@@ -1,5 +1,7 @@
 # Current project status — standalone continuation
 
+Session handoff and exact resume instructions: **`codex/CHECKPOINT.md`** (2026-11-20).
+
 The user's latest instruction supersedes the original Threadnote integration requirement: develop Narrative independently. Preserve the original manifest-protected specifications and fixture seeds. `TASKS.md` is the original checklist, not the current completion ledger.
 
 - P0–P4 backend implementation and synthetic acceptance are complete; see phase reports.
