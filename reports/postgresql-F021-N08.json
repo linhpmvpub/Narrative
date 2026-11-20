@@ -1,0 +1,242 @@
+{
+  "is_synthetic": true,
+  "is_public": false,
+  "delivery": "disabled",
+  "as_of": "2026-11-01T00:00:00+00:00",
+  "item": {
+    "id": "e6cb05d88975beae1caf0a078fbe7370f189448da886d95b402160dbc08c05ab",
+    "is_synthetic": true,
+    "decision_trace": {
+      "event_id": "F021",
+      "event_version_id": "3c0abf48-5255-511b-af95-8681038ac5e2",
+      "canonical_event_key": "SYN-F021",
+      "narrative_id": "N08",
+      "narrative_version_id": "demo-3321e0b6eae85e70d8b78c8fd07d965b8f60f4dba2e0547832c4f89d25eb67db:synthetic:N08:v1",
+      "as_of": "2026-11-01T00:00:00+00:00",
+      "is_synthetic": true,
+      "policy_version": "rie-v0.3-1d21ff630906",
+      "policy_snapshot": {
+        "name": "rie-v0.3",
+        "algorithm_revision": "gates-and-stance-v3",
+        "weights": {
+          "R": 0.25,
+          "M": 0.2,
+          "N": 0.2,
+          "Q": 0.15,
+          "T": 0.1,
+          "U": 0.1
+        },
+        "half_lives_days": {
+          "FILING": 90,
+          "CAPEX": 45,
+          "COMPONENT_COST": 14,
+          "MEMORY_PRICING": 14,
+          "NAND_PRICE": 14,
+          "PRICE_ONLY": 1,
+          "default": 30
+        },
+        "push": 80,
+        "digest": 60,
+        "quality_digest": 0.7,
+        "quality_push": 0.8,
+        "max_hops": 2,
+        "correction_novelty": 0.7,
+        "unknown_materiality": "review_required",
+        "path_decay": 0.85
+      },
+      "extraction_version": "validated-observations-v1",
+      "input_sha256": "f101217f639483989a09a0a267a6a136cc86c88185ad965bffa231b903f58c83",
+      "gate_results": {
+        "source_rights": true,
+        "synthetic_isolation": true,
+        "narrative_mode": true,
+        "provenance": true,
+        "available_as_of": true,
+        "identity": true,
+        "novelty": true,
+        "comparison_basis": true,
+        "core_numbers_consistent": true,
+        "contract_claim_evidenced": true,
+        "quality_digest": true,
+        "quality_push": true,
+        "materiality_known": false,
+        "verified_path": true,
+        "direction_and_conditions": false
+      },
+      "reasons": [
+        "unknown_materiality"
+      ],
+      "selected_path": {
+        "edges": [
+          {
+            "id": "R026",
+            "from_entity": "NAND_ASP",
+            "to_entity": "SERVER_COMPONENT_COST",
+            "family": "SUPPLIER_COST",
+            "mechanism": "Higher NAND/SSD input costs can raise system component costs",
+            "status": "verified",
+            "sign": "positive",
+            "strength": 0.6,
+            "confidence": 0.9,
+            "recorded_at": "2026-09-01T00:00:00Z",
+            "valid_from": "2026-09-01T00:00:00Z",
+            "valid_until": null,
+            "reviewed_at": "2026-09-01T00:00:00Z",
+            "reviewer": "synthetic-fixture-reviewer",
+            "evidence_urls": [
+              "fixture://synthetic/evidence/R026"
+            ],
+            "evidence_available_at": "2026-09-01T00:00:00Z",
+            "conditions": [
+              "contracted_cost_rises"
+            ],
+            "is_synthetic": true
+          },
+          {
+            "id": "R027",
+            "from_entity": "SERVER_COMPONENT_COST",
+            "to_entity": "DELL_ISG_MARGIN",
+            "family": "FINANCIAL_TRANSMISSION",
+            "mechanism": "Unrecovered component costs can pressure ISG margin",
+            "status": "verified",
+            "sign": "negative",
+            "strength": 0.6,
+            "confidence": 0.9,
+            "recorded_at": "2026-09-01T00:00:00Z",
+            "valid_from": "2026-09-01T00:00:00Z",
+            "valid_until": null,
+            "reviewed_at": "2026-09-01T00:00:00Z",
+            "reviewer": "synthetic-fixture-reviewer",
+            "evidence_urls": [
+              "fixture://synthetic/evidence/R027"
+            ],
+            "evidence_available_at": "2026-09-01T00:00:00Z",
+            "conditions": [
+              "cost_not_offset"
+            ],
+            "is_synthetic": true
+          }
+        ],
+        "target": "DELL_ISG_MARGIN",
+        "relevance": 0.306,
+        "confidence": 0.9,
+        "sign": "negative",
+        "conditional_reasons": [
+          "contracted_cost_rises",
+          "cost_not_offset"
+        ],
+        "exposure": null,
+        "sensitivity": null,
+        "strength_basis": "Routing heuristic; exposure and sensitivity are unknown"
+      },
+      "alternates": [],
+      "score_components": {
+        "R": 0.306,
+        "M": null,
+        "N": 1.0,
+        "Q": 0.96,
+        "T": 0.5970618859852485,
+        "U": 1.0
+      },
+      "score": null,
+      "score_bounds": [
+        58.021,
+        78.021
+      ],
+      "materiality": null,
+      "stance": "INSUFFICIENT_EVIDENCE",
+      "conditional_stance": "SUPPORTS",
+      "economic_effect": "UNCERTAIN",
+      "realized_outcome": "NOT_ESTABLISHED",
+      "observations": [
+        {
+          "metric_id": "NAND_ASP",
+          "direction": 1,
+          "evidence_url": "fixture://synthetic/F021",
+          "available_at": "2026-10-21T14:00:00Z"
+        }
+      ],
+      "conditional_reasons": [
+        "contracted_cost_rises",
+        "cost_not_offset"
+      ],
+      "evidence_urls": [
+        "fixture://synthetic/F021",
+        "fixture://synthetic/evidence/R026",
+        "fixture://synthetic/evidence/R027"
+      ],
+      "decision": "review_required",
+      "send_recommendation": false,
+      "delivery_status": "disabled",
+      "sent_at": null,
+      "timeliness_basis": {
+        "half_life_days": 14,
+        "clock": "available_at"
+      },
+      "context_id": "demo-3321e0b6eae85e70d8b78c8fd07d965b8f60f4dba2e0547832c4f89d25eb67db",
+      "ingestion_status": "ingested",
+      "decision_id": "8b345103233a0e01bdac898e624d0ab7a4f16a76d99b95ff7a3dcc43792f7a00"
+    },
+    "card": {
+      "is_synthetic": true,
+      "event_id": "F021",
+      "narrative_id": "N08",
+      "primary_ticker": "DELL",
+      "headline": "SYNTHETIC: Hypothetical NAND price rise may increase server input costs",
+      "what_changed": "Hypothetical NAND price rise may increase server input costs",
+      "why_connected": "NAND_ASP -> SERVER_COMPONENT_COST -> DELL_ISG_MARGIN",
+      "graph_path": [
+        {
+          "edge_id": "R026",
+          "from": "NAND_ASP",
+          "to": "SERVER_COMPONENT_COST",
+          "family": "SUPPLIER_COST",
+          "status": "synthetic_verified_demo_only",
+          "evidence_urls": [
+            "fixture://synthetic/evidence/R026"
+          ]
+        },
+        {
+          "edge_id": "R027",
+          "from": "SERVER_COMPONENT_COST",
+          "to": "DELL_ISG_MARGIN",
+          "family": "FINANCIAL_TRANSMISSION",
+          "status": "synthetic_verified_demo_only",
+          "evidence_urls": [
+            "fixture://synthetic/evidence/R027"
+          ]
+        }
+      ],
+      "narrative_stance": "INSUFFICIENT_EVIDENCE",
+      "conditional_stance": "SUPPORTS",
+      "economic_effect": "UNCERTAIN",
+      "conditional_economic_effect": "ADVERSE_IF_CONDITIONS_HOLD",
+      "status": "review_required",
+      "what_is_uncertain": [
+        "Contracted component costs actually rise with market input prices.",
+        "Realized pricing, vendor rebates and product mix do not offset the higher costs.",
+        "Materiality is unknown; no numerical impact is inferred.",
+        "Synthetic evidence does not establish a real company outcome."
+      ],
+      "what_to_watch": "Check the next disclosure for: Dell increases realized pricing and maintains margins",
+      "evidence_urls": [
+        "fixture://synthetic/F021",
+        "fixture://synthetic/evidence/R026",
+        "fixture://synthetic/evidence/R027"
+      ],
+      "source_published_at": "2026-10-21T14:00:00+00:00",
+      "source_available_at": "2026-10-21T14:00:00+00:00",
+      "delivery_status": "disabled",
+      "reason_for_not_sending": "Live notification delivery is disabled. This event and its evidence are synthetic. Required economic conditions remain unverified.",
+      "sent_at": null
+    },
+    "available_at": "2026-11-01T00:00:00+00:00",
+    "correction_of": null,
+    "related_thread_ids": [
+      "29807329-6702-488d-a2e7-b1e3311b93f4",
+      "2d9c0e92-cf43-4f6a-8e14-49e283157081"
+    ],
+    "state_delta": "insufficient_evidence",
+    "personal_relevance": "default"
+  }
+}

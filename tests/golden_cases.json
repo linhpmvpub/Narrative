@@ -1,0 +1,210 @@
+[
+  {
+    "case_id": "G01",
+    "type": "seed_cardinality",
+    "setup": "Exactly five stocks and ten narratives, two for each ticker",
+    "expected_status": "pass",
+    "assertions": {
+      "stocks": 5,
+      "narratives": 10,
+      "per_stock": 2
+    }
+  },
+  {
+    "case_id": "G02",
+    "type": "unverified_graph",
+    "setup": "Live route through any candidate-only edge",
+    "expected_status": "review_required",
+    "assertions": {
+      "must_not_dispatch": true
+    }
+  },
+  {
+    "case_id": "G03",
+    "type": "verified_two_hop",
+    "setup": "In demo mode F003 traverses DRAM_BIT_SUPPLY -> DRAM_ASP -> MU_GROSS_MARGIN",
+    "expected_status": "matched",
+    "assertions": {
+      "narrative": "N02",
+      "max_hops": 2,
+      "must_show_path": true
+    }
+  },
+  {
+    "case_id": "G04",
+    "type": "conditional_hop",
+    "setup": "F024 AI_CAPEX -> SSD demand via conditional path with no Sandisk customer evidence",
+    "expected_status": "insufficient_evidence",
+    "assertions": {
+      "must_not_claim_company_impact": true
+    }
+  },
+  {
+    "case_id": "G05",
+    "type": "cross_ticker_cost",
+    "setup": "F021 NAND ASP can affect DELL N08 through 2-hop input-cost path (demo only)",
+    "expected_status": "matched",
+    "assertions": {
+      "narrative": "N08",
+      "must_show_path": true,
+      "requires_condition": true
+    }
+  },
+  {
+    "case_id": "G06",
+    "type": "same_canonical_reprint",
+    "setup": "F029 reprints F001",
+    "expected_status": "suppressed",
+    "assertions": {
+      "duplicate_of": "F001",
+      "max_push_per_user": 1
+    }
+  },
+  {
+    "case_id": "G07",
+    "type": "future_leakage",
+    "setup": "Replay as_of 2026-11-01 excludes F030 released 2026-12-01",
+    "expected_status": "suppressed",
+    "assertions": {
+      "reason": "future_available_at"
+    }
+  },
+  {
+    "case_id": "G08",
+    "type": "correction",
+    "setup": "F031 revises F017",
+    "expected_status": "versioned_correction",
+    "assertions": {
+      "original_event": "F017",
+      "unique_canonical_key": "SYN-F017",
+      "new_story_entry_linked": true
+    }
+  },
+  {
+    "case_id": "G09",
+    "type": "quality_gate",
+    "setup": "F025 Q=0.30",
+    "expected_status": "suppressed",
+    "assertions": {
+      "must_not_push": true
+    }
+  },
+  {
+    "case_id": "G10",
+    "type": "price_only",
+    "setup": "F026 price-only movement must not infer fundamental improvement",
+    "expected_status": "no_change",
+    "assertions": {
+      "must_not_claim_causality": true
+    }
+  },
+  {
+    "case_id": "G11",
+    "type": "period_mismatch",
+    "setup": "F027 compares quarterly and annual without reconciliation",
+    "expected_status": "review_required",
+    "assertions": {
+      "must_not_push": true
+    }
+  },
+  {
+    "case_id": "G12",
+    "type": "spin_off",
+    "setup": "F028 misattributes WDC HDD revenue to SNDK",
+    "expected_status": "rejected",
+    "assertions": {
+      "must_not_use_wdc_hdd_for_sndk": true
+    }
+  },
+  {
+    "case_id": "G13",
+    "type": "multi_thread_dedup",
+    "setup": "One user subscribes MU stock thread + N01 narrative; F001 matches both",
+    "expected_status": "single_delivery",
+    "assertions": {
+      "notification_count": 1,
+      "related_thread_count": 2
+    }
+  },
+  {
+    "case_id": "G14",
+    "type": "wrong_feedback",
+    "setup": "WRONG feedback creates review ticket and no auto-promoted edge",
+    "expected_status": "review_required",
+    "assertions": {
+      "global_truth_mutations": 0
+    }
+  },
+  {
+    "case_id": "G15",
+    "type": "user_isolation",
+    "setup": "User A requests user B narrative feed",
+    "expected_status": "forbidden",
+    "assertions": {
+      "http_status": 403
+    }
+  },
+  {
+    "case_id": "G16",
+    "type": "offline_mode",
+    "setup": "All fixture tests pass with network disabled and LLM mode none",
+    "expected_status": "pass",
+    "assertions": {
+      "external_requests": 0
+    }
+  },
+  {
+    "case_id": "G17",
+    "type": "narrative_scope",
+    "setup": "Custom narrative >3 priority drivers in free tier",
+    "expected_status": "validation_error",
+    "assertions": {
+      "http_status": 422
+    }
+  },
+  {
+    "case_id": "G18",
+    "type": "mixed_stance",
+    "setup": "Two verified equal-strength contradictory facts relevant to N07",
+    "expected_status": "mixed",
+    "assertions": {
+      "must_not_suppress_counterevidence": true
+    }
+  },
+  {
+    "case_id": "G19",
+    "type": "missing_materiality",
+    "setup": "Impact magnitude unknown even though relevance high",
+    "expected_status": "digest_or_review",
+    "assertions": {
+      "must_not_push": true
+    }
+  },
+  {
+    "case_id": "G20",
+    "type": "questionable_customer_link",
+    "setup": "Direct NVDA-to-MU supply contract claim unsupported",
+    "expected_status": "rejected",
+    "assertions": {
+      "must_not_assert_customer_contract": true
+    }
+  },
+  {
+    "case_id": "G21",
+    "type": "asof_graph_revision",
+    "setup": "Edge verified on 2026-11-20 not available in replay 2026-11-01",
+    "expected_status": "suppressed",
+    "assertions": {
+      "reason": "graph_lookahead"
+    }
+  },
+  {
+    "case_id": "G22",
+    "type": "private_story",
+    "setup": "Shareable story private until explicit owner consent",
+    "expected_status": "private",
+    "assertions": {
+      "is_public": false
+    }
+  }
+]

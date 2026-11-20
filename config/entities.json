@@ -1,0 +1,296 @@
+[
+  {
+    "entity_id": "ACCELERATOR_DEMAND",
+    "entity_type": "product_market",
+    "display_name": "Accelerator Demand",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "ADVANCED_PACKAGING_CAPACITY",
+    "entity_type": "product_market",
+    "display_name": "Advanced Packaging Capacity",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "AI_CAPEX",
+    "entity_type": "driver",
+    "display_name": "Ai Capex",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "AMD_DC_MARGIN",
+    "entity_type": "financial_metric",
+    "display_name": "Amd Dc Margin",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "AMD_DC_REVENUE",
+    "entity_type": "financial_metric",
+    "display_name": "Amd Dc Revenue",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "AMD_EPYC_ADOPTION",
+    "entity_type": "financial_metric",
+    "display_name": "Amd Epyc Adoption",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "AMD_INSTINCT_ADOPTION",
+    "entity_type": "driver",
+    "display_name": "Amd Instinct Adoption",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "AMD_INSTINCT_SHIPMENTS",
+    "entity_type": "financial_metric",
+    "display_name": "Amd Instinct Shipments",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "CO_AMD",
+    "entity_type": "company",
+    "display_name": "AMD",
+    "status": "verify_identity",
+    "current_ticker": "AMD"
+  },
+  {
+    "entity_id": "CO_DELL",
+    "entity_type": "company",
+    "display_name": "DELL",
+    "status": "verify_identity",
+    "current_ticker": "DELL"
+  },
+  {
+    "entity_id": "CO_MU",
+    "entity_type": "company",
+    "display_name": "MU",
+    "status": "verify_identity",
+    "current_ticker": "MU"
+  },
+  {
+    "entity_id": "CO_NVDA",
+    "entity_type": "company",
+    "display_name": "NVDA",
+    "status": "verify_identity",
+    "current_ticker": "NVDA"
+  },
+  {
+    "entity_id": "CO_SNDK",
+    "entity_type": "company",
+    "display_name": "SNDK",
+    "status": "verify_identity",
+    "current_ticker": "SNDK"
+  },
+  {
+    "entity_id": "DELL_AI_SERVER_BACKLOG",
+    "entity_type": "financial_metric",
+    "display_name": "Dell Ai Server Backlog",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "DELL_AI_SERVER_ORDERS",
+    "entity_type": "financial_metric",
+    "display_name": "Dell Ai Server Orders",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "DELL_AI_SERVER_REVENUE",
+    "entity_type": "financial_metric",
+    "display_name": "Dell Ai Server Revenue",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "DELL_ISG_MARGIN",
+    "entity_type": "financial_metric",
+    "display_name": "Dell Isg Margin",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "DELL_WORKING_CAPITAL",
+    "entity_type": "financial_metric",
+    "display_name": "Dell Working Capital",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "DRAM_ASP",
+    "entity_type": "product_market",
+    "display_name": "Dram Asp",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "DRAM_BIT_SUPPLY",
+    "entity_type": "product_market",
+    "display_name": "Dram Bit Supply",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "DRAM_INVENTORY",
+    "entity_type": "product_market",
+    "display_name": "Dram Inventory",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "ENTERPRISE_SSD_DEMAND",
+    "entity_type": "product_market",
+    "display_name": "Enterprise Ssd Demand",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "EXPORT_CONTROLS",
+    "entity_type": "policy_or_constraint",
+    "display_name": "Export Controls",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "GPU_SUPPLY",
+    "entity_type": "product_market",
+    "display_name": "Gpu Supply",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "HBM_DEMAND",
+    "entity_type": "product_market",
+    "display_name": "Hbm Demand",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "MU_GROSS_MARGIN",
+    "entity_type": "financial_metric",
+    "display_name": "Mu Gross Margin",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "MU_HBM_REVENUE",
+    "entity_type": "financial_metric",
+    "display_name": "Mu Hbm Revenue",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "MU_REVENUE",
+    "entity_type": "financial_metric",
+    "display_name": "Mu Revenue",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "NAND_ASP",
+    "entity_type": "product_market",
+    "display_name": "Nand Asp",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "NAND_BIT_SUPPLY",
+    "entity_type": "product_market",
+    "display_name": "Nand Bit Supply",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "NAND_INVENTORY",
+    "entity_type": "product_market",
+    "display_name": "Nand Inventory",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "NVDA_ADDRESSABLE_MARKET",
+    "entity_type": "financial_metric",
+    "display_name": "Nvda Addressable Market",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "NVDA_DATA_CENTER_REVENUE",
+    "entity_type": "financial_metric",
+    "display_name": "Nvda Data Center Revenue",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "NVDA_SUPPLY_AVAILABLE",
+    "entity_type": "financial_metric",
+    "display_name": "Nvda Supply Available",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "PC_REFRESH",
+    "entity_type": "driver",
+    "display_name": "Pc Refresh",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "PRICE_PASS_THROUGH",
+    "entity_type": "driver",
+    "display_name": "Price Pass Through",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "SERVER_COMPONENT_COST",
+    "entity_type": "product_market",
+    "display_name": "Server Component Cost",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "SERVER_CPU_DEMAND",
+    "entity_type": "product_market",
+    "display_name": "Server Cpu Demand",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "SNDK_ENTERPRISE_MIX",
+    "entity_type": "financial_metric",
+    "display_name": "Sndk Enterprise Mix",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "SNDK_GROSS_MARGIN",
+    "entity_type": "financial_metric",
+    "display_name": "Sndk Gross Margin",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "SNDK_REVENUE",
+    "entity_type": "financial_metric",
+    "display_name": "Sndk Revenue",
+    "status": "seed_candidate",
+    "current_ticker": null
+  },
+  {
+    "entity_id": "SNDK_SSD_SHIPMENTS",
+    "entity_type": "financial_metric",
+    "display_name": "Sndk Ssd Shipments",
+    "status": "seed_candidate",
+    "current_ticker": null
+  }
+]

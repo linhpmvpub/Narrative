@@ -1,0 +1,98 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "reviewer": {
+      "minLength": 1,
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "is_new": {
+      "title": "Is New",
+      "type": "boolean"
+    },
+    "is_relevant": {
+      "title": "Is Relevant",
+      "type": "boolean"
+    },
+    "is_material": {
+      "title": "Is Material",
+      "type": "boolean"
+    },
+    "valid_path": {
+      "title": "Valid Path",
+      "type": "boolean"
+    },
+    "hops": {
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Hops",
+      "type": "integer"
+    },
+    "stance": {
+      "enum": [
+        "SUPPORTS",
+        "CHALLENGES",
+        "MIXED",
+        "NO_CHANGE",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "title": "Stance",
+      "type": "string"
+    },
+    "should_push": {
+      "title": "Should Push",
+      "type": "boolean"
+    },
+    "should_digest": {
+      "title": "Should Digest",
+      "type": "boolean"
+    },
+    "negative_or_irrelevant_or_reprint": {
+      "title": "Negative Or Irrelevant Or Reprint",
+      "type": "boolean"
+    },
+    "reason": {
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "evidence_urls": {
+      "items": {
+        "format": "uri",
+        "maxLength": 2083,
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Evidence Urls",
+      "type": "array"
+    }
+  },
+  "required": [
+    "case_id",
+    "reviewer",
+    "reviewed_at",
+    "is_new",
+    "is_relevant",
+    "is_material",
+    "valid_path",
+    "hops",
+    "stance",
+    "should_push",
+    "should_digest",
+    "negative_or_irrelevant_or_reprint",
+    "reason",
+    "evidence_urls"
+  ],
+  "title": "Label",
+  "type": "object"
+}

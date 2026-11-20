@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "tls_verified": true,
+  "installed_wheel_assets": 4,
+  "checks": {
+    "/": 200,
+    "/assets/app.js": 200,
+    "/assets/demo.json": 200,
+    "/assets/__init__.py": 404,
+    "/readyz": 200,
+    "/api/v0/narratives": 401,
+    "/docs": 404
+  }
+}

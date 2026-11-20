@@ -1,0 +1,8 @@
+{
+  "tool": "Docker Scout",
+  "status": "blocked_docker_login_required",
+  "reason": "User authorized image-data transfer. Docker Scout was invoked but requires Docker account login before scanning.",
+  "image_data_transfer_authorized": true,
+  "private_image_uploaded": false,
+  "python_dependency_audits": "completed separately"
+}

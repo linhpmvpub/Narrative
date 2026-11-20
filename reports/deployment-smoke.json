@@ -1,0 +1,33 @@
+{
+  "tls": "verified against local test certificate",
+  "scope": "loopback only",
+  "results": {
+    "/healthz": {
+      "status": 200,
+      "cache_control": "no-store"
+    },
+    "/readyz": {
+      "status": 200,
+      "cache_control": "no-store"
+    },
+    "/api/v0/subscriptions": {
+      "status": 401,
+      "cache_control": "no-store"
+    },
+    "/api/v0/admin/review-queue": {
+      "status": 403,
+      "cache_control": "no-store"
+    },
+    "/docs": {
+      "status": 404,
+      "cache_control": "no-store"
+    },
+    "oversize": {
+      "status": 413
+    },
+    "burst": {
+      "200": 11,
+      "429": 24
+    }
+  }
+}

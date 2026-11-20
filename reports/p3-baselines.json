@@ -1,0 +1,93 @@
+{
+  "is_synthetic": true,
+  "as_of": "2026-11-01T00:00:00+00:00",
+  "corpus_input_ids": [
+    "F001",
+    "F002",
+    "F003",
+    "F004",
+    "F005",
+    "F006",
+    "F007",
+    "F008",
+    "F009",
+    "F010",
+    "F011",
+    "F012",
+    "F013",
+    "F014",
+    "F015",
+    "F016",
+    "F017",
+    "F018",
+    "F019",
+    "F020",
+    "F021",
+    "F022",
+    "F023",
+    "F024",
+    "F025",
+    "F026",
+    "F027",
+    "F028",
+    "F029",
+    "F031"
+  ],
+  "corpus_count": 30,
+  "pair_count": 300,
+  "B0": {
+    "method": "ticker keyword in headline plus 30-day recency, no hard gates",
+    "matched_pairs": [
+      [
+        "F002",
+        "N01"
+      ],
+      [
+        "F002",
+        "N02"
+      ],
+      [
+        "F028",
+        "N09"
+      ],
+      [
+        "F028",
+        "N10"
+      ],
+      [
+        "F012",
+        "N05"
+      ],
+      [
+        "F012",
+        "N06"
+      ],
+      [
+        "F016",
+        "N07"
+      ],
+      [
+        "F016",
+        "N08"
+      ]
+    ],
+    "matched_count": 8
+  },
+  "B1": {
+    "status": "UNAVAILABLE",
+    "reason": "LLM_MODE=none; no substitute baseline presented as LLM output",
+    "matched_count": null
+  },
+  "V0": {
+    "verified_path_pairs": 56,
+    "decisions": {
+      "review_required": 76,
+      "suppressed": 222,
+      "storybook": 2
+    }
+  },
+  "historical_evaluation": "PENDING genuine source-backed human labels",
+  "precision": null,
+  "recall": null,
+  "note": "Matching counts compare routing coverage only, not precision or proven investment relevance."
+}

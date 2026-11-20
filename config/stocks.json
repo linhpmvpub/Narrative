@@ -1,0 +1,80 @@
+[
+  {
+    "entity_id": "CO_MU",
+    "ticker": "MU",
+    "legal_name": "Micron Technology, Inc.",
+    "sector_cluster": "memory",
+    "business_focus": [
+      "HBM",
+      "DRAM",
+      "NAND"
+    ],
+    "exchange": "NASDAQ",
+    "cik": null,
+    "identity_status": "verify_via_sec_before_live",
+    "note": "Financial metrics should be associated with fiscal period and as-of filing time."
+  },
+  {
+    "entity_id": "CO_NVDA",
+    "ticker": "NVDA",
+    "legal_name": "NVIDIA Corporation",
+    "sector_cluster": "ai_compute",
+    "business_focus": [
+      "AI accelerators",
+      "data center systems"
+    ],
+    "exchange": "NASDAQ",
+    "cik": null,
+    "identity_status": "verify_via_sec_before_live",
+    "note": "Avoid inventing direct customer-supplier exposure to any other pilot issuer."
+  },
+  {
+    "entity_id": "CO_AMD",
+    "ticker": "AMD",
+    "legal_name": "Advanced Micro Devices, Inc.",
+    "sector_cluster": "ai_compute",
+    "business_focus": [
+      "Instinct accelerators",
+      "EPYC server CPUs"
+    ],
+    "exchange": "NASDAQ",
+    "cik": null,
+    "identity_status": "verify_via_sec_before_live",
+    "note": "Separate server CPU adoption and accelerator adoption."
+  },
+  {
+    "entity_id": "CO_DELL",
+    "ticker": "DELL",
+    "legal_name": "Dell Technologies Inc.",
+    "sector_cluster": "ai_infrastructure",
+    "business_focus": [
+      "AI-optimized servers",
+      "ISG",
+      "enterprise storage"
+    ],
+    "exchange": "NYSE",
+    "cik": null,
+    "identity_status": "verify_via_sec_before_live",
+    "note": "Backlog vs orders vs revenue must never be mixed."
+  },
+  {
+    "entity_id": "CO_SNDK",
+    "ticker": "SNDK",
+    "legal_name": "Sandisk Corporation",
+    "sector_cluster": "nand_storage",
+    "business_focus": [
+      "NAND flash",
+      "enterprise SSD",
+      "client SSD"
+    ],
+    "exchange": "NASDAQ",
+    "cik": null,
+    "identity_status": "verify_via_sec_before_live",
+    "notes": [
+      "Separated from WDC on 2025-02-21, began SNDK trading on 2025-02-24",
+      "Do not inherit WDC post-separation HDD results or conflate pre-spinoff data"
+    ],
+    "spin_off_from": "WDC",
+    "independent_from": "2025-02-21"
+  }
+]

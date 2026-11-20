@@ -1,0 +1,70 @@
+{
+  "is_synthetic": false,
+  "retrieved_at": "2026-11-20T16:13:55.518195+00:00",
+  "status": "review_required",
+  "delivery": "disabled",
+  "identities": {
+    "NVDA": {
+      "cik": "0001045810",
+      "name": "NVIDIA CORP",
+      "index_and_submissions_agree": true,
+      "submission_sha256": "bd9dbcb9c9fb2ed73869cb524b442ebbc838eb9da2ec8166b1deae6d872a14db",
+      "retrieved_at": "2026-11-20T16:13:56.691915+00:00",
+      "production_identity_approval": "pending_review"
+    },
+    "AMD": {
+      "cik": "0000002488",
+      "name": "ADVANCED MICRO DEVICES INC",
+      "index_and_submissions_agree": true,
+      "submission_sha256": "aaf997fb3df0815e38abca68ed55151b78da6f45f010cd9e0f84020abebec4bb",
+      "retrieved_at": "2026-11-20T16:14:22.084737+00:00",
+      "production_identity_approval": "pending_review"
+    },
+    "MU": {
+      "cik": "0000723125",
+      "name": "MICRON TECHNOLOGY INC",
+      "index_and_submissions_agree": true,
+      "submission_sha256": "515dd342068a593add3ee48f35aea70d5bf178c3ab600e06dd986a47346842cd",
+      "retrieved_at": "2026-11-20T16:14:50.791598+00:00",
+      "production_identity_approval": "pending_review"
+    },
+    "DELL": {
+      "cik": "0001571996",
+      "name": "Dell Technologies Inc.",
+      "index_and_submissions_agree": true,
+      "submission_sha256": "41dc5b75b68db2abf0294a043016b624abf132a6bd068caf953f3474b9218925",
+      "retrieved_at": "2026-11-20T16:14:58.659571+00:00",
+      "production_identity_approval": "pending_review"
+    },
+    "SNDK": {
+      "cik": "0002023554",
+      "name": "Sandisk Corp",
+      "index_and_submissions_agree": true,
+      "submission_sha256": "617c49bda55918971674cc8c4c9a94d64fac94f744949f7f106000bcfd567c80",
+      "retrieved_at": "2026-11-20T16:15:04.526048+00:00",
+      "production_identity_approval": "pending_review"
+    }
+  },
+  "errors": [],
+  "index_sha256": "7aecfc123ae392e6ed017effca46f815bf221d77875e597bb495b3d9625dc5df",
+  "index_retrieved_at": "2026-11-20T16:13:56.042850+00:00",
+  "downloaded_filings": 50,
+  "filings_by_ticker": {
+    "NVDA": 10,
+    "AMD": 10,
+    "MU": 10,
+    "DELL": 10,
+    "SNDK": 10
+  },
+  "forms": {
+    "8-K": 38,
+    "10-Q": 9,
+    "8-K/A": 1,
+    "10-K": 2
+  },
+  "historical_events_evaluated": 0,
+  "reviewed_canonical_events": 0,
+  "rights_approval": "pending",
+  "labels": "pending",
+  "historical_availability": "Capture times retained; filing dates do not prove earlier engine availability"
+}

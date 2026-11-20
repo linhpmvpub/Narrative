@@ -1,0 +1,5 @@
+{
+  "scope": "Local nginx and uvicorn stdout/stderr",
+  "canary_leaks": 0,
+  "excludes_host_and_external_logs": true
+}

@@ -1,0 +1,263 @@
+{
+  "is_synthetic": true,
+  "as_of": "2026-11-01T00:00:00Z",
+  "delivery": "disabled",
+  "counts": {
+    "ingested": 25,
+    "duplicate": 1,
+    "suppressed": 2,
+    "review_required": 1,
+    "rejected": 1,
+    "versioned_correction": 1
+  },
+  "results": [
+    {
+      "input_id": "F001",
+      "canonical_event_key": "SYN-F001",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "50c88532-f1dd-5b2a-94e8-b9b1f356f1e2"
+    },
+    {
+      "input_id": "F022",
+      "canonical_event_key": "SYN-F022",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "91d4ccba-accf-5afc-b1ae-2cd76aeb7fed"
+    },
+    {
+      "input_id": "F029",
+      "canonical_event_key": "SYN-F001",
+      "is_synthetic": true,
+      "status": "duplicate",
+      "reason": "canonical_reprint",
+      "event_version_id": "50c88532-f1dd-5b2a-94e8-b9b1f356f1e2"
+    },
+    {
+      "input_id": "F002",
+      "canonical_event_key": "SYN-F002",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "8e971f5c-57ec-5c3b-b919-c1c593bf6873"
+    },
+    {
+      "input_id": "F023",
+      "canonical_event_key": "SYN-F023",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "b3a52f12-ad18-5e0c-8649-8cc14640c53e"
+    },
+    {
+      "input_id": "F003",
+      "canonical_event_key": "SYN-F003",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "16322f48-7726-5fd1-acf9-ded1ef7ccfbd"
+    },
+    {
+      "input_id": "F024",
+      "canonical_event_key": "SYN-F024",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "a62026a7-6022-5d5a-90f3-461b0a23c21f"
+    },
+    {
+      "input_id": "F004",
+      "canonical_event_key": "SYN-F004",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "b83c7788-3842-5eaf-b90b-b34d95ed4c13"
+    },
+    {
+      "input_id": "F025",
+      "canonical_event_key": "SYN-F025",
+      "is_synthetic": true,
+      "status": "suppressed",
+      "reason": "low_evidence_quality",
+      "event_version_id": null
+    },
+    {
+      "input_id": "F005",
+      "canonical_event_key": "SYN-F005",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "045792cd-2aaf-5f7b-b5e5-19d648f0a7ab"
+    },
+    {
+      "input_id": "F026",
+      "canonical_event_key": "SYN-F026",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "7ad95e64-d79e-5f29-8beb-6a5d105a80e4"
+    },
+    {
+      "input_id": "F006",
+      "canonical_event_key": "SYN-F006",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "4ad18185-9f46-5469-828f-8ed91fa5385d"
+    },
+    {
+      "input_id": "F027",
+      "canonical_event_key": "SYN-F027",
+      "is_synthetic": true,
+      "status": "review_required",
+      "reason": "incompatible_period",
+      "event_version_id": null
+    },
+    {
+      "input_id": "F007",
+      "canonical_event_key": "SYN-F007",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "58a4cafe-4867-52e4-bce8-12841a05ea12"
+    },
+    {
+      "input_id": "F028",
+      "canonical_event_key": "SYN-F028",
+      "is_synthetic": true,
+      "status": "rejected",
+      "reason": "issuer_identity_mismatch",
+      "event_version_id": null
+    },
+    {
+      "input_id": "F008",
+      "canonical_event_key": "SYN-F008",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "ea9710f1-f2c5-5ae3-8dad-b09085081fee"
+    },
+    {
+      "input_id": "F009",
+      "canonical_event_key": "SYN-F009",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "a8cc7cc2-1f3e-557e-a318-fee10ee73b82"
+    },
+    {
+      "input_id": "F010",
+      "canonical_event_key": "SYN-F010",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "bd417ef2-10a6-599f-a0df-13164e50d465"
+    },
+    {
+      "input_id": "F011",
+      "canonical_event_key": "SYN-F011",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "f82d8275-ab55-5e87-9f72-e7d091004297"
+    },
+    {
+      "input_id": "F012",
+      "canonical_event_key": "SYN-F012",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "3d13c115-b7d1-54d6-9bfe-cd359c239b2a"
+    },
+    {
+      "input_id": "F013",
+      "canonical_event_key": "SYN-F013",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "943ceb17-8253-5370-8291-ed80f904b726"
+    },
+    {
+      "input_id": "F014",
+      "canonical_event_key": "SYN-F014",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "126fcb84-9e78-597c-9d85-5979139bbc7c"
+    },
+    {
+      "input_id": "F015",
+      "canonical_event_key": "SYN-F015",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "49021fd7-6747-51df-a755-41778af0905e"
+    },
+    {
+      "input_id": "F016",
+      "canonical_event_key": "SYN-F016",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "0a8c3e3c-562d-59dd-bba0-7da5c2785cbc"
+    },
+    {
+      "input_id": "F017",
+      "canonical_event_key": "SYN-F017",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "1d06a622-4663-5bb9-96f7-eb41349759ba"
+    },
+    {
+      "input_id": "F018",
+      "canonical_event_key": "SYN-F018",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "0a2468a8-37b9-5abb-9beb-59f1064f59cc"
+    },
+    {
+      "input_id": "F019",
+      "canonical_event_key": "SYN-F019",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "b9445367-76a6-54b0-aab3-364e92f76faa"
+    },
+    {
+      "input_id": "F020",
+      "canonical_event_key": "SYN-F020",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "e1f93b0f-1f09-5ccd-8b76-d6f5796b68ef"
+    },
+    {
+      "input_id": "F021",
+      "canonical_event_key": "SYN-F021",
+      "is_synthetic": true,
+      "status": "ingested",
+      "reason": "new_fact",
+      "event_version_id": "3c0abf48-5255-511b-af95-8681038ac5e2"
+    },
+    {
+      "input_id": "F031",
+      "canonical_event_key": "SYN-F017",
+      "is_synthetic": true,
+      "status": "versioned_correction",
+      "reason": "explicit_synthetic_correction",
+      "event_version_id": "ffee7121-b8fa-5b08-885a-f54be1f48aa8"
+    },
+    {
+      "input_id": "F030",
+      "canonical_event_key": "SYN-F030",
+      "is_synthetic": true,
+      "status": "suppressed",
+      "reason": "future_available_at",
+      "event_version_id": null
+    }
+  ]
+}

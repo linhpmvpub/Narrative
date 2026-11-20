@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "title": "Url",
+          "type": "string"
+        },
+        "document_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Document Sha256",
+          "type": "string"
+        },
+        "archive_id": {
+          "minLength": 1,
+          "title": "Archive Id",
+          "type": "string"
+        },
+        "rights": {
+          "const": "approved",
+          "title": "Rights",
+          "type": "string"
+        },
+        "rights_reviewer": {
+          "minLength": 1,
+          "title": "Rights Reviewer",
+          "type": "string"
+        },
+        "rights_approved_at": {
+          "format": "date-time",
+          "title": "Rights Approved At",
+          "type": "string"
+        },
+        "published_at": {
+          "format": "date-time",
+          "title": "Published At",
+          "type": "string"
+        },
+        "first_seen_at": {
+          "format": "date-time",
+          "title": "First Seen At",
+          "type": "string"
+        },
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "retrieved_at": {
+          "format": "date-time",
+          "title": "Retrieved At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "document_sha256",
+        "archive_id",
+        "rights",
+        "rights_reviewer",
+        "rights_approved_at",
+        "published_at",
+        "first_seen_at",
+        "available_at",
+        "retrieved_at"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "canonical_key": {
+      "minLength": 1,
+      "title": "Canonical Key",
+      "type": "string"
+    },
+    "event_version": {
+      "minLength": 1,
+      "title": "Event Version",
+      "type": "string"
+    },
+    "narrative_version": {
+      "minLength": 1,
+      "title": "Narrative Version",
+      "type": "string"
+    },
+    "ticker": {
+      "enum": [
+        "MU",
+        "NVDA",
+        "AMD",
+        "DELL",
+        "SNDK"
+      ],
+      "title": "Ticker",
+      "type": "string"
+    },
+    "headline": {
+      "minLength": 1,
+      "title": "Headline",
+      "type": "string"
+    },
+    "is_synthetic": {
+      "title": "Is Synthetic",
+      "type": "boolean"
+    },
+    "as_of": {
+      "format": "date-time",
+      "title": "As Of",
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "minItems": 1,
+      "title": "Evidence",
+      "type": "array"
+    },
+    "narrative_available_at": {
+      "format": "date-time",
+      "title": "Narrative Available At",
+      "type": "string"
+    },
+    "edge_available_at": {
+      "items": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "title": "Edge Available At",
+      "type": "array"
+    },
+    "metric_available_at": {
+      "items": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "title": "Metric Available At",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "canonical_key",
+    "event_version",
+    "narrative_version",
+    "ticker",
+    "headline",
+    "is_synthetic",
+    "as_of",
+    "evidence",
+    "narrative_available_at",
+    "edge_available_at",
+    "metric_available_at"
+  ],
+  "title": "Case",
+  "type": "object"
+}

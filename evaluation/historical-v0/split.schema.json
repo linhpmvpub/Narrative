@@ -1,0 +1,27 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "development_end": {
+      "format": "date-time",
+      "title": "Development End",
+      "type": "string"
+    },
+    "calibration_end": {
+      "format": "date-time",
+      "title": "Calibration End",
+      "type": "string"
+    },
+    "holdout_end": {
+      "format": "date-time",
+      "title": "Holdout End",
+      "type": "string"
+    }
+  },
+  "required": [
+    "development_end",
+    "calibration_end",
+    "holdout_end"
+  ],
+  "title": "Split",
+  "type": "object"
+}

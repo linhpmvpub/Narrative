@@ -1,0 +1,19 @@
+{
+  "schema": "0004",
+  "database": "rie-p4-demo.db",
+  "is_synthetic": true,
+  "counts_after_retry": {
+    "rie_narratives": 10,
+    "rie_relationships": 40,
+    "rie_events": 25,
+    "rie_event_versions": 26,
+    "rie_policy_traces": 310,
+    "rie_user_cards": 8,
+    "rie_card_threads": 16,
+    "rie_alerts": 0,
+    "rie_dispatch_plans": 0
+  },
+  "delivery": "disabled",
+  "postgresql_ddl_compilation": "passed",
+  "postgresql_runtime": "blocked: Docker Linux engine pipe missing"
+}

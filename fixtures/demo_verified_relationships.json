@@ -1,0 +1,409 @@
+{
+  "fixture_id": "DEMO_GRAPH_2026_09",
+  "is_synthetic": true,
+  "never_use_in_live": true,
+  "as_of_available_at": "2026-09-01T00:00:00Z",
+  "simulated_verification": "These synthetic edge approvals exist only within offline regression tests and may not be written into production approved relationships.",
+  "edges": [
+    {
+      "relation_id": "R001",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R001",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R002",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R002",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R003",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R003",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R004",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R004",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R005",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R005",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R006",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R006",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R007",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R007",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R008",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R008",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R009",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R009",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R010",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R010",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R011",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R011",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R012",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R012",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R013",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R013",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R014",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R014",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R015",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R015",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R016",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R016",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R017",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R017",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R018",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R018",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R019",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R019",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R020",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R020",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R021",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R021",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R022",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R022",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R023",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R023",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R024",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R024",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R025",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R025",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R026",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R026",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R027",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R027",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R028",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R028",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R029",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R029",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R030",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R030",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R031",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R031",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R032",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R032",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R033",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R033",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R034",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R034",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R035",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R035",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R036",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R036",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R037",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R037",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R038",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R038",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R039",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R039",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    },
+    {
+      "relation_id": "R040",
+      "status": "verified",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "evidence_uri": "fixture://synthetic/evidence/R040",
+      "verified_at": "2026-09-01T00:00:00Z",
+      "available_at": "2026-09-01T00:00:00Z",
+      "is_synthetic": true
+    }
+  ]
+}

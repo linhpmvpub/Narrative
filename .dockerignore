@@ -1,0 +1,13 @@
+.git
+.venv
+.audit-venv
+__pycache__
+*.db
+.env
+secrets
+source-cache
+backups
+*.dump
+.pytest_cache
+.mypy_cache
+.ruff_cache

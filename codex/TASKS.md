@@ -1,0 +1,84 @@
+# TASKS — implementation execution checklist
+
+Each task must end with an automated test or inspectable artifact. `README.md` governs any ambiguity. `P#` labels are **dependencies**, not independent checklists that may be bypassed.
+
+## P0 — Repo audit, decisions, scaffold
+- [ ] Inspect existing Threadnote repository, auth, DB models and UI endpoints; document compatibility constraints.
+- [ ] Write `docs/architecture_decisions.md` with accepted stack or reason to preserve an existing one; make no unrelated refactors.
+- [ ] Create `pyproject.toml`, `engine/`, `.env.example`, `docker-compose.yml`, Alembic scaffold, README install instructions for Windows/WSL2.
+- [ ] Add CI `ruff`, typing (mypy or pyright), `pytest`, migration smoke test; secret scanning optional but desirable.
+- [ ] Verify `LLM_MODE=none`, `SEND_NOTIFICATIONS=false`, `ALLOW_SYNTHETIC_LIVE=false` by default.
+
+## P1 — Foundations and seed import
+- [ ] Model the DDL in `schemas/schema.sql` as migrations, including unique IDs, integrity constraints, temporal fields and indexes.
+- [ ] Build `Entity`, `Relationship`, `Narrative`, `NarrativeVersion`, `NarrativeDriver` Pydantic models; validate no unknown graph nodes.
+- [ ] Import node registry (`config/entities.json`), 5 company identities and verified ticker alias resolution through SEC feed (allow `pending` locally/offline).
+- [ ] Import exactly 10 narratives and 40 candidate edges; verify 2 narratives per ticker.
+- [ ] Validate every narrative has `supporting_evidence`, `challenging_evidence`, `disconfirmation`, <=2 hop monitoring and a metrics list.
+- [ ] Enforce candidate relation approval requires evidence URL/document/time, reviewer and audit row; no blind score threshold activation.
+- [ ] Regression: SNDK separated from WDC; WDC HDD must never map to post-spin SNDK.
+
+## P2 — Evidence/Event pipeline
+- [ ] Implement `FixtureSourceAdapter` to parse `fixtures/events.jsonl` with `is_synthetic=true` and no network.
+- [ ] Implement SEC adapter with rate limiter, user agent, cache, exponential backoff and document/URL hashes; test with mocked SEC responses.
+- [ ] Implement company IR allowlist and rights metadata; block pending/blocked source in live processing.
+- [ ] Implement extraction Pydantic models requiring source-span and comparison basis; fail closed on invalid JSON.
+- [ ] Implement canonical event ID, reprint dedup, correction versioning, `first_seen_at`, `published_at`, `available_at`, `occurred_at`.
+- [ ] Implement explicit unit/period basis validation; no comparisons between annual and quarterly figures without normalization.
+- [ ] Regression: F029 duplicate, F030 future source, F031 correction, F027 incompatible period, F025 low quality.
+
+## P3 — Graph + decision policy
+- [ ] Implement directed verified-edge query for 0,1,2 hops, as-of valid edge snapshots; no loops, no 3-hop.
+- [ ] Return `selected_path`, alternates, `path_confidence`, `sign` and `conditional_reasons`; don't sum overlapping paths.
+- [ ] Implement pre-score evidence/rights/path/novelty/materiality gates.
+- [ ] Implement R/M/N/Q/T/U scoring exactly as v0 config, with per-component trace and `policy_version`.
+- [ ] Implement stance classifier with `SUPPORTS`, `CHALLENGES`, `MIXED`, `NO_CHANGE`, `INSUFFICIENT_EVIDENCE`; no probability outputs.
+- [ ] Implement decisions `push`, `digest`, `storybook`, `suppressed`, `review_required`, separate from delivery statuses.
+- [ ] Implement rate-limit, daily cap, per-user per-canonical-event bundling and dry-run dispatcher.
+- [ ] Regression: R003 two-hop, F021 price-cost cross-link, F024 conditional no company assertion, mixed signals, unknown materiality, candidate edge cannot push.
+
+## P4 — Product integration
+- [ ] Build authenticated REST endpoints listed in README; admin RBAC; Swagger/OpenAPI; predictable error payload.
+- [ ] Enforce free-tier entitlement (max 3 stocks, max 1 narrative), though actual billing remains out of scope.
+- [ ] Add narrative compiler and user approval, free-tier max 3 high-priority drivers; store immutable version after edits.
+- [ ] Add structured alert card response: what changed, why connected with path, thesis impact, missing facts, next monitor, evidence links.
+- [ ] Add feedback API; `WRONG` -> global quality review, `NOT_RELEVANT` -> user relevance; never auto-affect relationship truth.
+- [ ] Build chronological storybook with source-linked entries and financial observations at actual reporting times, private by default.
+- [ ] Regression: tenant auth, multi-thread duplicate bundling, feedback ownership, story corrections and opt-in public sharing.
+
+## P5 — Evaluation and release review
+- [ ] Build human-label template and ingest 50–100 **real** historical events via approved sources with genuine as-of dates.
+- [ ] Holdout split chronologically, define no-leakage checks for sources/edges/narrative versions/metrics.
+- [ ] Implement B0 keyword baseline, B1 ticker-only LLM baseline or explicitly marked unavailable when no LLM, and V0 graph scoring.
+- [ ] Evaluate push precision, material recall, 2-hop recall, duplicates, false alerts, factual errors, time to review, latency and cost.
+- [ ] Benchmark with counts/denominators and confidence intervals; don't silently exclude hard negative examples.
+- [ ] Publish `reports/eval-v0.md`, `reports/quality-errors.md`, `reports/cost-v0.md`, `RUNBOOK.md`.
+- [ ] Complete threat model: source prompt injection, licenses, auth/tenant, privacy, audit log, ingestion idempotency and failure recovery.
+- [ ] Go/no-go decision with remaining risks; no unsupported product-ready claim.
+
+## Golden cases
+Translate **every** case from `tests/golden_cases.json` into executable tests. Additional mandatory tests:
+- All source URLs in notification trace resolve to approved source documents (fixture URLs only in demo).
+- Can't approve relation with no cite, reviewer, verified-at and `recorded_at <= as_of`.
+- Regression after score-weight change reproducible by `policy_version`.
+- Duplicate filing uploaded twice has a single canonical event; retries are safe.
+- Different users with differing preferences receive different ranking but identical factual claims.
+- Same narrative edited in November doesn't alter the version seen during October historical replay.
+- Error on SEC request must never result in fabricated data or 'no change' event.
+- Adjusted price data cannot be combined with unadjusted series without explicit metadata.
+- Local model timeout does not create an alert; fallback to review/skip.
+- 3-hop path is rejected even if it has a high score.
+
+## Implementation completion report template
+```
+IMPLEMENTED:
+- [phase] file(s) and design decision
+TESTED:
+- exact command, passed/failed/skipped count, test environment
+PENDING:
+- work not done, why, owner not invented
+BLOCKERS:
+- API access/data licensing/existing repo mismatch
+QUALITY:
+- baseline metrics with N and dates, unsupported metrics clearly labeled
+```

@@ -1,0 +1,65 @@
+{
+  "all_match": true,
+  "files": [
+    {
+      "file": "BRIEF_BAN_GIAO_VI.md",
+      "matches": true
+    },
+    {
+      "file": "CODEX_START_HERE.md",
+      "matches": true
+    },
+    {
+      "file": "README.md",
+      "matches": true
+    },
+    {
+      "file": "codex/TASKS.md",
+      "matches": true
+    },
+    {
+      "file": "config/entities.json",
+      "matches": true
+    },
+    {
+      "file": "config/narratives.json",
+      "matches": true
+    },
+    {
+      "file": "config/relationships.json",
+      "matches": true
+    },
+    {
+      "file": "config/stocks.json",
+      "matches": true
+    },
+    {
+      "file": "fixtures/demo_verified_relationships.json",
+      "matches": true
+    },
+    {
+      "file": "fixtures/events.jsonl",
+      "matches": true
+    },
+    {
+      "file": "fixtures/sample_expected_card_F021.json",
+      "matches": true
+    },
+    {
+      "file": "schemas/json_contracts.json",
+      "matches": true
+    },
+    {
+      "file": "schemas/schema.sql",
+      "matches": true
+    },
+    {
+      "file": "tests/check_package.py",
+      "matches": true
+    },
+    {
+      "file": "tests/golden_cases.json",
+      "matches": true
+    }
+  ]
+}

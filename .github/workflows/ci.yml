@@ -1,0 +1,47 @@
+name: engine-foundations
+on: [push, pull_request]
+jobs:
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install pip==26.3 pip-audit==2.10.1
+      - run: pip-audit -r requirements-validated.txt --no-deps --disable-pip
+      - run: pip-audit -r requirements-container.txt --no-deps --disable-pip
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: rie
+          POSTGRES_PASSWORD: ci_only
+          POSTGRES_DB: rie_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U rie -d rie_test"
+          --health-interval 5s --health-timeout 5s --health-retries 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pip==26.3
+      - run: pip install -c requirements-validated.txt -e '.[dev]'
+      - run: ruff check engine alembic tests
+      - run: mypy engine
+      - run: pytest -q
+      - run: pytest -q
+        env:
+          TEST_DATABASE_URL: postgresql+psycopg://rie:ci_only@localhost:5432/rie_test
+      - run: |
+          alembic upgrade head
+          python -m engine.seed --config config
+          python -m engine.ingest --demo --initialize-demo --as-of 2026-11-01T00:00:00Z
+          python -m engine.replay --dry-run --as-of 2026-11-01T00:00:00Z
+          alembic downgrade base
+        env:
+          DATABASE_URL: postgresql+psycopg://rie:ci_only@localhost:5432/rie_test

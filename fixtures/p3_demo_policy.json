@@ -1,0 +1,312 @@
+{
+  "version": "p3-synthetic-observations-v1",
+  "is_synthetic": true,
+  "never_use_in_live": true,
+  "simulated_available_at": "2026-09-01T00:00:00Z",
+  "note": "Hand-authored directional observations from supplied synthetic headlines, not gold stance labels. No numeric values or materiality inferred. Context dates are simulated, never production history.",
+  "outcomes": {
+    "N01": {
+      "MU_HBM_REVENUE": 1,
+      "MU_GROSS_MARGIN": 1
+    },
+    "N02": {
+      "MU_GROSS_MARGIN": -1
+    },
+    "N03": {
+      "NVDA_DATA_CENTER_REVENUE": 1
+    },
+    "N04": {
+      "NVDA_SUPPLY_AVAILABLE": -1,
+      "NVDA_ADDRESSABLE_MARKET": -1,
+      "NVDA_DATA_CENTER_REVENUE": -1
+    },
+    "N05": {
+      "AMD_INSTINCT_SHIPMENTS": 1,
+      "AMD_DC_REVENUE": 1
+    },
+    "N06": {
+      "AMD_DC_REVENUE": 1,
+      "AMD_DC_MARGIN": 1
+    },
+    "N07": {
+      "DELL_AI_SERVER_REVENUE": 1,
+      "DELL_ISG_MARGIN": 1
+    },
+    "N08": {
+      "DELL_ISG_MARGIN": -1
+    },
+    "N09": {
+      "SNDK_GROSS_MARGIN": 1,
+      "SNDK_REVENUE": 1
+    },
+    "N10": {
+      "SNDK_ENTERPRISE_MIX": 1,
+      "SNDK_SSD_SHIPMENTS": 1,
+      "SNDK_GROSS_MARGIN": 1
+    }
+  },
+  "edge_conditions": {
+    "R025": [
+      "contracted_cost_rises"
+    ],
+    "R026": [
+      "contracted_cost_rises"
+    ],
+    "R027": [
+      "cost_not_offset"
+    ]
+  },
+  "signals": {
+    "F001": {
+      "metric_id": "MU_HBM_REVENUE",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F001",
+      "source_headline_sha256": "c3544287d9d3fc784f639ceba10ce7cb045da0ca4538d8862cc1f37e927b1c9d",
+      "available_at": "2026-10-01T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F002": {
+      "metric_id": "MU_GROSS_MARGIN",
+      "direction": -1,
+      "evidence_url": "fixture://synthetic/F002",
+      "source_headline_sha256": "c65ac4190882dee337f9d4206a65bbbe97dd21112e10cf425d33afa9d990c4de",
+      "available_at": "2026-10-02T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F003": {
+      "metric_id": "DRAM_BIT_SUPPLY",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F003",
+      "source_headline_sha256": "1d45b72b1f55d01b92c260dc0c6ac62328dbfe1348412f685daa6b9ee7ddc06e",
+      "available_at": "2026-10-03T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F004": {
+      "metric_id": "DRAM_ASP",
+      "direction": 0,
+      "evidence_url": "fixture://synthetic/F004",
+      "source_headline_sha256": "75606277c18f394041b36cb30221b61234676ce0295faf9f46b1b26c6774305b",
+      "available_at": "2026-10-04T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F005": {
+      "metric_id": "AI_CAPEX",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F005",
+      "source_headline_sha256": "401a8eace09efc3eb8f675b8656beb310a238f91b1a1549eb91f00ebe1173eea",
+      "available_at": "2026-10-05T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F006": {
+      "metric_id": "NVDA_DATA_CENTER_REVENUE",
+      "direction": -1,
+      "evidence_url": "fixture://synthetic/F006",
+      "source_headline_sha256": "8b76425d4114eae3a48152cd01296822dc47b5a2e01d2172a5a2e81ae4febe9c",
+      "available_at": "2026-10-06T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F007": {
+      "metric_id": "NVDA_SUPPLY_AVAILABLE",
+      "direction": -1,
+      "evidence_url": "fixture://synthetic/F007",
+      "source_headline_sha256": "b017e6b87a28e0427a5225a8e944011d7d25acbbf6165e493dc67480b3d532e1",
+      "available_at": "2026-10-07T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F008": {
+      "metric_id": "ADVANCED_PACKAGING_CAPACITY",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F008",
+      "source_headline_sha256": "ee2a6972c3d9a03c494eaa029b2a16e5a864e09e75303c25cfda7401628b0a9a",
+      "available_at": "2026-10-08T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F009": {
+      "metric_id": "AMD_INSTINCT_SHIPMENTS",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F009",
+      "source_headline_sha256": "a936c9a8436a3af66107347975b7d82a6c3548b5ac92971de6b4a9ca3ea39c45",
+      "available_at": "2026-10-09T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F010": {
+      "metric_id": "AMD_INSTINCT_ADOPTION",
+      "direction": -1,
+      "evidence_url": "fixture://synthetic/F010",
+      "source_headline_sha256": "0eb92a1760fcd4856472239bf43288a44075cfcc4b76db99076b562a07c5f9cc",
+      "available_at": "2026-10-10T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F011": {
+      "metric_id": "AMD_EPYC_ADOPTION",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F011",
+      "source_headline_sha256": "234dadf4296be836ab0df72048c7a552d031c53d4b4ad4ea08d4999a868bdbe7",
+      "available_at": "2026-10-11T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F012": {
+      "metric_id": "AMD_DC_MARGIN",
+      "direction": -1,
+      "evidence_url": "fixture://synthetic/F012",
+      "source_headline_sha256": "fa3894a30dc2af3c62b21e400b25c74bb07fd6c26a2333b63baa4bc7cc1ef29b",
+      "available_at": "2026-10-12T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F013": {
+      "metric_id": "DELL_AI_SERVER_REVENUE",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F013",
+      "source_headline_sha256": "da9343c65e6e19e0a3956946cc02abe1b785637ba787fa8d81d962f7762195e0",
+      "available_at": "2026-10-13T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F014": {
+      "metric_id": "DELL_AI_SERVER_BACKLOG",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F014",
+      "source_headline_sha256": "65b34f550280c44e595dfb994834a7ec16db8da31783c35d872004bcb08229f8",
+      "available_at": "2026-10-14T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F015": {
+      "metric_id": "SERVER_COMPONENT_COST",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F015",
+      "source_headline_sha256": "b24421fd33969f032bd44b1ab933c5f96e8368b3fa37c88b5191d3ed56b9e1f9",
+      "available_at": "2026-10-15T14:00:00Z",
+      "confirmed_conditions": [
+        "contracted_cost_rises",
+        "cost_not_offset"
+      ]
+    },
+    "F016": {
+      "metric_id": "PRICE_PASS_THROUGH",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F016",
+      "source_headline_sha256": "0ddb0791286d2cbf3462119181c65baad91dc486be6c3f10955aaae04f468ff3",
+      "available_at": "2026-10-16T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F017": {
+      "metric_id": "NAND_ASP",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F017",
+      "source_headline_sha256": "c164e340807e588b39e057dca694f51bd700257d250a8f4f67dd0141b3c941d3",
+      "available_at": "2026-10-17T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F018": {
+      "metric_id": "SNDK_GROSS_MARGIN",
+      "direction": -1,
+      "evidence_url": "fixture://synthetic/F018",
+      "source_headline_sha256": "d210dda221e390cb4fcfe477acbcbc5b47fc2bf7421d06b11033900c823526a4",
+      "available_at": "2026-10-18T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F019": {
+      "metric_id": "SNDK_SSD_SHIPMENTS",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F019",
+      "source_headline_sha256": "b73931bf36aa709da66516dd7058c5d19db829e8e09fe9e27b6bbfd728e2490b",
+      "available_at": "2026-10-19T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F020": {
+      "metric_id": "SNDK_ENTERPRISE_MIX",
+      "direction": 0,
+      "evidence_url": "fixture://synthetic/F020",
+      "source_headline_sha256": "1ce09ab5400e211236695f8723ce331781bdc6ab47a96213b180a8ed46cd65f7",
+      "available_at": "2026-10-20T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F021": {
+      "metric_id": "NAND_ASP",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F021",
+      "source_headline_sha256": "4bdef2f94b7fd98053deb2eca65e2912a0331d1f67ee65bff6068801263ec8a4",
+      "available_at": "2026-10-21T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F022": {
+      "metric_id": "DRAM_BIT_SUPPLY",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F022",
+      "source_headline_sha256": "07abf0c6ac432d0431f0ffa55e275942cfac4c453c692b8408b9c09690f6dcbd",
+      "available_at": "2026-10-01T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F023": {
+      "metric_id": "EXPORT_CONTROLS",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F023",
+      "source_headline_sha256": "2214a4fd9d63c59d2f60cd726773da4e5e07ec46e770b098c96a9bd4b157ecc0",
+      "available_at": "2026-10-02T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F024": {
+      "metric_id": "AI_CAPEX",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F024",
+      "source_headline_sha256": "9f932e475e0a99624db4c5633316d6c1001958fad245ed911c2004bb77f6bd6f",
+      "available_at": "2026-10-03T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F025": {
+      "metric_id": "NVDA_DATA_CENTER_REVENUE",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F025",
+      "source_headline_sha256": "bae3febaf0d15ac6be8e1dd9f121bda52459b3eca6fa0fc6b19d099e3a01d30c",
+      "available_at": "2026-10-04T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F026": {
+      "metric_id": "MU_REVENUE",
+      "direction": null,
+      "evidence_url": "fixture://synthetic/F026",
+      "source_headline_sha256": "aea5fc7bcf2599eb95251735ab9caa0b9f2e962305c001e19d38386c64e755c8",
+      "available_at": "2026-10-05T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F027": {
+      "metric_id": "DELL_AI_SERVER_REVENUE",
+      "direction": null,
+      "evidence_url": "fixture://synthetic/F027",
+      "source_headline_sha256": "070ce3d8eddcfce3dbe242f5606641a34739d1f5951c784589262d07941f79c8",
+      "available_at": "2026-10-06T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F028": {
+      "metric_id": "NAND_ASP",
+      "direction": null,
+      "evidence_url": "fixture://synthetic/F028",
+      "source_headline_sha256": "458a2fe3b82445143910f07f610ea84c2eb7cfed153dfce4d7f92afa7e710bd4",
+      "available_at": "2026-10-07T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F029": {
+      "metric_id": "MU_HBM_REVENUE",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F029",
+      "source_headline_sha256": "e9093919df0f65a54caf2e440668d3f5676b7731d5a2bda2a1bf3fff92d85627",
+      "available_at": "2026-10-01T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F030": {
+      "metric_id": "AI_CAPEX",
+      "direction": 1,
+      "evidence_url": "fixture://synthetic/F030",
+      "source_headline_sha256": "9c1cb00b89e48a201b5184e72de9f7d45917fc2df4b0e707532f98a631700c62",
+      "available_at": "2026-12-01T14:00:00Z",
+      "confirmed_conditions": []
+    },
+    "F031": {
+      "metric_id": "NAND_ASP",
+      "direction": null,
+      "evidence_url": "fixture://synthetic/F031",
+      "source_headline_sha256": "4f424ca9f9d25d0abf699007e4bde23703297873399ecb2674bc22bc1ffe077d",
+      "available_at": "2026-10-26T14:00:00Z",
+      "confirmed_conditions": []
+    }
+  }
+}

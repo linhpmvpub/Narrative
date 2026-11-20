@@ -1,0 +1,506 @@
+[
+  {
+    "narrative_id": "N01",
+    "primary_ticker": "MU",
+    "title": "HBM demand and premium mix drive profitability",
+    "thesis": "AI workloads support HBM demand; if MU monetizes this demand through a richer product mix, revenue quality and gross margin could improve.",
+    "horizon_months": 12,
+    "driver_ids": [
+      "HBM_DEMAND",
+      "MU_HBM_REVENUE",
+      "MU_GROSS_MARGIN",
+      "DRAM_ASP"
+    ],
+    "supporting_evidence": [
+      "HBM demand and MU disclosed HBM shipments/revenue or mix improve together",
+      "MU gross margin improves with consistent reporting basis"
+    ],
+    "challenging_evidence": [
+      "HBM industry demand grows but MU HBM revenue/mix does not respond",
+      "MU gross margin declines despite favorable memory pricing"
+    ],
+    "disconfirmation": "HBM industry demand grows but MU HBM revenue/mix does not respond",
+    "metrics": [
+      "HBM revenue or mix, if disclosed",
+      "DRAM ASP (if disclosed)",
+      "gross margin",
+      "revenue by memory technology"
+    ],
+    "known_confounds": [
+      "HBM strength may coincide with rising manufacturing or packaging costs",
+      "Gross margin is affected by multiple products and accounting factors"
+    ],
+    "watch_entities": [
+      "CO_MU",
+      "DRAM_ASP",
+      "HBM_DEMAND",
+      "MU_GROSS_MARGIN",
+      "MU_HBM_REVENUE"
+    ],
+    "update_cadence": "event_driven_with_weekly_optional_digest",
+    "status": "template_draft",
+    "version": 1,
+    "is_template": true,
+    "is_synthetic_hypothesis": true,
+    "scope": {
+      "max_hops": 2,
+      "needs_user_confirmation_before_activation": true
+    },
+    "last_verified_at": null,
+    "hypothesis_polarity_for_company": "favorable",
+    "stance_is_stock_direction": false
+  },
+  {
+    "narrative_id": "N02",
+    "primary_ticker": "MU",
+    "title": "Memory supply cycle threatens pricing power",
+    "thesis": "Excess DRAM supply or inventory normalization could weaken pricing and offset earnings recovery.",
+    "horizon_months": 12,
+    "driver_ids": [
+      "DRAM_BIT_SUPPLY",
+      "DRAM_INVENTORY",
+      "DRAM_ASP",
+      "MU_GROSS_MARGIN"
+    ],
+    "supporting_evidence": [
+      "Bit supply and inventories rise while DRAM ASP and MU gross margin weaken"
+    ],
+    "challenging_evidence": [
+      "DRAM ASP remains strong despite new capacity",
+      "Company product mix offsets pricing declines"
+    ],
+    "disconfirmation": "DRAM ASP remains strong despite new capacity",
+    "metrics": [
+      "DRAM bit supply",
+      "inventory days",
+      "DRAM ASP",
+      "gross margin"
+    ],
+    "known_confounds": [
+      "Capacity announcements do not equal realized wafer output",
+      "Technology mix and timing can offset headline capacity"
+    ],
+    "watch_entities": [
+      "CO_MU",
+      "DRAM_ASP",
+      "DRAM_BIT_SUPPLY",
+      "DRAM_INVENTORY",
+      "MU_GROSS_MARGIN"
+    ],
+    "update_cadence": "event_driven_with_weekly_optional_digest",
+    "status": "template_draft",
+    "version": 1,
+    "is_template": true,
+    "is_synthetic_hypothesis": true,
+    "scope": {
+      "max_hops": 2,
+      "needs_user_confirmation_before_activation": true
+    },
+    "last_verified_at": null,
+    "hypothesis_polarity_for_company": "adverse",
+    "stance_is_stock_direction": false
+  },
+  {
+    "narrative_id": "N03",
+    "primary_ticker": "NVDA",
+    "title": "AI infrastructure spending sustains accelerator demand",
+    "thesis": "Sustained AI infrastructure investment could support accelerator demand and NVIDIA data center revenue.",
+    "horizon_months": 12,
+    "driver_ids": [
+      "AI_CAPEX",
+      "ACCELERATOR_DEMAND",
+      "NVDA_DATA_CENTER_REVENUE"
+    ],
+    "supporting_evidence": [
+      "AI infrastructure spending and accelerator order indicators grow",
+      "NVIDIA data center revenue confirms demand conversion"
+    ],
+    "challenging_evidence": [
+      "Capex grows but is allocated to non-GPU infrastructure or competitors",
+      "Orders fail to convert into reported sales"
+    ],
+    "disconfirmation": "Capex grows but is allocated to non-GPU infrastructure or competitors",
+    "metrics": [
+      "hyperscaler AI capex",
+      "data center revenue",
+      "supply commitments (context only)"
+    ],
+    "known_confounds": [
+      "AI capex does not translate one-to-one to NVIDIA revenue",
+      "Export mix and inventory channel matter"
+    ],
+    "watch_entities": [
+      "ACCELERATOR_DEMAND",
+      "AI_CAPEX",
+      "CO_NVDA",
+      "NVDA_DATA_CENTER_REVENUE"
+    ],
+    "update_cadence": "event_driven_with_weekly_optional_digest",
+    "status": "template_draft",
+    "version": 1,
+    "is_template": true,
+    "is_synthetic_hypothesis": true,
+    "scope": {
+      "max_hops": 2,
+      "needs_user_confirmation_before_activation": true
+    },
+    "last_verified_at": null,
+    "hypothesis_polarity_for_company": "favorable",
+    "stance_is_stock_direction": false
+  },
+  {
+    "narrative_id": "N04",
+    "primary_ticker": "NVDA",
+    "title": "Supply and export constraints limit growth",
+    "thesis": "Packaging/memory capacity constraints and export rules could restrict NVIDIA shipments or addressable sales.",
+    "horizon_months": 12,
+    "driver_ids": [
+      "NVDA_SUPPLY_AVAILABLE",
+      "ADVANCED_PACKAGING_CAPACITY",
+      "EXPORT_CONTROLS",
+      "NVDA_ADDRESSABLE_MARKET"
+    ],
+    "supporting_evidence": [
+      "Supply-related disclosure confirms restrictions or delivery delays",
+      "New applicable export restrictions reduce accessible end markets"
+    ],
+    "challenging_evidence": [
+      "Capacity expands and shipment constraints ease",
+      "Demand redirects to approved products/markets with demonstrated conversion"
+    ],
+    "disconfirmation": "Capacity expands and shipment constraints ease",
+    "metrics": [
+      "supply commitments",
+      "manufacturing constraints",
+      "regulatory scope",
+      "region revenue if disclosed"
+    ],
+    "known_confounds": [
+      "Committed supply is not shipped supply",
+      "Regulatory headlines may not affect named product/market"
+    ],
+    "watch_entities": [
+      "ADVANCED_PACKAGING_CAPACITY",
+      "CO_NVDA",
+      "EXPORT_CONTROLS",
+      "NVDA_ADDRESSABLE_MARKET",
+      "NVDA_SUPPLY_AVAILABLE"
+    ],
+    "update_cadence": "event_driven_with_weekly_optional_digest",
+    "status": "template_draft",
+    "version": 1,
+    "is_template": true,
+    "is_synthetic_hypothesis": true,
+    "scope": {
+      "max_hops": 2,
+      "needs_user_confirmation_before_activation": true
+    },
+    "last_verified_at": null,
+    "hypothesis_polarity_for_company": "adverse",
+    "stance_is_stock_direction": false
+  },
+  {
+    "narrative_id": "N05",
+    "primary_ticker": "AMD",
+    "title": "Instinct adoption drives AI accelerator revenue expansion",
+    "thesis": "Customer adoption of AMD Instinct accelerators could increase accelerator shipments and data center sales.",
+    "horizon_months": 12,
+    "driver_ids": [
+      "AMD_INSTINCT_ADOPTION",
+      "AMD_INSTINCT_SHIPMENTS",
+      "AMD_DC_REVENUE",
+      "ACCELERATOR_DEMAND"
+    ],
+    "supporting_evidence": [
+      "Customer deployment translates to disclosed accelerator shipments or revenue",
+      "Data center revenue and profitability improve with accelerators"
+    ],
+    "challenging_evidence": [
+      "Announced deployments are delayed or not monetized",
+      "Growth is primarily CPU rather than Instinct and thesis is misattributed"
+    ],
+    "disconfirmation": "Announced deployments are delayed or not monetized",
+    "metrics": [
+      "data center revenue",
+      "accelerator revenue if disclosed",
+      "customer deployment dates",
+      "product mix"
+    ],
+    "known_confounds": [
+      "Customer announcements may not imply contracted revenue",
+      "Data center includes CPUs and accelerators"
+    ],
+    "watch_entities": [
+      "ACCELERATOR_DEMAND",
+      "AMD_DC_REVENUE",
+      "AMD_INSTINCT_ADOPTION",
+      "AMD_INSTINCT_SHIPMENTS",
+      "CO_AMD"
+    ],
+    "update_cadence": "event_driven_with_weekly_optional_digest",
+    "status": "template_draft",
+    "version": 1,
+    "is_template": true,
+    "is_synthetic_hypothesis": true,
+    "scope": {
+      "max_hops": 2,
+      "needs_user_confirmation_before_activation": true
+    },
+    "last_verified_at": null,
+    "hypothesis_polarity_for_company": "favorable",
+    "stance_is_stock_direction": false
+  },
+  {
+    "narrative_id": "N06",
+    "primary_ticker": "AMD",
+    "title": "EPYC adoption improves data center economics",
+    "thesis": "EPYC server CPU adoption could support AMD data center growth and segment economics.",
+    "horizon_months": 12,
+    "driver_ids": [
+      "SERVER_CPU_DEMAND",
+      "AMD_EPYC_ADOPTION",
+      "AMD_DC_REVENUE",
+      "AMD_DC_MARGIN"
+    ],
+    "supporting_evidence": [
+      "Server CPU deployment and reported AMD data center economics advance"
+    ],
+    "challenging_evidence": [
+      "CPU adoption stalls",
+      "Segment growth comes from other product categories or margin worsens"
+    ],
+    "disconfirmation": "CPU adoption stalls",
+    "metrics": [
+      "server CPU market indicators",
+      "AMD data center revenue",
+      "segment margin if disclosed"
+    ],
+    "known_confounds": [
+      "Data center metric aggregates product lines",
+      "Competitor market share numbers need independent verification"
+    ],
+    "watch_entities": [
+      "AMD_DC_MARGIN",
+      "AMD_DC_REVENUE",
+      "AMD_EPYC_ADOPTION",
+      "CO_AMD",
+      "SERVER_CPU_DEMAND"
+    ],
+    "update_cadence": "event_driven_with_weekly_optional_digest",
+    "status": "template_draft",
+    "version": 1,
+    "is_template": true,
+    "is_synthetic_hypothesis": true,
+    "scope": {
+      "max_hops": 2,
+      "needs_user_confirmation_before_activation": true
+    },
+    "last_verified_at": null,
+    "hypothesis_polarity_for_company": "favorable",
+    "stance_is_stock_direction": false
+  },
+  {
+    "narrative_id": "N07",
+    "primary_ticker": "DELL",
+    "title": "AI server orders convert into profitable revenue",
+    "thesis": "Growth in AI-server orders and backlog could convert to revenue and profitable ISG operating performance.",
+    "horizon_months": 12,
+    "driver_ids": [
+      "DELL_AI_SERVER_ORDERS",
+      "DELL_AI_SERVER_BACKLOG",
+      "DELL_AI_SERVER_REVENUE",
+      "DELL_ISG_MARGIN"
+    ],
+    "supporting_evidence": [
+      "Backlog converts to reported revenue and ISG profitability",
+      "Revenue and cash conversion improve without excessive working capital"
+    ],
+    "challenging_evidence": [
+      "Backlog increases but conversion is delayed",
+      "AI server revenue grows with deteriorating ISG margin or cash conversion"
+    ],
+    "disconfirmation": "Backlog increases but conversion is delayed",
+    "metrics": [
+      "AI server orders/backlog",
+      "AI server revenue",
+      "ISG margin",
+      "working capital"
+    ],
+    "known_confounds": [
+      "Order book may be cancelable or time-shifted",
+      "Large lower-margin server mix can depress group margin"
+    ],
+    "watch_entities": [
+      "CO_DELL",
+      "DELL_AI_SERVER_BACKLOG",
+      "DELL_AI_SERVER_ORDERS",
+      "DELL_AI_SERVER_REVENUE",
+      "DELL_ISG_MARGIN"
+    ],
+    "update_cadence": "event_driven_with_weekly_optional_digest",
+    "status": "template_draft",
+    "version": 1,
+    "is_template": true,
+    "is_synthetic_hypothesis": true,
+    "scope": {
+      "max_hops": 2,
+      "needs_user_confirmation_before_activation": true
+    },
+    "last_verified_at": null,
+    "hypothesis_polarity_for_company": "favorable",
+    "stance_is_stock_direction": false
+  },
+  {
+    "narrative_id": "N08",
+    "primary_ticker": "DELL",
+    "title": "Component inflation compresses infrastructure margins",
+    "thesis": "Rising DRAM/NAND and other component prices could pressure Dell margins unless selling prices and configuration mix offset the costs.",
+    "horizon_months": 12,
+    "driver_ids": [
+      "SERVER_COMPONENT_COST",
+      "DRAM_ASP",
+      "NAND_ASP",
+      "DELL_ISG_MARGIN"
+    ],
+    "supporting_evidence": [
+      "Input costs rise while ISG margins deteriorate",
+      "Price pass-through lags rising components"
+    ],
+    "challenging_evidence": [
+      "Dell increases realized pricing and maintains margins",
+      "Supplier rebates or mix reduce net cost pressure"
+    ],
+    "disconfirmation": "Dell increases realized pricing and maintains margins",
+    "metrics": [
+      "DRAM ASP",
+      "NAND ASP",
+      "ISG gross/operating margin",
+      "pricing commentary"
+    ],
+    "known_confounds": [
+      "Component cost contracts can lag spot prices",
+      "DRAM/NAND pricing is only part of BOM"
+    ],
+    "watch_entities": [
+      "CO_DELL",
+      "DELL_ISG_MARGIN",
+      "DRAM_ASP",
+      "NAND_ASP",
+      "SERVER_COMPONENT_COST"
+    ],
+    "update_cadence": "event_driven_with_weekly_optional_digest",
+    "status": "template_draft",
+    "version": 1,
+    "is_template": true,
+    "is_synthetic_hypothesis": true,
+    "scope": {
+      "max_hops": 2,
+      "needs_user_confirmation_before_activation": true
+    },
+    "last_verified_at": null,
+    "hypothesis_polarity_for_company": "adverse",
+    "stance_is_stock_direction": false
+  },
+  {
+    "narrative_id": "N09",
+    "primary_ticker": "SNDK",
+    "title": "NAND pricing recovery supports earnings",
+    "thesis": "NAND ASP recovery and supply discipline could improve Sandisk revenue mix and gross margin.",
+    "horizon_months": 12,
+    "driver_ids": [
+      "NAND_ASP",
+      "NAND_BIT_SUPPLY",
+      "NAND_INVENTORY",
+      "SNDK_GROSS_MARGIN"
+    ],
+    "supporting_evidence": [
+      "NAND ASP recovers and SNDK revenue/margin confirms pass-through",
+      "Inventory tightness is corroborated by supplier data"
+    ],
+    "challenging_evidence": [
+      "NAND ASP improves but SNDK margin/cash does not",
+      "Bit supply expands faster than demand"
+    ],
+    "disconfirmation": "NAND ASP improves but SNDK margin/cash does not",
+    "metrics": [
+      "NAND ASP",
+      "bit shipment trends",
+      "inventory",
+      "gross margin"
+    ],
+    "known_confounds": [
+      "SNDK fiscal comparability around WDC separation",
+      "Segment/customer contracts may lag NAND spot price"
+    ],
+    "watch_entities": [
+      "CO_SNDK",
+      "NAND_ASP",
+      "NAND_BIT_SUPPLY",
+      "NAND_INVENTORY",
+      "SNDK_GROSS_MARGIN"
+    ],
+    "update_cadence": "event_driven_with_weekly_optional_digest",
+    "status": "template_draft",
+    "version": 1,
+    "is_template": true,
+    "is_synthetic_hypothesis": true,
+    "scope": {
+      "max_hops": 2,
+      "needs_user_confirmation_before_activation": true
+    },
+    "last_verified_at": null,
+    "hypothesis_polarity_for_company": "favorable",
+    "stance_is_stock_direction": false
+  },
+  {
+    "narrative_id": "N10",
+    "primary_ticker": "SNDK",
+    "title": "Enterprise SSD demand expands higher-value mix",
+    "thesis": "Growing enterprise SSD adoption could improve Sandisk demand mix and long-term unit economics if monetized.",
+    "horizon_months": 12,
+    "driver_ids": [
+      "ENTERPRISE_SSD_DEMAND",
+      "SNDK_ENTERPRISE_MIX",
+      "SNDK_SSD_SHIPMENTS",
+      "SNDK_GROSS_MARGIN"
+    ],
+    "supporting_evidence": [
+      "Enterprise SSD orders convert into shipments and improving mix",
+      "Reported revenue/margins corroborate enterprise exposure"
+    ],
+    "challenging_evidence": [
+      "Market demand rises but SNDK share or economics do not",
+      "Enterprise SSD growth is offset by falling overall NAND pricing"
+    ],
+    "disconfirmation": "Market demand rises but SNDK share or economics do not",
+    "metrics": [
+      "enterprise SSD demand",
+      "SNDK SSD shipments if disclosed",
+      "end-market mix",
+      "gross margin"
+    ],
+    "known_confounds": [
+      "Do not equate general AI data center capex with Sandisk-specific business",
+      "Do not merge WDC HDD with SNDK NAND"
+    ],
+    "watch_entities": [
+      "CO_SNDK",
+      "ENTERPRISE_SSD_DEMAND",
+      "SNDK_ENTERPRISE_MIX",
+      "SNDK_GROSS_MARGIN",
+      "SNDK_SSD_SHIPMENTS"
+    ],
+    "update_cadence": "event_driven_with_weekly_optional_digest",
+    "status": "template_draft",
+    "version": 1,
+    "is_template": true,
+    "is_synthetic_hypothesis": true,
+    "scope": {
+      "max_hops": 2,
+      "needs_user_confirmation_before_activation": true
+    },
+    "last_verified_at": null,
+    "hypothesis_polarity_for_company": "favorable",
+    "stance_is_stock_direction": false
+  }
+]

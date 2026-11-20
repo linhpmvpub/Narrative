@@ -1,0 +1,16 @@
+.venv/
+.audit-venv/
+source-cache/
+backups/
+secrets/
+*.dump
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.db
+.env
+*.egg-info/
+
+
+*.log

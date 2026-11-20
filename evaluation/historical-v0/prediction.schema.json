@@ -1,0 +1,69 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "matched": {
+      "title": "Matched",
+      "type": "boolean"
+    },
+    "decision": {
+      "enum": [
+        "push",
+        "digest",
+        "storybook",
+        "suppressed",
+        "review_required"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "policy_version": {
+      "minLength": 1,
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "trace_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Trace Sha256",
+      "type": "string"
+    },
+    "latency_ms": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Latency Ms"
+    },
+    "cost_usd": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cost Usd"
+    }
+  },
+  "required": [
+    "case_id",
+    "matched",
+    "decision",
+    "policy_version",
+    "trace_sha256"
+  ],
+  "title": "Prediction",
+  "type": "object"
+}

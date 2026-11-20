@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "browser": "Chrome / Playwright",
+  "live_notifications": false,
+  "checks": [
+    "synthetic demo",
+    "desktop/mobile layout",
+    "memory-only authentication",
+    "stock subscription",
+    "custom narrative draft/approval/subscription",
+    "logout"
+  ],
+  "javascript_errors": []
+}

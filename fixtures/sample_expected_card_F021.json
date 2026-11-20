@@ -1,0 +1,23 @@
+{
+  "_note": "Illustrative EXPECTED SHAPE only. No engine has been run. Entire event is SYNTHETIC.",
+  "is_synthetic": true,
+  "event_id": "F021",
+  "narrative_id": "N08",
+  "primary_ticker": "DELL",
+  "narrative_stance": "SUPPORTS",
+  "economic_effect": "ADVERSE_IF_UNOFFSET",
+  "status": "review_required",
+  "source_url": "fixture://synthetic/F021",
+  "graph_path": [
+    {"from": "NAND_ASP", "relation": "SUPPLIER_COST", "to": "SERVER_COMPONENT_COST", "edge_id": "R026", "status": "synthetic_verified_demo_only"},
+    {"from": "SERVER_COMPONENT_COST", "relation": "FINANCIAL_TRANSMISSION", "to": "DELL_ISG_MARGIN", "edge_id": "R027", "status": "synthetic_verified_demo_only"}
+  ],
+  "copy": {
+    "headline": "Hypothetical NAND price pressure could affect Dell's component costs",
+    "what_changed": "Synthetic event: NAND prices rose in a mocked test fixture.",
+    "why_it_matters": "If Dell's contracted component cost rises and pricing cannot offset it, ISG margins could face pressure.",
+    "uncertainty": "No verified evidence in this fixture that Dell's actual input cost or margin changed.",
+    "watch_next": "Dell's realized component costs, vendor rebates, pricing and ISG margin disclosures."
+  },
+  "reason_for_not_sending": "Demo-only path; real edges are candidate and the relevant contract/price pass-through conditions are unverified."
+}

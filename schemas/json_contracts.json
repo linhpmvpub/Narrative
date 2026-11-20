@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/rie/v0/contracts",
+  "title": "RIE v0 reference DTO contracts",
+  "description": "Reference shape for Codex to implement and test with Pydantic v2. Not a live service schema.",
+  "$defs": {
+    "EventExtraction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_document_id", "entity_ids", "event_type", "factual_headline", "published_at", "available_at", "claims", "uncertainties"],
+      "properties": {
+        "source_document_id": {"type": "string", "minLength": 1},
+        "entity_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "event_type": {"type": "string", "minLength": 1},
+        "factual_headline": {"type": "string", "maxLength": 280},
+        "published_at": {"type": "string", "format": "date-time"},
+        "available_at": {"type": "string", "format": "date-time"},
+        "claims": {"type": "array", "items": {"$ref": "#/$defs/NumericOrQualitativeClaim"}, "minItems": 1},
+        "uncertainties": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "NumericOrQualitativeClaim": {
+      "type": "object", "additionalProperties": false,
+      "required": ["claim_text", "metric_id", "unit", "period", "comparison_basis", "old_value", "new_value", "source_span", "source_url"],
+      "properties": {
+        "claim_text": {"type": "string"},
+        "metric_id": {"type": ["string", "null"]},
+        "unit": {"type": ["string", "null"]},
+        "period": {"type": ["string", "null"]},
+        "comparison_basis": {"type": ["string", "null"]},
+        "old_value": {"type": ["number", "null"]},
+        "new_value": {"type": ["number", "null"]},
+        "source_span": {"type": "object", "required": ["start", "end"], "properties": {"start": {"type": "integer", "minimum": 0}, "end": {"type": "integer", "minimum": 0}}},
+        "source_url": {"type": "string", "minLength": 1}
+      }
+    },
+    "RelationProposal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["from_entity_id", "to_entity_id", "family", "mechanism", "sign", "status", "verification_needed", "source_document_ids"],
+      "properties": {
+        "from_entity_id": {"type": "string"},
+        "to_entity_id": {"type": "string"},
+        "family": {"enum": ["CUSTOMER_DEMAND", "SUPPLIER_COST", "COMPETITOR_SUPPLY", "PRODUCT_MARKET", "MACRO_POLICY", "FINANCIAL_TRANSMISSION"]},
+        "mechanism": {"type": "string", "minLength": 15},
+        "sign": {"enum": ["positive", "negative", "conditional", "unknown"]},
+        "status": {"const": "candidate"},
+        "verification_needed": {"const": true},
+        "source_document_ids": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "NarrativeDraft": {
+      "type": "object", "additionalProperties": false,
+      "required": ["primary_ticker", "title", "thesis", "horizon_months", "driver_ids", "supporting_conditions", "challenging_conditions", "disconfirmation_condition", "requires_user_confirmation"],
+      "properties": {
+        "primary_ticker": {"type": "string"},
+        "title": {"type": "string"},
+        "thesis": {"type": "string"},
+        "horizon_months": {"type": "integer", "minimum": 1, "maximum": 60},
+        "driver_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "maxItems": 3, "uniqueItems": true},
+        "supporting_conditions": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "challenging_conditions": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "disconfirmation_condition": {"type": "string"},
+        "requires_user_confirmation": {"const": true}
+      }
+    },
+    "DecisionTrace": {
+      "type": "object", "additionalProperties": false,
+      "required": ["event_version_id", "narrative_version_id", "as_of", "path_edge_ids", "gate_results", "score_components", "score", "stance", "economic_effect", "decision", "policy_version", "evidence_urls", "is_synthetic"],
+      "properties": {
+        "event_version_id": {"type": "string"},
+        "narrative_version_id": {"type": "string"},
+        "as_of": {"type": "string", "format": "date-time"},
+        "path_edge_ids": {"type": "array", "items": {"type": "string"}, "maxItems": 2},
+        "gate_results": {"type": "object", "additionalProperties": {"type": "boolean"}},
+        "score_components": {"type": "object", "required": ["R", "M", "N", "Q", "T", "U"], "properties": {"R": {"$ref": "#/$defs/UnitScore"}, "M": {"$ref": "#/$defs/UnitScore"}, "N": {"$ref": "#/$defs/UnitScore"}, "Q": {"$ref": "#/$defs/UnitScore"}, "T": {"$ref": "#/$defs/UnitScore"}, "U": {"$ref": "#/$defs/UnitScore"}}},
+        "score": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "stance": {"enum": ["SUPPORTS", "CHALLENGES", "MIXED", "NO_CHANGE", "INSUFFICIENT_EVIDENCE"]},
+        "economic_effect": {"enum": ["FAVORABLE", "ADVERSE", "UNCERTAIN", "NONE"]},
+        "decision": {"enum": ["push", "digest", "storybook", "suppressed", "review_required"]},
+        "policy_version": {"type": "string"},
+        "evidence_urls": {"type": "array", "items": {"type": "string"}},
+        "is_synthetic": {"type": "boolean"}
+      }
+    },
+    "UnitScore": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "AlertExplanation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["headline", "what_changed", "why_connected", "narrative_stance", "economic_effect", "what_is_uncertain", "what_to_watch", "evidence_urls", "is_synthetic"],
+      "properties": {
+        "headline": {"type": "string", "maxLength": 160},
+        "what_changed": {"type": "string"},
+        "why_connected": {"type": "string"},
+        "narrative_stance": {"enum": ["SUPPORTS", "CHALLENGES", "MIXED", "NO_CHANGE", "INSUFFICIENT_EVIDENCE"]},
+        "economic_effect": {"enum": ["FAVORABLE", "ADVERSE", "UNCERTAIN", "NONE"]},
+        "what_is_uncertain": {"type": "string"},
+        "what_to_watch": {"type": "string"},
+        "evidence_urls": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "is_synthetic": {"type": "boolean"}
+      }
+    }
+  }
+}
