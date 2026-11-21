@@ -1,0 +1,23 @@
+{
+  "id": 44913119806,
+  "head_sha": "d088f875f413a6c34d0a9ea4434a7f4114489dbc",
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/linhpmvpub/Narrative/actions/runs/44913119806",
+  "updated_at": "2026-11-21T14:19:16Z",
+  "local_tests": {
+    "sqlite": {
+      "passed": 275,
+      "seconds": 395.93
+    },
+    "postgresql": {
+      "passed": 275,
+      "seconds": 625.2
+    },
+    "focused": {
+      "passed": 10,
+      "seconds": 35.26
+    }
+  },
+  "note": "Following handoff commit is docs/report only [skip ci]. Independent causal validation and human labels remain pending; no real notifications."
+}
