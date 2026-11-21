@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "204_assigned_cases",
+    "no_prefilled_predictions",
+    "language_and_numeric_forms",
+    "synthetic_writes_only",
+    "required_operands",
+    "late_private_response_after_logout_ignored",
+    "mobile_layout"
+  ],
+  "browser_errors": [],
+  "real_labels_created": 0,
+  "delivery": "disabled"
+}

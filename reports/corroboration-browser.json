@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "8_temporal_cross_source_assessments",
+    "peer_independence_and_limits",
+    "no_graph_approval",
+    "mobile_layout"
+  ],
+  "browser_errors": [],
+  "delivery": "disabled"
+}

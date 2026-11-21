@@ -274,7 +274,11 @@ def live_map(user: User, as_of: datetime | None = None):
                             "type": "reported_metric",
                             "observation": observation,
                         }
+            from engine.corroboration import at as corroboration_at
+
+            external = corroboration_at(conn, cutoff)
             for edge in graph["edges"]:
+                edge["cross_source_assessment"] = external.get(edge["id"])
                 edge["source_matches"] = [
                     a
                     for notice in graph["notices"]

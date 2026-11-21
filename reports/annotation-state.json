@@ -1,0 +1,18 @@
+{
+  "counts": {
+    "rie_annotation_cases": 204,
+    "rie_annotation_assignments": 1,
+    "rie_annotation_labels": 0,
+    "rie_corroboration_versions": 3,
+    "rie_events": 51,
+    "rie_event_versions": 51,
+    "rie_alerts": 0
+  },
+  "source_captures_verified": 5,
+  "publisher_groups": 3,
+  "relation_assessments": 8,
+  "independent_human_approvals": 0,
+  "manifest_files_verified": 15,
+  "runtime_token_scan": "passed",
+  "delivery": "disabled"
+}

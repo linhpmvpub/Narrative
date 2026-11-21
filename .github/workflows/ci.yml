@@ -37,6 +37,7 @@ jobs:
       - run: |
           node --check engine/web/app.js
           node --check engine/web/map.js
+          node --check engine/web/label.js
       - run: mypy engine
       - run: pytest -q
       - run: pytest -q

@@ -1,0 +1,218 @@
+{
+  "sources": [
+    {
+      "id": "tf",
+      "publisher": "TrendForce",
+      "url": "https://www.trendforce.com/presscenter/news/20260907-13219.html",
+      "published_at": "2026-09-07T00:00:00+00:00",
+      "publication_time_precision": "day_or_document_metadata",
+      "retrieved_at": "2026-11-21T14:38:38.575278+00:00",
+      "capture_sha256": "f3ad9424c380ede92012e454c5270463d2122529b4c7587e6c47ff558684e9d2",
+      "content_type": "text/html; charset=UTF-8",
+      "independence": "THIRD_PARTY_INDUSTRY_RESEARCH",
+      "economic_interest": "Commercial research publisher; methodology not independently audited",
+      "quote": "Micron continued to prioritize higher-priced server DRAM in its product mix amid capacity constraints.",
+      "locator": "Micron paragraph",
+      "summary": "Giá, sản lượng và mix cùng thay đổi; dữ liệu ngành hỗ trợ cơ chế doanh thu, chưa cô lập đóng góp riêng của giá."
+    },
+    {
+      "id": "ms",
+      "publisher": "Microsoft Investor Relations",
+      "url": "https://www.microsoft.com/en-us/investor/events/fy-2027/earnings-fy-2027-q1",
+      "published_at": "2026-10-28T00:00:00+00:00",
+      "publication_time_precision": "day_or_document_metadata",
+      "retrieved_at": "2026-11-21T14:38:38.892514+00:00",
+      "capture_sha256": "501a3acdc7505b5ec7bb9584bb86efd381c53174e61b9e716dc5b15f7c389aa1",
+      "content_type": "text/html; charset=utf-8",
+      "independence": "CUSTOMER_PRIMARY_DISCLOSURE",
+      "economic_interest": "Commercial customer/partner or competitor; not a neutral causal experiment",
+      "quote": "primarily CPUs and GPUs, including higher memory and storage costs",
+      "locator": "Amy Hood capital expenditure discussion",
+      "summary": "Phía khách hàng xác nhận đầu tư CPU/GPU và chi phí bộ nhớ, nhưng không phân bổ doanh thu cho NVIDIA hoặc xác định số lượng GPU."
+    },
+    {
+      "id": "epyc",
+      "publisher": "Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/confidential-computing/virtual-machine-options",
+      "published_at": "2026-06-30T00:00:00Z",
+      "publication_time_precision": "day_or_document_metadata",
+      "retrieved_at": "2026-11-21T14:38:39.272513+00:00",
+      "capture_sha256": "798869d8aca02e1f33fe70b280eb2e7433eba8eb179d923aae67854290c127aa",
+      "content_type": "text/html",
+      "independence": "CUSTOMER_PRIMARY_DISCLOSURE",
+      "economic_interest": "Commercial customer/partner or competitor; not a neutral causal experiment",
+      "quote": "AMD-based confidential VMs use AMD SEV-SNP, introduced with 3rd Gen AMD EPYC processors.",
+      "locator": "Supported VM sizes",
+      "summary": "Tài liệu khách hàng xác nhận dòng VM dùng EPYC; không cho biết mức tăng đơn hàng, giá bán hoặc doanh thu AMD trong kỳ."
+    },
+    {
+      "id": "instinct",
+      "publisher": "Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/gpu-accelerated/ndmi300xv5-series",
+      "published_at": "2024-08-01T00:00:00Z",
+      "publication_time_precision": "day_or_document_metadata",
+      "retrieved_at": "2026-11-21T14:38:39.615933+00:00",
+      "capture_sha256": "e5287e857eed0a3e00b4b4cb31ee9ded487b51291dfeb1c7fc6645aa997facb1",
+      "content_type": "text/html",
+      "independence": "CUSTOMER_PRIMARY_DISCLOSURE",
+      "economic_interest": "Commercial customer/partner or competitor; not a neutral causal experiment",
+      "quote": "",
+      "locator": "ND MI300X v5 overview",
+      "summary": "Azure mô tả VM dùng GPU AMD Instinct MI300. Sản phẩm được cung cấp không đồng nghĩa mức tăng shipments hay doanh thu của AMD trong kỳ."
+    },
+    {
+      "id": "hpe",
+      "publisher": "Hewlett Packard Enterprise",
+      "url": "https://investors.hpe.com/~/media/Files/H/HP-Enterprise-IR/documents/q1-2026/hpe-q1-26-earnings-transcript.pdf",
+      "published_at": "2026-03-09T00:00:00+00:00",
+      "publication_time_precision": "day_or_document_metadata",
+      "retrieved_at": "2026-11-21T14:38:41.490946+00:00",
+      "capture_sha256": "2f0af199b1c00577a2ba09f0fe46f2fe3604e3f3e73539bc5dbb29fc744e0189",
+      "content_type": "application/pdf",
+      "independence": "PEER_PRIMARY_DISCLOSURE",
+      "economic_interest": "Commercial customer/partner or competitor; not a neutral causal experiment",
+      "quote": "we are dynamically passing through memory and component cost inflation",
+      "locator": "PDF page 7, Cloud & AI discussion",
+      "summary": "HPE mô tả bù chi phí linh kiện bằng giá bán và mix; tác động tại Dell vẫn chưa xác định."
+    }
+  ],
+  "assessments": [
+    {
+      "relation_id": "R006",
+      "source_ids": [
+        "tf"
+      ],
+      "conclusion": "PARTIAL_EXTERNAL_CORROBORATION",
+      "basis": "Dữ liệu ngành ngoài Micron hỗ trợ cơ chế giá DRAM liên quan doanh thu.",
+      "limitations": [
+        "Không tách riêng giá, sản lượng và mix; quý lịch khác kỳ tài chính MU."
+      ],
+      "required_conditions": [
+        "Đối chiếu sản lượng, mix, tỷ giá và kỳ ghi nhận"
+      ],
+      "graph_eligible": false,
+      "causal_effect_identified": false,
+      "effect_size": "UNKNOWN"
+    },
+    {
+      "relation_id": "R005",
+      "source_ids": [
+        "tf"
+      ],
+      "conclusion": "INSUFFICIENT_COMPANY_MARGIN_EVIDENCE",
+      "basis": "Giá và mix hỗ trợ giả thuyết, chưa xác nhận biên lợi nhuận MU.",
+      "limitations": [
+        "Thiếu cầu nối giá bán–giá vốn và chi phí trên mỗi bit."
+      ],
+      "required_conditions": [
+        "Đối chiếu giá vốn, yield và chi phí chuyển đổi công nghệ"
+      ],
+      "graph_eligible": false,
+      "causal_effect_identified": false,
+      "effect_size": "UNKNOWN"
+    },
+    {
+      "relation_id": "R010",
+      "source_ids": [
+        "ms"
+      ],
+      "conclusion": "DEMAND_CONTEXT_ONLY",
+      "basis": "Nguồn khách hàng ghi nhận đầu tư CPU/GPU phục vụ AI.",
+      "limitations": [
+        "Không tách NVIDIA khỏi CPU, GPU khác hoặc hạ tầng."
+      ],
+      "required_conditions": [
+        "Xác nhận nhà cung cấp, khối lượng và thời điểm bàn giao"
+      ],
+      "graph_eligible": false,
+      "causal_effect_identified": false,
+      "effect_size": "UNKNOWN"
+    },
+    {
+      "relation_id": "R017",
+      "source_ids": [
+        "instinct"
+      ],
+      "conclusion": "PRODUCT_AVAILABILITY_CORROBORATED_REVENUE_UNIDENTIFIED",
+      "basis": "Azure xác nhận cấu hình sử dụng Instinct.",
+      "limitations": [
+        "Thiếu shipments, giá và doanh thu AMD theo kỳ; tài liệu hiện tại không chứng minh trạng thái ở quá khứ."
+      ],
+      "required_conditions": [
+        "Đối chiếu quy mô và thời điểm giao hàng thực tế"
+      ],
+      "graph_eligible": false,
+      "causal_effect_identified": false,
+      "effect_size": "UNKNOWN"
+    },
+    {
+      "relation_id": "R019",
+      "source_ids": [
+        "epyc"
+      ],
+      "conclusion": "PRODUCT_AVAILABILITY_CORROBORATED_REVENUE_UNIDENTIFIED",
+      "basis": "Khách hàng công bố các dòng VM dùng EPYC.",
+      "limitations": [
+        "Danh sách sản phẩm không đo mức tăng doanh thu hoặc thị phần trong kỳ."
+      ],
+      "required_conditions": [
+        "Đối chiếu triển khai, thế hệ chip và kỳ doanh thu"
+      ],
+      "graph_eligible": false,
+      "causal_effect_identified": false,
+      "effect_size": "UNKNOWN"
+    },
+    {
+      "relation_id": "R028",
+      "source_ids": [
+        "hpe"
+      ],
+      "conclusion": "PEER_MECHANISM_ONLY",
+      "basis": "Đối thủ mô tả cơ chế chuyển chi phí linh kiện vào giá bán.",
+      "limitations": [
+        "Không phải bằng chứng trực tiếp về Dell; mix và chi phí cùng tác động."
+      ],
+      "required_conditions": [
+        "Kiểm tra khả năng tăng giá, hợp đồng và độ co giãn cầu tại Dell"
+      ],
+      "graph_eligible": false,
+      "causal_effect_identified": false,
+      "effect_size": "UNKNOWN"
+    },
+    {
+      "relation_id": "R024",
+      "source_ids": [
+        "hpe"
+      ],
+      "conclusion": "INSUFFICIENT_DIRECT_EVIDENCE",
+      "basis": "Nguồn đối thủ cho thấy mix và thời điểm giao AI server cần được xem xét.",
+      "limitations": [
+        "Không xác định dấu/quy mô liên hệ doanh thu AI server–biên ISG tại Dell."
+      ],
+      "required_conditions": [
+        "Cần biên theo sản phẩm và cầu nối mix trong ISG"
+      ],
+      "graph_eligible": false,
+      "causal_effect_identified": false,
+      "effect_size": "UNKNOWN"
+    },
+    {
+      "relation_id": "R027",
+      "source_ids": [
+        "hpe"
+      ],
+      "conclusion": "UNCONDITIONAL_MARGIN_CLAIM_CHALLENGED",
+      "basis": "Doanh nghiệp cùng ngành có thể bù chi phí đầu vào bằng giá và mix.",
+      "limitations": [
+        "Không bác bỏ quan hệ có điều kiện; không chuyển số liệu HPE thành tác động Dell."
+      ],
+      "required_conditions": [
+        "cost_not_offset; đo mức pass-through và độ trễ tồn kho/hợp đồng"
+      ],
+      "graph_eligible": false,
+      "causal_effect_identified": false,
+      "effect_size": "UNKNOWN"
+    }
+  ],
+  "method": "AI source assessment; no human approval or statistical causal identification"
+}

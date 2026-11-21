@@ -140,7 +140,9 @@ def parse(document, claim):
             "facts": {"us-gaap": {tag: {"units": {"USD": rows}} for tag, rows in facts.items()}}
         }
         for item in extract(payload, claim["ticker"], {claim["accession"]: claim}):
-            item.update(scope="reported_segment", segment=key[0], dimensions=[list(pair) for pair in key[1]])
+            item.update(
+                scope="reported_segment", segment=key[0], dimensions=[list(pair) for pair in key[1]]
+            )
             item["label"] = key[0].split(":")[-1].removesuffix("Member") + " · " + item["metric"]
             for operand in ("current", "prior"):
                 pointer = item[operand].pop("json_pointer")
@@ -318,7 +320,15 @@ def assessment(conn, ticker, accession, cutoff):
         "captured_at": utc(row["captured_at"]).isoformat(),
         "available_at": utc(row["available_at"]).isoformat(),
     }
-    return {kind: [{**item, **provenance} for item in row["payload"][kind]] for kind in empty}
+    result = {kind: [{**item, **provenance} for item in row["payload"][kind]] for kind in empty}
+    from engine.corroboration import at as corroboration_at
+
+    external = corroboration_at(conn, cutoff)
+    for item in result["attributions"]:
+        item["cross_source_assessments"] = [
+            external[rid] for rid in item.get("candidate_relation_ids", []) if rid in external
+        ]
+    return result
 
 
 def main():

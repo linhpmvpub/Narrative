@@ -16,6 +16,8 @@ UPSTREAM = "http://127.0.0.1:8888"
 GET_PATHS = {
     "/",
     "/map",
+    "/label",
+    "/api/v0/annotations/packets",
     "/healthz",
     "/readyz",
     "/api/v0/stocks",
@@ -35,11 +37,14 @@ buckets: dict = defaultdict(list)
 
 def allowed(method, path):
     if method == "POST":
-        return path in POST_PATHS
+        return path in POST_PATHS or bool(
+            re.fullmatch(r"/api/v0/annotations/[a-f0-9]{64}/cases/[a-f0-9]{64}/labels", path)
+        )
     if method != "GET":
         return False
     return (
         path in GET_PATHS
+        or bool(re.fullmatch(r"/api/v0/annotations/[a-f0-9]{64}/cases(?:/[a-f0-9]{64})?", path))
         or bool(re.fullmatch(r"/assets/[a-zA-Z0-9_.-]+", path))
         or bool(re.fullmatch(r"/api/v0/threads/[0-9a-fA-F-]{36}/(feed|story)", path))
     )
@@ -79,7 +84,9 @@ async def proxy(request: Request, path: str):
         return JSONResponse({"message": "Request rate exceeded"}, status_code=429)
     buckets[identity] = recent + [now]
     headers = {
-        k: request.headers[k] for k in ("authorization", "content-type") if k in request.headers
+        k: request.headers[k]
+        for k in ("authorization", "content-type", "idempotency-key")
+        if k in request.headers
     }
     try:
         result = await forward(
