@@ -1,0 +1,19 @@
+{
+  "commit": "f0922113a8ea4467b543f634b3cd314db1e01184",
+  "run_id": 44921643460,
+  "url": "https://github.com/linhpmvpub/Narrative/actions/runs/44921643460",
+  "jobs": [
+    {
+      "name": "dependency-audit",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "full_suite_per_database": 314,
+  "ai_simulation_is_not_human_validation": true
+}
