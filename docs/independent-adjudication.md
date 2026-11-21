@@ -2,9 +2,9 @@
 
 ## Use the workflow
 
-1. Two genuine reviewers use separate assigned member accounts at `/label`. Each reads the source, transcribes comparable USD operands and periods where applicable, provides rationale and declares independence. Neither sees model output or the other reviewer's labels. The current prototype has one assigned account; do not create fake people or machine-generated human labels. A second reviewer can work locally; the approved Cloudflare email restriction remains unchanged.
+1. Two genuine reviewers use separate assigned member accounts at `/label`. Each reads the source, transcribes comparable USD operands and periods where applicable, provides rationale and declares independence. Neither sees model output or the other reviewer's labels. The current campaign has two assigned reviewer slots and one packet-scoped adjudicator; see [campaign guide](campaign-204-guide-vi.md). do not create fake people or machine-generated human labels. A second reviewer can work locally; the approved Cloudflare email restriction remains unchanged.
 2. Open **http://127.0.0.1:8888/adjudicate** on the host computer. Use the existing operator credential from ignored `secrets/development-operator-access-token.txt`. Keep it out of URLs, screenshots and chat. This page and its API are deliberately unavailable through the phone gateway.
-3. The default queue shows disagreements and deferred cases. Read the source and the latest votes. A third account, distinct from every annotator on that case, can resolve with a language label or independently transcribed numeric comparison, or defer without creating a reference label. A reason and independence declaration are mandatory. No model answer is shown or preselected.
+3. The default queue shows disagreements and deferred cases. Read the source and the latest votes. A third assigned adjudicator account (or global operator), distinct from every annotator on that case, can resolve with a language label or independently transcribed numeric comparison, or defer without creating a reference label. A reason and independence declaration are mandatory. No model answer is shown or preselected.
 4. Refresh the report to see reference-label coverage, raw pair agreement, holdout classification accuracy and exact numeric comparison accuracy. The denominator remains the full frozen holdout, including pending and invalid-source cases. Null accuracy means no eligible scored labels; it is not zero accuracy.
 
 Notifications remain disabled. Consensus and adjudication never approve relationships, alter the feed/graph or create alerts.
@@ -19,7 +19,7 @@ Separate accounts plus declarations are auditable controls, not proof of differe
 
 ## Frozen predictions and reproducibility
 
-Migration **0011** stores immutable predictions and adjudication revisions. Predictions must be frozen before any labels exist. The import verifies the exact original source-derived packet and predictions at the stored cutoff; changed predictions or a freeze after label collection are rejected. An identical retry is idempotent. Predictions are never returned by annotator endpoints or the adjudication case detail.
+Migration **0012** adds packet-scoped campaign participants; migration **0011** stores immutable predictions and adjudication revisions. Predictions must be frozen before any labels exist. The import verifies the exact original source-derived packet and predictions at the stored cutoff; changed predictions or a freeze after label collection are rejected. An identical retry is idempotent. Predictions are never returned by annotator endpoints or the adjudication case detail.
 
 ```powershell
 $env:DATABASE_URL='sqlite:///rie-dev-feed.db'

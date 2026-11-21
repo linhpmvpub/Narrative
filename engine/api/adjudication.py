@@ -10,12 +10,14 @@ from sqlalchemy import select
 
 from engine.api.accounts import write
 from engine.api.annotations import Numeric
-from engine.api.product import Admin, Body, Key
+from engine.api.product import Admin, Body, Key, User
 from engine.db import database
+from engine.evaluation.campaign import progress
 from engine.evaluation.consensus import quality, states
 from engine.models.schema_v2 import database_mode
 from engine.models.schema_v10 import labels, packets
 from engine.models.schema_v11 import adjudications
+from engine.models.schema_v12 import roster
 
 router = APIRouter(prefix="/api/v0/admin/evaluation", tags=["Independent adjudication"])
 
@@ -41,7 +43,13 @@ class Decision(Body):
         return self
 
 
-def load(conn, pid):
+def load(conn, pid, user):
+    if user.role != "admin" and not conn.scalar(
+        select(roster.c.user_id).where(
+            roster.c.packet_id == pid, roster.c.user_id == user.id, roster.c.slot == "adjudicator"
+        )
+    ):
+        raise HTTPException(403, "Assigned adjudicator or operator required")
     try:
         return states(conn, pid)
     except ValueError:
@@ -49,17 +57,26 @@ def load(conn, pid):
 
 
 @router.get("/packets")
-def list_packets(user: Admin):
+def list_packets(user: User):
     engine = database()
     try:
         with engine.connect() as conn:
-            return {"items": [dict(r) for r in conn.execute(select(packets)).mappings()]}
+            query = select(packets)
+            if user.role != "admin":
+                query = query.where(
+                    packets.c.id.in_(
+                        select(roster.c.packet_id).where(
+                            roster.c.user_id == user.id, roster.c.slot == "adjudicator"
+                        )
+                    )
+                )
+            return {"items": [dict(r) for r in conn.execute(query).mappings()]}
     finally:
         engine.dispose()
 
 
 @router.get("/{pid}/cases")
-def queue(pid: str, user: Admin):
+def queue(pid: str, user: User):
     engine = database()
     try:
         with engine.connect() as conn:
@@ -73,7 +90,7 @@ def queue(pid: str, user: Admin):
                         "vote_count": len(s["votes"]),
                         "stale_adjudication": s["stale_adjudication"],
                     }
-                    for s in load(conn, pid)
+                    for s in load(conn, pid, user)
                 ]
             }
     finally:
@@ -81,11 +98,11 @@ def queue(pid: str, user: Admin):
 
 
 @router.get("/{pid}/cases/{cid}")
-def detail(pid: str, cid: str, user: Admin):
+def detail(pid: str, cid: str, user: User):
     engine = database()
     try:
         with engine.connect() as conn:
-            s = next((s for s in load(conn, pid) if s["case"]["id"] == cid), None)
+            s = next((s for s in load(conn, pid, user) if s["case"]["id"] == cid), None)
             if s is None:
                 raise HTTPException(404, "Case not found")
             s["self_review_forbidden"] = any(v["user_id"] == user.id for v in s["votes"])
@@ -95,12 +112,17 @@ def detail(pid: str, cid: str, user: Admin):
 
 
 @router.get("/{pid}/quality")
-def report(pid: str, user: Admin):
+def report(pid: str, user: User):
+    from engine.evaluation.agent_pilot import public_summary
+
     engine = database()
     try:
         with engine.connect() as conn:
-            load(conn, pid)
-            return quality(conn, pid)
+            load(conn, pid, user)
+            return quality(conn, pid) | {
+                "campaign_progress": progress(conn, pid),
+                "ai_simulation": public_summary(pid),
+            }
     finally:
         engine.dispose()
 
@@ -110,7 +132,7 @@ def export(pid: str, user: Admin):
     engine = database()
     try:
         with engine.connect() as conn:
-            current = load(conn, pid)
+            current = load(conn, pid, user)
             return {
                 "packet_id": pid,
                 "quality": quality(conn, pid),
@@ -138,10 +160,10 @@ def export(pid: str, user: Admin):
 
 
 @router.post("/{pid}/cases/{cid}/adjudications")
-def save(pid: str, cid: str, body: Decision, user: Admin, key: Key = None):
+def save(pid: str, cid: str, body: Decision, user: User, key: Key = None):
     def action(conn):
         conn.execute(select(database_mode).with_for_update()).one()
-        s = next((s for s in load(conn, pid) if s["case"]["id"] == cid), None)
+        s = next((s for s in load(conn, pid, user) if s["case"]["id"] == cid), None)
         if s is None:
             raise HTTPException(404, "Case not found")
         if any(v["user_id"] == user.id for v in s["votes"]):

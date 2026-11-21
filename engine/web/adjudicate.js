@@ -30,7 +30,22 @@ async function refresh() {
   const [queue, report] = await Promise.all([api(base + "/cases"), api(base + "/quality")]);
   if (base !== url()) return;
   items = queue.items;
-  const lines = [`${report.total_cases} ca · ${report.gold_cases} nhãn tham chiếu · ${report.status}`];
+  const lines = [`${report.total_cases} ca · ${report.gold_cases} nhãn người thật · ${report.status}`];
+  const ai = report.ai_simulation;
+  if (ai) {
+    lines.push("AI MÔ PHỎNG — KHÔNG PHẢI ĐÁNH GIÁ ĐỘC LẬP BỞI CON NGƯỜI",
+      `Nhà đầu tư cá nhân: ${ai.profiles.retail_investor}/${ai.total_cases}; nhà quản lý quỹ: ${ai.profiles.fund_manager}/${ai.total_cases}`,
+      `Bất đồng ban đầu: ${ai.initial_disagreements}; chuyên gia đã xử lý: ${ai.profiles.financial_expert}; còn chờ: ${ai.pending_adjudications}`,
+      `Chốt AI: ${ai.resolved_disagreements}; hoãn: ${ai.deferred_disagreements}. Nhãn người thật được tạo: 0.`,
+      "Các agent có thể chia sẻ sai lệch của cùng mô hình. Tỷ lệ khớp AI không xác nhận độ chính xác hay tác động giá cổ phiếu.");
+    for (const [kind, m] of Object.entries(ai.holdout_diagnostics || {})) lines.push(`Khớp nhãn AI · ${kind}: ${m.matches_ai_reference}/${m.scored} ca đã đối chiếu; độ phủ ${m.scored}/${m.total_holdout}.`);
+  }
+  const campaign = report.campaign_progress;
+  if (campaign && campaign.configured) {
+    lines.push(`TÀI KHOẢN DỰ PHÒNG CHO NGƯỜI THẬT · cần ${campaign.required_independent_labels} nhãn độc lập`);
+    for (const r of campaign.reviewers) lines.push(`${r.slot}: ${r.current_source_completed}/${r.total} ca còn hiệu lực · đã gửi ${r.submitted} · cần làm ${r.actionable_remaining} · chờ nguồn ${r.source_blocked} · ${r.credential_active ? "tài khoản hoạt động" : "cần gia hạn tài khoản"}`);
+    lines.push(`Đủ hai phiếu: ${campaign.cases_with_two_votes}; bất đồng chưa xử lý: ${campaign.unresolved_disagreements}; thẩm định cũ hết hiệu lực: ${campaign.stale_decisions}`);
+  }
   for (const [kind, m] of Object.entries(report.holdout)) {
     lines.push(`${kind}: ${m.scored}/${m.total} ca holdout được chấm; đúng ${m.accuracy_on_resolved === null ? "chưa đủ nhãn" : (100*m.accuracy_on_resolved).toFixed(1)+"%"}; loại do nguồn ${m.source_excluded}`);
     const a = report.agreement[kind];

@@ -6,6 +6,9 @@ from pathlib import Path
 from playwright.sync_api import expect, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
+credential = ROOT / "secrets/annotation-campaign-204/adjudicator.txt"
+if not credential.exists():
+    credential = ROOT / "secrets/development-operator-access-token.txt"
 with sync_playwright() as p:
     browser = p.chromium.launch(
         executable_path="C:/Program Files/Google/Chrome/Application/chrome.exe", headless=True
@@ -15,9 +18,7 @@ with sync_playwright() as p:
     errors = []
     page.on("pageerror", lambda e: errors.append(str(e)))
     page.goto("http://127.0.0.1:8888/adjudicate")
-    page.locator("#token").fill(
-        (ROOT / "secrets/development-operator-access-token.txt").read_text().strip()
-    )
+    page.locator("#token").fill(credential.read_text().strip())
     page.locator("#login button").click()
     expect(page.locator("#quality")).to_contain_text("204")
     expect(page.locator("#quality")).to_contain_text("PENDING_LABELS")

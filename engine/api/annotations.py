@@ -16,6 +16,7 @@ from engine.db import database
 from engine.models.contracts import utc
 from engine.models.schema_v2 import database_mode
 from engine.models.schema_v10 import assignments, cases, labels, packets
+from engine.models.schema_v12 import roster
 
 router = APIRouter(prefix="/api/v0/annotations", tags=["Blind human annotation"])
 
@@ -78,6 +79,15 @@ class LabelBody(Body):
 
 
 def authorized(conn, pid, user):
+    configured = conn.scalar(select(roster.c.user_id).where(roster.c.packet_id == pid).limit(1))
+    if configured and not conn.scalar(
+        select(roster.c.user_id).where(
+            roster.c.packet_id == pid,
+            roster.c.user_id == user.id,
+            roster.c.slot.in_(["reviewer_a", "reviewer_b"]),
+        )
+    ):
+        raise HTTPException(404, "Reviewer assignment not found")
     if not conn.scalar(
         select(assignments.c.user_id).where(
             assignments.c.packet_id == pid, assignments.c.user_id == user.id

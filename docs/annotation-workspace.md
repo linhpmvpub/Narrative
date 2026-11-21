@@ -2,9 +2,9 @@
 
 ## Open and use
 
-Open `/label` on the existing local preview (http://127.0.0.1:8888/label) or the approved email-restricted Cloudflare hostname saved in ignored secrets/mobile-preview.json. The original phone hostname is preserved while the tunnel runs. Use the existing member application token in secrets/development-feed-access-token.txt; never send that token in chat or put it in a URL. Cloudflare email OTP remains the outer gate; the app separately checks assignment and account identity.
+Open `/label` on the existing local preview (http://127.0.0.1:8888/label) or the approved email-restricted Cloudflare hostname saved in ignored secrets/mobile-preview.json. The original phone hostname is preserved while the tunnel runs. Use your dedicated reviewer token under secrets/annotation-campaign-204/ (see [campaign guide](campaign-204-guide-vi.md)); never send that token in chat or put it in a URL. Cloudflare email OTP remains the outer gate; the app separately checks assignment and account identity.
 
-The current member is assigned the frozen **204-case** packet (132 language,72 segment). Filter by company, case type and your own completion status. Open a case, read the cited source, select a judgment, add rationale and explicitly attest independent work. Numeric comparable cases require independently transcribed USD operands and period boundaries; uncertain/incomparable cases may omit operands and explain why. No model classification or computed numeric result is prefilled. Source fact/context locators and frozen hashes are available; raw captures remain in ignored source-cache/sec-review-2026-11-20. If the linked live document differs, use the frozen capture and report the discrepancy before labeling.
+Two dedicated reviewer accounts are assigned the frozen **204-case** packet (132 language,72 segment). Filter by company, case type and your own completion status. Open a case, read the cited source, select a judgment, add rationale and explicitly attest independent work. Numeric comparable cases require independently transcribed USD operands and period boundaries; uncertain/incomparable cases may omit operands and explain why. No model classification or computed numeric result is prefilled. Source fact/context locators and frozen hashes are available; raw captures remain in ignored source-cache/sec-review-2026-11-20. If the linked live document differs, use the frozen capture and report the discrepancy before labeling.
 
 Saving creates a new immutable label revision. Your previous revision remains in the operator export. Same-request retry is idempotent; stale expected_version/hash returns409. Case switching warns about unsaved edits. Logout clears tokens and source text; late responses cannot restore them. Labels never approve graph edges or send alerts. The development DB currently contains **zero real labels**; all simulated browser submissions used intercepted synthetic API responses.
 
@@ -18,7 +18,7 @@ A second genuine reviewer needs their own provisioned account. Operator provisio
 
 ## Operator commands and export
 
-Schema head0011. Back up development DB before migration. Set DATABASE_URL=sqlite:///rie-dev-feed.db, DEV_INFORMATIONAL_FEED=true, SEND_NOTIFICATIONS=false, ALLOW_SYNTHETIC_LIVE=false, LLM_MODE=none.
+Schema head0012. Back up development DB before migration. Set DATABASE_URL=sqlite:///rie-dev-feed.db, DEV_INFORMATIONAL_FEED=true, SEND_NOTIFICATIONS=false, ALLOW_SYNTHETIC_LIVE=false, LLM_MODE=none.
 
 ```powershell
 .venv/Scripts/python -m alembic upgrade head

@@ -1,0 +1,45 @@
+{
+  "packet_id": "526bd6298883375e06874ca83a78069104f1411ad5e103455f0c357d5b70ac9f",
+  "configured": true,
+  "total_cases": 204,
+  "required_independent_labels": 408,
+  "reviewers": [
+    {
+      "slot": "reviewer_a",
+      "total": 204,
+      "submitted": 0,
+      "current_source_completed": 0,
+      "remaining": 204,
+      "source_blocked": 0,
+      "actionable_remaining": 204,
+      "by_kind": {},
+      "last_saved_at": null,
+      "credential_active": true
+    },
+    {
+      "slot": "reviewer_b",
+      "total": 204,
+      "submitted": 0,
+      "current_source_completed": 0,
+      "remaining": 204,
+      "source_blocked": 0,
+      "actionable_remaining": 204,
+      "by_kind": {},
+      "last_saved_at": null,
+      "credential_active": true
+    }
+  ],
+  "cases_with_two_votes": 0,
+  "states": {
+    "WAITING_FOR_TWO_REVIEWERS": 204
+  },
+  "unresolved_disagreements": 0,
+  "stale_decisions": 0,
+  "identity_verification": "operator_must_confirm_distinct_humans",
+  "delivery": "disabled",
+  "human_labels": 0,
+  "human_adjudications": 0,
+  "prepared_accounts": 3,
+  "label_assignments": 2,
+  "alerts": 0
+}

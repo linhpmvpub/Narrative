@@ -1,0 +1,51 @@
+{
+  "evaluation_track": "AI_SIMULATED",
+  "packet_id": "526bd6298883375e06874ca83a78069104f1411ad5e103455f0c357d5b70ac9f",
+  "status": "AI_REVIEW_COMPLETE",
+  "generated_at": "2026-11-21T15:49:40.635876+00:00",
+  "total_cases": 204,
+  "profiles": {
+    "retail_investor": 204,
+    "fund_manager": 204,
+    "financial_expert": 3
+  },
+  "initial_agreements": 201,
+  "initial_disagreements": 3,
+  "resolved_disagreements": 3,
+  "deferred_disagreements": 0,
+  "pending_adjudications": 0,
+  "ai_reference_cases": 204,
+  "human_labels_created": 0,
+  "human_accuracy": null,
+  "independent_human_validation": false,
+  "holdout_diagnostics": {
+    "causal_language": {
+      "total_holdout": 60,
+      "scored": 60,
+      "matches_ai_reference": 34,
+      "agreement_with_ai_reference": 0.5666666666666667,
+      "coverage": 1.0
+    },
+    "segment_comparison": {
+      "total_holdout": 15,
+      "scored": 15,
+      "matches_ai_reference": 15,
+      "agreement_with_ai_reference": 1.0,
+      "coverage": 1.0
+    }
+  },
+  "input_sha256": "581b40d16957b007b9b792d8543b7fa1979bffe3498a7e3f2274a8acc9414ed1",
+  "review_output_sha256": {
+    "a": "bc3e0d90fcb082396d93441c565aa0055f954dd0210f10415654ba31d13a129b",
+    "b": "2db60af9961ae6349c8008ff9f89a49751503a401fec7a12e2517d6f051b8437",
+    "expert": "0c85d452085005d5ec5ca0fe1f990e0ee7ca571673bde8e15aad0928d9f3ce09"
+  },
+  "delivery": "disabled",
+  "graph_modified": false,
+  "limitations": [
+    "Three personas are not three statistically independent human experts",
+    "Shared model biases may inflate consensus and agreement",
+    "Numbers measure agreement with AI reference, not validated accuracy or stock impact",
+    "No AI outputs are imported as human labels; source lifecycle must be rechecked before reuse"
+  ]
+}
