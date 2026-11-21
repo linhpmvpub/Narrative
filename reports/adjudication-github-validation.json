@@ -1,0 +1,19 @@
+{
+  "commit": "8162e110990ad3ddde5bfd0150d28d42118c3bd9",
+  "run_id": 44919204601,
+  "url": "https://github.com/linhpmvpub/Narrative/actions/runs/44919204601",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "dependency-audit",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}
