@@ -225,6 +225,7 @@ def live_map(user: User, as_of: datetime | None = None):
                         .one()
                     )
                     claim = current["normalized_claim"]
+                    from engine.filing_evidence import assessment
                     from engine.financials import assessments
 
                     financial = assessments(
@@ -240,6 +241,9 @@ def live_map(user: User, as_of: datetime | None = None):
                             "source_status": claim.get("source_status", "active"),
                             "url": claim["url"],
                             "economic_observations": financial,
+                            "filing_evidence": assessment(
+                                conn, claim["ticker"], claim["accession"], cutoff
+                            ),
                             "impact": "REPORTED_FINANCIAL_CHANGE"
                             if financial
                             else "INSUFFICIENT_EVIDENCE",
@@ -250,8 +254,15 @@ def live_map(user: User, as_of: datetime | None = None):
                     )
             reported: dict = {}
             for notice in graph["notices"]:
-                for observation in notice["economic_observations"]:
-                    nid = observation["ticker"] + "_REPORTED_" + observation["metric"]
+                for observation in (
+                    notice["economic_observations"] + notice["filing_evidence"]["segments"]
+                ):
+                    nid = (
+                        observation["ticker"]
+                        + "_REPORTED_"
+                        + observation["metric"]
+                        + ("_" + observation["segment"] if observation.get("segment") else "")
+                    )
                     previous = reported.get(nid)
                     if (
                         previous is None
@@ -263,6 +274,13 @@ def live_map(user: User, as_of: datetime | None = None):
                             "type": "reported_metric",
                             "observation": observation,
                         }
+            for edge in graph["edges"]:
+                edge["source_matches"] = [
+                    a
+                    for notice in graph["notices"]
+                    for a in notice["filing_evidence"]["attributions"]
+                    if edge["id"] in a.get("candidate_relation_ids", [])
+                ]
             graph["nodes"].extend(reported.values())
             return graph
     finally:

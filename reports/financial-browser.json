@@ -3,7 +3,7 @@
   "delivery": "disabled",
   "gateway": "loopback read-only; HTTPS email gate verified separately",
   "checks": [
-    "four_reported_metric_nodes",
+    "reported_metric_nodes",
     "source_period_unit_detail",
     "financial_feed_rendered",
     "mobile_read_only_controls",

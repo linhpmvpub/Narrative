@@ -1,0 +1,15 @@
+{
+  "segment_comparisons": 72,
+  "operands_verified_from_inline_facts": 144,
+  "attributions": 275,
+  "candidate_relation_source_matches": 28,
+  "independently_verified_causal_relations": 0,
+  "counts": {
+    "rie_events": 51,
+    "rie_event_versions": 51,
+    "rie_user_cards": 31,
+    "rie_alerts": 0,
+    "rie_filing_evidence_snapshots": 11
+  },
+  "delivery": "disabled"
+}

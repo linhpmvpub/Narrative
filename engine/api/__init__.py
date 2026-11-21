@@ -67,7 +67,7 @@ def ready():
     try:
         with engine.connect() as conn:
             revision = conn.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-            if revision != "0008":
+            if revision != "0009":
                 raise HTTPException(503, "Database migration required")
         return {"status": "ready", "schema": revision}
     except SQLAlchemyError:

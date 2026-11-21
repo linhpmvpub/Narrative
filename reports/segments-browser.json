@@ -1,0 +1,12 @@
+{
+  "errors": [],
+  "checks": [
+    "segment_period_source_context_detail",
+    "issuer_attribution_not_independent_cause",
+    "no_verified_edges",
+    "private_feed",
+    "readonly_mobile",
+    "no_horizontal_overflow"
+  ],
+  "delivery": "disabled"
+}

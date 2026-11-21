@@ -21,7 +21,7 @@ with sync_playwright() as p:
     page.locator("#token").fill(token)
     page.locator("#auth button").first.click()
     page.locator("#graph .reported").first.wait_for()
-    assert page.locator("#graph .reported").count() == 4
+    assert page.locator("#graph .reported").count() >= 4
     page.locator("#graph .reported").first.click()
     expect(page.locator("#detail")).to_contain_text("JSON pointer")
     expect(page.locator("#detail")).to_contain_text("USD")
@@ -41,7 +41,7 @@ with sync_playwright() as p:
     assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
     page.screenshot(path=str(ROOT / "reports/financial-feed-mobile.png"), full_page=True)
     report["checks"] = [
-        "four_reported_metric_nodes",
+        "reported_metric_nodes",
         "source_period_unit_detail",
         "financial_feed_rendered",
         "mobile_read_only_controls",

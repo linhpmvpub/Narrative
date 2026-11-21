@@ -1,0 +1,61 @@
+{
+  "filings": {
+    "NVDA:0001045810-26-000075": {
+      "status": "created",
+      "segments": 4,
+      "attributions": 22
+    },
+    "NVDA:0001045810-26-000052": {
+      "status": "created",
+      "segments": 4,
+      "attributions": 19
+    },
+    "AMD:0000002488-26-000191": {
+      "status": "created",
+      "segments": 6,
+      "attributions": 22
+    },
+    "AMD:0000002488-26-000123": {
+      "status": "created",
+      "segments": 6,
+      "attributions": 25
+    },
+    "MU:0000723125-26-000023": {
+      "status": "created",
+      "segments": 15,
+      "attributions": 38
+    },
+    "MU:0000723125-26-000015": {
+      "status": "created",
+      "segments": 15,
+      "attributions": 36
+    },
+    "MU:0000723125-26-000006": {
+      "status": "created",
+      "segments": 15,
+      "attributions": 29
+    },
+    "DELL:0001571996-26-000046": {
+      "status": "created",
+      "segments": 4,
+      "attributions": 31
+    },
+    "SNDK:0001628280-26-068601": {
+      "status": "created",
+      "segments": 3,
+      "attributions": 13
+    },
+    "SNDK:0001628280-26-057406": {
+      "status": "created",
+      "segments": 0,
+      "attributions": 20
+    },
+    "SNDK:0001628280-26-029401": {
+      "status": "created",
+      "segments": 0,
+      "attributions": 20
+    }
+  },
+  "errors": {},
+  "delivery": "disabled"
+}
