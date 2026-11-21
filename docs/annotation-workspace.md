@@ -10,7 +10,7 @@ Saving creates a new immutable label revision. Your previous revision remains in
 
 ## Identity and blinding
 
-Cases are imported with an exact content check against the source packet at its historical cutoff. Only blind fields are stored, not sealed predictions. Each account needs an explicit packet assignment; same tenant alone grants no access. Annotators can read only their own labels, never another account's labels or consensus feedback. The three source-group research assessments shown on the map are deliberately absent from the blind labeling UI.
+Cases are imported with an exact content check against the source packet at its historical cutoff. Only blind fields are served to annotators. Schema0011 separately stores sealed predictions for operator evaluation, frozen before labels. Each account needs an explicit packet assignment; same tenant alone grants no access. Annotators can read only their own labels, never another account's labels or consensus feedback. The three source-group research assessments shown on the map are deliberately absent from the blind labeling UI.
 
 The account ID is supplied by server authentication, not a form field. Separate account IDs plus an independence declaration are auditable controls, not proof that two different humans reviewed the material. The existing corpus was visible during development; future unseen periods are required before generalization claims.
 
@@ -18,7 +18,7 @@ A second genuine reviewer needs their own provisioned account. Operator provisio
 
 ## Operator commands and export
 
-Schema head0010. Back up development DB before migration. Set DATABASE_URL=sqlite:///rie-dev-feed.db, DEV_INFORMATIONAL_FEED=true, SEND_NOTIFICATIONS=false, ALLOW_SYNTHETIC_LIVE=false, LLM_MODE=none.
+Schema head0011. Back up development DB before migration. Set DATABASE_URL=sqlite:///rie-dev-feed.db, DEV_INFORMATIONAL_FEED=true, SEND_NOTIFICATIONS=false, ALLOW_SYNTHETIC_LIVE=false, LLM_MODE=none.
 
 ```powershell
 .venv/Scripts/python -m alembic upgrade head
@@ -28,9 +28,9 @@ Schema head0010. Back up development DB before migration. Set DATABASE_URL=sqlit
 
 Import is idempotent and assigns zero labels. Use the same import with another genuine account ID to grant access to the same packet. Assignment is explicit; no public registration or role selection was added.
 
-Global operator only: GET `/api/v0/annotations/{packet_id}/export` on loopback. Export contains all immutable revisions, latest revision per reviewer/case and `holdout_language_labels` compatible with `engine.evaluation.filing_labels.evaluate(sealed_packet, labels)`. Only current-source holdout language cases are included in that evaluation list. Development, numeric and inactive/superseded cases are reported separately. Numeric labels remain available for separate human adjudication. Never export the sealed predictions to the annotator or commit human labels/tokens/raw case packets.
+Global operator only: GET `/api/v0/annotations/{packet_id}/export` on loopback. Export contains all immutable revisions, latest revision per reviewer/case and `holdout_language_labels` compatible with `engine.evaluation.filing_labels.evaluate(sealed_packet, labels)`. Only current-source holdout language cases are included in that evaluation list. Development, numeric and inactive/superseded cases are reported separately. Numeric labels now feed the independent consensus/adjudication workflow. Never export the sealed predictions to the annotator or commit human labels/tokens/raw case packets.
 
-The evaluator requires two agreeing independent reviewer declarations and leaves disagreements pending; neither labels nor source assessments change production matching. Numeric consensus/adjudication and genuine causal-effect estimation are still pending workflows.
+The evaluator requires two agreeing independent reviewer declarations and leaves disagreements pending; neither labels nor source assessments change production matching. Numeric consensus and third-account adjudication are implemented; see [independent adjudication](independent-adjudication.md). Genuine causal-effect estimation remains pending.
 
 ## Source changes and transport
 

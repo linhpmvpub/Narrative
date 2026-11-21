@@ -1,0 +1,67 @@
+{
+  "packet_id": "526bd6298883375e06874ca83a78069104f1411ad5e103455f0c357d5b70ac9f",
+  "total_cases": 204,
+  "generated_at": "2026-11-21T15:16:43.710592+00:00",
+  "evaluation_input_sha256": "249aa74450c6b6b3bf55a7e260ac91c0002db2d08db242c482702dcb5f883703",
+  "states": {
+    "WAITING_FOR_TWO_REVIEWERS": 204
+  },
+  "gold_cases": 0,
+  "prediction_sha256": "779ec5108ad08837aad42c6e39180047fc9edfd9514d2b488256f36d1df5aa07",
+  "prediction_frozen_at": "2026-11-21T15:15:29.726903+00:00",
+  "status": "PENDING_LABELS",
+  "holdout": {
+    "causal_language": {
+      "total": 60,
+      "source_excluded": 0,
+      "resolved": 0,
+      "scored": 0,
+      "correct": 0,
+      "coverage": 0.0,
+      "accuracy_on_resolved": null,
+      "consensus": 0,
+      "adjudicated": 0,
+      "confusion_gold_rows_prediction_columns": {}
+    },
+    "segment_comparison": {
+      "total": 15,
+      "source_excluded": 0,
+      "resolved": 0,
+      "scored": 0,
+      "correct": 0,
+      "coverage": 0.0,
+      "accuracy_on_resolved": null,
+      "consensus": 0,
+      "adjudicated": 0,
+      "confusion_gold_rows_prediction_columns": {}
+    }
+  },
+  "agreement": {
+    "causal_language": {
+      "reviewer_pairs": 0,
+      "agreeing_pairs": 0,
+      "rate": null,
+      "basis": "latest raw votes before adjudication; pair-weighted across all current cases"
+    },
+    "segment_comparison": {
+      "reviewer_pairs": 0,
+      "agreeing_pairs": 0,
+      "rate": null,
+      "basis": "latest raw votes before adjudication; pair-weighted across all current cases"
+    }
+  },
+  "delivery": "disabled",
+  "graph_modified": false,
+  "market_prediction_accuracy": null,
+  "limitations": [
+    "Metrics only cover sampled language classification and extracted numeric comparisons",
+    "Numeric cases contain extracted positives: extraction recall cannot be estimated",
+    "Consensus is human reference data, not scientific causal identification",
+    "Account independence is declared, not independently identity-verified",
+    "Corpus was visible during development; use unseen periods before generalization claims"
+  ],
+  "actual_labels": 0,
+  "actual_adjudications": 0,
+  "assigned_accounts": 1,
+  "alerts": 0
+}

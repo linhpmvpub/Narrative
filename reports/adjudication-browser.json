@@ -1,0 +1,9 @@
+{
+  "actual_cases": 204,
+  "actual_labels_created": 0,
+  "actual_decisions_created": 0,
+  "synthetic_intercepted_writes": 3,
+  "gateway_admin_blocked": true,
+  "mobile_overflow": false,
+  "js_errors": []
+}

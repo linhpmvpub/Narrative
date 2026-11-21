@@ -25,6 +25,10 @@ def install(app):
     def label():
         return shell("label.html")
 
+    @app.get("/adjudicate", include_in_schema=False)
+    def adjudicate():
+        return shell("adjudicate.html")
+
     def shell(name):
         return FileResponse(
             ROOT / name,
@@ -46,6 +50,8 @@ def install(app):
             "map.js",
             "map.css",
             "map-demo.json",
+            "adjudicate.js",
+            "adjudicate.css",
             "label.js",
             "label.css",
         }:

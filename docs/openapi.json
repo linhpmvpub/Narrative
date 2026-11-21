@@ -2079,6 +2079,299 @@
           }
         }
       }
+    },
+    "/api/v0/admin/evaluation/packets": {
+      "get": {
+        "tags": [
+          "Independent adjudication"
+        ],
+        "summary": "List Packets",
+        "operationId": "list_packets_api_v0_admin_evaluation_packets_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v0/admin/evaluation/{pid}/cases": {
+      "get": {
+        "tags": [
+          "Independent adjudication"
+        ],
+        "summary": "Queue",
+        "operationId": "queue_api_v0_admin_evaluation__pid__cases_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/admin/evaluation/{pid}/cases/{cid}": {
+      "get": {
+        "tags": [
+          "Independent adjudication"
+        ],
+        "summary": "Detail",
+        "operationId": "detail_api_v0_admin_evaluation__pid__cases__cid__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          },
+          {
+            "name": "cid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/admin/evaluation/{pid}/quality": {
+      "get": {
+        "tags": [
+          "Independent adjudication"
+        ],
+        "summary": "Report",
+        "operationId": "report_api_v0_admin_evaluation__pid__quality_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/admin/evaluation/{pid}/export": {
+      "get": {
+        "tags": [
+          "Independent adjudication"
+        ],
+        "summary": "Export",
+        "operationId": "export_api_v0_admin_evaluation__pid__export_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/admin/evaluation/{pid}/cases/{cid}/adjudications": {
+      "post": {
+        "tags": [
+          "Independent adjudication"
+        ],
+        "summary": "Save",
+        "operationId": "save_api_v0_admin_evaluation__pid__cases__cid__adjudications_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "pid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Pid"
+            }
+          },
+          {
+            "name": "cid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cid"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Decision"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2103,6 +2396,75 @@
           "expected_version"
         ],
         "title": "ApprovalBody"
+      },
+      "Decision": {
+        "properties": {
+          "expected_vote_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Expected Vote Hash"
+          },
+          "expected_decision_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Decision Version"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "RESOLVED",
+              "DEFERRED"
+            ],
+            "title": "Outcome"
+          },
+          "independent_of_extractor": {
+            "type": "boolean",
+            "const": true,
+            "title": "Independent Of Extractor"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 10,
+            "title": "Reason"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "ISSUER_ATTRIBUTION",
+                  "UNCERTAIN_OR_FORWARD_LOOKING",
+                  "NO_CAUSAL_CLAIM"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language"
+          },
+          "numeric": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Numeric"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_vote_hash",
+          "expected_decision_version",
+          "outcome",
+          "independent_of_extractor",
+          "reason"
+        ],
+        "title": "Decision"
       },
       "DraftBody": {
         "properties": {

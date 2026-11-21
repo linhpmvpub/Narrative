@@ -51,8 +51,10 @@ class Numeric(Body):
             if value is not None:
                 try:
                     number = Decimal(value)
-                    if not number.is_finite() or abs(number) > Decimal("1e30"):
+                    if not number.is_finite() or number.copy_abs() > Decimal("1e30"):
                         raise ValueError("Finite bounded amount required")
+                    if abs(int(number.as_tuple().exponent)) > 80:
+                        raise ValueError("Decimal exponent out of bounds")
                 except InvalidOperation:
                     raise ValueError("Invalid decimal") from None
         return self
