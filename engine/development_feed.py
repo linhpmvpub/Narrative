@@ -13,7 +13,6 @@ from uuid import uuid4
 from sqlalchemy import select
 
 from engine.adapters.http_sources import SourceClient
-from engine.api.accounts import transaction
 from engine.collect_sec import candidates, identities
 from engine.db import database
 from engine.ingestion.contracts import digest
@@ -199,6 +198,8 @@ def apply_rows(conn, rows, capture, now):
 
 def project(engine, user_id=None):
     """Idempotent per-owner snapshots, direct issuer only; never a causal match."""
+    from engine.api.accounts import transaction
+
     require_enabled()
     count = 0
     with engine.connect() as conn:

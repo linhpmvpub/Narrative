@@ -265,12 +265,21 @@ def timeline(conn, sid, as_of, limit, cursor=None, *, public=False):
                 .one()
             )
             status = latest["normalized_claim"].get("source_status", "active")
+            from engine.financials import assessments
+
+            financial = assessments(
+                conn,
+                latest["normalized_claim"]["ticker"],
+                min(as_of, recorded),
+                accession=latest["normalized_claim"]["accession"],
+            )
             lifecycle = {
                 "effective_source_status": status,
                 "latest_event_version_id": latest["id"],
                 "is_superseded": latest["id"]
                 != row["snapshot"]["decision_trace"]["event_version_id"],
                 "impact_eligible": False,
+                "financial_assessments": financial,
             }
         items.append(
             {

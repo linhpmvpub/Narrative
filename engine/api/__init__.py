@@ -50,6 +50,11 @@ async def http_error(request, exc):
     )
 
 
+@app.get("/api/v0/client-capabilities")
+def client_capabilities():
+    return {"read_only": False}
+
+
 @app.get("/healthz")
 def health() -> dict:
     Settings.from_env()
@@ -62,7 +67,7 @@ def ready():
     try:
         with engine.connect() as conn:
             revision = conn.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-            if revision != "0007":
+            if revision != "0008":
                 raise HTTPException(503, "Database migration required")
         return {"status": "ready", "schema": revision}
     except SQLAlchemyError:

@@ -1,0 +1,18 @@
+{
+  "manifest_files_verified": 15,
+  "runtime_token_scan": "passed",
+  "counts": {
+    "rie_financial_snapshots": 5,
+    "rie_events": 51,
+    "rie_event_versions": 51,
+    "rie_user_cards": 31,
+    "rie_card_threads": 41,
+    "rie_alerts": 0
+  },
+  "sqlite_tests": 265,
+  "postgresql_tests": 265,
+  "final_focused_tests": 13,
+  "phone_remote_access": "user confirmed map opens over remote connection",
+  "delivery": "disabled",
+  "production": "NO_GO: causal evidence and independent evaluation pending"
+}

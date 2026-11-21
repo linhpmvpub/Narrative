@@ -225,6 +225,11 @@ def live_map(user: User, as_of: datetime | None = None):
                         .one()
                     )
                     claim = current["normalized_claim"]
+                    from engine.financials import assessments
+
+                    financial = assessments(
+                        conn, claim["ticker"], cutoff, accession=claim["accession"]
+                    )
                     graph["notices"].append(
                         {
                             "id": r["id"],
@@ -234,11 +239,31 @@ def live_map(user: User, as_of: datetime | None = None):
                             "available_at": utc(current["available_at"]).isoformat(),
                             "source_status": claim.get("source_status", "active"),
                             "url": claim["url"],
-                            "economic_observations": [],
-                            "impact": "INSUFFICIENT_EVIDENCE",
-                            "reason": "Filing metadata alone does not establish a directional economic observation",
+                            "economic_observations": financial,
+                            "impact": "REPORTED_FINANCIAL_CHANGE"
+                            if financial
+                            else "INSUFFICIENT_EVIDENCE",
+                            "reason": "Comparable consolidated SEC XBRL actuals; causal/stock-price impact unknown"
+                            if financial
+                            else "Filing metadata alone does not establish a directional economic observation",
                         }
                     )
+            reported: dict = {}
+            for notice in graph["notices"]:
+                for observation in notice["economic_observations"]:
+                    nid = observation["ticker"] + "_REPORTED_" + observation["metric"]
+                    previous = reported.get(nid)
+                    if (
+                        previous is None
+                        or observation["current"]["end"] > previous["observation"]["current"]["end"]
+                    ):
+                        reported[nid] = {
+                            "id": nid,
+                            "label": observation["label"],
+                            "type": "reported_metric",
+                            "observation": observation,
+                        }
+            graph["nodes"].extend(reported.values())
             return graph
     finally:
         engine.dispose()

@@ -1,0 +1,68 @@
+{
+  "comparisons": 36,
+  "operands_verified_against_raw_source": 72,
+  "companies": {
+    "NVDA": {
+      "comparisons": 8,
+      "concepts": [
+        "us-gaap:GrossProfit",
+        "us-gaap:NetIncomeLoss",
+        "us-gaap:OperatingIncomeLoss",
+        "us-gaap:Revenues"
+      ],
+      "period_kinds": [
+        "quarter"
+      ]
+    },
+    "AMD": {
+      "comparisons": 8,
+      "concepts": [
+        "us-gaap:GrossProfit",
+        "us-gaap:NetIncomeLoss",
+        "us-gaap:OperatingIncomeLoss",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+      ],
+      "period_kinds": [
+        "quarter"
+      ]
+    },
+    "MU": {
+      "comparisons": 12,
+      "concepts": [
+        "us-gaap:GrossProfit",
+        "us-gaap:NetIncomeLoss",
+        "us-gaap:OperatingIncomeLoss",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+      ],
+      "period_kinds": [
+        "annual",
+        "quarter"
+      ]
+    },
+    "DELL": {
+      "comparisons": 4,
+      "concepts": [
+        "us-gaap:GrossProfit",
+        "us-gaap:NetIncomeLoss",
+        "us-gaap:OperatingIncomeLoss",
+        "us-gaap:Revenues"
+      ],
+      "period_kinds": [
+        "quarter"
+      ]
+    },
+    "SNDK": {
+      "comparisons": 4,
+      "concepts": [
+        "us-gaap:GrossProfit",
+        "us-gaap:NetIncomeLoss",
+        "us-gaap:OperatingIncomeLoss",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"
+      ],
+      "period_kinds": [
+        "quarter"
+      ]
+    }
+  },
+  "delivery": "disabled"
+}

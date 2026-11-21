@@ -1,0 +1,31 @@
+{
+  "companies": {
+    "NVDA": {
+      "status": "duplicate",
+      "id": "8a1e69de347786c9c8c99489810b6f0a43e34c133be5bd32b5fc540c2a2b7f40",
+      "comparisons": 8
+    },
+    "AMD": {
+      "status": "duplicate",
+      "id": "687dca58744459570cd767bfd8f6e5cd3b6c89d7d72af9aab48f29d52fe927b8",
+      "comparisons": 8
+    },
+    "MU": {
+      "status": "duplicate",
+      "id": "9db6d8e160437941198cf32b9588c8223e26345c63759944df681c02400138ff",
+      "comparisons": 12
+    },
+    "DELL": {
+      "status": "duplicate",
+      "id": "c65c105086afce61848a453a7f17c22729c93b1a02175d176da414da4877b712",
+      "comparisons": 4
+    },
+    "SNDK": {
+      "status": "duplicate",
+      "id": "48aa18b7e36a42ce9b2204b7b74959688268a390efd57f671f06185251c40496",
+      "comparisons": 4
+    }
+  },
+  "errors": {},
+  "delivery": "disabled"
+}
