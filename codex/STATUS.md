@@ -4,7 +4,7 @@ Latest: incremental collector/lifecycle and interactive impact map implemented (
 51 real SEC metadata notices, 31 private cards / 41 links; zero alerts or fabricated withdrawals.
 Final SQLite and PostgreSQL suites each pass252 tests; browser/lint/types/JS checks pass.
 See docs/incremental-impact-map.md and codex/CHECKPOINT.md. Origin is now
-https://github.com/linhpmvpub/Narrative and Git authentication works; earlier no-remote/login
+https://github.com/linhpmvpub/Narrative; code commit fe3b840 is pushed and GitHub CI run44908013042 passed; earlier no-remote/login
 statements below are historical. Next quality work: source-backed financial observations and
 independent causal/impact evaluation, not further source-rights gating of this private prototype.
 

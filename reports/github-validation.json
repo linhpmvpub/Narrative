@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/linhpmvpub/Narrative",
+  "code_commit": "fe3b8401a9d58522083e64709ab5fa058d182260",
+  "branch": "main",
+  "ci_run_url": "https://github.com/linhpmvpub/Narrative/actions/runs/44908013042",
+  "ci_conclusion": "success",
+  "note": "Subsequent handoff commit changes documentation/reports only; source code validated at code_commit."
+}

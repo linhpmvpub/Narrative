@@ -6,7 +6,7 @@ Schema0007 adds atomic collection checkpoints, correction/withdrawal lifecycle, 
 private projections and as-of invalidation. Interactive /map runs existing bounded matching,
 shows evidence/conditions and separates hypothetical demo from real private metadata.
 Real corpus:51 notices,31 cards/41 links,0 alerts,0 confirmed withdrawals. Repeat collection
-adds no duplicates. GitHub origin is linhpmvpub/Narrative and authentication is available.
+adds no duplicates. GitHub origin is linhpmvpub/Narrative; source commit fe3b840 is pushed and CI run44908013042 passed all jobs. See reports/github-validation.json.
 
 Source rights do not block this private development scope. Real impact accuracy remains to be
 evaluated on independently labeled financial observations and causal evidence; no calibrated

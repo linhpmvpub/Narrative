@@ -11,7 +11,7 @@ Implemented:
   direction changes and the existing two-hop matcher. Demo and real data remain separated.
 - Temporal eligibility badges and packaged seed topology verified by new regression tests.
 - GitHub origin configured as https://github.com/linhpmvpub/Narrative; authenticated push dry-run
-  succeeds. Existing CI now includes JS checks and read-only repository permissions.
+  succeeds. Source commit fe3b840 was pushed to main and GitHub CI run44908013042 passed all jobs, including both database suites and migration/replay. Existing CI includes JS checks and read-only repository permissions. The final handoff commit contains documentation/report changes only.
 
 Real collection: 51 events/versions,31 owner cards/41 feed links,5 company cursors; no alerts or
 confirmed real withdrawals. One new NVDA filing notice was added. Repeat collection created no
