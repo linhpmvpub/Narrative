@@ -17,6 +17,10 @@ def install(app):
     def review():
         return shell("review.html")
 
+    @app.get("/map", include_in_schema=False)
+    def impact_map():
+        return shell("map.html")
+
     def shell(name):
         return FileResponse(
             ROOT / name,
@@ -29,6 +33,6 @@ def install(app):
 
     @app.get("/assets/{name}", include_in_schema=False)
     def asset(name: str):
-        if name not in {"app.js", "style.css", "demo.json", "review.js", "review.css"}:
+        if name not in {"app.js", "style.css", "demo.json", "review.js", "review.css", "map.js", "map.css", "map-demo.json"}:
             raise HTTPException(404, "Asset not found")
         return FileResponse(ROOT / name)

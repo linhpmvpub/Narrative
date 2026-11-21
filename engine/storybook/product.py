@@ -237,10 +237,46 @@ def timeline(conn, sid, as_of, limit, cursor=None, *, public=False):
                 feedback.c.card_id == row["card_id"], feedback.c.active.is_(True)
             )
         ).scalar_one_or_none()
+        lifecycle = {}
+        if row["snapshot"]["card"].get("private_only"):
+            ev = metadata.tables["rie_event_versions"]
+            current_event = (
+                select(ev.c.event_id)
+                .where(
+                    ev.c.id
+                    == select(cards.c.event_version_id)
+                    .where(cards.c.id == row["card_id"])
+                    .scalar_subquery()
+                )
+                .scalar_subquery()
+            )
+            latest = (
+                conn.execute(
+                    select(ev)
+                    .where(
+                        ev.c.event_id == current_event,
+                        ev.c.available_at <= as_of,
+                        ev.c.available_at <= recorded,
+                    )
+                    .order_by(ev.c.version_number.desc())
+                    .limit(1)
+                )
+                .mappings()
+                .one()
+            )
+            status = latest["normalized_claim"].get("source_status", "active")
+            lifecycle = {
+                "effective_source_status": status,
+                "latest_event_version_id": latest["id"],
+                "is_superseded": latest["id"]
+                != row["snapshot"]["decision_trace"]["event_version_id"],
+                "impact_eligible": False,
+            }
         items.append(
             {
                 "id": row["card_id"],
                 **row["snapshot"],
+                **lifecycle,
                 "available_at": utc(row["available_at"]).isoformat(),
                 "correction_of": row["correction_of"],
                 "related_thread_ids": sorted(related),

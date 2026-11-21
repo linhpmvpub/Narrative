@@ -1,0 +1,1333 @@
+{
+  "is_synthetic": true,
+  "as_of": "2026-11-01T00:00:00+00:00",
+  "delivery": "disabled",
+  "price_impact": "UNKNOWN",
+  "nodes": [
+    {
+      "id": "ACCELERATOR_DEMAND",
+      "label": "Accelerator Demand",
+      "type": "product_market"
+    },
+    {
+      "id": "ADVANCED_PACKAGING_CAPACITY",
+      "label": "Advanced Packaging Capacity",
+      "type": "product_market"
+    },
+    {
+      "id": "AI_CAPEX",
+      "label": "Ai Capex",
+      "type": "driver"
+    },
+    {
+      "id": "AMD_DC_MARGIN",
+      "label": "Amd Dc Margin",
+      "type": "financial_metric"
+    },
+    {
+      "id": "AMD_DC_REVENUE",
+      "label": "Amd Dc Revenue",
+      "type": "financial_metric"
+    },
+    {
+      "id": "AMD_EPYC_ADOPTION",
+      "label": "Amd Epyc Adoption",
+      "type": "financial_metric"
+    },
+    {
+      "id": "AMD_INSTINCT_ADOPTION",
+      "label": "Amd Instinct Adoption",
+      "type": "driver"
+    },
+    {
+      "id": "AMD_INSTINCT_SHIPMENTS",
+      "label": "Amd Instinct Shipments",
+      "type": "financial_metric"
+    },
+    {
+      "id": "CO_AMD",
+      "label": "AMD",
+      "type": "company"
+    },
+    {
+      "id": "CO_DELL",
+      "label": "DELL",
+      "type": "company"
+    },
+    {
+      "id": "CO_MU",
+      "label": "MU",
+      "type": "company"
+    },
+    {
+      "id": "CO_NVDA",
+      "label": "NVDA",
+      "type": "company"
+    },
+    {
+      "id": "CO_SNDK",
+      "label": "SNDK",
+      "type": "company"
+    },
+    {
+      "id": "DELL_AI_SERVER_BACKLOG",
+      "label": "Dell Ai Server Backlog",
+      "type": "financial_metric"
+    },
+    {
+      "id": "DELL_AI_SERVER_ORDERS",
+      "label": "Dell Ai Server Orders",
+      "type": "financial_metric"
+    },
+    {
+      "id": "DELL_AI_SERVER_REVENUE",
+      "label": "Dell Ai Server Revenue",
+      "type": "financial_metric"
+    },
+    {
+      "id": "DELL_ISG_MARGIN",
+      "label": "Dell Isg Margin",
+      "type": "financial_metric"
+    },
+    {
+      "id": "DELL_WORKING_CAPITAL",
+      "label": "Dell Working Capital",
+      "type": "financial_metric"
+    },
+    {
+      "id": "DRAM_ASP",
+      "label": "Dram Asp",
+      "type": "product_market"
+    },
+    {
+      "id": "DRAM_BIT_SUPPLY",
+      "label": "Dram Bit Supply",
+      "type": "product_market"
+    },
+    {
+      "id": "DRAM_INVENTORY",
+      "label": "Dram Inventory",
+      "type": "product_market"
+    },
+    {
+      "id": "ENTERPRISE_SSD_DEMAND",
+      "label": "Enterprise Ssd Demand",
+      "type": "product_market"
+    },
+    {
+      "id": "EXPORT_CONTROLS",
+      "label": "Export Controls",
+      "type": "policy_or_constraint"
+    },
+    {
+      "id": "GPU_SUPPLY",
+      "label": "Gpu Supply",
+      "type": "product_market"
+    },
+    {
+      "id": "HBM_DEMAND",
+      "label": "Hbm Demand",
+      "type": "product_market"
+    },
+    {
+      "id": "MU_GROSS_MARGIN",
+      "label": "Mu Gross Margin",
+      "type": "financial_metric"
+    },
+    {
+      "id": "MU_HBM_REVENUE",
+      "label": "Mu Hbm Revenue",
+      "type": "financial_metric"
+    },
+    {
+      "id": "MU_REVENUE",
+      "label": "Mu Revenue",
+      "type": "financial_metric"
+    },
+    {
+      "id": "NAND_ASP",
+      "label": "Nand Asp",
+      "type": "product_market"
+    },
+    {
+      "id": "NAND_BIT_SUPPLY",
+      "label": "Nand Bit Supply",
+      "type": "product_market"
+    },
+    {
+      "id": "NAND_INVENTORY",
+      "label": "Nand Inventory",
+      "type": "product_market"
+    },
+    {
+      "id": "NVDA_ADDRESSABLE_MARKET",
+      "label": "Nvda Addressable Market",
+      "type": "financial_metric"
+    },
+    {
+      "id": "NVDA_DATA_CENTER_REVENUE",
+      "label": "Nvda Data Center Revenue",
+      "type": "financial_metric"
+    },
+    {
+      "id": "NVDA_SUPPLY_AVAILABLE",
+      "label": "Nvda Supply Available",
+      "type": "financial_metric"
+    },
+    {
+      "id": "PC_REFRESH",
+      "label": "Pc Refresh",
+      "type": "driver"
+    },
+    {
+      "id": "PRICE_PASS_THROUGH",
+      "label": "Price Pass Through",
+      "type": "driver"
+    },
+    {
+      "id": "SERVER_COMPONENT_COST",
+      "label": "Server Component Cost",
+      "type": "product_market"
+    },
+    {
+      "id": "SERVER_CPU_DEMAND",
+      "label": "Server Cpu Demand",
+      "type": "product_market"
+    },
+    {
+      "id": "SNDK_ENTERPRISE_MIX",
+      "label": "Sndk Enterprise Mix",
+      "type": "financial_metric"
+    },
+    {
+      "id": "SNDK_GROSS_MARGIN",
+      "label": "Sndk Gross Margin",
+      "type": "financial_metric"
+    },
+    {
+      "id": "SNDK_REVENUE",
+      "label": "Sndk Revenue",
+      "type": "financial_metric"
+    },
+    {
+      "id": "SNDK_SSD_SHIPMENTS",
+      "label": "Sndk Ssd Shipments",
+      "type": "financial_metric"
+    }
+  ],
+  "edges": [
+    {
+      "id": "R001",
+      "from_entity": "AI_CAPEX",
+      "to_entity": "ACCELERATOR_DEMAND",
+      "family": "CUSTOMER_DEMAND",
+      "mechanism": "Demand for AI compute can increase accelerator procurement",
+      "status": "verified",
+      "sign": "positive",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R001"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R002",
+      "from_entity": "ACCELERATOR_DEMAND",
+      "to_entity": "HBM_DEMAND",
+      "family": "PRODUCT_MARKET",
+      "mechanism": "Accelerator demand can expand attached HBM demand depending on architectures",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R002"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R003",
+      "from_entity": "HBM_DEMAND",
+      "to_entity": "MU_HBM_REVENUE",
+      "family": "PRODUCT_MARKET",
+      "mechanism": "HBM market demand affects a supplier only to the extent of qualified products and orders",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R003"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R004",
+      "from_entity": "MU_HBM_REVENUE",
+      "to_entity": "MU_GROSS_MARGIN",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Premium mix may contribute to gross margin depending on yield and cost",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R004"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R005",
+      "from_entity": "DRAM_ASP",
+      "to_entity": "MU_GROSS_MARGIN",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "DRAM realized prices can influence MU profitability subject to mix and costs",
+      "status": "verified",
+      "sign": "positive",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R005"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R006",
+      "from_entity": "DRAM_ASP",
+      "to_entity": "MU_REVENUE",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "DRAM prices influence revenue at a given shipment volume",
+      "status": "verified",
+      "sign": "positive",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R006"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R007",
+      "from_entity": "DRAM_BIT_SUPPLY",
+      "to_entity": "DRAM_ASP",
+      "family": "COMPETITOR_SUPPLY",
+      "mechanism": "Higher available bit supply can pressure price if demand unchanged",
+      "status": "verified",
+      "sign": "negative",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R007"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R008",
+      "from_entity": "DRAM_INVENTORY",
+      "to_entity": "DRAM_ASP",
+      "family": "PRODUCT_MARKET",
+      "mechanism": "Elevated inventory can pressure realized pricing",
+      "status": "verified",
+      "sign": "negative",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R008"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R009",
+      "from_entity": "AI_CAPEX",
+      "to_entity": "NVDA_DATA_CENTER_REVENUE",
+      "family": "CUSTOMER_DEMAND",
+      "mechanism": "Capital spending can convert to NVIDIA revenue only if products are purchased and delivered",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R009"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R010",
+      "from_entity": "ACCELERATOR_DEMAND",
+      "to_entity": "NVDA_DATA_CENTER_REVENUE",
+      "family": "PRODUCT_MARKET",
+      "mechanism": "Accelerator demand is relevant to NVIDIA data center sales with market share and shipment conditions",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R010"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R011",
+      "from_entity": "ADVANCED_PACKAGING_CAPACITY",
+      "to_entity": "NVDA_SUPPLY_AVAILABLE",
+      "family": "SUPPLIER_COST",
+      "mechanism": "Advanced packaging availability can affect finished-system supply",
+      "status": "verified",
+      "sign": "positive",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R011"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R012",
+      "from_entity": "NVDA_SUPPLY_AVAILABLE",
+      "to_entity": "NVDA_DATA_CENTER_REVENUE",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Available supply supports shipments only when order demand exists",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R012"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R013",
+      "from_entity": "EXPORT_CONTROLS",
+      "to_entity": "NVDA_ADDRESSABLE_MARKET",
+      "family": "MACRO_POLICY",
+      "mechanism": "Export rules may shrink accessible product-market combinations",
+      "status": "verified",
+      "sign": "negative",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R013"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R014",
+      "from_entity": "NVDA_ADDRESSABLE_MARKET",
+      "to_entity": "NVDA_DATA_CENTER_REVENUE",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Addressable demand may affect recognized revenue depending on timing and substitution",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R014"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R015",
+      "from_entity": "ACCELERATOR_DEMAND",
+      "to_entity": "AMD_INSTINCT_ADOPTION",
+      "family": "PRODUCT_MARKET",
+      "mechanism": "Accelerator market demand can create AMD adoption opportunity",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R015"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R016",
+      "from_entity": "AMD_INSTINCT_ADOPTION",
+      "to_entity": "AMD_INSTINCT_SHIPMENTS",
+      "family": "CUSTOMER_DEMAND",
+      "mechanism": "Customer use translates into shipments only after deployment and procurement",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R016"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R017",
+      "from_entity": "AMD_INSTINCT_SHIPMENTS",
+      "to_entity": "AMD_DC_REVENUE",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Recognized shipments contribute to data center revenue",
+      "status": "verified",
+      "sign": "positive",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R017"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R018",
+      "from_entity": "SERVER_CPU_DEMAND",
+      "to_entity": "AMD_EPYC_ADOPTION",
+      "family": "CUSTOMER_DEMAND",
+      "mechanism": "Server CPU market growth enables EPYC opportunities depending on competitiveness",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R018"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R019",
+      "from_entity": "AMD_EPYC_ADOPTION",
+      "to_entity": "AMD_DC_REVENUE",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Adoption can affect reported DC revenue with timing and mix",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R019"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R020",
+      "from_entity": "AMD_DC_REVENUE",
+      "to_entity": "AMD_DC_MARGIN",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Revenue expansion can support or dilute profitability depending on mix/cost",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R020"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R021",
+      "from_entity": "AI_CAPEX",
+      "to_entity": "DELL_AI_SERVER_ORDERS",
+      "family": "CUSTOMER_DEMAND",
+      "mechanism": "Data center investments may lead to server integrator orders",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R021"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R022",
+      "from_entity": "DELL_AI_SERVER_ORDERS",
+      "to_entity": "DELL_AI_SERVER_BACKLOG",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Orders may contribute to backlog depending on contract classification and fulfillment",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R022"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R023",
+      "from_entity": "DELL_AI_SERVER_BACKLOG",
+      "to_entity": "DELL_AI_SERVER_REVENUE",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Backlog converts into sales only upon fulfillment and recognition",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R023"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R024",
+      "from_entity": "DELL_AI_SERVER_REVENUE",
+      "to_entity": "DELL_ISG_MARGIN",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "AI server mix and scale can change segment margins in either direction",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R024"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R025",
+      "from_entity": "DRAM_ASP",
+      "to_entity": "SERVER_COMPONENT_COST",
+      "family": "SUPPLIER_COST",
+      "mechanism": "Higher DRAM costs can raise server component bill subject to contracts",
+      "status": "verified",
+      "sign": "positive",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R025"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [
+        "contracted_cost_rises"
+      ],
+      "is_synthetic": true
+    },
+    {
+      "id": "R026",
+      "from_entity": "NAND_ASP",
+      "to_entity": "SERVER_COMPONENT_COST",
+      "family": "SUPPLIER_COST",
+      "mechanism": "Higher NAND/SSD input costs can raise system component costs",
+      "status": "verified",
+      "sign": "positive",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R026"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [
+        "contracted_cost_rises"
+      ],
+      "is_synthetic": true
+    },
+    {
+      "id": "R027",
+      "from_entity": "SERVER_COMPONENT_COST",
+      "to_entity": "DELL_ISG_MARGIN",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Unrecovered component costs can pressure ISG margin",
+      "status": "verified",
+      "sign": "negative",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R027"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [
+        "cost_not_offset"
+      ],
+      "is_synthetic": true
+    },
+    {
+      "id": "R028",
+      "from_entity": "PRICE_PASS_THROUGH",
+      "to_entity": "DELL_ISG_MARGIN",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Realized pricing can offset component inflation",
+      "status": "verified",
+      "sign": "positive",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R028"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R029",
+      "from_entity": "DELL_AI_SERVER_BACKLOG",
+      "to_entity": "DELL_WORKING_CAPITAL",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Backlog execution may create inventory and cash timing needs",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R029"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R030",
+      "from_entity": "NAND_BIT_SUPPLY",
+      "to_entity": "NAND_ASP",
+      "family": "COMPETITOR_SUPPLY",
+      "mechanism": "Increased NAND bit supply may pressure prices if demand does not grow as fast",
+      "status": "verified",
+      "sign": "negative",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R030"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R031",
+      "from_entity": "NAND_INVENTORY",
+      "to_entity": "NAND_ASP",
+      "family": "PRODUCT_MARKET",
+      "mechanism": "Elevated channel inventory may pressure pricing",
+      "status": "verified",
+      "sign": "negative",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R031"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R032",
+      "from_entity": "NAND_ASP",
+      "to_entity": "SNDK_GROSS_MARGIN",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "NAND prices can improve Sandisk realized margin depending on mix, cost and contracts",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R032"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R033",
+      "from_entity": "NAND_ASP",
+      "to_entity": "SNDK_REVENUE",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Realized NAND prices influence reported sales depending on volumes",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R033"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R034",
+      "from_entity": "AI_CAPEX",
+      "to_entity": "ENTERPRISE_SSD_DEMAND",
+      "family": "CUSTOMER_DEMAND",
+      "mechanism": "AI storage needs may increase enterprise SSD demand for some workloads",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R034"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R035",
+      "from_entity": "ENTERPRISE_SSD_DEMAND",
+      "to_entity": "SNDK_ENTERPRISE_MIX",
+      "family": "PRODUCT_MARKET",
+      "mechanism": "Market SSD demand can affect Sandisk enterprise mix only with competitive wins",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R035"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R036",
+      "from_entity": "ENTERPRISE_SSD_DEMAND",
+      "to_entity": "SNDK_SSD_SHIPMENTS",
+      "family": "CUSTOMER_DEMAND",
+      "mechanism": "Enterprise demand may convert to Sandisk shipments with qualified products and orders",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R036"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R037",
+      "from_entity": "SNDK_SSD_SHIPMENTS",
+      "to_entity": "SNDK_GROSS_MARGIN",
+      "family": "FINANCIAL_TRANSMISSION",
+      "mechanism": "Higher SSD shipments may improve or dilute margin depending on ASP and cost",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R037"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R038",
+      "from_entity": "PC_REFRESH",
+      "to_entity": "NAND_ASP",
+      "family": "PRODUCT_MARKET",
+      "mechanism": "Client SSD demand from PC refresh may shift NAND balance subject to supply",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R038"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R039",
+      "from_entity": "GPU_SUPPLY",
+      "to_entity": "DELL_AI_SERVER_REVENUE",
+      "family": "SUPPLIER_COST",
+      "mechanism": "Availability of accelerators may limit server system shipment schedule",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R039"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    },
+    {
+      "id": "R040",
+      "from_entity": "EXPORT_CONTROLS",
+      "to_entity": "AMD_INSTINCT_SHIPMENTS",
+      "family": "MACRO_POLICY",
+      "mechanism": "Relevant export controls may restrict specific accelerator product shipments",
+      "status": "verified",
+      "sign": "conditional",
+      "strength": 0.6,
+      "confidence": 0.9,
+      "recorded_at": "2026-09-01T00:00:00Z",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": null,
+      "reviewed_at": "2026-09-01T00:00:00Z",
+      "reviewer": "synthetic-fixture-reviewer",
+      "evidence_urls": [
+        "fixture://synthetic/evidence/R040"
+      ],
+      "evidence_available_at": "2026-09-01T00:00:00Z",
+      "conditions": [],
+      "is_synthetic": true
+    }
+  ],
+  "sample": {
+    "is_synthetic": true,
+    "decision_trace": {
+      "event_id": "F021",
+      "event_version_id": "3c0abf48-5255-511b-af95-8681038ac5e2",
+      "canonical_event_key": "SYN-F021",
+      "narrative_id": "N08",
+      "narrative_version_id": "demo-3321e0b6eae85e70d8b78c8fd07d965b8f60f4dba2e0547832c4f89d25eb67db:synthetic:N08:v1",
+      "as_of": "2026-11-01T00:00:00+00:00",
+      "is_synthetic": true,
+      "policy_version": "rie-v0.3-1d21ff630906",
+      "policy_snapshot": {
+        "name": "rie-v0.3",
+        "algorithm_revision": "gates-and-stance-v3",
+        "weights": {
+          "R": 0.25,
+          "M": 0.2,
+          "N": 0.2,
+          "Q": 0.15,
+          "T": 0.1,
+          "U": 0.1
+        },
+        "half_lives_days": {
+          "FILING": 90,
+          "CAPEX": 45,
+          "COMPONENT_COST": 14,
+          "MEMORY_PRICING": 14,
+          "NAND_PRICE": 14,
+          "PRICE_ONLY": 1,
+          "default": 30
+        },
+        "push": 80,
+        "digest": 60,
+        "quality_digest": 0.7,
+        "quality_push": 0.8,
+        "max_hops": 2,
+        "correction_novelty": 0.7,
+        "unknown_materiality": "review_required",
+        "path_decay": 0.85
+      },
+      "extraction_version": "validated-observations-v1",
+      "input_sha256": "f101217f639483989a09a0a267a6a136cc86c88185ad965bffa231b903f58c83",
+      "gate_results": {
+        "source_rights": true,
+        "synthetic_isolation": true,
+        "narrative_mode": true,
+        "provenance": true,
+        "available_as_of": true,
+        "identity": true,
+        "novelty": true,
+        "comparison_basis": true,
+        "core_numbers_consistent": true,
+        "contract_claim_evidenced": true,
+        "quality_digest": true,
+        "quality_push": true,
+        "materiality_known": false,
+        "verified_path": true,
+        "direction_and_conditions": false
+      },
+      "reasons": [
+        "unknown_materiality"
+      ],
+      "selected_path": {
+        "edges": [
+          {
+            "id": "R026",
+            "from_entity": "NAND_ASP",
+            "to_entity": "SERVER_COMPONENT_COST",
+            "family": "SUPPLIER_COST",
+            "mechanism": "Higher NAND/SSD input costs can raise system component costs",
+            "status": "verified",
+            "sign": "positive",
+            "strength": 0.6,
+            "confidence": 0.9,
+            "recorded_at": "2026-09-01T00:00:00Z",
+            "valid_from": "2026-09-01T00:00:00Z",
+            "valid_until": null,
+            "reviewed_at": "2026-09-01T00:00:00Z",
+            "reviewer": "synthetic-fixture-reviewer",
+            "evidence_urls": [
+              "fixture://synthetic/evidence/R026"
+            ],
+            "evidence_available_at": "2026-09-01T00:00:00Z",
+            "conditions": [
+              "contracted_cost_rises"
+            ],
+            "is_synthetic": true
+          },
+          {
+            "id": "R027",
+            "from_entity": "SERVER_COMPONENT_COST",
+            "to_entity": "DELL_ISG_MARGIN",
+            "family": "FINANCIAL_TRANSMISSION",
+            "mechanism": "Unrecovered component costs can pressure ISG margin",
+            "status": "verified",
+            "sign": "negative",
+            "strength": 0.6,
+            "confidence": 0.9,
+            "recorded_at": "2026-09-01T00:00:00Z",
+            "valid_from": "2026-09-01T00:00:00Z",
+            "valid_until": null,
+            "reviewed_at": "2026-09-01T00:00:00Z",
+            "reviewer": "synthetic-fixture-reviewer",
+            "evidence_urls": [
+              "fixture://synthetic/evidence/R027"
+            ],
+            "evidence_available_at": "2026-09-01T00:00:00Z",
+            "conditions": [
+              "cost_not_offset"
+            ],
+            "is_synthetic": true
+          }
+        ],
+        "target": "DELL_ISG_MARGIN",
+        "relevance": 0.306,
+        "confidence": 0.9,
+        "sign": "negative",
+        "conditional_reasons": [
+          "contracted_cost_rises",
+          "cost_not_offset"
+        ],
+        "exposure": null,
+        "sensitivity": null,
+        "strength_basis": "Routing heuristic; exposure and sensitivity are unknown"
+      },
+      "alternates": [],
+      "score_components": {
+        "R": 0.306,
+        "M": null,
+        "N": 1.0,
+        "Q": 0.96,
+        "T": 0.5970618859852485,
+        "U": 1.0
+      },
+      "score": null,
+      "score_bounds": [
+        58.021,
+        78.021
+      ],
+      "materiality": null,
+      "stance": "INSUFFICIENT_EVIDENCE",
+      "conditional_stance": "SUPPORTS",
+      "economic_effect": "UNCERTAIN",
+      "realized_outcome": "NOT_ESTABLISHED",
+      "observations": [
+        {
+          "metric_id": "NAND_ASP",
+          "direction": 1,
+          "evidence_url": "fixture://synthetic/F021",
+          "available_at": "2026-10-21T14:00:00Z"
+        }
+      ],
+      "conditional_reasons": [
+        "contracted_cost_rises",
+        "cost_not_offset"
+      ],
+      "evidence_urls": [
+        "fixture://synthetic/F021",
+        "fixture://synthetic/evidence/R026",
+        "fixture://synthetic/evidence/R027"
+      ],
+      "decision": "review_required",
+      "send_recommendation": false,
+      "delivery_status": "disabled",
+      "sent_at": null,
+      "timeliness_basis": {
+        "half_life_days": 14,
+        "clock": "available_at"
+      },
+      "context_id": "demo-3321e0b6eae85e70d8b78c8fd07d965b8f60f4dba2e0547832c4f89d25eb67db",
+      "ingestion_status": "ingested",
+      "decision_id": "8b345103233a0e01bdac898e624d0ab7a4f16a76d99b95ff7a3dcc43792f7a00"
+    },
+    "card": {
+      "is_synthetic": true,
+      "event_id": "F021",
+      "narrative_id": "N08",
+      "primary_ticker": "DELL",
+      "headline": "SYNTHETIC: Hypothetical NAND price rise may increase server input costs",
+      "what_changed": "Hypothetical NAND price rise may increase server input costs",
+      "why_connected": "NAND_ASP -> SERVER_COMPONENT_COST -> DELL_ISG_MARGIN",
+      "graph_path": [
+        {
+          "edge_id": "R026",
+          "from": "NAND_ASP",
+          "to": "SERVER_COMPONENT_COST",
+          "family": "SUPPLIER_COST",
+          "status": "synthetic_verified_demo_only",
+          "evidence_urls": [
+            "fixture://synthetic/evidence/R026"
+          ]
+        },
+        {
+          "edge_id": "R027",
+          "from": "SERVER_COMPONENT_COST",
+          "to": "DELL_ISG_MARGIN",
+          "family": "FINANCIAL_TRANSMISSION",
+          "status": "synthetic_verified_demo_only",
+          "evidence_urls": [
+            "fixture://synthetic/evidence/R027"
+          ]
+        }
+      ],
+      "narrative_stance": "INSUFFICIENT_EVIDENCE",
+      "conditional_stance": "SUPPORTS",
+      "economic_effect": "UNCERTAIN",
+      "conditional_economic_effect": "ADVERSE_IF_CONDITIONS_HOLD",
+      "status": "review_required",
+      "what_is_uncertain": [
+        "Contracted component costs actually rise with market input prices.",
+        "Realized pricing, vendor rebates and product mix do not offset the higher costs.",
+        "Materiality is unknown; no numerical impact is inferred.",
+        "Synthetic evidence does not establish a real company outcome."
+      ],
+      "what_to_watch": "Check the next disclosure for: Dell increases realized pricing and maintains margins",
+      "evidence_urls": [
+        "fixture://synthetic/F021",
+        "fixture://synthetic/evidence/R026",
+        "fixture://synthetic/evidence/R027"
+      ],
+      "source_published_at": "2026-10-21T14:00:00+00:00",
+      "source_available_at": "2026-10-21T14:00:00+00:00",
+      "delivery_status": "disabled",
+      "reason_for_not_sending": "Live notification delivery is disabled. This event and its evidence are synthetic. Required economic conditions remain unverified.",
+      "sent_at": null
+    }
+  }
+}

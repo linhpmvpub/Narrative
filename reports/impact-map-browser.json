@@ -1,0 +1,14 @@
+{
+  "base_url": "http://127.0.0.1:8888",
+  "browser_errors": [],
+  "checks": [
+    "demo_uses_two_hop_path",
+    "direction_reversal",
+    "zoom",
+    "F021_N08_trace",
+    "private_real_notices_no_fabricated_impact",
+    "late_private_response_ignored_after_logout",
+    "mobile_no_horizontal_overflow"
+  ],
+  "delivery": "disabled"
+}

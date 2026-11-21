@@ -1,5 +1,8 @@
 # Private development feed
 
+Updated continuation: see [incremental collection and impact map](incremental-impact-map.md).
+Schema head is now0007; the limits/next-work section below records the original feed milestone.
+
 This mode implements the user's 2026-11-21 instruction to temporarily bypass source-rights,
 verified-graph and materiality gates for private development. It does not grant source rights,
 approve evidence, score impact or send notifications. The reviewed ingestion path remains strict.

@@ -1,5 +1,13 @@
 # Current project status — standalone continuation
 
+Latest: incremental collector/lifecycle and interactive impact map implemented (schema0007).
+51 real SEC metadata notices, 31 private cards / 41 links; zero alerts or fabricated withdrawals.
+Final SQLite and PostgreSQL suites each pass252 tests; browser/lint/types/JS checks pass.
+See docs/incremental-impact-map.md and codex/CHECKPOINT.md. Origin is now
+https://github.com/linhpmvpub/Narrative and Git authentication works; earlier no-remote/login
+statements below are historical. Next quality work: source-backed financial observations and
+independent causal/impact evaluation, not further source-rights gating of this private prototype.
+
 Latest 2026-11-21: opt-in private development feed implemented under the user's explicit
 source-rights/verified-graph/materiality bypass for development. 50 real SEC metadata notices,
 30 owner cards / 40 thread links in separate rie-dev-feed.db; no alerts, no approvals. Public

@@ -1,0 +1,302 @@
+{
+  "mode": "development_sec_notice",
+  "delivery": "disabled",
+  "companies": {
+    "NVDA": {
+      "ticker": "NVDA",
+      "replayed": false,
+      "new_versions": 0,
+      "versions": [
+        {
+          "event_version_id": "36b59f52-ef2c-4407-b5f4-3051e78cb88d",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "31f56bbe-49fd-4ae3-8cf9-e6aa4749f5ff",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "f88b2674-a69b-4d27-aa93-2612f1ae1f3f",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "688323a7-b0da-4dab-b494-a794ef62c626",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "968584cf-dad4-4384-8bf2-9c3ceaf24cf8",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "0852cb48-55b1-45ea-9273-749a50c5bafa",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "38c54940-44f7-4da2-9361-1938c467b111",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "a04d39d1-330a-4da2-b0c9-bd48b77ffb0b",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "10f6c331-8e83-4739-89b5-37c39749a4f2",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "ab287be4-4e0f-4424-9f20-358d68b0ba38",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "f3e649d2-3080-4083-b798-23581068b4b9",
+          "status": "duplicate"
+        }
+      ],
+      "missing_unconfirmed": [],
+      "uncovered": [],
+      "floor_date": "2026-05-20",
+      "snapshots": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+          "sha256": "8dd44fbc9bc7fd47f0b16155e66cd22445345d0f9706f316e9e55d7ce4f48045",
+          "captured_at": "2026-11-21T13:09:02.654505+00:00"
+        }
+      ],
+      "delivery": "disabled"
+    },
+    "AMD": {
+      "ticker": "AMD",
+      "replayed": false,
+      "new_versions": 0,
+      "versions": [
+        {
+          "event_version_id": "01d9692e-099a-4626-b297-86face2b482d",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "2d91c70d-6b4e-468a-a451-b082aae4a3ad",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "22064269-a636-4d1f-8a72-141d3026095d",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "f4528f17-cb93-4f49-8c7b-a5768ebdb3b0",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "fbc538d0-e92f-4fb2-9cf4-1f5e8586dd6b",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "92a6b6b4-b49a-4ab5-868b-c8a53f3f51e5",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "6d7712fc-9ea6-493a-988d-e24e4d3047a1",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "4553d83c-0614-4a56-a46d-eb9784e66a74",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "b24fbd86-2580-44eb-af4e-bc697cdff5c2",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "01386103-201e-4aee-a0e6-e1894f84804c",
+          "status": "duplicate"
+        }
+      ],
+      "missing_unconfirmed": [],
+      "uncovered": [],
+      "floor_date": "2026-07-01",
+      "snapshots": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000002488.json",
+          "sha256": "66a7410459e8cf513259a46d036ebb220f1169d1600b532a1a79e9b9576801ae",
+          "captured_at": "2026-11-21T13:09:04.159047+00:00"
+        }
+      ],
+      "delivery": "disabled"
+    },
+    "MU": {
+      "ticker": "MU",
+      "replayed": false,
+      "new_versions": 0,
+      "versions": [
+        {
+          "event_version_id": "e018b182-a411-4a1f-930e-e9bbd460aa7b",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "f5933eb7-5961-46d4-95da-17a676b7aeb0",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "0dfcecd9-7fe4-4b02-8319-0ce7fcce64bb",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "a0952911-a423-4c8d-8e00-5fc0c2444bbd",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "e28fb27a-d7c3-4e48-8df8-2ddc331576e6",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "47091b00-a744-4ba5-8e6f-c4788beed907",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "2d526ec1-21b8-4d02-bff3-27603b0f0b52",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "e942e101-1749-4aea-aff4-d03f841e7671",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "38f2e8db-cd3a-4522-8aca-e5d6dd8e2263",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "78621e52-696d-497e-b857-42c211069b77",
+          "status": "duplicate"
+        }
+      ],
+      "missing_unconfirmed": [],
+      "uncovered": [],
+      "floor_date": "2026-03-19",
+      "snapshots": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000723125.json",
+          "sha256": "515dd342068a593add3ee48f35aea70d5bf178c3ab600e06dd986a47346842cd",
+          "captured_at": "2026-11-21T13:09:04.635128+00:00"
+        }
+      ],
+      "delivery": "disabled"
+    },
+    "DELL": {
+      "ticker": "DELL",
+      "replayed": false,
+      "new_versions": 0,
+      "versions": [
+        {
+          "event_version_id": "b3b22564-df9a-4f1f-930f-013b6b5ef227",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "e09a18e0-4f1e-42a9-89a1-c3c4d97994b4",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "d96b784b-18d1-4f71-9420-bf785d24be65",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "7c31d561-f860-4e5b-81b5-f22e7aa91878",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "becea192-58d9-4776-b584-bacb2a03fe1f",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "92ab5f75-9a20-4547-aedb-bde20d52a8a7",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "bb5d4f6d-a36f-4410-9d53-c39a3c39e06a",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "715b0bb3-ce57-45d3-9e8d-b04ee9101322",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "320e991b-524d-476f-bbb6-c7db8553a849",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "7e1baa89-4958-4b45-9a8b-f4df9e969069",
+          "status": "duplicate"
+        }
+      ],
+      "missing_unconfirmed": [],
+      "uncovered": [],
+      "floor_date": "2026-06-12",
+      "snapshots": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001571996.json",
+          "sha256": "41dc5b75b68db2abf0294a043016b624abf132a6bd068caf953f3474b9218925",
+          "captured_at": "2026-11-21T13:09:05.175005+00:00"
+        }
+      ],
+      "delivery": "disabled"
+    },
+    "SNDK": {
+      "ticker": "SNDK",
+      "replayed": false,
+      "new_versions": 0,
+      "versions": [
+        {
+          "event_version_id": "9faa483a-2ffd-4bfe-9bbd-2d2b4f35f198",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "8f15b730-aa90-4dec-a56d-13c576ce0cfd",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "c01ee4f3-03df-4c95-bbed-7abe6a8bfa95",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "cfb06c1d-de74-4b4f-8fe5-bdbe3fe5d5ad",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "e43eb432-f870-495a-9b88-e1e09c99c30b",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "df0fcdf9-e1f2-4d46-b564-a8d6440a1b5f",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "43249ebe-1f09-4e97-9f49-2a14dff76d3a",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "4af0d4f8-11d1-4702-8937-fda799bb7845",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "c98c8e2f-6ac9-4a49-ac4c-c4b1df546c47",
+          "status": "duplicate"
+        },
+        {
+          "event_version_id": "72410eef-1338-47b9-b695-66d91c1094d1",
+          "status": "duplicate"
+        }
+      ],
+      "missing_unconfirmed": [],
+      "uncovered": [],
+      "floor_date": "2026-05-01",
+      "snapshots": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0002023554.json",
+          "sha256": "617c49bda55918971674cc8c4c9a94d64fac94f744949f7f106000bcfd567c80",
+          "captured_at": "2026-11-21T13:09:05.621021+00:00"
+        }
+      ],
+      "delivery": "disabled"
+    }
+  },
+  "errors": {},
+  "new_private_links": 0
+}

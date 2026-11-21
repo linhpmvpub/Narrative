@@ -1,3 +1,19 @@
+# Release v0 — incremental collection and impact map (2026-11-21)
+
+252 passed SQLite (297.44s), 252 passed PostgreSQL (398.33s); each suite has one existing Starlette/httpx deprecation warning and zero failures. Ruff, mypy53 files, JavaScript syntax and Chrome desktop/mobile checks pass.
+
+Schema0007 adds atomic collection checkpoints, correction/withdrawal lifecycle, incremental
+private projections and as-of invalidation. Interactive /map runs existing bounded matching,
+shows evidence/conditions and separates hypothetical demo from real private metadata.
+Real corpus:51 notices,31 cards/41 links,0 alerts,0 confirmed withdrawals. Repeat collection
+adds no duplicates. GitHub origin is linhpmvpub/Narrative and authentication is available.
+
+Source rights do not block this private development scope. Real impact accuracy remains to be
+evaluated on independently labeled financial observations and causal evidence; no calibrated
+price model is claimed. Production security/release gates remain open, including old image
+findings (not rescanned here). See reports/incremental-map-checkpoint.md and
+ docs/incremental-impact-map.md. The remaining sections are historical milestone evidence.
+
 # Release v0 — private development feed (2026-11-21)
 
 Final full suites: **237 passed SQLite (239.74s), 237 passed PostgreSQL (290.99s)**. Each has one existing upstream Starlette/httpx deprecation warning; zero failures. Nine new development-feed cases include concurrent ingestion/projection, identity/hash/time rejection, private ownership, sharing exclusion, temporal pagination, opt-in isolation and A → B → A correction history.

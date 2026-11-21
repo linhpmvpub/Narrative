@@ -12,7 +12,7 @@ from uuid import uuid4
 
 from sqlalchemy import select
 
-from engine.adapters.http_sources import SECSourceAdapter, SourceClient
+from engine.adapters.http_sources import SourceClient
 from engine.api.accounts import transaction
 from engine.collect_sec import candidates, identities
 from engine.db import database
@@ -74,107 +74,126 @@ def ingest_submissions(engine, ticker, cik, capture, *, per_company=10):
         mode = conn.scalar(select(database_mode.c.mode).with_for_update())
         if mode != "production":
             raise ValueError("Separate non-synthetic database required")
-        # Same serialization lock used by reviewed ingestion; never modify its sources.
-        if not conn.scalar(select(sources.c.id).where(sources.c.id == SOURCE)):
-            conn.execute(
-                sources.insert().values(
-                    id=SOURCE,
-                    name="SEC development metadata",
-                    origin="https://data.sec.gov",
-                    rights_status="pending",
-                    citation_url=capture.url,
-                    rights_note="User-authorized private development bypass; no approval granted",
-                    created_at=now,
-                )
+        results = apply_rows(conn, rows, capture, now)
+    return results
+
+
+def apply_rows(conn, rows, capture, now):
+    """Caller holds the shared ingestion lock; used by atomic incremental reconciliation."""
+    results = []
+    # Same serialization lock used by reviewed ingestion; never modify its sources.
+    if not conn.scalar(select(sources.c.id).where(sources.c.id == SOURCE)):
+        conn.execute(
+            sources.insert().values(
+                id=SOURCE,
+                name="SEC development metadata",
+                origin="https://data.sec.gov",
+                rights_status="pending",
+                citation_url=capture.url,
+                rights_note="User-authorized private development bypass; no approval granted",
+                created_at=now,
             )
-        for row in rows:
-            key = KIND + ":" + ticker + ":" + row["accession"]
-            claim = {
-                k: row[k] for k in ("ticker", "cik", "accession", "filing_date", "form", "url")
-            }
-            claim["mode"] = KIND
-            old = (
-                conn.execute(
-                    select(versions)
-                    .where(versions.c.event_id == key)
-                    .order_by(versions.c.version_number.desc())
-                    .limit(1)
-                )
-                .mappings()
-                .first()
-            )
-            if old and old["normalized_claim"] == claim:
-                results.append({"event_version_id": old["id"], "status": "duplicate"})
-                continue
-            # An old cached response cannot revert a newer version.
-            if old:
-                previous_capture = conn.scalar(
-                    select(documents.c.retrieved_at).where(documents.c.id == old["document_id"])
-                )
-                if capture.retrieved_at <= utc(previous_capture):
-                    raise ValueError("Stale capture cannot correct a newer notice")
-            headline = f"{ticker}: hồ sơ {row['form']} nộp SEC ngày {row['filing_date']}"
-            # Only a date is known; stored midnight is explicitly date precision, never knowledge time.
-            published = datetime.fromisoformat(row["filing_date"]).replace(tzinfo=UTC)
-            docid = str(uuid4())
+        )
+    for row in rows:
+        ticker = row["ticker"]
+        key = KIND + ":" + ticker + ":" + row["accession"]
+        claim = {k: row[k] for k in ("ticker", "cik", "accession", "filing_date", "form", "url")}
+        claim["mode"] = KIND
+        if row.get("source_status"):
+            claim["source_status"] = row["source_status"]
+            claim["lifecycle_evidence"] = row["lifecycle_evidence"]
+        old = (
             conn.execute(
-                documents.insert().values(
-                    id=docid,
-                    source_id=SOURCE,
-                    external_id=row["accession"],
-                    primary_entity_id="CO_" + ticker,
-                    filing_form=row["form"],
-                    source_url=capture.url,
-                    title=headline,
-                    # This document is a metadata capture receipt, not the raw SEC JSON.
-                    # Include capture time so A -> B -> A preserves all three receipts.
-                    content_sha256=digest(
-                        [claim, capture.content_sha256, capture.retrieved_at.isoformat()]
-                    ),
+                select(versions)
+                .where(versions.c.event_id == key)
+                .order_by(versions.c.version_number.desc())
+                .limit(1)
+            )
+            .mappings()
+            .first()
+        )
+        unchanged = old and (
+            old["normalized_claim"] == claim
+            or (
+                old["normalized_claim"].get("source_status") == "active"
+                and all(old["normalized_claim"].get(k) == v for k, v in claim.items())
+            )
+        )
+        if unchanged:
+            results.append({"event_version_id": old["id"], "status": "duplicate"})
+            continue
+        # An old cached response cannot revert a newer version.
+        if old:
+            previous_capture = conn.scalar(
+                select(documents.c.retrieved_at).where(documents.c.id == old["document_id"])
+            )
+            if capture.retrieved_at <= utc(previous_capture):
+                raise ValueError("Stale capture cannot correct a newer notice")
+        ticker = row["ticker"]
+        headline = f"{ticker}: hồ sơ {row['form']} nộp SEC ngày {row['filing_date']}"
+        if claim.get("source_status") == "missing_unconfirmed":
+            headline = "Không còn thấy trong phạm vi nguồn · " + headline
+        # Only a date is known; stored midnight is explicitly date precision, never knowledge time.
+        published = datetime.fromisoformat(row["filing_date"]).replace(tzinfo=UTC)
+        docid = str(uuid4())
+        conn.execute(
+            documents.insert().values(
+                id=docid,
+                source_id=SOURCE,
+                external_id=row["accession"],
+                primary_entity_id="CO_" + ticker,
+                filing_form=row["form"],
+                source_url=capture.url,
+                title=headline,
+                # This document is a metadata capture receipt, not the raw SEC JSON.
+                # Include capture time so A -> B -> A preserves all three receipts.
+                content_sha256=digest(
+                    [claim, capture.content_sha256, capture.retrieved_at.isoformat()]
+                ),
+                published_at=published,
+                first_seen_at=capture.retrieved_at,
+                available_at=now,
+                retrieved_at=capture.retrieved_at,
+                is_synthetic=False,
+                metadata={
+                    "mode": KIND,
+                    "published_precision": "date",
+                    "capture_sha256": capture.content_sha256,
+                    "content_hash_basis": "notice_and_capture_receipt_v1",
+                    "filing_url": row["url"],
+                },
+            )
+        )
+        if not old:
+            conn.execute(
+                events.insert().values(
+                    id=key,
+                    canonical_event_key=key,
+                    issuer_entity_id="CO_" + ticker,
+                    event_type=KIND,
                     published_at=published,
                     first_seen_at=capture.retrieved_at,
                     available_at=now,
-                    retrieved_at=capture.retrieved_at,
                     is_synthetic=False,
-                    metadata={
-                        "mode": KIND,
-                        "published_precision": "date",
-                        "capture_sha256": capture.content_sha256,
-                        "content_hash_basis": "notice_and_capture_receipt_v1",
-                        "filing_url": row["url"],
-                    },
+                    created_at=now,
                 )
             )
-            if not old:
-                conn.execute(
-                    events.insert().values(
-                        id=key,
-                        canonical_event_key=key,
-                        issuer_entity_id="CO_" + ticker,
-                        event_type=KIND,
-                        published_at=published,
-                        first_seen_at=capture.retrieved_at,
-                        available_at=now,
-                        is_synthetic=False,
-                        created_at=now,
-                    )
-                )
-            vid = str(uuid4())
-            conn.execute(
-                versions.insert().values(
-                    id=vid,
-                    event_id=key,
-                    version_number=old["version_number"] + 1 if old else 1,
-                    factual_headline=headline,
-                    normalized_claim=claim,
-                    document_id=docid,
-                    extraction_model="sec-submissions-metadata-v1",
-                    available_at=now,
-                    is_correction=bool(old),
-                    supersedes_version_id=old["id"] if old else None,
-                )
+        vid = str(uuid4())
+        conn.execute(
+            versions.insert().values(
+                id=vid,
+                event_id=key,
+                version_number=old["version_number"] + 1 if old else 1,
+                factual_headline=headline,
+                normalized_claim=claim,
+                document_id=docid,
+                extraction_model="sec-submissions-metadata-v1",
+                available_at=now,
+                is_correction=bool(old),
+                supersedes_version_id=old["id"] if old else None,
             )
-            results.append({"event_version_id": vid, "status": "corrected" if old else "created"})
+        )
+        results.append({"event_version_id": vid, "status": "corrected" if old else "created"})
     return results
 
 
@@ -202,21 +221,35 @@ def project(engine, user_id=None):
                 .mappings()
                 .all()
             )
-            notices = (
-                conn.execute(
-                    select(versions, events.c.issuer_entity_id)
-                    .join(events)
-                    .where(events.c.event_type == KIND, versions.c.available_at <= now)
-                    .order_by(versions.c.available_at, versions.c.version_number)
-                )
-                .mappings()
-                .all()
-            )
             for sub in subscriptions:
                 entity = sub["stock_entity_id"] or conn.scalar(
                     select(narratives.c.ticker_entity_id).where(
                         narratives.c.id == sub["narrative_id"]
                     )
+                )
+                projected = (
+                    select(links.c.card_id)
+                    .select_from(links.join(cards, links.c.card_id == cards.c.id))
+                    .where(
+                        links.c.thread_id == sub["id"], cards.c.event_version_id == versions.c.id
+                    )
+                    .exists()
+                )
+                notices = (
+                    conn.execute(
+                        select(versions, events.c.issuer_entity_id)
+                        .select_from(versions.join(events, versions.c.event_id == events.c.id))
+                        .where(
+                            events.c.event_type == KIND,
+                            events.c.issuer_entity_id == entity,
+                            versions.c.available_at <= now,
+                            ~projected,
+                        )
+                        .order_by(versions.c.available_at, versions.c.version_number, versions.c.id)
+                        .limit(500)
+                    )
+                    .mappings()
+                    .all()
                 )
                 for notice in notices:
                     if notice["issuer_entity_id"] != entity:
@@ -258,6 +291,8 @@ def project(engine, user_id=None):
                         "source_rights": "pending",
                         "graph": "not_evaluated",
                         "materiality": "UNKNOWN",
+                        "source_status": claim.get("source_status", "active"),
+                        "lifecycle_evidence": claim.get("lifecycle_evidence"),
                         "score": None,
                         "delivery": "disabled",
                         "bypassed_gates": ["source_rights", "verified_graph", "materiality"],
@@ -268,12 +303,12 @@ def project(engine, user_id=None):
                         "is_synthetic": False,
                         "primary_ticker": claim["ticker"],
                         "headline": notice["factual_headline"],
+                        "source_status": claim.get("source_status", "active"),
                         "what_changed": notice["factual_headline"],
                         "why_connected": "Cùng công ty đang theo dõi; chưa đánh giá quan hệ nhân quả.",
                         "narrative_stance": "INSUFFICIENT_EVIDENCE",
                         "what_to_watch": "Mở hồ sơ gốc và kiểm duyệt nội dung trước khi đánh giá tác động.",
                         "what_is_uncertain": [
-                            "Quyền nguồn chưa duyệt",
                             "Graph chưa xác minh",
                             "Materiality chưa đánh giá",
                             "Chỉ có metadata hồ sơ",
@@ -315,9 +350,10 @@ def main():
         )
         for ticker, identity in registry.items():
             try:
-                capture = SECSourceAdapter(client).submissions(identity["cik"])
-                result["companies"][ticker] = ingest_submissions(
-                    engine, ticker, identity["cik"], capture, per_company=args.per_company
+                from engine.ingestion.incremental import collect_company
+
+                result["companies"][ticker] = collect_company(
+                    engine, client, ticker, identity["cik"], initial_limit=args.per_company
                 )
             except (ValueError, RuntimeError) as exc:
                 result["errors"][ticker] = str(exc)

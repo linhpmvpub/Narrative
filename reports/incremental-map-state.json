@@ -1,0 +1,15 @@
+{
+  "manifest_files_verified": 15,
+  "tracked_blob_integrity": true,
+  "repeat_collection_new_versions": 0,
+  "counts": {
+    "rie_events": 51,
+    "rie_event_versions": 51,
+    "rie_user_cards": 31,
+    "rie_card_threads": 41,
+    "rie_source_cursors": 5,
+    "rie_collection_runs": 10,
+    "rie_alerts": 0
+  },
+  "confirmed_real_withdrawals": 0
+}

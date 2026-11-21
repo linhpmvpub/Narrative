@@ -1536,6 +1536,262 @@
           }
         }
       }
+    },
+    "/api/v0/admin/development/versions/{version_id}/lifecycle": {
+      "post": {
+        "tags": [
+          "Development source lifecycle"
+        ],
+        "summary": "Lifecycle",
+        "operationId": "lifecycle_api_v0_admin_development_versions__version_id__lifecycle_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Version Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LifecycleBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/impact-map/demo": {
+      "get": {
+        "tags": [
+          "Relationship and impact diagnostics"
+        ],
+        "summary": "Demo Snapshot",
+        "operationId": "demo_snapshot_api_v0_impact_map_demo_get",
+        "parameters": [
+          {
+            "name": "as_of",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/impact-map/demo-scenario": {
+      "post": {
+        "tags": [
+          "Relationship and impact diagnostics"
+        ],
+        "summary": "Demo Scenario",
+        "operationId": "demo_scenario_api_v0_impact_map_demo_scenario_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScenarioBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/impact-map": {
+      "get": {
+        "tags": [
+          "Relationship and impact diagnostics"
+        ],
+        "summary": "Live Map",
+        "operationId": "live_map_api_v0_impact_map_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "as_of",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/impact-map/scenario": {
+      "post": {
+        "tags": [
+          "Relationship and impact diagnostics"
+        ],
+        "summary": "Live Scenario",
+        "operationId": "live_scenario_api_v0_impact_map_scenario_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScenarioBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -1856,6 +2112,45 @@
           "as_of"
         ],
         "title": "IngestBody"
+      },
+      "LifecycleBody": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "withdrawn",
+              "restored"
+            ],
+            "title": "Action"
+          },
+          "evidence_url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Evidence Url"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 20,
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "action",
+          "evidence_url",
+          "reason"
+        ],
+        "title": "LifecycleBody"
       },
       "MeasurementBasis": {
         "properties": {
@@ -2344,6 +2639,53 @@
           "note"
         ],
         "title": "ReviewBody"
+      },
+      "ScenarioBody": {
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "enum": [
+              "MU",
+              "NVDA",
+              "AMD",
+              "DELL",
+              "SNDK"
+            ],
+            "title": "Ticker",
+            "default": "DELL"
+          },
+          "start": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Start",
+            "default": "NAND_ASP"
+          },
+          "direction": {
+            "type": "integer",
+            "enum": [
+              -1,
+              1
+            ],
+            "title": "Direction",
+            "default": 1
+          },
+          "as_of": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "As Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ScenarioBody"
       },
       "SharingBody": {
         "properties": {
