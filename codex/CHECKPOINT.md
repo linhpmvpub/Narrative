@@ -1,4 +1,20 @@
-# Checkpoint tiếp tục phiên sau — 2026-11-20
+# Checkpoint tiếp tục phiên sau — cập nhật 2026-11-21
+
+## Cập nhật mới nhất — ưu tiên phần này khi tiếp tục
+
+- Đã hoàn thành màn hình kiểm duyệt SEC: `engine/sec_review.py`, `engine/api/sec_review.py`, `engine/web/review.*`; migration `0005` / schema_v5. Chi tiết và giới hạn: `docs/sec-review.md`, bằng chứng: `reports/sec-review-checkpoint.md`.
+- Database thật riêng `rie-sec-review.db`: nhập 50 capture, import retry không thêm bản trùng; 0 bản nháp thật, 0 review thật, 0 canonical event/feed card. Không sửa database demo cũ. Mode production chỉ có nghĩa nguồn không-synthetic, không phải go-live.
+- Preview kiểm duyệt được để chạy ở `http://127.0.0.1:8886/review`; token operator trong `secrets/sec-review-access-token.txt` (Git ignore). Không in token, không đưa vào URL. Chưa tạo người duyệt thứ hai cho hồ sơ thật. Tài khoản thứ hai trong browser test chỉ tồn tại trong database test riêng dùng văn bản giả.
+- Khi khởi động lại phải migrate head 0005 trước. Preview cũ cổng 8876 có thể vẫn chạy mã phiên trước; nếu khởi động lại thì dùng hướng dẫn đã cập nhật trong `docs/standalone-product.md`. Không chiếm cổng 8765.
+- SQLite full suite: 206 passed, 161.24s; sau đó SEC-focused suite 19 passed, 35.62s, gồm 2 test bổ sung. PostgreSQL full suite mới: 208 passed, 217.60s. Tất cả chỉ có cảnh báo deprecation Starlette/httpx đã biết. Ruff/mypy 45 file/JS syntax đạt. Chrome workflow và desktop/mobile đạt.
+- Đã sửa UTC serialization trên SQLite và race khi nhập form trong lúc đổi hồ sơ; workspace bị khóa tương tác trong lúc request, logout xóa form cũ. Giữ các regression này.
+- Import chỉ staging. Review yêu cầu operator khác tác giả, quyền/citation/định danh/basis được xác nhận; approval lưu receipt bất biến nhưng `feed_eligible=false`. Không dùng receipt để tự vượt quyền nguồn, graph hoặc materiality.
+- Form UI hiện sửa claim định tính; bản định lượng chỉ xem/duyệt. Một chuỗi draft/claim mỗi hồ sơ. Citation offset theo Unicode trong normalized text; bảng số phải đối chiếu nguồn gốc.
+- GitHub repository tools vẫn không expose trong phiên này; không push/CI từ xa. Docker Scout đã chạy thành công sau quyền egress đã cấp; đăng nhập không còn là blocker. Đã vá zlib và bỏ pip runtime; scan còn 56 findings/13 packages (5 HIGH, 15 MEDIUM, 36 LOW), chưa có fixed version theo báo cáo. Xem reports/image-audit-status.json; production NO_GO. Giữ toàn bộ chỉ đạo và email đã có ở phần dưới.
+- Công việc tiếp theo: **adapter đưa extraction đã duyệt vào canonical ingestion**, kiểm tra receipt/version còn hiệu lực, quyền nguồn/định danh thực sự được duyệt và as-of. Dùng test data giả để phát triển; không tự trích xuất/phê duyệt 50 hồ sơ thật thay người duyệt. Sau đó mới nối private feed và chuẩn bị benchmark với nhãn độc lập.
+- Lệnh nhắc: **“Đọc codex/CHECKPOINT.md, tiếp tục adapter ingestion cho nguồn đã kiểm duyệt; giữ thông báo thật tắt.”**
+
+Phần bên dưới là checkpoint nền của phiên 2026-11-20. Các mục “xây màn hình kiểm duyệt” và số lượng test cũ đã được thay thế bằng cập nhật ở trên.
 
 ## Đọc trước khi làm việc
 

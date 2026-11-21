@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "test_data": "fabricated local filing",
+  "checks": [
+    "draft saved",
+    "independent reviewer approval",
+    "logout clears source text",
+    "no browser credential persistence",
+    "50 real captures read-only",
+    "desktop/mobile layout"
+  ],
+  "real_filings_approved": 0,
+  "javascript_errors": [],
+  "delivery": "disabled"
+}

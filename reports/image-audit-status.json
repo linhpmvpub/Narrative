@@ -1,8 +1,29 @@
 {
   "tool": "Docker Scout",
-  "status": "blocked_docker_login_required",
-  "reason": "User authorized image-data transfer. Docker Scout was invoked but requires Docker account login before scanning.",
+  "status": "completed_with_unresolved_vulnerabilities",
+  "scan_date": "2026-11-21",
   "image_data_transfer_authorized": true,
-  "private_image_uploaded": false,
-  "python_dependency_audits": "completed separately"
+  "login_blocker_resolved": true,
+  "before": {
+    "vulnerable_packages": 15,
+    "findings": 62
+  },
+  "after": {
+    "vulnerable_packages": 13,
+    "findings": 56,
+    "severity": {
+      "LOW": 36,
+      "MEDIUM": 15,
+      "HIGH": 5
+    },
+    "fixed_version_available": []
+  },
+  "remediation": [
+    "zlib1g pinned to 1:1.3.dfsg+really1.3.1-1+deb13u1",
+    "pip and its vendored components removed from runtime after build"
+  ],
+  "python_dependency_audit": "No known vulnerabilities found for final installed distribution inventory",
+  "production_release": "NO_GO",
+  "sarif": "reports/application-image-audit.sarif.json",
+  "image_manifest_digest": "sha256:fc5b72f438afb8298e50843299580350f00af4fb22199ce6b9f63aed0c838302"
 }

@@ -1,4 +1,10 @@
-# Release v0 — standalone product update
+# Release v0 — SEC review workspace update (2026-11-21)
+
+Current milestone: operator SEC review workspace is implemented with migration 0005 and separate real-source staging. 50 captures imported; 0 real drafts/reviews/events/feed cards. Complete PostgreSQL suite: **208 passed**. SQLite full suite: **206 passed**, followed by **19 focused tests passed** including two new cases (208 distinct tests covered). Chrome workflow and responsive checks passed; Ruff/mypy (45 files)/JavaScript syntax passed. See `reports/sec-review-checkpoint.md` and `docs/sec-review.md` for current evidence and operation.
+
+Docker Scout now completed: patched zlib and removed runtime pip, reducing findings from 62 to 56 (5 HIGH). The remaining entries have no fixed version listed by Scout. Production remains NO_GO; login is no longer blocked. See `reports/image-audit-status.json`.
+
+The table below retains the previous standalone milestone evidence; its older counts are historical. Review approval remains staging-only. The next implementation is a gated reviewed-source ingestion adapter, not construction of the now-completed review screen.
 
 **NO_GO for production; validated for isolated synthetic/private development.** The user removed the Threadnote dependency. Narrative now has its own Vietnamese interface. Live notifications and LLM execution remain disabled.
 

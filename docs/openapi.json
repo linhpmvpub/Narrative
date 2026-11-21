@@ -979,6 +979,286 @@
           }
         }
       }
+    },
+    "/api/v0/admin/sec/filings": {
+      "get": {
+        "tags": [
+          "SEC review"
+        ],
+        "summary": "List Filings",
+        "operationId": "list_filings_api_v0_admin_sec_filings_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "as_of",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/admin/sec/filings/{filing_id}": {
+      "get": {
+        "tags": [
+          "SEC review"
+        ],
+        "summary": "Get Filing",
+        "operationId": "get_filing_api_v0_admin_sec_filings__filing_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "filing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Filing Id"
+            }
+          },
+          {
+            "name": "as_of",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/admin/sec/filings/{filing_id}/drafts": {
+      "post": {
+        "tags": [
+          "SEC review"
+        ],
+        "summary": "Create Draft",
+        "operationId": "create_draft_api_v0_admin_sec_filings__filing_id__drafts_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "filing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Filing Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/admin/sec/drafts/{draft_id}/reviews": {
+      "post": {
+        "tags": [
+          "SEC review"
+        ],
+        "summary": "Review Draft",
+        "operationId": "review_draft_api_v0_admin_sec_drafts__draft_id__reviews_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "draft_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Draft Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1003,6 +1283,56 @@
           "expected_version"
         ],
         "title": "ApprovalBody"
+      },
+      "DraftBody": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Version"
+          },
+          "event": {
+            "$ref": "#/components/schemas/EventExtraction"
+          },
+          "occurrence_window": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Occurrence Window"
+          },
+          "correction_of": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Correction Of"
+          },
+          "duplicate_of": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duplicate Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "event",
+          "occurrence_window"
+        ],
+        "title": "DraftBody"
       },
       "EditBody": {
         "properties": {
@@ -1116,6 +1446,73 @@
         ],
         "title": "EditBody"
       },
+      "EventExtraction": {
+        "properties": {
+          "source_document_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Source Document Id"
+          },
+          "entity_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Entity Ids"
+          },
+          "event_type": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Event Type"
+          },
+          "factual_headline": {
+            "type": "string",
+            "maxLength": 280,
+            "minLength": 1,
+            "title": "Factual Headline"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Published At"
+          },
+          "available_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Available At"
+          },
+          "claims": {
+            "items": {
+              "$ref": "#/components/schemas/NumericOrQualitativeClaim"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Claims"
+          },
+          "uncertainties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Uncertainties"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source_document_id",
+          "entity_ids",
+          "event_type",
+          "factual_headline",
+          "published_at",
+          "available_at",
+          "claims",
+          "uncertainties"
+        ],
+        "title": "EventExtraction"
+      },
       "FeedbackBody": {
         "properties": {
           "label": {
@@ -1155,6 +1552,60 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "MeasurementBasis": {
+        "properties": {
+          "concept": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Concept"
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Unit"
+          },
+          "duration": {
+            "type": "string",
+            "enum": [
+              "quarter",
+              "year",
+              "instant",
+              "other"
+            ],
+            "title": "Duration"
+          },
+          "fiscal_calendar": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Fiscal Calendar"
+          },
+          "accounting_basis": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Accounting Basis"
+          },
+          "observation_kind": {
+            "type": "string",
+            "enum": [
+              "actual",
+              "guidance",
+              "price"
+            ],
+            "title": "Observation Kind"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "concept",
+          "unit",
+          "duration",
+          "fiscal_calendar",
+          "accounting_basis",
+          "observation_kind"
+        ],
+        "title": "MeasurementBasis"
       },
       "NarrativeBody": {
         "properties": {
@@ -1262,6 +1713,124 @@
         ],
         "title": "NarrativeBody"
       },
+      "NumericOrQualitativeClaim": {
+        "properties": {
+          "claim_text": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Claim Text"
+          },
+          "metric_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metric Id"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit"
+          },
+          "period": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period"
+          },
+          "comparison_basis": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Comparison Basis"
+          },
+          "old_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Old Value"
+          },
+          "new_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "New Value"
+          },
+          "source_span": {
+            "$ref": "#/components/schemas/SourceSpan"
+          },
+          "source_url": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Source Url"
+          },
+          "old_basis": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementBasis"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "new_basis": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementBasis"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "claim_text",
+          "metric_id",
+          "unit",
+          "period",
+          "comparison_basis",
+          "old_value",
+          "new_value",
+          "source_span",
+          "source_url"
+        ],
+        "title": "NumericOrQualitativeClaim"
+      },
       "RelationReview": {
         "properties": {
           "action": {
@@ -1357,6 +1926,58 @@
         ],
         "title": "ReplayBody"
       },
+      "ReviewBody": {
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "approved",
+              "rejected"
+            ],
+            "title": "Decision"
+          },
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Note"
+          },
+          "rights_basis": {
+            "type": "string",
+            "maxLength": 2000,
+            "title": "Rights Basis",
+            "default": ""
+          },
+          "identity_confirmed": {
+            "type": "boolean",
+            "title": "Identity Confirmed",
+            "default": false
+          },
+          "citation_confirmed": {
+            "type": "boolean",
+            "title": "Citation Confirmed",
+            "default": false
+          },
+          "comparison_confirmed": {
+            "type": "boolean",
+            "title": "Comparison Confirmed",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "decision",
+          "expected_version",
+          "note"
+        ],
+        "title": "ReviewBody"
+      },
       "SharingBody": {
         "properties": {
           "is_public": {
@@ -1370,6 +1991,27 @@
           "is_public"
         ],
         "title": "SharingBody"
+      },
+      "SourceSpan": {
+        "properties": {
+          "start": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Start"
+          },
+          "end": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "End"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "start",
+          "end"
+        ],
+        "title": "SourceSpan"
       },
       "SubscriptionBody": {
         "properties": {

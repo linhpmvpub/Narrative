@@ -14,6 +14,8 @@ Proxy access logs contain only source IP, method, status and duration. They excl
 
 ## Local secrets and database connectivity
 
+Update 2026-11-21: the image now pins patched `zlib1g=1:1.3.dfsg+really1.3.1-1+deb13u1` and uninstalls pip after installation. Rebuild to change runtime dependencies; pip is deliberately unavailable inside the final image. Refreshed `requirements-container.txt` records installed runtime distributions. Docker Scout now ran successfully: findings reduced from 62 to 56 after remediation, including 5 HIGH remaining with no fixed version listed. This is a production blocker; see `reports/image-audit-status.json` and the before/after SARIF reports. An empty pip-audit result does not cover OS or vendored component findings.
+
 Compose reads these ignored files: `secrets/database_url`, `secrets/tls.crt`, `secrets/tls.key`. The application accepts `DATABASE_URL_FILE`, rejects conflicting DATABASE_URL configuration, and requires a PostgreSQL URL in the secret file. Never commit these files. The test certificate is self-signed for localhost and expires after one day; it was verified explicitly by the test client, not installed as a system trust root. It is not a production certificate.
 
 For the smoke test, the disposable `rie-release-validation` PostgreSQL container was attached to `rie-staging-validation_private`. The API secret referenced that container's synthetic `rie_demo` database. In a real deployment, attach a separately provisioned PostgreSQL service to the private network and use a least-privilege application role; the disposable test superuser credentials are not a production configuration.

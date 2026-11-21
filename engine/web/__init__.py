@@ -11,8 +11,15 @@ ROOT = Path(__file__).parent
 def install(app):
     @app.get("/", include_in_schema=False)
     def home():
+        return shell("index.html")
+
+    @app.get("/review", include_in_schema=False)
+    def review():
+        return shell("review.html")
+
+    def shell(name):
         return FileResponse(
-            ROOT / "index.html",
+            ROOT / name,
             headers={
                 "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; "
                 "connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; "
@@ -22,6 +29,6 @@ def install(app):
 
     @app.get("/assets/{name}", include_in_schema=False)
     def asset(name: str):
-        if name not in {"app.js", "style.css", "demo.json"}:
+        if name not in {"app.js", "style.css", "demo.json", "review.js", "review.css"}:
             raise HTTPException(404, "Asset not found")
         return FileResponse(ROOT / name)
