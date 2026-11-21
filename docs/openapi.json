@@ -753,6 +753,28 @@
         ]
       }
     },
+    "/api/v0/development-feed/refresh": {
+      "post": {
+        "summary": "Refresh Development Feed",
+        "description": "Owner-scoped, idempotent local projection. Never initiates network collection.",
+        "operationId": "refresh_development_feed_api_v0_development_feed_refresh_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v0/threads/{thread_id}/story": {
       "get": {
         "summary": "Story",

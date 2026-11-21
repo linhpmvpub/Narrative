@@ -1,5 +1,20 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-21
 
+## Feed phát triển riêng tư — ưu tiên chỉ đạo mới 2026-11-21
+
+- Người dùng đã yêu cầu tạm bỏ gate quyền nguồn, graph đã xác minh và materiality để xây hệ thống. Đã thực hiện bằng luồng **development informational feed** riêng, mặc định tắt; chỉ đạo này thay thế yêu cầu gate feed ở checkpoint cũ trong phạm vi phát triển riêng tư. Không cấp quyền/approval giả và không bật thông báo.
+- `engine/development_feed.py`: lấy metadata từ SEC submissions API miễn phí, kiểm tra CIK/ticker/capture hash/time, lưu canonical notice theo issuer/accession; retry không trùng, sửa metadata tạo version/correction, chặn capture cũ ghi đè. Không trích xuất sự kiện kinh tế từ toàn văn. Nguồn vẫn pending, graph không được nâng thành verified, materiality UNKNOWN, stance INSUFFICIENT_EVIDENCE, score/path trống.
+- Opt-in `DEV_INFORMATIONAL_FEED=true`; các cờ `SEND_NOTIFICATIONS=false`, `ALLOW_SYNTHETIC_LIVE=false`, `LLM_MODE=none` giữ nguyên. Không đổi migration: schema head vẫn 0006. Không gọi dispatcher, không có alerts.
+- Projection theo đúng issuer vào stock/narrative của chủ tài khoản; card/version/correction riêng tư và as-of theo lúc hệ thống thực sự xử lý. Public stories lọc loại event phát triển trước pagination, kể cả link chia sẻ có sẵn. Tắt cờ thì private feed cũng ẩn các card này. UI có nhãn chưa kiểm duyệt và link nguồn.
+- API mới `POST /api/v0/development-feed/refresh`: token thành viên, chỉ project cho chính chủ, retry idempotent, không gọi internet. UI gọi khi tải/làm mới feed để nhận cả các mục vừa subscribe. Thu thập internet là CLI chủ động, chưa có lịch tự chạy.
+- Đã thu thập thật 50 canonical filing notices (10 mỗi MU/NVDA/AMD/DELL/SNDK), 50 versions, 30 cards riêng tư và 40 thread links; 0 alerts/reviews/permissions. Chạy lại collector toàn bộ duplicate và 0 link mới. Đây là metadata hồ sơ, không phải 50 economic claims đã xác minh. Báo cáo `reports/development-feed-{collection,retry,state,preview}.json`.
+- DB mới ignored `rie-dev-feed.db`; cache ignored `source-cache/development-feed/`; preview loopback **http://127.0.0.1:8888** (đã restart code cuối; kiểm tra PID và command line trước khi dừng). Token 30 ngày ở ignored `secrets/development-feed-access-token.txt`, không in token/log/URL. Tài khoản preview theo dõi DELL, NVDA, MU, N08. Không chiếm cổng8765. SEC review DB vẫn 50 captures và 0 canonical/review/permission; synthetic DB không đổi.
+- Chrome desktop/mobile: đăng nhập, 4 feeds mỗi feed10 notices, nhãn chưa kiểm duyệt, không tràn ngang/mobile, 0 JS errors; ảnh `reports/development-feed-{desktop,mobile}.png`. Ruff/mypy49 files/node syntax đạt; 15 file manifest gốc không đổi.
+- Test cuối trên code đã sửa A → B → A: **237 passed SQLite (239.74s), 237 passed PostgreSQL (290.99s)**; mỗi suite 1 warning deprecation Starlette/httpx đã biết, 0 failures. Có 9 test mới. Báo cáo XML trong reports/development-feed-{sqlite,postgresql}-tests.xml. PostgreSQL disposable rie-release-validation được stop sau kiểm tra; preview8888 để chạy.
+- Hướng dẫn chạy, API, nguồn SEC và giới hạn: `docs/development-feed.md`; OpenAPI và `.env.example` cập nhật. Container image chưa rebuild/Scout lại trong bước này; findings scan trước và production NO_GO vẫn còn. Không có remote/push/CI từ xa.
+- Bước tiếp theo đề xuất: **thu thập tăng dần và xử lý hồ sơ bị sửa/rút**, thêm bộ lọc nguồn/thời gian; sau đó mở rộng tin IR chính thức. Chưa làm withdrawal detection/cross-accession grouping; projection hiện phù hợp pilot nhỏ. Luồng impact-feed đã kiểm duyệt thật và benchmark có nhãn độc lập vẫn là công việc riêng chưa hoàn thành.
+- Lệnh tiếp tục: **“Đọc codex/CHECKPOINT.md, tiếp tục thu thập tăng dần và xử lý sửa/rút hồ sơ cho private development feed; giữ thông báo thật tắt.”**
+
 ## Ingestion đã triển khai — cập nhật sau workspace SEC, 2026-11-21
 
 - Yêu cầu mới đã thực hiện: nối extraction đã được kiểm duyệt vào canonical ingestion, giữ thông báo thật tắt. Module `engine/ingestion/reviewed.py`, API `engine/api/sec_ingestion.py`, schema/migration `0006`. Hướng dẫn: `docs/reviewed-ingestion.md`; báo cáo: `reports/reviewed-ingestion-checkpoint.md`.

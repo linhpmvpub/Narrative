@@ -1,5 +1,11 @@
 # Current project status — standalone continuation
 
+Latest 2026-11-21: opt-in private development feed implemented under the user's explicit
+source-rights/verified-graph/materiality bypass for development. 50 real SEC metadata notices,
+30 owner cards / 40 thread links in separate rie-dev-feed.db; no alerts, no approvals. Public
+sharing excludes development events. Preview port8888; docs/development-feed.md and CHECKPOINT
+contain current commands. Final SQLite and PostgreSQL suites each pass237 tests; lint/types/JS/browser checks pass. The strict reviewed impact-feed path remains future work.
+
 Session handoff and exact resume instructions: **`codex/CHECKPOINT.md`** (updated 2026-11-21).
 
 The user's latest instruction supersedes the original Threadnote integration requirement: develop Narrative independently. Preserve the original manifest-protected specifications and fixture seeds. `TASKS.md` is the original checklist, not the current completion ledger.
@@ -18,4 +24,4 @@ SEC review workspace implemented on 2026-11-21: migration 0005, bounded offline 
 
 Reviewed-source ingestion adapter implemented in schema 0006: explicit versioned capture permissions, independent review and fresh rights/version/as-of checks, atomic canonical event/evidence creation, retry/dedup, cross-capture corrections and historical operator snapshots. Permissions/ingestion are API-only in this milestone. Review DB backed up and migrated; all 50 real captures remain unapproved with zero canonical events. See `docs/reviewed-ingestion.md` and `reports/reviewed-ingestion-checkpoint.md`.
 
-Next recommended implementation: gated private-feed projection from reviewed canonical records, with current rights/review checks, verified graph and calibrated materiality. Independent reviews and gold labels must not be invented. Keep notifications disabled; canonical ingestion does not approve graph edges or enable delivery.
+Deferred verified-impact work: gated private-feed projection from reviewed canonical records, with current rights/review checks, verified graph and calibrated materiality. The current next development task is incremental collection and correction/withdrawal handling for the private informational feed. Independent reviews and gold labels must not be invented. Keep notifications disabled; canonical ingestion does not approve graph edges or enable delivery.

@@ -1,0 +1,13 @@
+{
+  "base_url": "http://127.0.0.1:8888",
+  "delivery": "disabled",
+  "schema": "0006",
+  "private_threads": 4,
+  "feed_counts": {
+    "CO_DELL": 10,
+    "CO_NVDA": 10,
+    "CO_MU": 10,
+    "N08": 10
+  },
+  "browser_errors": []
+}

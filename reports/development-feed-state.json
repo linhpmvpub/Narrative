@@ -1,0 +1,24 @@
+{
+  "original_files_verified": 15,
+  "stores": {
+    "rie-dev-feed.db": {
+      "rie_events": 50,
+      "rie_event_versions": 50,
+      "rie_user_cards": 30,
+      "rie_card_threads": 40,
+      "rie_alerts": 0,
+      "rie_sec_reviews": 0,
+      "rie_sec_permissions": 0
+    },
+    "rie-sec-review.db": {
+      "rie_events": 0,
+      "rie_event_versions": 0,
+      "rie_user_cards": 0,
+      "rie_card_threads": 0,
+      "rie_alerts": 0,
+      "rie_sec_reviews": 0,
+      "rie_sec_permissions": 0
+    }
+  },
+  "retry_all_duplicates": true
+}

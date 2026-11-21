@@ -20,6 +20,7 @@ from engine.models.contracts import utc
 from engine.models.schema_v4 import card_threads, cards, feedback, metadata, shares, users
 from engine.replay import event_input
 from engine.scoring.policy import NarrativeInput, evaluate, render_card
+from engine.settings import Settings
 
 
 def custom_outputs(conn, records, context, as_of, subscription):
@@ -177,7 +178,7 @@ def project(engine, records, replay_result):
     return count
 
 
-def timeline(conn, sid, as_of, limit, cursor=None):
+def timeline(conn, sid, as_of, limit, cursor=None, *, public=False):
     recorded = datetime.now(UTC)
     last = None
     if cursor:
@@ -200,6 +201,14 @@ def timeline(conn, sid, as_of, limit, cursor=None):
             card_threads.c.recorded_at <= recorded,
         )
     )
+    # Exclude development notices before pagination, including pre-existing public shares.
+    if public or not Settings.from_env().dev_informational_feed:
+        ev = metadata.tables["rie_event_versions"]
+        event = metadata.tables["rie_events"]
+        dev_versions = (
+            select(ev.c.id).join(event).where(event.c.event_type == "development_sec_notice")
+        )
+        query = query.where(cards.c.event_version_id.not_in(dev_versions))
     if last:
         query = query.where(
             or_(
@@ -308,6 +317,24 @@ def observations(conn, subscription, as_of):
     return observations
 
 
+@router.post("/development-feed/refresh")
+def refresh_development_feed(user: User):
+    """Owner-scoped, idempotent local projection. Never initiates network collection."""
+    if not Settings.from_env().dev_informational_feed:
+        return {"enabled": False, "new_private_links": 0, "delivery": "disabled"}
+    from engine.development_feed import project as project_development
+
+    engine = database()
+    try:
+        return {
+            "enabled": True,
+            "new_private_links": project_development(engine, user.id),
+            "delivery": "disabled",
+        }
+    finally:
+        engine.dispose()
+
+
 @router.get("/threads/{thread_id}/feed")
 @router.get("/threads/{thread_id}/story")
 def story(
@@ -349,7 +376,7 @@ def public_story(token: str, limit: int = Query(default=50, ge=1, le=100)):
             )
             if not share:
                 raise HTTPException(404, "Story not found")
-            private = timeline(conn, share["thread_id"], datetime.now(UTC), limit)
+            private = timeline(conn, share["thread_id"], datetime.now(UTC), limit, public=True)
             # Allowlist excludes user-authored hypotheses, monitoring conditions and feedback.
             allowed = (
                 "is_synthetic",

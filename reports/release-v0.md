@@ -1,3 +1,20 @@
+# Release v0 — private development feed (2026-11-21)
+
+Final full suites: **237 passed SQLite (239.74s), 237 passed PostgreSQL (290.99s)**. Each has one existing upstream Starlette/httpx deprecation warning; zero failures. Nine new development-feed cases include concurrent ingestion/projection, identity/hash/time rejection, private ownership, sharing exclusion, temporal pagination, opt-in isolation and A → B → A correction history.
+
+User-authorized development bypass implemented as an explicit opt-in private informational feed.
+50 real SEC metadata canonical notices; 30 owner cards / 40 thread links; 0 alerts, 0 approvals.
+Public shares exclude all development notices. Live delivery stays disabled. Ruff/mypy49 files,
+JS syntax, Chrome desktop/mobile and original manifest integrity pass. No new migration (0006).
+See `reports/development-feed-checkpoint.md` and `docs/development-feed.md`.
+
+No blocker remains for this development milestone. Production remains NO_GO: independent
+source/impact evaluation, benchmark labels, account/operational readiness and prior image
+security findings remain open. No image rebuild/new Scout scan or remote push/CI in this task.
+Next: incremental collection and correction/withdrawal handling for the private feed.
+
+The sections below are historical milestones; their earlier test counts and next tasks are superseded.
+
 # Release v0 — reviewed canonical ingestion (2026-11-21)
 
 Latest milestone: schema 0006 connects independently reviewed SEC extractions to canonical events behind explicit versioned rights/identity permissions and current/as-of gates. Final full suites: **228 passed on SQLite and 228 passed on PostgreSQL**, one upstream deprecation warning each. Ruff/mypy (48 files), packaged-container end-to-end ingestion and local read-only readiness checks passed. See `reports/reviewed-ingestion-checkpoint.md` and `docs/reviewed-ingestion.md`.
