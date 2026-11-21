@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "schema": "0006",
+  "source_filings": 50,
+  "canonical_events": 0,
+  "read_only_validation": true,
+  "delivery": "disabled"
+}

@@ -1,4 +1,10 @@
-# Release v0 — SEC review workspace update (2026-11-21)
+# Release v0 — reviewed canonical ingestion (2026-11-21)
+
+Latest milestone: schema 0006 connects independently reviewed SEC extractions to canonical events behind explicit versioned rights/identity permissions and current/as-of gates. Final full suites: **228 passed on SQLite and 228 passed on PostgreSQL**, one upstream deprecation warning each. Ruff/mypy (48 files), packaged-container end-to-end ingestion and local read-only readiness checks passed. See `reports/reviewed-ingestion-checkpoint.md` and `docs/reviewed-ingestion.md`.
+
+50 real captures remain unchanged, with zero real approvals/canonical events. Canonical ingestion does not publish a private feed, approve graph/materiality or send notifications. Production remains NO_GO due to independent review/evaluation/operational gates and prior unresolved image findings. Next implementation: gated private-feed projection. No remote push/CI is claimed.
+
+The remaining sections retain earlier milestone evidence; their older schema/test counts are historical.
 
 Current milestone: operator SEC review workspace is implemented with migration 0005 and separate real-source staging. 50 captures imported; 0 real drafts/reviews/events/feed cards. Complete PostgreSQL suite: **208 passed**. SQLite full suite: **206 passed**, followed by **19 focused tests passed** including two new cases (208 distinct tests covered). Chrome workflow and responsive checks passed; Ruff/mypy (45 files)/JavaScript syntax passed. See `reports/sec-review-checkpoint.md` and `docs/sec-review.md` for current evidence and operation.
 

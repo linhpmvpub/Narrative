@@ -1,5 +1,20 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-21
 
+## Ingestion đã triển khai — cập nhật sau workspace SEC, 2026-11-21
+
+- Yêu cầu mới đã thực hiện: nối extraction đã được kiểm duyệt vào canonical ingestion, giữ thông báo thật tắt. Module `engine/ingestion/reviewed.py`, API `engine/api/sec_ingestion.py`, schema/migration `0006`. Hướng dẫn: `docs/reviewed-ingestion.md`; báo cáo: `reports/reviewed-ingestion-checkpoint.md`.
+- Quyền nguồn/định danh là attestation riêng, có version, capture hash, CIK, bằng chứng, thời điểm server ghi và hạn sử dụng. Review nội dung không tự cấp quyền. Có API thu hồi và đọc lịch sử quyền.
+- Ingestion kiểm tra lại source/review/version/quyền/as-of, commit nguyên tử event/document/evidence/receipt, xử lý retry/dedup/correction. Canonical available_at là lúc xử lý thật; không backdate về filing date. Snapshot operator theo as-of không dùng để tự động xuất bản feed.
+- Endpoints mới: POST `/api/v0/admin/sec/filings/{id}/permissions`; GET cùng đường dẫn; POST `/api/v0/admin/sec/drafts/{id}/ingest`; GET `/api/v0/admin/sec/events`. Mutations yêu cầu operator token và Idempotency-Key. UI chưa có form cho permission/ingest; dùng OpenAPI/guide.
+- Review store thật được backup trong ignored backups/ và migrate 0006. Preview cổng 8886 đã restart. Vẫn 50 captures, 0 real drafts/reviews/permissions/promotions/events/alerts/cards. Không tự cấp quyền hoặc tạo review cho hồ sơ thật để demo.
+- Test mới: 20 acceptance cases cho permission, stale version, temporal gates, rollback, correction/reprint và concurrent operators. SQLite full rerun trên code sửa cuối: 228 passed. PostgreSQL full rerun: 228 passed (246.97s); SQLite 225.99s; mỗi suite một cảnh báo Starlette/httpx, không lỗi. Ruff/mypy 48 file đạt; full flow trong Docker bằng dữ liệu giả đạt và không có alerts/cards.
+- Đã sửa một variable collision trong nhánh correction được phát hiện bởi full regression, rồi chạy lại tests. Image đã rebuild với bản sửa; Docker smoke import installed wheel từ /tmp, schema 0006.
+- Các giới hạn còn lại: same-capture extraction amendment chưa hỗ trợ (correction hiện cross-capture); nguồn/graph/materiality/gold labels vẫn cần người duyệt thật; image-security findings của phiên trước còn mở; GitHub chưa push. Không tự bật notifications.
+- Bước tiếp theo: **private-feed projection có gate từ canonical records**, kiểm tra current rights/review, verified graph và materiality trước khi đưa vào feed. Giữ decision và delivery tách biệt, delivery disabled.
+- Lệnh nhắc: **“Đọc codex/CHECKPOINT.md và tiếp tục private-feed projection từ canonical events đã kiểm duyệt; giữ thông báo thật tắt.”**
+
+Phần cập nhật workspace SEC dưới đây là mốc trước ingestion; không xây lại adapter đã hoàn thành.
+
 ## Cập nhật mới nhất — ưu tiên phần này khi tiếp tục
 
 - Đã hoàn thành màn hình kiểm duyệt SEC: `engine/sec_review.py`, `engine/api/sec_review.py`, `engine/web/review.*`; migration `0005` / schema_v5. Chi tiết và giới hạn: `docs/sec-review.md`, bằng chứng: `reports/sec-review-checkpoint.md`.

@@ -1259,6 +1259,261 @@
           }
         }
       }
+    },
+    "/api/v0/admin/sec/filings/{filing_id}/permissions": {
+      "post": {
+        "tags": [
+          "Reviewed ingestion"
+        ],
+        "summary": "Set Permission",
+        "operationId": "set_permission_api_v0_admin_sec_filings__filing_id__permissions_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "filing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Filing Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Reviewed ingestion"
+        ],
+        "summary": "Get Permissions",
+        "operationId": "get_permissions_api_v0_admin_sec_filings__filing_id__permissions_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "filing_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Filing Id"
+            }
+          },
+          {
+            "name": "as_of",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/admin/sec/drafts/{draft_id}/ingest": {
+      "post": {
+        "tags": [
+          "Reviewed ingestion"
+        ],
+        "summary": "Ingest",
+        "operationId": "ingest_api_v0_admin_sec_drafts__draft_id__ingest_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "draft_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Draft Id"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IngestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v0/admin/sec/events": {
+      "get": {
+        "tags": [
+          "Reviewed ingestion"
+        ],
+        "summary": "Canonical Events",
+        "operationId": "canonical_events_api_v0_admin_sec_events_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "as_of",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1553,6 +1808,33 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "IngestBody": {
+        "properties": {
+          "expected_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Version"
+          },
+          "expected_permission_version": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Expected Permission Version"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_version",
+          "expected_permission_version",
+          "as_of"
+        ],
+        "title": "IngestBody"
+      },
       "MeasurementBasis": {
         "properties": {
           "concept": {
@@ -1830,6 +2112,69 @@
           "source_url"
         ],
         "title": "NumericOrQualitativeClaim"
+      },
+      "PermissionBody": {
+        "properties": {
+          "expected_permission_version": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Expected Permission Version"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "approved",
+              "revoked"
+            ],
+            "title": "Status"
+          },
+          "cik": {
+            "type": "string",
+            "pattern": "^\\d{10}$",
+            "title": "Cik"
+          },
+          "evidence_url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Evidence Url"
+          },
+          "rights_note": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Rights Note"
+          },
+          "identity_note": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Identity Note"
+          },
+          "identity_confirmed": {
+            "type": "boolean",
+            "title": "Identity Confirmed"
+          },
+          "valid_until": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Valid Until"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "expected_permission_version",
+          "status",
+          "cik",
+          "evidence_url",
+          "rights_note",
+          "identity_note",
+          "identity_confirmed",
+          "valid_until"
+        ],
+        "title": "PermissionBody"
       },
       "RelationReview": {
         "properties": {

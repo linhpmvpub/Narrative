@@ -1,5 +1,7 @@
 # Kiểm duyệt hồ sơ SEC — 2026-11-21
 
+**Bổ sung schema 0006:** đã có API riêng để xác nhận/thu hồi quyền nguồn và đưa bản trích xuất đã duyệt vào canonical ingestion. Duyệt nội dung vẫn không tự xuất bản. Xem `docs/reviewed-ingestion.md` về các kiểm tra quyền, phiên bản, thời điểm và retry; feed và thông báo vẫn chưa được kích hoạt.
+
 Đã triển khai workspace tại `/review`, migration `0005`, importer không dùng mạng và API quản trị `/api/v0/admin/sec/`. Dữ liệu thật nằm trong `rie-sec-review.db`, tách biệt với `rie-p4-demo.db` chứa fixture. Tên mode `production` trong schema chỉ phân biệt nguồn thật với synthetic, **không có nghĩa sản phẩm đã được phép phát hành**.
 
 ## Sử dụng cục bộ
@@ -39,6 +41,6 @@ Quyết định duyệt chỉ là **receipt trong khu vực kiểm duyệt**. N�
 - Một chuỗi bản trích xuất và một claim mỗi hồ sơ. Form tạo/sửa chỉ hỗ trợ định tính. API nhận claim định lượng có schema kỳ/đơn vị/basis nhưng người duyệt phải kiểm tra ý nghĩa; UI chỉ xem/duyệt bản định lượng, không âm thầm chuyển thành định tính.
 - Không suy đoán sự kiện hay nhãn bằng LLM. Không tự gán giờ công bố, source rights hoặc materiality.
 - 50 hồ sơ thật đã nhập, **0 draft thật, 0 review thật, 0 sự kiện được xuất bản** khi bàn giao. Browser test ghi dữ liệu vào database riêng bằng văn bản giả; với 50 hồ sơ thật chỉ đọc.
-- Bước tiếp theo là adapter từ receipt đã duyệt sang canonical ingestion, với kiểm tra lại version/rights/identity/as-of trước khi đưa vào private feed. Cần thiết kế nguồn authoritative cho graph/materiality và gold labels; không dùng receipt staging để vượt các gate này.
+- Adapter từ receipt đã duyệt sang canonical ingestion đã triển khai trong schema 0006, với kiểm tra lại version/rights/identity/as-of. Bước tiếp theo là private-feed projection có kiểm tra graph/materiality; cần nguồn và gold labels được duyệt độc lập, không dùng receipt staging để vượt các gate này.
 
 Kiểm tra: `tests/test_sec_review.py`, `deploy/sec_review_browser.py`, các báo cáo `reports/sec-review-*`. PostgreSQL dùng database test dùng một lần; không đặt TEST_DATABASE_URL trỏ vào review/demo store.

@@ -1,0 +1,15 @@
+{
+  "schema": "0006",
+  "counts": {
+    "rie_sec_filings": 50,
+    "rie_sec_drafts": 0,
+    "rie_sec_reviews": 0,
+    "rie_sec_permissions": 0,
+    "rie_sec_promotions": 0,
+    "rie_events": 0,
+    "rie_user_cards": 0,
+    "rie_alerts": 0
+  },
+  "delivery": "disabled",
+  "real_approvals_created": false
+}
