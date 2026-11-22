@@ -1,0 +1,26 @@
+{
+  "code_sha": "f6bf0eb0f02f5bf7ebd0f3306b82f6dea37cc2b9",
+  "workflow_run_id": 45006251802,
+  "workflow_url": "https://github.com/linhpmvpub/Narrative/actions/runs/45006251802",
+  "conclusion": "success",
+  "sqlite_tests": 410,
+  "postgresql_tests": 410,
+  "focused_tests": 20,
+  "focused_seconds": 60.34,
+  "static_checks": [
+    "ruff",
+    "mypy 84 files",
+    "JavaScript syntax"
+  ],
+  "browser": "Live read-only source and intercepted canonical new/duplicate/correction/stale/snapshot checks passed; zero production writes",
+  "schema": "0015",
+  "send_notifications": false,
+  "allow_synthetic_live": false,
+  "llm_mode": "none",
+  "source_block_policy": "CURRENT_BLOCK_OVERRIDES_HISTORICAL_SNAPSHOT",
+  "remaining": [
+    "No private informational feed projection for reviewed news yet",
+    "Source rights status lacks temporal history; current blocks override past snapshots",
+    "Real source-backed claims/reviews still needed; no causal/materiality inference validated"
+  ]
+}
