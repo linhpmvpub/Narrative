@@ -1,0 +1,27 @@
+{
+  "code_sha": "a29582363575f5a1b4814345b464f44bdfff325a",
+  "workflow_run_id": 45004736751,
+  "workflow_url": "https://github.com/linhpmvpub/Narrative/actions/runs/45004736751",
+  "conclusion": "success",
+  "sqlite_tests": 403,
+  "postgresql_tests": 403,
+  "focused_tests": 37,
+  "focused_seconds": 47.14,
+  "static_checks": [
+    "ruff",
+    "mypy 83 files",
+    "JavaScript syntax"
+  ],
+  "browser": "read-only desktop/mobile smoke passed; no production writes",
+  "schema": "0015",
+  "production_news_promotions": 0,
+  "send_notifications": false,
+  "allow_synthetic_live": false,
+  "llm_mode": "none",
+  "limitations": [
+    "No ingestion UI button yet",
+    "No temporal news canonical reader or impact feed projection yet",
+    "No genuine news claims or approvals fabricated",
+    "RSS literal checks do not establish materiality or causality"
+  ]
+}
