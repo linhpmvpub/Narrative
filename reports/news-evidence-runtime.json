@@ -1,0 +1,23 @@
+{
+  "real_dossier_evidence": {
+    "capture_sha256": "866da5b361edcc133b4fd6ff80d4f0c8c7256be1dcd99644a0e7df882cf1c3be",
+    "status": "UNAVAILABLE",
+    "byte_integrity": false,
+    "revision_content_match": false,
+    "availability_basis": "LOCAL_CHECK_NOW_NOT_ORIGINAL_CAPTURE_TIME",
+    "parser_basis": "CURRENT_RSS_PARSER",
+    "article_evidence": "NOT_ATTACHED",
+    "independent_corroboration": false
+  },
+  "mobile_width": 390,
+  "overflow": false,
+  "logout_cleared": true,
+  "javascript_errors": [],
+  "writes": 0,
+  "protected_originals_verified": 15,
+  "delivery": "disabled",
+  "current_revision_capture_status_counts": {
+    "UNAVAILABLE": 100,
+    "BYTES_AND_ENTRY_MATCH": 37
+  }
+}

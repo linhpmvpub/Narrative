@@ -1,3 +1,4 @@
 main{max-width:1060px;margin:auto;padding:24px}header,nav{display:flex;justify-content:space-between;gap:20px}#news-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.news-card{border:1px solid var(--line,#d5dce4);border-radius:14px;padding:20px;overflow-wrap:anywhere}.news-card h2{font-size:1.2rem;line-height:1.5}.news-card p{line-height:1.6}.meta{font-size:.85rem;color:#627084}.source-line{padding:10px 0;border-bottom:1px solid #ddd}.stale{color:#a14e0c}select{max-width:100%}#connect{max-width:540px}a{overflow-wrap:anywhere}@media(max-width:650px){main{padding:16px}#news-list{grid-template-columns:1fr}.row{flex-wrap:wrap}}
 
 #result{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}#claims input[type=checkbox]{width:auto;margin-right:8px}#claims form select{margin:8px 0}
+#dossier-result{overflow-wrap:anywhere;max-width:100%}

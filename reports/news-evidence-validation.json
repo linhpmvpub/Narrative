@@ -1,0 +1,19 @@
+{
+  "code_sha": "d5c2166dbe534b9b5059424aab36a42dd8c093d6",
+  "workflow_run_id": 45018622374,
+  "conclusion": "success",
+  "sqlite_tests": 446,
+  "postgresql_tests": 446,
+  "focused_tests": 9,
+  "focused_seconds": 15.96,
+  "mypy_files": 91,
+  "runtime_current_revisions": 137,
+  "capture_entry_match": 37,
+  "capture_unavailable": 100,
+  "mobile_browser_passed": true,
+  "followup": "CSS hash wrapping and repeatable read-only browser check verified locally after CI code commit; no backend changes.",
+  "SEND_NOTIFICATIONS": false,
+  "ALLOW_SYNTHETIC_LIVE": false,
+  "LLM_MODE": "none",
+  "next": "Attach separate article evidence with capture provenance before source-bound numeric issuer extraction and fresh review."
+}
