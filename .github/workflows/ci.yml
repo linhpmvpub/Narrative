@@ -36,6 +36,7 @@ jobs:
       - run: ruff check engine alembic tests
       - run: |
           node --check engine/web/app.js
+          node --check engine/web/news.js
           node --check engine/web/map.js
           node --check engine/web/label.js
           node --check engine/web/adjudicate.js

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "cnbc_markets",
+    "name": "CNBC Markets",
+    "kind": "rss",
+    "category": "markets",
+    "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+    "interval_seconds": 120,
+    "enabled": true
+  },
+  {
+    "id": "cnbc_world",
+    "name": "CNBC World",
+    "kind": "rss",
+    "category": "global",
+    "url": "https://www.cnbc.com/id/100727362/device/rss/rss.html",
+    "interval_seconds": 120,
+    "enabled": true
+  },
+  {
+    "id": "cnbc_technology",
+    "name": "CNBC Technology",
+    "kind": "rss",
+    "category": "technology",
+    "url": "https://www.cnbc.com/id/19854910/device/rss/rss.html",
+    "interval_seconds": 180,
+    "enabled": true
+  },
+  {
+    "id": "marketwatch",
+    "name": "MarketWatch",
+    "kind": "rss",
+    "category": "markets",
+    "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
+    "interval_seconds": 120,
+    "enabled": true
+  },
+  {
+    "id": "fed",
+    "name": "Federal Reserve",
+    "kind": "rss",
+    "category": "macro",
+    "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+    "interval_seconds": 300,
+    "enabled": true
+  },
+  {
+    "id": "ecb",
+    "name": "European Central Bank",
+    "kind": "rss",
+    "category": "macro",
+    "url": "https://www.ecb.europa.eu/rss/press.html",
+    "interval_seconds": 300,
+    "enabled": true
+  },
+  {
+    "id": "x_reuters",
+    "name": "Reuters on X",
+    "kind": "x",
+    "category": "markets",
+    "handle": "Reuters",
+    "interval_seconds": 300,
+    "enabled": false
+  },
+  {
+    "id": "x_business",
+    "name": "Bloomberg on X",
+    "kind": "x",
+    "category": "markets",
+    "handle": "business",
+    "interval_seconds": 300,
+    "enabled": false
+  },
+  {
+    "id": "x_cnbc",
+    "name": "CNBC on X",
+    "kind": "x",
+    "category": "markets",
+    "handle": "CNBC",
+    "interval_seconds": 300,
+    "enabled": false
+  },
+  {
+    "id": "x_yahoofinance",
+    "name": "Yahoo Finance on X",
+    "kind": "x",
+    "category": "markets",
+    "handle": "YahooFinance",
+    "interval_seconds": 300,
+    "enabled": false
+  }
+]

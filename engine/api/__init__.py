@@ -67,7 +67,7 @@ def ready():
     try:
         with engine.connect() as conn:
             revision = conn.execute(text("SELECT version_num FROM alembic_version")).scalar_one()
-            if revision != "0012":
+            if revision != "0013":
                 raise HTTPException(503, "Database migration required")
         return {"status": "ready", "schema": revision}
     except SQLAlchemyError:
@@ -165,4 +165,7 @@ app.include_router(annotation_router)
 from engine.api.adjudication import router as adjudication_router  # noqa: E402
 
 app.include_router(adjudication_router)
+from engine.api.news import router as news_router  # noqa: E402
+
+app.include_router(news_router)
 install_web(app)

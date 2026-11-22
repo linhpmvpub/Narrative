@@ -17,6 +17,10 @@ def install(app):
     def review():
         return shell("review.html")
 
+    @app.get("/news", include_in_schema=False)
+    def news():
+        return shell("news.html")
+
     @app.get("/map", include_in_schema=False)
     def impact_map():
         return shell("map.html")
@@ -43,6 +47,8 @@ def install(app):
     def asset(name: str):
         if name not in {
             "app.js",
+            "news.js",
+            "news.css",
             "style.css",
             "demo.json",
             "review.js",

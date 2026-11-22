@@ -16,6 +16,9 @@ UPSTREAM = "http://127.0.0.1:8888"
 GET_PATHS = {
     "/",
     "/map",
+    "/news",
+    "/api/v0/news",
+    "/api/v0/news/sources",
     "/label",
     "/api/v0/annotations/packets",
     "/healthz",

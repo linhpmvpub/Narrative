@@ -1,0 +1,121 @@
+{
+  "schema": "0013",
+  "counts": {
+    "rie_news_items": 135,
+    "rie_news_revisions": 135,
+    "rie_events": 51,
+    "rie_event_versions": 51
+  },
+  "sources": [
+    {
+      "source_id": "cnbc_markets",
+      "status": "OK",
+      "enabled": true
+    },
+    {
+      "source_id": "cnbc_world",
+      "status": "OK",
+      "enabled": true
+    },
+    {
+      "source_id": "cnbc_technology",
+      "status": "OK",
+      "enabled": true
+    },
+    {
+      "source_id": "marketwatch",
+      "status": "OK",
+      "enabled": true
+    },
+    {
+      "source_id": "fed",
+      "status": "OK",
+      "enabled": true
+    },
+    {
+      "source_id": "ecb",
+      "status": "OK",
+      "enabled": true
+    },
+    {
+      "source_id": "x_reuters",
+      "status": "DISABLED",
+      "enabled": false
+    },
+    {
+      "source_id": "x_business",
+      "status": "DISABLED",
+      "enabled": false
+    },
+    {
+      "source_id": "x_cnbc",
+      "status": "DISABLED",
+      "enabled": false
+    },
+    {
+      "source_id": "x_yahoofinance",
+      "status": "DISABLED",
+      "enabled": false
+    }
+  ],
+  "delivery": "disabled",
+  "x_live_requests": 0,
+  "initial_batch_items": 135,
+  "source_content_committed": false,
+  "scope": "RSS polling, no economic claims or graph approvals",
+  "alerts": 0,
+  "polls": [
+    {
+      "source_id": "cnbc_markets",
+      "last_status": "OK",
+      "last_success": "2026-11-22 07:27:43.743410"
+    },
+    {
+      "source_id": "cnbc_world",
+      "last_status": "OK",
+      "last_success": "2026-11-22 07:27:43.837454"
+    },
+    {
+      "source_id": "cnbc_technology",
+      "last_status": "OK",
+      "last_success": "2026-11-22 07:27:44.172229"
+    },
+    {
+      "source_id": "marketwatch",
+      "last_status": "OK",
+      "last_success": "2026-11-22 07:27:44.776010"
+    },
+    {
+      "source_id": "fed",
+      "last_status": "NOT_MODIFIED",
+      "last_success": "2026-11-22 07:26:41.306540"
+    },
+    {
+      "source_id": "ecb",
+      "last_status": "OK",
+      "last_success": "2026-11-22 07:26:42.191211"
+    },
+    {
+      "source_id": "x_reuters",
+      "last_status": "DISABLED",
+      "last_success": null
+    },
+    {
+      "source_id": "x_business",
+      "last_status": "DISABLED",
+      "last_success": null
+    },
+    {
+      "source_id": "x_cnbc",
+      "last_status": "DISABLED",
+      "last_success": null
+    },
+    {
+      "source_id": "x_yahoofinance",
+      "last_status": "DISABLED",
+      "last_success": null
+    }
+  ],
+  "worker_start_stop_idempotency": "verified",
+  "windows_reboot_autostart": false
+}

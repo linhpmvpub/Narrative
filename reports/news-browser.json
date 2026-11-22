@@ -1,0 +1,13 @@
+{
+  "visible_articles": 100,
+  "checks": [
+    "authenticated_news",
+    "source_filter",
+    "mobile_no_overflow",
+    "token_not_persisted",
+    "logout_clears_content",
+    "gateway_admin_blocked"
+  ],
+  "browser_errors": [],
+  "writes": 0
+}
