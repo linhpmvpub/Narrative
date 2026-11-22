@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-11-22T05:55:37.250872+00:00",
+  "status": "WAITING_FOR_ELIGIBLE_FILING_DATE",
+  "candidate_version": "financial-language-shadow-v2.0.1",
+  "candidate_sha256": "7ff37402267f74c39b0a0aa8bd85dd0d127971fc7865797ad48ec244cb269e13",
+  "protocol_sha256": "273f20f4c347c50226569e68d23aaeb520aebb69da24f310e4be2c4f22204073",
+  "frozen_at": "2026-11-22T05:38:06.667040+00:00",
+  "earliest_eligible_filing_date": "2026-11-23",
+  "current_utc_date": "2026-11-22",
+  "eligibility_rule": "filing_date > frozen_at UTC date and filing_date <= current UTC date",
+  "eligible_date_window_empty": true,
+  "network_collection_attempted": false,
+  "reason": "No date can satisfy the sealed protocol today. No future filing or recycled source substituted.",
+  "new_documents_collected": 0,
+  "new_predictions_frozen": 0,
+  "new_agent_labels": 0,
+  "agents_dispatched": 0,
+  "evaluation_accuracy": null,
+  "delivery": "disabled",
+  "candidate_modified": false,
+  "graph_modified": false,
+  "next_step": "On or after earliest eligible filing date, collect actual new filings for MU/NVDA/AMD/DELL/SNDK; verify sources; screen duplicates; freeze predictions; dispatch isolated blind AI reviewers and expert adjudicator. Calendar eligibility does not guarantee available filings."
+}

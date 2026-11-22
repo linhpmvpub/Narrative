@@ -1,5 +1,13 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Prospective collection preflight — 2026-11-22 (latest)
+
+- User authorized collecting post-freeze filings, locking predictions, three isolated AI reviewers, tests/checkpoint/GitHub; real notifications remain disabled. This request is pending eligible data, not pending authorization.
+- Checked at 2026-11-22T05:55:37.250872+00:00. Sealed protocol requires filing_date strictly after 2026-11-22 and no later than current UTC date. Today is still 2026-11-22: the eligible date interval is empty. Earliest eligible filing date is **2026-11-23**, which does not guarantee that any issuer has filed. Did not contact SEC for an impossible date window, fabricate future documents, loosen the freeze, or recycle old cases.
+- Candidate SHA and protocol digest match the original sealed values. Receipt: reports/prospective-collection-readiness.json. New documents0, new predictions0, new agent labels0; agents not dispatched because no eligible packet exists. No accuracy result, production code/DB/feed/graph/notification settings unchanged.
+- Tests run this turn: **43 passed in 1.08s** (language candidate, temporal/duplicate gates, sealed prediction integrity, AI review validation). Artifact: reports/prospective-readiness-tests.xml. No application changes; the previous full CI for code5c8d232 remains applicable, not rerun or represented as a fresh full suite. This handoff updates docs/reports only [skip ci].
+- Resume on/after 2026-11-23 UTC: collect real new SEC filings for MU/NVDA/AMD/DELL/SNDK, verify identity/hash/capture and filing times, screen against the unchanged protocol; include negatives/missed cases and deduplicate within the new packet. Freeze predictions before labels. Use fresh isolated contexts for retail investor and fund manager (source/rubric only), then financial expert resolves disagreements without model predictions. Retain AI_SIMULATED provenance and distinguish shared-model agreement from human/causal accuracy. Keep notifications disabled. Do not claim this prospective evaluation has run.
+
 ## Post-hoc language audit + frozen shadow candidate — 2026-11-22 (latest)
 
 - User requested reading checkpoint and implementing the next step. Audited all132 language cases and the26 original holdout mismatches using existing independent-context AI reviews and the3 expert resolutions; no relabeling to fit the model. Breakdown:19 financial outlook/dependency cases excluded by v1 causal-marker gate,6 missed realized explanations,1 audit-procedure false attribution. These are AI-reference disagreements, not proven human-adjudicated errors.60 holdout cases contain53 unique normalized texts;72 development cases contain59.
