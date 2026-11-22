@@ -11,7 +11,7 @@ Schema của bundle. Mã kiểm tra nằm trong `engine/company_profiles.py`.
 
 - `ProfileBundle`: danh tính pháp nhân/ticker/identifiers, phiên bản, thời điểm
   snapshot và availability thực tế, mô-đun ngành, nguồn, thành phần, nodes,
-  relationships, observations, narratives, events. Không giới hạn thêm ticker
+  relationships, observations, narratives, events. Hồ sơ có thể tồn tại trước khi có narrative hoặc sự kiện; không bắt buộc tạo tin giả để khởi tạo. Không giới hạn thêm ticker
   bằng danh sách hardcode; không sửa5mã/10narrative seed của engine cũ.
 - `Component`: key chuẩn, summary, evidence và trạng thái SOURCED/UNKNOWN/
   NOT_DISCLOSED/NOT_APPLICABLE/STALE/DISPUTED. Thành phần thiếu được bổ sung

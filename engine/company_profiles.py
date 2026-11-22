@@ -215,8 +215,8 @@ class ProfileBundle(Strict):
     nodes: list[Node] = Field(min_length=1, max_length=200)
     relationships: list[Relationship] = Field(max_length=300)
     observations: list[MetricObservation] = Field(default_factory=list, max_length=200)
-    narratives: list[Narrative] = Field(min_length=1, max_length=20)
-    events: list[Event] = Field(min_length=1, max_length=100)
+    narratives: list[Narrative] = Field(default_factory=list, max_length=20)
+    events: list[Event] = Field(default_factory=list, max_length=100)
     author_kind: Literal["AI_ASSISTED_SOURCE_EXTRACTION"] = "AI_ASSISTED_SOURCE_EXTRACTION"
 
     @model_validator(mode="after")

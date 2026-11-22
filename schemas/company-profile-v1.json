@@ -1030,7 +1030,6 @@
           "$ref": "#/$defs/Narrative"
         },
         "maxItems": 20,
-        "minItems": 1,
         "title": "Narratives",
         "type": "array"
       },
@@ -1039,7 +1038,6 @@
           "$ref": "#/$defs/Event"
         },
         "maxItems": 100,
-        "minItems": 1,
         "title": "Events",
         "type": "array"
       },
@@ -1064,9 +1062,7 @@
       "sources",
       "components",
       "nodes",
-      "relationships",
-      "narratives",
-      "events"
+      "relationships"
     ],
     "title": "ProfileBundle",
     "type": "object"

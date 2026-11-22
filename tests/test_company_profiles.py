@@ -247,3 +247,12 @@ def test_duplicate_profile_identity_and_writer_lock(dossier):
     assert not (root / "writer.lock").exists()
     shutil.copytree(root, root.parent / "duplicate")
     assert feed()["items"] == [] and feed()["withheld"] == 2
+
+
+def test_profile_can_exist_before_narratives_or_events(dossier):
+    _, data = dossier
+    data.pop("events")
+    data.pop("narratives")
+    result = project(ProfileBundle.model_validate(data))
+    assert result["cards"] == result["narratives"] == []
+    assert result["coverage"]["SOURCED"] == 1
