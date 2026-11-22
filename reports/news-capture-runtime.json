@@ -1,0 +1,126 @@
+{
+  "checked_at": "2026-11-22T11:34:20.302206+00:00",
+  "sources": [
+    {
+      "source_id": "cnbc_markets",
+      "status": "OK",
+      "sha256": "fb53a6a228cc8bf1e71e4166bdad587c28a55bba6244e845fc6ca49208407cb8",
+      "bytes": 20214,
+      "parsed_entries": 30,
+      "rejected": 0,
+      "integrity_verified": true
+    },
+    {
+      "source_id": "cnbc_world",
+      "status": "OK",
+      "sha256": "7f866d02be9adfbefe6e91c8ec6324250b2cf35a017ac59844b493cdc9b80a79",
+      "bytes": 20585,
+      "parsed_entries": 30,
+      "rejected": 0,
+      "integrity_verified": true
+    },
+    {
+      "source_id": "cnbc_technology",
+      "status": "OK",
+      "sha256": "e8638b95565a14e01cdfbf39c3b5f028123ef00f370a185276d9726a969f069b",
+      "bytes": 20570,
+      "parsed_entries": 30,
+      "rejected": 0,
+      "integrity_verified": true
+    },
+    {
+      "source_id": "marketwatch",
+      "status": "OK",
+      "sha256": "fa6ff5c8452b08ae956bb6ed2a6aeb13c33ec62aa423199ea06bf9d60cb1cd63",
+      "bytes": 8265,
+      "parsed_entries": 10,
+      "rejected": 0,
+      "integrity_verified": true
+    },
+    {
+      "source_id": "fed",
+      "status": "OK",
+      "sha256": "72529d13594fbe7456a5701eb087c253b2cff213510b8d76e442bd97d570aa4e",
+      "bytes": 14457,
+      "parsed_entries": 20,
+      "rejected": 0,
+      "integrity_verified": true
+    },
+    {
+      "source_id": "ecb",
+      "status": "OK",
+      "sha256": "6b3a5ddee3fcab48800464dcdb23e0ee57da0e6d62cdbff94f2419c4e47627cb",
+      "bytes": 5783,
+      "parsed_entries": 15,
+      "rejected": 0,
+      "integrity_verified": true
+    }
+  ],
+  "canonical_writes": 0,
+  "SEND_NOTIFICATIONS": false,
+  "ALLOW_SYNTHETIC_LIVE": false,
+  "LLM_MODE": "none",
+  "note": "Direct adapter archive check; does not alter worker cursors or backfill old revisions.",
+  "worker_poll": {
+    "polled_at": "2026-11-22T11:35:56.733460+00:00",
+    "results": [
+      {
+        "source_id": "cnbc_markets",
+        "status": "OK",
+        "rejected": 0,
+        "created": 2,
+        "updated": 0,
+        "duplicates": 28
+      },
+      {
+        "source_id": "cnbc_world",
+        "status": "OK",
+        "rejected": 0,
+        "created": 0,
+        "updated": 0,
+        "duplicates": 30
+      },
+      {
+        "source_id": "cnbc_technology",
+        "status": "OK",
+        "rejected": 0,
+        "created": 0,
+        "updated": 0,
+        "duplicates": 30
+      },
+      {
+        "source_id": "marketwatch",
+        "status": "OK",
+        "rejected": 0,
+        "created": 0,
+        "updated": 0,
+        "duplicates": 10
+      },
+      {
+        "source_id": "fed",
+        "status": "HTTP_404"
+      },
+      {
+        "source_id": "ecb",
+        "status": "OK",
+        "rejected": 0,
+        "created": 0,
+        "updated": 0,
+        "duplicates": 15
+      }
+    ],
+    "delivery": "disabled"
+  },
+  "latest_revision_capture_checks": [
+    {
+      "capture_sha256": "fb53a6a228cc8bf1e71e4166bdad587c28a55bba6244e845fc6ca49208407cb8",
+      "bytes": 20214,
+      "received_at": "2026-11-22 11:35:53.015358"
+    },
+    {
+      "capture_sha256": "fb53a6a228cc8bf1e71e4166bdad587c28a55bba6244e845fc6ca49208407cb8",
+      "bytes": 20214,
+      "received_at": "2026-11-22 11:35:53.015358"
+    }
+  ]
+}

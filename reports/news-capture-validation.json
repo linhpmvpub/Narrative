@@ -1,0 +1,23 @@
+{
+  "code_sha": "241102eb11f447ea8b9c5ca487c8b98c1251601d",
+  "workflow_run_id": 45017914756,
+  "workflow_url": "https://github.com/linhpmvpub/Narrative/actions/runs/45017914756",
+  "conclusion": "success",
+  "sqlite_tests": 445,
+  "postgresql_tests": 445,
+  "focused_tests": 19,
+  "focused_seconds": 12.32,
+  "mypy_files": 90,
+  "protected_originals_verified": 15,
+  "live_direct_rss_checks": 6,
+  "worker_new_unverified_items": 2,
+  "new_canonical_events": 0,
+  "SEND_NOTIFICATIONS": false,
+  "ALLOW_SYNTHETIC_LIVE": false,
+  "LLM_MODE": "none",
+  "remaining": [
+    "Fed returned HTTP404 during worker poll after successful direct fetch; normal retry enabled.",
+    "Historical missing captures cannot establish original availability from later fetches.",
+    "Article evidence packet integration and numeric issuer claims with independent review remain next."
+  ]
+}
