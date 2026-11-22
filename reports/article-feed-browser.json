@@ -1,0 +1,11 @@
+{
+  "gateway": true,
+  "viewport_width": 390,
+  "actual_unverified_cards": 2,
+  "failure_withholds": true,
+  "logout_clears": true,
+  "overflow": false,
+  "javascript_errors": [],
+  "writes": 0,
+  "delivery": "disabled"
+}
