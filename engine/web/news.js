@@ -17,6 +17,7 @@ function renderReviewed(result){
  if(!result){root.append(el('p','Không kiểm tra được hiệu lực. Đã ẩn sự kiện đã duyệt; hãy tải lại.','stale'));return;}
  if(!result.enabled){root.append(el('p','Feed sự kiện đã duyệt chưa bật.','meta'));return;}
  root.append(el('p','Kiểm tra lúc '+date(result.as_of)+(result.truncated?' · Chỉ xét 200 sự kiện gần nhất':'')+' · '+result.withheld_count+' sự kiện không còn đủ điều kiện hiển thị.','meta'));
+ if(result.exposure_truncated)root.append(el('p','Tỷ trọng nền chỉ xét 500 bản thẩm định gần nhất.','meta'));
  if(!result.items.length)root.append(el('p','Chưa có sự kiện news đã duyệt còn hợp lệ.','meta'));
  for(const item of result.items){
   const card=el('article','','news-card');
@@ -25,6 +26,14 @@ function renderReviewed(result){
   card.append(el('p','Người lập: '+(item.author_kind==='AI_SIMULATED'?'Agent AI':'Người dùng tự khai')+' · Người duyệt: '+(item.reviewer_kind==='AI_SIMULATED'?'Agent AI':'Người dùng tự khai'),'meta'));
   const m=item.measurement;
   if(m&&m.new_value!==null)card.append(el('p',(m.metric_id||'Chỉ tiêu')+': '+m.new_value+' '+(m.unit||'')+' · Kỳ '+(m.period||'không rõ')+(m.old_value!==null?' · So với '+m.old_value+' ở kỳ '+item.comparison_period:'')));
+  for(const share of item.baseline_shares||[]){
+   const box=el('details');box.append(el('summary',share.segment+' · tỷ trọng doanh thu nền '+share.percent+'%'));
+   box.append(el('p','Không phải phần doanh thu bị ảnh hưởng bởi tin. Materiality và nhân quả chưa xác định.'));
+   box.append(el('p',share.numerator.current.value+' / '+share.denominator.current.value+' '+share.denominator.unit+' · '+share.numerator.current.start+' → '+share.numerator.current.end));
+   box.append(el('p','Duyệt lúc '+date(share.reviewed_at)+' · '+share.reviewer_kind,'meta'));
+   for(const operand of [share.numerator,share.denominator]){const a=el('a','Hồ sơ SEC ↗');try{const u=new URL(operand.filing_url);if(u.protocol==='https:'){a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';box.append(a);}}catch{}}
+   card.append(box);
+  }
   const link=el('a','Đối chiếu tại nguồn ↗');try{const u=new URL(item.source_url);if(['https:','http:'].includes(u.protocol)){link.href=u.href;link.target='_blank';link.rel='noopener noreferrer';card.append(link);}}catch{}
   root.append(card);
  }

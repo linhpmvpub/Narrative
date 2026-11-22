@@ -285,6 +285,10 @@ def live_map(user: User, as_of: datetime | None = None):
                     for a in notice["filing_evidence"]["attributions"]
                     if edge["id"] in a.get("candidate_relation_ids", [])
                 ]
+            from engine.news_exposure_feed import approved_shares
+
+            # Informational overlay only: never inserted into causal nodes/edges/scenario inputs.
+            graph["baseline_exposure"] = approved_shares(conn, cutoff)
             graph["nodes"].extend(reported.values())
             return graph
     finally:

@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Revalidated baseline shares on news feed and map — 2026-11-22 (latest)
+
+- Added engine/news_exposure_feed.py allowlisted approved-share projection. Latest independent-account approval, proof confirmations/chronology, draft hash, current primary canonical claim and pinned financial pair revalidated per read. Revoked/stale/malformed/unavailable entries withheld; duplicate event-version/pair displayed once;500-candidate cap reports truncation. No author/reviewer/private draft IDs or review notes exposed.
+- Feed /news cards include baseline_shares; live /map has baseline_exposure overlay with0–100% meter, operands/period/unit, review provenance and source links/hashes/locators. No causal node/edge insertion or scenario changes. Cutoff requires approval recorded by cutoff AND still valid now, conservative current-valid projection rather than historic exposure replay. Materiality/affected fraction/causality UNKNOWN/NOT_ESTABLISHED.
+- UI clears stale share content/details on refresh/failure/hide/logout;60s visible-tab checks and request epochs. Map background refresh updates only baseline overlay; graph/scenario untouched. Gateway existing read routes only. Schema0016 unchanged, backend8888 restarted hidden; worker/gateway retained, no Cloudflare changes. Actual51 events/versions,0alerts,0exposure drafts/reviews,0published baseline shares and0eligible graph edges. No production writes; notifications/synthetic-live false, LLMnone, X off.
+- Final focused27 tests passed39.66s, including duplicate-pair dedup and explicit candidate truncation;441 tests collected. Ruff/mypy89files/JS syntax passed, mobile browser live read+intercepted baseline meter/feed detail/revocation/logout checks passed.15 protected originals unchanged. Full GitHub CI pending; update after completion.
+- Next: complete source-backed real claim and independent exposure review before publishing any actual share; then audit linkage/effect-size evidence for materiality rather than interpreting baseline ratio as affected revenue. Consider temporal approval replay and pagination, preserving current revocation gate for shared views. See docs/news-claim-review.md.
+
+
 ## Independently reviewed segment revenue shares — 2026-11-22 (latest)
 
 - Schema0016 adds immutable news exposure drafts and versioned approved/rejected/revoked reviews. New engine/news_exposure.py and local author/admin API/UI attach current primary canonical news to hash-pinned SEC segment/consolidated revenue pairs. Exact same issuer/accession/concept/unit/period/source identity; supported segment axis plus optional operating-segment consolidation dimension; reject incompatible scope, nonfinite/negative/zero-denominator/>100% operands. Decimal ratio4places is BASELINE_SEGMENT_REVENUE_SHARE, never affected fraction or causal impact.

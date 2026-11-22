@@ -1,0 +1,15 @@
+{
+  "schema": "0016",
+  "counts": {
+    "rie_events": 51,
+    "rie_event_versions": 51,
+    "rie_alerts": 0,
+    "rie_news_exposure_drafts": 0,
+    "rie_news_exposure_reviews": 0
+  },
+  "feed_baseline_shares": 0,
+  "map_baseline_shares": 0,
+  "map_eligible_edges": 0,
+  "delivery": "disabled",
+  "production_writes": 0
+}

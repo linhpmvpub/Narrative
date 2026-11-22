@@ -99,3 +99,13 @@ Quản trị viên khác tài khoản người lập duyệt/từ chối; approv
 API: GET/POST /api/v0/news-claims/{claim_id}/exposure; POST /api/v0/news-claims/exposure/{draft_id}/reviews. POST draft cần Idempotency-Key; review dùng expected_version, không trả approval cũ từ cache. Các ghi chú giữ riêng theo quyền author/admin; chưa có public projection hoặc as-of exposure reader.
 
 Kiểm tra actual corpus:7 dossiers chứa14 lần xuất hiện của2 cặp baseline khác nhau. Đây là các cặp có thể đối chiếu số học, chưa có phê duyệt exposure thật. Cần claim/news linkage có nguồn và thẩm định độc lập trước khi đưa kết quả vào feed/map; materiality vẫn UNKNOWN.
+
+## Hiển thị tỷ trọng đã duyệt trên feed và bản đồ
+
+Feed /news gắn baseline_shares vào đúng event version; /map trả baseline_exposure ở lớp thông tin riêng. Tỷ trọng không thêm node/edge vào causal graph và không đổi scenario matcher. Bản đồ có thanh0–100% kèm phân khúc, kỳ, tử số/mẫu số, loại người duyệt, thời điểm duyệt và liên kết/hash/locator nguồn. Không cộng các tỷ trọng hay coi chúng là xác suất.
+
+Projection yêu cầu quyết định mới nhất hiện tại là approved, reviewer khác author, đủ3 confirmations và chronology hợp lệ. Kiểm tra lại input hash, primary canonical news, phê duyệt news, current source và cặp số liệu SEC. Bằng chứng đổi, claim sửa/rút hoặc exposure revoke đều làm tỷ trọng biến mất ở lần tải kế tiếp. Nhiều bản nháp đã duyệt cùng event version/pair chỉ hiển thị một lần. Tối đa500 draft candidates, có examined/truncated; có thể có approval cũ ngoài giới hạn này.
+
+Với cutoff trên map, chỉ hiển thị approval đã ghi trước cutoff **và còn hợp lệ hiện tại**: CURRENT_VALID_APPROVAL_RECORDED_BY_CUTOFF. Đây không phải tái dựng lịch sử approval hoàn chỉnh. Quyết định thu hồi sau cutoff vẫn loại dữ liệu; phê duyệt mới sau cutoff không được đưa ngược về quá khứ. Actor/private draft IDs, rationale/limitations và danh tính tài khoản không xuất hiện trong shared projection; chỉ giữ actor-kind declaration và source-backed operand allowlist.
+
+Map/feed kiểm tra lại mỗi60 giây khi visible. Khi refresh/tab hide/logout, dữ liệu tỷ trọng cũ bị xóa; lỗi tải không giữ nhãn đã duyệt cũ. Map chỉ làm mới lớp tỷ trọng trong nền, không thay đồ thị/kịch bản đang xem. Khi vừa chạy mô phỏng hoặc đổi bộ lọc, response không còn đúng phiên bản UI bị bỏ qua. Không mở thêm gateway write routes, không bật thông báo hoặc Cloudflare tunnel. Corpus thật vẫn0 approvals, nên chưa có tỷ trọng thật được công bố.

@@ -2,6 +2,7 @@
 
 from datetime import UTC, datetime
 
+from engine.news_exposure_feed import approved_shares
 from engine.news_snapshot import snapshot
 from engine.settings import Settings
 
@@ -22,6 +23,9 @@ def reviewed_feed(conn, limit=100):
     if not Settings.from_env().dev_informational_feed:
         return {**base, "enabled": False}
     result = snapshot(conn, now, limit)
+    exposure = approved_shares(
+        conn, now, event_version_ids=[item["event_version_id"] for item in result["items"]]
+    )
     cards = []
     for item in result["items"]:
         claim = item["claim"]
@@ -55,6 +59,11 @@ def reviewed_feed(conn, limit=100):
                 "comparison_period": item["comparison_period"],
                 "verification": "REVIEWED_EXCERPT_NOT_CAUSAL_VALIDATION",
                 "source_rights": item["source_rights"],
+                "baseline_shares": [
+                    share
+                    for share in exposure["items"]
+                    if share["event_version_id"] == item["event_version_id"]
+                ],
                 "materiality": "UNKNOWN",
                 "impact_eligible": False,
                 "graph_eligible": False,
@@ -67,4 +76,5 @@ def reviewed_feed(conn, limit=100):
         "truncated": result["truncated"],
         "examined": result["examined"],
         "withheld_count": len(result["withheld"]),
+        "exposure_truncated": exposure["truncated"],
     }

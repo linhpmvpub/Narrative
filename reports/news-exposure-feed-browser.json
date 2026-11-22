@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "map_baseline_meter",
+    "provenance_detail",
+    "no_causal_edge",
+    "revocation_refresh_clears",
+    "feed_share_details",
+    "mobile_no_overflow",
+    "logout_clears"
+  ],
+  "browser_errors": [],
+  "production_writes": 0
+}

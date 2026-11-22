@@ -96,6 +96,14 @@ def candidates(conn, actor, claim_id):
     )
     if not claim or (actor.role != "admin" and actor.id != claim["author_id"]):
         raise ValueError("Claim unavailable to this account")
+    return canonical_candidates(conn, claim)
+
+
+def canonical_candidates(conn, claim):
+    """Internal evidence validation; callers enforce authorization or approved projection."""
+    if not Settings.from_env().dev_informational_feed:
+        raise ValueError("Private development opt-in required")
+    claim_id = claim["id"]
     receipt = (
         conn.execute(select(news_promotions).where(news_promotions.c.claim_id == claim_id))
         .mappings()
