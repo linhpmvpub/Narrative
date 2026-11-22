@@ -66,3 +66,32 @@ X API có phí theo sử dụng. Trước khi bật cần tài khoản/API token
 - GET `/api/v0/news/{id}/history`: tối đa100 phiên bản, chỉ API nội bộ đã đăng nhập.
 
 Đều yêu cầu tài khoản. Tin công khai được thu chung cho các thành viên đã xác thực; không trả nhãn, luận điểm hay dữ liệu riêng của thành viên khác. Gateway chỉ mở GET news/sources và trang /news; không mở API quản trị hay ghi dữ liệu. Token trang chỉ ở bộ nhớ, logout xóa nội dung và chặn response muộn phục hồi dữ liệu.
+
+
+## Private RSS capture archive (2026-11-22)
+
+The CLI worker now archives every bounded HTTP 200 RSS entity body before parsing,
+under `source-cache/rss-captures/<sha256>.rss` (ignored by Git). Use
+`--capture-dir` to select another private filesystem supporting hard links.
+The bytes are HTTP-decoded entity bytes before UTF-8 decoding/normalization,
+not compressed wire traffic. No request headers, credentials or cookies are saved.
+Existing revision `capture_sha256` values identify the bytes; no schema change.
+`engine.news_capture.read_capture(root, sha)` returns bytes only after bounded
+size and SHA-256 verification. It raises for missing or corrupt files.
+
+Writes publish a complete fsynced temporary file via an exclusive hard link;
+concurrent identical responses deduplicate. Existing corrupt captures are never
+overwritten. Archive errors report CAPTURE_ARCHIVE_FAILED and preserve cursor
+and revisions for retry. Malformed HTTP 200 XML is retained for diagnosis, but
+is not ingested. HTTP 304/errors do not fabricate new evidence. A DB failure may
+leave an unreferenced capture. No automated deletion/retention policy is enabled;
+monitor disk capacity and back up this private directory with the database.
+
+Programmatic NewsClient callers must explicitly supply capture_dir; the production
+CLI always supplies its default directory. This archive currently covers RSS,
+not the disabled X adapter. Old hashes without files remain unavailable; a later
+fetch cannot establish original capture time. Repeated unchanged responses do not
+create new revisions or change their received_at. The archive proves byte
+integrity, not publisher authenticity, original publication time, independent
+corroboration, causal impact or review approval. Raw files are never served by the
+member feed/gateway. Article captures and review packet export remain separate.

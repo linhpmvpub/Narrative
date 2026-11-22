@@ -244,6 +244,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("config/news-sources.json"))
     parser.add_argument("--once", action="store_true")
+    parser.add_argument("--capture-dir", type=Path, default=Path("source-cache/rss-captures"))
     args = parser.parse_args()
     Settings.from_env()
     engine = database()
@@ -252,7 +253,7 @@ def main():
         configs = [{**c, "enabled": False} if c["kind"] == "x" else c for c in configs]
     register(engine, configs)
     token = os.getenv("X_BEARER_TOKEN") if os.getenv("NEWS_ENABLE_X") == "true" else None
-    client = NewsClient(token=token)
+    client = NewsClient(token=token, capture_dir=args.capture_dir)
     try:
         while True:
             result = poll(engine, client)

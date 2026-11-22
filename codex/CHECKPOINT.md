@@ -1,5 +1,13 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Private raw RSS capture archive — 2026-11-22 (latest)
+
+- Implemented engine/news_capture.py: content-addressed bounded HTTP-decoded entity bytes before parsing, atomic no-overwrite publication, concurrent dedup, integrity-verifying reader. CLI default source-cache/rss-captures ignored by Git; optional --capture-dir. No schema/API/UI or canonical changes.
+- Archive failure preserves cursor/revisions with CAPTURE_ARCHIVE_FAILED; malformed XML archived for diagnosis,304/errors never fabricate bodies. Old captures remain missing; no backdating. Files prove integrity only, not source correctness/causality. No automatic retention; monitor disk and back up with DB. Programmatic clients must opt in; X archive excluded, X stays off.
+- Focused19 tests passed12.32s; Ruff and mypy90 files passed. Full CI and runtime validation pending. Notifications/synthetic-live remain false, LLMnone.
+- Next: attach verified raw-capture availability and separate article evidence to review packets; source-bound numeric issuer claims with explicit period/unit/scale and fresh review remain pending. No new impact/exposure approval.
+
+
 ## First real source-attributed news claim — 2026-11-22 (latest)
 
 - Continued real evidence work rather than fabricating approvals. Captured public CNBC policy article via HTTPS200, issuer NVIDIA results page200 as context; AP direct403 and web fetch misses recorded, not bypassed or treated as independent evidence. Source/cache/review files remain private under source-cache/news-live-review-20261122. Backup before data write: ignored backups/dev-before-first-news-claim-20261122.db.

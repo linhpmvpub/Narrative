@@ -12,6 +12,8 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import httpx
 
+from engine.news_capture import archive_capture
+
 
 def public_url(value):
     p = urlsplit(value)
@@ -131,8 +133,9 @@ class FetchError(Exception):
 
 
 class NewsClient:
-    def __init__(self, *, token=None, transport=None):
+    def __init__(self, *, token=None, transport=None, capture_dir=None):
         self.token = token
+        self.capture_dir = capture_dir
         self.client = httpx.Client(
             timeout=20,
             follow_redirects=False,
@@ -179,6 +182,11 @@ class NewsClient:
             body, response_headers, status = self.get(config["url"], headers=headers)
             if status == 304:
                 return [], state, None, "NOT_MODIFIED", 0
+            if self.capture_dir is not None:
+                try:
+                    archive_capture(self.capture_dir, body)
+                except (OSError, ValueError):
+                    raise FetchError("CAPTURE_ARCHIVE_FAILED") from None
             rows, rejected = parse_feed(body, now)
             return (
                 rows,
