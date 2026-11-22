@@ -114,6 +114,7 @@ def detail(pid: str, cid: str, user: User):
 @router.get("/{pid}/quality")
 def report(pid: str, user: User):
     from engine.evaluation.agent_pilot import public_summary
+    from engine.evaluation.language_audit import public_audit
 
     engine = database()
     try:
@@ -122,6 +123,7 @@ def report(pid: str, user: User):
             return quality(conn, pid) | {
                 "campaign_progress": progress(conn, pid),
                 "ai_simulation": public_summary(pid),
+                "language_error_audit": public_audit(pid),
             }
     finally:
         engine.dispose()

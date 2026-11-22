@@ -1,0 +1,76 @@
+{
+  "packet_id": "526bd6298883375e06874ca83a78069104f1411ad5e103455f0c357d5b70ac9f",
+  "evaluation_track": "AI_SIMULATED_POST_HOC",
+  "candidate_version": "financial-language-shadow-v2.0.1",
+  "deployment": "SHADOW_ONLY",
+  "splits": {
+    "development": {
+      "cases": 72,
+      "unique_texts": 59,
+      "baseline_matches_ai": 39,
+      "candidate_matches_ai": 60,
+      "candidate_matches_unique_text": 49,
+      "baseline_mismatch_categories": {
+        "OUTLOOK_RUBRIC_VS_CAUSAL_GATE": 22,
+        "MISSED_REALIZED_EXPLANATION": 10,
+        "PARAGRAPH_TEMPORAL_SCOPE": 1
+      },
+      "fixed_against_ai": 25,
+      "regressed_against_ai": 4,
+      "candidate_confusion_ai_to_prediction": {
+        "NO_CAUSAL_CLAIM -> NO_CAUSAL_CLAIM": 25,
+        "ISSUER_ATTRIBUTION -> NO_CAUSAL_CLAIM": 1,
+        "UNCERTAIN_OR_FORWARD_LOOKING -> NO_CAUSAL_CLAIM": 3,
+        "ISSUER_ATTRIBUTION -> ISSUER_ATTRIBUTION": 16,
+        "UNCERTAIN_OR_FORWARD_LOOKING -> UNCERTAIN_OR_FORWARD_LOOKING": 19,
+        "ISSUER_ATTRIBUTION -> UNCERTAIN_OR_FORWARD_LOOKING": 6,
+        "NO_CAUSAL_CLAIM -> UNCERTAIN_OR_FORWARD_LOOKING": 2
+      }
+    },
+    "holdout": {
+      "cases": 60,
+      "unique_texts": 53,
+      "baseline_matches_ai": 34,
+      "candidate_matches_ai": 57,
+      "candidate_matches_unique_text": 50,
+      "baseline_mismatch_categories": {
+        "OUTLOOK_RUBRIC_VS_CAUSAL_GATE": 19,
+        "MISSED_REALIZED_EXPLANATION": 6,
+        "AUDIT_OR_NONFINANCIAL_CAUSE": 1
+      },
+      "fixed_against_ai": 24,
+      "regressed_against_ai": 1,
+      "candidate_confusion_ai_to_prediction": {
+        "UNCERTAIN_OR_FORWARD_LOOKING -> UNCERTAIN_OR_FORWARD_LOOKING": 21,
+        "ISSUER_ATTRIBUTION -> ISSUER_ATTRIBUTION": 12,
+        "NO_CAUSAL_CLAIM -> NO_CAUSAL_CLAIM": 24,
+        "ISSUER_ATTRIBUTION -> NO_CAUSAL_CLAIM": 1,
+        "NO_CAUSAL_CLAIM -> UNCERTAIN_OR_FORWARD_LOOKING": 1,
+        "ISSUER_ATTRIBUTION -> UNCERTAIN_OR_FORWARD_LOOKING": 1
+      }
+    }
+  },
+  "review_artifact_sha256": {
+    "a": "bc3e0d90fcb082396d93441c565aa0055f954dd0210f10415654ba31d13a129b",
+    "b": "2db60af9961ae6349c8008ff9f89a49751503a401fec7a12e2517d6f051b8437",
+    "expert": "0c85d452085005d5ec5ca0fe1f990e0ee7ca571673bde8e15aad0928d9f3ce09"
+  },
+  "human_accuracy": null,
+  "fresh_evaluation": "PENDING_POST_FREEZE_FILINGS_AND_BLIND_LABELS",
+  "delivery": "disabled",
+  "graph_modified": false,
+  "limitations": [
+    "Exposed holdout used for diagnosis; results are not independent validation",
+    "AI references can be wrong; mismatch categories describe rubric disagreement, not proven errors",
+    "Repeated text across filings inflates case counts; unique-text denominators also reported",
+    "Candidate is heuristic and shadow-only; original frozen predictions/snapshots remain unchanged"
+  ],
+  "baseline_frozen_payload_sha256": "779ec5108ad08837aad42c6e39180047fc9edfd9514d2b488256f36d1df5aa07",
+  "prospective_protocol": {
+    "candidate_sha256": "7ff37402267f74c39b0a0aa8bd85dd0d127971fc7865797ad48ec244cb269e13",
+    "frozen_at": "2026-11-22T05:38:06.667040+00:00",
+    "near_duplicate_jaccard": 0.8,
+    "promotion_allowed": false
+  },
+  "prospective_protocol_sha256": "273f20f4c347c50226569e68d23aaeb520aebb69da24f310e4be2c4f22204073"
+}

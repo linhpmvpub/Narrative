@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "shadow_only_notice",
+    "baseline_vs_candidate_counts",
+    "regression_count",
+    "deduplicated_denominator",
+    "mobile_layout",
+    "gateway_admin_blocked",
+    "logout_clears_private_report"
+  ],
+  "browser_errors": [],
+  "writes": 0
+}
