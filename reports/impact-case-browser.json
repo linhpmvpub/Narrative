@@ -1,0 +1,12 @@
+{
+  "local_gateway": true,
+  "viewport_width": 390,
+  "real_cases": 1,
+  "failure_withholds": true,
+  "cutoff_withholds": true,
+  "logout_clears": true,
+  "overflow": false,
+  "javascript_errors": [],
+  "writes": 0,
+  "delivery": "disabled"
+}
