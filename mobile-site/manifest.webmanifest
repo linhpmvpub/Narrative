@@ -1,0 +1,17 @@
+{
+  "name": "Narrative Research",
+  "short_name": "Narrative",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f2ec",
+  "theme_color": "#183a38",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

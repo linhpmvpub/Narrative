@@ -1,5 +1,13 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## GitHub Pages mobile entry — 2026-11-22 (latest)
+
+- User requested github.io mobile access. Enabled Pages via authenticated GitHub API (existing repo public, admin permission) with build_type workflow. Public responsive entry site under mobile-site only; fixed target https://linhpmvpub.github.io/Narrative/. No database/token/private snapshots; no public credential form.
+- Restarted email-restricted Cloudflare quick tunnel to gateway8890, allowed-mail preserved. Protected origin in mobile-site/connection.json, ignored secrets/mobile-preview.json updated. Local servers unchanged. Feed/map navigate to protected origin, preserving same-origin OTP/app-token checks; no CORS weakening. PC and tunnel must stay running; Pages is entry hosting, not backend hosting. No remote authenticated data-session claim.
+- Local mobile390/desktop1440 checks passed; remote origin reached Cloudflare Access sign-in, no private feed exposed; artifact exact file allowlist/token scan passed. Deployment and published-site verification pending. Notifications/synthetic-live false, LLMnone.
+- Recovery: docs/github-pages-mobile.md; restart quick tunnel changes URL, then update connection.json and push. Always-on backend/stable tunnel remains future infrastructure work.
+
+
 ## Article evidence and numeric extraction preparation — 2026-11-22 (latest)
 
 - Multi-step batch: immutable bounded HTTPS article capture CLI and exact-revision receipts; admin dossier/API/UI article evidence; explicit quarterly revenue candidate parser; source-span financial worksheet validator/CLI. Same-article vs issuer-context separated, actual retrieval clock retained. No redirects/access bypass, no raw HTML execution, no gateway expansion, no schema change or canonical/review writes.

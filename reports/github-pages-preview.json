@@ -1,0 +1,10 @@
+{
+  "mobile_width": 390,
+  "desktop_width": 1440,
+  "no_overflow": true,
+  "no_credential_form_on_pages": true,
+  "protected_remote_origin": "https://craig-switches-foundations-nicole.trycloudflare.com",
+  "cloudflare_gate_observed": true,
+  "gate_title": "Sign in \u30fb Cloudflare Access",
+  "javascript_errors": []
+}

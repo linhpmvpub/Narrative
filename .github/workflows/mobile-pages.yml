@@ -1,0 +1,45 @@
+name: mobile-pages
+on:
+  push:
+    branches: [main]
+    paths: ['mobile-site/**', '.github/workflows/mobile-pages.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: mobile-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
+      - name: Verify public artifact allowlist
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          from urllib.parse import urlsplit
+          root=Path('mobile-site')
+          allowed={'index.html','app.css','app.js','connection.json','icon.svg','manifest.webmanifest','.nojekyll'}
+          assert {p.name for p in root.iterdir()}==allowed
+          assert all(p.is_file() and not p.is_symlink() for p in root.iterdir())
+          origin=json.loads((root/'connection.json').read_text())
+          assert set(origin)=={'origin'}
+          u=urlsplit(origin['origin'])
+          assert u.scheme=='https' and u.hostname.endswith('.trycloudflare.com')
+          assert not u.username and not u.password and not u.query and not u.fragment
+          PY
+          node --check mobile-site/app.js
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
+        with:
+          path: mobile-site
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
