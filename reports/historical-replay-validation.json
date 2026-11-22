@@ -1,0 +1,29 @@
+{
+  "code_commit": "312387cded4fb362f43e68e62323bd61ca470d11",
+  "run_id": 45025646519,
+  "url": "https://github.com/linhpmvpub/Narrative/actions/runs/45025646519",
+  "status": "success",
+  "sqlite": {
+    "passed": 491,
+    "seconds": 85.83
+  },
+  "postgresql": {
+    "passed": 491,
+    "seconds": 161.31
+  },
+  "focused_local": {
+    "passed": 56,
+    "seconds": 11.76
+  },
+  "mypy_files": 98,
+  "dependency_audit": "passed",
+  "migrations_demo_replay_downgrade": "passed",
+  "private_source_upload": false,
+  "delivery": "disabled",
+  "full_local_sqlite": {
+    "passed": 491,
+    "seconds": 662.09,
+    "warnings": 1,
+    "warning_kind": "upstream StarletteDeprecationWarning"
+  }
+}

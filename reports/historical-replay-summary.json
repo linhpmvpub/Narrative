@@ -1,0 +1,177 @@
+{
+  "track": "HISTORICAL_ARCHIVE_RECONSTRUCTION_AI",
+  "packet_id": "a1e0c0e7f5d4e2a150a920daad1333a98ca66bd81444166123dfb40f0037516d",
+  "clusters": 60,
+  "passages": 180,
+  "profiles": {
+    "financial_expert": 60,
+    "fund_manager": 60,
+    "retail_investor": 60
+  },
+  "counts": {
+    "development_total": 75,
+    "unanimous": 154,
+    "development_resolved": 75,
+    "development_language_matches": 61,
+    "disputed": 26,
+    "calibration_total": 48,
+    "calibration_resolved": 48,
+    "calibration_language_matches": 41,
+    "holdout_total": 57,
+    "holdout_resolved": 56,
+    "holdout_language_matches": 41,
+    "clean_holdout_resolved": 39,
+    "clean_holdout_language_matches": 28
+  },
+  "language_agreement": {
+    "development": {
+      "passages": 75,
+      "resolved": 75,
+      "language_matches": 61,
+      "agreement": 0.8133333333333334,
+      "cluster_bootstrap_95_interval": [
+        0.7333333333333333,
+        0.8933333333333333
+      ],
+      "resolved_clusters": 25
+    },
+    "calibration": {
+      "passages": 48,
+      "resolved": 48,
+      "language_matches": 41,
+      "agreement": 0.8541666666666666,
+      "cluster_bootstrap_95_interval": [
+        0.75,
+        0.9375
+      ],
+      "resolved_clusters": 16
+    },
+    "holdout": {
+      "passages": 57,
+      "resolved": 56,
+      "language_matches": 41,
+      "agreement": 0.7321428571428571,
+      "cluster_bootstrap_95_interval": [
+        0.6071428571428571,
+        0.8571428571428571
+      ],
+      "resolved_clusters": 19
+    },
+    "clean_holdout": {
+      "passages": 39,
+      "resolved": 39,
+      "language_matches": 28,
+      "agreement": 0.717948717948718,
+      "cluster_bootstrap_95_interval": [
+        0.5641025641025641,
+        0.8461538461538461
+      ],
+      "resolved_clusters": 13
+    }
+  },
+  "reference_method": "UNANIMOUS_OR_SOURCE_ADJUDICATED_FULL_LABEL_TUPLE",
+  "status": "BLIND_REVIEW_COMPLETE",
+  "adjudicated_passages": 26,
+  "deferred_passages": 1,
+  "human_labels": 0,
+  "push_precision": null,
+  "two_hop_recall": null,
+  "stock_prediction_accuracy": null,
+  "graph_promotions": 0,
+  "delivery": "disabled",
+  "limitations": [
+    "AI consensus is not human truth or independent causal identification",
+    "Historical LLM pretraining contamination cannot be excluded",
+    "Archive reconstruction is not first-seen production replay",
+    "Financial filing sample is not all market news; no two-hop graph evaluated",
+    "Three sampling strata do not guarantee positive/negative class proportions",
+    "Intervals resample issuer-period clusters; common issuer/model biases remain",
+    "Direction and quantified-effect labels are reference collection, not scored predictions",
+    "Cross-split exact reuse/exposed H20 passages excluded only from clean subset",
+    "Near-duplicate boilerplate and implicit prior knowledge may remain"
+  ],
+  "confusion_counts": [
+    {
+      "reference": "ISSUER_ATTRIBUTION",
+      "prediction": "ISSUER_ATTRIBUTION",
+      "count": 27
+    },
+    {
+      "reference": "ISSUER_ATTRIBUTION",
+      "prediction": "NO_CAUSAL_CLAIM",
+      "count": 10
+    },
+    {
+      "reference": "ISSUER_ATTRIBUTION",
+      "prediction": "UNCERTAIN_OR_FORWARD_LOOKING",
+      "count": 1
+    },
+    {
+      "reference": "NO_CAUSAL_CLAIM",
+      "prediction": "ISSUER_ATTRIBUTION",
+      "count": 4
+    },
+    {
+      "reference": "NO_CAUSAL_CLAIM",
+      "prediction": "NO_CAUSAL_CLAIM",
+      "count": 107
+    },
+    {
+      "reference": "NO_CAUSAL_CLAIM",
+      "prediction": "UNCERTAIN_OR_FORWARD_LOOKING",
+      "count": 12
+    },
+    {
+      "reference": "UNCERTAIN_OR_FORWARD_LOOKING",
+      "prediction": "ISSUER_ATTRIBUTION",
+      "count": 1
+    },
+    {
+      "reference": "UNCERTAIN_OR_FORWARD_LOOKING",
+      "prediction": "NO_CAUSAL_CLAIM",
+      "count": 8
+    },
+    {
+      "reference": "UNCERTAIN_OR_FORWARD_LOOKING",
+      "prediction": "UNCERTAIN_OR_FORWARD_LOOKING",
+      "count": 9
+    }
+  ],
+  "label_provenance": {
+    "retail_investor": "3e38db2d7b354f338fd9a354336da264cd6176df2550ed3fe2e2e29938f8a589",
+    "fund_manager": "bf4b71b86fc68394b4775939e124221a875fdc405c476dd627bc517a7806a503",
+    "financial_expert": "4537a39ebba4896e7d4a6a92f0daf65471ae99394c246d4a77925833c2ec454e",
+    "adjudication": "c422ff5fd2cf123c72162b3efc6ba89676afef37097e17ed0f59933ebc72eb89"
+  },
+  "freeze_code_commit": "9366c586c182bd1ec40eb5069811ac8453396495",
+  "source_documents_uploaded": false,
+  "ticker_clusters": {
+    "MU": 17,
+    "AMD": 16,
+    "NVDA": 15,
+    "DELL": 8,
+    "SNDK": 4
+  },
+  "final_reference_counts": {
+    "language": {
+      "NO_CAUSAL_CLAIM": 123,
+      "ISSUER_ATTRIBUTION": 38,
+      "UNCERTAIN_OR_FORWARD_LOOKING": 18
+    },
+    "impact_sign": {
+      "UNKNOWN": 130,
+      "NEGATIVE": 24,
+      "MIXED": 12,
+      "POSITIVE": 13
+    },
+    "numeric_effect_supported": 17
+  },
+  "posthoc_prior_204_overlap_audit": {
+    "method": "word-trigram Jaccard >=0.8",
+    "prior_text_cases": 132,
+    "matching_passages": 0,
+    "holdout_matching_passages": 0,
+    "changes_frozen_scores": false,
+    "not_proof_of_no_exposure": true
+  }
+}
