@@ -123,3 +123,10 @@ def extractions():
             return extraction_feed(conn)
     finally:
         engine.dispose()
+
+
+@router.get("/impact-cases")
+def impact_cases():
+    from engine.impact_cases import case_feed
+
+    return case_feed()

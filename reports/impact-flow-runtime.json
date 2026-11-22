@@ -1,0 +1,25 @@
+{
+  "case_input_sha256": "e03d6487db08767c23cfe8aee28425a89ee57142ec1c65de56d53933195eacd4",
+  "receipt_sha256": "36bef767047349b8d264fe17b69eba06d86681cfe02076404b3f1586908c48b0",
+  "review_roles": 3,
+  "review_kind": "AI_SIMULATED",
+  "human_reviews": 0,
+  "real_case_count": 1,
+  "source_artifacts": 3,
+  "general_graph_promotions": 0,
+  "canonical_writes": 0,
+  "notification_delivery": "disabled",
+  "case_read_seconds": 0.322,
+  "prospective_evaluation": {
+    "status": "WAITING_FOR_ELIGIBLE_FILING_DATE",
+    "earliest_date_utc": "2026-11-23",
+    "new_predictions": 0,
+    "new_labels": 0
+  },
+  "limitations": [
+    "Historical worked case, not prospective evaluation",
+    "Issuer reporting is not independent causal identification",
+    "No price/cash/tax counterfactual",
+    "No cloud database/source upload"
+  ]
+}

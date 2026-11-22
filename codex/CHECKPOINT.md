@@ -1,5 +1,15 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Real accounting impact flow (steps1–4) — 2026-11-22 (latest)
+
+- User authorized continuing1–4, local data only/no cloud migration, notifications off. Selected historical NVDA H20 quarter ending2025-04-27 with SEC10-Q, issuer release and companyfacts. Source files/three AI reviews/sealed receipt stored only in ignored source-cache/impact-cases/nvda-h20-q1-fy2026. Do not ingest duplicates or call this unseen evaluation.
+- Added exact-context XBRL/USD/issuer/period/dimension normalization and same-accession companyfacts corroboration; accounting identity and charge bounds, comparable prior-year dates, product-category baseline share separated from affected fraction. First supported issuer NVDA only. Reporting magnitude is conditional accounting arithmetic, not non-GAAP margin, full margin change, cash/price/tax effect or calibrated materiality.
+- Retail/fund independently reviewed original sources without computed output/each other votes; expert adjudicated source/two votes. All3 ACCEPT_REPORTED_ACCOUNTING_CASE, AI_SIMULATED,0human reviews. Found/fixed newline packaging from original capture bytes, rechecked3raw hashes. Not independent causal identification. General graph stays40candidate, no approvals/canonical events/alerts created.
+- Added read-only private feed impact-cases endpoint and event-scoped chain in map evidence panel. Actual availability is review receipt time2026, not event date2025. Hash/role/input/time checks; withdrawn/corrupt/missing sources hide current case; cutoff cannot backdate availability. No DB schema change,0016; no Pages data/Cloud deployment.
+- Focused68 tests passed4.94s including16 new accounting/case regressions and existing frozen/prospective checks. Ruff/mypy97files/JS passed. Full CI/browser pending. Runtime report impact-flow-runtime.json includes only aggregate/hash, no private case evidence. Case read0.322s locally.
+- Step4 preflight explicitly WAITING_FOR_ELIGIBLE_FILING_DATE earliest2026-11-23 UTC;0new predictions/labels. Need new filings before genuine prospective evaluation; keep frozen protocol unchanged. Next: review current case UI, broaden source-backed cases/issuer mappings, and obtain independent mechanism/counterevidence before general relationship approval. See docs/reported-impact-cases.md.
+
+
 ## GitHub Pages mobile entry — 2026-11-22 (latest)
 
 - User requested github.io mobile access. Enabled Pages via authenticated GitHub API (existing repo public, admin permission) with build_type workflow. Public responsive entry site under mobile-site only; fixed target https://linhpmvpub.github.io/Narrative/. No database/token/private snapshots; no public credential form.

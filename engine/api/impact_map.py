@@ -289,6 +289,9 @@ def live_map(user: User, as_of: datetime | None = None):
 
             # Informational overlay only: never inserted into causal nodes/edges/scenario inputs.
             graph["baseline_exposure"] = approved_shares(conn, cutoff)
+            from engine.impact_cases import case_feed
+
+            graph["impact_cases"] = case_feed(cutoff)
             graph["nodes"].extend(reported.values())
             return graph
     finally:
