@@ -118,7 +118,7 @@ def parse_feed(body, now):
             )
         except ValueError:
             rejected += 1
-        if len(rows) + rejected >= 500:
+        if len(rows) + rejected > 500:
             raise ValueError("Feed exceeds bounded item count")
     if rejected and not rows:
         raise ValueError("No valid entries")

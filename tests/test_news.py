@@ -192,6 +192,11 @@ def test_authenticated_news_inbox(client, identities, db):
     assert response.status_code == 200
     payload = response.json()
     assert payload["items"][0]["impact"] == "UNKNOWN"
+    assert datetime.fromisoformat(payload["items"][0]["first_seen_at"]).tzinfo is not None
+    source_state = client.get("/api/v0/news/sources", headers=headers(identities[0])).json()[
+        "items"
+    ][0]
+    assert datetime.fromisoformat(source_state["last_success"]).tzinfo is not None
     assert client.get("/api/v0/news/sources", headers=headers(identities[0])).status_code == 200
     assert (
         client.get(

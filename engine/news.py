@@ -229,9 +229,9 @@ def status(engine):
             "category": r["config"]["category"],
             "interval_seconds": r["config"]["interval_seconds"],
             "status": r["last_status"] if r["config"]["enabled"] else "DISABLED",
-            "last_success": r["last_success"],
-            "last_attempt": r["last_attempt"],
-            "next_poll_at": r["next_poll_at"],
+            "last_success": utc(r["last_success"]) if r["last_success"] else None,
+            "last_attempt": utc(r["last_attempt"]) if r["last_attempt"] else None,
+            "next_poll_at": utc(r["next_poll_at"]),
             "stale": r["last_success"] is None
             or (now - utc(r["last_success"])).total_seconds()
             > max(600, r["config"]["interval_seconds"] * 3),

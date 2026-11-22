@@ -7,6 +7,7 @@ from sqlalchemy import select
 
 from engine.api.accounts import Principal, principal
 from engine.db import database
+from engine.models.contracts import utc
 from engine.models.schema_v13 import news_items, news_revisions
 from engine.news import status
 
@@ -49,7 +50,7 @@ def feed(
                 "id": row["id"],
                 "source_id": row["source_id"],
                 "version": row["version"],
-                "first_seen_at": row["first_seen_at"],
+                "first_seen_at": utc(row["first_seen_at"]),
                 "also_seen_in": [],
                 **row["payload"],
             }
@@ -82,6 +83,6 @@ def history(item_id: str):
             )
         if not rows:
             raise HTTPException(404, "News item not found")
-        return {"items": [dict(r) for r in rows]}
+        return {"items": [{**dict(r), "received_at": utc(r["received_at"])} for r in rows]}
     finally:
         engine.dispose()
