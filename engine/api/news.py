@@ -66,6 +66,17 @@ def feed(
         engine.dispose()
 
 
+@router.get("/clusters")
+def clusters():
+    from engine.news_clusters import analyze
+
+    engine = database()
+    try:
+        return analyze(engine)
+    finally:
+        engine.dispose()
+
+
 @router.get("/{item_id}/history")
 def history(item_id: str):
     engine = database()

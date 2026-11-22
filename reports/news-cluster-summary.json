@@ -1,0 +1,15 @@
+{
+  "algorithm": "news-grouping-v1",
+  "as_of": "2026-11-22T08:13:32.416433+00:00",
+  "source_items": 135,
+  "cluster_count": 100,
+  "truncated": false,
+  "snapshot_sha256": "fe1f3a48cf2c8f71e76a1f3abb4d683f2a6a956e313797b2176446ca9516d4d1",
+  "delivery": "disabled",
+  "canonical_events_created": 0,
+  "graph_modified": false,
+  "multi_article_clusters": 0,
+  "multi_publisher_clusters": 0,
+  "potential_conflict_clusters": 0,
+  "impact_ready_clusters": 0
+}

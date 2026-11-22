@@ -3,6 +3,7 @@
   "checks": [
     "authenticated_news",
     "source_filter",
+    "candidate_clusters_and_impact_blockers",
     "mobile_no_overflow",
     "token_not_persisted",
     "logout_clears_content",
