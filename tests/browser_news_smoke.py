@@ -54,10 +54,51 @@ with sync_playwright() as p:
 
     assert page.request.get("http://127.0.0.1:8890/adjudicate").status == 404
 
+    # Intercepted presentation only; no production claim or event writes.
+    fake_card = {
+        "headline": "Synthetic reviewed Micron event",
+        "excerpt": "<script>synthetic only</script>",
+        "version": 2,
+        "published_at": "2026-11-22T08:00:00Z",
+        "captured_at": "2026-11-22T09:00:00Z",
+        "available_at": "2026-11-22T10:00:00Z",
+        "author_kind": "AI_SIMULATED",
+        "reviewer_kind": "AI_SIMULATED",
+        "measurement": {"new_value": None},
+        "source_url": "https://example.com/synthetic",
+    }
+    reviewed = {
+        "enabled": True,
+        "items": [fake_card],
+        "as_of": "2026-11-22T10:01:00Z",
+        "withheld_count": 0,
+        "truncated": False,
+    }
+    page.route("**/api/v0/news/reviewed*", lambda route: route.fulfill(json=reviewed))
+    page.locator("#refresh").click()
+    expect(page.locator("#reviewed-list")).to_contain_text("Synthetic reviewed Micron event")
+    expect(page.locator("#reviewed-list")).to_contain_text("Agent AI")
+    expect(page.locator("#reviewed-list")).to_contain_text("Bản 2")
+    expect(page.locator("#reviewed-list script")).to_have_count(0)
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    reviewed["items"] = []
+    reviewed["withheld_count"] = 1
+    page.locator("#refresh").click()
+    expect(page.locator("#reviewed-list .news-card")).to_have_count(0)
+    expect(page.locator("#reviewed-list")).to_contain_text("1 sự kiện không còn đủ điều kiện")
+    page.unroute("**/api/v0/news/reviewed*")
+    page.route(
+        "**/api/v0/news/reviewed*",
+        lambda route: route.fulfill(status=503, json={"message": "test unavailable"}),
+    )
+    page.locator("#refresh").click()
+    expect(page.locator("#reviewed-list")).to_contain_text("Đã ẩn sự kiện")
+    expect(page.locator("#news-list .news-card").first).to_be_visible()
     page.locator("#logout").click()
 
     expect(page.locator("#news-list")).to_be_empty()
     expect(page.locator("#cluster-list")).to_be_empty()
+    expect(page.locator("#reviewed-list")).to_be_empty()
 
     expect(page.locator("#workspace")).to_be_hidden()
 
@@ -71,6 +112,10 @@ with sync_playwright() as p:
             "visible_articles": count,
             "checks": [
                 "authenticated_news",
+                "reviewed_card_provenance_and_correction",
+                "withdrawn_card_removed",
+                "reviewed_endpoint_failure_clears_cards",
+                "source_text_not_html",
                 "source_filter",
                 "candidate_clusters_and_impact_blockers",
                 "mobile_no_overflow",

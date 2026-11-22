@@ -63,3 +63,13 @@ Bộ đọc chọn phiên bản canonical mới nhất đã available tại cuto
 Kết quả có items, withheld với lý do, examined và truncated nếu vượt giới hạn. Truy vấn không ghi intake/receipt. **Snapshot lịch sử mô tả những gì hợp lệ ở thời điểm đó**, không xác nhận đủ điều kiện hôm nay: thu hồi sau cutoff không xóa trạng thái hợp lệ trước cutoff. Riêng rights_status chưa có lịch sử versioned; source đang blocked sẽ luôn bị loại ở mọi cutoff, được khai báo bằng CURRENT_BLOCK_OVERRIDES_HISTORICAL_SNAPSHOT. Không suy ra quyền thương mại từ pending hoặc approved của source trong luồng phát triển này.
 
 Các tests dùng nguồn và phê duyệt tổng hợp trong DB riêng. Browser kiểm tra ghi mới/trùng/sửa và lỗi stale bằng request đã intercept, không gửi thao tác ghi đến DB thật. Tiếp theo mới nối snapshot hợp lệ vào feed thông tin với citation/thời điểm; graph và tác động vẫn cần kiểm chứng riêng.
+
+## Feed thông tin riêng tư từ canonical news
+
+Trang /news có khu vực Sự kiện đã kiểm duyệt trích đoạn, tách khỏi bài RSS chưa thẩm định. API GET /api/v0/news/reviewed yêu cầu tài khoản, trả trạng thái hiện tại (không hỗ trợ replay/as_of). Gateway chỉ mở GET endpoint này; API review/canonical operator vẫn đóng. Đây là inbox nguồn chung cho các tài khoản được cấp quyền, tương tự các bài RSS, chưa cá nhân hóa theo subscription.
+
+Mỗi request chạy lại bộ kiểm tra snapshot ở thời điểm hiện tại. Trích đoạn, số liệu/unit/kỳ/basis, citation, source revision/hash, ngày đăng/nhận/nhập và khai báo loại người lập/người duyệt được đưa vào allowlist. Không trả author/reviewer ID, claim/review ID, uncertainties, rationale, occurrence identity, comparison_basis ghi tự do hoặc lý do withholding chi tiết. Không ghi thẻ cache vào DB: thu hồi/sửa nguồn/blocked sẽ loại ngay ở lần tải kế tiếp; bản sửa hợp lệ thay phiên bản cũ, duplicate không nhân thẻ.
+
+Giao diện kiểm tra mỗi60 giây khi tab mở; đây không phải stream cập nhật tức thì. Khi tải lại hoặc lỗi, thẻ cũ bị xóa để không tiếp tục hiển thị như còn hợp lệ. Khi tab bị ẩn, xóa khu vực đã duyệt; khi quay lại thì tải mới. Nếu endpoint phần đã duyệt lỗi, các bài RSS vẫn tải bình thường. Logout xóa token và nội dung. Không lưu nội dung trong localStorage hoặc cho phép HTTP cache.
+
+Giới hạn mặc định100, tối đa500 ứng viên canonical; UI xét200. examined/truncated/withheld_count mô tả phạm vi, không bảo đảm bao phủ toàn thị trường. Bộ lọc nguồn chỉ áp dụng bài RSS, khu vực đã duyệt xét toàn bộ nguồn. DEV_INFORMATIONAL_FEED=false trả enabled=false và danh sách trống. Thẻ luôn ghi tác động UNKNOWN, graph/impact eligibility false; đây không phải đánh giá nhân quả, khuyến nghị đầu tư hay xác nhận quyền thương mại. Chưa chiếu các news này lên bản đồ graph.

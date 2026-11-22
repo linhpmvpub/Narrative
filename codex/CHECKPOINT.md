@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Reviewed canonical news in private informational feed — 2026-11-22 (latest)
+
+- Added engine/news_feed.py and authenticated GET /api/v0/news/reviewed, current-only revalidated snapshot projection. Shared source inbox for provisioned accounts; allowlisted excerpt/numeric measurement/citation/revision/hash/published-captured-ingested times/actor-kind declarations. No private notes, reviewer identities, occurrence identity or withheld reasons. No durable card writes; duplicate one card, correction replaces, source edits/revoked approval/blocked source withhold at next request. Historical query cannot restore revoked content through member endpoint.
+- /news adds reviewed informational section, distinct from raw RSS and no impact inference. Clears old reviewed cards on refresh/failure/tab hide/logout; refreshes every60s while visible, keeps raw RSS available on reviewed-endpoint failure. Source filter applies only raw RSS. Gateway adds GET reviewed only; operator routes remain blocked. No Cloudflare tunnel started or remote connection claimed.
+- Actual schema0015 unchanged; backend8888/gateway8890 restarted hidden, readiness and authenticated gateway projection/no-store verified.51 events/versions,0alerts,0news claims/promotions;0 real cards. No fabricated reviews or production writes. RSS worker retained, X off, SEND_NOTIFICATIONS=false, ALLOW_SYNTHETIC_LIVE=false, LLM_MODE=none.
+- Focused16 tests passed46.24s; Ruff, mypy85files, JS syntax and desktop/mobile browser live read/intercepted synthetic card correction/withdrawal/error/XSS checks passed. All15 protected originals unchanged. Full GitHub CI pending; update after completion.
+- Next: source-backed real claim/review workflow and measured exposure/materiality evidence before promoting news into relationship/impact map. Consider filter/pagination for reviewed cards and source rights temporal audit; neither collection nor review implies causal/price impact. UI can display reviewed cards now, but actual corpus has no approved news claims yet. See docs/news-claim-review.md.
+
+
 ## News canonical controls and temporal snapshot — 2026-11-22 (latest)
 
 - Added explicit canonical form after intake preparation in local /news-review: new/duplicate/correction, target selector or manual claim ID, occurrence identity, rationale and unchecked confirmation. Target selection copies stored occurrence_window; changes clear confirmation. Ingestion uses the exact prepared hash; server revalidates, stale errors displayed. Busy guard and reload/logout epochs prevent stale response disclosure. Operator snapshot form accepts timezone-aware ISO cutoff; member/gateway access remains blocked.

@@ -2,6 +2,10 @@
   "visible_articles": 100,
   "checks": [
     "authenticated_news",
+    "reviewed_card_provenance_and_correction",
+    "withdrawn_card_removed",
+    "reviewed_endpoint_failure_clears_cards",
+    "source_text_not_html",
     "source_filter",
     "candidate_clusters_and_impact_blockers",
     "mobile_no_overflow",

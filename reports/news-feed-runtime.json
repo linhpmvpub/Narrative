@@ -1,0 +1,15 @@
+{
+  "schema": "0015",
+  "counts": {
+    "rie_events": 51,
+    "rie_event_versions": 51,
+    "rie_alerts": 0,
+    "rie_news_claims": 0,
+    "rie_news_promotions": 0
+  },
+  "reviewed_cards": 0,
+  "withheld_count": 0,
+  "delivery": "disabled",
+  "gateway_read_verified": true,
+  "production_writes": 0
+}

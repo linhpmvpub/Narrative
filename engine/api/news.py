@@ -97,3 +97,17 @@ def history(item_id: str):
         return {"items": [{**dict(r), "received_at": utc(r["received_at"])} for r in rows]}
     finally:
         engine.dispose()
+
+
+@router.get("/reviewed")
+def reviewed(limit: int = Query(100, ge=1, le=500)):
+    from engine.news_feed import reviewed_feed
+
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            return reviewed_feed(conn, limit)
+    except ValueError as exc:
+        raise HTTPException(409, str(exc)) from None
+    finally:
+        engine.dispose()
