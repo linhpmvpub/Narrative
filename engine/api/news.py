@@ -145,3 +145,15 @@ def company_profile_framework():
     from engine.company_profiles import framework
 
     return framework()
+
+
+@router.get("/profile-rss")
+def profile_rss(as_of: AwareDatetime | None = None):
+    from engine.profile_news import candidate_feed
+
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            return candidate_feed(conn, as_of)
+    finally:
+        engine.dispose()

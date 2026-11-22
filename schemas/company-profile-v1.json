@@ -222,6 +222,7 @@
       "from_kinds": [
         "facility",
         "factor",
+        "input",
         "location",
         "supplier"
       ],
@@ -438,6 +439,115 @@
           "quote"
         ],
         "title": "Evidence",
+        "type": "object"
+      },
+      "FactorBinding": {
+        "additionalProperties": false,
+        "description": "Curated literal topic/context/change groups, never a financial event classifier.",
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "factor_id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Factor Id",
+            "type": "string"
+          },
+          "topic_terms": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Topic Terms",
+            "type": "array"
+          },
+          "context_terms": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Context Terms",
+            "type": "array"
+          },
+          "change_terms": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 30,
+            "minItems": 1,
+            "title": "Change Terms",
+            "type": "array"
+          },
+          "exclude_terms": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Exclude Terms",
+            "type": "array"
+          },
+          "scope": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Scope",
+            "type": "string"
+          },
+          "reviewed_at": {
+            "format": "date-time",
+            "title": "Reviewed At",
+            "type": "string"
+          },
+          "review_until": {
+            "format": "date-time",
+            "title": "Review Until",
+            "type": "string"
+          },
+          "max_news_age_days": {
+            "default": 14,
+            "maximum": 30,
+            "minimum": 1,
+            "title": "Max News Age Days",
+            "type": "integer"
+          },
+          "enabled": {
+            "default": true,
+            "title": "Enabled",
+            "type": "boolean"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "factor_id",
+          "topic_terms",
+          "context_terms",
+          "change_terms",
+          "scope",
+          "reviewed_at",
+          "review_until",
+          "evidence"
+        ],
+        "title": "FactorBinding",
         "type": "object"
       },
       "MetricObservation": {
@@ -1023,6 +1133,14 @@
         },
         "maxItems": 200,
         "title": "Observations",
+        "type": "array"
+      },
+      "factor_bindings": {
+        "items": {
+          "$ref": "#/$defs/FactorBinding"
+        },
+        "maxItems": 50,
+        "title": "Factor Bindings",
         "type": "array"
       },
       "narratives": {

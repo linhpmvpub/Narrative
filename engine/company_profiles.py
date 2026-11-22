@@ -62,7 +62,7 @@ RELATIONS = {
     "APPLIES_TO": ("STRUCTURAL", {"factor", "contract"}, {"product", "market", "company", "facility"}),
     "DEPENDS_ON": ("STRUCTURAL", {"facility", "product", "segment"}, {"input", "supplier", "location", "factor"}),
     "AFFECTS_COST": ("MECHANISM", {"input", "factor", "contract"}, {"metric"}),
-    "AFFECTS_SUPPLY": ("MECHANISM", {"factor", "facility", "supplier", "location"}, {"product", "input"}),
+    "AFFECTS_SUPPLY": ("MECHANISM", {"factor", "facility", "supplier", "location", "input"}, {"product", "input"}),
     "AFFECTS_DEMAND": ("MECHANISM", {"factor", "market", "customer"}, {"product", "metric"}),
     "AFFECTS_ACCESS": ("MECHANISM", {"factor"}, {"market", "product"}),
     "AFFECTS_REVENUE": ("MECHANISM", {"market", "product", "factor"}, {"metric"}),
@@ -198,6 +198,33 @@ class MetricObservation(Strict):
         return self
 
 
+class FactorBinding(Strict):
+    """Curated literal topic/context/change groups, never a financial event classifier."""
+    id: ID
+    factor_id: ID
+    topic_terms: list[TEXT] = Field(min_length=1, max_length=20)
+    context_terms: list[TEXT] = Field(min_length=1, max_length=20)
+    change_terms: list[TEXT] = Field(min_length=1, max_length=30)
+    exclude_terms: list[TEXT] = Field(default_factory=list, max_length=20)
+    scope: TEXT
+    reviewed_at: AwareDatetime
+    review_until: AwareDatetime
+    max_news_age_days: int = Field(default=14, ge=1, le=30)
+    enabled: bool = True
+    evidence: list[Evidence] = Field(min_length=1, max_length=20)
+
+    @model_validator(mode="after")
+    def bounded_rule(self):
+        if not self.reviewed_at < self.review_until:
+            raise ValueError("Binding review window invalid")
+        if (self.review_until - self.reviewed_at).total_seconds() > 90 * 86400:
+            raise ValueError("Binding must be rechecked within 90 days")
+        for term in [*self.topic_terms, *self.context_terms, *self.change_terms, *self.exclude_terms]:
+            if not 2 <= len(term.strip()) <= 80 or term != term.strip():
+                raise ValueError("Invalid literal binding term")
+        return self
+
+
 class ProfileBundle(Strict):
     schema_version: Literal["company-profile-v1"] = "company-profile-v1"
     id: ID
@@ -215,6 +242,7 @@ class ProfileBundle(Strict):
     nodes: list[Node] = Field(min_length=1, max_length=200)
     relationships: list[Relationship] = Field(max_length=300)
     observations: list[MetricObservation] = Field(default_factory=list, max_length=200)
+    factor_bindings: list[FactorBinding] = Field(default_factory=list, max_length=50)
     narratives: list[Narrative] = Field(default_factory=list, max_length=20)
     events: list[Event] = Field(default_factory=list, max_length=100)
     author_kind: Literal["AI_ASSISTED_SOURCE_EXTRACTION"] = "AI_ASSISTED_SOURCE_EXTRACTION"
@@ -223,7 +251,7 @@ class ProfileBundle(Strict):
     def coherent(self):
         for rows, key in ((self.sources, "id"), (self.components, "key"), (self.nodes, "id"),
                           (self.relationships, "id"), (self.narratives, "id"), (self.events, "id"),
-                          (self.observations, "id")):
+                          (self.observations, "id"), (self.factor_bindings, "id")):
             if len({getattr(r, key) for r in rows}) != len(rows):
                 raise ValueError("Duplicate identity")
         nodes = {n.id: n for n in self.nodes}
@@ -258,12 +286,22 @@ class ProfileBundle(Strict):
                 raise ValueError("Observation requires a metric node")
             if o.period_end > self.snapshot_at.date():
                 raise ValueError("Future observation period")
-        items: list[Component | Relationship | Event | MetricObservation] = [
-            *self.components, *self.relationships, *self.events, *self.observations]
+        items: list[Component | Relationship | Event | MetricObservation | FactorBinding] = [
+            *self.components, *self.relationships, *self.events, *self.observations,
+            *self.factor_bindings]
         for item in items:
             if any(e.source_id not in source_ids for e in item.evidence):
                 raise ValueError("Missing evidence source")
         sources = {s.id: s for s in self.sources}
+        for binding in self.factor_bindings:
+            if binding.factor_id not in nodes or nodes[binding.factor_id].kind not in {
+                "factor", "input", "supplier", "market", "facility", "location"
+            }:
+                raise ValueError("Binding requires a scoped economic factor")
+            if binding.reviewed_at > self.available_at or any(
+                sources[e.source_id].retrieved_at > binding.reviewed_at for e in binding.evidence
+            ):
+                raise ValueError("Binding review must follow source capture and precede availability")
         for r in self.relationships:
             if any(sources[e.source_id].retrieved_at > r.known_at for e in r.evidence):
                 raise ValueError("Relationship knowledge cannot predate captured evidence")
@@ -313,8 +351,9 @@ def verify_sources(directory, bundle):
         if hashlib.sha256(raw).hexdigest() != s.sha256:
             raise ValueError("Source version changed")
         texts[s.id] = source_text(raw)
-    items: list[Component | Relationship | Event | MetricObservation] = [
-        *bundle.components, *bundle.relationships, *bundle.events, *bundle.observations]
+    items: list[Component | Relationship | Event | MetricObservation | FactorBinding] = [
+        *bundle.components, *bundle.relationships, *bundle.events, *bundle.observations,
+        *bundle.factor_bindings]
     for item in items:
         if any(e.quote not in texts[e.source_id] for e in item.evidence):
             raise ValueError("Evidence quote not in visible source")
@@ -391,11 +430,12 @@ def withdraw(directory):
         temporary.replace(pointer)
 
 
-def paths(bundle, event, narrative):
+def paths(bundle, event, narrative, *, effective_at=None):
     """Directed simple routes: <=3 structural and <=2 mechanism edges, max5 total."""
+    when = effective_at or bundle.snapshot_at
     edges = [r for r in bundle.relationships if r.status == "SOURCE_BACKED"
-             and r.known_at <= bundle.available_at and r.valid_from <= bundle.snapshot_at
-             and (r.valid_until is None or bundle.snapshot_at < r.valid_until)]
+             and r.known_at <= bundle.available_at and r.valid_from <= when
+             and (r.valid_until is None or when < r.valid_until)]
     # Company membership is established only by structural links, ignoring direction.
     connected = {bundle.company_id}
     for _ in range(len(bundle.nodes)):
@@ -480,6 +520,7 @@ def project(bundle):
             "nodes": [n.model_dump() for n in bundle.nodes],
             "relationships": [r.model_dump(mode="json") for r in bundle.relationships],
             "observations": [o.model_dump(mode="json") for o in bundle.observations],
+            "factor_bindings": [b.model_dump(mode="json") for b in bundle.factor_bindings],
             "sources": [{"id": s.id, "url": str(s.url), "sha256": s.sha256,
                          "published_at": s.published_at.isoformat(),
                          "retrieved_at": s.retrieved_at.isoformat()} for s in bundle.sources],
@@ -488,7 +529,7 @@ def project(bundle):
             "narratives": [n.model_dump(mode="json") for n in bundle.narratives]}
 
 
-def feed(as_of=None):
+def available_bundles(as_of=None):
     at = as_of or datetime.now(UTC)
     if at.tzinfo is None:
         raise ValueError("Aware cutoff required")
@@ -503,16 +544,21 @@ def feed(as_of=None):
                 raise ValueError("Profile directory outside root")
             b = load_bundle(directory)
             if b.available_at <= at:
-                items.append(project(b))
+                items.append(b)
         except (OSError, ValueError, KeyError, TypeError):
             withheld += 1
-    counts = Counter(item["id"] for item in items)
+    counts = Counter(item.id for item in items)
     duplicates = {id for id, n in counts.items() if n > 1}
-    withheld += sum(item["id"] in duplicates for item in items)
-    items = [item for item in items if item["id"] not in duplicates]
+    withheld += sum(item.id in duplicates for item in items)
+    items = [item for item in items if item.id not in duplicates]
     return {"items": items, "enabled": True, "as_of": at.isoformat(),
             "withheld": withheld, "truncated": len(directories) > 30,
             "component_catalog": COMPONENTS, "delivery": "disabled"}
+
+
+def feed(as_of=None):
+    result = available_bundles(as_of)
+    return {**result, "items": [project(b) for b in result["items"]]}
 
 
 def framework():

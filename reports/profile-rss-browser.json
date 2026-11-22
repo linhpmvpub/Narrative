@@ -1,0 +1,17 @@
+{
+  "widths": [
+    390,
+    1440
+  ],
+  "cards": 1,
+  "rss_copies": 2,
+  "unverified_and_missing_capture_disclosed": true,
+  "source_links": true,
+  "failure_withholds": true,
+  "recovery_restores": true,
+  "logout_clears": true,
+  "overflow": false,
+  "javascript_errors": [],
+  "writes": 0,
+  "delivery": "disabled"
+}

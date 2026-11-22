@@ -25,6 +25,7 @@ GET_PATHS = {
     "/api/v0/news/impact-cases",
     "/api/v0/news/profiles",
     "/api/v0/news/profile-framework",
+    "/api/v0/news/profile-rss",
     "/label",
     "/api/v0/annotations/packets",
     "/healthz",

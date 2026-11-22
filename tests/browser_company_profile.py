@@ -23,7 +23,7 @@ with sync_playwright() as p:
         expect(page.locator("#profile-list")).to_contain_text("MẪU LỊCH SỬ")
         expect(page.locator("#profile-list")).to_contain_text("Thách thức giả định")
         expect(page.locator("#profile-list article ol li")).to_have_count(3)
-        page.locator("#profile-list > details > summary").click()
+        page.locator("#profile-list > details > summary").first.click()
         page.locator("#profile-list article summary").click()
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
         assert page.locator("#profile-list article a").first.get_attribute("href").startswith(
