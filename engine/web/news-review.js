@@ -52,6 +52,7 @@ $('load-dossier').addEventListener('click',()=>run(async()=>{
  const d=await api('news-claims/source/'+encodeURIComponent(source.item_id)+'/dossier?ticker='+encodeURIComponent(ticker)+'&expected_payload_sha256='+source.payload_sha256);
  if(gen!==epoch||source?.revision_id!==revision||$('ticker').value!==ticker)return;
  const root=$('dossier-result');root.append(el('p','Nguồn v'+d.source.version+' · Số liệu có sẵn trước '+d.evidence_cutoff),el('p','Mức phơi nhiễm và materiality: chưa xác định. Quan hệ nhân quả: chưa xác minh.'));
+ const raw=d.raw_source_evidence;if(raw){root.append(el('p','Bản RSS: '+raw.status+' · Hash: '+raw.capture_sha256),el('p','Kiểm tra file hiện có, không chứng minh thời điểm lưu ban đầu. Bằng chứng bài viết: chưa đính kèm. Không phải xác minh độc lập hay phê duyệt tác động.'));}
  root.append(el('h3','Số liệu tài chính nền'));
  if(!d.financial_context.length)root.append(el('p','Chưa có số liệu nền hợp lệ trước thời điểm nhận tin.'));
  for(const c of d.financial_context){const box=el('article','');box.className='news-card';box.append(el('h4',c.label||c.metric),el('p',c.current.start+' → '+c.current.end+': '+c.current.value+' '+c.unit),el('p','Kỳ so sánh '+c.prior.start+' → '+c.prior.end+': '+c.prior.value+' '+c.unit));const a=el('a','Hồ sơ SEC');try{const u=new URL(c.filing_url);if(u.protocol==='https:'){a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';box.append(a);}}catch{}root.append(box);}

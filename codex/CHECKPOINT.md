@@ -1,5 +1,13 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## RSS evidence diagnostics in review dossiers — 2026-11-22 (latest)
+
+- Admin dossier and local operator UI now expose current raw-capture hash/integrity/entry-match diagnostics. Bounded bytes rehashed and parsed at revision cutoff; exactly one external_id and exact source fields required. Duplicate GUIDs ambiguous; missing/unreadable/corrupt/parse-failed/mismatch distinguished. No bytes/paths exposed, no gateway expansion or schema change.
+- Availability is LOCAL_CHECK_NOW_NOT_ORIGINAL_CAPTURE_TIME. Article evidence NOT_ATTACHED, independent corroboration false; no approval, causal inference or historical backdating. NEWS_CAPTURE_DIR shared API/worker setting with worker CLI override. Prior baseline/review/impact gates unchanged; no real claim or canonical write.
+- Focused9 tests passed15.96s; Ruff/mypy91files/JS passed. Full CI/runtime pending. Notifications and synthetic-live false, LLMnone, X off.
+- Next: separately attach bounded article captures and provenance to review packets, then source-bound issuer numeric claims with explicit periods/units and fresh review. Raw capture checks alone do not establish impact.
+
+
 ## Private raw RSS capture archive — 2026-11-22 (latest)
 
 - Implemented engine/news_capture.py: content-addressed bounded HTTP-decoded entity bytes before parsing, atomic no-overwrite publication, concurrent dedup, integrity-verifying reader. CLI default source-cache/rss-captures ignored by Git; optional --capture-dir. No schema/API/UI or canonical changes.

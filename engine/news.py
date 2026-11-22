@@ -244,7 +244,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("config/news-sources.json"))
     parser.add_argument("--once", action="store_true")
-    parser.add_argument("--capture-dir", type=Path, default=Path("source-cache/rss-captures"))
+    parser.add_argument(
+        "--capture-dir",
+        type=Path,
+        default=Path(os.getenv("NEWS_CAPTURE_DIR", "source-cache/rss-captures")),
+    )
     args = parser.parse_args()
     Settings.from_env()
     engine = database()

@@ -126,3 +126,47 @@ def test_dossier_rejects_changed_source_and_disabled_mode(
             .values(payload={"title": "changed"})
         )
     assert request(client, identities, setup).status_code == 409
+
+
+def test_dossier_capture_checks(client, identities, setup, enabled, db, tmp_path, monkeypatch):
+    from sqlalchemy import update
+    from test_news import rss
+
+    from engine.models.schema_v13 import news_revisions
+    from engine.news_capture import archive_capture
+
+    monkeypatch.setenv("NEWS_CAPTURE_DIR", str(tmp_path))
+
+    def evidence():
+        return request(client, identities, setup).json()["raw_source_evidence"]
+
+    assert evidence()["status"] == "UNAVAILABLE"
+    body = rss()
+    sha = archive_capture(tmp_path, body)
+    with db.begin() as conn:
+        conn.execute(update(news_revisions).values(capture_sha256=sha))
+    found = evidence()
+    assert found["status"] == "BYTES_AND_ENTRY_MATCH"
+    assert found["byte_integrity"] and found["revision_content_match"]
+    assert found["article_evidence"] == "NOT_ATTACHED"
+    assert not found["independent_corroboration"]
+    assert found["availability_basis"] == "LOCAL_CHECK_NOW_NOT_ORIGINAL_CAPTURE_TIME"
+    assert str(tmp_path) not in str(found) and "<rss>" not in str(found)
+    (tmp_path / (sha + ".rss")).write_bytes(b"tampered")
+    assert evidence()["status"] == "INTEGRITY_FAILED"
+    bodies = [
+        (rss("Micron changed title"), "ENTRY_MISMATCH_OR_AMBIGUOUS"),
+        (
+            body.replace(
+                b"</channel>", body.split(b"<channel>")[1].split(b"</channel>")[0] + b"</channel>"
+            ),
+            "ENTRY_MISMATCH_OR_AMBIGUOUS",
+        ),
+        (b"<malformed", "PARSE_FAILED"),
+    ]
+    for content, status in bodies:
+        sha = archive_capture(tmp_path, content)
+        with db.begin() as conn:
+            conn.execute(update(news_revisions).values(capture_sha256=sha))
+        assert evidence()["status"] == status
+        assert not evidence()["revision_content_match"]

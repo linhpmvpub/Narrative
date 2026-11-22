@@ -119,3 +119,23 @@ Artifact private: source-cache/news-live-review-20261122 chứa capture bytes, r
 Nguồn RSS dùng timestamp dateModified của bài; datePublished gốc khác. UI news hiển thị Mốc nguồn thay cho Đăng, reviewed card thêm source_timestamp_basis=SOURCE_REPORTED_NOT_VERIFIED_ORIGINAL_PUBLICATION. Field published_at giữ tương thích là timestamp do nguồn cung cấp, không chứng minh thời điểm đăng lần đầu. SQLite lưu datetime không timezone, được đọc lại theo UTC qua engine.models.contracts.utc; collector ghi datetime.now(UTC). Không backdate canonical availability.
 
 Raw RSS response cũ chưa được lưu nên không thể recompute capture hash; payload hash, exact quote span và HTML capture mới đã được kiểm tra. Giới hạn này được ghi trong review rationale. Bản ghi app có1 review operator AI_SIMULATED với hash3 artifact, không giả lập3 quyết định DB/human labels. Author/member và reviewer/operator là hai tài khoản khác nhau; pipeline giữ source/current review checks. Actual canonical tăng51→52,1 reviewed-news card,0exposure approvals,0alerts. Không auto-gắn tỷ trọng vào statement này.
+
+
+## RSS evidence in operator dossiers (2026-11-22)
+
+The admin-only dossier now includes raw_source_evidence, recomputed on each read.
+It verifies bounded local bytes against revision.capture_sha256, reparses using
+the current RSS parser at revision received_at, and requires exactly one matching
+external_id plus exact URL/title/summary/publication-field equality. Duplicate GUIDs
+are ambiguous. Missing, unreadable, corrupt, invalid XML and mismatched entries
+are distinct states; none constitute approval. No raw bytes or filesystem paths
+are returned. Member/gateway permissions remain unchanged.
+
+The local operator UI shows status/hash and warns that current file availability
+is not proof of original capture time. No file mtime is used to backdate evidence.
+Article evidence is explicitly NOT_ATTACHED; independent corroboration is false.
+Existing financial-context cutoff, claim review, canonical and impact gates remain
+unchanged. Archive availability is diagnostic, not a new automatic approval gate.
+Set NEWS_CAPTURE_DIR consistently for API and worker if using a nondefault archive;
+worker --capture-dir overrides that environment only for the worker. Default is
+source-cache/rss-captures. Historical missing captures remain unavailable.
