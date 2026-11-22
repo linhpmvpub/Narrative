@@ -1,0 +1,28 @@
+{
+  "code_sha": "981c46e3fd7f9a140bb5e6799b0661bf37bfec01",
+  "workflow_run_id": 45015849015,
+  "workflow_url": "https://github.com/linhpmvpub/Narrative/actions/runs/45015849015",
+  "conclusion": "success",
+  "sqlite_tests": 441,
+  "postgresql_tests": 441,
+  "focused_tests": 18,
+  "focused_seconds": 44.14,
+  "mypy_files": 89,
+  "real_news_claims_promoted": 1,
+  "review_personas": 3,
+  "review_kind": "AI_SIMULATED",
+  "human_reviews": 0,
+  "statistical_independence_claimed": false,
+  "actual_exposure_approvals": 0,
+  "alerts": 0,
+  "source_timestamp_caveat": "RSS published_at matches article dateModified, not original datePublished; UI labels source time.",
+  "raw_rss_capture_available": false,
+  "SEND_NOTIFICATIONS": false,
+  "ALLOW_SYNTHETIC_LIVE": false,
+  "LLM_MODE": "none",
+  "remaining": [
+    "Archive raw RSS response bytes and verify capture hashes for future evidence packets.",
+    "Extract source-bound numeric issuer claims with explicit period, unit and scale and fresh review.",
+    "Require independently supported causal linkage and effect-size evidence before materiality approval."
+  ]
+}
