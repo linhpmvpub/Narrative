@@ -1,0 +1,31 @@
+{
+  "code_commit": "79d37f3813b84682cacb7b11b32f1130f3499e61",
+  "run_id": 44991927565,
+  "url": "https://github.com/linhpmvpub/Narrative/actions/runs/44991927565",
+  "jobs": {
+    "verify": "success",
+    "dependency-audit": "success"
+  },
+  "final_collected_tests": 361,
+  "ci_sqlite_suite": "success",
+  "ci_postgresql_suite": "success",
+  "local_full_sqlite": {
+    "passed": 360,
+    "seconds": 398.77,
+    "warnings": 1,
+    "note": "Started before final review-handoff test addition"
+  },
+  "final_focused": {
+    "passed": 55,
+    "seconds": 1.78
+  },
+  "ruff": "passed",
+  "mypy_source_files": 72,
+  "protected_originals_verified": 15,
+  "delivery": "disabled",
+  "new_live_documents": 0,
+  "new_real_predictions": 0,
+  "new_agent_labels": 0,
+  "live_evaluation": "PENDING_ELIGIBLE_POST_FREEZE_FILINGS",
+  "artifacts_contain": "Synthetic tests and aggregate validation only"
+}
