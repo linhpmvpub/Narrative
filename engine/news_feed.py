@@ -40,6 +40,7 @@ def reviewed_feed(conn, limit=100):
                 "source_revision_id": item["source_revision_id"],
                 "source_payload_sha256": item["source_payload_sha256"],
                 "published_at": item["published_at"],
+                "source_timestamp_basis": "SOURCE_REPORTED_NOT_VERIFIED_ORIGINAL_PUBLICATION",
                 "captured_at": item["captured_at"],
                 "available_at": item["available_at"],
                 "author_kind": item["author_kind"],

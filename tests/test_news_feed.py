@@ -33,6 +33,7 @@ def test_shared_projection_is_allowlisted(client, identities, setup, enabled):
     result = response.json()
     assert result["mode"] == "REVIEWED_INFORMATIONAL_NEWS" and result["delivery"] == "disabled"
     card = result["items"][0]
+    assert card["source_timestamp_basis"] == "SOURCE_REPORTED_NOT_VERIFIED_ORIGINAL_PUBLICATION"
     assert card["excerpt"] == payload["claim"]["claim_text"]
     assert card["source_url"] == payload["claim"]["source_url"]
     assert card["materiality"] == "UNKNOWN" and not card["impact_eligible"]

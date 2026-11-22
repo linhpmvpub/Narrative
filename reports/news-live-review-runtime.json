@@ -1,0 +1,62 @@
+{
+  "schema": "0016",
+  "counts": {
+    "rie_events": 52,
+    "rie_event_versions": 52,
+    "rie_alerts": 0,
+    "rie_news_claims": 1,
+    "rie_news_claim_reviews": 1,
+    "rie_news_promotions": 1,
+    "rie_news_exposure_drafts": 0,
+    "rie_news_exposure_reviews": 0
+  },
+  "real_reviewed_news_cards": 1,
+  "review_personas": [
+    "RETAIL_INVESTOR_SIMULATED",
+    "FUND_MANAGER_SIMULATED",
+    "FINANCIAL_EXPERT_SIMULATED"
+  ],
+  "source_review_verdicts": [
+    "approve_narrow_attribution",
+    "approve_narrow_attribution",
+    "approve_narrow_attribution"
+  ],
+  "exposure_eligible": false,
+  "impact_eligible": false,
+  "materiality": "UNKNOWN",
+  "human_reviews": 0,
+  "statistical_independence_established": false,
+  "external_capture_status": [
+    {
+      "id": "cnbc_policy",
+      "url": "https://www.cnbc.com/2026/11/20/treasury-secretary-scott-bessent.html",
+      "status": 200,
+      "received_at": "2026-11-22T10:56:27.642757+00:00",
+      "content_sha256": "607e3a2ccbe68c6a4f4c901a725dc869ed443967e8e0bc87afd188cdde547fb9"
+    },
+    {
+      "id": "ap_policy",
+      "url": "https://apnews.com/article/88142455395552afe74caec3399a648b",
+      "status": 403,
+      "received_at": "2026-11-22T10:56:27.805623+00:00",
+      "content_sha256": "250f657eb9ca6b785af2e92fb91231e5d46fa07289d3e010da4afe0cacfd25ad"
+    },
+    {
+      "id": "nvidia_results",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027",
+      "status": 200,
+      "received_at": "2026-11-22T10:56:28.384720+00:00",
+      "content_sha256": "2e952b2165b23d8d40abd3fe49976f9e9adab508d8d20d61829c54156193e039"
+    }
+  ],
+  "review_artifact_sha256": {
+    "claim-review-packet.json": "808c1c4f693651e59599942c11fa171cc83093b3b8739aaff023169f2e085706",
+    "retail-review.json": "517f22e2724bd3ba8ec49dc68c496c48ade319c67ae720259eeb1c5db96d4580",
+    "fund-review.json": "eb1ea7e35132338914b759c888c296ea3ba9fb9ec94e84f8f05125aa486696c7",
+    "expert-adjudication.json": "d033b7eb0a211e8668a758111d2cc13611c283709c2ca11289b99571165ba213",
+    "rss-revision.json": "ea96ca7b5a8c765a934d88fcc1349328c3d126941627d43edc6d361d36506968"
+  },
+  "source_time_caveat": "RSS provided dateModified, not original datePublished; UI labels it source time",
+  "raw_rss_capture_available": false,
+  "delivery": "disabled"
+}

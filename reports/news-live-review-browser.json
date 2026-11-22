@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "actual_reviewed_claim_visible",
+    "AI_provenance_label",
+    "source_timestamp_not_original_publication_label",
+    "materiality_unknown",
+    "source_link",
+    "mobile_no_overflow",
+    "logout_clears"
+  ],
+  "browser_errors": [],
+  "browser_writes": 0
+}
