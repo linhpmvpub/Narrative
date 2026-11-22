@@ -1,0 +1,15 @@
+{
+  "local_profile_version": 3,
+  "new_factors": 3,
+  "new_bindings": 4,
+  "fresh_clusters": 12,
+  "fresh_pairs": 48,
+  "excluded_prior_clusters": 100,
+  "excluded_near_duplicates": 0,
+  "packet_sha256": "52ef9f8e145806dfda28842382a867fbb0ee178a50d41cb8556306cbbbcd2507",
+  "reference_status": "WAITING_FOR_REVIEWER_METHOD",
+  "independent_labels": 0,
+  "independent_accuracy": null,
+  "delivery": "disabled",
+  "private_data_exported": false
+}

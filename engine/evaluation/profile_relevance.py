@@ -5,6 +5,7 @@ The packet intentionally omits predictions and literal matching rules.
 """
 
 import json
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -22,7 +23,33 @@ def write_new(path, data):
         stream.write("\n")
 
 
-def freeze(conn, output: Path, *, count=60, at=None):
+def shingles(payload):
+    words = re.findall(r"\w+", (payload.get("title", "") + " "
+                               + payload.get("summary", "")).casefold())
+    return {tuple(words[i:i + 3]) for i in range(max(1, len(words) - 2))} if words else set()
+
+
+def prior_exposure(packet_paths):
+    clusters, texts, hashes = set(), [], []
+    for path in packet_paths:
+        packet = json.loads(path.read_text(encoding="utf-8"))
+        receipt = json.loads(path.with_name("freeze.json").read_text(encoding="utf-8"))
+        sha = digest(packet)
+        if sha != receipt["packet_sha256"]:
+            raise ValueError("Prior exposure packet integrity mismatch")
+        hashes.append(sha)
+        for row in packet:
+            if row["cluster"] not in clusters:
+                texts.append(shingles(row["article"]))
+            clusters.add(row["cluster"])
+    return clusters, texts, hashes
+
+
+def overlaps(text, previous):
+    return any(text and old and len(text & old) / len(text | old) >= 0.8 for old in previous)
+
+
+def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=()):
     if not 1 <= count <= 100:
         raise ValueError("Choose 1..100 article clusters")
     at = at or datetime.now(UTC)
@@ -58,7 +85,23 @@ def freeze(conn, output: Path, *, count=60, at=None):
                                  for k in ("title", "summary")):
             blocked.add(key)
         groups.setdefault(key, r)
-    articles = [r for key, r in groups.items() if key not in blocked][:count]
+    prior_clusters, prior_texts, prior_hashes = prior_exposure(exclude_packets)
+    articles: list = []
+    selected_texts: list = []
+    excluded_exposure = excluded_near_duplicates = 0
+    for key, r in groups.items():
+        if key in blocked:
+            continue
+        text = shingles(r["payload"])
+        if key in prior_clusters or overlaps(text, prior_texts):
+            excluded_exposure += 1
+            continue
+        if overlaps(text, selected_texts):
+            excluded_near_duplicates += 1
+            continue
+        if len(articles) < count:
+            articles.append(r)
+            selected_texts.append(text)
     if not articles:
         raise ValueError("No eligible articles")
     matched = {c["id"] for c in prediction["items"]}
@@ -96,6 +139,10 @@ def freeze(conn, output: Path, *, count=60, at=None):
         "predictions_sha256": digest(predictions), "clusters": len(articles),
         "pairs": len(packet), "sampling": "LATEST_VALID_DEDUPLICATED_URLS",
         "excluded_conflicting_or_invalid_clusters": len(blocked),
+        "excluded_prior_exposure": excluded_exposure,
+        "excluded_near_duplicates": excluded_near_duplicates,
+        "prior_packet_sha256": prior_hashes,
+        "requested_clusters": count,
         "mode": "DEVELOPMENT_RELEVANCE_AUDIT_NOT_INDEPENDENT_GOLD", "delivery": "disabled"}
     write_new(output / "freeze.json", receipt)
     return receipt
@@ -117,7 +164,8 @@ def evaluate(directory: Path, labels_path: Path):
             or any(type(v) is not bool for v in predictions.values())
             or len(votes) != len(ids) or {v["id"] for v in votes} != ids):
         raise ValueError("Exactly one prediction and reference per pair required")
-    if labels["reference_kind"] not in {"AI_DEVELOPMENT_REVIEW", "HUMAN_REVIEW"}:
+    if labels["reference_kind"] not in {"AI_DEVELOPMENT_REVIEW", "HUMAN_REVIEW",
+                                        "AI_CONSENSUS_REVIEW"}:
         raise ValueError("Explicit reference provenance required")
     counts = {"tp": 0, "fp": 0, "tn": 0, "fn": 0, "unresolved": 0}
     errors = []
@@ -147,24 +195,79 @@ def evaluate(directory: Path, labels_path: Path):
                         "Relevance only, not financial impact or push accuracy"]}
 
 
+def consensus(directory: Path, review_paths):
+    """Two declared independent reviews; disagreements remain unresolved, never majority-guessed."""
+    if len(review_paths) != 2:
+        raise ValueError("Exactly two independent review files required")
+    packet = json.loads((directory / "packet.json").read_text(encoding="utf-8"))
+    frozen = json.loads((directory / "freeze.json").read_text(encoding="utf-8"))
+    if digest(packet) != frozen["packet_sha256"]:
+        raise ValueError("Packet changed")
+    ids = {r["id"] for r in packet}
+    reviewers, reviews, hashes = set(), [], []
+    for path in review_paths:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        reviewed_at = datetime.fromisoformat(data["reviewed_at"])
+        if (data["packet_sha256"] != frozen["packet_sha256"]
+                or data["reference_kind"] != "AI_INDEPENDENT_REVIEW"
+                or data.get("predictions_accessed") is not False
+                or data.get("peer_labels_accessed") is not False
+                or not data.get("reviewer_id", "").strip()
+                or data["reviewer_id"] in reviewers
+                or reviewed_at.tzinfo is None
+                or not datetime.fromisoformat(frozen["at"]) <= reviewed_at <= datetime.now(UTC)):
+            raise ValueError("Independent reviewer identity, time or declarations invalid")
+        votes = data["labels"]
+        if len(votes) != len(ids) or {v["id"] for v in votes} != ids:
+            raise ValueError("Review coverage incomplete or duplicated")
+        for v in votes:
+            if (v["relevance"] not in {"RELEVANT", "NOT_RELEVANT", "INSUFFICIENT_CONTEXT"}
+                    or not v.get("rationale", "").strip()):
+                raise ValueError("Invalid reference label")
+        reviewers.add(data["reviewer_id"])
+        reviews.append({v["id"]: v for v in votes})
+        hashes.append(digest(data))
+    labels, disagreements = [], 0
+    for row in packet:
+        a, b = (r[row["id"]] for r in reviews)
+        agree = a["relevance"] == b["relevance"]
+        disagreements += int(not agree)
+        labels.append({"id": row["id"],
+                       "relevance": a["relevance"] if agree else "INSUFFICIENT_CONTEXT",
+                       "rationale": "Reviewer A: " + a["rationale"] + " Reviewer B: " + b["rationale"]})
+    return {"packet_sha256": frozen["packet_sha256"], "reference_kind": "AI_CONSENSUS_REVIEW",
+            "reviewer_ids": sorted(reviewers), "review_sha256": hashes,
+            "disagreements": disagreements, "independent_gold": False,
+            "independence_basis": "Declared separate contexts, not filesystem isolation or human truth",
+            "labels": labels}
+
+
 def main():
     import argparse
 
     from engine.db import database
 
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["freeze", "evaluate"])
+    parser.add_argument("action", choices=["freeze", "evaluate", "consensus"])
     parser.add_argument("--directory", required=True, type=Path)
     parser.add_argument("--labels", type=Path)
     parser.add_argument("--count", type=int, default=60)
+    parser.add_argument("--exclude-packet", type=Path, action="append", default=[])
+    parser.add_argument("--review", type=Path, action="append", default=[])
     args = parser.parse_args()
     if args.action == "freeze":
         db = database()
         try:
             with db.connect() as conn:
-                result = freeze(conn, args.directory, count=args.count)
+                result = freeze(conn, args.directory, count=args.count,
+                                exclude_packets=args.exclude_packet)
         finally:
             db.dispose()
+    elif args.action == "consensus":
+        result = consensus(args.directory, args.review)
+        write_new(args.directory / "consensus.json", result)
+        result = {"pairs": len(result["labels"]), "disagreements": result["disagreements"],
+                  "reference_kind": result["reference_kind"], "delivery": "disabled"}
     else:
         if not args.labels:
             parser.error("--labels required")
