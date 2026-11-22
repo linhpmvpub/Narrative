@@ -1,0 +1,26 @@
+{
+  "code_sha": "1ead1d1bc700558e20590ce792560e47f3e6022c",
+  "workflow_run_id": 45010717319,
+  "workflow_url": "https://github.com/linhpmvpub/Narrative/actions/runs/45010717319",
+  "conclusion": "success",
+  "sqlite_tests": 441,
+  "postgresql_tests": 441,
+  "focused_tests": 27,
+  "focused_seconds": 39.66,
+  "static_checks": [
+    "ruff",
+    "mypy 89 files",
+    "JavaScript syntax"
+  ],
+  "browser": "Live read-only map/feed and intercepted baseline meter/provenance/revocation/logout checks passed on mobile; zero production writes",
+  "schema": "0016",
+  "actual_published_baseline_shares": 0,
+  "send_notifications": false,
+  "allow_synthetic_live": false,
+  "llm_mode": "none",
+  "remaining": [
+    "Real source-backed news and exposure approvals",
+    "Attributable affected fraction and effect-size evidence before materiality scoring",
+    "Current-valid cutoff projection is not complete historical exposure replay"
+  ]
+}
