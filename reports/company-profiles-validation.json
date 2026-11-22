@@ -1,0 +1,33 @@
+{
+  "code_commit": "761fe4b4ae044fecc343acd10d01842d41ab6dbb",
+  "run_id": 45029835360,
+  "url": "https://github.com/linhpmvpub/Narrative/actions/runs/45029835360",
+  "status": "success",
+  "sqlite": {
+    "passed": 521,
+    "seconds": 82.65
+  },
+  "postgresql": {
+    "passed": 521,
+    "seconds": 157.59
+  },
+  "focused_local": {
+    "passed": 46,
+    "seconds": 4.98
+  },
+  "mypy_files": 99,
+  "js_syntax": "passed",
+  "dependency_audit": "passed",
+  "migration_demo_replay_downgrade": "passed",
+  "browser_widths": [
+    390,
+    1440
+  ],
+  "active_sample_version": 3,
+  "historical_cutoff_withholds": true,
+  "local_schema_optional_narratives_events": true,
+  "source_upload": false,
+  "delivery": "disabled",
+  "canonical_writes": 0,
+  "global_graph_promotions": 0
+}
