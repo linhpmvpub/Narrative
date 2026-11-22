@@ -1,5 +1,15 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Prospective pipeline implementation — 2026-11-22 (latest)
+
+- User requested completing collection/deduplication/prediction freeze while awaiting new filings, tests/checkpoint/GitHub. Added engine/evaluation/prospective.py with explicit collect/prepare/verify/disputes/evaluate CLI; no DB writes, automatic model calls or notification delivery. Frozen candidate and original protocol untouched.
+- Reuses bounded SEC collector (five identities, recent 10-K/10-Q/8-K and amendments, cap20/company). Empty date window returns WAITING without network; observed earliest date2026-11-23. Collection errors/incomplete issuer coverage block preparation. Checks capture hashes, index/submissions identities, canonical URL/accession/form/date. Does not claim source signatures or full historical/exhibit coverage.
+- Label-independent visible block extraction, deterministic hash sampling, max20 eligible paragraphs/filing; filters old/future sources and exact/near duplicates against sealed protocol AND within new batch. Records excluded reasons/caps. Simple HTML extraction is not numeric recall evaluation. Later reviewed batches require a new exclusion protocol before another independent evaluation.
+- Stages sealed predictions, blind-input, receipt and protocol into an exclusive .pending directory then renames; refuses existing output/empty eligible sets. Verify detects prediction/packet/protocol edits. Persist receipt hash externally before sending labels; local integrity receipts are not tamper-proof external timestamps. Raw captures, predictions and individual labels stay ignored.
+- Three-agent handoff documented in docs/prospective-pipeline.md: fresh contexts, two blind personas receive only packet content/rubric, expert receives validated disagreements without predictions; provenance AI_SIMULATED. CLI review actions verify freeze first, validate full coverage/source hashes/vote hashes, never overwrite prior summary. No use of old agent_pilot CLI defaults (old204 packet).
+- Initial focused validation55 passed (1.78s), Ruff all passed, mypy72files passed. Full SQLite suite and GitHub CI pending final handoff. Actual CLI preflight returned WAITING; no live source acquisition, new predictions or agent labels claimed. SEND_NOTIFICATIONS=false, ALLOW_SYNTHETIC_LIVE=false, LLM_MODE=none retained; Settings validates CLI environment.
+- Resume: read docs/prospective-pipeline.md; on/after23Nov collect valid new sources, prepare/verify, commit aggregate receipt hash before isolated blind review, then disputes/evaluate. Candidate remains SHADOW_ONLY; no deployment or causal/price accuracy claims.
+
 ## Prospective collection preflight — 2026-11-22 (latest)
 
 - User authorized collecting post-freeze filings, locking predictions, three isolated AI reviewers, tests/checkpoint/GitHub; real notifications remain disabled. This request is pending eligible data, not pending authorization.
