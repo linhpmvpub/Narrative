@@ -1,0 +1,14 @@
+{
+  "schema": "0015",
+  "counts": {
+    "rie_events": 51,
+    "rie_event_versions": 51,
+    "rie_alerts": 0,
+    "rie_news_claims": 0,
+    "rie_news_claim_reviews": 0,
+    "rie_news_claim_intakes": 0,
+    "rie_news_promotions": 0
+  },
+  "delivery": "disabled",
+  "production_claim_writes": 0
+}

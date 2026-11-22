@@ -3,7 +3,7 @@ import os
 from sqlalchemy import engine_from_config, pool
 
 from alembic import context
-from engine.models.schema_v14 import metadata
+from engine.models.schema_v15 import metadata
 
 config = context.config
 url = os.getenv("DATABASE_URL", config.get_main_option("sqlalchemy.url"))

@@ -232,6 +232,15 @@ def prepare(conn, actor, claim_id):
         raise ValueError("Current independent-account approval required")
     if digest(draft["payload"]) != draft["input_sha256"]:
         raise ValueError("Claim payload changed")
+    proof = ReviewBody.model_validate(approved["payload"])
+    now = datetime.now(UTC)
+    if (
+        proof.decision != "approved"
+        or not all((proof.identity_confirmed, proof.citation_confirmed, proof.comparison_confirmed))
+        or utc(draft["created_at"]) > utc(approved["recorded_at"])
+        or utc(approved["recorded_at"]) > now
+    ):
+        raise ValueError("Invalid approval proof or chronology")
     body = ClaimBody.model_validate(draft["payload"])
     row, event = validate(conn, body, datetime.now(UTC))
     old = (
@@ -244,6 +253,16 @@ def prepare(conn, actor, claim_id):
         .first()
     )
     if old:
+        p = old["payload"]
+        if (
+            digest(p) != old["payload_sha256"]
+            or p["event"] != event.model_dump(mode="json")
+            or p["review_id"] != approved["id"]
+            or p["claim_id"] != claim_id
+            or p["source_payload_sha256"] != body.expected_payload_sha256
+            or p.get("comparison_period") != body.comparison_period
+        ):
+            raise ValueError("Intake receipt provenance mismatch")
         return {"id": old["id"], "payload_sha256": old["payload_sha256"], "payload": old["payload"]}
     payload = {
         "kind": "REVIEWED_NEWS_INTAKE",
@@ -256,6 +275,7 @@ def prepare(conn, actor, claim_id):
         "source_text": source_text(row["payload"]),
         "source_text_basis": "RSS_TITLE_NEWLINE_SUMMARY_V1",
         "event": event.model_dump(mode="json"),
+        "comparison_period": body.comparison_period,
         "author_kind": body.author_kind,
         "reviewer_kind": approved["payload"]["reviewer_kind"],
         "canonical_key_candidate": canonical_key(

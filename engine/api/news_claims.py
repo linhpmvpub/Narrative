@@ -9,8 +9,11 @@ from engine.api.accounts import transaction, write
 from engine.api.product import Admin, Key, User
 from engine.db import database
 from engine.ingestion.contracts import digest
+from engine.ingestion.news_reviewed import IngestBody, ingest
+from engine.ingestion.reviewed import sources, versions
 from engine.models.contracts import utc
 from engine.models.schema_v13 import news_items, news_revisions
+from engine.models.schema_v15 import news_promotions
 from engine.news_claims import (
     ClaimBody,
     ReviewBody,
@@ -76,6 +79,36 @@ def list_claims(user: User):
                     validate(conn, ClaimBody.model_validate(draft["payload"]), datetime.now(UTC))
                 except ValueError as exc:
                     state, reason = "stale_or_invalid", str(exc)
+                receipt = (
+                    conn.execute(
+                        select(news_promotions).where(news_promotions.c.claim_id == draft["id"])
+                    )
+                    .mappings()
+                    .first()
+                )
+                ingestion_status = "not_ingested"
+                if receipt:
+                    blocked = (
+                        conn.scalar(
+                            select(sources.c.rights_status).where(
+                                sources.c.id == "news-reviewed:" + draft["revision_id"]
+                            )
+                        )
+                        == "blocked"
+                    )
+                    current_version = conn.scalar(
+                        select(versions.c.id)
+                        .where(versions.c.event_id == receipt["result"]["event_id"])
+                        .order_by(versions.c.version_number.desc())
+                        .limit(1)
+                    )
+                    ingestion_status = (
+                        "withheld"
+                        if blocked or state != "approved" or latest["id"] != receipt["review_id"]
+                        else "superseded"
+                        if current_version != receipt["event_version_id"]
+                        else "recorded_not_impact_eligible"
+                    )
                 result.append(
                     {
                         "id": draft["id"],
@@ -84,6 +117,8 @@ def list_claims(user: User):
                         "payload": draft["payload"],
                         "status": state,
                         "blocker": reason,
+                        "ingestion_receipt": receipt["result"] if receipt else None,
+                        "ingestion_status": ingestion_status,
                         "review_version": latest["version"] if latest else 0,
                         "latest_review": latest["payload"] if latest else None,
                     }
@@ -138,5 +173,15 @@ def prepare_claim(claim_id: str, user: Admin):
     try:
         with transaction(engine, user.id) as conn:
             return safe(lambda: prepare(conn, user, claim_id))
+    finally:
+        engine.dispose()
+
+
+@router.post("/{claim_id}/ingest")
+def ingest_claim(claim_id: str, body: IngestBody, user: Admin):
+    engine = database()
+    try:
+        with transaction(engine, user.id) as conn:
+            return safe(lambda: ingest(conn, user, claim_id, body))
     finally:
         engine.dispose()

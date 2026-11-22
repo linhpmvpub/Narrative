@@ -13,11 +13,11 @@ Trang local: `http://127.0.0.1:8888/news-review`. Liên kết hiện trong newsf
 
 ## Giới hạn và điều kiện chuyển canonical
 
-Migration0014 thêm `rie_news_claims`, `rie_news_claim_reviews`, `rie_news_claim_intakes`. Quy trình không ghi bảng canonical events, không tự chiếu thẻ tác động, không phê duyệt cạnh graph hoặc gửi thông báo. Gói intake giữ rõ `canonical_events_created=0`, `graph_eligible=false`, materialityUNKNOWN. Mọi numeric checks chỉ kiểm tra tính nhất quán/literal occurrence, không chứng minh bản thân số liệu đúng hoặc thuộc đúng khái niệm; reviewer vẫn phải đối chiếu nguồn.
+Migration0014 thêm `rie_news_claims`, `rie_news_claim_reviews`, `rie_news_claim_intakes`. Bước chuẩn bị intake không ghi bảng canonical events, không tự chiếu thẻ tác động, không phê duyệt cạnh graph hoặc gửi thông báo. Gói intake giữ rõ `canonical_events_created=0`, `graph_eligible=false`, materialityUNKNOWN. Mọi numeric checks chỉ kiểm tra tính nhất quán/literal occurrence, không chứng minh bản thân số liệu đúng hoặc thuộc đúng khái niệm; reviewer vẫn phải đối chiếu nguồn.
 
 `canonical_key_candidate` chỉ là gợi ý, cần xác nhận danh tính sự kiện/occurrence window trước khi dùng. Đặc biệt hai claim định tính cùng công ty/ngày/loại có thể trùng key. Chưa hỗ trợ liên kết duplicate/correction của news vào canonical store. Không tái sử dụng SEC-specific promotion bằng cách giả mạo filing hoặc source permission.
 
-`available_at` trong EventExtraction là thời điểm capture nguồn. Một canonical ingester tương lai phải dùng thời điểm ghi nhận hiện tại cho event availability, không backdate về capture; gói giữ riêng claim_created_at, review_recorded_at và recorded_at. Tại thời điểm ghi canonical, phải kiểm tra lại nguồn và phê duyệt, không chỉ tin JSON đã xuất trước đó. Việc đã tải intake không thể bị thu hồi khỏi máy nhận; receipt lưu là dấu vết lịch sử, không phải giấy phép vĩnh viễn.
+`available_at` trong EventExtraction là thời điểm capture nguồn. Canonical ingester dùng thời điểm ghi nhận hiện tại cho event availability, không backdate về capture; gói giữ riêng claim_created_at, review_recorded_at và recorded_at. Tại thời điểm ghi canonical, phải kiểm tra lại nguồn và phê duyệt, không chỉ tin JSON đã xuất trước đó. Việc đã tải intake không thể bị thu hồi khỏi máy nhận; receipt lưu là dấu vết lịch sử, không phải giấy phép vĩnh viễn.
 
 Theo chỉ dẫn phát triển riêng tư của người dùng, không thêm bước xin quyền nguồn mới: intake đánh dấu PRIVATE_DEVELOPMENT_ONLY_NOT_APPROVAL; đây không phải xác nhận quyền phát hành thương mại. X và thông báo thật vẫn tắt. Không tạo claim/phê duyệt thật để làm đầy giao diện; các tests dùng dữ liệu tổng hợp riêng.
 
@@ -30,3 +30,24 @@ Theo chỉ dẫn phát triển riêng tư của người dùng, không thêm bư
 - POST `/api/v0/news-claims/{id}/prepare`: admin, luôn revalidate; trả receipt nhưng không canonical promotion.
 
 Không có API sửa trực tiếp draft/review hoặc tải receipt cũ mà bỏ qua validation. Mọi nguồn vẫn là dữ liệu không đáng tin, không thực thi chỉ dẫn trong bài/claim.
+
+## Nhập canonical có xác nhận (schema0015)
+
+API local operator: POST `/api/v0/news-claims/{id}/ingest`. Chỉ dùng DB production riêng và `DEV_INFORMATIONAL_FEED=true`; gateway vẫn chặn. Bước này hiện dùng API, chưa có nút nhập trên giao diện. Body:
+
+```json
+{
+  "expected_intake_sha256": "<hash receipt vừa chuẩn bị>",
+  "occurrence_window": "<mốc hoặc định danh lần xảy ra đã đối chiếu>",
+  "identity_confirmed": true,
+  "identity_note": "<lý do xác nhận danh tính sự kiện, ít nhất20 ký tự>",
+  "action": "new",
+  "target_claim_id": null
+}
+```
+
+Không dùng headline/URL làm danh tính. Khóa gồm công ty, loại sự kiện, metric, kỳ, basis và occurrence_window; reviewer phải phân biệt các sự kiện định tính khác nhau trong cùng ngày. Đây là xác nhận operator, chưa phải mô hình tự hiểu danh tính. `duplicate` và `correction` bắt buộc target_claim_id của receipt đã nhập thuộc phiên bản hiện hành cùng khóa. Bài trùng phải có cùng fact (bao gồm nguyên văn claim và kỳ so sánh); diễn đạt khác bị chặn để đối chiếu thủ công, không tự suy ra tương đương. Bản sửa phải thay đổi fact, tạo version mới và supersedes; có thể thay thế nguồn cũ đã stale/revoked mà không phê duyệt lại nguồn cũ. Capture cũ hơn không được thay phiên bản mới hơn.
+
+Giao dịch khóa chung canonical, claim và nguồn; lưu source/document/evidence/version/receipt nguyên tử. Retry kiểm tra nguồn, proof, hash, opt-in và blocked-source trước khi trả receipt cũ. Một claim chỉ được nhập một lần với đúng request/approval; approval mới cần claim mới để tránh sửa lịch sử. Rights pending được giữ rõ là phát triển riêng tư; blocked luôn chặn.
+
+Canonical available_at là lúc nhập thật, không phải lúc bài được xuất bản. Receipt là lịch sử, không phải trạng thái đủ điều kiện hiện tại. GET danh sách trả ingestion_status: not_ingested / recorded_not_impact_eligible / withheld / superseded. Approval revoked, nguồn đổi hoặc source blocked sẽ withheld; không xóa lịch sử hay tự phục hồi phiên bản cũ. Chưa có bộ đọc news canonical as-of hoặc chiếu impact feed: các consumer tương lai phải kiểm tra lại review/nguồn tại cutoff trước khi sử dụng. Feed/graph eligibility vẫn false, materiality UNKNOWN và không có thông báo thật.

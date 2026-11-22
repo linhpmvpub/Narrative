@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Reviewed news canonical ingestion — 2026-11-22 (latest)
+
+- Implemented schema0015 news promotion receipts and operator-only POST /api/v0/news-claims/{id}/ingest. Explicit canonical identity, new/duplicate/correction, latest target, conservative exact-fact matching, source chronology, current approval/hash checks even on retry. Shared canonical lock and atomic source/document/evidence/version/receipt. Corrections retain superseded history, may replace stale source; no old-version fallback. Comparison period retained in intake/fact.
+- Private development opt-in and separate production-mode store required. Sources remain pending rights; explicitly blocked source is rejected. No fake SEC permission. Canonical availability uses actual ingestion time. Materiality UNKNOWN, feed/graph eligibility false, notifications false; no impact projection or as-of reader for news canonical yet. Member list remains own claims; admin list shows historical receipt with current withheld/superseded state. API ingestion available locally; no ingestion UI button or gateway expansion yet.
+- Actual DB backed up to ignored backups/dev-before-news-promotions-0015.db; schema0015,51 canonical events/versions,0 alerts and0 claims/reviews/intakes/promotions. Backend8888 restarted hidden; readyz passed. RSS worker/gateway retained; Cloudflare not reopened. No production claim/review created.
+- Focused news regressions37 passed (47.14s); Ruff, mypy83files, JS syntax and read-only browser desktop/mobile checks passed. All15 protected originals unchanged. Full GitHub SQLite/PostgreSQL validation pending push/run; update this entry once completed. Upstream Starlette/httpx deprecation warning only.
+- Next: add operator canonical-identity/duplicate/correction controls to review UI and a temporal validated news reader before private impact-feed integration. Still needs real source-backed claims/reviews and exposure/materiality/causal checks; do not infer these from collection or exact-string matching. See docs/news-claim-review.md.
+
+
 ## Immutable news-claim review and canonical intake preparation — 2026-11-22 (latest)
 
 - Continued next task: source-bound news claims, independent-account operator review, revocation and revalidated intake preparation. Schema0014 adds claims/reviews/intakes tables; actual database backed up to ignored backups/dev-before-news-claims-0014.db and migrated. No real claim, review or intake created; canonical51 events/versions and0 alerts unchanged.

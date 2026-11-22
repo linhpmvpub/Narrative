@@ -15,7 +15,7 @@ report = {"base_url": BASE, "browser_errors": [], "checks": [], "delivery": "dis
 for attempt in range(20):
     try:
         with urlopen(BASE + "/readyz", timeout=2) as response:
-            assert json.load(response)["schema"] == "0014"
+            assert json.load(response)["schema"] == "0015"
         break
     except URLError:
         if attempt == 19:
