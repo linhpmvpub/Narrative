@@ -2,7 +2,7 @@
 
 from datetime import UTC, datetime
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from sqlalchemy import select
 
 from engine.api.accounts import transaction, write
@@ -25,6 +25,7 @@ from engine.news_claims import (
     source_text,
     validate,
 )
+from engine.news_snapshot import snapshot
 
 router = APIRouter(prefix="/api/v0/news-claims")
 
@@ -118,6 +119,7 @@ def list_claims(user: User):
                         "status": state,
                         "blocker": reason,
                         "ingestion_receipt": receipt["result"] if receipt else None,
+                        "ingestion_identity": receipt["request"] if receipt else None,
                         "ingestion_status": ingestion_status,
                         "review_version": latest["version"] if latest else 0,
                         "latest_review": latest["payload"] if latest else None,
@@ -183,5 +185,17 @@ def ingest_claim(claim_id: str, body: IngestBody, user: Admin):
     try:
         with transaction(engine, user.id) as conn:
             return safe(lambda: ingest(conn, user, claim_id, body))
+    finally:
+        engine.dispose()
+
+
+@router.get("/canonical")
+def canonical_snapshot(
+    user: Admin, as_of: datetime | None = None, limit: int = Query(default=100, ge=1, le=500)
+):
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            return safe(lambda: snapshot(conn, as_of or datetime.now(UTC), limit))
     finally:
         engine.dispose()

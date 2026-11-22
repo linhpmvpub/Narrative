@@ -33,7 +33,7 @@ Không có API sửa trực tiếp draft/review hoặc tải receipt cũ mà b�
 
 ## Nhập canonical có xác nhận (schema0015)
 
-API local operator: POST `/api/v0/news-claims/{id}/ingest`. Chỉ dùng DB production riêng và `DEV_INFORMATIONAL_FEED=true`; gateway vẫn chặn. Bước này hiện dùng API, chưa có nút nhập trên giao diện. Body:
+API local operator: POST `/api/v0/news-claims/{id}/ingest`. Chỉ dùng DB production riêng và `DEV_INFORMATIONAL_FEED=true`; gateway vẫn chặn. Sau khi bấm Chuẩn bị intake, quản trị viên thấy form nhập canonical cho claim chưa nhập. Body:
 
 ```json
 {
@@ -50,4 +50,16 @@ Không dùng headline/URL làm danh tính. Khóa gồm công ty, loại sự ki�
 
 Giao dịch khóa chung canonical, claim và nguồn; lưu source/document/evidence/version/receipt nguyên tử. Retry kiểm tra nguồn, proof, hash, opt-in và blocked-source trước khi trả receipt cũ. Một claim chỉ được nhập một lần với đúng request/approval; approval mới cần claim mới để tránh sửa lịch sử. Rights pending được giữ rõ là phát triển riêng tư; blocked luôn chặn.
 
-Canonical available_at là lúc nhập thật, không phải lúc bài được xuất bản. Receipt là lịch sử, không phải trạng thái đủ điều kiện hiện tại. GET danh sách trả ingestion_status: not_ingested / recorded_not_impact_eligible / withheld / superseded. Approval revoked, nguồn đổi hoặc source blocked sẽ withheld; không xóa lịch sử hay tự phục hồi phiên bản cũ. Chưa có bộ đọc news canonical as-of hoặc chiếu impact feed: các consumer tương lai phải kiểm tra lại review/nguồn tại cutoff trước khi sử dụng. Feed/graph eligibility vẫn false, materiality UNKNOWN và không có thông báo thật.
+Canonical available_at là lúc nhập thật, không phải lúc bài được xuất bản. Receipt là lịch sử, không phải trạng thái đủ điều kiện hiện tại. GET danh sách trả ingestion_status: not_ingested / recorded_not_impact_eligible / withheld / superseded. Approval revoked, nguồn đổi hoặc source blocked sẽ withheld; không xóa lịch sử hay tự phục hồi phiên bản cũ. Bộ đọc canonical as-of được mô tả bên dưới; chưa chiếu impact feed. Feed/graph eligibility vẫn false, materiality UNKNOWN và không có thông báo thật.
+
+## Giao diện nhập và snapshot theo thời điểm
+
+Tại /news-review, sau khi chuẩn bị intake, chọn sự kiện mới / bài trùng / bản sửa. Với bài trùng hoặc sửa, chọn claim đã nhập từ danh sách (tối đa100 claim gần nhất), hoặc nhập ID ngoài danh sách. Chọn bản gốc điền lại occurrence_window đã lưu; vẫn phải đối chiếu metric, kỳ và basis, ghi căn cứ và tự tích xác nhận. Máy chủ sẽ từ chối mục tiêu khác khóa hoặc đã bị thay thế. Mỗi lần thay đổi danh tính sẽ bỏ tích xác nhận. Nếu nguồn hoặc phê duyệt đổi, chuẩn bị intake mới; giao diện không tự làm mới hash để ghi dưới một xác nhận cũ. Thông báo lỗi được hiển thị, nút ghi được khóa khi request đang chạy.
+
+Admin có thể đọc snapshot với mốc ISO có múi giờ, ví dụ2026-11-22T10:00:00Z; để trống dùng hiện tại. API GET /api/v0/news-claims/canonical?as_of=...&limit=100 (giới hạn1–500). Thành viên/gateway không được đọc endpoint này. Không có migration mới; schema0015.
+
+Bộ đọc chọn phiên bản canonical mới nhất đã available tại cutoff **trước** khi kiểm tra tính hợp lệ. Claim, approval, intake, receipt và revision nguồn phải tồn tại tại cutoff, đúng chuỗi thời gian, hash, danh tính và nội dung. Source revision được chọn từ lịch sử bất biến theo cutoff, không lấy payload hiện tại. Bản nguồn đổi nhưng chưa có correction hợp lệ tạo khoảng trống; bản mới bị thu hồi không làm bản cũ sống lại. Receipt duplicate không cứu bản canonical có primary claim đã mất hiệu lực. Một phê duyệt mới sau khi thu hồi không tự hợp thức hóa receipt cũ.
+
+Kết quả có items, withheld với lý do, examined và truncated nếu vượt giới hạn. Truy vấn không ghi intake/receipt. **Snapshot lịch sử mô tả những gì hợp lệ ở thời điểm đó**, không xác nhận đủ điều kiện hôm nay: thu hồi sau cutoff không xóa trạng thái hợp lệ trước cutoff. Riêng rights_status chưa có lịch sử versioned; source đang blocked sẽ luôn bị loại ở mọi cutoff, được khai báo bằng CURRENT_BLOCK_OVERRIDES_HISTORICAL_SNAPSHOT. Không suy ra quyền thương mại từ pending hoặc approved của source trong luồng phát triển này.
+
+Các tests dùng nguồn và phê duyệt tổng hợp trong DB riêng. Browser kiểm tra ghi mới/trùng/sửa và lỗi stale bằng request đã intercept, không gửi thao tác ghi đến DB thật. Tiếp theo mới nối snapshot hợp lệ vào feed thông tin với citation/thời điểm; graph và tác động vẫn cần kiểm chứng riêng.

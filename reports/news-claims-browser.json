@@ -4,6 +4,9 @@
     "exact_quote_offsets",
     "member_authoring_ui",
     "synthetic_intercepted_operator_review",
+    "canonical_new_duplicate_correction_intercepted",
+    "stale_ingestion_error",
+    "historical_snapshot_intercepted",
     "mobile_layout",
     "logout_clears",
     "gateway_review_blocked"

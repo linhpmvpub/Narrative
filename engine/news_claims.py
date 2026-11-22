@@ -63,11 +63,13 @@ def source_text(payload):
     return payload["title"] + "\n" + payload.get("summary", "")
 
 
-def latest_review(conn, claim_id):
+def latest_review(conn, claim_id, at=None):
     return (
         conn.execute(
             select(reviews)
-            .where(reviews.c.claim_id == claim_id)
+            .where(
+                reviews.c.claim_id == claim_id, reviews.c.recorded_at <= (at or datetime.now(UTC))
+            )
             .order_by(reviews.c.version.desc())
             .limit(1)
         )
@@ -76,7 +78,7 @@ def latest_review(conn, claim_id):
     )
 
 
-def validate(conn, body, now):
+def validate(conn, body, now, *, historical=False):
     row = (
         conn.execute(select(news_revisions).where(news_revisions.c.id == body.revision_id))
         .mappings()
@@ -84,11 +86,16 @@ def validate(conn, body, now):
     )
     if not row or utc(row["received_at"]) > now:
         raise ValueError("Source revision missing or unavailable")
-    current = (
-        conn.execute(select(news_items).where(news_items.c.id == row["item_id"]).with_for_update())
-        .mappings()
-        .one()
-    )
+    if historical:
+        query = (
+            select(news_revisions)
+            .where(news_revisions.c.item_id == row["item_id"], news_revisions.c.received_at <= now)
+            .order_by(news_revisions.c.version.desc())
+            .limit(1)
+        )
+    else:
+        query = select(news_items).where(news_items.c.id == row["item_id"]).with_for_update()
+    current = conn.execute(query).mappings().one()
     if current["version"] != row["version"] or digest(current["payload"]) != digest(row["payload"]):
         raise ValueError("Source revision changed; create a new claim")
     p = row["payload"]
