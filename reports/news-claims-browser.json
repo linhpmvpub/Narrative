@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "live_source_read",
+    "exact_quote_offsets",
+    "member_authoring_ui",
+    "synthetic_intercepted_operator_review",
+    "mobile_layout",
+    "logout_clears",
+    "gateway_review_blocked"
+  ],
+  "browser_errors": [],
+  "production_writes": 0
+}

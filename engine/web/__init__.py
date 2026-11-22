@@ -17,6 +17,10 @@ def install(app):
     def review():
         return shell("review.html")
 
+    @app.get("/news-review", include_in_schema=False)
+    def news_review():
+        return shell("news-review.html")
+
     @app.get("/news", include_in_schema=False)
     def news():
         return shell("news.html")
@@ -48,6 +52,7 @@ def install(app):
         if name not in {
             "app.js",
             "news.js",
+            "news-review.js",
             "news.css",
             "style.css",
             "demo.json",
