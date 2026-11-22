@@ -1,0 +1,1075 @@
+{
+  "version": "company-profile-v1",
+  "components": {
+    "identity": "Danh tính pháp lý",
+    "securities": "Chứng khoán và niêm yết",
+    "ownership": "Cấu trúc tập đoàn",
+    "segments": "Phân khúc kinh doanh",
+    "products": "Sản phẩm và dịch vụ",
+    "revenue_model": "Mô hình doanh thu",
+    "strategy": "Chiến lược và phân bổ vốn",
+    "selling_prices": "Giá bán",
+    "sales_mix": "Sản lượng và cơ cấu bán",
+    "customers": "Khách hàng",
+    "end_users": "Người dùng cuối",
+    "channels": "Kênh phân phối",
+    "markets": "Thị trường địa lý",
+    "demand_drivers": "Động lực nhu cầu",
+    "orders": "Đơn hàng và cam kết",
+    "competition": "Cạnh tranh và thay thế",
+    "partners": "Đối tác và hệ sinh thái",
+    "inputs": "Nguyên liệu và linh kiện",
+    "suppliers": "Nhà cung cấp trực tiếp",
+    "upstream": "Nhà cung cấp gián tiếp",
+    "input_prices": "Giá đầu vào",
+    "procurement": "Điều khoản mua hàng",
+    "facilities": "Cơ sở hoạt động",
+    "capacity": "Công suất và vận hành",
+    "inventory": "Tồn kho",
+    "logistics": "Logistics",
+    "utilities": "Năng lượng và nước",
+    "workforce": "Lao động",
+    "resilience": "Khả năng chống chịu",
+    "financials": "Đặc điểm tài chính",
+    "debt": "Nợ và thanh khoản",
+    "fx_hedging": "Ngoại tệ và phòng hộ",
+    "accounting": "Phạm vi kế toán",
+    "management": "Quản trị",
+    "insider_trades": "Giao dịch người nội bộ",
+    "related_party": "Giao dịch bên liên quan",
+    "capital_events": "Sự kiện vốn",
+    "regulation": "Pháp lý và chính sách",
+    "geopolitics": "Địa chính trị",
+    "weather": "Thời tiết và thiên tai",
+    "technology": "Công nghệ và an ninh",
+    "calendar": "Lịch sự kiện"
+  },
+  "relationships": {
+    "OWNS": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "company"
+      ],
+      "to_kinds": [
+        "company",
+        "facility"
+      ]
+    },
+    "ISSUES": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "company"
+      ],
+      "to_kinds": [
+        "security"
+      ]
+    },
+    "HAS_SEGMENT": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "company"
+      ],
+      "to_kinds": [
+        "segment"
+      ]
+    },
+    "SELLS": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "company",
+        "segment"
+      ],
+      "to_kinds": [
+        "product"
+      ]
+    },
+    "USES_INPUT": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "facility",
+        "product",
+        "segment"
+      ],
+      "to_kinds": [
+        "input"
+      ]
+    },
+    "SUPPLIES": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "company",
+        "supplier"
+      ],
+      "to_kinds": [
+        "company",
+        "product",
+        "segment"
+      ]
+    },
+    "BUYS": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "company",
+        "customer"
+      ],
+      "to_kinds": [
+        "product"
+      ]
+    },
+    "SOLD_IN": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "product",
+        "segment"
+      ],
+      "to_kinds": [
+        "market"
+      ]
+    },
+    "LOCATED_IN": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "company",
+        "facility"
+      ],
+      "to_kinds": [
+        "location"
+      ]
+    },
+    "DISTRIBUTES": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "channel",
+        "company",
+        "partner"
+      ],
+      "to_kinds": [
+        "product"
+      ]
+    },
+    "PARTNERS_WITH": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "company"
+      ],
+      "to_kinds": [
+        "company",
+        "partner"
+      ]
+    },
+    "COMPETES_WITH": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "company",
+        "product"
+      ],
+      "to_kinds": [
+        "company",
+        "product"
+      ]
+    },
+    "HAS_METRIC": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "company",
+        "product",
+        "segment"
+      ],
+      "to_kinds": [
+        "metric"
+      ]
+    },
+    "APPLIES_TO": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "contract",
+        "factor"
+      ],
+      "to_kinds": [
+        "company",
+        "facility",
+        "market",
+        "product"
+      ]
+    },
+    "DEPENDS_ON": {
+      "family": "STRUCTURAL",
+      "from_kinds": [
+        "facility",
+        "product",
+        "segment"
+      ],
+      "to_kinds": [
+        "factor",
+        "input",
+        "location",
+        "supplier"
+      ]
+    },
+    "AFFECTS_COST": {
+      "family": "MECHANISM",
+      "from_kinds": [
+        "contract",
+        "factor",
+        "input"
+      ],
+      "to_kinds": [
+        "metric"
+      ]
+    },
+    "AFFECTS_SUPPLY": {
+      "family": "MECHANISM",
+      "from_kinds": [
+        "facility",
+        "factor",
+        "location",
+        "supplier"
+      ],
+      "to_kinds": [
+        "input",
+        "product"
+      ]
+    },
+    "AFFECTS_DEMAND": {
+      "family": "MECHANISM",
+      "from_kinds": [
+        "customer",
+        "factor",
+        "market"
+      ],
+      "to_kinds": [
+        "metric",
+        "product"
+      ]
+    },
+    "AFFECTS_ACCESS": {
+      "family": "MECHANISM",
+      "from_kinds": [
+        "factor"
+      ],
+      "to_kinds": [
+        "market",
+        "product"
+      ]
+    },
+    "AFFECTS_REVENUE": {
+      "family": "MECHANISM",
+      "from_kinds": [
+        "factor",
+        "market",
+        "product"
+      ],
+      "to_kinds": [
+        "metric"
+      ]
+    },
+    "AFFECTS_MARGIN": {
+      "family": "MECHANISM",
+      "from_kinds": [
+        "factor",
+        "metric"
+      ],
+      "to_kinds": [
+        "metric"
+      ]
+    },
+    "AFFECTS_CASH": {
+      "family": "MECHANISM",
+      "from_kinds": [
+        "contract",
+        "factor",
+        "metric"
+      ],
+      "to_kinds": [
+        "metric"
+      ]
+    },
+    "AFFECTS_FINANCING": {
+      "family": "MECHANISM",
+      "from_kinds": [
+        "contract",
+        "factor"
+      ],
+      "to_kinds": [
+        "metric"
+      ]
+    }
+  },
+  "schema": {
+    "$defs": {
+      "Component": {
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "SOURCED",
+              "UNKNOWN",
+              "NOT_DISCLOSED",
+              "NOT_APPLICABLE",
+              "STALE",
+              "DISPUTED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "summary": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Summary",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "maxItems": 20,
+            "title": "Evidence",
+            "type": "array"
+          }
+        },
+        "required": [
+          "key",
+          "status",
+          "summary"
+        ],
+        "title": "Component",
+        "type": "object"
+      },
+      "Event": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "version": {
+            "minimum": 1,
+            "title": "Version",
+            "type": "integer"
+          },
+          "type": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Type",
+            "type": "string"
+          },
+          "headline": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Headline",
+            "type": "string"
+          },
+          "summary": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Summary",
+            "type": "string"
+          },
+          "anchors": {
+            "items": {
+              "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Anchors",
+            "type": "array"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "title": "Occurred At",
+            "type": "string"
+          },
+          "available_at": {
+            "format": "date-time",
+            "title": "Available At",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "historical": {
+            "default": true,
+            "title": "Historical",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "type",
+          "headline",
+          "summary",
+          "anchors",
+          "occurred_at",
+          "available_at",
+          "evidence"
+        ],
+        "title": "Event",
+        "type": "object"
+      },
+      "Evidence": {
+        "additionalProperties": false,
+        "properties": {
+          "source_id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Source Id",
+            "type": "string"
+          },
+          "quote": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Quote",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_id",
+          "quote"
+        ],
+        "title": "Evidence",
+        "type": "object"
+      },
+      "MetricObservation": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "node_id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Node Id",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Value"
+          },
+          "unit": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Unit",
+            "type": "string"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Z]{3}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Currency"
+          },
+          "period_start": {
+            "format": "date",
+            "title": "Period Start",
+            "type": "string"
+          },
+          "period_end": {
+            "format": "date",
+            "title": "Period End",
+            "type": "string"
+          },
+          "scope": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Scope",
+            "type": "string"
+          },
+          "basis": {
+            "enum": [
+              "GAAP",
+              "NON_GAAP",
+              "PHYSICAL",
+              "UNKNOWN"
+            ],
+            "title": "Basis",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "node_id",
+          "value",
+          "unit",
+          "period_start",
+          "period_end",
+          "scope",
+          "basis",
+          "evidence"
+        ],
+        "title": "MetricObservation",
+        "type": "object"
+      },
+      "Narrative": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "version": {
+            "minimum": 1,
+            "title": "Version",
+            "type": "integer"
+          },
+          "title": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          },
+          "thesis": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Thesis",
+            "type": "string"
+          },
+          "company_id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Company Id",
+            "type": "string"
+          },
+          "scope": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Scope",
+            "type": "string"
+          },
+          "horizon": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Horizon",
+            "type": "string"
+          },
+          "watched_nodes": {
+            "items": {
+              "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+              "type": "string"
+            },
+            "maxItems": 30,
+            "minItems": 1,
+            "title": "Watched Nodes",
+            "type": "array"
+          },
+          "assumptions": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Assumptions",
+            "type": "array"
+          },
+          "supporting_evidence": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Supporting Evidence",
+            "type": "array"
+          },
+          "challenging_evidence": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Challenging Evidence",
+            "type": "array"
+          },
+          "reconsider_when": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Reconsider When",
+            "type": "array"
+          },
+          "unknowns": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Unknowns",
+            "type": "array"
+          },
+          "challenge_event_types": {
+            "items": {
+              "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+              "type": "string"
+            },
+            "maxItems": 30,
+            "title": "Challenge Event Types",
+            "type": "array"
+          },
+          "support_event_types": {
+            "items": {
+              "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+              "type": "string"
+            },
+            "maxItems": 30,
+            "title": "Support Event Types",
+            "type": "array"
+          },
+          "available_at": {
+            "format": "date-time",
+            "title": "Available At",
+            "type": "string"
+          },
+          "audience": {
+            "const": "SHARED_RESEARCH_EXAMPLE",
+            "default": "SHARED_RESEARCH_EXAMPLE",
+            "title": "Audience",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "title",
+          "thesis",
+          "company_id",
+          "scope",
+          "horizon",
+          "watched_nodes",
+          "assumptions",
+          "supporting_evidence",
+          "challenging_evidence",
+          "reconsider_when",
+          "unknowns",
+          "available_at"
+        ],
+        "title": "Narrative",
+        "type": "object"
+      },
+      "Node": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "company",
+              "security",
+              "segment",
+              "product",
+              "customer",
+              "supplier",
+              "input",
+              "facility",
+              "market",
+              "location",
+              "factor",
+              "metric",
+              "partner",
+              "person",
+              "channel",
+              "contract"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "label": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "label"
+        ],
+        "title": "Node",
+        "type": "object"
+      },
+      "Relationship": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          },
+          "from_id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "From Id",
+            "type": "string"
+          },
+          "to_id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "To Id",
+            "type": "string"
+          },
+          "scope": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Scope",
+            "type": "string"
+          },
+          "valid_from": {
+            "format": "date-time",
+            "title": "Valid From",
+            "type": "string"
+          },
+          "valid_until": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Valid Until"
+          },
+          "known_at": {
+            "format": "date-time",
+            "title": "Known At",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "SOURCE_BACKED",
+              "CANDIDATE",
+              "DISPUTED",
+              "REVOKED",
+              "STALE"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "basis": {
+            "enum": [
+              "SOURCE_REPORTED",
+              "ISSUER_ATTRIBUTION",
+              "CONDITIONAL_MECHANISM"
+            ],
+            "title": "Basis",
+            "type": "string"
+          },
+          "conditions": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Conditions",
+            "type": "array"
+          },
+          "unknowns": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Unknowns",
+            "type": "array"
+          },
+          "direction": {
+            "default": "UNKNOWN",
+            "enum": [
+              "POSITIVE",
+              "NEGATIVE",
+              "MIXED",
+              "UNKNOWN"
+            ],
+            "title": "Direction",
+            "type": "string"
+          },
+          "lag": {
+            "default": "UNKNOWN",
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Lag",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "from_id",
+          "to_id",
+          "scope",
+          "valid_from",
+          "known_at",
+          "status",
+          "basis",
+          "evidence"
+        ],
+        "title": "Relationship",
+        "type": "object"
+      },
+      "Source": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "url": {
+            "format": "uri",
+            "maxLength": 2083,
+            "minLength": 1,
+            "title": "Url",
+            "type": "string"
+          },
+          "file": {
+            "title": "File",
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Sha256",
+            "type": "string"
+          },
+          "published_at": {
+            "format": "date-time",
+            "title": "Published At",
+            "type": "string"
+          },
+          "retrieved_at": {
+            "format": "date-time",
+            "title": "Retrieved At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "file",
+          "sha256",
+          "published_at",
+          "retrieved_at"
+        ],
+        "title": "Source",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": "company-profile-v1",
+        "default": "company-profile-v1",
+        "title": "Schema Version",
+        "type": "string"
+      },
+      "id": {
+        "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+        "title": "Id",
+        "type": "string"
+      },
+      "version": {
+        "minimum": 1,
+        "title": "Version",
+        "type": "integer"
+      },
+      "company_id": {
+        "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+        "title": "Company Id",
+        "type": "string"
+      },
+      "ticker": {
+        "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+        "title": "Ticker",
+        "type": "string"
+      },
+      "legal_name": {
+        "maxLength": 4000,
+        "minLength": 1,
+        "title": "Legal Name",
+        "type": "string"
+      },
+      "identifiers": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Identifiers",
+        "type": "object"
+      },
+      "snapshot_at": {
+        "format": "date-time",
+        "title": "Snapshot At",
+        "type": "string"
+      },
+      "available_at": {
+        "format": "date-time",
+        "title": "Available At",
+        "type": "string"
+      },
+      "description": {
+        "maxLength": 4000,
+        "minLength": 1,
+        "title": "Description",
+        "type": "string"
+      },
+      "industry_modules": {
+        "items": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "maxItems": 10,
+        "minItems": 1,
+        "title": "Industry Modules",
+        "type": "array"
+      },
+      "sources": {
+        "items": {
+          "$ref": "#/$defs/Source"
+        },
+        "maxItems": 30,
+        "minItems": 1,
+        "title": "Sources",
+        "type": "array"
+      },
+      "components": {
+        "items": {
+          "$ref": "#/$defs/Component"
+        },
+        "maxItems": 60,
+        "title": "Components",
+        "type": "array"
+      },
+      "nodes": {
+        "items": {
+          "$ref": "#/$defs/Node"
+        },
+        "maxItems": 200,
+        "minItems": 1,
+        "title": "Nodes",
+        "type": "array"
+      },
+      "relationships": {
+        "items": {
+          "$ref": "#/$defs/Relationship"
+        },
+        "maxItems": 300,
+        "title": "Relationships",
+        "type": "array"
+      },
+      "observations": {
+        "items": {
+          "$ref": "#/$defs/MetricObservation"
+        },
+        "maxItems": 200,
+        "title": "Observations",
+        "type": "array"
+      },
+      "narratives": {
+        "items": {
+          "$ref": "#/$defs/Narrative"
+        },
+        "maxItems": 20,
+        "minItems": 1,
+        "title": "Narratives",
+        "type": "array"
+      },
+      "events": {
+        "items": {
+          "$ref": "#/$defs/Event"
+        },
+        "maxItems": 100,
+        "minItems": 1,
+        "title": "Events",
+        "type": "array"
+      },
+      "author_kind": {
+        "const": "AI_ASSISTED_SOURCE_EXTRACTION",
+        "default": "AI_ASSISTED_SOURCE_EXTRACTION",
+        "title": "Author Kind",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "version",
+      "company_id",
+      "ticker",
+      "legal_name",
+      "identifiers",
+      "snapshot_at",
+      "available_at",
+      "description",
+      "industry_modules",
+      "sources",
+      "components",
+      "nodes",
+      "relationships",
+      "narratives",
+      "events"
+    ],
+    "title": "ProfileBundle",
+    "type": "object"
+  },
+  "delivery": "disabled"
+}

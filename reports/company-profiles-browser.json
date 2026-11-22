@@ -1,0 +1,18 @@
+{
+  "local_gateway": true,
+  "widths": [
+    390,
+    1440
+  ],
+  "real_historical_cards": 1,
+  "component_coverage_visible": true,
+  "path_edges": 3,
+  "source_link": true,
+  "failure_withholds": true,
+  "recovery_restores": true,
+  "logout_clears": true,
+  "overflow": false,
+  "javascript_errors": [],
+  "writes": 0,
+  "delivery": "disabled"
+}

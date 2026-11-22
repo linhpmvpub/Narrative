@@ -3,6 +3,7 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from pydantic import AwareDatetime
 from sqlalchemy import select
 
 from engine.api.accounts import Principal, principal
@@ -130,3 +131,17 @@ def impact_cases():
     from engine.impact_cases import case_feed
 
     return case_feed()
+
+
+@router.get("/profiles")
+def company_profiles(as_of: AwareDatetime | None = None):
+    from engine.company_profiles import feed
+
+    return feed(as_of)
+
+
+@router.get("/profile-framework")
+def company_profile_framework():
+    from engine.company_profiles import framework
+
+    return framework()

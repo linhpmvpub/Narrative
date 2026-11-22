@@ -1,0 +1,20 @@
+{
+  "schema": "company-profile-v1",
+  "components": 42,
+  "relationship_types": 23,
+  "sample_profiles": 1,
+  "sample_version": 3,
+  "sourced_components": 6,
+  "unknown_components": 36,
+  "cards": 1,
+  "sample_sha256": "275244639744c2e34c7c72cebc32641122dc836cb0daed11de40d07b9ea25636",
+  "path_edges": 3,
+  "historical": true,
+  "publication_clock": "SEC submissions acceptanceDateTime",
+  "graph_promotions": 0,
+  "canonical_writes": 0,
+  "delivery": "disabled",
+  "raw_sources_uploaded": false,
+  "user_subscriptions_changed": false,
+  "exclusive_stage_cli_verified": true
+}
