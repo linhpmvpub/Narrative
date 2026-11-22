@@ -1,0 +1,24 @@
+{
+  "code_commit": "5c8d232e78ea921fae00e588c74b75f04bd9cc43",
+  "run_id": 44991081180,
+  "url": "https://github.com/linhpmvpub/Narrative/actions/runs/44991081180",
+  "jobs": [
+    {
+      "name": "dependency-audit",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "verify",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "collected_tests_per_database": 349,
+  "sqlite_suite": "success",
+  "postgresql_suite": "success",
+  "deployment": "SHADOW_ONLY",
+  "evaluation": "POST_HOC_AI_AGREEMENT",
+  "independent_human_validation": false,
+  "notifications_enabled": false
+}
