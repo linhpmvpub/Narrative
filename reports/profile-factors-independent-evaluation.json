@@ -1,0 +1,36 @@
+{
+  "tp": 0,
+  "fp": 0,
+  "tn": 44,
+  "fn": 0,
+  "unresolved": 4,
+  "clusters": 12,
+  "pairs": 48,
+  "precision": null,
+  "recall": null,
+  "reference_kind": "AI_CONSENSUS_REVIEW",
+  "independent_gold": false,
+  "packet_sha256": "52ef9f8e145806dfda28842382a867fbb0ee178a50d41cb8556306cbbbcd2507",
+  "labels_sha256": "d76c00740f714f94b01534bf9c38cbb7f6a3fef1787d3eb5f0189345aad4fbcb",
+  "delivery": "disabled",
+  "limitations": [
+    "Latest-URL convenience sample; pairs are correlated within articles",
+    "Unknown references excluded, never counted as negatives",
+    "Relevance only, not financial impact or push accuracy",
+    "Only12remaining eligible article clusters; no positive references, so precision/recall not estimable.",
+    "Two separate-context AI reviews, not human labels or independent causal truth.",
+    "Text-overlap exclusion does not prove absence of semantic/pretraining exposure."
+  ],
+  "reference_status": "COMPLETED_TWO_SEPARATE_CONTEXT_AI_REVIEWS",
+  "reviewers": 2,
+  "agreement_pairs": 48,
+  "disagreements": 0,
+  "positive_reference_pairs": 0,
+  "review_sha256": [
+    "9e6d7b9dabb8563cf6d15cffbedc9a1afc1eabde692d6298a3ea421f858b1701",
+    "39f8a004050f267d4b1bb123c73deb300ebc690296496cd79d1f25362d0a1625"
+  ],
+  "excluded_prior_clusters": 100,
+  "frozen_hashes_unchanged": true,
+  "positive_accuracy_established": false
+}
