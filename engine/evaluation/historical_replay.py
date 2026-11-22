@@ -7,6 +7,7 @@ contain evidence only; frozen predictions and later labels live in separate file
 import argparse
 import hashlib
 import json
+import random
 import re
 from collections import Counter
 from datetime import UTC, datetime
@@ -252,12 +253,87 @@ def label_key(label):
     return (label["language"], label["impact_sign"], label["numeric_effect_supported"])
 
 
-def evaluate(root):
+def load_votes(root):
     pack, sealed, receipt = verify(root)
     votes = {profile: validate_review(pack, read(root / (profile + ".json")),
                                      receipt["frozen_at"]) for profile in sorted(PROFILES)}
     if any(read(root / (p + ".json"))["profile"] != p for p in PROFILES):
         raise ValueError("Duplicate reviewer profile")
+    return pack, sealed, receipt, votes
+
+
+def review_dossier(root, pack, votes):
+    rows = []
+    for c in pack["cases"]:
+        for i, passage in enumerate(c["passages"]):
+            labels = {p: votes[p][c["id"]]["passages"][i] for p in sorted(PROFILES)}
+            if len({label_key(v) for v in labels.values()}) > 1:
+                rows.append({"case_id": c["id"], "passage": i, "source": c["url"],
+                             "text": passage["text"], "votes": labels,
+                             "vote_sha256": digest(labels)})
+    result = {"track": TRACK, "packet_id": pack["packet_id"], "disagreements": rows,
+              "independent_review_sha256": sha(root / "financial_expert.json"),
+              "review_sha256": {p: sha(root / (p + ".json")) for p in sorted(PROFILES)},
+              "predictions_included": False}
+    return result
+
+
+def disagreements(root):
+    pack, _, _, votes = load_votes(root)
+    result = review_dossier(root, pack, votes)
+    write(root / "disagreements.json", result)
+    return {"disagreements": len(result["disagreements"]), "predictions_included": False}
+
+
+def adjudications(root, pack, votes):
+    if not (root / "adjudication.json").exists():
+        return {}
+    dossier = read(root / "disagreements.json")
+    if dossier != review_dossier(root, pack, votes):
+        raise ValueError("Disagreement dossier no longer matches frozen evidence/votes")
+    review = read(root / "adjudication.json")
+    if (review.get("track") != TRACK or review.get("profile") != "financial_expert"
+            or review.get("packet_id") != pack["packet_id"]
+            or review.get("blind_to_predictions") is not True
+            or review.get("independent_review_sha256") != sha(root / "financial_expert.json")):
+        raise ValueError("Invalid adjudication provenance")
+    for p in PROFILES:
+        if dossier["review_sha256"][p] != sha(root / (p + ".json")):
+            raise ValueError("Blind review changed after disagreement packet")
+    at = datetime.fromisoformat(review["reviewed_at"])
+    latest = max(datetime.fromisoformat(read(root / (p + ".json"))["reviewed_at"])
+                 for p in PROFILES)
+    if at.tzinfo is None or not latest <= at <= datetime.now(UTC):
+        raise ValueError("Adjudication must follow independent reviews")
+    pending = {(r["case_id"], r["passage"]): r for r in dossier["disagreements"]}
+    output: dict = {}
+    for row in review["decisions"]:
+        key = (row["case_id"], row["passage"])
+        if key in output or key not in pending or row["vote_sha256"] != pending[key]["vote_sha256"]:
+            raise ValueError("Duplicate, unknown or stale adjudication")
+        if row["outcome"] == "DEFERRED":
+            if row.get("label") is not None or len(row.get("reason", "")) < 15:
+                raise ValueError("Deferred adjudication requires reason and no reference")
+            output[key] = None
+        elif row["outcome"] == "RESOLVED":
+            label = row["label"]
+            if (label["language"] not in CLASSES
+                    or label["impact_sign"] not in {"POSITIVE", "NEGATIVE", "MIXED", "UNKNOWN"}
+                    or type(label["numeric_effect_supported"]) is not bool
+                    or len(label["reason"].strip()) < 15 or not label["quote"]
+                    or label["quote"] not in pending[key]["text"]):
+                raise ValueError("Invalid adjudication evidence")
+            output[key] = label_key(label)
+        else:
+            raise ValueError("Unknown adjudication outcome")
+    if set(output) != set(pending):
+        raise ValueError("All disagreements require resolved/deferred decision")
+    return output
+
+
+def evaluate(root):
+    pack, sealed, receipt, votes = load_votes(root)
+    adjudicated = adjudications(root, pack, votes)
     details: list[dict] = []
     totals: Counter[str] = Counter()
     for c in pack["cases"]:
@@ -265,7 +341,7 @@ def evaluate(root):
             labels = [votes[p][c["id"]]["passages"][i] for p in sorted(PROFILES)]
             counts = Counter(label_key(v) for v in labels)
             key, n = counts.most_common(1)[0]
-            reference = key if n >= 2 else None
+            reference = key if n == 3 else adjudicated.get((c["id"], i))
             pred = sealed["predictions"][c["id"]][i]["label"]
             group = c["split"]
             totals[group + "_total"] += 1
@@ -280,11 +356,40 @@ def evaluate(root):
                             "vote_count": n, "reference": reference,
                             "prediction": pred, "match": pred == reference[0] if reference else None})
     write(root / "comparison-private.json", details)
+    clean_ids = {c["id"] for c in pack["cases"] if c["clean_holdout_eligible"]}
+    metrics = {}
+    for scope in ("development", "calibration", "holdout", "clean_holdout"):
+        rows = [d for d in details if (d["case_id"] in clean_ids if scope == "clean_holdout"
+                                      else d["split"] == scope)]
+        resolved = [d for d in rows if d["reference"] is not None]
+        grouped: dict = {}
+        for d in resolved:
+            grouped.setdefault(d["case_id"], []).append(int(d["match"]))
+        samples = []
+        rng = random.Random(20261122)
+        ids = sorted(grouped)
+        if len(ids) >= 2:
+            for _ in range(2000):
+                values = [v for cid in rng.choices(ids, k=len(ids)) for v in grouped[cid]]
+                samples.append(sum(values) / len(values))
+            samples.sort()
+        metrics[scope] = {"passages": len(rows), "resolved": len(resolved),
+                          "language_matches": sum(d["match"] for d in resolved),
+                          "agreement": sum(d["match"] for d in resolved) / len(resolved)
+                          if resolved else None,
+                          "cluster_bootstrap_95_interval": [samples[49], samples[1949]]
+                          if samples else None,
+                          "resolved_clusters": len(ids)}
     report = {"track": TRACK, "packet_id": pack["packet_id"],
               "clusters": len(pack["cases"]), "passages": len(details),
               "profiles": {p: len(v) for p, v in votes.items()}, "counts": dict(totals),
-              "reference_method": "THREE_BLIND_AI_VOTES_MAJORITY_FULL_LABEL_TUPLE",
-              "status": "BLIND_REVIEW_COMPLETE", "human_labels": 0,
+              "language_agreement": metrics,
+              "reference_method": "UNANIMOUS_OR_SOURCE_ADJUDICATED_FULL_LABEL_TUPLE",
+              "status": "BLIND_REVIEW_COMPLETE" if len(adjudicated) == totals["disputed"]
+              else "ADJUDICATION_PENDING",
+              "adjudicated_passages": len(adjudicated),
+              "deferred_passages": sum(v is None for v in adjudicated.values()),
+              "human_labels": 0,
               "push_precision": None, "two_hop_recall": None, "stock_prediction_accuracy": None,
               "graph_promotions": 0, "delivery": "disabled",
               "limitations": ["AI consensus is not human truth or independent causal identification",
@@ -292,6 +397,8 @@ def evaluate(root):
                   "Archive reconstruction is not first-seen production replay",
                   "Financial filing sample is not all market news; no two-hop graph evaluated",
                   "Three sampling strata do not guarantee positive/negative class proportions",
+                  "Intervals resample issuer-period clusters; common issuer/model biases remain",
+                  "Direction and quantified-effect labels are reference collection, not scored predictions",
                   "Cross-split exact reuse/exposed H20 passages excluded only from clean subset",
                   "Near-duplicate boilerplate and implicit prior knowledge may remain"]}
     write(root / "evaluation.json", report)
@@ -300,7 +407,7 @@ def evaluate(root):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["collect", "freeze", "verify", "evaluate"])
+    parser.add_argument("action", choices=["collect", "freeze", "verify", "disagreements", "evaluate"])
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--user-agent", default="Narrative research linhpm.vpub@gmail.com")
     args = parser.parse_args()
@@ -310,6 +417,8 @@ def main():
         result = freeze(args.root)
     elif args.action == "verify":
         result = {"verified": True, "clusters": len(verify(args.root)[0]["cases"])}
+    elif args.action == "disagreements":
+        result = disagreements(args.root)
     else:
         result = evaluate(args.root)
     print(json.dumps(result))

@@ -42,6 +42,7 @@ def frozen(tmp_path):
         path = tmp_path / f"{n}.html"
         path.write_bytes(text(n).encode())
         sources.append({"cluster_key": f"MU:{n}", "file": path.name,
+                        "url": f"https://example.test/synthetic/{n}",
                         "source_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
                         "filing_date": "2025-01-01", "ticker": "MU"})
     h.write(tmp_path / "collection.json", {"sources": sources, "errors": []})
@@ -116,3 +117,41 @@ def test_source_parser_excludes_hidden_text():
     passages = h.excerpts("<script>Invented revenue increased</script>" + text(1))
     assert len(passages) == 3
     assert not any("Invented" in p["text"] for p in passages)
+
+
+@pytest.mark.parametrize("fault", [None, "stale", "quote", "missing", "dossier"])
+def test_disagreement_adjudication_is_source_bound(frozen, fault):
+    pack, _, _ = h.verify(frozen)
+    for profile in h.PROFILES:
+        r = review(pack, profile)
+        if profile == "fund_manager":
+            r["labels"][0]["passages"][0]["language"] = "ISSUER_ATTRIBUTION"
+        h.write(frozen / (profile + ".json"), r)
+    assert h.disagreements(frozen)["disagreements"] == 1
+    dossier = h.read(frozen / "disagreements.json")
+    row = dossier["disagreements"][0]
+    decision = {"case_id": row["case_id"], "passage": row["passage"],
+                "vote_sha256": row["vote_sha256"], "outcome": "RESOLVED",
+                "label": row["votes"]["fund_manager"]}
+    adjudication = {"track": h.TRACK, "profile": "financial_expert",
+                   "packet_id": pack["packet_id"], "blind_to_predictions": True,
+                   "independent_review_sha256": dossier["independent_review_sha256"],
+                   "reviewed_at": datetime.now(UTC).isoformat(), "decisions": [decision]}
+    if fault == "stale":
+        decision["vote_sha256"] = "0" * 64
+    elif fault == "quote":
+        decision["label"]["quote"] = "invented absent quote"
+    elif fault == "missing":
+        adjudication["decisions"] = []
+    elif fault == "dossier":
+        dossier["disagreements"][0]["text"] = "Replaced evidence"
+        (frozen / "disagreements.json").unlink()
+        h.write(frozen / "disagreements.json", dossier)
+    h.write(frozen / "adjudication.json", adjudication)
+    if fault:
+        with pytest.raises(ValueError):
+            h.evaluate(frozen)
+    else:
+        result = h.evaluate(frozen)
+        assert result["status"] == "BLIND_REVIEW_COMPLETE"
+        assert result["adjudicated_passages"] == 1

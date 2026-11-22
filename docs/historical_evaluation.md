@@ -1,5 +1,11 @@
 # P5 offline historical evaluation workflow
 
+The strict production-clock workflow below remains unchanged. A separate local
+archive-reconstruction track now covers60 issuer-period clusters with three
+blind AI reviewers; see [historical replay guide](historical-replay-guide-vi.md).
+It does not backdate acquisition or satisfy this workflow's graph/push/human
+validation requirements. Its scores describe language agreement with AI references.
+
 This tooling validates an explicitly supplied corpus and compares submitted V0 results with a deterministic B0 keyword baseline. It does not acquire sources, label events, run an LLM, enable notifications, or establish that a claimed archive is genuine. Real historical evaluation is pending. The checked-in `evaluation/historical-v0/` workspace is empty and contains JSON schemas, not fabricated examples.
 
 ## Collection and review
