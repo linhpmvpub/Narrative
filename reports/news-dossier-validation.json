@@ -1,0 +1,28 @@
+{
+  "code_sha": "98a4ebdedb9cb6d55cc434dbf4cddb29e6bafbfd",
+  "workflow_run_id": 45008287162,
+  "workflow_url": "https://github.com/linhpmvpub/Narrative/actions/runs/45008287162",
+  "conclusion": "success",
+  "sqlite_tests": 419,
+  "postgresql_tests": 419,
+  "focused_tests": 13,
+  "focused_seconds": 37.14,
+  "static_checks": [
+    "ruff",
+    "mypy 86 files",
+    "JavaScript syntax"
+  ],
+  "browser": "Read-only local source and intercepted evidence dossier passed desktop/mobile; zero production writes",
+  "source_items_examined": 135,
+  "distinct_article_ticker_pairs": 7,
+  "impact_ready": 0,
+  "schema": "0015",
+  "send_notifications": false,
+  "allow_synthetic_live": false,
+  "llm_mode": "none",
+  "remaining": [
+    "Independent source-backed claim review",
+    "Explicit news-to-metric causal linkage",
+    "Matched exposure numerator and denominator before materiality/map integration"
+  ]
+}
