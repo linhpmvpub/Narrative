@@ -1,0 +1,50 @@
+{
+  "profiles": [
+    {
+      "ticker": "AMD",
+      "version": 1,
+      "sourced_components": 3,
+      "unknown_components": 39,
+      "nodes": 5,
+      "relationships": 4,
+      "bindings": 2,
+      "narratives": 1
+    },
+    {
+      "ticker": "MU",
+      "version": 1,
+      "sourced_components": 5,
+      "unknown_components": 37,
+      "nodes": 4,
+      "relationships": 4,
+      "bindings": 1,
+      "narratives": 1
+    },
+    {
+      "ticker": "NVDA",
+      "version": 3,
+      "sourced_components": 6,
+      "unknown_components": 36,
+      "nodes": 6,
+      "relationships": 6,
+      "bindings": 0,
+      "narratives": 1
+    },
+    {
+      "ticker": "NVDA",
+      "version": 2,
+      "sourced_components": 9,
+      "unknown_components": 33,
+      "nodes": 10,
+      "relationships": 13,
+      "bindings": 4,
+      "narratives": 2
+    }
+  ],
+  "distinct_tickers": 3,
+  "new_profiles": 2,
+  "corrected_nvda_evidence": true,
+  "delivery": "disabled",
+  "canonical_writes": 0,
+  "private_sources_exported": false
+}

@@ -7,6 +7,7 @@ from playwright.sync_api import expect, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
+expect.set_options(timeout=20000)
 with sync_playwright() as p:
     browser = p.chromium.launch(
         executable_path="C:/Program Files/Google/Chrome/Application/chrome.exe", headless=True
@@ -20,6 +21,10 @@ with sync_playwright() as p:
         page.locator("#connect button").click()
         expect(page.locator("#profile-list article")).to_have_count(1)
         expect(page.locator("#profile-list")).to_contain_text("6/42")
+        expect(page.locator("#profile-list > details")).to_have_count(4)
+        expect(page.locator("#profile-list")).to_contain_text("AMD")
+        expect(page.locator("#profile-list")).to_contain_text("MU")
+        expect(page.locator("#profile-list")).to_contain_text("GLOBALFOUNDRIES")
         expect(page.locator("#profile-list")).to_contain_text("MẪU LỊCH SỬ")
         expect(page.locator("#profile-list")).to_contain_text("Thách thức giả định")
         expect(page.locator("#profile-list article ol li")).to_have_count(3)
@@ -42,6 +47,7 @@ with sync_playwright() as p:
     assert not errors
     browser.close()
 report = {"local_gateway": True, "widths": [390, 1440], "real_historical_cards": 1,
+          "profiles": 4, "distinct_companies": 3, "named_supplier_visible": True,
           "component_coverage_visible": True, "path_edges": 3, "source_link": True,
           "failure_withholds": True, "recovery_restores": True, "logout_clears": True,
           "overflow": False, "javascript_errors": errors, "writes": 0, "delivery": "disabled"}

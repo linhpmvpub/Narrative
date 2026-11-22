@@ -1,0 +1,22 @@
+{
+  "tp": 1,
+  "fp": 0,
+  "tn": 375,
+  "fn": 4,
+  "unresolved": 20,
+  "clusters": 100,
+  "pairs": 400,
+  "precision": 1.0,
+  "recall": 0.2,
+  "reference_kind": "AI_DEVELOPMENT_REVIEW",
+  "independent_gold": false,
+  "packet_sha256": "b7fbdf1ef30d3e628976462dbce5a1b101acf562dcd54e0df0630153266bab0f",
+  "labels_sha256": "838fe828d910a2f36269344432d4ebfe432b26fee7fc282ecd936e87e165dcd5",
+  "delivery": "disabled",
+  "limitations": [
+    "Latest-URL convenience sample; pairs are correlated within articles",
+    "Unknown references excluded, never counted as negatives",
+    "Relevance only, not financial impact or push accuracy"
+  ],
+  "sample_expansion": "Initial 60 mostly administrative/off-topic; expanded to 100 without changing the first freeze or tuning rules."
+}

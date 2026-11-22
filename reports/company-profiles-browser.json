@@ -5,6 +5,9 @@
     1440
   ],
   "real_historical_cards": 1,
+  "profiles": 4,
+  "distinct_companies": 3,
+  "named_supplier_visible": true,
   "component_coverage_visible": true,
   "path_edges": 3,
   "source_link": true,
