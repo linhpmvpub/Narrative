@@ -1,0 +1,33 @@
+{
+  "code_commit": "7983b2b078988c1d546b4b6f2b3fad8f0be3646a",
+  "run_id": 44998546679,
+  "url": "https://github.com/linhpmvpub/Narrative/actions/runs/44998546679",
+  "jobs": {
+    "verify": "success",
+    "dependency-audit": "success"
+  },
+  "final_collected_tests_per_database": 381,
+  "ci_sqlite": "success",
+  "ci_postgresql": "success",
+  "local_sqlite": {
+    "passed": 380,
+    "seconds": 456.1,
+    "note": "Started before final XML encoding and UTC API refinements"
+  },
+  "final_focused": {
+    "passed": 15,
+    "seconds": 13.27
+  },
+  "mypy_source_files": 77,
+  "ruff": "passed",
+  "browser": "desktop/mobile read-only passed through local gateway",
+  "live_rss_sources": 6,
+  "initial_source_items": 135,
+  "x_live_enabled": false,
+  "notifications_enabled": false,
+  "canonical_events_unchanged": 51,
+  "alerts": 0,
+  "protected_originals_verified": 15,
+  "credential_scan": "passed",
+  "uptime_limit": "Local PC worker; no reboot autostart or cloud deployment"
+}

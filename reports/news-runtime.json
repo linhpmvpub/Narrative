@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-11-22T07:31:34.237435+00:00",
+  "schema": "0013",
+  "counts": {
+    "rie_news_items": 135,
+    "rie_news_revisions": 135,
+    "rie_events": 51,
+    "rie_event_versions": 51,
+    "rie_alerts": 0
+  },
+  "enabled_sources": 6,
+  "stale_enabled_sources": 0,
+  "disabled_x_sources": 4,
+  "delivery": "disabled",
+  "credential_scan": "passed",
+  "remote_tunnel_tested": false
+}
