@@ -199,3 +199,15 @@ def canonical_snapshot(
             return safe(lambda: snapshot(conn, as_of or datetime.now(UTC), limit))
     finally:
         engine.dispose()
+
+
+@router.get("/source/{item_id}/dossier")
+def evidence_dossier(item_id: str, ticker: str, expected_payload_sha256: str, user: Admin):
+    from engine.news_dossier import dossier
+
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            return safe(lambda: dossier(conn, item_id, ticker, expected_payload_sha256))
+    finally:
+        engine.dispose()

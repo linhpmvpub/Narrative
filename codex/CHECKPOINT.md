@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Source-pinned news evidence dossiers — 2026-11-22 (latest)
+
+- Added engine/news_dossier.py, admin-only local source/{item_id}/dossier API and operator UI. Source pinned to current version/hash, explicit pilot issuer and valid chronology; outputs UNVERIFIED_RSS, no claim/review created. Baseline SEC financial/segment evidence is selected at news capture cutoff and intersected with currently valid snapshots to exclude future/replaced/withdrawn evidence. Context is not news causal proof. Limits12 comparisons/5 filings/20 segments, explicit truncation/hash/blockers; no ratio/materiality score inferred.
+- Operator UI shows current/prior financial periods, values/unit/SEC link and expandable provenance/segment/blocker detail. Source/ticker change, refresh/logout clear prior dossier and epoch guards reject late responses. Gateway remains blocked. Snapshot cutoff is received_at, not publication-time market knowledge. No migration; schema0015, backend8888 restarted, RSS worker/gateway retained, no Cloudflare change.
+- Actual read-only pass over135 stored source items found7 distinct normalized-article/ticker pairs, all NVDA; private dossiers in ignored source-cache/news-dossiers.56 financial context occurrences and28 segment occurrences across7 dossiers (repeated baseline context, NOT independent evidence),0 errors,0 impact-ready,0 production writes. Aggregate reports/news-dossier-runtime.json only; raw sources/claims remain private and unverified. Real notifications false, synthetic live false, LLMnone, X off.
+- Focused13 tests passed37.14s; Ruff, mypy86files, JS syntax and browser desktop/mobile read-only+intercepted dossier UI passed. All15 protected originals unchanged.419 tests collected. Full GitHub CI pending; update after completion.
+- Next: source-backed exposure/materiality review with matched numerator/denominator periods/scopes and explicit link to news claim, before map integration. Seven dossiers are review inputs, not approved news or verified causal evidence. No fabricated independent reviewers. See docs/news-claim-review.md.
+
+
 ## Reviewed canonical news in private informational feed — 2026-11-22 (latest)
 
 - Added engine/news_feed.py and authenticated GET /api/v0/news/reviewed, current-only revalidated snapshot projection. Shared source inbox for provisioned accounts; allowlisted excerpt/numeric measurement/citation/revision/hash/published-captured-ingested times/actor-kind declarations. No private notes, reviewer identities, occurrence identity or withheld reasons. No durable card writes; duplicate one card, correction replaces, source edits/revoked approval/blocked source withhold at next request. Historical query cannot restore revoked content through member endpoint.

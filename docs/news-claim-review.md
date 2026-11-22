@@ -73,3 +73,15 @@ Mỗi request chạy lại bộ kiểm tra snapshot ở thời điểm hiện t�
 Giao diện kiểm tra mỗi60 giây khi tab mở; đây không phải stream cập nhật tức thì. Khi tải lại hoặc lỗi, thẻ cũ bị xóa để không tiếp tục hiển thị như còn hợp lệ. Khi tab bị ẩn, xóa khu vực đã duyệt; khi quay lại thì tải mới. Nếu endpoint phần đã duyệt lỗi, các bài RSS vẫn tải bình thường. Logout xóa token và nội dung. Không lưu nội dung trong localStorage hoặc cho phép HTTP cache.
 
 Giới hạn mặc định100, tối đa500 ứng viên canonical; UI xét200. examined/truncated/withheld_count mô tả phạm vi, không bảo đảm bao phủ toàn thị trường. Bộ lọc nguồn chỉ áp dụng bài RSS, khu vực đã duyệt xét toàn bộ nguồn. DEV_INFORMATIONAL_FEED=false trả enabled=false và danh sách trống. Thẻ luôn ghi tác động UNKNOWN, graph/impact eligibility false; đây không phải đánh giá nhân quả, khuyến nghị đầu tư hay xác nhận quyền thương mại. Chưa chiếu các news này lên bản đồ graph.
+
+## Hồ sơ đối chiếu số liệu nền và bằng chứng tác động
+
+Trong /news-review, quản trị viên đọc phiên bản nguồn, chọn công ty, rồi bấm Đối chiếu nguồn và số liệu nền. API GET /api/v0/news-claims/source/{item_id}/dossier?ticker=...&expected_payload_sha256=... chỉ dành cho admin local; gateway không mở. Nguồn được ghim bằng hash/version, công ty phải có tên rõ ràng trong title+summary và chronology hợp lệ. Dossier giữ UNVERIFIED_RSS; không tạo claim hay phê duyệt.
+
+Financial/segment context dùng cutoff bằng lúc **nhận** tin. Chỉ lấy snapshot SEC đã available trước cutoff và vẫn hợp lệ ở hiện tại; snapshot mới thay thế sẽ làm context cũ bị loại, không lấp khoảng trống bằng số liệu tương lai. Đây là research context lúc hệ thống nhận tin, không phải khẳng định thị trường đã biết tại publication time. Trích đoạn, URL/hash và cutoff được giữ; dossier có hash bao gồm thời điểm tạo nên không phải ID ổn định qua các lần đọc.
+
+Số liệu tài chính hiển thị cả hai kỳ, đơn vị, giá trị và hồ sơ SEC. Chi tiết JSON giữ provenance/JSON pointers và phân khúc. Giới hạn12 financial records,5 filings,20 segment records; truncated được công bố. Context không tự nối causal attribution, không dùng biến động giá cổ phiếu làm numerator doanh thu và không tính tỷ lệ phơi nhiễm khi thiếu denominator tương thích.
+
+Blockers luôn giữ yêu cầu claim/review, liên kết tin→chỉ tiêu, numerator/denominator cùng kỳ/phạm vi/đơn vị, bằng chứng nhân quả/counterfactual và đường quan hệ đã xác minh. Có đủ số liệu nền không làm materiality/causality thành verified. Chưa có auto-promotion lên feed hoặc map từ dossier.
+
+Đợt kiểm tra22Nov:135 mục nguồn →7 cặp bài/công ty khác nhau theo URL, đều NVDA. Hồ sơ riêng tư trong source-cache/news-dossiers; báo cáo public chỉ aggregate tại reports/news-dossier-runtime.json.56 lượt financial context và28 lượt segment context tính trên7 hồ sơ, có số liệu nền lặp lại giữa hồ sơ; không phải56/28 bằng chứng độc lập.0 impact-ready,0 claim/review được tạo. Nội dung RSS vẫn chưa được thẩm định độc lập.

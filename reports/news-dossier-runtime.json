@@ -1,0 +1,14 @@
+{
+  "by_ticker": {
+    "NVDA": 7
+  },
+  "source_items_examined": 135,
+  "distinct_article_ticker_pairs": 7,
+  "financial_context_records": 56,
+  "segment_context_records": 28,
+  "errors": 0,
+  "impact_ready": 0,
+  "production_writes": 0,
+  "delivery": "disabled",
+  "context_counts_are_occurrences_across_dossiers": true
+}

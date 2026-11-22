@@ -124,9 +124,38 @@ with sync_playwright() as p:
     page.locator("#snapshot-at").fill("2026-11-22T10:00:00Z")
     page.get_by_role("button", name="Đọc snapshot").click()
     expect(page.locator("#snapshot-result")).to_contain_text("2026-11-22T10:00:00Z")
+    page.locator("#load").click()
+    expect(page.locator("#source")).not_to_have_value("")
+    page.route(
+        "**/api/v0/news-claims/source/*/dossier?*",
+        lambda route: route.fulfill(
+            json={
+                "source": {"version": 1},
+                "evidence_cutoff": "2026-11-22T10:00:00Z",
+                "financial_context": [
+                    {
+                        "metric": "REVENUE",
+                        "unit": "USD",
+                        "current": {"start": "2026-07-01", "end": "2026-09-30", "value": "20"},
+                        "prior": {"start": "2025-07-01", "end": "2025-09-30", "value": "10"},
+                        "filing_url": "https://www.sec.gov/synthetic-only",
+                    }
+                ],
+                "segment_context": [],
+                "truncated": False,
+                "materiality": "UNKNOWN",
+            }
+        ),
+    )
+    page.locator("#load-dossier").click()
+    expect(page.locator("#dossier-result")).to_contain_text("2026-07-01")
+    expect(page.locator("#dossier-result")).to_contain_text("2025-07-01")
+    expect(page.locator("#dossier-result")).to_contain_text("chưa xác định")
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     assert not errors, errors
     page.locator("#logout").click()
     expect(page.locator("#claims")).to_be_empty()
+    expect(page.locator("#dossier-result")).to_be_empty()
     browser.close()
 (ROOT / "reports/news-claims-browser.json").write_text(
     json.dumps(
@@ -139,6 +168,7 @@ with sync_playwright() as p:
                 "canonical_new_duplicate_correction_intercepted",
                 "stale_ingestion_error",
                 "historical_snapshot_intercepted",
+                "evidence_dossier_intercepted",
                 "mobile_layout",
                 "logout_clears",
                 "gateway_review_blocked",
