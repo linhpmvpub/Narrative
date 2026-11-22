@@ -1,0 +1,20 @@
+{
+  "track": "HISTORICAL_ARCHIVE_RECONSTRUCTION_AI",
+  "packet_id": "a1e0c0e7f5d4e2a150a920daad1333a98ca66bd81444166123dfb40f0037516d",
+  "frozen_at": "2026-11-22T12:57:52.341654+00:00",
+  "packet_sha256": "847d2a6ee2367867011f65ca2de005af65d36da489ed6a7b48fe4602a80c3414",
+  "prediction_sha256": "dbefab10b426c67ac4d6f1bca2b012b567609d17ad343e987fdbdc123715076b",
+  "collection_sha256": "4e5e8c7d38f7244b5ed0da70cae5e139113cff8ce44c1227d0bcf9ce48ffba87",
+  "clusters": 60,
+  "passages": 180,
+  "split_counts": {
+    "development": 25,
+    "calibration": 16,
+    "holdout": 19
+  },
+  "clean_holdout_clusters": 13,
+  "published_data": false,
+  "delivery": "disabled",
+  "capture_errors_count": 0,
+  "passage_failures_count": 0
+}
