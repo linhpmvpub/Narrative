@@ -1,0 +1,26 @@
+{
+  "code_sha": "381ee7cf379c050b746a06ecd518452081407b13",
+  "workflow_run_id": 45007002616,
+  "workflow_url": "https://github.com/linhpmvpub/Narrative/actions/runs/45007002616",
+  "conclusion": "success",
+  "sqlite_tests": 415,
+  "postgresql_tests": 415,
+  "focused_tests": 16,
+  "focused_seconds": 46.24,
+  "static_checks": [
+    "ruff",
+    "mypy 85 files",
+    "JavaScript syntax"
+  ],
+  "browser": "Live read-only gateway and intercepted reviewed/corrected/withdrawn/unavailable cards passed desktop/mobile; zero production writes",
+  "schema": "0015",
+  "real_reviewed_news_cards": 0,
+  "send_notifications": false,
+  "allow_synthetic_live": false,
+  "llm_mode": "none",
+  "remaining": [
+    "Source-backed real news claims and independent review",
+    "Exposure/materiality evidence before news impact-map integration",
+    "Shared feed is not personalized; bounded candidates and 60-second visible-tab refresh"
+  ]
+}
