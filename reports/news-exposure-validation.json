@@ -1,0 +1,27 @@
+{
+  "code_sha": "62ee5cf69b6971dbd06d7c97a9ada62e4091e237",
+  "workflow_run_id": 45009303526,
+  "workflow_url": "https://github.com/linhpmvpub/Narrative/actions/runs/45009303526",
+  "conclusion": "success",
+  "sqlite_tests": 433,
+  "postgresql_tests": 433,
+  "focused_tests": 18,
+  "focused_seconds": 10.75,
+  "static_checks": [
+    "ruff",
+    "mypy 88 files",
+    "JavaScript syntax"
+  ],
+  "browser": "Read-only live source and intercepted exposure drafting/review passed desktop/mobile; zero production writes",
+  "schema": "0016",
+  "distinct_baseline_pairs": 2,
+  "actual_exposure_approvals": 0,
+  "send_notifications": false,
+  "allow_synthetic_live": false,
+  "llm_mode": "none",
+  "remaining": [
+    "Approved current baseline share projection into informational feed/map",
+    "Real independently reviewed news claims and exposure drafts",
+    "Attributable affected fraction and effect-size evidence for materiality; baseline share is not news impact"
+  ]
+}
