@@ -1,0 +1,14 @@
+{
+  "review_personas": 3,
+  "review_kind": "AI_SIMULATED",
+  "human_reviews": 0,
+  "statistical_independence_claimed": false,
+  "source_independence_claimed": false,
+  "verdict": "SUPPORTS_LITERAL_EXTRACTION_REQUIRES_REVIEW",
+  "normalized_financial_approval": false,
+  "impact_eligible": false,
+  "review_artifact_sha256": "f222a67eec73649343565b919044d6f085c33f249043dc05e32dfca5638f67f8",
+  "sec_target_period_matches": 0,
+  "canonical_writes": 0,
+  "notification_delivery": "disabled"
+}

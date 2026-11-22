@@ -111,3 +111,15 @@ def reviewed(limit: int = Query(100, ge=1, le=500)):
         raise HTTPException(409, str(exc)) from None
     finally:
         engine.dispose()
+
+
+@router.get("/extractions")
+def extractions():
+    from engine.news_extraction_feed import extraction_feed
+
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            return extraction_feed(conn)
+    finally:
+        engine.dispose()

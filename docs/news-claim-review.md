@@ -178,3 +178,24 @@ zero/negative prior values do not yield percentage growth. Semantic/table alignm
 fiscal dates and completeness still require independent review. Output is an
 UNREVIEWED_FINANCIAL_WORKSHEET, never a review/claim/feed promotion. All private
 source text and detailed extraction results remain excluded from Git.
+
+
+## Separate unverified extraction feed (user-approved)
+
+The user explicitly chose a separate private-feed section labeled “Bản trích chưa
+xác minh”. Authenticated GET /api/v0/news/extractions is read-only and permitted
+through the existing mobile gateway. It projects allowlisted candidate fields,
+source URL/body hash/retrieval time and unresolved currency/period/scope flags;
+no local paths, reviewer notes, author identity, raw HTML or private packet IDs.
+Each read revalidates current revision and packet bytes. Changed revisions have
+no historical fallback; corrupt/unavailable packets or packet truncation withhold
+that revision. Latest capture per URL/relation wins; repeated candidate fields
+are deduplicated. Explicitly blocked reviewed-source article URLs are withheld.
+At most200 current revisions and100 output candidates are returned, with truncation
+reported. This is a current informational view, not historical replay.
+
+The section clears on refresh/failure/tab-hide/logout and refreshes every60s while
+visible. It does not follow the raw-news source filter. GAAP/non-GAAP remain separate
+accounting labels, not independent corroboration. None of these candidates enter
+canonical events, baseline shares, graph edges, materiality, stance or alerts.
+New source evidence and independent semantic review are still needed before promotion.

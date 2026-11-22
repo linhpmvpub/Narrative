@@ -1,0 +1,12 @@
+{
+  "issuer": "NVDA",
+  "target_end": "2026-10-25",
+  "writes": 0,
+  "canonical_changes": 0,
+  "status": "captured",
+  "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+  "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+  "retrieved_at": "2026-11-22T12:05:06.452319+00:00",
+  "matching_rows": 0,
+  "units": []
+}
