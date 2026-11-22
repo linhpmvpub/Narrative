@@ -168,7 +168,12 @@ def test_review_handoff_round_trip(setup, tmp_path):
             ],
         }
         (reviews / filename).write_text(json.dumps(review))
-    review_run(out, reviews, "disputes")
+    from engine.evaluation.review_release import release
+
+    anchor = tmp_path / "anchor.json"
+    released = release(out, tmp_path / "handoff", anchor)
+    kwargs = {"anchor_path": anchor, "anchor_sha256": released["anchor_sha256"]}
+    review_run(out, reviews, "disputes", **kwargs)
     assert read(reviews / "disputes.json")["disagreements"] == []
     (reviews / "expert.json").write_text(
         json.dumps(
@@ -181,6 +186,72 @@ def test_review_handoff_round_trip(setup, tmp_path):
             }
         )
     )
-    review_run(out, reviews, "evaluate")
+    review_run(out, reviews, "evaluate", **kwargs)
     assert read(reviews / "summary.json")["total_cases"] == 2
     assert read(reviews / "summary.json")["human_labels_created"] == 0
+
+
+@pytest.mark.parametrize(
+    "change", ["predictions_and_receipt", "anchor", "reviewer_input", "extra_file"]
+)
+def test_release_rejects_tampering_even_with_locally_rehashed_receipt(setup, tmp_path, change):
+    from engine.evaluation.review_release import release, verify_handoff
+    from engine.ingestion.contracts import digest
+
+    directory, plan, out = setup
+    prepare(directory, plan, out, now=NOW)
+    handoff, anchor = tmp_path / "handoff", tmp_path / "anchor.json"
+    released = release(out, handoff, anchor)
+    assert (
+        verify_handoff(out, handoff, anchor, released["anchor_sha256"])["integrity"] == "verified"
+    )
+    if change == "predictions_and_receipt":
+        sealed = read(out / "sealed-predictions.json")
+        sealed["predictions"] = {cid: "tampered" for cid in sealed["predictions"]}
+        (out / "sealed-predictions.json").write_text(json.dumps(sealed))
+        receipt = read(out / "receipt.json")
+        receipt["prediction_sha256"] = digest(
+            {k: sealed[k] for k in ("predictions", "extractor", "as_of")}
+        )
+        (out / "receipt.json").write_text(json.dumps(receipt))
+        assert verify(out)["integrity"] == "verified"  # Local receipt alone cannot detect this.
+    elif change == "anchor":
+        value = read(anchor)
+        value["cases"] += 1
+        anchor.write_text(json.dumps(value))
+    elif change == "reviewer_input":
+        (handoff / "retail_investor.json").write_text("{}")
+    else:
+        (handoff / "sealed-predictions.json").write_text("{}")
+    with pytest.raises(ValueError):
+        verify_handoff(out, handoff, anchor, released["anchor_sha256"])
+
+
+def test_release_is_private_minimal_and_never_overwritten(setup, tmp_path):
+    from engine.evaluation.review_release import release
+
+    directory, plan, out = setup
+    prepare(directory, plan, out, now=NOW)
+    anchor, handoff = tmp_path / "anchor.json", tmp_path / "handoff"
+    release(out, handoff, anchor)
+    public = anchor.read_text()
+    assert TEXT not in public and NEGATIVE not in public
+    for path in handoff.iterdir():
+        value = read(path)
+        assert "predictions" not in value and "receipt" not in value
+        assert set(value["cases"][0]) == {
+            "id",
+            "kind",
+            "split",
+            "ticker",
+            "accession",
+            "source_sha256",
+            "url",
+            "filing_date",
+            "available_at",
+            "text",
+        }
+    with pytest.raises(ValueError, match="already exists"):
+        release(out, handoff, anchor)
+    with pytest.raises(ValueError, match="outside"):
+        release(out, tmp_path / "other", out / "bad-anchor.json")

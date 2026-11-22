@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Anchored blind-review handoff — 2026-11-22 (latest)
+
+- Continued next actionable task while post-freeze filing date remains unavailable. Added engine/evaluation/review_release.py and CLI release/verify-release. Frozen model/protocol unchanged; no source acquisition, real prediction packet, anchor or agent labels created this turn.
+- Release exports two profile-specific allowlisted blind packets into a separate directory, plus a public aggregate anchor with receipt/packet/input hashes. Raw paragraphs remain private. Exclusive staging/rename, existing-output refusal, separate run/handoff/anchor paths. Verify-release rejects changed inputs and unexpected files (including accidentally copied predictions).
+- Review disputes/evaluate now REQUIRE --anchor and --anchor-sha256 retained before review. This detects edits to predictions even if the local receipt is recomputed; CLI callers must update. Local API review_run also requires these keyword arguments. Old frozen runs remain readable via verify; release them before using updated review commands.
+- Operator must commit/push anchor and preserve the printed digest BEFORE handing packet content to fresh-context reviewers. No automatic external timestamp or guarantee of actual agent blinding; same-actor replacement of both anchor and trusted digest is outside the guarantee. Agent isolation remains an orchestration requirement. Expert gets only source/two votes, no model predictions.
+- Updated docs/prospective-pipeline.md with release, verification and required review arguments. Final focused60 tests passed (2.04s), Ruff passed, mypy73files passed; final suite collects366 tests. All15 original manifest files unchanged. GitHub full SQLite/PostgreSQL CI pending handoff. SEND_NOTIFICATIONS=false, ALLOW_SYNTHETIC_LIVE=false, LLM_MODE=none unchanged; no DB/feed/graph edits.
+- Next: from23Nov UTC, collect eligible real SEC filings, prepare, release, commit public anchor digest, verify-release, then isolated AI review and anchored disputes/evaluate. No real prospective evaluation yet. Continue reporting AI agreement separately from human accuracy or causal/price inference.
+
 ## Prospective pipeline implementation — 2026-11-22 (latest)
 
 - User requested completing collection/deduplication/prediction freeze while awaiting new filings, tests/checkpoint/GitHub. Added engine/evaluation/prospective.py with explicit collect/prepare/verify/disputes/evaluate CLI; no DB writes, automatic model calls or notification delivery. Frozen candidate and original protocol untouched.

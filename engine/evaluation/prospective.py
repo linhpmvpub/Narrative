@@ -189,10 +189,11 @@ def verify(output):
     return {"packet_id": receipt["packet_id"], "cases": receipt["cases"], "integrity": "verified"}
 
 
-def review_run(output, reviews, action):
+def review_run(output, reviews, action, *, anchor_path, anchor_sha256):
     from engine.evaluation.agent_pilot import disputes, evaluate
+    from engine.evaluation.review_release import verify_anchor
 
-    verify(output)
+    verify_anchor(output, anchor_path, anchor_sha256)
     pack = read(output / "blind-input.json")
     left, right = read(reviews / "reviewer-a.json"), read(reviews / "reviewer-b.json")
     if action == "disputes":
@@ -219,7 +220,18 @@ def review_run(output, reviews, action):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["collect", "prepare", "verify", "disputes", "evaluate"])
+    parser.add_argument(
+        "action",
+        choices=[
+            "collect",
+            "prepare",
+            "verify",
+            "release",
+            "verify-release",
+            "disputes",
+            "evaluate",
+        ],
+    )
     parser.add_argument(
         "--protocol",
         type=Path,
@@ -229,13 +241,34 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--user-agent")
     parser.add_argument("--reviews", type=Path)
+    parser.add_argument("--handoff", type=Path)
+    parser.add_argument("--anchor", type=Path)
+    parser.add_argument("--anchor-sha256")
     parser.add_argument("--per-filing", type=int, default=20)
     args = parser.parse_args()
     Settings.from_env()
     if args.action in {"disputes", "evaluate"}:
-        if args.reviews is None:
-            parser.error("review actions require --reviews")
-        result = review_run(args.output, args.reviews, args.action)
+        if args.reviews is None or args.anchor is None or not args.anchor_sha256:
+            parser.error("review actions require --reviews, --anchor and --anchor-sha256")
+        result = review_run(
+            args.output,
+            args.reviews,
+            args.action,
+            anchor_path=args.anchor,
+            anchor_sha256=args.anchor_sha256,
+        )
+    elif args.action == "verify-release":
+        from engine.evaluation.review_release import verify_handoff
+
+        if args.handoff is None or args.anchor is None or not args.anchor_sha256:
+            parser.error("verify-release requires --handoff, --anchor and --anchor-sha256")
+        result = verify_handoff(args.output, args.handoff, args.anchor, args.anchor_sha256)
+    elif args.action == "release":
+        from engine.evaluation.review_release import release
+
+        if args.handoff is None or args.anchor is None:
+            parser.error("release requires --handoff and --anchor")
+        result = release(args.output, args.handoff, args.anchor)
     elif args.action == "verify":
         result = verify(args.output)
     elif args.action == "collect":
