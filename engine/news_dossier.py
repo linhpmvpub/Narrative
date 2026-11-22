@@ -10,6 +10,7 @@ from engine.financials import assessments, known_filings
 from engine.ingestion.contracts import digest
 from engine.models.contracts import utc
 from engine.models.schema_v13 import news_items, news_revisions
+from engine.news_articles import evidence as article_evidence
 from engine.news_claims import NAMES, source_text
 from engine.news_evidence import capture_evidence
 from engine.settings import Settings
@@ -107,6 +108,7 @@ def dossier(conn, item_id, ticker, expected_hash):
         },
         evidence_cutoff=cutoff.isoformat(),
         raw_source_evidence=capture_evidence(row),
+        article_evidence=article_evidence(row),
         financial_context=comparisons[:12],
         segment_context=segments[:20],
         limits={"financial": 12, "filings": 5, "segments": 20},

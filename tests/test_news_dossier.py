@@ -170,3 +170,23 @@ def test_dossier_capture_checks(client, identities, setup, enabled, db, tmp_path
             conn.execute(update(news_revisions).values(capture_sha256=sha))
         assert evidence()["status"] == status
         assert not evidence()["revision_content_match"]
+
+
+def test_article_packet_routes_operator_only(client, identities, setup, enabled):
+    from engine.mobile_gateway import allowed
+
+    for suffix in ("article-packet", "numeric-candidates"):
+        path = "/api/v0/news-claims/source/" + setup[0] + "/" + suffix
+        assert (
+            client.get(
+                path, params={"packet_sha256": "0" * 64}, headers=headers(identities[0])
+            ).status_code
+            == 403
+        )
+        assert (
+            client.get(
+                path, params={"packet_sha256": "0" * 64}, headers=headers(identities[3])
+            ).status_code
+            == 409
+        )
+        assert not allowed("GET", path)

@@ -252,8 +252,6 @@ def exposure_options(claim_id: str, user: User):
         engine.dispose()
 
 
-
-
 @router.post("/{claim_id}/exposure")
 def create_exposure(claim_id: str, body: ExposureBody, user: User, key: Key = None):
     from engine.news_exposure import create as create_draft
@@ -277,5 +275,61 @@ def review_exposure(draft_id: str, body: ExposureReview, user: Admin):
     try:
         with transaction(engine, user.id) as conn:
             return safe(lambda: review_draft(conn, user, draft_id, body))
+    finally:
+        engine.dispose()
+
+
+@router.get("/source/{item_id}/article-packet")
+def article_packet(item_id: str, packet_sha256: str, user: Admin):
+    from engine.news_articles import read_packet
+
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            row = (
+                conn.execute(
+                    select(news_revisions)
+                    .join(news_items, news_items.c.id == news_revisions.c.item_id)
+                    .where(
+                        news_items.c.id == item_id, news_revisions.c.version == news_items.c.version
+                    )
+                )
+                .mappings()
+                .first()
+            )
+            if not row:
+                raise HTTPException(404, "Source missing")
+            packet, text = safe(lambda: read_packet(row, packet_sha256))
+            return {
+                "packet": packet,
+                "text": text,
+                "packet_sha256": packet_sha256,
+                "delivery": "disabled",
+            }
+    finally:
+        engine.dispose()
+
+
+@router.get("/source/{item_id}/numeric-candidates")
+def numeric_candidates(item_id: str, packet_sha256: str, user: Admin):
+    from engine.news_numeric_candidates import candidates
+
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            row = (
+                conn.execute(
+                    select(news_revisions)
+                    .join(news_items, news_items.c.id == news_revisions.c.item_id)
+                    .where(
+                        news_items.c.id == item_id, news_revisions.c.version == news_items.c.version
+                    )
+                )
+                .mappings()
+                .first()
+            )
+            if not row:
+                raise HTTPException(404, "Source missing")
+            return safe(lambda: candidates(row, packet_sha256))
     finally:
         engine.dispose()

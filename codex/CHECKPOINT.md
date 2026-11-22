@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Article evidence and numeric extraction preparation — 2026-11-22 (latest)
+
+- Multi-step batch: immutable bounded HTTPS article capture CLI and exact-revision receipts; admin dossier/API/UI article evidence; explicit quarterly revenue candidate parser; source-span financial worksheet validator/CLI. Same-article vs issuer-context separated, actual retrieval clock retained. No redirects/access bypass, no raw HTML execution, no gateway expansion, no schema change or canonical/review writes.
+- Private NEWS_ARTICLE_DIR defaults source-cache/news-articles. Manifests/body/text hashes revalidated on reads; current revision mismatch, corruption and missing data withheld. Visible text is not guaranteed article-only. Local integrity is not publisher signature or independent corroboration. No automated article polling or commercial permission inferred.
+- Captured2 real packets (CNBC article and NVIDIA issuer context), both pinned to current source revision. Issuer parser found2 GAAP/non-GAAP revenue candidates with exact quotes/spans. Dollar currency UNKNOWN, abbreviated fiscal periods UNRESOLVED, scope/comparability unreviewed; no automatic worksheet/claim approval, impact unknown. Private artifacts source-cache/article-packet-live.json and issuer-numeric-candidates.json; publish aggregates only.
+- Focused17 tests passed20.43s; Ruff/mypy94files/JS passed. Full CI/browser pending. Notifications/synthetic-live false, LLMnone, X off.
+- Next: independent review and normalization of issuer/currency/fiscal dates/table scope before converting financial candidates into reviewed ingestion. Extend parsers only with source-backed examples and tests; worksheet arithmetic is not materiality or price impact.
+
+
 ## RSS evidence diagnostics in review dossiers — 2026-11-22 (latest)
 
 - Admin dossier and local operator UI now expose current raw-capture hash/integrity/entry-match diagnostics. Bounded bytes rehashed and parsed at revision cutoff; exactly one external_id and exact source fields required. Duplicate GUIDs ambiguous; missing/unreadable/corrupt/parse-failed/mismatch distinguished. No bytes/paths exposed, no gateway expansion or schema change.

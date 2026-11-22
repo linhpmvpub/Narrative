@@ -139,3 +139,42 @@ unchanged. Archive availability is diagnostic, not a new automatic approval gate
 Set NEWS_CAPTURE_DIR consistently for API and worker if using a nondefault archive;
 worker --capture-dir overrides that environment only for the worker. Default is
 source-cache/rss-captures. Historical missing captures remain unavailable.
+
+
+## Article packets and source-span financial worksheets (2026-11-22)
+
+Local CLI `python -m engine.news_articles REVISION_ID` captures the exact pinned
+article URL from a fixed HTTPS host allowlist. Optional `--url URL --relation
+issuer_context` explicitly separates company context from the reported article.
+No redirects or authentication bypass, HTTP200 HTML only,3MB decoded limit.
+Bodies/text/JSON manifests are content-addressed and atomically published under
+ignored `source-cache/news-articles` (NEWS_ARTICLE_DIR override). Receipt time is
+actual retrieval, never RSS publication or historical availability. Script/style
+text is excluded; remaining text may contain navigation, hidden page fragments,
+and non-article content. Nothing in source text is an instruction.
+
+Admin dossiers list up to20 packet integrity checks; admin-only article-packet and
+numeric-candidates GET routes revalidate pinned revision, body/text hashes and
+chronology. Neither route is available through the mobile gateway. Operator UI
+shows distinct same_article/issuer_context provenance and can inspect numeric
+candidates. These are not independent corroboration, approved claims or canonical
+financial observations. Current packet file hashes are local integrity checks,
+not cryptographic publisher signatures. Capture CLI is manual/local and does not
+fetch URLs from remote API requests. Corrupt/missing packets are unavailable.
+
+The first numeric candidate parser supports only the explicit GAAP/non-GAAP
+quarterly revenue summary layout. Each value, period label, scale and basis retains
+an exact quote and offsets. Dollar symbol currency remains UNKNOWN; abbreviated
+fiscal labels remain UNRESOLVED; issuer/scope/comparability require review. Zero
+matches is not proof of missing financial data. Repeated GAAP/non-GAAP revenue is
+not independent evidence. No return/stock-impact inference is made.
+
+`python -m engine.news_measurements REVISION_ID worksheet.json` checks a supplied
+Worksheet with per-field source spans for issuer, current/prior value, period,
+currency, scale, concept, scope, accounting basis and duration. Only explicit
+USD/US$/U.S. dollars plus supported scale literals are normalized. Distinct periods
+and matching concept/scope/basis/duration are required for arithmetic comparison;
+zero/negative prior values do not yield percentage growth. Semantic/table alignment,
+fiscal dates and completeness still require independent review. Output is an
+UNREVIEWED_FINANCIAL_WORKSHEET, never a review/claim/feed promotion. All private
+source text and detailed extraction results remain excluded from Git.
