@@ -1,0 +1,18 @@
+{
+  "schema": "0016",
+  "counts": {
+    "rie_events": 51,
+    "rie_event_versions": 51,
+    "rie_alerts": 0,
+    "rie_news_exposure_drafts": 0,
+    "rie_news_exposure_reviews": 0
+  },
+  "dossiers_checked": 7,
+  "stale_dossiers": 0,
+  "matched_pair_occurrences": 14,
+  "distinct_baseline_pairs": 2,
+  "actual_exposure_approvals": 0,
+  "materiality": "UNKNOWN",
+  "production_writes": 0,
+  "delivery": "disabled"
+}

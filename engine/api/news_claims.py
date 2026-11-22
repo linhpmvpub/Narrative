@@ -25,6 +25,8 @@ from engine.news_claims import (
     source_text,
     validate,
 )
+from engine.news_exposure import DraftBody as ExposureBody
+from engine.news_exposure import ReviewBody as ExposureReview
 from engine.news_snapshot import snapshot
 
 router = APIRouter(prefix="/api/v0/news-claims")
@@ -209,5 +211,71 @@ def evidence_dossier(item_id: str, ticker: str, expected_payload_sha256: str, us
     try:
         with engine.connect() as conn:
             return safe(lambda: dossier(conn, item_id, ticker, expected_payload_sha256))
+    finally:
+        engine.dispose()
+
+
+@router.get("/{claim_id}/exposure")
+def exposure_options(claim_id: str, user: User):
+    from engine.news_exposure import candidates, drafts, latest_review, validate_draft
+
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            result = safe(lambda: candidates(conn, user, claim_id))
+            query = (
+                select(drafts)
+                .where(drafts.c.claim_id == claim_id)
+                .order_by(drafts.c.created_at.desc())
+            )
+            if user.role != "admin":
+                query = query.where(drafts.c.author_id == user.id)
+            entries = []
+            for draft in conn.execute(query.limit(100)).mappings():
+                decision = latest_review(conn, draft["id"])
+                status = decision["decision"] if decision else "pending"
+                try:
+                    validate_draft(conn, user, draft)
+                except ValueError:
+                    status = "stale"
+                entries.append(
+                    {
+                        "id": draft["id"],
+                        "author_id": draft["author_id"],
+                        "payload": draft["payload"],
+                        "status": status,
+                        "review_version": decision["version"] if decision else 0,
+                    }
+                )
+            return {**result, "drafts": entries, "role": user.role, "current_user_id": user.id}
+    finally:
+        engine.dispose()
+
+
+
+
+@router.post("/{claim_id}/exposure")
+def create_exposure(claim_id: str, body: ExposureBody, user: User, key: Key = None):
+    from engine.news_exposure import create as create_draft
+
+    return safe(
+        lambda: write(
+            user,
+            "news-exposure:" + claim_id,
+            key,
+            body.model_dump(mode="json"),
+            lambda conn: create_draft(conn, user, claim_id, body),
+        )
+    )
+
+
+@router.post("/exposure/{draft_id}/reviews")
+def review_exposure(draft_id: str, body: ExposureReview, user: Admin):
+    from engine.news_exposure import review as review_draft
+
+    engine = database()
+    try:
+        with transaction(engine, user.id) as conn:
+            return safe(lambda: review_draft(conn, user, draft_id, body))
     finally:
         engine.dispose()

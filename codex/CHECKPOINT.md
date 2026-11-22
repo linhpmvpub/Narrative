@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
 
+## Independently reviewed segment revenue shares — 2026-11-22 (latest)
+
+- Schema0016 adds immutable news exposure drafts and versioned approved/rejected/revoked reviews. New engine/news_exposure.py and local author/admin API/UI attach current primary canonical news to hash-pinned SEC segment/consolidated revenue pairs. Exact same issuer/accession/concept/unit/period/source identity; supported segment axis plus optional operating-segment consolidation dimension; reject incompatible scope, nonfinite/negative/zero-denominator/>100% operands. Decimal ratio4places is BASELINE_SEGMENT_REVENUE_SHARE, never affected fraction or causal impact.
+- Draft stores author kind, news-link rationale, limitations, pair and canonical version. Independent-account operator approval requires three explicit evidence/baseline confirmations; expected-version conflicts and stale evidence blocked; append-only revocation. Revalidation on reads marks stale, invalid primary claim blocks access; user sees own drafts only. Notes remain private. No exposure projection into feed/map yet and no historical exposure reader. Materiality UNKNOWN, graph/impact eligibility false, no fabricated approvals.
+- DB backed up to ignored backups/dev-before-exposure-0016.db then migrated;51 events/versions,0alerts,0exposure drafts/reviews. Actual read-only7 dossiers yielded14 occurrences of2 distinct compatible baseline pairs,0approved. reports/news-exposure-runtime.json. Backend8888 restarted hidden, gateway/worker retained; no Cloudflare change. Notifications/synthetic-live false, LLMnone, X off.
+- Final focused18 tests passed10.75s, Ruff/mypy88files/JS syntax passed; browser desktop/mobile synthetic-intercepted draft/review flow passed without production writes.433 tests collected;15 protected originals unchanged. Full GitHub CI pending; update after completion.
+- Next: render approved/revalidated baseline shares with provenance in informational feed/map, explicitly separate from affected fraction and materiality. Actual news claims and independent reviews are still absent; do not auto-approve to populate UI. Before true impact scoring, require attributable affected exposure/effect size and validated relationship evidence. See docs/news-claim-review.md.
+
+
 ## Source-pinned news evidence dossiers — 2026-11-22 (latest)
 
 - Added engine/news_dossier.py, admin-only local source/{item_id}/dossier API and operator UI. Source pinned to current version/hash, explicit pilot issuer and valid chronology; outputs UNVERIFIED_RSS, no claim/review created. Baseline SEC financial/segment evidence is selected at news capture cutoff and intersected with currently valid snapshots to exclude future/replaced/withdrawn evidence. Context is not news causal proof. Limits12 comparisons/5 filings/20 segments, explicit truncation/hash/blockers; no ratio/materiality score inferred.

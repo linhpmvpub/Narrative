@@ -85,3 +85,17 @@ Số liệu tài chính hiển thị cả hai kỳ, đơn vị, giá trị và h
 Blockers luôn giữ yêu cầu claim/review, liên kết tin→chỉ tiêu, numerator/denominator cùng kỳ/phạm vi/đơn vị, bằng chứng nhân quả/counterfactual và đường quan hệ đã xác minh. Có đủ số liệu nền không làm materiality/causality thành verified. Chưa có auto-promotion lên feed hoặc map từ dossier.
 
 Đợt kiểm tra22Nov:135 mục nguồn →7 cặp bài/công ty khác nhau theo URL, đều NVDA. Hồ sơ riêng tư trong source-cache/news-dossiers; báo cáo public chỉ aggregate tại reports/news-dossier-runtime.json.56 lượt financial context và28 lượt segment context tính trên7 hồ sơ, có số liệu nền lặp lại giữa hồ sơ; không phải56/28 bằng chứng độc lập.0 impact-ready,0 claim/review được tạo. Nội dung RSS vẫn chưa được thẩm định độc lập.
+
+## Thẩm định tỷ trọng doanh thu phân khúc (schema0016)
+
+Claim đã được nhập canonical và vẫn là primary version hiện hành có nút Thẩm định tỷ trọng phân khúc. Thành viên chỉ truy cập claim của mình; admin xem được toàn bộ. Bước này chưa mở qua gateway.
+
+Candidate pair ghim toàn bộ hai bản ghi SEC bằng hash: doanh thu reportable segment / doanh thu consolidated cùng ticker, accession, concept, unit, duration, start/end và source identity. Chấp nhận một StatementBusinessSegmentsAxis, có thể kèm đúng ConsolidationItemsAxis=OperatingSegmentsMember theo parser SEC; loại nhóm geography/product/chiều bổ sung. Không tự đổi tiền tệ, scale hay gộp concept alias. Chỉ nhận0≤numerator≤denominator và denominator>0, số hữu hạn. Percent làm tròn4 chữ số thập phân. Không cộng các segment shares vì có thể có intersegment/elimination.
+
+Đây là BASELINE_SEGMENT_REVENUE_SHARE, không phải affected revenue fraction, ước lượng thiệt hại, materiality hay tác động giá. Người lập ghi căn cứ tin liên quan phân khúc và giới hạn; actor_kind được khai báo rõ. Bản nháp bất biến giữ pair, event version và input hash. Hai nguồn vẫn phải có sẵn trước news capture và còn hợp lệ hiện tại.
+
+Quản trị viên khác tài khoản người lập duyệt/từ chối; approval bắt buộc xác nhận kỳ/đơn vị/phạm vi, xem xét căn cứ liên quan đến tin, và tỷ trọng nền không phải hiệu ứng do tin gây ra. Có expected review version và revoke append-only. Account independence không chứng minh hai con người độc lập. Approval không xác minh nhân quả, không tạo score, không chuyển graph/feed/map. Nếu canonical claim hoặc source bị thu hồi/sửa, evidence pair đổi hoặc hash không đúng, draft không còn hợp lệ để phê duyệt. Reload kiểm tra lại và trả stale; toàn bộ claim mất hiệu lực sẽ chặn endpoint.
+
+API: GET/POST /api/v0/news-claims/{claim_id}/exposure; POST /api/v0/news-claims/exposure/{draft_id}/reviews. POST draft cần Idempotency-Key; review dùng expected_version, không trả approval cũ từ cache. Các ghi chú giữ riêng theo quyền author/admin; chưa có public projection hoặc as-of exposure reader.
+
+Kiểm tra actual corpus:7 dossiers chứa14 lần xuất hiện của2 cặp baseline khác nhau. Đây là các cặp có thể đối chiếu số học, chưa có phê duyệt exposure thật. Cần claim/news linkage có nguồn và thẩm định độc lập trước khi đưa kết quả vào feed/map; materiality vẫn UNKNOWN.

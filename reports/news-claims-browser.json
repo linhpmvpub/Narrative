@@ -8,6 +8,7 @@
     "stale_ingestion_error",
     "historical_snapshot_intercepted",
     "evidence_dossier_intercepted",
+    "exposure_draft_and_review_intercepted",
     "mobile_layout",
     "logout_clears",
     "gateway_review_blocked"

@@ -152,6 +152,70 @@ with sync_playwright() as p:
     expect(page.locator("#dossier-result")).to_contain_text("2025-07-01")
     expect(page.locator("#dossier-result")).to_contain_text("chưa xác định")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+    fake["items"][0]["ingestion_receipt"] = {"event_id": "synthetic-event"}
+    fake["items"][0]["ingestion_status"] = "recorded_not_impact_eligible"
+    exposure_payload = {
+        "pairs": [
+            {
+                "pair_sha256": "b" * 64,
+                "numerator": {
+                    "segment": "Synthetic segment",
+                    "current": {"start": "2026-07-01", "end": "2026-09-30", "value": "25"},
+                },
+                "denominator": {"unit": "USD", "current": {"value": "100"}},
+                "percent": "25.0000",
+            }
+        ],
+        "drafts": [],
+        "role": "admin",
+        "current_user_id": "operator",
+    }
+    exposure_posts = []
+
+    def exposure_route(route):
+        if route.request.method == "GET":
+            route.fulfill(json=exposure_payload)
+        else:
+            body = route.request.post_data_json
+            exposure_posts.append(body)
+            exposure_payload["drafts"] = [
+                {
+                    "id": "synthetic-exposure",
+                    "status": "pending",
+                    "review_version": 0,
+                    "payload": body,
+                }
+            ]
+            route.fulfill(json={"id": "synthetic-exposure"})
+
+    page.route("**/api/v0/news-claims/synthetic-test/exposure", exposure_route)
+
+    def review_exposure_route(route):
+        exposure_posts.append(route.request.post_data_json)
+        exposure_payload["drafts"][0].update(status="approved", review_version=1)
+        route.fulfill(json={"decision": "approved", "materiality": "UNKNOWN"})
+
+    page.route("**/api/v0/news-claims/exposure/synthetic-exposure/reviews", review_exposure_route)
+    page.locator("#reload").click()
+    page.get_by_role("button", name="Thẩm định tỷ trọng phân khúc").click()
+    form = page.locator(".exposure-draft")
+    expect(form).to_be_visible()
+    form.locator("select").nth(0).select_option("b" * 64)
+    form.locator("select").nth(1).select_option("AI_SIMULATED")
+    form.locator("textarea").nth(0).fill("Synthetic news link; no real review written.")
+    form.locator("textarea").nth(1).fill("Baseline ratio only; causal impact unknown.")
+    form.get_by_role("button").click()
+    reviewform = page.locator(".exposure-review")
+    expect(reviewform).to_be_visible()
+    reviewform.locator("select").nth(0).select_option("approved")
+    reviewform.locator("select").nth(1).select_option("AI_SIMULATED")
+    for check in reviewform.locator('input[type="checkbox"]').all():
+        check.check()
+    reviewform.locator("textarea").fill("Synthetic intercepted review; no production writes.")
+    reviewform.get_by_role("button").click()
+    expect(page.locator("#claims")).to_contain_text("Thẩm định: approved")
+    assert len(exposure_posts) == 2 and exposure_posts[1]["baseline_not_effect_confirmed"]
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     assert not errors, errors
     page.locator("#logout").click()
     expect(page.locator("#claims")).to_be_empty()
@@ -169,6 +233,7 @@ with sync_playwright() as p:
                 "stale_ingestion_error",
                 "historical_snapshot_intercepted",
                 "evidence_dossier_intercepted",
+                "exposure_draft_and_review_intercepted",
                 "mobile_layout",
                 "logout_clears",
                 "gateway_review_blocked",
