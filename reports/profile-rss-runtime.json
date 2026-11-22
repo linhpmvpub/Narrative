@@ -1,0 +1,14 @@
+{
+  "profiles": 2,
+  "examined": 145,
+  "cards": 1,
+  "withheld": 0,
+  "truncated": false,
+  "rss_copies": 2,
+  "missing_raw_captures": 2,
+  "all_related_information": true,
+  "all_impact_unknown": true,
+  "delivery": "disabled",
+  "graph_modified": false,
+  "local_only": true
+}
