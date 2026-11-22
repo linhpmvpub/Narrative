@@ -27,3 +27,5 @@ performed remotely. See reports/github-pages-preview.json.
 Official references:
 - https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
 - https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/
+
+Published-site verification passed: HTTP200, mobile links/layout, and click through to Cloudflare Access email gate. Pages workflow45021788424 succeeded. Receipt: reports/github-pages-published.json.
