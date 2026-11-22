@@ -1,0 +1,25 @@
+{
+  "code_commit": "abf42c4a2868527789e8753d604007f595a2a00b",
+  "run_id": 45002048843,
+  "url": "https://github.com/linhpmvpub/Narrative/actions/runs/45002048843",
+  "jobs": {
+    "verify": "success",
+    "dependency-audit": "success"
+  },
+  "collected_tests_per_database": 390,
+  "sqlite_suite": "success",
+  "postgresql_suite": "success",
+  "focused_tests": 24,
+  "focused_seconds": 6.4,
+  "ruff": "passed",
+  "mypy_source_files": 78,
+  "browser": "Desktop/mobile and expanded source evidence at 390px passed",
+  "source_items": 135,
+  "candidate_clusters": 100,
+  "multi_publisher_clusters": 0,
+  "impact_ready_clusters": 0,
+  "canonical_events_created": 0,
+  "notifications_enabled": false,
+  "graph_modified": false,
+  "protected_originals_verified": 15
+}
