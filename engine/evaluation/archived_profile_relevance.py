@@ -26,8 +26,10 @@ SCOPE = re.compile(r"\b(affiliate|subsidiar\w*|competitor\w*|customer\w*|supplie
 
 def text_prediction(bundle, narrative, article, at, *, issuer_cik=None):
     """Shared literal/identity/path primitives only; excludes ingestion and age gates."""
+    roles = extract_supply_roles(article.get("summary", ""), issuer_cik)
+    if roles["routing_withheld"]:
+        return False
     for binding in bundle.factor_bindings:
-        roles = extract_supply_roles(article.get("summary", ""), issuer_cik)
         if roles["issuer_supply_context"] and binding.kind != "SUPPLIER_ROLE_DISCLOSURE":
             if (not binding.issuer_supply_scope or not valid_cik(bundle.identifiers.get("CIK"))
                     or int(issuer_cik) != int(bundle.identifiers["CIK"])):

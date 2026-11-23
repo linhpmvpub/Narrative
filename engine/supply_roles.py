@@ -8,6 +8,7 @@ PURCHASE = re.compile(r"\bWe purchase (?P<product>[^.;!?\n]{2,120}?) from "
                       r"(?P<suppliers>[^;!?\n]{2,600}?)(?=\.(?:\s+(?:We|Our|The|This|It)\b|\s*$)|$)", re.I)
 NETWORK = re.compile(r"\bWe (?:utilize|use|rely on|purchase)\b.{0,180}?"
                      r"\b(suppliers?|foundries|subcontractors?|contract manufacturers?|memory from)\b", re.I)
+COMPETITION = re.compile(r"\bour competitors\b|\bWe face\b.{0,60}\bcompetition\b", re.I)
 
 
 def valid_cik(value):
@@ -16,8 +17,12 @@ def valid_cik(value):
 
 def extract_supply_roles(text, issuer_cik):
     """Only externally identified issuer-authored, affirmative bounded paragraphs."""
-    if not valid_cik(issuer_cik) or not text or len(text) > 1600 or UNSAFE.search(text):
-        return {"issuer_supply_context": False, "facts": []}
+    if not valid_cik(issuer_cik) or not text or len(text) > 1600:
+        return {"issuer_supply_context": False, "facts": [], "routing_withheld": False}
+    if UNSAFE.search(text) or COMPETITION.search(text):
+        # Rejecting role extraction must not fall back to broad economic co-occurrence.
+        return {"issuer_supply_context": bool(NETWORK.search(text)), "facts": [],
+                "routing_withheld": bool(NETWORK.search(text) or COMPETITION.search(text))}
     facts = []
     for match in PURCHASE.finditer(text):
         if re.search(r",|\band\b", match["product"], re.I):
@@ -32,7 +37,8 @@ def extract_supply_roles(text, issuer_cik):
             "start": match.start(), "end": match.end(), "text": match.group(),
             "product_start": match.start("product"), "supplier_start": match.start("suppliers"),
             "identity_merged": False, "relationship_verified": False})
-    return {"issuer_supply_context": bool(NETWORK.search(text) or facts), "facts": facts}
+    return {"issuer_supply_context": bool(NETWORK.search(text) or facts), "facts": facts,
+            "routing_withheld": False}
 
 
 def supplier_span(fact, legal_name):

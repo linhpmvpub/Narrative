@@ -64,6 +64,20 @@ def test_single_word_brand_does_not_resolve_legal_entity():
     assert supplier_span(fact, "Example") is None
 
 
+@pytest.mark.parametrize("text", [
+    "We face intense competition in semiconductor memory. Our competitors may cut costs.",
+    "We purchase memory from Example Technology but may change suppliers.",
+])
+def test_rejected_role_context_cannot_fall_back_to_economic_keywords(text):
+    from types import SimpleNamespace
+
+    roles = extract_supply_roles(text, "123")
+    assert roles["routing_withheld"]
+    # Reject before touching bindings or graph; no legacy economic fallback.
+    assert not text_prediction(SimpleNamespace(), SimpleNamespace(), {"summary": text},
+                               datetime.now(UTC), issuer_cik="123")
+
+
 @pytest.mark.parametrize("fault", [None, "expired", "revoked_path", "wrong_product_node"])
 def test_supplier_role_requires_reviewed_product_and_current_route(dossier, fault):
     _, data = dossier
