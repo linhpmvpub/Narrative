@@ -1,0 +1,15 @@
+# Economic-event grouping before relevance evaluation
+
+`python -m engine.evaluation.sec_event_groups --packet-root <source-review-packet> --review <source-a.json> --review <source-b.json> --output <new-private-directory> --exclude-packet <old-packet.json>` prepares an offline challenge. Supply every previous frozen packet with repeated exclusion arguments. Real data, original reviews, prediction files and labels stay local. The command makes no network, database, feed, graph or dispatch writes.
+
+The source packet, two distinct AI source-review declarations, every original HTML/text hash, plain-text transformation and same-accession source URLs are checked. Source-review agreement is not source truth or human approval. Any missing/external context flag from either reviewer holds the whole family; holds are never negative labels.
+
+Earnings grouping requires both source reviewers to identify the same explicit period and an exact date citation in a quarter/year/period-ended passage. It uses issuer plus economic period, not filing date. Earnings indicators without an unambiguous cited period are withheld rather than falling back to an event date. A previously evaluated issuer-period excludes the whole family even when accession, release date, document or excerpt differ.
+
+Non-earnings events retain issuer, cited report-event date and accession. This avoids merging distinct governance/contract events merely because they share a date; semantic cross-accession duplicate detection remains incomplete. Prior source URL/hash and passage near-duplicate checks provide additional exclusions. Source-period grouping is deliberately conservative and remains diagnostic, not a canonical event resolver.
+
+One passage per selected group is chosen using fixed named-party, identity-scope, then control vocabulary priority, independent of algorithm predictions. Source citations, related document URLs and grouping evidence accompany the passage. The shared freezer preserves current profile versions and separates reviewer packets from predictions. `sec_event_groups.evaluate(output, labels)` additionally verifies the frozen grouping audit before scoring.
+
+The 2026-11-23 run withheld 11 external-context families, excluded four previously evaluated economic periods and selected four groups/20 narrative pairs. Twelve previous packet paths were checked (including the preserved counter-correction verification copy). Four overlapping passages were removed. This is a small, source-reviewed corpus: documents were already exposed to source auditors, so it is not a pristine holdout or historical as-of backtest. New independent relevance reviewers must not be the prior source auditors. Do not tune after reading labels and call the modified result a blind evaluation.
+
+Next coverage work should obtain the missing cited evidence or explicitly review narrower independent event scopes, then use different source/event families for validation. The AMD amendment remains source-linked correction metadata, not an automatic release of original observations or a label in this packet.
