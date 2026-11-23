@@ -1,0 +1,12 @@
+{
+  "mode": "POST_REVIEW_DIAGNOSTIC_ABLATION_NOT_NEW_HOLDOUT",
+  "legacy_economic_only": {
+    "tp": 1,
+    "fp": 2,
+    "tn": 116,
+    "fn": 1
+  },
+  "changed_predictions_from_disclosure": 0,
+  "conclusion": "Existing economic bindings also produce the two false positives; new mode did not change this follow-up sample.",
+  "delivery": "disabled"
+}

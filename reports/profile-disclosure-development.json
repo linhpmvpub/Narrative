@@ -1,0 +1,26 @@
+{
+  "mode": "EXPOSED_DEVELOPMENT_COMPARISON_NOT_HOLDOUT",
+  "pairs": 120,
+  "before": {
+    "tp": 0,
+    "fp": 0,
+    "tn": 118,
+    "fn": 1,
+    "unresolved": 1
+  },
+  "delivery": "disabled",
+  "initial_unscoped": {
+    "tp": 1,
+    "fp": 1,
+    "tn": 117,
+    "fn": 0,
+    "unresolved": 1
+  },
+  "after": {
+    "tp": 1,
+    "fp": 0,
+    "tn": 118,
+    "fn": 0,
+    "unresolved": 1
+  }
+}

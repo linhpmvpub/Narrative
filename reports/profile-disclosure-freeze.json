@@ -1,0 +1,43 @@
+{
+  "at": "2026-11-23T13:00:05.770396+00:00",
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "delivery": "disabled",
+  "packet_sha256": "a888c168d80ff41ed8101b0e53ef54581dc8712bb39ea7a5f9d79b27e3c715d5",
+  "predictions_sha256": "cbb7a80409485c90d3cd57aa0b74881931bc0ce8377a14211c4d7606029c41a7",
+  "collection_sha256": "826c61a6fec8d995f1ae9ebd52b534ca351162d2ccdf07157dd6521665ee5f22",
+  "clusters": 24,
+  "pairs": 120,
+  "excluded_packet_sha256": [
+    "50d249a1879efb98fb660f7b703b6614e566558913fb8213ef43682cd31a4842"
+  ],
+  "requested_clusters": 24,
+  "excluded_previously_labelled_passages": 329,
+  "sampling_strata": {
+    "named_party": 8,
+    "identity_scope": 8,
+    "control": 8
+  },
+  "sampling": "FIXED_PARTY_SCOPE_CONTROL_ROUND_ROBIN_ONE_PER_ISSUER_PERIOD",
+  "strict_production_replay_eligible": false,
+  "independent_gold": false,
+  "limitations": [
+    "Current profile knowledge applied to old text; not point-in-time replay",
+    "Documents exposed previously; new excerpts are not an unseen holdout",
+    "Text-routing stage only; ingestion and news age gates not evaluated",
+    "Sampling strata are not relevance labels; correlated issuer periods"
+  ],
+  "documents_overlap_previous_challenge": 0,
+  "source_issuers": {
+    "MU": 6,
+    "AMD": 6,
+    "NVDA": 5,
+    "DELL": 5,
+    "SNDK": 2
+  },
+  "source_years": {
+    "2023": 1,
+    "2024": 16,
+    "2025": 7
+  },
+  "supersedes_unreviewed_preliminary_freeze": "profile-disclosure-challenge-2026-11-23"
+}

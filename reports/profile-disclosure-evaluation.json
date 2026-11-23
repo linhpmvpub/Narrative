@@ -1,0 +1,113 @@
+{
+  "tp": 1,
+  "fp": 2,
+  "tn": 116,
+  "fn": 1,
+  "unresolved": 0,
+  "clusters": 24,
+  "pairs": 120,
+  "selected_unresolved": 0,
+  "resolved_fraction": 1.0,
+  "by_narrative": {
+    "amd-supply-2026:foundry-resilience": {
+      "tp": 0,
+      "fp": 1,
+      "tn": 23,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": 0.0,
+      "recall": null
+    },
+    "amd-supply-2026:rack-deployment": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 24,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "mu-supply-2026:memory-supply": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 23,
+      "fn": 1,
+      "unresolved": 0,
+      "precision": null,
+      "recall": 0.0
+    },
+    "nvda-supply-2026:supply-resilience": {
+      "tp": 1,
+      "fp": 0,
+      "tn": 23,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "nvda-supply-2026:customer-buildout": {
+      "tp": 0,
+      "fp": 1,
+      "tn": 23,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": 0.0,
+      "recall": null
+    }
+  },
+  "precision": 0.3333333333333333,
+  "recall": 0.5,
+  "reference_kind": "AI_CONSENSUS_REVIEW",
+  "independent_gold": false,
+  "packet_sha256": "a888c168d80ff41ed8101b0e53ef54581dc8712bb39ea7a5f9d79b27e3c715d5",
+  "labels_sha256": "ac64e0bd475481bc61a042585d0657cafe3154e95a94a162840a171082355679",
+  "delivery": "disabled",
+  "limitations": [
+    "Current profile knowledge applied to old text; not point-in-time replay",
+    "Documents exposed previously; new excerpts are not an unseen holdout",
+    "Text-routing stage only; ingestion and news age gates not evaluated",
+    "Sampling strata are not relevance labels; correlated issuer periods",
+    "AI consensus is not human gold; unresolved labels excluded from precision/recall"
+  ],
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "strict_production_replay_eligible": false,
+  "by_topic_stratum": {
+    "other": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 55,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "capacity": {
+      "tp": 1,
+      "fp": 2,
+      "tn": 16,
+      "fn": 1,
+      "unresolved": 0,
+      "precision": 0.3333333333333333,
+      "recall": 0.5
+    },
+    "finance": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 40,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "policy": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 5,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    }
+  },
+  "disagreements": 0
+}
