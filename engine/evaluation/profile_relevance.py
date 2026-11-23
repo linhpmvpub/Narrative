@@ -6,7 +6,8 @@ The packet intentionally omits predictions and literal matching rules.
 
 import json
 import re
-from datetime import UTC, datetime
+from collections import Counter
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from sqlalchemy import select
@@ -49,9 +50,40 @@ def overlaps(text, previous):
     return any(text and old and len(text & old) / len(text | old) >= 0.8 for old in previous)
 
 
-def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=()):
+STRATA = {
+    "finance": r"\b(financ\w*|fund\w*|loan\w*|credit|capital|investment|acquisition|acquire)\b",
+    "policy": r"\b(permit\w*|regulat\w*|ban\w*|tax\w*|approval|approved|opposition|planning)\b",
+    "capacity": r"\b(compute|computing|capacity|power|construction|build\w*|chip\w*|GPU\w*|wafer\w*)\b",
+}
+
+
+def stratum(payload, definitions=None):
+    """Sampling only; deliberately separate from profile rules and predictions."""
+    text = payload.get("title", "") + " " + payload.get("summary", "")
+    return next((name for name, expression in (definitions or STRATA).items()
+                 if re.search(expression, text, re.I)), "other")
+
+
+def sample_articles(rows, count, stratified):
+    if not stratified:
+        return rows[:count]
+    buckets = {k: [r for r in rows if stratum(r["payload"]) == k]
+               for k in [*STRATA, "other"]}
+    selected: list = []
+    # Round robin by topic; within each topic preserve deterministic recency order.
+    while any(buckets.values()) and len(selected) < count:
+        for bucket in buckets.values():
+            if bucket and len(selected) < count:
+                selected.append(bucket.pop(0))
+    return selected
+
+
+def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
+           stratified=False, max_age_days=None):
     if not 1 <= count <= 100:
         raise ValueError("Choose 1..100 article clusters")
+    if max_age_days is not None and not 1 <= max_age_days <= 30:
+        raise ValueError("Age window must be 1..30 days")
     at = at or datetime.now(UTC)
     if at.tzinfo is None or at > datetime.now(UTC):
         raise ValueError("Aware, nonfuture cutoff required")
@@ -89,8 +121,13 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=()):
     articles: list = []
     selected_texts: list = []
     excluded_exposure = excluded_near_duplicates = 0
+    excluded_age = 0
     for key, r in groups.items():
         if key in blocked:
+            continue
+        if max_age_days is not None and datetime.fromisoformat(r["payload"]["published_at"]) < (
+                at - timedelta(days=max_age_days)):
+            excluded_age += 1
             continue
         text = shingles(r["payload"])
         if key in prior_clusters or overlaps(text, prior_texts):
@@ -99,9 +136,9 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=()):
         if overlaps(text, selected_texts):
             excluded_near_duplicates += 1
             continue
-        if len(articles) < count:
-            articles.append(r)
-            selected_texts.append(text)
+        articles.append(r)
+        selected_texts.append(text)
+    articles = sample_articles(articles, count, stratified)
     if not articles:
         raise ValueError("No eligible articles")
     matched = {c["id"] for c in prediction["items"]}
@@ -141,9 +178,15 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=()):
         "excluded_conflicting_or_invalid_clusters": len(blocked),
         "excluded_prior_exposure": excluded_exposure,
         "excluded_near_duplicates": excluded_near_duplicates,
+        "excluded_age": excluded_age,
+        "max_age_days": max_age_days,
+        "sampling_strata": dict(Counter(stratum(r["payload"]) for r in articles)),
         "prior_packet_sha256": prior_hashes,
         "requested_clusters": count,
         "mode": "DEVELOPMENT_RELEVANCE_AUDIT_NOT_INDEPENDENT_GOLD", "delivery": "disabled"}
+    if stratified:
+        receipt["sampling"] = "TOPIC_ROUND_ROBIN_NOT_PREDICTION_SELECTED"
+        receipt["strata_definitions"] = STRATA
     write_new(output / "freeze.json", receipt)
     return receipt
 
@@ -168,23 +211,42 @@ def evaluate(directory: Path, labels_path: Path):
                                         "AI_CONSENSUS_REVIEW"}:
         raise ValueError("Explicit reference provenance required")
     counts = {"tp": 0, "fp": 0, "tn": 0, "fn": 0, "unresolved": 0}
+    by_narrative: dict = {}
+    by_stratum: dict = {}
+    rows = {r["id"]: r for r in packet}
+    selected_unresolved = 0
     errors = []
     for v in votes:
         if not v.get("rationale", "").strip():
             raise ValueError("Reference rationale required")
         target = v["relevance"]
+        row = rows[v["id"]]
+        narrative = row["profile_id"] + ":" + row["narrative"]["id"]
+        topic = stratum(row["article"], frozen.get("strata_definitions"))
+        groups = [counts, by_narrative.setdefault(narrative, dict.fromkeys(counts, 0)),
+                  by_stratum.setdefault(topic, dict.fromkeys(counts, 0))]
         if target == "INSUFFICIENT_CONTEXT":
-            counts["unresolved"] += 1
+            for group in groups:
+                group["unresolved"] += 1
+            selected_unresolved += int(predictions[v["id"]])
             continue
         if target not in {"RELEVANT", "NOT_RELEVANT"}:
             raise ValueError("Unknown reference label")
         pred = predictions[v["id"]]
         outcome = ("t" if pred == (target == "RELEVANT") else "f") + ("p" if pred else "n")
-        counts[outcome] += 1
+        for group in groups:
+            group[outcome] += 1
         if outcome in {"fp", "fn"}:
             errors.append({"id": v["id"], "outcome": outcome})
     tp, fp, fn = counts["tp"], counts["fp"], counts["fn"]
+    for group in [*by_narrative.values(), *by_stratum.values()]:
+        a, b, c = group["tp"], group["fp"], group["fn"]
+        group["precision"] = a / (a + b) if a + b else None
+        group["recall"] = a / (a + c) if a + c else None
     return {**counts, "clusters": frozen["clusters"], "pairs": len(packet),
+        "selected_unresolved": selected_unresolved,
+        "resolved_fraction": (len(packet) - counts["unresolved"]) / len(packet),
+        "by_narrative": by_narrative, "by_stratum": by_stratum,
         "precision": tp / (tp + fp) if tp + fp else None,
         "recall": tp / (tp + fn) if tp + fn else None,
         "reference_kind": labels["reference_kind"], "independent_gold": False,
@@ -254,13 +316,16 @@ def main():
     parser.add_argument("--count", type=int, default=60)
     parser.add_argument("--exclude-packet", type=Path, action="append", default=[])
     parser.add_argument("--review", type=Path, action="append", default=[])
+    parser.add_argument("--stratified", action="store_true")
+    parser.add_argument("--max-age-days", type=int)
     args = parser.parse_args()
     if args.action == "freeze":
         db = database()
         try:
             with db.connect() as conn:
                 result = freeze(conn, args.directory, count=args.count,
-                                exclude_packets=args.exclude_packet)
+                                exclude_packets=args.exclude_packet, stratified=args.stratified,
+                                max_age_days=args.max_age_days)
         finally:
             db.dispose()
     elif args.action == "consensus":

@@ -1,4 +1,12 @@
-# Checkpoint tiếp tục phiên sau — cập nhật 2026-11-22
+# Checkpoint tiếp tục phiên sau — cập nhật 2026-11-23
+
+## Sector RSS and stratified independent relevance evaluation — 2026-11-23 (latest)
+
+- Continued checkpoint: added DatacenterDynamics and Data Center Knowledge public RSS at600second intervals, initial20+50items/0parse rejections. Raw captures/revisions local, unverified inbox only. Existing collector picks up registered sources; X remains off. No canonical/graph promotions or notifications, no cloud/tunnel/Pages changes.
+- Added prediction-independent topic-round-robin sampling with finance/policy/capacity/other strata and optional1..30dayage window. Prior packet integrity/URL/near-duplicate exclusions retained, within-sample near duplicates grouped, actual underfill/exclusion counts explicit. Added per-narrative/per-stratum confusion counts, precision/recall, resolved_fraction and selected_unresolved. No matcher/profile tuning in this batch.
+- Frozen source-cache/profile-stratified-2026-11-23:40clusters/160pairs (requested48), strata5finance/3policy/12capacity/20other,47age exclusions and95prior exclusions after agefilter. All3previous packets excluded; frozen sampling definitions and profile hashes retained. Reviewer-only copy contains no predictions. Two fresh-context AI agents independently labeling; final references/results recorded after both seal. No claim of human gold or semantic/pretraining independence.
+-31focused tests passed62.94s; Ruff/mypy101files passed. Mobile390/desktop1440 local browser passed9cards, sources/quotes/disclosures, failure/recovery/logout,0overflow/JS errors. Final full CI pending. Guide docs/stratified-relevance-evaluation.md, freeze receipt reports/profile-stratified-freeze.json. Private raw news, packets and labels stay ignored; aggregate reports only on GitHub.
+
 
 ## Finance/permitting/compute factors and fresh evaluation preparation — 2026-11-22 (latest)
 

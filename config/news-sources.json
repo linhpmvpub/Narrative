@@ -88,5 +88,23 @@
     "handle": "YahooFinance",
     "interval_seconds": 300,
     "enabled": false
+  },
+  {
+    "id": "dcd",
+    "name": "DatacenterDynamics",
+    "kind": "rss",
+    "category": "data_center_infrastructure",
+    "url": "https://www.datacenterdynamics.com/en/rss/",
+    "interval_seconds": 600,
+    "enabled": true
+  },
+  {
+    "id": "dck",
+    "name": "Data Center Knowledge",
+    "kind": "rss",
+    "category": "data_center_infrastructure",
+    "url": "https://www.datacenterknowledge.com/rss.xml",
+    "interval_seconds": 600,
+    "enabled": true
   }
 ]
