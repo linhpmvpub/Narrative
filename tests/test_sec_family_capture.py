@@ -90,6 +90,16 @@ def test_changed_audit_or_capture_rejected(family):
         plan(audit, root)
 
 
+def test_resumed_capture_requires_exact_bytes_even_for_newline_changes(family):
+    root, audit, _, url = family
+    out = root / "out"
+    result = capture(audit, root, out, Client())
+    path = out / result["captures"][url]["file"]
+    path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
+    with pytest.raises(ValueError, match="Stored capture bytes changed"):
+        capture(audit, root, out, Client())
+
+
 def test_amendment_primary_only_and_no_automatic_release(family):
     root, audit, _, _ = family
     rows = json.loads((audit / "source-audit.json").read_text())

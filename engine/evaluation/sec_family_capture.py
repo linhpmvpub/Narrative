@@ -13,6 +13,12 @@ from engine.evaluation.held_role_corpus import checked, read
 from engine.ingestion.contracts import digest
 
 
+def exact_capture(root, name, expected):
+    checked(root, name, expected)  # containment and UTF-8 validation
+    if hashlib.sha256((root / name).read_bytes()).hexdigest() != expected:
+        raise ValueError("Stored capture bytes changed")
+
+
 def family_url(source, url):
     """No userinfo, encoded paths, redirects, traversal or cross-accession links."""
     prefix = (f"/Archives/edgar/data/{int(source['cik'])}/"
@@ -38,7 +44,7 @@ def plan(directory, root):
         directory_path = (root / source["collection_directory"]).resolve()
         if not directory_path.is_relative_to(root.resolve()):
             raise ValueError("Source directory escapes root")
-        checked(directory_path, source["file"], source["stored_bytes_sha256"])
+        exact_capture(directory_path, source["file"], source["stored_bytes_sha256"])
         if not family_url(source, source["url"]):
             raise ValueError("Invalid primary SEC URL")
         links = sorted(set(row["linked_documents"]))
@@ -68,7 +74,7 @@ def capture(directory, root, output, client):
     if not set(manifest["captures"]) <= urls:
         raise ValueError("Unplanned capture")
     for url, item in manifest["captures"].items():
-        checked(output, item["file"], item["content_sha256"])
+        exact_capture(output, item["file"], item["content_sha256"])
         at = datetime.fromisoformat(item["retrieved_at"])
         if item["url"] != url or at.tzinfo is None or at > datetime.now(UTC):
             raise ValueError("Invalid capture provenance")

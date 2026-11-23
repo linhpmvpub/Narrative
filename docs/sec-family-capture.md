@@ -12,7 +12,7 @@ Having every observed link downloaded does not prove exhibit inventory completen
 
 Compare original and amendment issuer, reporting period, stated explanatory scope and exact source spans. Keep the original immutable and attach the correction to its family. An issuer's assertion that other disclosures are unchanged is not an automatic verification of every original claim. Numeric observations must use the corrected source and preserve the prior version; source-scope review alone must not promote numbers or canonical events.
 
-The current local AMD pair is being independently audited by two AI source reviewers. This is operational source reconciliation, not new blind benchmark labels, human gold or a production approval. Both disclosures were already read for this reconciliation and must be marked exposed in future sampling.
+The current local AMD pair was independently audited by two AI source reviewers. They agreed on the exact original and corrected quote offsets and the limited presentation-correction scope. This is operational source reconciliation, not new blind benchmark labels, human gold or a production approval. Both disclosures were already read for this reconciliation and must be marked exposed in future sampling.
 
 ## Current collection
 
