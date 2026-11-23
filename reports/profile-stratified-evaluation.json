@@ -1,0 +1,118 @@
+{
+  "tp": 3,
+  "fp": 0,
+  "tn": 80,
+  "fn": 21,
+  "unresolved": 56,
+  "clusters": 40,
+  "pairs": 160,
+  "selected_unresolved": 1,
+  "resolved_fraction": 0.65,
+  "by_narrative": {
+    "amd-supply-2026:foundry-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 36,
+      "fn": 1,
+      "unresolved": 3,
+      "precision": null,
+      "recall": 0.0
+    },
+    "mu-supply-2026:memory-supply": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 36,
+      "fn": 0,
+      "unresolved": 4,
+      "precision": null,
+      "recall": null
+    },
+    "nvda-supply-2026:supply-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 7,
+      "fn": 1,
+      "unresolved": 32,
+      "precision": null,
+      "recall": 0.0
+    },
+    "nvda-supply-2026:customer-buildout": {
+      "tp": 3,
+      "fp": 0,
+      "tn": 1,
+      "fn": 19,
+      "unresolved": 17,
+      "precision": 1.0,
+      "recall": 0.13636363636363635
+    }
+  },
+  "by_stratum": {
+    "finance": {
+      "tp": 1,
+      "fp": 0,
+      "tn": 10,
+      "fn": 3,
+      "unresolved": 6,
+      "precision": 1.0,
+      "recall": 0.25
+    },
+    "policy": {
+      "tp": 2,
+      "fp": 0,
+      "tn": 6,
+      "fn": 0,
+      "unresolved": 4,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "capacity": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 26,
+      "fn": 8,
+      "unresolved": 14,
+      "precision": null,
+      "recall": 0.0
+    },
+    "other": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 38,
+      "fn": 10,
+      "unresolved": 32,
+      "precision": null,
+      "recall": 0.0
+    }
+  },
+  "precision": 1.0,
+  "recall": 0.125,
+  "reference_kind": "AI_CONSENSUS_REVIEW",
+  "independent_gold": false,
+  "packet_sha256": "3df4d26639a9992487a48adf95cb01972d3317a0b0c5ec48228f7f63b4d3b219",
+  "labels_sha256": "76a861b73523f66005cb1572cae13bc2d0b7d4852057733d2145ff71b6b6a091",
+  "delivery": "disabled",
+  "limitations": [
+    "Latest-URL convenience sample; pairs are correlated within articles",
+    "Unknown references excluded, never counted as negatives",
+    "Relevance only, not financial impact or push accuracy",
+    "Sector-enriched convenience sample, not deployment prevalence.",
+    "Two AI contexts, not human gold; disagreement excluded, no adjudication.",
+    "Age-limited and snippet-only; positive support varies across narratives."
+  ],
+  "reviewers": 2,
+  "agreement_pairs": 125,
+  "disagreements": 35,
+  "review_sha256": [
+    "126a03e8dccd9f1a4089895cdc32b4ee258134e639e75b67aca3bf9211046fba",
+    "0426d47bf94b93c4de2669ae1a711b69a3fe8916088bd2138a9cd4740015ad4d"
+  ],
+  "frozen_hashes_unchanged": true,
+  "sampling": "TOPIC_ROUND_ROBIN_NOT_PREDICTION_SELECTED",
+  "sampling_strata": {
+    "finance": 5,
+    "policy": 3,
+    "capacity": 12,
+    "other": 20
+  },
+  "human_labels": 0
+}

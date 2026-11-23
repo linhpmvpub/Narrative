@@ -1,0 +1,15 @@
+{
+  "false_negatives": 21,
+  "groups": {
+    "expression_or_missing_trigger": 11,
+    "unmodeled_operational_or_technology_factor": 6,
+    "supplier_commitments_not_input_named": 1,
+    "reference_scope_needs_review": 3
+  },
+  "stage": "POST_EVALUATION_DEVELOPMENT_ANALYSIS_NOT_NEW_REFERENCE_LABELS",
+  "reference_changes": 0,
+  "prediction_changes": 0,
+  "rules_changed": false,
+  "next": "Freeze a development/calibration split before changes, then test another unseen independently reviewed set.",
+  "delivery": "disabled"
+}
