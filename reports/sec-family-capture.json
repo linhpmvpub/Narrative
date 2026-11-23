@@ -1,0 +1,13 @@
+{
+  "families": 21,
+  "event_filings": 19,
+  "amendment_documents": 2,
+  "captured_attachments": 19,
+  "acquisition_errors": 0,
+  "event_filings_with_links": 14,
+  "event_filings_without_links": 5,
+  "manifest_sha256": "fb6a2eecca94d2163a38bc404c893635e0c3f5fdca0666ea5b105969f17db53c",
+  "complete_exhibit_inventory_verified": false,
+  "ingested": false,
+  "delivery": "disabled"
+}

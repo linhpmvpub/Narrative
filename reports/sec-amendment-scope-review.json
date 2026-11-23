@@ -1,0 +1,15 @@
+{
+  "reviewer_kind": "AI_INDEPENDENT",
+  "reviewers": 2,
+  "issuer_period_match": true,
+  "exact_original_and_corrected_spans_agree": true,
+  "correction_scope": "Client ASP and unit-shipment growth presentation transposed",
+  "production_promoted": false,
+  "other_sections_verified_unchanged": false,
+  "delivery": "disabled",
+  "packet_sha256": "441e6563751df7ac63ead8638ffca543d24dd0e297ce88290f55a74d2026b1f1",
+  "review_sha256": [
+    "ad8a85d134bab88f040d7f02fe165555dac2f0d8307844cae6082194ff95a969",
+    "6ecf185f134f3422146cc7bb5d02d89b16302840a4b38d2224018f96efaf614d"
+  ]
+}

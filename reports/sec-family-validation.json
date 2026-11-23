@@ -1,0 +1,28 @@
+{
+  "focused": {
+    "passed": 33,
+    "seconds": 1.92
+  },
+  "lint": "passed",
+  "mypy_files": 107,
+  "code_commit": "9ff0a85",
+  "full_ci": {
+    "run_id": 45203432570,
+    "conclusion": "success",
+    "sqlite": {
+      "passed": 700,
+      "seconds": 67.63
+    },
+    "postgresql": {
+      "passed": 700,
+      "seconds": 135.67
+    },
+    "dependency_audit": "passed",
+    "migration_demo_replay_downgrade": "passed"
+  },
+  "offline_resume": {
+    "captures_verified": 19,
+    "requests": 0
+  },
+  "delivery": "disabled"
+}

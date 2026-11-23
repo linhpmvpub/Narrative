@@ -1,0 +1,16 @@
+{
+  "families": 19,
+  "two_ai_reviewers": true,
+  "scoped_text_context_sufficient": 19,
+  "families_with_external_or_missing_context": 11,
+  "possible_prior_period_overlap": 4,
+  "complete_contract_inventory_verified": false,
+  "fresh_benchmark_frozen": false,
+  "production_promoted": false,
+  "delivery": "disabled",
+  "packet_sha256": "93f5d810898688fd5ef41dd3ef1094edc40ca189e0d0d47ece77dab43608a229",
+  "review_sha256": [
+    "15e8fa19d599d6770c260c89879a74cdad704055c1abcfe636c8d8479d55efbb",
+    "b1448b6d9117baf20c178462f25830cee07f60667dd8c0329315c4979f69838a"
+  ]
+}
