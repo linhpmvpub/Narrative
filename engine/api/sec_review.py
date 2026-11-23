@@ -21,6 +21,7 @@ router = APIRouter(prefix="/api/v0/admin/sec", tags=["SEC review"])
 
 
 class DraftBody(Body):
+    author_kind: Literal["HUMAN", "AI", "UNSPECIFIED"] = "UNSPECIFIED"
     expected_version: int = Field(ge=0)
     event: EventExtraction
     occurrence_window: str = Field(min_length=1, max_length=100)
@@ -29,6 +30,7 @@ class DraftBody(Body):
 
 
 class ReviewBody(Body):
+    reviewer_kind: Literal["HUMAN", "AI_INDEPENDENT", "UNSPECIFIED"] = "UNSPECIFIED"
     decision: Literal["approved", "rejected"]
     expected_version: int = Field(ge=1)
     note: str = Field(min_length=10, max_length=2000)

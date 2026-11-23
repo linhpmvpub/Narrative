@@ -157,3 +157,15 @@ def profile_rss(as_of: AwareDatetime | None = None):
             return candidate_feed(conn, as_of)
     finally:
         engine.dispose()
+
+
+@router.get("/reviewed-roles")
+def reviewed_roles():
+    from engine.reviewed_role_feed import role_feed
+
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            return role_feed(conn)
+    finally:
+        engine.dispose()

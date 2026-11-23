@@ -358,7 +358,7 @@ def ingest_reviewed(
                     "is_synthetic": False,
                 },
                 metric_id=claim.metric_id,
-                extraction_model="human-reviewed-sec-v1",
+                extraction_model="independently-reviewed-sec-v1",
                 document_id=doc_id,
                 evidence_quality=None,
                 available_at=now,

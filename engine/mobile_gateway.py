@@ -26,6 +26,7 @@ GET_PATHS = {
     "/api/v0/news/profiles",
     "/api/v0/news/profile-framework",
     "/api/v0/news/profile-rss",
+    "/api/v0/news/reviewed-roles",
     "/label",
     "/api/v0/annotations/packets",
     "/healthz",

@@ -7,15 +7,13 @@ import re
 from collections import Counter
 from datetime import UTC, datetime
 from pathlib import Path
-from types import SimpleNamespace
 
-from engine.company_profiles import available_bundles, paths
+from engine.company_profiles import available_bundles
 from engine.evaluation.profile_relevance import evaluate as evaluate_pairs
 from engine.evaluation.profile_relevance import overlaps, shingles, write_new
 from engine.evaluation.prospective import Paragraphs
 from engine.ingestion.contracts import digest
-from engine.profile_news import entity_context, matches
-from engine.supply_roles import extract_supply_roles, valid_cik
+from engine.profile_routing import binding_decisions
 
 TRACK = "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE"
 # Sampling vocabulary is fixed independently of profile rules and predictions.
@@ -26,30 +24,7 @@ SCOPE = re.compile(r"\b(affiliate|subsidiar\w*|competitor\w*|customer\w*|supplie
 
 def text_prediction(bundle, narrative, article, at, *, issuer_cik=None):
     """Shared literal/identity/path primitives only; excludes ingestion and age gates."""
-    roles = extract_supply_roles(article.get("summary", ""), issuer_cik)
-    if roles["routing_withheld"]:
-        return False
-    for binding in bundle.factor_bindings:
-        if roles["issuer_supply_context"] and binding.kind != "SUPPLIER_ROLE_DISCLOSURE":
-            if (not binding.issuer_supply_scope or not valid_cik(bundle.identifiers.get("CIK"))
-                    or int(issuer_cik) != int(bundle.identifiers["CIK"])):
-                continue
-        if binding.narrative_ids and narrative.id not in binding.narrative_ids:
-            continue
-        if not binding.enabled or not binding.reviewed_at <= at < binding.review_until:
-            continue
-        if not matches(binding, article, issuer_cik=issuer_cik,
-                       profile_cik=bundle.identifiers.get("CIK"), legal_name=bundle.legal_name):
-            continue
-        if binding.entity_reference_id:
-            ref = entity_context(bundle, binding.entity_reference_id, article, at)
-            if not ref or not paths(bundle, SimpleNamespace(anchors=[ref["node_id"]]),
-                                    narrative, effective_at=at)[0]:
-                continue
-        if paths(bundle, SimpleNamespace(anchors=[binding.factor_id]),
-                 narrative, effective_at=at)[0]:
-            return True
-    return False
+    return next(binding_decisions(bundle, narrative, article, at, issuer_cik=issuer_cik), None) is not None
 
 
 def select_passages(archive, count, exclude_packets=()):
