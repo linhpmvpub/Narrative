@@ -1,0 +1,55 @@
+{
+  "at": "2026-11-23T14:28:53.739806+00:00",
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "delivery": "disabled",
+  "packet_sha256": "df3baedb142c618fa4a7ce58846667e95b3d794458fd5ef21645cae9364d453a",
+  "predictions_sha256": "4ee274639a40d919a85e8df40070ec772f5c646778f135dfd15c339b3fb73ebd",
+  "collection_sha256": "2b9b05ca8f8e49fa448bffdda1fd83eeb9ae3dcb10cf8dca6c0b0a04e9cc5b4c",
+  "clusters": 5,
+  "pairs": 25,
+  "excluded_packet_sha256": [
+    "50d249a1879efb98fb660f7b703b6614e566558913fb8213ef43682cd31a4842",
+    "93091f395690dfbb60e3ae389be2b7c59fcb412842f374ba435a40f7f313a009",
+    "a888c168d80ff41ed8101b0e53ef54581dc8712bb39ea7a5f9d79b27e3c715d5",
+    "c3bc71a2b0271ab11edbb6f6557c7c998ca7581d310301feace84af0d8ba82a3",
+    "52ef9f8e145806dfda28842382a867fbb0ee178a50d41cb8556306cbbbcd2507",
+    "a43ee80b4a0da57cb65ba6b53ea0ca45789263b8d008cd2d23bab67db8447ec3",
+    "b7fbdf1ef30d3e628976462dbce5a1b101acf562dcd54e0df0630153266bab0f",
+    "5f59da370e6536e7f80c97464cbd233084afe03c63d25301e58b82d42434deb0",
+    "27c074fc94e2c3956f3cfa2095d0407762bb4499f85872ff343d48cba2b977bd",
+    "3df4d26639a9992487a48adf95cb01972d3317a0b0c5ec48228f7f63b4d3b219"
+  ],
+  "requested_clusters": 24,
+  "excluded_previously_labelled_passages": 34,
+  "sampling_strata": {
+    "named_party": 2,
+    "identity_scope": 2,
+    "control": 1
+  },
+  "sampling": "FIXED_PARTY_SCOPE_CONTROL_ROUND_ROBIN_ONE_PER_ISSUER_PERIOD",
+  "strict_production_replay_eligible": false,
+  "independent_gold": false,
+  "limitations": [
+    "Current profiles applied to captured text, not point-in-time replay",
+    "New only against supplied prior packets; not proof of pretraining independence",
+    "8-K event/exhibit and amendment families withheld, not negative examples",
+    "Strata are vocabulary samples, not positive/negative labels; underfill explicit",
+    "Relevance only; no ingestion, financial impact or notification evaluation"
+  ],
+  "source_audit_sha256": "26df55f65e63c8643b4e435c14f508fe81a91b73542270b553a97753516482c2",
+  "held_corpus": {
+    "documents": 26,
+    "disposition": {
+      "EVENT_AND_EXHIBIT_REVIEW_REQUIRED": 19,
+      "ELIGIBLE_TEXT_CHALLENGE_ONLY": 5,
+      "AMENDMENT_FAMILY_REVIEW_REQUIRED": 2
+    },
+    "linked_document_candidates": 65,
+    "selected_clusters": 5,
+    "requested_clusters": 24,
+    "delivery": "disabled",
+    "ingested": false
+  },
+  "metadata_manifest_sha256": "66aa243f5b527d8ff5ec470470802d4d43f5c0028ab81326e82cf25c7b22d5f5",
+  "receipt_correction": "Initial run omitted excluded-passage count; v2 records 34. Packet and predictions identical; initial run preserved."
+}

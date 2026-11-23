@@ -1,0 +1,28 @@
+{
+  "focused": {
+    "tests": "36",
+    "failures": "0",
+    "errors": "0",
+    "time": "37.010"
+  },
+  "lint": "passed",
+  "mypy_files": 106,
+  "code_commit": "55be929",
+  "delivery": "disabled",
+  "data_storage": "local_only",
+  "full_ci": {
+    "run_id": 45195203905,
+    "conclusion": "success",
+    "sqlite": {
+      "passed": 689,
+      "seconds": 129.76
+    },
+    "postgresql": {
+      "passed": 689,
+      "seconds": 198.43
+    },
+    "dependency_audit": "passed",
+    "migration_demo_replay_downgrade": "passed"
+  },
+  "frozen_artifacts_reverified": true
+}

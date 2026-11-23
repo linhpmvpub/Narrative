@@ -1,0 +1,125 @@
+{
+  "tp": 2,
+  "fp": 0,
+  "tn": 22,
+  "fn": 1,
+  "unresolved": 0,
+  "clusters": 5,
+  "pairs": 25,
+  "selected_unresolved": 0,
+  "resolved_fraction": 1.0,
+  "by_narrative": {
+    "amd-supply-2026:foundry-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 5,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "amd-supply-2026:rack-deployment": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 5,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "mu-supply-2026:memory-supply": {
+      "tp": 1,
+      "fp": 0,
+      "tn": 4,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "nvda-supply-2026:supply-resilience": {
+      "tp": 1,
+      "fp": 0,
+      "tn": 4,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "nvda-supply-2026:customer-buildout": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 4,
+      "fn": 1,
+      "unresolved": 0,
+      "precision": null,
+      "recall": 0.0
+    }
+  },
+  "precision": 1.0,
+  "recall": 0.6666666666666666,
+  "reference_kind": "AI_CONSENSUS_REVIEW",
+  "independent_gold": false,
+  "packet_sha256": "df3baedb142c618fa4a7ce58846667e95b3d794458fd5ef21645cae9364d453a",
+  "labels_sha256": "97b6b239d20b9e4ab89c0d2194ed12f5eceba6a7eeec47a028300cc37ce93d7e",
+  "delivery": "disabled",
+  "limitations": [
+    "Current profiles applied to captured text, not point-in-time replay",
+    "New only against supplied prior packets; not proof of pretraining independence",
+    "8-K event/exhibit and amendment families withheld, not negative examples",
+    "Strata are vocabulary samples, not positive/negative labels; underfill explicit",
+    "Relevance only; no ingestion, financial impact or notification evaluation",
+    "AI consensus is not human gold; unresolved labels excluded from precision/recall",
+    "Only 5 source clusters and 3 resolved positive pairs; no whole-market accuracy claim"
+  ],
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "strict_production_replay_eligible": false,
+  "by_topic_stratum": {
+    "finance": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 9,
+      "fn": 1,
+      "unresolved": 0,
+      "precision": null,
+      "recall": 0.0
+    },
+    "other": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 10,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "capacity": {
+      "tp": 2,
+      "fp": 0,
+      "tn": 3,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    }
+  },
+  "disagreements": 0,
+  "freeze_directory": "profile-held-roles-2026-11-23",
+  "exclusion_counter_correction": {
+    "actual_passages_excluded": 34,
+    "original_receipt_counter": 0,
+    "verification_directory": "profile-held-roles-v2-2026-11-23",
+    "packet_and_predictions_unchanged": true,
+    "note": "Only exclusion telemetry corrected; original pre-review freeze remains the benchmark."
+  },
+  "source_cluster_coverage": {
+    "AMD": 1,
+    "DELL": 2,
+    "SNDK": 1,
+    "NVDA": 1
+  },
+  "target_pair_coverage": {
+    "AMD": 10,
+    "MU": 5,
+    "NVDA": 10
+  }
+}
