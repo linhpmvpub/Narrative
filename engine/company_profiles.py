@@ -243,7 +243,9 @@ class FactorBinding(Strict):
     topic_terms: list[TEXT] = Field(min_length=1, max_length=20)
     context_terms: list[TEXT] = Field(min_length=1, max_length=20)
     change_terms: list[TEXT] = Field(default_factory=list, max_length=30)
-    kind: Literal["ECONOMIC_CHANGE", "ISSUER_RELATIONSHIP_DISCLOSURE"] = "ECONOMIC_CHANGE"
+    kind: Literal["ECONOMIC_CHANGE", "ISSUER_RELATIONSHIP_DISCLOSURE",
+                  "SUPPLIER_ROLE_DISCLOSURE"] = "ECONOMIC_CHANGE"
+    issuer_supply_scope: bool = False
     disclosure_terms: list[TEXT] = Field(default_factory=list, max_length=20)
     narrative_ids: list[ID] = Field(default_factory=list, max_length=20)
     exclude_terms: list[TEXT] = Field(default_factory=list, max_length=20)
@@ -273,6 +275,8 @@ class FactorBinding(Strict):
                  *self.disclosure_terms, *self.exclude_terms]
         if self.term_aliases.keys() & set(self.disclosure_terms):
             raise ValueError("Disclosure subject phrases cannot be expanded by aliases")
+        if self.kind == "SUPPLIER_ROLE_DISCLOSURE" and self.term_aliases:
+            raise ValueError("Supplier role terms must be explicit, without aliases")
         if not self.term_aliases.keys() <= set(terms):
             raise ValueError("Alias key must be an explicit binding term")
         for key, variants in self.term_aliases.items():
@@ -375,6 +379,11 @@ class ProfileBundle(Strict):
         for binding in self.factor_bindings:
             if not set(binding.narrative_ids) <= {n.id for n in self.narratives}:
                 raise ValueError("Binding references unknown narrative")
+            if binding.issuer_supply_scope and not binding.narrative_ids:
+                raise ValueError("Issuer supply scope requires approved narratives")
+            if binding.kind == "SUPPLIER_ROLE_DISCLOSURE" and not any(
+                    n.id == binding.factor_id and n.kind == "product" for n in self.nodes):
+                raise ValueError("Supplier role must anchor a sourced product node")
             if binding.entity_reference_id is not None:
                 bound_ref = references.get(binding.entity_reference_id)
                 if bound_ref is None or bound_ref.identity_level == "UNRESOLVED_AFFILIATE":
@@ -384,9 +393,9 @@ class ProfileBundle(Strict):
                         v.casefold() not in names for t in binding.topic_terms
                         for v in binding.term_aliases.get(t, [])):
                     raise ValueError("Entity-bound topic terms must be sourced reference names")
-            if binding.factor_id not in nodes or nodes[binding.factor_id].kind not in {
-                "factor", "input", "supplier", "market", "facility", "location"
-            }:
+            if (binding.kind != "SUPPLIER_ROLE_DISCLOSURE"
+                    and (binding.factor_id not in nodes or nodes[binding.factor_id].kind not in {
+                        "factor", "input", "supplier", "market", "facility", "location"})):
                 raise ValueError("Binding requires a scoped economic factor")
             if binding.reviewed_at > self.available_at or any(
                 sources[e.source_id].retrieved_at > binding.reviewed_at for e in binding.evidence

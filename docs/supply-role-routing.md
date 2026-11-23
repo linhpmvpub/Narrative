@@ -1,0 +1,15 @@
+# Source-scoped buyer, supplier and product roles
+
+`supply_roles.py` recognizes a bounded affirmative issuer clause of the form “We purchase [product] from [supplier list]”. It retains original source offsets, product text, supplier text and the externally supplied buyer CIK. It never resolves a buyer from an RSS ticker or writes a graph relationship. Identity merge and verified-relationship flags remain false.
+
+Quoted speech, conditional/negative language, competitor language, affiliates, compound product lists and ambiguous sentence boundaries are withheld. A supplier candidate must match a multiword legal-name stem with bounded corporate suffix handling; a ticker or one-word brand is insufficient. Product topic/context terms must match the purchased product, not an unrelated sentence. This is a deliberately narrow English pattern, not general relation extraction.
+
+`SUPPLIER_ROLE_DISCLOSURE` bindings require a sourced product anchor, explicit narrative scope, evidence and current review clocks. Aliases are disallowed for these rules. The existing temporal path check must connect the product to that narrative. Local Micron supply v2 uses this to recognize an issuer's explicit memory purchase involving Micron, without asserting volume, realized revenue or a currently verified customer edge.
+
+For issuer supply paragraphs in the offline archive evaluator, economic and issuer-disclosure bindings also need `issuer_supply_scope`, approved narratives and the same source/profile CIK. Local NVDA supply v8 and AMD supply v6 constrain reviewed manufacturing bindings accordingly. This prevents a paragraph about another issuer's foundries from being treated as an AMD-specific event, or manufacturing capacity from becoming customer-deployment evidence solely through a graph route.
+
+The trusted issuer context currently exists only in the integrity-checked local SEC archive workflow. RSS has no equivalent identity attestation and does not activate supplier-role rules; no production feed source/age gate has been relaxed. The broad economic RSS matcher still has its previously documented limitations. Integrating roles into reviewed ingestion/feed is a separate next step and must carry source provenance.
+
+The 120-pair exposed development set improves from TP1/FP2/FN1 to TP2/FP0/FN0. That is development evidence, not generalization. Follow-up excludes both prior 24-document challenges, leaving 12 different documents/60 pairs, with original profiles, source references and predictions frozen before two independent AI reviews. The larger archive had been used previously, so this remains a current-profile retrospective diagnostic, not point-in-time or human-gold validation.
+
+Keep all raw source passages, role traces and labels local. Public reports contain aggregate counts only. Preserve frozen failures; do not silently relabel them or tune and then report the same cases as an untouched holdout.

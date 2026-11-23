@@ -612,10 +612,16 @@
             "default": "ECONOMIC_CHANGE",
             "enum": [
               "ECONOMIC_CHANGE",
-              "ISSUER_RELATIONSHIP_DISCLOSURE"
+              "ISSUER_RELATIONSHIP_DISCLOSURE",
+              "SUPPLIER_ROLE_DISCLOSURE"
             ],
             "title": "Kind",
             "type": "string"
+          },
+          "issuer_supply_scope": {
+            "default": false,
+            "title": "Issuer Supply Scope",
+            "type": "boolean"
           },
           "disclosure_terms": {
             "items": {

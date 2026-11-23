@@ -19,6 +19,7 @@ from engine.ingestion.contracts import digest
 from engine.models.contracts import utc
 from engine.models.schema_v13 import news_items, news_revisions, news_sources
 from engine.news_capture import read_capture
+from engine.supply_roles import extract_supply_roles, supplier_span, valid_cik
 
 
 @lru_cache(maxsize=4096)
@@ -26,10 +27,33 @@ def pattern(term):
     return re.compile(r"(?<!\w)" + re.escape(term) + r"(?!\w)", re.IGNORECASE)
 
 
-def matches(binding, payload, *, issuer_cik=None, profile_cik=None):
+def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name=""):
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
     groups = ("topic_terms", "context_terms", "change_terms")
+    if binding.kind == "SUPPLIER_ROLE_DISCLOSURE":
+        if (not valid_cik(issuer_cik) or not valid_cik(profile_cik)
+                or int(issuer_cik) == int(profile_cik)):
+            return []
+        for fact in extract_supply_roles(fields["summary"], issuer_cik)["facts"]:
+            name = supplier_span(fact, legal_name)
+            if not name or not any(pattern(t).search(fact["text"]) for t in binding.disclosure_terms):
+                continue
+            if any(pattern(t).search(fact["text"]) for t in binding.exclude_terms):
+                continue
+            spans = []
+            for group in ("topic_terms", "context_terms"):
+                hit = next((m for t in getattr(binding, group)
+                            if (m := pattern(t).search(fact["product"]))), None)
+                if hit is None:
+                    break
+                spans.append({"group": group, "field": "summary",
+                    "start": fact["product_start"] + hit.start(),
+                    "end": fact["product_start"] + hit.end(), "text": hit.group()})
+            if len(spans) == 2:
+                return spans + [{"group": "supplier_name", "field": "summary", **name},
+                                {"group": "source_role", "field": "summary", **fact}]
+        return []
     if binding.kind == "ISSUER_RELATIONSHIP_DISCLOSURE":
         # Trusted caller metadata only: never read an issuer identifier from RSS payload.
         if (not issuer_cik or not profile_cik or not str(issuer_cik).isdigit()
