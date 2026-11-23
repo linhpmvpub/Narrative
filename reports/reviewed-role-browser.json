@@ -1,0 +1,17 @@
+{
+  "widths": [
+    390,
+    1440
+  ],
+  "reviewed_role_cards": 1,
+  "ai_review_disclosed": true,
+  "source_quotes_and_paths": true,
+  "failure_hides": true,
+  "recovery_restores": true,
+  "logout_clears": true,
+  "overflow": false,
+  "javascript_errors": [],
+  "browser_writes": 0,
+  "delivery": "disabled",
+  "graph_modified": false
+}

@@ -1,0 +1,16 @@
+{
+  "reviewed_historical_pilots_ingested": 1,
+  "role_cards": 1,
+  "target_tickers": [
+    "MU"
+  ],
+  "ai_reviewers": 2,
+  "reviewer_kind": "AI_INDEPENDENT",
+  "exact_original_document_offsets_verified": true,
+  "temporary_operator_tokens_revoked": 2,
+  "source_time_basis": "SEC_FILING_DATE",
+  "graph_modified": false,
+  "impact_eligible": false,
+  "current_relationship_verified": false,
+  "delivery": "disabled"
+}

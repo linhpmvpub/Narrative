@@ -1,0 +1,27 @@
+{
+  "focused": {
+    "tests": "86",
+    "failures": "0",
+    "errors": "0",
+    "time": "134.457"
+  },
+  "lint": "passed",
+  "mypy_files": 105,
+  "javascript_syntax": "passed",
+  "code_commit": "dd82c14",
+  "ci_run": 45191994860,
+  "delivery": "disabled",
+  "ci": {
+    "conclusion": "success",
+    "sqlite": {
+      "passed": 676,
+      "seconds": 104.17
+    },
+    "postgresql": {
+      "passed": 676,
+      "seconds": 187.84
+    },
+    "dependency_audit": "passed",
+    "migration_demo_replay_downgrade": "passed"
+  }
+}

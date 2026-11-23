@@ -1,0 +1,26 @@
+{
+  "candidate_new_documents": 26,
+  "candidate_issuers": {
+    "NVDA": 7,
+    "AMD": 7,
+    "MU": 2,
+    "DELL": 5,
+    "SNDK": 5
+  },
+  "candidate_forms": {
+    "8-K": 19,
+    "10-Q": 3,
+    "10-K": 3,
+    "10-K/A": 1
+  },
+  "expanded_downloads": 40,
+  "expanded_previous_capture_exclusions": 38,
+  "additional_new_url_downloads": 24,
+  "additional_errors": 0,
+  "status": "HELD_FOR_REVIEW_NOT_INGESTED",
+  "limitations": [
+    "Excludes indexed captures and profiles, not proof against all exposure/pretraining",
+    "Not yet labelled, approved or ingested"
+  ],
+  "delivery": "disabled"
+}
