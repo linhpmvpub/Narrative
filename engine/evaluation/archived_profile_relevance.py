@@ -99,6 +99,12 @@ def select_passages(archive, count, exclude_packets=()):
 
 def freeze(archive: Path, output: Path, count=24, exclude_packets=()):
     selected, excluded, collection_sha = select_passages(archive, count, exclude_packets)
+    return freeze_selected(selected, output, count, excluded, collection_sha, exclude_packets)
+
+
+def freeze_selected(selected, output, count, excluded, collection_sha, exclude_packets=(),
+                    *, document_previously_exposed=True, extra_receipt=None):
+    """Seal a prevalidated source selection before any independent review."""
     at = datetime.now(UTC)
     registry = available_bundles(at)
     if not registry["enabled"] or registry.get("withheld") or registry.get("truncated"):
@@ -116,7 +122,7 @@ def freeze(archive: Path, output: Path, count=24, exclude_packets=()):
                     "paragraph_index": row["paragraph_index"],
                     "text_sha256": digest(row["article"]["summary"]),
                     "sampling_stratum": row["sampling_stratum"],
-                    "document_previously_exposed": True, "track": TRACK,
+                    "document_previously_exposed": document_previously_exposed, "track": TRACK,
                     "profile_id": b.id, "profile_version": b.version,
                     "profile_sha256": digest(b.model_dump(mode="json")), "ticker": b.ticker,
                     "narrative": n.model_dump(mode="json"),
@@ -150,6 +156,8 @@ def freeze(archive: Path, output: Path, count=24, exclude_packets=()):
                         "Documents exposed previously; new excerpts are not an unseen holdout",
                         "Text-routing stage only; ingestion and news age gates not evaluated",
                         "Sampling strata are not relevance labels; correlated issuer periods"]}
+    if extra_receipt:
+        receipt.update(extra_receipt)
     write_new(output / "freeze.json", receipt)
     return receipt
 
