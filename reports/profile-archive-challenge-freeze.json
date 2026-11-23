@@ -1,0 +1,35 @@
+{
+  "at": "2026-11-23T12:39:03.809296+00:00",
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "delivery": "disabled",
+  "packet_sha256": "50d249a1879efb98fb660f7b703b6614e566558913fb8213ef43682cd31a4842",
+  "predictions_sha256": "ddfcc43c8159156a863facc29bec888aa447abc60ba08ee2b64644022958b4a9",
+  "collection_sha256": "826c61a6fec8d995f1ae9ebd52b534ca351162d2ccdf07157dd6521665ee5f22",
+  "clusters": 24,
+  "pairs": 120,
+  "requested_clusters": 24,
+  "excluded_previously_labelled_passages": 234,
+  "sampling_strata": {
+    "named_party": 8,
+    "identity_scope": 8,
+    "control": 8
+  },
+  "sampling": "FIXED_PARTY_SCOPE_CONTROL_ROUND_ROBIN_ONE_PER_ISSUER_PERIOD",
+  "strict_production_replay_eligible": false,
+  "independent_gold": false,
+  "limitations": [
+    "Current profile knowledge applied to old text; not point-in-time replay",
+    "Documents exposed previously; new excerpts are not an unseen holdout",
+    "Text-routing stage only; ingestion and news age gates not evaluated",
+    "Sampling strata are not relevance labels; correlated issuer periods"
+  ],
+  "source_issuers": {
+    "MU": 8,
+    "AMD": 8,
+    "NVDA": 8
+  },
+  "source_years": {
+    "2022": 13,
+    "2023": 11
+  }
+}

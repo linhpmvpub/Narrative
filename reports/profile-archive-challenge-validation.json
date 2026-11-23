@@ -1,0 +1,25 @@
+{
+  "focused": {
+    "tests": "22",
+    "failures": "0",
+    "errors": "0",
+    "time": "34.551"
+  },
+  "archive_tests_after_evaluator_assertions": 8,
+  "lint": "passed after import formatting correction",
+  "mypy_files": 102,
+  "delivery": "disabled",
+  "code_commit": "39e4aaf",
+  "ci_run": 45176845294,
+  "ci_status": "success",
+  "sqlite": {
+    "tests": 617,
+    "seconds": 111.79
+  },
+  "postgresql": {
+    "tests": 617,
+    "seconds": 214.86
+  },
+  "dependency_audit": "passed",
+  "migration_demo_replay_downgrade": "passed"
+}
