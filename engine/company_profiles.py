@@ -7,6 +7,7 @@ Shared examples never contain user subscriptions or personal narrative notes.
 import hashlib
 import json
 import os
+import re
 from collections import Counter, deque
 from contextlib import contextmanager
 from datetime import UTC, date, datetime
@@ -198,6 +199,43 @@ class MetricObservation(Strict):
         return self
 
 
+class EntityReference(Strict):
+    """A sourced name reference, not a global identity merge or new relationship."""
+    id: ID
+    label: TEXT
+    identity_level: Literal["LEGAL_ENTITY", "GROUP", "BRAND", "UNRESOLVED_AFFILIATE"]
+    resolution: Literal["EXACT_ENTITY", "CONTEXT_ONLY"]
+    node_id: ID
+    names: list[TEXT] = Field(default_factory=list, max_length=10)
+    relationship_ids: list[ID] = Field(min_length=1, max_length=10)
+    scope: TEXT
+    unknowns: list[TEXT] = Field(min_length=1, max_length=20)
+    reviewed_at: AwareDatetime
+    review_until: AwareDatetime
+    status: Literal["SOURCE_BACKED", "DISPUTED", "REVOKED"] = "SOURCE_BACKED"
+    evidence: list[Evidence] = Field(min_length=1, max_length=20)
+
+    @model_validator(mode="after")
+    def named_scope(self):
+        if not 0 < (self.review_until - self.reviewed_at).total_seconds() <= 90 * 86400:
+            raise ValueError("Entity reference review window invalid")
+        if self.resolution == "EXACT_ENTITY" and self.identity_level != "LEGAL_ENTITY":
+            raise ValueError("Group/brand/unknown affiliate cannot be exact legal identity")
+        if self.identity_level == "UNRESOLVED_AFFILIATE" and self.names:
+            raise ValueError("Unnamed affiliate must not borrow a group/parent name")
+        if self.identity_level != "UNRESOLVED_AFFILIATE" and not self.names:
+            raise ValueError("Named reference needs sourced names")
+        if len({n.casefold() for n in self.names}) != len(self.names):
+            raise ValueError("Duplicate entity name")
+        for name in self.names:
+            if name != name.strip() or not 2 <= len(name) <= 120:
+                raise ValueError("Invalid bounded entity name")
+            if not any(re.search(r"(?<!\w)" + re.escape(name) + r"(?!\w)", e.quote, re.I)
+                       for e in self.evidence):
+                raise ValueError("Entity name must appear literally in supporting evidence")
+        return self
+
+
 class FactorBinding(Strict):
     """Curated literal topic/context/change groups, never a financial event classifier."""
     id: ID
@@ -207,6 +245,7 @@ class FactorBinding(Strict):
     change_terms: list[TEXT] = Field(min_length=1, max_length=30)
     exclude_terms: list[TEXT] = Field(default_factory=list, max_length=20)
     term_aliases: dict[str, list[TEXT]] = Field(default_factory=dict, max_length=40)
+    entity_reference_id: ID | None = None
     scope: TEXT
     reviewed_at: AwareDatetime
     review_until: AwareDatetime
@@ -252,6 +291,7 @@ class ProfileBundle(Strict):
     relationships: list[Relationship] = Field(max_length=300)
     observations: list[MetricObservation] = Field(default_factory=list, max_length=200)
     factor_bindings: list[FactorBinding] = Field(default_factory=list, max_length=50)
+    entity_references: list[EntityReference] = Field(default_factory=list, max_length=100)
     narratives: list[Narrative] = Field(default_factory=list, max_length=20)
     events: list[Event] = Field(default_factory=list, max_length=100)
     author_kind: Literal["AI_ASSISTED_SOURCE_EXTRACTION"] = "AI_ASSISTED_SOURCE_EXTRACTION"
@@ -260,7 +300,8 @@ class ProfileBundle(Strict):
     def coherent(self):
         for rows, key in ((self.sources, "id"), (self.components, "key"), (self.nodes, "id"),
                           (self.relationships, "id"), (self.narratives, "id"), (self.events, "id"),
-                          (self.observations, "id"), (self.factor_bindings, "id")):
+                          (self.observations, "id"), (self.factor_bindings, "id"),
+                          (self.entity_references, "id")):
             if len({getattr(r, key) for r in rows}) != len(rows):
                 raise ValueError("Duplicate identity")
         nodes = {n.id: n for n in self.nodes}
@@ -295,14 +336,39 @@ class ProfileBundle(Strict):
                 raise ValueError("Observation requires a metric node")
             if o.period_end > self.snapshot_at.date():
                 raise ValueError("Future observation period")
-        items: list[Component | Relationship | Event | MetricObservation | FactorBinding] = [
+        items: list[Component | Relationship | Event | MetricObservation | FactorBinding | EntityReference] = [
             *self.components, *self.relationships, *self.events, *self.observations,
-            *self.factor_bindings]
+            *self.factor_bindings, *self.entity_references]
         for item in items:
             if any(e.source_id not in source_ids for e in item.evidence):
                 raise ValueError("Missing evidence source")
         sources = {s.id: s for s in self.sources}
+        references = {r.id: r for r in self.entity_references}
+        relationships = {r.id: r for r in self.relationships}
+        for ref in self.entity_references:
+            if ref.node_id not in nodes or nodes[ref.node_id].kind not in {
+                    "company", "supplier", "customer", "partner"}:
+                raise ValueError("Entity reference requires a company/counterparty node")
+            if ref.resolution == "EXACT_ENTITY" and nodes[ref.node_id].label.casefold() not in {
+                    n.casefold() for n in ref.names}:
+                raise ValueError("Exact legal identity must name the actual node, not its parent")
+            if any(rid not in relationships or ref.node_id not in {
+                    relationships[rid].from_id, relationships[rid].to_id}
+                   for rid in ref.relationship_ids):
+                raise ValueError("Entity context requires existing incident relationship evidence")
+            if ref.reviewed_at > self.available_at or any(
+                    sources[e.source_id].retrieved_at > ref.reviewed_at for e in ref.evidence):
+                raise ValueError("Entity reference review must follow acquisition")
         for binding in self.factor_bindings:
+            if binding.entity_reference_id is not None:
+                bound_ref = references.get(binding.entity_reference_id)
+                if bound_ref is None or bound_ref.identity_level == "UNRESOLVED_AFFILIATE":
+                    raise ValueError("Binding requires a named entity reference")
+                names = {n.casefold() for n in bound_ref.names}
+                if any(t.casefold() not in names for t in binding.topic_terms) or any(
+                        v.casefold() not in names for t in binding.topic_terms
+                        for v in binding.term_aliases.get(t, [])):
+                    raise ValueError("Entity-bound topic terms must be sourced reference names")
             if binding.factor_id not in nodes or nodes[binding.factor_id].kind not in {
                 "factor", "input", "supplier", "market", "facility", "location"
             }:
@@ -360,9 +426,9 @@ def verify_sources(directory, bundle):
         if hashlib.sha256(raw).hexdigest() != s.sha256:
             raise ValueError("Source version changed")
         texts[s.id] = source_text(raw)
-    items: list[Component | Relationship | Event | MetricObservation | FactorBinding] = [
+    items: list[Component | Relationship | Event | MetricObservation | FactorBinding | EntityReference] = [
         *bundle.components, *bundle.relationships, *bundle.events, *bundle.observations,
-        *bundle.factor_bindings]
+        *bundle.factor_bindings, *bundle.entity_references]
     for item in items:
         if any(e.quote not in texts[e.source_id] for e in item.evidence):
             raise ValueError("Evidence quote not in visible source")
@@ -530,6 +596,7 @@ def project(bundle):
             "relationships": [r.model_dump(mode="json") for r in bundle.relationships],
             "observations": [o.model_dump(mode="json") for o in bundle.observations],
             "factor_bindings": [b.model_dump(mode="json") for b in bundle.factor_bindings],
+            "entity_references": [r.model_dump(mode="json") for r in bundle.entity_references],
             "sources": [{"id": s.id, "url": str(s.url), "sha256": s.sha256,
                          "published_at": s.published_at.isoformat(),
                          "retrieved_at": s.retrieved_at.isoformat()} for s in bundle.sources],

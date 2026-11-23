@@ -16,7 +16,10 @@ with sync_playwright() as p:
     request = urllib.request.Request("http://127.0.0.1:8890/api/v0/news/profile-rss",
                                      headers={"Authorization": "Bearer " + token})
     with urllib.request.urlopen(request) as response:
-        expected_cards = len(json.load(response)["items"])
+        response_data = json.load(response)
+        expected_cards = len(response_data["items"])
+        has_entity_context = any(link.get("entity_context")
+                                 for item in response_data["items"] for link in item["links"])
     assert expected_cards >= 1
     for width in (390, 1440):
         page = browser.new_page(viewport={"width": width, "height": 900})
@@ -32,6 +35,9 @@ with sync_playwright() as p:
         expect(root).to_contain_text("Thông báo thật tắt")
         for summary in root.locator("summary").all():
             summary.click()
+        if has_entity_context:
+            expect(root).to_contain_text("Tên tổ chức và phạm vi nhận diện")
+            expect(root).to_contain_text("Đường ngữ cảnh:")
         assert root.locator('a[href^="https://www.sec.gov/Archives/"]').count() > 0
         assert root.locator("blockquote").count() > 0
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
@@ -48,6 +54,7 @@ with sync_playwright() as p:
     assert not errors
     browser.close()
 report = {"widths": [390, 1440], "cards": expected_cards,
+          "entity_context_disclosure": has_entity_context,
           "unverified_and_missing_capture_disclosed": True, "source_links": True,
           "failure_withholds": True, "recovery_restores": True, "logout_clears": True,
           "overflow": False, "javascript_errors": errors, "writes": 0, "delivery": "disabled"}

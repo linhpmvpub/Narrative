@@ -340,6 +340,127 @@
         "title": "Component",
         "type": "object"
       },
+      "EntityReference": {
+        "additionalProperties": false,
+        "description": "A sourced name reference, not a global identity merge or new relationship.",
+        "properties": {
+          "id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          },
+          "identity_level": {
+            "enum": [
+              "LEGAL_ENTITY",
+              "GROUP",
+              "BRAND",
+              "UNRESOLVED_AFFILIATE"
+            ],
+            "title": "Identity Level",
+            "type": "string"
+          },
+          "resolution": {
+            "enum": [
+              "EXACT_ENTITY",
+              "CONTEXT_ONLY"
+            ],
+            "title": "Resolution",
+            "type": "string"
+          },
+          "node_id": {
+            "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+            "title": "Node Id",
+            "type": "string"
+          },
+          "names": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 10,
+            "title": "Names",
+            "type": "array"
+          },
+          "relationship_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+              "type": "string"
+            },
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Relationship Ids",
+            "type": "array"
+          },
+          "scope": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Scope",
+            "type": "string"
+          },
+          "unknowns": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Unknowns",
+            "type": "array"
+          },
+          "reviewed_at": {
+            "format": "date-time",
+            "title": "Reviewed At",
+            "type": "string"
+          },
+          "review_until": {
+            "format": "date-time",
+            "title": "Review Until",
+            "type": "string"
+          },
+          "status": {
+            "default": "SOURCE_BACKED",
+            "enum": [
+              "SOURCE_BACKED",
+              "DISPUTED",
+              "REVOKED"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/Evidence"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "identity_level",
+          "resolution",
+          "node_id",
+          "relationship_ids",
+          "scope",
+          "unknowns",
+          "reviewed_at",
+          "review_until",
+          "evidence"
+        ],
+        "title": "EntityReference",
+        "type": "object"
+      },
       "Event": {
         "additionalProperties": false,
         "properties": {
@@ -510,6 +631,19 @@
             "maxProperties": 40,
             "title": "Term Aliases",
             "type": "object"
+          },
+          "entity_reference_id": {
+            "anyOf": [
+              {
+                "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Entity Reference Id"
           },
           "scope": {
             "maxLength": 4000,
@@ -1154,6 +1288,14 @@
         },
         "maxItems": 50,
         "title": "Factor Bindings",
+        "type": "array"
+      },
+      "entity_references": {
+        "items": {
+          "$ref": "#/$defs/EntityReference"
+        },
+        "maxItems": 100,
+        "title": "Entity References",
         "type": "array"
       },
       "narratives": {

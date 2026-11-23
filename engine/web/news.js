@@ -9,6 +9,7 @@ function renderProfileNews(result){
   for(const item of card.links){box.append(el('h4','Vì sao đáng theo dõi: '+item.factor));const flow=el('ol');for(const r of item.path)flow.append(el('li',r.from+' → '+r.to));box.append(flow,el('p',item.scope));const detail=el('details');detail.append(el('summary','Xem điều kiện, từ khớp và nguồn hồ sơ'));
    for(const r of item.path){for(const c of r.conditions)detail.append(el('p','Điều kiện: '+c));for(const u of r.unknowns)detail.append(el('p','Chưa biết: '+u));for(const e of r.evidence)detail.append(el('blockquote',e.quote));}
    detail.append(el('p','Từ khớp trong RSS: '+item.matches.map(m=>m.text+' ('+(m.field==='title'?'tiêu đề':'trích đoạn')+')').join(' · ')));
+   if(item.entity_context){const ref=item.entity_context;detail.append(el('h4','Tên tổ chức và phạm vi nhận diện'),el('p',ref.label+' · '+(ref.resolution==='CONTEXT_ONLY'?'Chỉ liên hệ ngữ cảnh; chưa xác định pháp nhân trong tin':'Tham chiếu pháp nhân theo hồ sơ; bên được nói đến trong tin chưa xác minh'),'stale'),el('p',ref.scope));for(const u of ref.unknowns)detail.append(el('p','Chưa biết: '+u));for(const e of ref.evidence)detail.append(el('blockquote',e.quote));for(const r of item.entity_context_path||[])detail.append(el('p','Đường ngữ cảnh: '+r.from+' → '+r.to+' · '+r.scope));}
    for(const e of item.profile_evidence)detail.append(el('blockquote',e.quote));for(const src of item.sources)detail.append(profileLink(src),el('br'));box.append(detail);
   }
   for(const u of card.unknowns)box.append(el('p','Chưa biết: '+u,'meta'));

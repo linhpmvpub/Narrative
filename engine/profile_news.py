@@ -57,6 +57,45 @@ def matches(binding, payload):
     return spans
 
 
+def entity_context(bundle, reference_id, payload, at):
+    """Profile-local reference only. Ambiguous overlapping names fail closed."""
+    active = [r for r in bundle.entity_references if r.status == "SOURCE_BACKED"
+              and r.reviewed_at <= at < r.review_until]
+    ref = next((r for r in active if r.id == reference_id), None)
+    if ref is None or not ref.names:
+        return None
+    edges = {r.id: r for r in bundle.relationships}
+    for rid in ref.relationship_ids:
+        r = edges[rid]
+        if (r.status != "SOURCE_BACKED" or r.known_at > at or r.valid_from > at
+                or (r.valid_until is not None and at >= r.valid_until)):
+            return None
+    fields = {k: payload.get(k, "") for k in ("title", "summary")}
+    hits = []
+    for name in ref.names:
+        for field, text in fields.items():
+            match = pattern(name).search(text)
+            if match:
+                for other in active:
+                    if other.id == ref.id:
+                        continue
+                    for other_name in other.names:
+                        if any(m.start() < match.end() and match.start() < m.end()
+                               for m in pattern(other_name).finditer(text)):
+                            return None
+                hits.append({"field": field, "start": match.start(), "end": match.end(),
+                             "text": match.group(), "name": name})
+    if not hits:
+        return None
+    return {"reference_id": ref.id, "label": ref.label, "node_id": ref.node_id,
+            "identity_level": ref.identity_level, "resolution": ref.resolution,
+            "identity_merged": False, "news_party_verified": False,
+            "scope": ref.scope, "unknowns": ref.unknowns, "matches": hits,
+            "relationship_ids": ref.relationship_ids,
+            "review_until": ref.review_until.isoformat(),
+            "evidence": [e.model_dump() for e in ref.evidence]}
+
+
 def verified_row(row, at, capture_cache):
     p, config = row["payload"], row["source_config"]
     if config.get("kind") != "rss" or not config.get("enabled") or p.get("kind") != "rss":
@@ -155,10 +194,21 @@ def candidate_feed(conn, as_of=None, limit=500):
                     continue
                 if any(v[1] < at - timedelta(days=binding.max_news_age_days) for v in variants):
                     continue
+                entity = None
+                if binding.entity_reference_id is not None:
+                    entity = entity_context(bundle, binding.entity_reference_id, payload, at)
+                    if entity is None:
+                        continue
                 spans = matches(binding, payload)
                 if not spans:
                     continue
                 for narrative in bundle.narratives:
+                    entity_routes = []
+                    if entity is not None:
+                        entity_routes, _ = paths(bundle, SimpleNamespace(anchors=[entity["node_id"]]),
+                                                 narrative, effective_at=at)
+                        if not entity_routes:
+                            continue
                     routes, truncated = paths(bundle, SimpleNamespace(anchors=[binding.factor_id]),
                                               narrative, effective_at=at)
                     if not routes:
@@ -169,6 +219,10 @@ def candidate_feed(conn, as_of=None, limit=500):
                     key = (article_key, bundle.id, narrative.id)
                     citations = {e.source_id for e in binding.evidence}
                     citations.update(e.source_id for r in route for e in r.evidence)
+                    entity_route = min(entity_routes, key=len) if entity_routes else []
+                    if entity is not None:
+                        citations.update(e["source_id"] for e in entity["evidence"])
+                        citations.update(e.source_id for r in entity_route for e in r.evidence)
                     if key not in cards:
                         cards[key] = {"id": digest(key), "ticker": bundle.ticker,
                             "profile_id": bundle.id, "profile_version": bundle.version,
@@ -197,6 +251,10 @@ def candidate_feed(conn, as_of=None, limit=500):
                     cards[key]["links"].append({"binding_id": binding.id,
                         "factor_id": binding.factor_id, "factor": nodes[binding.factor_id],
                         "scope": binding.scope, "matches": spans,
+                        "entity_context": entity,
+                        "entity_context_path": [{"id": r.id, "from": nodes[r.from_id],
+                            "to": nodes[r.to_id], "type": r.type, "scope": r.scope,
+                            "evidence": [e.model_dump() for e in r.evidence]} for r in entity_route],
                         "profile_evidence": [e.model_dump() for e in binding.evidence],
                         "review_until": binding.review_until.isoformat(),
                         "path": [{"id": r.id, "from": nodes[r.from_id], "to": nodes[r.to_id],

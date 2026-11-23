@@ -159,6 +159,7 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
                     "ticker": b.ticker, "narrative": n.model_dump(mode="json"),
                     "sources": [s.model_dump(mode="json", exclude={"file"}) for s in b.sources],
                     "components": [c.model_dump() for c in b.components],
+                    "entity_references": [v.model_dump(mode="json") for v in b.entity_references],
                     "relationships": [v.model_dump(mode="json") for v in b.relationships],
                     "nodes": [v.model_dump() for v in b.nodes]})
                 predictions[key] = key in matched
