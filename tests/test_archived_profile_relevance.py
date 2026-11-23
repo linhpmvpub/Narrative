@@ -9,7 +9,12 @@ from test_company_profiles import dossier as dossier
 from test_company_profiles import seal as seal_profile
 
 from engine.company_profiles import ProfileBundle
-from engine.evaluation.archived_profile_relevance import evaluate, freeze, select_passages, text_prediction
+from engine.evaluation.archived_profile_relevance import (
+    evaluate,
+    freeze,
+    select_passages,
+    text_prediction,
+)
 from engine.ingestion.contracts import digest
 
 
