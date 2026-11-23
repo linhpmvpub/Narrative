@@ -1,0 +1,16 @@
+{
+  "mode": "EXPOSED_DEVELOPMENT_NOT_HOLDOUT",
+  "before": {
+    "tp": 1,
+    "fp": 2,
+    "tn": 116,
+    "fn": 1
+  },
+  "after": {
+    "tp": 2,
+    "fp": 0,
+    "tn": 118,
+    "fn": 0
+  },
+  "delivery": "disabled"
+}

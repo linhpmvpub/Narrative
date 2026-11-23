@@ -1,0 +1,28 @@
+{
+  "focused_before_final_fallback": {
+    "tests": "102",
+    "failures": "0",
+    "errors": "0",
+    "time": "55.439"
+  },
+  "after_final_fallback": {
+    "tests": 55,
+    "seconds": 1.33
+  },
+  "lint": "passed",
+  "mypy_files": 103,
+  "code_commit": "35e5f69",
+  "ci_run": 45183236940,
+  "delivery": "disabled",
+  "ci_status": "success",
+  "sqlite": {
+    "tests": 664,
+    "seconds": 111.33
+  },
+  "postgresql": {
+    "tests": 664,
+    "seconds": 208.49
+  },
+  "dependency_audit": "passed",
+  "migration_demo_replay_downgrade": "passed"
+}

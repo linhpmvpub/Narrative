@@ -1,0 +1,42 @@
+{
+  "at": "2026-11-23T13:16:18.869549+00:00",
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "delivery": "disabled",
+  "packet_sha256": "27c074fc94e2c3956f3cfa2095d0407762bb4499f85872ff343d48cba2b977bd",
+  "predictions_sha256": "ddcbf795a501af7c16317062cb0e96fef0469a077c9ef2059956a21dc6f4397a",
+  "collection_sha256": "826c61a6fec8d995f1ae9ebd52b534ca351162d2ccdf07157dd6521665ee5f22",
+  "clusters": 12,
+  "pairs": 60,
+  "excluded_packet_sha256": [
+    "50d249a1879efb98fb660f7b703b6614e566558913fb8213ef43682cd31a4842",
+    "a888c168d80ff41ed8101b0e53ef54581dc8712bb39ea7a5f9d79b27e3c715d5"
+  ],
+  "requested_clusters": 24,
+  "excluded_previously_labelled_passages": 122,
+  "sampling_strata": {
+    "named_party": 4,
+    "identity_scope": 4,
+    "control": 4
+  },
+  "sampling": "FIXED_PARTY_SCOPE_CONTROL_ROUND_ROBIN_ONE_PER_ISSUER_PERIOD",
+  "strict_production_replay_eligible": false,
+  "independent_gold": false,
+  "limitations": [
+    "Current profile knowledge applied to old text; not point-in-time replay",
+    "Documents exposed previously; new excerpts are not an unseen holdout",
+    "Text-routing stage only; ingestion and news age gates not evaluated",
+    "Sampling strata are not relevance labels; correlated issuer periods"
+  ],
+  "source_issuers": {
+    "MU": 3,
+    "DELL": 3,
+    "AMD": 2,
+    "SNDK": 2,
+    "NVDA": 2
+  },
+  "source_years": {
+    "2025": 12
+  },
+  "prior_document_overlap": 0,
+  "remaining_documents_after_this_round": 0
+}

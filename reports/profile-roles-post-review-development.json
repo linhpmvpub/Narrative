@@ -1,0 +1,12 @@
+{
+  "mode": "POST_LABEL_DEVELOPMENT_NOT_HOLDOUT",
+  "counts": {
+    "tp": 0,
+    "fp": 0,
+    "tn": 56,
+    "fn": 0,
+    "unresolved": 4
+  },
+  "frozen_blind_result_unchanged": true,
+  "delivery": "disabled"
+}
