@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-23
 
+## Operational factors, reviewed aliases and fresh follow-up evaluation — 2026-11-23 (latest)
+
+- Added optional bounded term_aliases to profile bindings: keys must be explicit group/exclusion terms,1..8unique variants/key,max40keys,2..80char literals. No fuzzy/stem/regex expansion; original offsets/text and canonical/matched terms retained. All3groups and exclusion aliases enforced. Legacy empty defaults; source review/expiry still required. Schema regenerated, original seeds unchanged.
+- Local NVDA supplyv4: power availability, project schedule/budget, supplier commitments, expanded reviewed permitting wording. General source exposure only; UPS design, labor/commissioning and project-specific effects remain unknown/conditional. AMD supplyv2: third-party cooling in Helios, separate rack-deployment narrative, AMD components rather than claiming it sells whole racks. No broad assignment of generic cooling news to AMD or unsourced NVDA cooling relation. MU unchanged; data/sources private, no source-clock backdating.
+- Allocated prior exposed40clusters30development/10exposed-monitoring before changes, preserved hash/seed. Neither is an untouched holdout. Version/payload checks excluded8pairs from2corrected articles. On unchanged revisions development baseline1TP/18FN→9TP/10FN; monitoring1TP/3FN→4TP/0FN;0additional FP among existing resolved negatives, unresolved remains. New AMD narrative unlabelled in old sample and not scored there. Old artifacts unchanged; diagnostic reports/profile-operations-development.json, not out-of-sample improvement.
+- New freeze source-cache/profile-operations-fresh-2026-11-23:32fresh clusters/160pairs across5narratives, excludes all4previous packets and near duplicates;1conflicting current group withheld. Separate reviewer-only packet/rubric hashes, no predictions or prior labels. Two new-context AI reviewers labeling; final independent results recorded after both seal. No post-label tuning.
+-65focused tests passed40.77s, Ruff/mypy101files passed. Local API8888 restarted hidden with notifications/synthetic-live false,LLMnone; gateway/tunnel/Pages unchanged. Browser/full CI final status pending. Guide docs/operations-factor-development.md. Private raw profiles, source captures and review packets stay ignored.
+
+
 ## Sector RSS and stratified independent relevance evaluation — 2026-11-23 (latest)
 
 - Continued checkpoint: added DatacenterDynamics and Data Center Knowledge public RSS at600second intervals, initial20+50items/0parse rejections. Raw captures/revisions local, unverified inbox only. Existing collector picks up registered sources; X remains off. No canonical/graph promotions or notifications, no cloud/tunnel/Pages changes.

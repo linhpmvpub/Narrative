@@ -1,0 +1,61 @@
+{
+  "scores": {
+    "development": {
+      "baseline": {
+        "tp": 1,
+        "fp": 0,
+        "tn": 61,
+        "fn": 18,
+        "unresolved": 40,
+        "selected_unresolved": 1,
+        "stale_revision": 0,
+        "precision": 1.0,
+        "recall": 0.05263157894736842
+      },
+      "current": {
+        "tp": 9,
+        "fp": 0,
+        "tn": 61,
+        "fn": 10,
+        "unresolved": 40,
+        "selected_unresolved": 1,
+        "stale_revision": 0,
+        "precision": 1.0,
+        "recall": 0.47368421052631576
+      }
+    },
+    "exposed_monitoring": {
+      "baseline": {
+        "tp": 1,
+        "fp": 0,
+        "tn": 15,
+        "fn": 3,
+        "unresolved": 13,
+        "selected_unresolved": 0,
+        "stale_revision": 8,
+        "precision": 1.0,
+        "recall": 0.25
+      },
+      "current": {
+        "tp": 4,
+        "fp": 0,
+        "tn": 15,
+        "fn": 0,
+        "unresolved": 13,
+        "selected_unresolved": 0,
+        "stale_revision": 8,
+        "precision": 1.0,
+        "recall": 1.0
+      }
+    }
+  },
+  "changed_pairs": 11,
+  "development_clusters": 30,
+  "exposed_monitoring_clusters": 10,
+  "independent_holdout": false,
+  "old_packet_and_predictions_unchanged": true,
+  "current_feed_cards": 20,
+  "new_narrative_evaluation": "UNLABELLED_AMD_RACK_DEPLOYMENT",
+  "delivery": "disabled",
+  "limitation": "Post-hoc development diagnostic on previously exposed AI references; not evidence of out-of-sample improvement."
+}

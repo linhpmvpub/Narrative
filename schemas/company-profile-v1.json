@@ -498,6 +498,19 @@
             "title": "Exclude Terms",
             "type": "array"
           },
+          "term_aliases": {
+            "additionalProperties": {
+              "items": {
+                "maxLength": 4000,
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "maxProperties": 40,
+            "title": "Term Aliases",
+            "type": "object"
+          },
           "scope": {
             "maxLength": 4000,
             "minLength": 1,

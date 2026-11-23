@@ -29,17 +29,25 @@ def pattern(term):
 def matches(binding, payload):
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
-    if any(pattern(t).search(s) for t in binding.exclude_terms for s in fields.values()):
+    def variants(term):
+        return [term, *binding.term_aliases.get(term, [])]
+
+    if any(pattern(v).search(s) for t in binding.exclude_terms for v in variants(t)
+           for s in fields.values()):
         return []
     spans = []
     for group in ("topic_terms", "context_terms", "change_terms"):
         found = None
         for term in getattr(binding, group):
-            for field, text in fields.items():
-                match = pattern(term).search(text)
-                if match:
-                    found = {"group": group, "field": field, "start": match.start(),
-                             "end": match.end(), "text": match.group(), "term": term}
+            for variant in variants(term):
+                for field, text in fields.items():
+                    match = pattern(variant).search(text)
+                    if match:
+                        found = {"group": group, "field": field, "start": match.start(),
+                                 "end": match.end(), "text": match.group(), "term": term,
+                                 "matched_term": variant, "alias_used": variant != term}
+                        break
+                if found:
                     break
             if found:
                 break

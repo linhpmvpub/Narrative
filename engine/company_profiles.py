@@ -206,6 +206,7 @@ class FactorBinding(Strict):
     context_terms: list[TEXT] = Field(min_length=1, max_length=20)
     change_terms: list[TEXT] = Field(min_length=1, max_length=30)
     exclude_terms: list[TEXT] = Field(default_factory=list, max_length=20)
+    term_aliases: dict[str, list[TEXT]] = Field(default_factory=dict, max_length=40)
     scope: TEXT
     reviewed_at: AwareDatetime
     review_until: AwareDatetime
@@ -219,7 +220,15 @@ class FactorBinding(Strict):
             raise ValueError("Binding review window invalid")
         if (self.review_until - self.reviewed_at).total_seconds() > 90 * 86400:
             raise ValueError("Binding must be rechecked within 90 days")
-        for term in [*self.topic_terms, *self.context_terms, *self.change_terms, *self.exclude_terms]:
+        terms = [*self.topic_terms, *self.context_terms, *self.change_terms, *self.exclude_terms]
+        if not self.term_aliases.keys() <= set(terms):
+            raise ValueError("Alias key must be an explicit binding term")
+        for key, variants in self.term_aliases.items():
+            if not 1 <= len(variants) <= 8 or len(set(v.casefold() for v in variants)) != len(variants):
+                raise ValueError("Aliases must be unique and bounded")
+            if any(v.casefold() == key.casefold() for v in variants):
+                raise ValueError("Alias repeats canonical term")
+        for term in [*terms, *(v for variants in self.term_aliases.values() for v in variants)]:
             if not 2 <= len(term.strip()) <= 80 or term != term.strip():
                 raise ValueError("Invalid literal binding term")
         return self
