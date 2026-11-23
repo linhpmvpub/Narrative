@@ -1,0 +1,26 @@
+{
+  "focused": {
+    "tests": "87",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "102.189"
+  },
+  "lint": "passed",
+  "mypy_files": 101,
+  "javascript_syntax": "passed",
+  "ci_run": 45172145673,
+  "code_commit": "ba7108b",
+  "ci_status": "success",
+  "sqlite": {
+    "tests": 609,
+    "seconds": 98.29
+  },
+  "postgresql": {
+    "tests": 609,
+    "seconds": 147.7
+  },
+  "dependency_audit": "passed",
+  "migration_demo_replay_downgrade": "passed",
+  "local_full_run": "Cancelled redundant local full run after both CI database suites passed; focused and browser checks passed locally"
+}

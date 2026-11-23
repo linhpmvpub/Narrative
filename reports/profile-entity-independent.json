@@ -1,0 +1,91 @@
+{
+  "tp": 0,
+  "fp": 0,
+  "tn": 12,
+  "fn": 0,
+  "unresolved": 3,
+  "clusters": 3,
+  "pairs": 15,
+  "selected_unresolved": 0,
+  "resolved_fraction": 0.8,
+  "by_narrative": {
+    "amd-supply-2026:foundry-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 3,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "amd-supply-2026:rack-deployment": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0,
+      "unresolved": 1,
+      "precision": null,
+      "recall": null
+    },
+    "mu-supply-2026:memory-supply": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 3,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "nvda-supply-2026:supply-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0,
+      "unresolved": 1,
+      "precision": null,
+      "recall": null
+    },
+    "nvda-supply-2026:customer-buildout": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0,
+      "unresolved": 1,
+      "precision": null,
+      "recall": null
+    }
+  },
+  "by_stratum": {
+    "finance": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0,
+      "unresolved": 3,
+      "precision": null,
+      "recall": null
+    },
+    "other": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 10,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    }
+  },
+  "precision": null,
+  "recall": null,
+  "reference_kind": "AI_CONSENSUS_REVIEW",
+  "independent_gold": false,
+  "packet_sha256": "c3bc71a2b0271ab11edbb6f6557c7c998ca7581d310301feace84af0d8ba82a3",
+  "labels_sha256": "3ea92fe42c1c85b48edace46f0df74439a4875028ccd110b74bddb17f0050887",
+  "delivery": "disabled",
+  "limitations": [
+    "Latest-URL convenience sample; pairs are correlated within articles",
+    "Unknown references excluded, never counted as negatives",
+    "Relevance only, not financial impact or push accuracy"
+  ],
+  "disagreements": 0
+}

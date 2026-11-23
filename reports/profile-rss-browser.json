@@ -3,7 +3,8 @@
     390,
     1440
   ],
-  "cards": 20,
+  "cards": 21,
+  "entity_context_disclosure": true,
   "unverified_and_missing_capture_disclosed": true,
   "source_links": true,
   "failure_withholds": true,

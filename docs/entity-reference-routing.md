@@ -13,3 +13,5 @@ Local NVDA supply v5 adds group-only customer financing context and a separately
 The prior financing miss is exposed development evidence, not a new holdout. The next freeze excludes all five previous packets; only three fresh clusters (15 narrative pairs) were available out of 48 requested. Predictions are locked before two separate-context AI reviews. No human labels or broad-market accuracy claim is implied. Future freezes must also exclude this sixth packet.
 
 Next: accumulate a larger unseen sample with named-party positives and ambiguous-name negatives across companies, review entity references before expiry, and evaluate source-scoped disambiguation before introducing a shared entity registry. Continue to distinguish narrative relevance from proven financial effects.
+
+Completed blind follow-up: both AI reviewers agreed on all 15 pairs (12 not relevant, 3 insufficient context). Engine results were 12 true negatives, no resolved positives or selected unresolved cases. Precision and recall remain undefined; this sample cannot establish recall or broad-market quality.

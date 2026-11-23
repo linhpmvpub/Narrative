@@ -1,0 +1,32 @@
+{
+  "at": "2026-11-23T12:10:27.371073+00:00",
+  "packet_sha256": "c3bc71a2b0271ab11edbb6f6557c7c998ca7581d310301feace84af0d8ba82a3",
+  "predictions_sha256": "7448275dbdb40e96116fec5cc62a161316578040611949f0113028abc28e6e9f",
+  "clusters": 3,
+  "pairs": 15,
+  "sampling": "TOPIC_ROUND_ROBIN_NOT_PREDICTION_SELECTED",
+  "excluded_conflicting_or_invalid_clusters": 1,
+  "excluded_prior_exposure": 166,
+  "excluded_near_duplicates": 0,
+  "excluded_age": 47,
+  "max_age_days": 14,
+  "sampling_strata": {
+    "finance": 1,
+    "other": 2
+  },
+  "prior_packet_sha256": [
+    "b7fbdf1ef30d3e628976462dbce5a1b101acf562dcd54e0df0630153266bab0f",
+    "5f59da370e6536e7f80c97464cbd233084afe03c63d25301e58b82d42434deb0",
+    "52ef9f8e145806dfda28842382a867fbb0ee178a50d41cb8556306cbbbcd2507",
+    "3df4d26639a9992487a48adf95cb01972d3317a0b0c5ec48228f7f63b4d3b219",
+    "a43ee80b4a0da57cb65ba6b53ea0ca45789263b8d008cd2d23bab67db8447ec3"
+  ],
+  "requested_clusters": 48,
+  "mode": "DEVELOPMENT_RELEVANCE_AUDIT_NOT_INDEPENDENT_GOLD",
+  "delivery": "disabled",
+  "strata_definitions": {
+    "finance": "\\b(financ\\w*|fund\\w*|loan\\w*|credit|capital|investment|acquisition|acquire)\\b",
+    "policy": "\\b(permit\\w*|regulat\\w*|ban\\w*|tax\\w*|approval|approved|opposition|planning)\\b",
+    "capacity": "\\b(compute|computing|capacity|power|construction|build\\w*|chip\\w*|GPU\\w*|wafer\\w*)\\b"
+  }
+}
