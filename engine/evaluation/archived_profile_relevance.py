@@ -23,12 +23,15 @@ PARTY = re.compile(r"\b(TSMC|Taiwan Semiconductor|GlobalFoundries|OpenAI|Microso
 SCOPE = re.compile(r"\b(affiliate|subsidiar\w*|competitor\w*|customer\w*|supplier\w*)\b", re.I)
 
 
-def text_prediction(bundle, narrative, article, at):
+def text_prediction(bundle, narrative, article, at, *, issuer_cik=None):
     """Shared literal/identity/path primitives only; excludes ingestion and age gates."""
     for binding in bundle.factor_bindings:
+        if binding.narrative_ids and narrative.id not in binding.narrative_ids:
+            continue
         if not binding.enabled or not binding.reviewed_at <= at < binding.review_until:
             continue
-        if not matches(binding, article):
+        if not matches(binding, article, issuer_cik=issuer_cik,
+                       profile_cik=bundle.identifiers.get("CIK")):
             continue
         if binding.entity_reference_id:
             ref = entity_context(bundle, binding.entity_reference_id, article, at)
@@ -41,7 +44,7 @@ def text_prediction(bundle, narrative, article, at):
     return False
 
 
-def select_passages(archive, count):
+def select_passages(archive, count, exclude_packets=()):
     """One excerpt/issuer-period; exclude previous passages and near duplicates."""
     if not 1 <= count <= 100:
         raise ValueError("Choose 1..100 source clusters")
@@ -53,10 +56,21 @@ def select_passages(archive, count):
         if hashlib.sha256((archive / name).read_bytes()).hexdigest() != receipt[key]:
             raise ValueError("Archive receipt mismatch")
     prior = [shingles({"summary": p["text"]}) for c in old["cases"] for p in c["passages"]]
+    excluded_documents = set()
+    for path in exclude_packets:
+        packet = json.loads(path.read_text(encoding="utf-8"))
+        frozen = json.loads(path.with_name("freeze.json").read_text(encoding="utf-8"))
+        if digest(packet) != frozen["packet_sha256"]:
+            raise ValueError("Excluded packet changed")
+        for row in packet:
+            excluded_documents.add(row["archive_source"]["source_sha256"])
+            prior.append(shingles(row["article"]))
     seen = list(prior)
     candidates: dict[str, list] = {"named_party": [], "identity_scope": [], "control": []}
     excluded = 0
     for source in sorted(collection["sources"], key=lambda s: (s["filing_date"], s["ticker"])):
+        if source["source_sha256"] in excluded_documents:
+            continue
         path = (archive / source["file"]).resolve()
         if not path.is_relative_to(archive.resolve()):
             raise ValueError("Source escapes archive")
@@ -100,8 +114,8 @@ def select_passages(archive, count):
     return selected, excluded, digest(collection)
 
 
-def freeze(archive: Path, output: Path, count=24):
-    selected, excluded, collection_sha = select_passages(archive, count)
+def freeze(archive: Path, output: Path, count=24, exclude_packets=()):
+    selected, excluded, collection_sha = select_passages(archive, count, exclude_packets)
     at = datetime.now(UTC)
     registry = available_bundles(at)
     if not registry["enabled"] or registry.get("withheld") or registry.get("truncated"):
@@ -128,7 +142,8 @@ def freeze(archive: Path, output: Path, count=24):
                     "entity_references": [r.model_dump(mode="json") for r in b.entity_references],
                     "relationships": [r.model_dump(mode="json") for r in b.relationships],
                     "nodes": [v.model_dump() for v in b.nodes]})
-                predictions[key] = text_prediction(b, n, row["article"], at)
+                predictions[key] = text_prediction(b, n, row["article"], at,
+                                                   issuer_cik=source.get("cik"))
     if not packet:
         raise ValueError("No narrative pairs")
     current = available_bundles(at)
@@ -142,6 +157,8 @@ def freeze(archive: Path, output: Path, count=24):
     receipt = {"at": at.isoformat(), "track": TRACK, "delivery": "disabled",
         "packet_sha256": digest(packet), "predictions_sha256": digest(predictions),
         "collection_sha256": collection_sha, "clusters": len(selected), "pairs": len(packet),
+        "excluded_packet_sha256": [digest(json.loads(p.read_text(encoding="utf-8")))
+                                   for p in exclude_packets],
         "requested_clusters": count, "excluded_previously_labelled_passages": excluded,
         "sampling_strata": dict(Counter(r["sampling_stratum"] for r in selected)),
         "sampling": "FIXED_PARTY_SCOPE_CONTROL_ROUND_ROBIN_ONE_PER_ISSUER_PERIOD",
@@ -172,6 +189,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--count", type=int, default=24)
     parser.add_argument("--labels", type=Path)
+    parser.add_argument("--exclude-packet", type=Path, action="append", default=[])
     args = parser.parse_args()
     print(json.dumps(evaluate(args.output, args.labels) if args.labels else
-                     freeze(args.archive, args.output, args.count), indent=2))
+                     freeze(args.archive, args.output, args.count, args.exclude_packet), indent=2))

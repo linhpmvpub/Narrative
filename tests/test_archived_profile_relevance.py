@@ -50,6 +50,21 @@ def test_archive_sampling_preserves_text_and_underfill(archive):
     assert rows[0]["sampling_stratum"] == "named_party"
 
 
+def test_excludes_entire_previously_reviewed_document(archive, tmp_path):
+    root, _ = archive
+    source = json.loads((root / "collection.json").read_text())["sources"][0]
+    previous = tmp_path / "previous"
+    previous.mkdir()
+    packet = [{"archive_source": source, "article": {"summary": "Different paragraph"}}]
+    (previous / "packet.json").write_text(json.dumps(packet))
+    (previous / "freeze.json").write_text(json.dumps({"packet_sha256": digest(packet)}))
+    with pytest.raises(ValueError, match="No unused"):
+        select_passages(root, 24, [previous / "packet.json"])
+    (previous / "packet.json").write_text("[]")
+    with pytest.raises(ValueError, match="Excluded packet changed"):
+        select_passages(root, 24, [previous / "packet.json"])
+
+
 @pytest.mark.parametrize("fault", ["source", "receipt", "escape", "future", "exposed"])
 def test_rejects_corruption_clock_escape_and_exposed_text(archive, fault):
     root, text = archive

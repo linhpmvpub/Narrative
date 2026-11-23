@@ -26,9 +26,23 @@ def pattern(term):
     return re.compile(r"(?<!\w)" + re.escape(term) + r"(?!\w)", re.IGNORECASE)
 
 
-def matches(binding, payload):
+def matches(binding, payload, *, issuer_cik=None, profile_cik=None):
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
+    groups = ("topic_terms", "context_terms", "change_terms")
+    if binding.kind == "ISSUER_RELATIONSHIP_DISCLOSURE":
+        # Trusted caller metadata only: never read an issuer identifier from RSS payload.
+        if (not issuer_cik or not profile_cik or not str(issuer_cik).isdigit()
+                or not str(profile_cik).isdigit() or int(issuer_cik) <= 0
+                or int(issuer_cik) != int(profile_cik)):
+            return []
+        text = fields["summary"]
+        if (not text or len(text) > 1600 or re.search(
+                r'["“”]|\b(according to|said|says|competitors?|no longer|not|never|ceased)\b',
+                text, re.I)):
+            return []
+        fields = {"summary": text}
+        groups = ("topic_terms", "context_terms", "disclosure_terms")
     def variants(term):
         return [term, *binding.term_aliases.get(term, [])]
 
@@ -36,7 +50,7 @@ def matches(binding, payload):
            for s in fields.values()):
         return []
     spans = []
-    for group in ("topic_terms", "context_terms", "change_terms"):
+    for group in groups:
         found = None
         for term in getattr(binding, group):
             for variant in variants(term):
@@ -203,6 +217,8 @@ def candidate_feed(conn, as_of=None, limit=500):
                 if not spans:
                     continue
                 for narrative in bundle.narratives:
+                    if binding.narrative_ids and narrative.id not in binding.narrative_ids:
+                        continue
                     entity_routes = []
                     if entity is not None:
                         entity_routes, _ = paths(bundle, SimpleNamespace(anchors=[entity["node_id"]]),

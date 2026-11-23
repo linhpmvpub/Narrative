@@ -605,8 +605,35 @@
               "type": "string"
             },
             "maxItems": 30,
-            "minItems": 1,
             "title": "Change Terms",
+            "type": "array"
+          },
+          "kind": {
+            "default": "ECONOMIC_CHANGE",
+            "enum": [
+              "ECONOMIC_CHANGE",
+              "ISSUER_RELATIONSHIP_DISCLOSURE"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "disclosure_terms": {
+            "items": {
+              "maxLength": 4000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Disclosure Terms",
+            "type": "array"
+          },
+          "narrative_ids": {
+            "items": {
+              "pattern": "^[A-Za-z0-9_.:-]{1,100}$",
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Narrative Ids",
             "type": "array"
           },
           "exclude_terms": {
@@ -688,7 +715,6 @@
           "factor_id",
           "topic_terms",
           "context_terms",
-          "change_terms",
           "scope",
           "reviewed_at",
           "review_until",

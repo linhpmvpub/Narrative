@@ -242,7 +242,10 @@ class FactorBinding(Strict):
     factor_id: ID
     topic_terms: list[TEXT] = Field(min_length=1, max_length=20)
     context_terms: list[TEXT] = Field(min_length=1, max_length=20)
-    change_terms: list[TEXT] = Field(min_length=1, max_length=30)
+    change_terms: list[TEXT] = Field(default_factory=list, max_length=30)
+    kind: Literal["ECONOMIC_CHANGE", "ISSUER_RELATIONSHIP_DISCLOSURE"] = "ECONOMIC_CHANGE"
+    disclosure_terms: list[TEXT] = Field(default_factory=list, max_length=20)
+    narrative_ids: list[ID] = Field(default_factory=list, max_length=20)
     exclude_terms: list[TEXT] = Field(default_factory=list, max_length=20)
     term_aliases: dict[str, list[TEXT]] = Field(default_factory=dict, max_length=40)
     entity_reference_id: ID | None = None
@@ -255,11 +258,21 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
+        if self.kind == "ECONOMIC_CHANGE":
+            if not self.change_terms or self.disclosure_terms:
+                raise ValueError("Economic rule requires changes, not disclosure terms")
+        elif self.change_terms or not self.disclosure_terms or not self.narrative_ids:
+            raise ValueError("Disclosure requires separate terms and explicit narrative scope")
+        if any(not term.casefold().startswith("we ") for term in self.disclosure_terms):
+            raise ValueError("Disclosure must use an explicit issuer first-person phrase")
         if not self.reviewed_at < self.review_until:
             raise ValueError("Binding review window invalid")
         if (self.review_until - self.reviewed_at).total_seconds() > 90 * 86400:
             raise ValueError("Binding must be rechecked within 90 days")
-        terms = [*self.topic_terms, *self.context_terms, *self.change_terms, *self.exclude_terms]
+        terms = [*self.topic_terms, *self.context_terms, *self.change_terms,
+                 *self.disclosure_terms, *self.exclude_terms]
+        if self.term_aliases.keys() & set(self.disclosure_terms):
+            raise ValueError("Disclosure subject phrases cannot be expanded by aliases")
         if not self.term_aliases.keys() <= set(terms):
             raise ValueError("Alias key must be an explicit binding term")
         for key, variants in self.term_aliases.items():
@@ -360,6 +373,8 @@ class ProfileBundle(Strict):
                     sources[e.source_id].retrieved_at > ref.reviewed_at for e in ref.evidence):
                 raise ValueError("Entity reference review must follow acquisition")
         for binding in self.factor_bindings:
+            if not set(binding.narrative_ids) <= {n.id for n in self.narratives}:
+                raise ValueError("Binding references unknown narrative")
             if binding.entity_reference_id is not None:
                 bound_ref = references.get(binding.entity_reference_id)
                 if bound_ref is None or bound_ref.identity_level == "UNRESOLVED_AFFILIATE":
