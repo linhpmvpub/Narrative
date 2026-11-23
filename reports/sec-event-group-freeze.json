@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-23T15:27:32.028442+00:00",
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "delivery": "disabled",
+  "packet_sha256": "aed46cb2b2581c2e66c6dac7c5e5378c4f0e1d841a96a604b6723d87567012de",
+  "predictions_sha256": "f6827ef75468292528271688daf23b59de3decb41264966f52db28e40ee4185c",
+  "collection_sha256": "93f5d810898688fd5ef41dd3ef1094edc40ca189e0d0d47ece77dab43608a229",
+  "clusters": 4,
+  "pairs": 20,
+  "excluded_packet_sha256": [
+    "50d249a1879efb98fb660f7b703b6614e566558913fb8213ef43682cd31a4842",
+    "93091f395690dfbb60e3ae389be2b7c59fcb412842f374ba435a40f7f313a009",
+    "a888c168d80ff41ed8101b0e53ef54581dc8712bb39ea7a5f9d79b27e3c715d5",
+    "c3bc71a2b0271ab11edbb6f6557c7c998ca7581d310301feace84af0d8ba82a3",
+    "df3baedb142c618fa4a7ce58846667e95b3d794458fd5ef21645cae9364d453a",
+    "df3baedb142c618fa4a7ce58846667e95b3d794458fd5ef21645cae9364d453a",
+    "52ef9f8e145806dfda28842382a867fbb0ee178a50d41cb8556306cbbbcd2507",
+    "a43ee80b4a0da57cb65ba6b53ea0ca45789263b8d008cd2d23bab67db8447ec3",
+    "b7fbdf1ef30d3e628976462dbce5a1b101acf562dcd54e0df0630153266bab0f",
+    "5f59da370e6536e7f80c97464cbd233084afe03c63d25301e58b82d42434deb0",
+    "27c074fc94e2c3956f3cfa2095d0407762bb4499f85872ff343d48cba2b977bd",
+    "3df4d26639a9992487a48adf95cb01972d3317a0b0c5ec48228f7f63b4d3b219"
+  ],
+  "requested_clusters": 19,
+  "excluded_previously_labelled_passages": 4,
+  "sampling_strata": {
+    "identity_scope": 3,
+    "control": 1
+  },
+  "sampling": "ONE_PER_CITED_EVENT_GROUP_FIXED_PARTY_SCOPE_CONTROL_PRIORITY",
+  "strict_production_replay_eligible": false,
+  "independent_gold": false,
+  "limitations": [
+    "Source-reviewed documents are exposed, not a pristine holdout",
+    "Current profiles and present captures, not point-in-time replay",
+    "External-context families withheld, not negative labels",
+    "Prior issuer-period/source/text exclusions cover supplied packets only",
+    "Non-earnings accessions remain separate; semantic cross-accession dedup incomplete",
+    "Relevance only, not financial impact, source truth or production approval"
+  ],
+  "event_grouping_sha256": "93b4cc6f0f4358dd757ec0980c8d6ac7c5fb917a67358460e0c76ca712f239b1",
+  "grouping_report": {
+    "families": 19,
+    "disposition": {
+      "SELECTED_TEXT_ONLY": 4,
+      "EXTERNAL_CONTEXT_HELD": 11,
+      "PREVIOUS_ECONOMIC_PERIOD": 4
+    },
+    "selected": 4,
+    "delivery": "disabled",
+    "ingested": false
+  },
+  "source_review_sha256": [
+    "15e8fa19d599d6770c260c89879a74cdad704055c1abcfe636c8d8479d55efbb",
+    "b1448b6d9117baf20c178462f25830cee07f60667dd8c0329315c4979f69838a"
+  ]
+}

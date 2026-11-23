@@ -1,0 +1,115 @@
+{
+  "tp": 0,
+  "fp": 0,
+  "tn": 10,
+  "fn": 3,
+  "unresolved": 7,
+  "clusters": 4,
+  "pairs": 20,
+  "selected_unresolved": 0,
+  "resolved_fraction": 0.65,
+  "by_narrative": {
+    "amd-supply-2026:foundry-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 3,
+      "fn": 0,
+      "unresolved": 1,
+      "precision": null,
+      "recall": null
+    },
+    "amd-supply-2026:rack-deployment": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0,
+      "unresolved": 2,
+      "precision": null,
+      "recall": null
+    },
+    "mu-supply-2026:memory-supply": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 1,
+      "unresolved": 1,
+      "precision": null,
+      "recall": 0.0
+    },
+    "nvda-supply-2026:supply-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 1,
+      "fn": 1,
+      "unresolved": 2,
+      "precision": null,
+      "recall": 0.0
+    },
+    "nvda-supply-2026:customer-buildout": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 1,
+      "unresolved": 1,
+      "precision": null,
+      "recall": 0.0
+    }
+  },
+  "precision": null,
+  "recall": 0.0,
+  "reference_kind": "AI_CONSENSUS_REVIEW",
+  "independent_gold": false,
+  "packet_sha256": "aed46cb2b2581c2e66c6dac7c5e5378c4f0e1d841a96a604b6723d87567012de",
+  "labels_sha256": "30aa5c0ef66c025ef3857efacd5977f6706008200a82f7470a202904c01898d2",
+  "delivery": "disabled",
+  "limitations": [
+    "Source-reviewed documents are exposed, not a pristine holdout",
+    "Current profiles and present captures, not point-in-time replay",
+    "External-context families withheld, not negative labels",
+    "Prior issuer-period/source/text exclusions cover supplied packets only",
+    "Non-earnings accessions remain separate; semantic cross-accession dedup incomplete",
+    "Relevance only, not financial impact, source truth or production approval",
+    "AI consensus is not human gold; unresolved labels excluded from precision/recall",
+    "Only four event groups; source audit sufficiency does not guarantee excerpt-level narrative context"
+  ],
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "strict_production_replay_eligible": false,
+  "by_topic_stratum": {
+    "finance": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 5,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "other": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 3,
+      "fn": 2,
+      "unresolved": 5,
+      "precision": null,
+      "recall": 0.0
+    },
+    "policy": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 1,
+      "unresolved": 2,
+      "precision": null,
+      "recall": 0.0
+    }
+  },
+  "disagreements": 0,
+  "miss_diagnostics": {
+    "reviewed_positive_pairs": 3,
+    "distinct_positive_excerpts": 2,
+    "literal_binding_matches": 0,
+    "routing_withheld": 0,
+    "profile_hashes_equal_frozen": true,
+    "post_label_tuning": false
+  }
+}
