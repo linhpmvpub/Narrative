@@ -1,0 +1,14 @@
+{
+  "tp": 2,
+  "fp": 0,
+  "tn": 10,
+  "fn": 1,
+  "unresolved": 7,
+  "selected_unresolved": 0,
+  "track": "POST_LABEL_DEVELOPMENT_ONLY",
+  "pairs": 20,
+  "original_packet_sha256": "aed46cb2b2581c2e66c6dac7c5e5378c4f0e1d841a96a604b6723d87567012de",
+  "production_profiles_modified": false,
+  "independent_validation": false,
+  "delivery": "disabled"
+}

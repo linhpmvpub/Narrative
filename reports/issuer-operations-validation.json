@@ -1,0 +1,32 @@
+{
+  "focused": {
+    "tests": "92",
+    "failures": "0",
+    "errors": "0",
+    "time": "3.114"
+  },
+  "lint": "passed",
+  "mypy_files": 109,
+  "code_commit": "0c4ee2d",
+  "ci": {
+    "run_id": 45297038114,
+    "conclusion": "success",
+    "sqlite": {
+      "passed": 740,
+      "seconds": 107.61
+    },
+    "postgresql": {
+      "passed": 740,
+      "seconds": 204.31
+    },
+    "dependency_audit": "passed",
+    "migration_demo_replay_downgrade": "passed"
+  },
+  "production_profiles_modified": false,
+  "delivery": "disabled",
+  "active_profile_versions_verified": {
+    "NVDA": 8,
+    "MU": 2
+  },
+  "original_freeze_hashes_unchanged": true
+}
