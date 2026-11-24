@@ -16,7 +16,8 @@ def vocabulary(dossier):
     raw = ("<p>" + text + "</p>").encode()
     (root / "operations.html").write_bytes(raw)
     data["sources"].append({**data["sources"][0], "id": "ops", "file": "operations.html",
-                            "sha256": hashlib.sha256(raw).hexdigest()})
+                            "sha256": hashlib.sha256(raw).hexdigest(),
+                            "url": "https://www.sec.gov/Archives/edgar/data/123/000000012326000001/test.htm"})
     data["identifiers"] = {"CIK": "123"}
     data["factor_bindings"] = [{"id": "ops", "factor_id": "p",
         "kind": "ISSUER_OPERATING_CONTEXT", "topic_terms": ["example systems"],
@@ -76,3 +77,16 @@ def test_corrupt_source_and_unknown_selection_fail_closed(vocabulary):
     (root / "operations.html").write_text("corruption")
     with pytest.raises(ValueError, match="Source version"):
         audit_vocabulary(root, bundle, ["ops"])
+
+
+@pytest.mark.parametrize("url", [
+    "https://www.sec.gov/Archives/edgar/data/456/000000012326000001/test.htm",
+    "https://example.test/Archives/edgar/data/123/000000012326000001/test.htm",
+    "https://www.sec.gov/Archives/edgar/data/123/000000012326000001/test.htm?other=1",
+    "https://www.sec.gov/Archives/edgar/data/123/000000012326000001/../test.htm",
+])
+def test_other_issuer_or_untrusted_source_cannot_support_terms(vocabulary, url):
+    root, data = vocabulary
+    data["sources"][-1]["url"] = url
+    with pytest.raises(ValueError, match="same-issuer SEC"):
+        audit_vocabulary(root, ProfileBundle.model_validate(data), ["ops"])
