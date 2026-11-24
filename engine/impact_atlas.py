@@ -134,13 +134,13 @@ def coverage(data):
 
 
 class FactEvidence(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
     source_id: str
     quote: str = Field(min_length=1, max_length=4000)
 
 
 class ExposureFact(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
     id: str = Field(min_length=1, max_length=100)
     version: int = Field(ge=1)
     relation_id: str
@@ -302,7 +302,7 @@ def read_snapshot(root):
 
 
 class Scenario(BaseModel):
-    model_config = ConfigDict(extra="forbid", strict=True)
+    model_config = ConfigDict(extra="forbid", strict=True, str_strip_whitespace=True)
     mechanism_id: str
     factor_id: str
     direction: Literal["UP", "DOWN"]

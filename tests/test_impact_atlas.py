@@ -100,7 +100,7 @@ def test_reviewed_facts_persist_with_evidence_and_overlap_rejected(dossier, tmp_
         assert db.execute('select count(*) from fact_evidence').fetchone()[0] == 1
 
 
-@pytest.mark.parametrize('fault', ['quote','source','future','unit','value'])
+@pytest.mark.parametrize('fault', ['quote','source','future','unit','value','reviewer'])
 def test_invalid_exposure_facts_fail_closed(dossier, fault):
     root, _ = dossier
     f = fact(dossier)
@@ -110,6 +110,8 @@ def test_invalid_exposure_facts_fail_closed(dossier, fault):
         f['evidence'][0]['source_id'] = 'other/s'
     elif fault == 'future':
         f['reviewed_at'] = (datetime.now(UTC)+timedelta(days=1)).isoformat()
+    elif fault == 'reviewer':
+        f['reviewer_id'] = '   '
     elif fault == 'unit':
         f['unit'] = 'days'
     else:
@@ -131,9 +133,10 @@ def test_horizon_and_dimensions_validate_without_defaults(dossier):
 def test_html_embedded_source_text_cannot_execute(dossier, tmp_path):
     root, _ = dossier
     data = snapshot(root.parent)
-    data['nodes'][0]['label'] = '</script><script>alert(1)</script>'
+    data['nodes'][0]['label'] = '</script><script>alert(1)</script> __SCRIPT__'
     install(data, tmp_path/'escape')
     html = (tmp_path/'escape/index.html').read_text(encoding='utf-8')
     assert '</script><script>alert(1)' not in html
+    assert '__SCRIPT__' in html
     assert "connect-src 'none'" in html
     assert json.loads((tmp_path/'escape/atlas.json').read_text(encoding='utf-8'))['nodes'][0]['label'].startswith('</script>')

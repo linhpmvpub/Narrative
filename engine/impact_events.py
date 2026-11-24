@@ -13,7 +13,7 @@ from engine.ingestion.contracts import digest
 
 
 class EventFrame(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
     id: str = Field(min_length=1, max_length=100)
     version: int = Field(ge=1)
     mechanism_id: str
