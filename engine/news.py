@@ -33,11 +33,14 @@ def register(engine, configs):
     if len({c["id"] for c in configs}) != len(configs):
         raise ValueError("Duplicate source ID")
     for c in configs:
-        if not re.fullmatch(r"[a-z0-9_-]{1,60}", c["id"]) or c["kind"] not in {"rss", "x"}:
+        if not re.fullmatch(r"[a-z0-9_-]{1,60}", c["id"]) or c["kind"] not in {"rss", "x", "sec_submissions"}:
             raise ValueError("Invalid source")
         if not 60 <= c["interval_seconds"] <= 86400:
             raise ValueError("Poll interval outside limits")
-        if c["kind"] == "rss":
+        if c["kind"] == "sec_submissions":
+            from engine.market_sources import validate_sec_source
+            validate_sec_source(c)
+        elif c["kind"] == "rss":
             if not canonical_url(c["url"]).startswith("https://"):
                 raise ValueError("RSS transport requires HTTPS")
         elif not re.fullmatch(r"[A-Za-z0-9_]{1,15}", c["handle"]):
@@ -60,11 +63,14 @@ def register(engine, configs):
                 )
             else:
                 # Changing identity under a durable cursor would lose/reassign posts.
-                key = "url" if old["config"]["kind"] == "rss" else "handle"
+                key = "handle" if old["config"]["kind"] == "x" else "url"
                 if old["config"]["kind"] != config["kind"] or old["config"].get(key) != config.get(
                     key
                 ):
                     raise ValueError("Source identity changed; use a new source ID")
+                if config["kind"] == "sec_submissions" and any(
+                        old["config"].get(k) != config.get(k) for k in ("ticker", "cik")):
+                    raise ValueError("SEC source identity changed")
                 conn.execute(
                     update(sources).where(sources.c.id == config["id"]).values(config=config)
                 )
@@ -145,20 +151,29 @@ def save_rows(conn, source, rows, capture_hash, now):
     return counts
 
 
-def poll(engine, client, *, now=None):
+def poll(engine, client, *, now=None, source_ids=None, max_sources=100):
     Settings.from_env()
+    if not 1 <= max_sources <= 100:
+        raise ValueError("Bounded source budget required")
     explicit_now = now
     now = now or datetime.now(UTC)
     with engine.connect() as conn:
-        configs = conn.execute(select(sources)).mappings().all()
+        query = select(sources).order_by(sources.c.next_poll_at, sources.c.id)
+        if source_ids is not None:
+            query = query.where(sources.c.id.in_(source_ids))
+        configs = conn.execute(query).mappings().all()
     results = []
+    attempted = 0
     for config in configs:
+        if attempted >= max_sources:
+            break
         now = explicit_now or datetime.now(UTC)
         if not config["config"]["enabled"]:
             continue
         source = claim(engine, config["id"], now)
         if not source:
             continue
+        attempted += 1
         try:
             rows, state, sha, status, rejected = client.fetch(
                 source["config"], source["state"], now

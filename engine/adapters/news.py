@@ -75,7 +75,16 @@ def published(value, now):
 
 
 def parse_feed(body, now):
-    decoded = body.decode("utf-8-sig")
+    # Honor a bounded set of XML encodings, then scan decoded text so UTF-16
+    # cannot hide a DTD/entity declaration behind NUL bytes.
+    if body.startswith((b"\xff\xfe", b"\xfe\xff")):
+        decoded = body.decode("utf-16")
+    else:
+        declaration = re.match(rb"\s*<\?xml[^>]*encoding=[\"\']([^\"\']+)[\"\']", body[:200], re.I)
+        encoding = declaration.group(1).decode("ascii").lower() if declaration else "utf-8-sig"
+        if encoding not in {"utf-8", "utf-8-sig", "iso-8859-1", "windows-1252", "us-ascii"}:
+            raise ValueError("Unsupported XML encoding")
+        decoded = body.decode(encoding)
     if "<!DOCTYPE" in decoded.upper() or "<!ENTITY" in decoded.upper():
         raise ValueError("DTD/entities forbidden")
     try:

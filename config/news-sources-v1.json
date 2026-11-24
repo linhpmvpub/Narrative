@@ -1,0 +1,315 @@
+[
+  {
+    "id": "cnbc_markets",
+    "name": "CNBC Markets",
+    "kind": "rss",
+    "category": "markets",
+    "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+    "interval_seconds": 120,
+    "enabled": true,
+    "discovery_only": true
+  },
+  {
+    "id": "cnbc_world",
+    "name": "CNBC World",
+    "kind": "rss",
+    "category": "global",
+    "url": "https://www.cnbc.com/id/100727362/device/rss/rss.html",
+    "interval_seconds": 120,
+    "enabled": true,
+    "discovery_only": true
+  },
+  {
+    "id": "cnbc_technology",
+    "name": "CNBC Technology",
+    "kind": "rss",
+    "category": "technology",
+    "url": "https://www.cnbc.com/id/19854910/device/rss/rss.html",
+    "interval_seconds": 180,
+    "enabled": true,
+    "discovery_only": true
+  },
+  {
+    "id": "marketwatch",
+    "name": "MarketWatch",
+    "kind": "rss",
+    "category": "markets",
+    "url": "https://feeds.content.dowjones.io/public/rss/mw_topstories",
+    "interval_seconds": 120,
+    "enabled": true,
+    "discovery_only": true
+  },
+  {
+    "id": "fed",
+    "name": "Federal Reserve",
+    "kind": "rss",
+    "category": "macro",
+    "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+    "interval_seconds": 300,
+    "enabled": true,
+    "discovery_only": true
+  },
+  {
+    "id": "ecb",
+    "name": "European Central Bank",
+    "kind": "rss",
+    "category": "macro",
+    "url": "https://www.ecb.europa.eu/rss/press.html",
+    "interval_seconds": 300,
+    "enabled": true,
+    "discovery_only": true
+  },
+  {
+    "id": "x_reuters",
+    "name": "Reuters on X",
+    "kind": "x",
+    "category": "markets",
+    "handle": "Reuters",
+    "interval_seconds": 300,
+    "enabled": false,
+    "discovery_only": true
+  },
+  {
+    "id": "x_business",
+    "name": "Bloomberg on X",
+    "kind": "x",
+    "category": "markets",
+    "handle": "business",
+    "interval_seconds": 300,
+    "enabled": false,
+    "discovery_only": true
+  },
+  {
+    "id": "x_cnbc",
+    "name": "CNBC on X",
+    "kind": "x",
+    "category": "markets",
+    "handle": "CNBC",
+    "interval_seconds": 300,
+    "enabled": false,
+    "discovery_only": true
+  },
+  {
+    "id": "x_yahoofinance",
+    "name": "Yahoo Finance on X",
+    "kind": "x",
+    "category": "markets",
+    "handle": "YahooFinance",
+    "interval_seconds": 300,
+    "enabled": false,
+    "discovery_only": true
+  },
+  {
+    "id": "dcd",
+    "name": "DatacenterDynamics",
+    "kind": "rss",
+    "category": "data_center_infrastructure",
+    "url": "https://www.datacenterdynamics.com/en/rss/",
+    "interval_seconds": 600,
+    "enabled": true,
+    "discovery_only": true
+  },
+  {
+    "id": "dck",
+    "name": "Data Center Knowledge",
+    "kind": "rss",
+    "category": "data_center_infrastructure",
+    "url": "https://www.datacenterknowledge.com/rss.xml",
+    "interval_seconds": 600,
+    "enabled": true,
+    "discovery_only": true
+  },
+  {
+    "id": "nvidia_ir",
+    "name": "NVIDIA Newsroom",
+    "url": "https://nvidianews.nvidia.com/releases.xml",
+    "kind": "rss",
+    "category": "company",
+    "interval_seconds": 300,
+    "enabled": true,
+    "families": [
+      "products",
+      "supply_chain",
+      "demand"
+    ],
+    "discovery_reference": "https://nvidianews.nvidia.com/rss",
+    "discovery_only": true
+  },
+  {
+    "id": "amd_ir_v2",
+    "name": "AMD Investor Relations",
+    "url": "https://ir.amd.com/news-events/press-releases/rss",
+    "kind": "rss",
+    "category": "company",
+    "interval_seconds": 300,
+    "enabled": true,
+    "families": [
+      "products",
+      "finance",
+      "demand"
+    ],
+    "discovery_reference": "https://ir.amd.com/sitemap",
+    "discovery_only": true
+  },
+  {
+    "id": "sk_hynix",
+    "name": "SK hynix Newsroom",
+    "url": "https://news.skhynix.com/en/feed/",
+    "kind": "rss",
+    "category": "memory_industry",
+    "interval_seconds": 600,
+    "enabled": true,
+    "families": [
+      "products",
+      "supply_chain",
+      "demand"
+    ],
+    "discovery_reference": "https://news.skhynix.com/en/",
+    "discovery_only": true
+  },
+  {
+    "id": "eia_energy",
+    "name": "EIA Today in Energy",
+    "url": "https://www.eia.gov/rss/todayinenergy.xml",
+    "kind": "rss",
+    "category": "energy",
+    "interval_seconds": 900,
+    "enabled": true,
+    "families": [
+      "input_costs",
+      "infrastructure"
+    ],
+    "discovery_reference": "https://www.eia.gov/tools/rssfeeds/",
+    "discovery_only": true
+  },
+  {
+    "id": "usgs_quakes",
+    "name": "USGS Earthquakes",
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.atom",
+    "kind": "rss",
+    "category": "hazards",
+    "interval_seconds": 300,
+    "enabled": true,
+    "families": [
+      "infrastructure"
+    ],
+    "discovery_reference": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/atom.php",
+    "discovery_only": true
+  },
+  {
+    "id": "sec_nvda",
+    "name": "NVDA SEC filings",
+    "kind": "sec_submissions",
+    "ticker": "NVDA",
+    "cik": "0001045810",
+    "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+    "category": "official_filings",
+    "interval_seconds": 300,
+    "lookback_days": 30,
+    "enabled": true,
+    "families": [
+      "finance",
+      "products",
+      "supply_chain",
+      "policy"
+    ],
+    "discovery_reference": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+    "discovery_only": true
+  },
+  {
+    "id": "sec_amd",
+    "name": "AMD SEC filings",
+    "kind": "sec_submissions",
+    "ticker": "AMD",
+    "cik": "0000002488",
+    "url": "https://data.sec.gov/submissions/CIK0000002488.json",
+    "category": "official_filings",
+    "interval_seconds": 300,
+    "lookback_days": 30,
+    "enabled": true,
+    "families": [
+      "finance",
+      "products",
+      "supply_chain",
+      "policy"
+    ],
+    "discovery_reference": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+    "discovery_only": true
+  },
+  {
+    "id": "sec_mu",
+    "name": "MU SEC filings",
+    "kind": "sec_submissions",
+    "ticker": "MU",
+    "cik": "0000723125",
+    "url": "https://data.sec.gov/submissions/CIK0000723125.json",
+    "category": "official_filings",
+    "interval_seconds": 300,
+    "lookback_days": 30,
+    "enabled": true,
+    "families": [
+      "finance",
+      "products",
+      "supply_chain",
+      "policy"
+    ],
+    "discovery_reference": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+    "discovery_only": true
+  },
+  {
+    "id": "sec_dell",
+    "name": "DELL SEC filings",
+    "kind": "sec_submissions",
+    "ticker": "DELL",
+    "cik": "0001571996",
+    "url": "https://data.sec.gov/submissions/CIK0001571996.json",
+    "category": "official_filings",
+    "interval_seconds": 300,
+    "lookback_days": 30,
+    "enabled": true,
+    "families": [
+      "finance",
+      "products",
+      "supply_chain",
+      "policy"
+    ],
+    "discovery_reference": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+    "discovery_only": true
+  },
+  {
+    "id": "sec_sndk",
+    "name": "SNDK SEC filings",
+    "kind": "sec_submissions",
+    "ticker": "SNDK",
+    "cik": "0002023554",
+    "url": "https://data.sec.gov/submissions/CIK0002023554.json",
+    "category": "official_filings",
+    "interval_seconds": 300,
+    "lookback_days": 30,
+    "enabled": true,
+    "families": [
+      "finance",
+      "products",
+      "supply_chain",
+      "policy"
+    ],
+    "discovery_reference": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+    "discovery_only": true
+  },
+  {
+    "id": "amd_ir",
+    "name": "AMD Investor Relations",
+    "url": "https://ir.amd.com/rss-news-feed",
+    "kind": "rss",
+    "category": "company",
+    "interval_seconds": 300,
+    "enabled": false,
+    "families": [
+      "products",
+      "finance",
+      "demand"
+    ],
+    "discovery_reference": "https://ir.amd.com/sitemap",
+    "discovery_only": true
+  }
+]

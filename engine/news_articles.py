@@ -18,6 +18,11 @@ from engine.models.schema_v13 import news_revisions
 from engine.news_capture import archive_capture, read_capture
 
 HOSTS = {
+    "www.sec.gov",
+    "news.skhynix.com",
+    "www.eia.gov",
+    "www.datacenterdynamics.com",
+    "www.datacenterknowledge.com",
     "www.cnbc.com",
     "www.marketwatch.com",
     "www.federalreserve.gov",

@@ -1,0 +1,157 @@
+{
+  "version": "product-v1-acceptance-1",
+  "tickers": [
+    "MU",
+    "NVDA",
+    "AMD",
+    "DELL",
+    "SNDK"
+  ],
+  "purpose": "Informational relevance and evidence paths, never price prediction",
+  "narrative_families": [
+    "products",
+    "supply_chain",
+    "demand",
+    "input_costs",
+    "finance",
+    "policy",
+    "infrastructure"
+  ],
+  "required_profile_components": [
+    "identity",
+    "products",
+    "segments",
+    "suppliers",
+    "customers",
+    "financials",
+    "regulation",
+    "capacity",
+    "markets",
+    "resilience"
+  ],
+  "event_types": [
+    "shipments",
+    "capacity",
+    "demand",
+    "input_prices",
+    "funding",
+    "regulation",
+    "disruption",
+    "earnings",
+    "correction",
+    "insider"
+  ],
+  "quality_targets": {
+    "min_event_clusters": 100,
+    "min_resolved_positive_pairs": 40,
+    "min_resolved_negative_pairs": 80,
+    "min_clusters_per_target": 10,
+    "min_strata": 5,
+    "max_unresolved_fraction": 0.2,
+    "min_precision": 0.85,
+    "min_precision_wilson_lower": 0.75,
+    "min_recall": 0.7
+  },
+  "operations_targets": {
+    "min_observation_days": 7,
+    "min_success_fraction": 0.95,
+    "max_source_stale_fraction": 0.1,
+    "max_feed_poll_interval_seconds": 900
+  },
+  "release_constraints": {
+    "live_notifications": false,
+    "cloud_data": false,
+    "source_claims_are_facts": false,
+    "human_validation_required_for_public_launch": true
+  },
+  "family_terms": {
+    "products": [
+      "processor",
+      "accelerator",
+      "GPU",
+      "CPU",
+      "DRAM",
+      "NAND",
+      "HBM",
+      "SSD",
+      "server",
+      "shipments"
+    ],
+    "supply_chain": [
+      "foundry",
+      "wafer",
+      "packaging",
+      "CoWoS",
+      "supplier",
+      "TSMC",
+      "GlobalFoundries",
+      "SK hynix",
+      "Samsung"
+    ],
+    "demand": [
+      "orders",
+      "backlog",
+      "hyperscaler",
+      "AI infrastructure",
+      "data center",
+      "cloud spending"
+    ],
+    "input_costs": [
+      "memory prices",
+      "DRAM prices",
+      "NAND prices",
+      "silicon wafer",
+      "electricity prices",
+      "natural gas",
+      "copper"
+    ],
+    "finance": [
+      "financing",
+      "capital expenditure",
+      "capex",
+      "credit facility",
+      "debt",
+      "earnings",
+      "revenue",
+      "margin"
+    ],
+    "policy": [
+      "export controls",
+      "export license",
+      "tariff",
+      "sanctions",
+      "permit",
+      "antitrust"
+    ],
+    "infrastructure": [
+      "power grid",
+      "electricity",
+      "cooling",
+      "water shortage",
+      "earthquake",
+      "flood",
+      "typhoon",
+      "port closure",
+      "outage"
+    ]
+  },
+  "company_names": {
+    "MU": [
+      "Micron",
+      "Micron Technology"
+    ],
+    "NVDA": [
+      "NVIDIA"
+    ],
+    "AMD": [
+      "Advanced Micro Devices"
+    ],
+    "DELL": [
+      "Dell",
+      "Dell Technologies"
+    ],
+    "SNDK": [
+      "Sandisk"
+    ]
+  }
+}
