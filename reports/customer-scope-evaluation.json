@@ -1,0 +1,352 @@
+{
+  "schema": "CUSTOMER_PROFILE_AND_SCOPE_EVALUATION_V1",
+  "code_commit": "cd19809f72c65d356a5c02b0331a103b4d9cb84d",
+  "local_research_versions": {
+    "DELL": 3,
+    "SNDK": 2,
+    "NVDA": 11
+  },
+  "active_server_profiles_changed": false,
+  "dell_sndk_component_gate": [
+    {
+      "ticker": "DELL",
+      "ready": true,
+      "sourced_driver_areas": 5,
+      "missing_components": []
+    },
+    {
+      "ticker": "SNDK",
+      "ready": true,
+      "sourced_driver_areas": 6,
+      "missing_components": []
+    }
+  ],
+  "cohorts": [
+    {
+      "name": "customer-scope",
+      "prediction_track": "feed",
+      "at": "2026-11-24T05:08:47.745769+00:00",
+      "packet_sha256": "b0d7c80b9718a93d3da13a842f4d77397d72c4d1b4e6f5447f98cc4d47b00750",
+      "predictions_sha256": "cd2f33386a40915586b7ac89a3f4910bf28c25f85f6c6cfd79b446384fd50543",
+      "feed_predictions_sha256": null,
+      "disagreements": 30,
+      "clusters": 38,
+      "pairs": 342,
+      "tp": 1,
+      "fp": 0,
+      "tn": 285,
+      "fn": 4,
+      "unresolved": 52,
+      "selected_unresolved": 0,
+      "precision": 1.0,
+      "recall": 0.2
+    },
+    {
+      "name": "customer-scope-postfix",
+      "prediction_track": "feed",
+      "at": "2026-11-24T05:16:52.374960+00:00",
+      "packet_sha256": "97c4304d2fe61cc0099d59c5d46d80f644983ccbbe775f6dbe9d5bd94132c053",
+      "predictions_sha256": "707229e8ae26894e4effaab5c3d5603c75cf11ee6bd2e3ba379906504bc0d30d",
+      "feed_predictions_sha256": null,
+      "disagreements": 18,
+      "clusters": 25,
+      "pairs": 225,
+      "tp": 0,
+      "fp": 0,
+      "tn": 169,
+      "fn": 16,
+      "unresolved": 40,
+      "selected_unresolved": 0,
+      "precision": null,
+      "recall": 0.0
+    },
+    {
+      "name": "customer-sector",
+      "prediction_track": "feed",
+      "at": "2026-11-24T05:23:40.797078+00:00",
+      "packet_sha256": "be42fc5abd511ba5a12f8aa99b8eac9c0687bab0c388aa7e93b048c6a974f04a",
+      "predictions_sha256": "bb6c4ca52444530799e4fcf73f4cb93776193b3b9ebdc69d9f3eb9eea7750e2c",
+      "feed_predictions_sha256": null,
+      "disagreements": 15,
+      "clusters": 18,
+      "pairs": 162,
+      "tp": 2,
+      "fp": 0,
+      "tn": 118,
+      "fn": 14,
+      "unresolved": 28,
+      "selected_unresolved": 0,
+      "precision": 1.0,
+      "recall": 0.125
+    },
+    {
+      "name": "customer-text",
+      "prediction_track": "text_relevance",
+      "at": "2026-11-24T05:32:49.646619+00:00",
+      "packet_sha256": "6d4efbbf68879ebf83aa05fa8409e139e597c9df0fe87e0d09b9274cd88dd605",
+      "predictions_sha256": "96c21e770707586f8c4113afbd9b00ae8b09eb700ef4043b3870ee25601343a4",
+      "feed_predictions_sha256": "a7af96addeba771e3b6c1df4db9b879289867a8e20cddd710f0947545e9202d0",
+      "disagreements": 23,
+      "clusters": 40,
+      "pairs": 360,
+      "tp": 9,
+      "fp": 2,
+      "tn": 283,
+      "fn": 28,
+      "unresolved": 38,
+      "selected_unresolved": 0,
+      "precision": 0.8181818181818182,
+      "recall": 0.24324324324324326
+    }
+  ],
+  "quality_checks": {
+    "feed_prediction_track": false,
+    "article_clusters": false,
+    "positive_pairs": false,
+    "negative_pairs": true,
+    "all_target_companies": false,
+    "strata": false,
+    "unresolved": true,
+    "precision": false,
+    "precision_lower_bound": false,
+    "recall": false,
+    "independent_event_cluster_audit": false
+  },
+  "precision_wilson_lower": 0.523019438039156,
+  "cohorts_not_pooled": true,
+  "reference_kind": "AI_CONSENSUS_REVIEW_NOT_HUMAN_GOLD",
+  "scope": "Current-profile relevance, no historical as-of or financial impact validation",
+  "age_audit": [
+    {
+      "cohort": "customer-scope-blind-2026-11-24",
+      "frozen_packet_sha256": "b0d7c80b9718a93d3da13a842f4d77397d72c4d1b4e6f5447f98cc4d47b00750",
+      "article_capture_matches_verified": 38,
+      "age_diagnostics": {
+        "within_age_window": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 224,
+          "fn": 4,
+          "unresolved": 41
+        },
+        "outside_age_window": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 61,
+          "fn": 0,
+          "unresolved": 11
+        }
+      },
+      "basis": "Post-hoc diagnostics against exact frozen profile hashes; does not replace full frozen metrics or constitute independent validation"
+    },
+    {
+      "cohort": "customer-scope-postfix-blind-2026-11-24",
+      "frozen_packet_sha256": "97c4304d2fe61cc0099d59c5d46d80f644983ccbbe775f6dbe9d5bd94132c053",
+      "article_capture_matches_verified": 25,
+      "age_diagnostics": {
+        "within_age_window": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 169,
+          "fn": 16,
+          "unresolved": 40
+        },
+        "outside_age_window": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0,
+          "unresolved": 0
+        }
+      },
+      "basis": "Post-hoc diagnostics against exact frozen profile hashes; does not replace full frozen metrics or constitute independent validation"
+    },
+    {
+      "cohort": "customer-sector-blind-2026-11-24",
+      "frozen_packet_sha256": "be42fc5abd511ba5a12f8aa99b8eac9c0687bab0c388aa7e93b048c6a974f04a",
+      "article_capture_matches_verified": 18,
+      "age_diagnostics": {
+        "within_age_window": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 7,
+          "fn": 0,
+          "unresolved": 0
+        },
+        "outside_age_window": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 111,
+          "fn": 14,
+          "unresolved": 28
+        }
+      },
+      "basis": "Post-hoc diagnostics against exact frozen profile hashes; does not replace full frozen metrics or constitute independent validation"
+    },
+    {
+      "cohort": "customer-text-blind-2026-11-24",
+      "frozen_packet_sha256": "6d4efbbf68879ebf83aa05fa8409e139e597c9df0fe87e0d09b9274cd88dd605",
+      "article_capture_matches_verified": 40,
+      "age_diagnostics": {
+        "within_age_window": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0,
+          "unresolved": 0
+        },
+        "outside_age_window": {
+          "tp": 9,
+          "fp": 2,
+          "tn": 283,
+          "fn": 28,
+          "unresolved": 38
+        }
+      },
+      "basis": "Post-hoc diagnostics against exact frozen profile hashes; does not replace full frozen metrics or constitute independent validation"
+    }
+  ],
+  "development_replay_not_validation": [
+    {
+      "cohort": "product-v1-blind-2026-11-24",
+      "packet_sha256": "d10eee8a69d1c1f05168ba71dcc427696634187e9c2b5bba29491c75f93f7654",
+      "counts": {
+        "tp": 3,
+        "fp": 0,
+        "tn": 423,
+        "fn": 3,
+        "unresolved": 71
+      },
+      "mode": "EXPOSED_DEVELOPMENT_REPLAY_NOT_VALIDATION"
+    },
+    {
+      "cohort": "customer-scope-blind-2026-11-24",
+      "packet_sha256": "b0d7c80b9718a93d3da13a842f4d77397d72c4d1b4e6f5447f98cc4d47b00750",
+      "counts": {
+        "tp": 4,
+        "fp": 0,
+        "tn": 285,
+        "fn": 1,
+        "unresolved": 52
+      },
+      "mode": "EXPOSED_DEVELOPMENT_REPLAY_NOT_VALIDATION"
+    },
+    {
+      "cohort": "customer-scope-postfix-blind-2026-11-24",
+      "packet_sha256": "97c4304d2fe61cc0099d59c5d46d80f644983ccbbe775f6dbe9d5bd94132c053",
+      "counts": {
+        "tp": 10,
+        "fp": 1,
+        "tn": 168,
+        "fn": 6,
+        "unresolved": 40
+      },
+      "mode": "EXPOSED_DEVELOPMENT_REPLAY_NOT_VALIDATION"
+    }
+  ],
+  "local_preview_related_cards": 38,
+  "release_ready": false,
+  "delivery": "disabled",
+  "cloud_data": false,
+  "remaining": [
+    "Improve scoped industry/counterparty/product interpretation for Dell and AMD",
+    "Add independently labeled positive cases for SNDK",
+    "Use full-text evidence where short RSS excerpts are insufficient",
+    "Evaluate relevance and delivery eligibility separately on larger fresh cohorts before activation"
+  ],
+  "validation": {
+    "ci_run_id": 45334263103,
+    "code_commit": "cd19809f72c65d356a5c02b0331a103b4d9cb84d",
+    "sqlite_tests_passed": 830,
+    "sqlite_seconds": 125.29,
+    "postgresql_tests_passed": 830,
+    "postgresql_seconds": 231.84,
+    "ruff": "passed",
+    "mypy_files": 117,
+    "dependency_audit": "passed",
+    "migration_demo_replay_downgrade": "passed"
+  },
+  "final_text_by_narrative": {
+    "amd-supply-2026:foundry-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 36,
+      "fn": 0,
+      "unresolved": 4,
+      "precision": null,
+      "recall": null
+    },
+    "amd-supply-2026:rack-deployment": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 25,
+      "fn": 8,
+      "unresolved": 7,
+      "precision": null,
+      "recall": 0.0
+    },
+    "dell-supply-2026:server-demand": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 23,
+      "fn": 14,
+      "unresolved": 3,
+      "precision": null,
+      "recall": 0.0
+    },
+    "dell-supply-2026:input-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 38,
+      "fn": 0,
+      "unresolved": 2,
+      "precision": null,
+      "recall": null
+    },
+    "mu-supply-2026:memory-supply": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 39,
+      "fn": 0,
+      "unresolved": 1,
+      "precision": null,
+      "recall": null
+    },
+    "nvda-supply-2026:supply-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 23,
+      "fn": 0,
+      "unresolved": 17,
+      "precision": null,
+      "recall": null
+    },
+    "nvda-supply-2026:customer-buildout": {
+      "tp": 9,
+      "fp": 2,
+      "tn": 21,
+      "fn": 6,
+      "unresolved": 2,
+      "precision": 0.8181818181818182,
+      "recall": 0.6
+    },
+    "sndk-supply-2026:nand-supply": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 39,
+      "fn": 0,
+      "unresolved": 1,
+      "precision": null,
+      "recall": null
+    },
+    "sndk-supply-2026:storage-demand": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 39,
+      "fn": 0,
+      "unresolved": 1,
+      "precision": null,
+      "recall": null
+    }
+  }
+}

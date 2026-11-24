@@ -1,6 +1,6 @@
 # Local product-v1 collection and acceptance
 
-This worker is an unverified discovery/review pipeline. It extends the existing reviewed canonical-event and profile-routing engines; it cannot approve relationships, derive impact, activate a dossier or dispatch notifications. The initial catalog has 18 enabled endpoints: 13 RSS/Atom and five SEC submissions endpoints. Four X entries and the retired AMD URL stay disabled. No X API key is needed.
+This worker is an unverified discovery/review pipeline. It extends the existing reviewed canonical-event and profile-routing engines; it cannot approve relationships, derive impact, activate a dossier or dispatch notifications. The expanded catalog has 23 enabled endpoints: 18 RSS/Atom endpoints (including bounded older pages from the same publishers) and five SEC submissions endpoints. Endpoint count is not independent publisher coverage. Four X entries and the retired AMD URL stay disabled. No X API key is needed.
 
 ## Run in an isolated local database
 

@@ -2,6 +2,15 @@
 
 Each task must end with an automated test or inspectable artifact. `README.md` governs any ambiguity. `P#` labels are **dependencies**, not independent checklists that may be bypassed.
 
+## Customer-profile and relevance follow-up — 2026-11-24
+
+- [x] Complete source-backed DELL/SNDK research profiles with ten explicit component areas and bounded narratives.
+- [x] Add same-sentence activity matching and reject enabled bindings without structural narrative routes.
+- [x] Add official company blog discovery and preserve immutable correction/source captures.
+- [x] Run separate blind cohorts; separate relevance predictions from feed-age eligibility.
+- [ ] Improve DELL/AMD recall and obtain resolved positive SNDK cases before active classifier promotion.
+- [ ] Validate larger fresh cohorts with final rules and company/topic quotas; no pooling of development rounds.
+
 ## Product-v1 implementation and acceptance — 2026-11-24
 
 - [x] Versioned scope and measurable acceptance targets; no price prediction.
