@@ -269,6 +269,8 @@ def build(selections, rules, *, profile_root=None, article_root=None, at=None):
                                 ],
                             }
                         )
+                        if len(cards) > 1000:
+                            raise ValueError("Shadow output limit exceeded; split the batch")
                         emitted += 1
                 audits.append(
                     {
