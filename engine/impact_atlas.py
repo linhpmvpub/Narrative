@@ -39,7 +39,7 @@ DIMENSIONS = ["exposure_share", "supplier_concentration", "supplier_concentratio
               "inventory_days", "contract_reset_days", "pass_through", "hedging", "ramp_days",
               "utilization", "yield", "market_share", "competition", "qualification_days",
               "funding_conditions", "permit_status", "exemptions", "geographic_mix", "duration_days",
-              "procurement_terms", "customer_contract_terms", "manufacturing_model", "utility_dependency", "pricing_reset_frequency", "net_cost_basis"]
+              "procurement_terms", "customer_contract_terms", "manufacturing_model", "utility_dependency", "pricing_reset_frequency", "net_cost_basis", "contract_term", "inventory_context"]
 GROUPS = {
     "products_revenue": ["products", "segments", "revenue_model", "sales_mix"],
     "supply_capacity": ["inputs", "suppliers", "facilities", "capacity"],
@@ -55,7 +55,7 @@ def key(profile, local):
     return profile + "/" + local
 
 
-def snapshot(profile_root, at=None, facts=()):
+def snapshot(profile_root, at=None, facts=(), identities=()):
     from engine.company_profiles import COMPONENTS, RELATIONS, available_bundles
     at = at or datetime.now(UTC)
     if at.tzinfo is None or at > datetime.now(UTC):
@@ -65,7 +65,7 @@ def snapshot(profile_root, at=None, facts=()):
         raise ValueError("Complete integrity-checked profile registry required")
     result: dict = {"schema": "IMPACT_ATLAS_V1", "as_of": at.isoformat(), "delivery": "disabled",
         "scope": "LOCAL_RESEARCH_SNAPSHOT_NOT_LIVE_VERIFICATION", "profiles": [], "nodes": [],
-        "relations": [], "sources": [], "narratives": [], "components": [], "exposures": [],
+        "relations": [], "sources": [], "narratives": [], "components": [], "exposures": [], "entity_references": [],
         "mechanisms": MECHANISMS, "groups": GROUPS, "dimensions": DIMENSIONS,
         "policy": {"version": "uncalibrated-v1", "weights": None, "financial_magnitude": "UNKNOWN",
                    "calibration_status": "PENDING_GROUPED_INDEPENDENT_EVALUATION"}}
@@ -96,6 +96,14 @@ def snapshot(profile_root, at=None, facts=()):
                     "evidence": []} for d in DIMENSIONS},
                 "legacy_lag_text": r.lag, "legacy_direction": r.direction,
                 "status": "UNQUANTIFIED_RELATIONSHIP_CONTEXT"})
+        for ref in b.entity_references:
+            incident = [r for r in result["relations"] if r["id"] in {key(pid, x) for x in ref.relationship_ids}]
+            result["entity_references"].append({**ref.model_dump(mode="json"),
+                "id": key(pid, ref.id), "profile_id": pid, "node_id": key(pid, ref.node_id),
+                "relationship_ids": [key(pid, x) for x in ref.relationship_ids],
+                "evidence": evidence(ref.evidence),
+                "eligible_at_snapshot": ref.status == "SOURCE_BACKED" and ref.reviewed_at <= at < ref.review_until
+                    and bool(incident) and all(r["eligible_at_snapshot"] for r in incident)})
         components = {c.key: c for c in b.components}
         for name, title in COMPONENTS.items():
             c = components.get(name)
@@ -114,6 +122,9 @@ def snapshot(profile_root, at=None, facts=()):
             [p["sha256"] for p in result["profiles"]]):
         raise ValueError("Registry changed during snapshot")
     apply_facts(result, facts, profile_root, registry["items"], at)
+    from engine.impact_inventory import apply_identities, field_inventory
+    apply_identities(result, identities)
+    result["field_inventory"] = field_inventory(result)
     result["coverage"] = coverage(result)
     return result
 
@@ -247,6 +258,9 @@ CREATE TABLE fact_evidence(fact_id TEXT NOT NULL REFERENCES exposure_facts(id), 
 CREATE TABLE components(id TEXT PRIMARY KEY, profile_id TEXT NOT NULL REFERENCES profiles(id), payload TEXT NOT NULL);
 CREATE TABLE narratives(id TEXT PRIMARY KEY, profile_id TEXT NOT NULL REFERENCES profiles(id), payload TEXT NOT NULL);
 CREATE TABLE mechanisms(id TEXT PRIMARY KEY, payload TEXT NOT NULL);
+CREATE TABLE entity_references(id TEXT PRIMARY KEY, node_id TEXT NOT NULL REFERENCES nodes(id), payload TEXT NOT NULL);
+CREATE TABLE identity_groups(id TEXT PRIMARY KEY, payload TEXT NOT NULL);
+CREATE TABLE identity_members(group_id TEXT NOT NULL REFERENCES identity_groups(id), reference_id TEXT PRIMARY KEY REFERENCES entity_references(id));
 """
 
 
@@ -283,6 +297,11 @@ def install(data, output):
                 db.executemany("INSERT INTO fact_evidence VALUES (?,?,?)",
                     [(fact["id"], e["source_id"], e["quote"]) for e in fact["evidence"]])
             db.executemany("INSERT INTO mechanisms VALUES (?,?)", [(k, encode(v)) for k, v in MECHANISMS.items()])
+            for ref in data.get("entity_references", []):
+                db.execute("INSERT INTO entity_references VALUES (?,?,?)", (ref["id"], ref["node_id"], encode(ref)))
+            for group in data.get("identity_groups", []):
+                db.execute("INSERT INTO identity_groups VALUES (?,?)", (group["id"], encode(group)))
+                db.executemany("INSERT INTO identity_members VALUES (?,?)", [(group["id"], r) for r in group["references"]])
             if db.execute("PRAGMA foreign_key_check").fetchall():
                 raise ValueError("Broken atlas references")
     finally:
@@ -382,12 +401,14 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--input", type=Path)
     parser.add_argument("--facts", type=Path)
+    parser.add_argument("--identities", type=Path)
     args = parser.parse_args()
     if args.action == "build":
         if args.profiles is None:
             parser.error("--profiles required")
         facts = json.loads(args.facts.read_text(encoding="utf-8")) if args.facts else []
-        result = install(snapshot(args.profiles, facts=facts), args.output)
+        identities = json.loads(args.identities.read_text(encoding="utf-8")) if args.identities else []
+        result = install(snapshot(args.profiles, facts=facts, identities=identities), args.output)
     else:
         data = read_snapshot(args.output)
         if args.action == "scenario":

@@ -109,3 +109,33 @@ keep it under ignored source-cache, do not publish it as a static website. Openi
 link is a deliberate navigation. No new gateway/API route or cloud deployment is added.
 Event bundling, accepted severity/horizon cards and production push remain gated on B–E
 and the existing product acceptance requirements. No production-complete claim is made.
+
+
+## Reviewed identity navigation and mechanism field inventory
+
+Build with optional `--identities LOCAL_IDENTITIES_JSON`. Each group declares id,
+version, exact legal_name, references (namespaced entity-reference IDs), reviewer
+kind/id/time and scope. Groups need at least two distinct profiles with current,
+source-backed EXACT_ENTITY/LEGAL_ENTITY references naming the same legal entity.
+Do not infer an identity from a parent, group, brand, ticker, fuzzy name or unnamed
+customer. A reviewer declaration is not independent legal attestation. No global
+node merge or cross-profile causal propagation is enabled.
+
+The source/profile registry remains the evidence authority. Revoked references,
+expired review windows and inactive incident relationships prevent a fresh build
+using the link; static snapshots do not poll revocations. Rebuild before reuse.
+
+`field_inventory` inspects required mechanism fields separately per relationship.
+It deliberately does not combine fields on different relationships or assume
+mechanism applicability or reporting-period alignment. Even a complete checklist remains scope-review-required,
+with strength UNKNOWN. Qualitative supplier concentration does not fill a numeric
+concentration field; DIO turnover is not physical inventory buffer days. Contract
+end dates do not supply event lag or duration. The UI exposes these gaps so data
+collection can be prioritized before calibration.
+
+Current private review: MUv4/SNDKv5,74nodes/81relations,82/252 sourced component
+slots and35facts (7numeric). One Sandisk navigation group; Kioxia Holdings and
+Kioxia Corporation remain separate. The dated inventory contains567relation/family
+rows,18with any required fields and0with allfields. This is not an applicability,
+accuracy or product-completeness metric. Aggregate validation is tracked in
+`reports/identity-inventory-progress.json` and `codex/CHECKPOINT.md`.

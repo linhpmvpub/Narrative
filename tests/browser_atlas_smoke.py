@@ -35,6 +35,17 @@ with sync_playwright() as p:
             expect(card).to_contain_text('Người rà soát:')
             card.locator('button').click()
             expect(page.locator('#detail blockquote').first).to_be_visible()
+    if page.locator('#field-inventory').count():
+        expect(page.locator('#field-inventory details')).to_have_count(7)
+        group = page.evaluate('(data.identity_groups||[])[0]')
+        if group:
+            refs = page.evaluate('data.entity_references')
+            member = next(r for r in refs if r['id'] == group['references'][0])
+            page.select_option('#profile', member['profile_id'])
+            page.locator('#identities summary').first.click()
+            page.locator('#identities button').last.click()
+            expect(page.locator('#detail pre')).to_contain_text('REVIEWED_NAVIGATION_ONLY')
+            expect(page.locator('#detail blockquote').first).to_be_visible()
     page.select_option('#view', 'MECHANISM')
     page.select_option('#view', 'all')
     page.evaluate('window.scrollTo(0,0)')

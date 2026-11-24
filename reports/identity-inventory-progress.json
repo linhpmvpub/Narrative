@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-24",
+  "mode": "LOCAL_RESEARCH_AI_OPERATOR_NOT_INDEPENDENT_GOLD",
+  "totals": {
+    "companies": 5,
+    "profiles": 6,
+    "nodes_before": 63,
+    "nodes_after": 74,
+    "relations_before": 69,
+    "relations_after": 81,
+    "sourced_components_before": 78,
+    "sourced_components_after": 82,
+    "component_slots": 252,
+    "facts_before": 31,
+    "facts_after": 35,
+    "numeric_facts": 7,
+    "entity_references": 8,
+    "reviewed_identity_groups": 1,
+    "inventory_rows": 567,
+    "rows_with_some_fields": 18,
+    "rows_with_all_fields": 0
+  },
+  "profile_changes": {
+    "MU": {
+      "version": 4,
+      "sourced_components": 16
+    },
+    "SNDK": {
+      "version": 5,
+      "sourced_components": 18
+    }
+  },
+  "limitations": [
+    "Field inventory is not mechanism applicability or score",
+    "Cross-profile links are navigation only",
+    "Quarterly DIO change is not physical buffer days",
+    "Contract end date is not event impact duration",
+    "Kioxia Holdings and Kioxia Corporation remain distinct"
+  ],
+  "delivery": "disabled",
+  "weights": null,
+  "active_feed_changed": false,
+  "validation": {
+    "focused_passed": 66,
+    "focused_seconds": 21.05,
+    "ruff": "passed",
+    "mypy_files": 127,
+    "js": "passed",
+    "browser": "five tickers,35facts,identity navigation,seven inventory groups,mobile fit,no HTTP requests",
+    "sqlite_integrity": "passed",
+    "ci": "pending"
+  }
+}
