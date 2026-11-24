@@ -39,6 +39,7 @@ jobs:
           node --check engine/web/news.js
           node --check engine/web/news-review.js
           node --check engine/web/map.js
+          node --check engine/web/atlas.js
           node --check engine/web/label.js
           node --check engine/web/adjudicate.js
       - run: mypy engine

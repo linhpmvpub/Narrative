@@ -1,0 +1,39 @@
+"""Optional installed-Edge smoke: python tests/browser_atlas_smoke.py LOCAL_ATLAS_DIR."""
+import sys
+from pathlib import Path
+
+from playwright.sync_api import expect, sync_playwright
+
+root = Path(sys.argv[1]).resolve()
+with sync_playwright() as p:
+    browser = p.chromium.launch(channel="msedge", headless=True)
+    page = browser.new_page(viewport={"width": 1365, "height": 900})
+    failures = []
+    network = []
+    page.on("pageerror", lambda error: failures.append(str(error)))
+    page.on("request", lambda request: network.append(request.url) if request.url.startswith("http") else None)
+    page.goto((root / "index.html").as_uri())
+    expect(page.locator('#profile option')).to_have_count(6)
+    expect(page.locator('#components details')).to_have_count(42)
+    expect(page.locator('#mechanisms details')).to_have_count(7)
+    for ticker in ['AMD', 'DELL', 'MU', 'NVDA', 'SNDK']:
+        options = page.locator('#profile option').all()
+        value = next(o.get_attribute('value') for o in options if o.text_content().startswith(ticker+' '))
+        page.select_option('#profile', value)
+        assert page.locator('#graph .node').count() > 0
+        page.locator('#relations button').first.click()
+        expect(page.locator('#detail blockquote').first).to_be_visible()
+        page.locator('#narratives button').first.click()
+        expect(page.locator('#detail pre')).to_contain_text('thesis')
+    page.select_option('#view', 'MECHANISM')
+    page.select_option('#view', 'all')
+    page.evaluate('window.scrollTo(0,0)')
+    page.screenshot(path=str(root/'desktop.png'))
+    page.set_viewport_size({'width':390,'height':844})
+    assert page.evaluate('document.body.scrollWidth <= window.innerWidth')
+    page.evaluate('window.scrollTo(0,0)')
+    page.screenshot(path=str(root/'mobile.png'))
+    assert not failures, failures
+    assert not network, network
+    browser.close()
+print('PASS: five companies, evidence, narrative paths, filters, 42 components, seven mechanisms, mobile fit, no network requests')
