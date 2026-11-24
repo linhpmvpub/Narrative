@@ -244,7 +244,7 @@ class FactorBinding(Strict):
     context_terms: list[TEXT] = Field(min_length=1, max_length=20)
     change_terms: list[TEXT] = Field(default_factory=list, max_length=30)
     kind: Literal["ECONOMIC_CHANGE", "ISSUER_RELATIONSHIP_DISCLOSURE",
-                  "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"] = "ECONOMIC_CHANGE"
+                  "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY"] = "ECONOMIC_CHANGE"
     issuer_supply_scope: bool = False
     disclosure_terms: list[TEXT] = Field(default_factory=list, max_length=20)
     narrative_ids: list[ID] = Field(default_factory=list, max_length=20)
@@ -260,11 +260,13 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
-        if self.kind in {"ECONOMIC_CHANGE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"}:
+        if self.kind in {"ECONOMIC_CHANGE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY"}:
             if not self.change_terms or self.disclosure_terms:
                 raise ValueError("Economic rule requires changes, not disclosure terms")
         elif self.change_terms or not self.disclosure_terms or not self.narrative_ids:
             raise ValueError("Disclosure requires separate terms and explicit narrative scope")
+        if self.kind == "SCOPED_ACTIVITY" and (not self.narrative_ids or self.entity_reference_id):
+            raise ValueError("Scoped activity requires explicit narratives without inferred parties")
         if any(not term.casefold().startswith("we ") for term in self.disclosure_terms):
             raise ValueError("Disclosure must use an explicit issuer first-person phrase")
         if not self.reviewed_at < self.review_until:
@@ -510,6 +512,7 @@ def stage_locked(directory, bundle):
     if bundle.available_at > datetime.now(UTC):
         raise ValueError("Future profile")
     verify_sources(directory, bundle)
+    audit_binding_routes(bundle)
     name = f"profile-v{bundle.version}.json"
     raw = bundle.model_dump_json(indent=2).encode("utf-8")
     if len(raw) > 1_000_000:
@@ -583,6 +586,20 @@ def paths(bundle, event, narrative, *, effective_at=None):
             if m <= 2 and s <= 3:
                 queue.append((r.to_id, route + [r], seen | {r.to_id}, s, m))
     return result, bool(queue)
+
+
+def audit_binding_routes(bundle):
+    """Reject enabled rules whose stated narratives have no sourced structural route."""
+    for binding in bundle.factor_bindings:
+        if not binding.enabled:
+            continue
+        targets = [n for n in bundle.narratives
+                   if not binding.narrative_ids or n.id in binding.narrative_ids]
+        event = type("FactorAnchor", (), {"anchors": [binding.factor_id]})()
+        reachable = [bool(paths(bundle, event, n, effective_at=bundle.available_at)[0])
+                     for n in targets]
+        if not any(reachable) or (binding.narrative_ids and not all(reachable)):
+            raise ValueError("Enabled binding has no sourced route to its narrative: " + binding.id)
 
 
 def project(bundle):

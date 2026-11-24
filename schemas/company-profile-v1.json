@@ -615,7 +615,8 @@
               "ISSUER_RELATIONSHIP_DISCLOSURE",
               "SUPPLIER_ROLE_DISCLOSURE",
               "ISSUER_OPERATING_CONTEXT",
-              "ISSUER_PRODUCT_SHIPMENTS"
+              "ISSUER_PRODUCT_SHIPMENTS",
+              "SCOPED_ACTIVITY"
             ],
             "title": "Kind",
             "type": "string"

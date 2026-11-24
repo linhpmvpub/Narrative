@@ -32,6 +32,22 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
     groups = ("topic_terms", "context_terms", "change_terms")
+    if binding.kind == "SCOPED_ACTIVITY":
+        # Three literal groups must co-occur in one sentence/heading. Do not join
+        # an issuer's share-price headline with an unrelated customer's project.
+        rule = binding.model_copy(update={"kind": "ECONOMIC_CHANGE"})
+        for field, text in fields.items():
+            for window in re.finditer(r"[^.!?;\n]+", text):
+                if len(window.group()) > 1200:
+                    continue
+                hits = matches(rule, {field: window.group()})
+                if hits:
+                    return [{**h, "start": h["start"] + window.start(),
+                             "end": h["end"] + window.start(),
+                             "scope_basis": "SAME_SENTENCE_TOPIC_ACTIVITY_NOT_VERIFIED_PARTY"}
+                            for h in hits]
+        return []
+
     if binding.kind == "ISSUER_PRODUCT_SHIPMENTS":
         return shipment_matches(binding, fields["summary"], issuer_cik, profile_cik)
     if binding.kind == "ISSUER_OPERATING_CONTEXT":

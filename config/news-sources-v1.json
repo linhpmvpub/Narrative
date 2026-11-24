@@ -311,5 +311,37 @@
     ],
     "discovery_reference": "https://ir.amd.com/sitemap",
     "discovery_only": true
+  },
+  {
+    "id": "nvidia_blog",
+    "name": "NVIDIA official blog",
+    "url": "https://blogs.nvidia.com/feed/",
+    "kind": "rss",
+    "category": "company",
+    "interval_seconds": 600,
+    "enabled": true,
+    "families": [
+      "products",
+      "demand",
+      "infrastructure"
+    ],
+    "discovery_reference": "https://blogs.nvidia.com/feed/",
+    "discovery_only": true
+  },
+  {
+    "id": "dell_blog",
+    "name": "Dell official blog",
+    "url": "https://www.dell.com/en-us/blog/feed/",
+    "kind": "rss",
+    "category": "company",
+    "interval_seconds": 600,
+    "enabled": true,
+    "families": [
+      "products",
+      "demand",
+      "infrastructure"
+    ],
+    "discovery_reference": "https://www.dell.com/en-us/blog/feed/",
+    "discovery_only": true
   }
 ]
