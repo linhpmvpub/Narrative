@@ -85,5 +85,35 @@
   "suppressed_blocks": 105,
   "notifications_enabled": false,
   "active_feed_promoted": false,
-  "independent_gold": false
+  "independent_gold": false,
+  "validation": {
+    "focused_tests": 30,
+    "focused_seconds": 59.72,
+    "ruff": "passed",
+    "mypy_files": 119,
+    "ui_browser": "Installed Edge via Playwright",
+    "ui_viewports": [
+      "1280x900",
+      "390x844"
+    ],
+    "ui_checks": [
+      "24 rendered cards",
+      "AMD filter6",
+      "search empty-state",
+      "fresh-window filter3",
+      "evidence expansion",
+      "no horizontal overflow"
+    ],
+    "github_ci": {
+      "run_id": 45347856023,
+      "commit": "30bca2d612d29677d20060b4afce93f690abd845",
+      "status": "success",
+      "sqlite_passed": 845,
+      "sqlite_seconds": 119.82,
+      "postgresql_passed": 845,
+      "postgresql_seconds": 224.3,
+      "migrations_replay_audits": "passed"
+    },
+    "notifications_enabled": false
+  }
 }
