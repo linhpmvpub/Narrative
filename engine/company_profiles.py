@@ -665,13 +665,13 @@ def project(bundle):
             "narratives": [n.model_dump(mode="json") for n in bundle.narratives]}
 
 
-def available_bundles(as_of=None):
+def available_bundles(as_of=None, *, root=None):
     at = as_of or datetime.now(UTC)
     if at.tzinfo is None:
         raise ValueError("Aware cutoff required")
     if not Settings.from_env().dev_informational_feed:
         return {"items": [], "enabled": False, "delivery": "disabled"}
-    root = Path(os.getenv("COMPANY_PROFILE_ROOT", "source-cache/company-profiles"))
+    root = Path(root if root is not None else os.getenv("COMPANY_PROFILE_ROOT", "source-cache/company-profiles"))
     directories = sorted(p for p in root.glob("*") if p.is_dir())
     items, withheld = [], 0
     for directory in directories[:30]:

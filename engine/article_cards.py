@@ -49,10 +49,10 @@ class Blocks(VisibleText):
             self.groups.append(self.group)
 
 
-def substantive_blocks(selection, at):
-    packet, _ = reviewed_body(selection, at)
+def substantive_blocks(selection, at, *, article_root=None):
+    packet, _ = reviewed_body(selection, at, article_root=article_root)
     parser = Blocks()
-    parser.feed(read_capture(root_dir() / "bodies", packet["body_sha256"], ".html").decode("utf-8-sig"))
+    parser.feed(read_capture((Path(article_root) if article_root is not None else root_dir()) / "bodies", packet["body_sha256"], ".html").decode("utf-8-sig"))
     review = selection["body_review"]
     blocks: list[dict] = []
     offset = 0
@@ -104,11 +104,11 @@ def decisions(bundle, narrative, title, blocks, at):
                     "max_news_age_days": result["binding"].max_news_age_days}
 
 
-def build(selections, at=None):
+def build(selections, at=None, *, profile_root=None, article_root=None):
     at = at or datetime.now(UTC)
     if at.tzinfo is None or at > datetime.now(UTC) or not 1 <= len(selections) <= 100:
         raise ValueError("Bounded selections and aware nonfuture time required")
-    registry = available_bundles(at)
+    registry = available_bundles(at, root=profile_root)
     if not registry["enabled"] or registry.get("withheld") or registry.get("truncated"):
         raise ValueError("Complete validated research registry required")
     cards, audit, seen = [], [], set()
@@ -117,7 +117,7 @@ def build(selections, at=None):
         if article["url"] in seen:
             continue
         seen.add(article["url"])
-        blocks, suppressed = substantive_blocks(selection, at)
+        blocks, suppressed = substantive_blocks(selection, at, article_root=article_root)
         audit.append({"url": article["url"], "substantive_blocks": len(blocks),
                       "suppressed_blocks": len(suppressed), "archive_preserved": True})
         for bundle in registry["items"]:

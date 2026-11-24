@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-24",
+  "reviewed_articles": 15,
+  "active_after_source_recheck": 15,
+  "research_cards": 24,
+  "held_articles": 0,
+  "old_feed_counts_unchanged": {
+    "profiles": 4,
+    "rss_cards": 25,
+    "rss_withheld": 7,
+    "reviewed_events": 1
+  },
+  "gateway_new_endpoint_status": 404,
+  "source_proof_ttl_seconds": 3600,
+  "worker_interval_seconds": 900,
+  "worker_cycles": 96,
+  "delivery": "disabled",
+  "cloud_exposure_added": false,
+  "independent_evaluation_performed": false,
+  "ui_smoke": "passed desktop/mobile + filters + held-source clearing + logout",
+  "validation": {
+    "initial_focused_passed": 24,
+    "ruff": "passed",
+    "mypy_files": 120,
+    "javascript_syntax": "passed",
+    "github_ci": "pending"
+  }
+}

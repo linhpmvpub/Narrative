@@ -66,7 +66,7 @@ def normalized_text(body):
     return "\n".join(parser.parts)
 
 
-def capture(revision, client, *, url=None, relation="same_article"):
+def capture(revision, client, *, url=None, relation="same_article", root=None):
     url = url or revision["payload"]["url"]
     public_url(url)
     parsed = urlsplit(url)
@@ -85,7 +85,7 @@ def capture(revision, client, *, url=None, relation="same_article"):
     text = normalized_text(body)
     if not text.strip():
         raise ValueError("Empty article text")
-    root = root_dir()
+    root = Path(root) if root is not None else root_dir()
     packet = {
         "schema": "ARTICLE_PACKET_V1",
         "revision_id": revision["id"],
@@ -107,8 +107,8 @@ def capture(revision, client, *, url=None, relation="same_article"):
     return {**packet, "packet_sha256": sha}
 
 
-def read_packet(revision, sha):
-    root = root_dir()
+def read_packet(revision, sha, *, root=None):
+    root = Path(root) if root is not None else root_dir()
     try:
         packet = json.loads(read_capture(root / digest(revision["id"]), sha, ".json"))
     except OSError:

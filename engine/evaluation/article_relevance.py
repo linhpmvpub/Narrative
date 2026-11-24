@@ -24,11 +24,11 @@ def utc(value):
     return value.astimezone(UTC)
 
 
-def reviewed_body(selection, at):
+def reviewed_body(selection, at, *, article_root=None):
     if selection.get("provenance") != "MANUAL_PUBLIC_DOCUMENT_OBSERVATION_NOT_RSS":
         raise ValueError("Explicit manual document provenance required")
     revision = {**selection["revision"], "received_at": utc(selection["revision"]["received_at"])}
-    packet, text = read_packet(revision, selection["packet_sha256"])
+    packet, text = read_packet(revision, selection["packet_sha256"], root=article_root)
     if packet["relation"] != "same_article" or utc(packet["retrieved_at"]) > at:
         raise ValueError("Same article available before freeze required")
     review = selection["body_review"]

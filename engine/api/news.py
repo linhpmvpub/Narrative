@@ -1,5 +1,6 @@
 """Authenticated shared public-source news inbox; never exposes user labels or secrets."""
 
+import os
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -155,6 +156,18 @@ def profile_rss(as_of: AwareDatetime | None = None):
     try:
         with engine.connect() as conn:
             return candidate_feed(conn, as_of)
+    finally:
+        engine.dispose()
+
+
+@router.get("/profile-articles")
+def profile_articles(ticker: str | None = None, narrative: str | None = None):
+    from engine.article_feed import feed
+
+    engine = database(os.getenv("ARTICLE_FEED_DATABASE_URL") or None)
+    try:
+        with engine.connect() as conn:
+            return feed(conn, ticker=ticker, narrative=narrative)
     finally:
         engine.dispose()
 
