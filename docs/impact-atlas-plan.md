@@ -39,8 +39,8 @@ or causal applicability. AI_OPERATOR remains distinct from HUMAN.
 
 The current local atlas imports six research profiles for MU/NVDA/AMD/DELL/SNDK,
 including a separate historical NVIDIA profile. All42component statuses remain
-visible, with seven cross-company coverage groups. The latest inventory has74nodes,
-81relations,82/252component slots with some sourced evidence and35exposure facts,
+visible, with seven cross-company coverage groups. The latest inventory has76nodes,
+83relations,84/252component slots with some sourced evidence and39exposure facts,
 of which7are numeric. These are data inventory counts, not completeness or impact
 accuracy. One explicitly reviewed Sandisk identity group supports navigation between
 MU competitor context and the Sandisk issuer profile; it does not merge graph nodes
@@ -141,3 +141,14 @@ Kioxia Corporation remain separate. The dated inventory contains567relation/fami
 rows,18with any required fields and0with allfields. This is not an applicability,
 accuracy or product-completeness metric. Aggregate validation is tracked in
 `reports/identity-inventory-progress.json` and `codex/CHECKPOINT.md`.
+
+
+## Financial composition and inventory extension
+
+`--financials LOCAL_SELECTIONS_JSON` adds reviewed Inline XBRL cell selections,
+separate reportable-segment/product/end-market partitions and current/prior inventory
+balances. See docs/atlas-financial-context.md. The current five-company research
+snapshot has13financial sets, with exact revenue reconciliation and preserved
+periods/source cell IDs. These numeric financial contexts are separate from the
+7numeric exposure facts; no revenue share becomes an impact weight. Raw values and
+selections remain in local ignored artifacts.

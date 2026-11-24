@@ -38,7 +38,7 @@ integrity, not live source availability or subsequent restatements; rebuild afte
 profile/source review. This is a research inspector, not the active news feed.
 
 Current aggregate:13datasets (8revenue partitions and5inventory pairs) across five
-companies,40selected source cells and22partition parts. Reporting periods differ
+companies,40cell references to37distinct source cells and22partition parts. Reporting periods differ
 between companies; annual Micron data must not be treated as a quarter. The local
 review-report.md lists the exact periods, values and source URLs. Do not upload it.
 

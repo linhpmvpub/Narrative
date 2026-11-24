@@ -6,11 +6,12 @@
     "sets": 13,
     "revenue_partitions": 8,
     "inventory_current_prior_pairs": 5,
-    "selected_source_cells": 40,
     "partition_parts": 22,
     "exact_reconciliations": 8,
     "impact_weights": null,
-    "buffer_days_inferred": false
+    "buffer_days_inferred": false,
+    "source_cell_references": 40,
+    "unique_source_cells": 37
   },
   "atlas": {
     "profiles": 6,
@@ -33,7 +34,18 @@
     "ruff": "passed",
     "mypy_files": 128,
     "javascript": "passed",
-    "browser": "pending final screenshot inspection",
-    "full_ci": "pending"
+    "browser": "passed:13financial tables,39exposure cards,identity navigation,desktop/mobile,no HTTP requests; screenshots inspected",
+    "full_ci": {
+      "run_id": 45391508828,
+      "commit": "8cba6d72f444fa7044502c275c19fa08a69e94c4",
+      "conclusion": "success",
+      "sqlite_passed": 926,
+      "sqlite_seconds": 192.24,
+      "postgresql_passed": 926,
+      "postgresql_seconds": 256.76,
+      "dependency_audits": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    },
+    "snapshot_hashes_sqlite_integrity_foreign_keys": "passed"
   }
 }
