@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-24
 
+## Điểm tiếp tục đã lưu theo yêu cầu — 2026-11-24
+
+- Đã hoàn tất bộ khung v1: 7 nhóm, 21 loại sự kiện, 30 trường dữ liệu, 7 quy tắc và 5 đầu vào kịch bản. Mốc mã đã kiểm thử: 92155f7; mốc báo cáo đã đồng bộ GitHub trước lần lưu này: 52e2dee. CI45429638803 đạt 1.080 tests SQLite + 1.080 tests PostgreSQL; đây là kết quả kiểm thử trước đó, không chạy lại tests cho thay đổi checkpoint.
+- Định hướng ưu tiên của người dùng: cấu trúc dữ liệu, tham số, quy tắc rõ ràng và đơn giản để tích lũy lợi thế sản phẩm. Lợi thế phải đến từ dữ liệu có nguồn, phạm vi đúng, khả năng truy vết và chất lượng đo được; chưa có benchmark chứng minh vượt LLM.
+- Bắt đầu phiên sau bằng việc đọc CHECKPOINT.md, QUALITY_REVIEW.md, docs/mechanism-playbook-v1.md và config/mechanism-playbook.json. Triển khai giao dịch thẩm định phạm vi có phiên bản vào R05: gắn sự kiện/nguồn/pháp nhân/sản phẩm/cơ sở/kỳ với đúng cạnh quan hệ; kiểm tra hash, thời gian, hết hạn và sửa/rút nguồn. Không dùng cờ boolean do người gọi tự khai báo để bỏ qua bằng chứng. R07 vẫn giữ UNKNOWN đến khi có đủ căn cứ nhân quả/độ lớn/thời gian.
+- Sau R05: bổ sung dữ liệu định lượng đúng mẫu số/kỳ cho từng cơ chế; cải thiện nhận diện phát biểu kinh tế theo quy tắc chung; đánh giá trên tập mới. 25 bất đồng nhãn còn chờ thẩm định; recall khoảng 27–28% của đợt thí điểm cũ chưa được cải thiện. Không tái dùng tập đã xem như holdout mới, không chỉnh từng bài để làm đẹp điểm.
+- Giữ dữ liệu chi tiết trong source-cache được gitignore, thông báo thật tắt, synthetic live false, LLM_MODE=none; chưa triển khai cloud hoặc đổi feed thật. Chỉ đẩy mã/tài liệu/số liệu tổng hợp lên GitHub. Sau mỗi lượt cập nhật hạn chế, cách khắc phục và kiểm chứng trong QUALITY_REVIEW.md.
+- Lần lưu này chỉ cập nhật tài liệu; không thay đổi thuật toán, dữ liệu, baseline hay cấu hình vận hành. Không có quyết định đang chờ người dùng.
+
 ## Explicit mechanism playbook and parameter contracts — 2026-11-24 (latest)
 
 - Latest user steering: make groups/data/parameters/rules explicit and concrete, initially simple, as the basis for differentiation from a generic LLM. Prioritize a reusable sourced knowledge base and deterministic explanations, not article-specific keyword patches. No claim of superiority until same-cohort baseline comparison exists.
