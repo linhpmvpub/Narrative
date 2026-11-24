@@ -1,0 +1,22 @@
+{
+  "filings": 6,
+  "documents": 16,
+  "capture_errors": 0,
+  "candidate_passages": 4,
+  "scope_held": 2,
+  "selected_event_clusters": 2,
+  "pairs": 10,
+  "same_period_overlap": false,
+  "profile_hashes_rechecked": true,
+  "active_nvda_version": 8,
+  "source_data_published": false,
+  "delivery": "disabled",
+  "historical_as_of_eligible": false,
+  "limitations": [
+    "Two AMD event periods only; not multi-company validation",
+    "Two NVIDIA excerpts held for missing standalone period context",
+    "Two Micron families yielded no paragraph under fixed sampling",
+    "Current profiles applied to old text; not point-in-time replay",
+    "No inference about overall market accuracy or financial impact"
+  ]
+}

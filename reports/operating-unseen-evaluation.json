@@ -1,0 +1,87 @@
+{
+  "tp": 0,
+  "fp": 0,
+  "tn": 8,
+  "fn": 1,
+  "unresolved": 1,
+  "clusters": 2,
+  "pairs": 10,
+  "selected_unresolved": 0,
+  "resolved_fraction": 0.9,
+  "by_narrative": {
+    "amd-supply-2026:foundry-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 0,
+      "fn": 1,
+      "unresolved": 1,
+      "precision": null,
+      "recall": 0.0
+    },
+    "amd-supply-2026:rack-deployment": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "mu-supply-2026:memory-supply": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "nvda-supply-2026:supply-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "nvda-supply-2026:customer-buildout": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    }
+  },
+  "precision": null,
+  "recall": 0.0,
+  "reference_kind": "AI_CONSENSUS_REVIEW",
+  "independent_gold": false,
+  "packet_sha256": "3037b24209174b5bbaf4781c5deaa6e935a5671d0424dee3e40349fca57e1e41",
+  "labels_sha256": "046fa72da4c4130e9868d747894746c17d5685933f729b9a34178881ace492f1",
+  "delivery": "disabled",
+  "limitations": [
+    "Independent exact-passage scope only; whole source remains incomplete",
+    "Source auditors saw documents; relevance labelers must use new contexts",
+    "Present profiles and captures, not point-in-time replay or human gold",
+    "Unquoted-text convenience sample, not whole-market accuracy",
+    "AI consensus is not human gold; unresolved labels excluded from precision/recall"
+  ],
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "strict_production_replay_eligible": false,
+  "by_topic_stratum": {
+    "finance": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 8,
+      "fn": 1,
+      "unresolved": 1,
+      "precision": null,
+      "recall": 0.0
+    }
+  },
+  "disagreements": 1,
+  "production_activation": false
+}
