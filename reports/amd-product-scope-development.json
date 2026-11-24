@@ -1,0 +1,18 @@
+{
+  "evaluation_kind": "POST_LABEL_SCOPE_DEVELOPMENT_NOT_BLIND_VALIDATION",
+  "existing_pairs_unchanged": 10,
+  "new_narrative_pairs": 2,
+  "new_narrative_matches": 1,
+  "new_target_reference_labels_available": false,
+  "old_frozen_fn_preserved": 1,
+  "old_unresolved_preserved": 1,
+  "production_activation": false,
+  "delivery": "disabled",
+  "limitations": [
+    "New product-availability target differs from foundry-resilience; no revised score for old benchmark",
+    "2021 source does not verify current shipment volume or historical/current product generation identity",
+    "Only narrow literal shipment phrases supported; negative/future/quoted context held"
+  ],
+  "independent_scope_reviewers": 2,
+  "scope_review_approved": true
+}
