@@ -1,0 +1,15 @@
+{
+  "widths": [
+    390,
+    1440
+  ],
+  "synthetic_response_only": true,
+  "real_operating_cards": 0,
+  "failure_hides": true,
+  "recovery_restores_empty_state": true,
+  "logout_clears": true,
+  "overflow": false,
+  "javascript_errors": [],
+  "database_writes": 0,
+  "delivery": "disabled"
+}

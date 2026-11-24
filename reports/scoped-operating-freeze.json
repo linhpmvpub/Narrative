@@ -1,0 +1,50 @@
+{
+  "at": "2026-11-24T00:43:48.488514+00:00",
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "delivery": "disabled",
+  "packet_sha256": "336e9ae79b86aa0d3e8d9df61d8b6f2e93d1f79e97b1ac311b2124b9847c1514",
+  "predictions_sha256": "c8c0380273283e9504aea431464e937a0c6e0301b451f651046400e359c2c524",
+  "collection_sha256": "5962c3e4e22a3169af89579efed44057ccdd4ea849e099e6b6c01edb99968df1",
+  "clusters": 1,
+  "pairs": 5,
+  "excluded_packet_sha256": [
+    "50d249a1879efb98fb660f7b703b6614e566558913fb8213ef43682cd31a4842",
+    "93091f395690dfbb60e3ae389be2b7c59fcb412842f374ba435a40f7f313a009",
+    "a888c168d80ff41ed8101b0e53ef54581dc8712bb39ea7a5f9d79b27e3c715d5",
+    "c3bc71a2b0271ab11edbb6f6557c7c998ca7581d310301feace84af0d8ba82a3",
+    "df3baedb142c618fa4a7ce58846667e95b3d794458fd5ef21645cae9364d453a",
+    "df3baedb142c618fa4a7ce58846667e95b3d794458fd5ef21645cae9364d453a",
+    "52ef9f8e145806dfda28842382a867fbb0ee178a50d41cb8556306cbbbcd2507",
+    "a43ee80b4a0da57cb65ba6b53ea0ca45789263b8d008cd2d23bab67db8447ec3",
+    "b7fbdf1ef30d3e628976462dbce5a1b101acf562dcd54e0df0630153266bab0f",
+    "5f59da370e6536e7f80c97464cbd233084afe03c63d25301e58b82d42434deb0",
+    "27c074fc94e2c3956f3cfa2095d0407762bb4499f85872ff343d48cba2b977bd",
+    "3df4d26639a9992487a48adf95cb01972d3317a0b0c5ec48228f7f63b4d3b219",
+    "aed46cb2b2581c2e66c6dac7c5e5378c4f0e1d841a96a604b6723d87567012de"
+  ],
+  "requested_clusters": 3,
+  "excluded_previously_labelled_passages": 2,
+  "sampling_strata": {
+    "scoped_text": 1
+  },
+  "sampling": "FIRST_UNQUOTED_OWN_ISSUER_OPERATING_PARAGRAPH_FIXED_TERMS",
+  "strict_production_replay_eligible": false,
+  "independent_gold": false,
+  "limitations": [
+    "Independent exact-passage scope only; whole source remains incomplete",
+    "Source auditors saw documents; relevance labelers must use new contexts",
+    "Present profiles and captures, not point-in-time replay or human gold",
+    "Own-issuer unquoted-text convenience sample, not whole-market accuracy"
+  ],
+  "scope_review_sha256": [
+    "97ad963d157a6bd22a6f91f7ea1beeb3b8487a22b094f14b6e91d123d9aaaccb",
+    "8b1bba09a127f69b2b9eb90eb859f9a5515bc1cda3907090298e85af6e6fbac7"
+  ],
+  "scope_report": {
+    "candidates": 3,
+    "scope_held": 0,
+    "previously_exposed": 2,
+    "selected": 1,
+    "delivery": "disabled"
+  }
+}

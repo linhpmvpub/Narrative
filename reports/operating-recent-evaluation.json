@@ -1,0 +1,87 @@
+{
+  "tp": 0,
+  "fp": 0,
+  "tn": 3,
+  "fn": 2,
+  "unresolved": 0,
+  "clusters": 1,
+  "pairs": 5,
+  "selected_unresolved": 0,
+  "resolved_fraction": 1.0,
+  "by_narrative": {
+    "amd-supply-2026:foundry-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 1,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "amd-supply-2026:rack-deployment": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 1,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "mu-supply-2026:memory-supply": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 1,
+      "fn": 0,
+      "unresolved": 0,
+      "precision": null,
+      "recall": null
+    },
+    "nvda-supply-2026:supply-resilience": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 0,
+      "fn": 1,
+      "unresolved": 0,
+      "precision": null,
+      "recall": 0.0
+    },
+    "nvda-supply-2026:customer-buildout": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 0,
+      "fn": 1,
+      "unresolved": 0,
+      "precision": null,
+      "recall": 0.0
+    }
+  },
+  "precision": null,
+  "recall": 0.0,
+  "reference_kind": "AI_CONSENSUS_REVIEW",
+  "independent_gold": false,
+  "packet_sha256": "14429616fc7088a281a49c717f56da89acd7387240b48c6e48f47cc3a6b6544a",
+  "labels_sha256": "3c1a2882f6998920ba130b4ddfae0780e74ecf4eb746b70f095793975ae70cd5",
+  "delivery": "disabled",
+  "limitations": [
+    "Independent exact-passage scope only; whole source remains incomplete",
+    "Source auditors saw documents; relevance labelers must use new contexts",
+    "Present profiles and captures, not point-in-time replay or human gold",
+    "Own-issuer unquoted-text convenience sample, not whole-market accuracy",
+    "AI consensus is not human gold; unresolved labels excluded from precision/recall"
+  ],
+  "track": "ARCHIVED_TEXT_CURRENT_PROFILE_CHALLENGE",
+  "strict_production_replay_eligible": false,
+  "by_topic_stratum": {
+    "other": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 3,
+      "fn": 2,
+      "unresolved": 0,
+      "precision": null,
+      "recall": 0.0
+    }
+  },
+  "disagreements": 0,
+  "activation_decision": "MISSED_POSITIVES_KEEP_EXPERIMENTAL_PROFILES_ISOLATED"
+}
