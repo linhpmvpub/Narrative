@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-24T13:39:49.224562+00:00",
+  "parent_baseline": "d5dcf77abc4b6ccf07a0d05274190f0c35d6825c95b994b6c58b6f41b871416b",
+  "successor_baseline": "1e736223ea4b4cb16e696798517700e9e998129523c9526b9c36f27156237c45",
+  "parent_artifacts_unchanged": true,
+  "same_atlas_new_runtime": true,
+  "synthetic_demo_cards": 1,
+  "real_grounding_rules": 0,
+  "real_accuracy": null,
+  "delivery": "disabled",
+  "active_feed_changed": false,
+  "demo_rules_sha256": "98d65ba1d426d9aaf28722562d0822aad883b9ff205438ccb9aac06585c54502",
+  "status": "BOUNDED_SHADOW_IMPLEMENTATION_NOT_PRODUCT_ACCEPTANCE",
+  "supported_action_families": 7,
+  "real_accuracy_claim": false,
+  "validation": {
+    "focused_passed": 71,
+    "focused_seconds": 43.25,
+    "ruff": "passed",
+    "mypy_files": 131,
+    "ci": "pending"
+  }
+}
