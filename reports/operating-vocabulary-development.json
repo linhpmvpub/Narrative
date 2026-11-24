@@ -1,0 +1,79 @@
+{
+  "evaluation_kind": "POST_LABEL_DEVELOPMENT_NOT_INDEPENDENT_VALIDATION",
+  "rounds": [
+    {
+      "source_round": "sec-event-groups-2026-11-23",
+      "pairs": 20,
+      "tp": 2,
+      "fp": 0,
+      "tn": 10,
+      "fn": 1,
+      "unresolved": 7,
+      "original_frozen_hashes_intact": true,
+      "selected_unresolved": 0
+    },
+    {
+      "source_round": "scoped-operating-challenge-2026-11-24",
+      "pairs": 5,
+      "tp": 0,
+      "fp": 0,
+      "tn": 4,
+      "fn": 0,
+      "unresolved": 1,
+      "original_frozen_hashes_intact": true,
+      "selected_unresolved": 0
+    },
+    {
+      "source_round": "operating-recent-challenge-2026-11-24",
+      "pairs": 5,
+      "tp": 2,
+      "fp": 0,
+      "tn": 3,
+      "fn": 0,
+      "unresolved": 0,
+      "original_frozen_hashes_intact": true,
+      "selected_unresolved": 0
+    }
+  ],
+  "synthetic_controls_passed": 14,
+  "lexical_witnesses": 6,
+  "profile_version": 10,
+  "active_profile_unchanged": true,
+  "production_activation": false,
+  "delivery": "disabled",
+  "limitations": [
+    "All replay labels were exposed before vocabulary changes",
+    "Two recent positive pairs share one excerpt",
+    "No human gold or population accuracy",
+    "Same-sentence policy retained; no cross-sentence segment inference",
+    "Real claim ingestion and production vocabulary activation remain separate"
+  ],
+  "independent_vocabulary_reviewers": 2,
+  "independently_approved_experimental_bindings": 2,
+  "review_packet_sha256": "e5732022cb6d4edf0a96b223b7769d01900a7ca1dd4428f18d65f3c386b7fcea",
+  "active_profile_versions": {
+    "amd-supply-2026": 6,
+    "mu-supply-2026": 2,
+    "nvda-h20-historical": 3,
+    "nvda-supply-2026": 8
+  },
+  "scoped_pool_readiness": [
+    {
+      "pool": "earlier",
+      "candidates": 3,
+      "scope_held": 0,
+      "previously_exposed": 3,
+      "selected": 0,
+      "delivery": "disabled"
+    },
+    {
+      "pool": "recent",
+      "candidates": 1,
+      "scope_held": 0,
+      "previously_exposed": 1,
+      "selected": 0,
+      "delivery": "disabled"
+    }
+  ],
+  "next_validation_blocker": "No unused economic period in these two already scoped pools; acquire and independently scope different event periods before another blind round"
+}
