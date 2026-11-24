@@ -126,6 +126,8 @@ def validate_labels(labels, cases):
                 raise ValueError("Unexpected assertion fields")
             for field in ["actor", "predicate", "object"]:
                 check_span(sources[row["id"]], a[field], nullable=field != "predicate")
+            if len(a["predicate"]["text"].split()) != 1:
+                raise ValueError("One lexical predicate token required")
             anchor = (a["predicate"]["start"], a["predicate"]["end"])
             if anchor in anchors:
                 raise ValueError("Duplicate assertion predicate")

@@ -172,3 +172,10 @@ def test_uncertainty_flag_counts_do_not_claim_promotion(sample):
         "flagged": 0,
     }
     assert result["delivery"] == "disabled"
+
+
+def test_predicate_phrase_cannot_silently_change_alignment_denominator(sample):
+    cases, _, labels = sample
+    labels["cases"][0]["assertions"][0]["predicate"] = span(cases[0]["text"], "expanded factories")
+    with pytest.raises(ValueError, match="One lexical"):
+        validate_labels(labels, cases)
