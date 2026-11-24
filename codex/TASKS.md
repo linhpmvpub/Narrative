@@ -2,6 +2,20 @@
 
 Each task must end with an automated test or inspectable artifact. `README.md` governs any ambiguity. `P#` labels are **dependencies**, not independent checklists that may be bypassed.
 
+## Product-v1 implementation and acceptance — 2026-11-24
+
+- [x] Versioned scope and measurable acceptance targets; no price prediction.
+- [x] Local source evidence workbook generator for five issuers with explicit UNKNOWN and review gates.
+- [x] Ten-family candidate event discovery, distinct from verified canonical events.
+- [x] Bounded incremental RSS/SEC collection, dedup/revisions/recovery, diversified pinned capture queue.
+- [x] Freeze100articles/500pairs and obtain two independent AI reviews; preserve failures/unresolved.
+- [ ] Complete reviewed active profiles for allfive, especially DELL/SNDK.
+- [ ] Reach positive/issuer/strata/recall/lower-bound gates on fresh cohorts; independently audit economic-event grouping.
+- [ ] Prove seven-day operational gates; scale freeze beyond500inbox rows.
+- [ ] Human validation before public launch; hosting/push remain disabled.
+
+See docs/local-market-pipeline.md, docs/product-v1-acceptance.md and the latest codex/CHECKPOINT.md section. These steps extend the existing engine; checked implementation artifacts do not mean the release is accepted.
+
 ## P0 — Repo audit, decisions, scaffold
 - [ ] Inspect existing Threadnote repository, auth, DB models and UI endpoints; document compatibility constraints.
 - [ ] Write `docs/architecture_decisions.md` with accepted stack or reason to preserve an existing one; make no unrelated refactors.

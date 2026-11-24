@@ -1,0 +1,145 @@
+{
+  "schema": "PRODUCT_V1_PROGRESS_AGGREGATE_V1",
+  "code_commit": "9fea825bf4d0822c4ff2ad0a11b616bead7469d7",
+  "scope": [
+    "MU",
+    "NVDA",
+    "AMD",
+    "DELL",
+    "SNDK"
+  ],
+  "policy_sha256": "2cc3f072e70613b4aad96821845c47623e0df6437d22f7205e69f07fd5e64d45",
+  "sources_enabled": 18,
+  "local_runs": 7,
+  "unique_article_urls": 264,
+  "captures_completed": 49,
+  "duplicate_items_skipped": 579,
+  "blind_evaluation": {
+    "clusters": 100,
+    "pairs": 500,
+    "tp": 1,
+    "fp": 0,
+    "tn": 423,
+    "fn": 5,
+    "unresolved": 71,
+    "selected_unresolved": 3,
+    "precision": 1.0,
+    "recall": 0.16666666666666666,
+    "reference_kind": "AI_CONSENSUS_REVIEW",
+    "packet_sha256": "d10eee8a69d1c1f05168ba71dcc427696634187e9c2b5bba29491c75f93f7654"
+  },
+  "quality_checks": {
+    "article_clusters": true,
+    "positive_pairs": false,
+    "negative_pairs": true,
+    "all_target_companies": false,
+    "strata": false,
+    "unresolved": true,
+    "precision": true,
+    "precision_lower_bound": false,
+    "recall": false,
+    "independent_event_cluster_audit": false
+  },
+  "precision_wilson_lower": 0.20654931437723742,
+  "quality_limitation": "100 URL clusters, not independently audited economic events; only six resolved relevant pairs; three selected pairs unresolved. AI labels, not human gold.",
+  "profile_research": {
+    "companies": [
+      {
+        "ticker": "MU",
+        "sources": 2,
+        "components_with_candidates": 10,
+        "sourced_components": 0,
+        "active": false
+      },
+      {
+        "ticker": "NVDA",
+        "sources": 1,
+        "components_with_candidates": 10,
+        "sourced_components": 0,
+        "active": false
+      },
+      {
+        "ticker": "AMD",
+        "sources": 2,
+        "components_with_candidates": 10,
+        "sourced_components": 0,
+        "active": false
+      },
+      {
+        "ticker": "DELL",
+        "sources": 1,
+        "components_with_candidates": 9,
+        "sourced_components": 0,
+        "active": false
+      },
+      {
+        "ticker": "SNDK",
+        "sources": 2,
+        "components_with_candidates": 9,
+        "sourced_components": 0,
+        "active": false
+      }
+    ],
+    "delivery": "disabled",
+    "requires_source_review": true
+  },
+  "profiles_complete": false,
+  "operations": {
+    "checks": {
+      "observation_days": false,
+      "continuous_observation": true,
+      "success_fraction": true,
+      "source_freshness": true
+    },
+    "passed": false,
+    "observed_days": 0.011405649895833333,
+    "attempts": 58,
+    "success_fraction": 0.9655172413793104,
+    "stale_fraction": 0.0,
+    "receipt_count": 7,
+    "note": "Local operational diagnostics, not independently attested uptime"
+  },
+  "release_ready": false,
+  "delivery": "disabled",
+  "cloud_data": false,
+  "next_tasks": [
+    "Review and activate complete DELL/SNDK profiles; fill explicit gaps on all five dossiers",
+    "Improve financing, customer deployment and product availability scope on development cases, then freeze a fresh disjoint evaluation cohort",
+    "Improve source and independent economic-event cluster coverage with per-company positive quotas",
+    "Collect seven-day operational evidence; expand paginated freeze beyond 500 inbox rows",
+    "Human validation before public launch; notifications and deployment require separate authorization"
+  ],
+  "latest_source_status": {
+    "cnbc_markets": "OK",
+    "cnbc_world": "OK",
+    "cnbc_technology": "OK",
+    "marketwatch": "OK",
+    "fed": "NOT_MODIFIED",
+    "ecb": "OK",
+    "dcd": "NOT_MODIFIED",
+    "dck": "OK",
+    "nvidia_ir": "OK",
+    "sk_hynix": "NOT_MODIFIED",
+    "eia_energy": "OK",
+    "usgs_quakes": "OK",
+    "sec_nvda": "OK",
+    "sec_amd": "OK",
+    "sec_mu": "OK",
+    "sec_dell": "OK",
+    "sec_sndk": "OK",
+    "amd_ir_v2": "OK"
+  },
+  "validation": {
+    "ci_run_id": 45329663477,
+    "code_commit": "9fea825bf4d0822c4ff2ad0a11b616bead7469d7",
+    "sqlite_tests_passed": 815,
+    "sqlite_seconds": 68.31,
+    "postgresql_tests_passed": 815,
+    "postgresql_seconds": 138.19,
+    "focused_tests_passed": 36,
+    "ruff": "passed",
+    "mypy_files": 117,
+    "dependency_audit": "passed",
+    "migration_demo_replay_downgrade": "passed"
+  }
+}
