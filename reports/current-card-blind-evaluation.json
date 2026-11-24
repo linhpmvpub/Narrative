@@ -1,0 +1,99 @@
+{
+  "tp": 12,
+  "fp": 0,
+  "tn": 62,
+  "fn": 15,
+  "unresolved": 1,
+  "precision": 1.0,
+  "recall": 0.4444444444444444,
+  "clusters": 9,
+  "pairs": 90,
+  "packet_sha256": "8d13a03d0298c93cb469f220ae541cf843906c2a364814b8fb67f7dec3f71c64",
+  "disagreements": 1,
+  "by_company": {
+    "AMD": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 16,
+      "fn": 1,
+      "unresolved": 1,
+      "positive_clusters": 1
+    },
+    "DELL": {
+      "tp": 4,
+      "fp": 0,
+      "tn": 9,
+      "fn": 5,
+      "unresolved": 0,
+      "positive_clusters": 7
+    },
+    "MU": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 9,
+      "fn": 0,
+      "unresolved": 0,
+      "positive_clusters": 0
+    },
+    "NVDA": {
+      "tp": 5,
+      "fp": 0,
+      "tn": 16,
+      "fn": 6,
+      "unresolved": 0,
+      "positive_clusters": 7
+    },
+    "SNDK": {
+      "tp": 3,
+      "fp": 0,
+      "tn": 12,
+      "fn": 3,
+      "unresolved": 0,
+      "positive_clusters": 4
+    }
+  },
+  "reference_kind": "AI_CONSENSUS_REVIEW",
+  "independent_gold": false,
+  "matcher": "feed_cards",
+  "delivery": "disabled",
+  "cloud_data_deployment": false,
+  "validation": {
+    "focused_tests": 16,
+    "seconds": 32.96,
+    "ruff": "passed",
+    "mypy_files": 123,
+    "github_ci": {
+      "run_id": 45358511303,
+      "commit": "581e35a01a5d76b0f3b4d296713e16328116fe87",
+      "conclusion": "success",
+      "sqlite": {
+        "passed": 873,
+        "seconds": 77.75
+      },
+      "postgresql": {
+        "passed": 873,
+        "seconds": 156.74
+      },
+      "dependency_audit": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    }
+  },
+  "limits": [
+    "Nine curated URL clusters; economic-event independence not audited",
+    "Issuer-heavy sample, no dedicated Micron issuer article",
+    "AI contexts are not human ground truth",
+    "Not production acceptance or push accuracy",
+    "No rules or profiles tuned on this cohort"
+  ],
+  "next_priorities": [
+    "Source-backed NAND process density and Flash Ventures financing",
+    "Explicit sector-context relevance distinct from company-specific exposure",
+    "Micron source restoration and new positive examples",
+    "Fresh disjoint cohort after future changes"
+  ],
+  "acceptance": "NOT_ACCEPTED_RECALL_AND_COVERAGE_GAPS",
+  "prediction_sha256": "5a7aa7740af8f198791a8f528b552b3a58b010349dfc0bab8ff27e7c0c092089",
+  "prior_packets_checked": 29,
+  "captures_selected": 10,
+  "excluded": 1
+}
