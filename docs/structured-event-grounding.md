@@ -74,3 +74,16 @@ company database, broaden extraction against a declared grammar/ontology specifi
 holdout. Record unsupported coverage and unresolved scope, not just precision on
 selected candidates. Preserve separate industry-context and verified-company exposure
 labels. Financial strength/horizon calibration and live push remain pending.
+
+## Validation
+
+71 focused regressions passed, including49 new structured-event tests. After the
+immediate output-bound guard, all49 structured tests passed again. Fresh CLI output
+matched the synthetic integration artifact exactly; a500rule/3clause stress batch
+failed closed at the candidate limit. Ruff and mypy131files passed.
+
+CI45406267040 on0251891be305c71127888f261ef19fa31dfefef9 passed993SQLite tests
+(125.63s) and993PostgreSQL tests(209.65s), dependency audits, JavaScript syntax and
+migration/seed/replay/downgrade. These are software regressions, not a blind news
+accuracy score. Final baseline is evaluation-baseline-v2; the first successor remains
+preserved as superseded after the output-bound change.

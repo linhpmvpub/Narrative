@@ -18,10 +18,24 @@
     "focused_seconds": 43.25,
     "ruff": "passed",
     "mypy_files": 131,
-    "ci": "pending",
+    "ci": {
+      "run_id": 45406267040,
+      "commit": "0251891be305c71127888f261ef19fa31dfefef9",
+      "conclusion": "success",
+      "sqlite_passed": 993,
+      "sqlite_seconds": 125.63,
+      "postgresql_passed": 993,
+      "postgresql_seconds": 209.65,
+      "dependency_audit": "passed",
+      "migration_seed_replay_downgrade": "passed",
+      "javascript": "passed"
+    },
     "final_focused_passed": 49,
-    "final_focused_seconds": 3.21
+    "final_focused_seconds": 3.21,
+    "cli_demo": "one synthetic candidate; exact output equality",
+    "output_limit_stress": "500 duplicate-scope rules with three clauses rejected at output cap"
   },
   "superseded_initial_successor_baseline": "1e736223ea4b4cb16e696798517700e9e998129523c9526b9c36f27156237c45",
-  "reason": "Immediate candidate-output bound before continuing extraction"
+  "reason": "Immediate candidate-output bound before continuing extraction",
+  "final_baseline_created_at": "2026-11-24T13:42:43.221564+00:00"
 }
