@@ -11,7 +11,25 @@
     "ruff": "passed",
     "mypy_files": 123,
     "cli_live_queue": "passed",
-    "full_ci": "pending"
+    "full_ci": {
+      "run_id": 45356018050,
+      "commit": "53a5e14f60c9bf763bea0a08762836995b604742",
+      "conclusion": "success",
+      "sqlite": {
+        "passed": 872,
+        "seconds": 133.83
+      },
+      "postgresql": {
+        "passed": 872,
+        "seconds": 247.15
+      },
+      "migration_seed_replay_downgrade": "passed",
+      "dependency_audits": "passed"
+    },
+    "preference_and_fresh_process_regressions": {
+      "passed": 11,
+      "seconds": 31.46
+    }
   },
   "limitations": [
     "Local operator CLI, no new remote admin UI",
