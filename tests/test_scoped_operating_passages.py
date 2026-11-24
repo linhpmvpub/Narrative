@@ -79,3 +79,21 @@ def test_scope_does_not_bypass_previous_period(scoped, tmp_path):
     r = freeze(scope, source, reviews, out, [old / "packet.json"])
     assert r["selected"] == 0 and r["previously_exposed"] == 1
     assert not (out / "predictions.json").exists()
+
+
+def test_cited_future_period_is_not_a_realized_reporting_period(scoped):
+    scope, source, reviews = scoped
+    originals = json.loads((source / "packet.json").read_text())
+    originals[0]["filing_date"] = "2026-04-25"
+    save(source / "packet.json", originals)
+    save(source / "receipt.json", {"packet_sha256": digest(originals)})
+    rows = json.loads((scope / "packet.json").read_text())
+    rows[0]["family"] = originals[0]
+    save(scope / "packet.json", rows)
+    save(scope / "receipt.json", {"packet_sha256": digest(rows)})
+    for path in reviews:
+        review = json.loads(path.read_text())
+        review["packet_sha256"] = digest(rows)
+        save(path, review)
+    selected, held = approved_rows(scope, source, reviews)
+    assert not selected and len(held) == 1

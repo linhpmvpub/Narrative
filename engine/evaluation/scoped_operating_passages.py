@@ -1,7 +1,7 @@
 """Freeze exact, independently scoped excerpts without approving their whole filing."""
 
 import hashlib
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 
 from engine.evaluation.archived_profile_relevance import freeze_selected
 from engine.evaluation.held_role_corpus import read
@@ -64,7 +64,8 @@ def approved_rows(directory, source_root, review_paths):
         citation = cited_date(docs, period, True)
         if (any(v["approved"] is not True or v["external_context_required"] is not False
                 or v["scope"] != "EXACT_PASSAGE_INFORMATIONAL_ONLY" for v in pair)
-                or period != pair[1]["economic_period"] or not citation):
+                or period != pair[1]["economic_period"] or not citation
+                or date.fromisoformat(period) > date.fromisoformat(family["filing_date"])):
             withheld.append(row["id"])
             continue
         selected.append({**row, "period": period, "period_citation": citation,
