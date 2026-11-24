@@ -152,3 +152,17 @@ snapshot has13financial sets, with exact revenue reconciliation and preserved
 periods/source cell IDs. These numeric financial contexts are separate from the
 7numeric exposure facts; no revenue share becomes an impact weight. Raw values and
 selections remain in local ignored artifacts.
+
+
+## Financial scope projection and evaluation baseline
+
+The reporting layer now projects22revenue buckets separately from the base graph,
+with four reviewed subset/contains links for DELL, NVIDIA and MU. It does not add
+causal routes or allocate a full segment share to a product. See
+`docs/financial-scope-baseline.md` for explicit binding review and freeze commands.
+
+A local pinned baseline fixes atlas artifacts, existing group criteria and fingerprints
+of engine/web code, config and declared dependency manifests. It currently has zero
+event clusters and no locked predictions/labels. It is a current research baseline,
+not automatically a historically valid as-of backtest or product acceptance result.
+Collect disjoint economic-event clusters and review source timing before evaluation.

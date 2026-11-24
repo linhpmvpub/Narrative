@@ -25,6 +25,16 @@
     "javascript": "passed",
     "edge": "five financial layers,source binding evidence,desktop/mobile,no HTTP requests",
     "baseline_verify": "passed",
-    "ci": "pending"
+    "ci": {
+      "run_id": 45397881250,
+      "commit": "1a87e397a904e5d2034568bf63c4c020e9ebf68e",
+      "conclusion": "success",
+      "sqlite_passed": 944,
+      "sqlite_seconds": 77.49,
+      "postgresql_passed": 944,
+      "postgresql_seconds": 153.12,
+      "dependency_audit": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    }
   }
 }
