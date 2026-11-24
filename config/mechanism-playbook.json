@@ -1,0 +1,692 @@
+{
+  "schema": "mechanism-playbook-v1",
+  "version": 1,
+  "status": "EXPLICIT_RULES_UNCALIBRATED",
+  "groups": {
+    "supply_disruption": {
+      "title": "Gián đoạn nguồn cung",
+      "driver": "Mức gián đoạn",
+      "channel": "input_availability",
+      "driver_up_channel_sign": -1,
+      "conditions": [
+        "Đúng đầu vào và phạm vi cơ sở",
+        "Tồn kho/nguồn thay thế không bù hết"
+      ],
+      "required_parameters": [
+        "inventory_days",
+        "substitutability",
+        "supplier_concentration"
+      ],
+      "subtypes": [
+        {
+          "id": "supply_disruption.outage",
+          "title": "Dừng/gián đoạn sản xuất"
+        },
+        {
+          "id": "supply_disruption.logistics",
+          "title": "Gián đoạn vận chuyển"
+        },
+        {
+          "id": "supply_disruption.recovery",
+          "title": "Khôi phục nguồn cung"
+        }
+      ]
+    },
+    "input_price": {
+      "title": "Thay đổi giá đầu vào",
+      "driver": "Giá đầu vào",
+      "channel": "unit_cost",
+      "driver_up_channel_sign": 1,
+      "conditions": [
+        "Giá mới áp dụng với hợp đồng mua",
+        "Phân biệt chi phí và biên lợi nhuận"
+      ],
+      "required_parameters": [
+        "contract_reset_days",
+        "pass_through",
+        "hedging"
+      ],
+      "subtypes": [
+        {
+          "id": "input_price.spot",
+          "title": "Biến động giá giao ngay"
+        },
+        {
+          "id": "input_price.contract",
+          "title": "Điều chỉnh giá hợp đồng"
+        },
+        {
+          "id": "input_price.tariff",
+          "title": "Thuế/phí làm đổi giá đầu vào"
+        }
+      ]
+    },
+    "capacity": {
+      "title": "Mở rộng/thu hẹp công suất",
+      "driver": "Công suất",
+      "channel": "production_capacity",
+      "driver_up_channel_sign": 1,
+      "conditions": [
+        "Có vốn, thiết bị và giấy phép",
+        "Phân biệt kế hoạch, lắp đặt và vận hành"
+      ],
+      "required_parameters": [
+        "ramp_days",
+        "utilization",
+        "yield"
+      ],
+      "subtypes": [
+        {
+          "id": "capacity.announcement",
+          "title": "Kế hoạch công suất"
+        },
+        {
+          "id": "capacity.commissioning",
+          "title": "Đưa công suất vào vận hành"
+        },
+        {
+          "id": "capacity.retirement",
+          "title": "Đóng/thu hẹp công suất"
+        }
+      ]
+    },
+    "demand": {
+      "title": "Thay đổi nhu cầu",
+      "driver": "Nhu cầu",
+      "channel": "order_opportunity",
+      "driver_up_channel_sign": 1,
+      "conditions": [
+        "Đúng thị trường/sản phẩm",
+        "Nhu cầu chưa đồng nghĩa đơn hàng của công ty"
+      ],
+      "required_parameters": [
+        "market_share",
+        "customer_concentration",
+        "competition"
+      ],
+      "subtypes": [
+        {
+          "id": "demand.end_market",
+          "title": "Nhu cầu thị trường đầu ra"
+        },
+        {
+          "id": "demand.orders",
+          "title": "Đơn hàng/hủy đơn hàng"
+        },
+        {
+          "id": "demand.customer_capex",
+          "title": "Chi đầu tư của khách hàng"
+        }
+      ]
+    },
+    "technology": {
+      "title": "Thay đổi công nghệ",
+      "driver": "Năng lực kỹ thuật",
+      "channel": "technical_capability",
+      "driver_up_channel_sign": 1,
+      "conditions": [
+        "Kiểm tra chỉ tiêu kỹ thuật và điều kiện đo",
+        "Mẫu thử chưa đồng nghĩa sản xuất hàng loạt"
+      ],
+      "required_parameters": [
+        "qualification_days",
+        "substitutability",
+        "yield"
+      ],
+      "subtypes": [
+        {
+          "id": "technology.sample",
+          "title": "Mẫu thử/thông số công nghệ"
+        },
+        {
+          "id": "technology.qualification",
+          "title": "Chứng nhận/đạt chuẩn khách hàng"
+        },
+        {
+          "id": "technology.volume",
+          "title": "Triển khai công nghệ quy mô sản xuất"
+        }
+      ]
+    },
+    "financing": {
+      "title": "Tài trợ/cam kết vốn",
+      "driver": "Nguồn vốn khả dụng",
+      "channel": "funded_capacity_option",
+      "driver_up_channel_sign": 1,
+      "conditions": [
+        "Đúng đơn vị nhận vốn và mục đích sử dụng",
+        "Cam kết chưa đồng nghĩa giải ngân hoặc công suất"
+      ],
+      "required_parameters": [
+        "funding_conditions",
+        "ramp_days",
+        "permit_status"
+      ],
+      "subtypes": [
+        {
+          "id": "financing.commitment",
+          "title": "Cam kết tài trợ"
+        },
+        {
+          "id": "financing.disbursement",
+          "title": "Giải ngân"
+        },
+        {
+          "id": "financing.refinancing",
+          "title": "Tái cấp vốn/điều kiện vốn"
+        }
+      ]
+    },
+    "policy": {
+      "title": "Chính sách/cấp phép",
+      "driver": "Mức hạn chế",
+      "channel": "market_access",
+      "driver_up_channel_sign": -1,
+      "conditions": [
+        "Đúng khu vực, sản phẩm và pháp nhân",
+        "Kiểm tra hiệu lực, ngoại lệ và thời hạn"
+      ],
+      "required_parameters": [
+        "exemptions",
+        "geographic_mix",
+        "substitutability"
+      ],
+      "subtypes": [
+        {
+          "id": "policy.restriction",
+          "title": "Hạn chế tiếp cận thị trường"
+        },
+        {
+          "id": "policy.license",
+          "title": "Cấp/thu hồi giấy phép"
+        },
+        {
+          "id": "policy.exemption",
+          "title": "Ngoại lệ và thời hạn"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "exposure_share": {
+      "description": "Tỷ trọng phơi nhiễm; phải ghi rõ mẫu số, sản phẩm và kỳ.",
+      "unit": "fraction",
+      "minimum": 0,
+      "maximum": 1,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "supplier_concentration": {
+      "description": "Tỷ trọng mua từ nhà cung cấp trong cùng mẫu số/kỳ.",
+      "unit": "fraction",
+      "minimum": 0,
+      "maximum": 1,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "supplier_concentration_qualitative": {
+      "description": "Mô tả phụ thuộc nhà cung cấp, không quy đổi thành tỷ lệ.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "customer_concentration": {
+      "description": "Tỷ trọng doanh thu khách hàng, đúng pháp nhân và kỳ.",
+      "unit": "fraction",
+      "minimum": 0,
+      "maximum": 1,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "customer_concentration_qualitative": {
+      "description": "Mô tả tập trung khách hàng; không suy ra tỷ trọng.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "substitutability": {
+      "description": "Nguồn thay thế đã xác định và điều kiện sử dụng; không mặc định có thể thay ngay.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "inventory_days": {
+      "description": "Số ngày đầu vào sử dụng được để bù gián đoạn; không dùng DIO kế toán thay thế.",
+      "unit": "days",
+      "minimum": 0,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "contract_reset_days": {
+      "description": "Thời gian đến khi giá hợp đồng áp dụng lại.",
+      "unit": "days",
+      "minimum": 0,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "pass_through": {
+      "description": "Phần biến động chi phí được chuyển cho khách hàng; cần điều khoản và mẫu số.",
+      "unit": "fraction",
+      "minimum": 0,
+      "maximum": 1,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "hedging": {
+      "description": "Công cụ/phạm vi/phần được bảo hiểm giá, không mặc định toàn bộ.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "ramp_days": {
+      "description": "Thời gian tăng công suất đến mức mục tiêu có định nghĩa.",
+      "unit": "days",
+      "minimum": 0,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "utilization": {
+      "description": "Công suất đang sử dụng / công suất khả dụng, cùng phạm vi.",
+      "unit": "fraction",
+      "minimum": 0,
+      "maximum": 1,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "yield": {
+      "description": "Sản phẩm đạt chuẩn / đầu vào sản xuất, cùng công nghệ và kỳ.",
+      "unit": "fraction",
+      "minimum": 0,
+      "maximum": 1,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "market_share": {
+      "description": "Doanh số công ty / thị trường có định nghĩa, cùng kỳ.",
+      "unit": "fraction",
+      "minimum": 0,
+      "maximum": 1,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "competition": {
+      "description": "Đối thủ và khả năng thay thế có nguồn; không tự cho điểm cạnh tranh.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "qualification_days": {
+      "description": "Thời gian kiểm định/phê duyệt khách hàng có nguồn.",
+      "unit": "days",
+      "minimum": 0,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "funding_conditions": {
+      "description": "Điều kiện giải ngân/sử dụng vốn còn phải đáp ứng.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "permit_status": {
+      "description": "Tình trạng giấy phép; không đồng nhất nộp hồ sơ và được duyệt.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "exemptions": {
+      "description": "Ngoại lệ chính sách đúng hàng hóa/pháp nhân/thời hạn.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "geographic_mix": {
+      "description": "Tỷ trọng theo vùng; cần phân biệt nơi bán, sản xuất và xuất xứ.",
+      "unit": "fraction",
+      "minimum": 0,
+      "maximum": 1,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "duration_days": {
+      "description": "Thời lượng tác động được nguồn hỗ trợ; không lấy thời hạn hợp đồng thay thế.",
+      "unit": "days",
+      "minimum": 0,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "procurement_terms": {
+      "description": "Điều khoản mua hàng: khối lượng, định giá, tối thiểu và điều kiện.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "customer_contract_terms": {
+      "description": "Điều khoản với khách hàng, chưa đồng nghĩa đơn hàng chắc chắn.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "manufacturing_model": {
+      "description": "Tự sản xuất, thuê ngoài hay liên doanh và phạm vi sở hữu.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "utility_dependency": {
+      "description": "Phụ thuộc điện/nước/khí theo cơ sở sản xuất.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "pricing_reset_frequency": {
+      "description": "Tần suất định giá, không suy ra ngay ngày hiệu lực.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "net_cost_basis": {
+      "description": "Cơ sở chi phí ròng, loại chi phí và khoản bù trừ.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "contract_term": {
+      "description": "Thời hạn hợp đồng, không phải thời lượng tác động.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "inventory_context": {
+      "description": "Tồn kho kế toán/đặc điểm lưu kho, chưa là số ngày nguồn cung.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    },
+    "pass_through_terms": {
+      "description": "Điều khoản chuyển giá định tính, không tự chuyển thành phần trăm.",
+      "unit": "category",
+      "minimum": null,
+      "maximum": null,
+      "unknown_policy": "KEEP_UNKNOWN_NEVER_ZERO",
+      "numeric_requires": [
+        "period_label",
+        "measurement_basis",
+        "reported_precision",
+        "source_evidence"
+      ]
+    }
+  },
+  "rules": [
+    {
+      "id": "R01",
+      "condition": "source_and_event_integrity",
+      "failure": "REJECT_INVALID_INPUT"
+    },
+    {
+      "id": "R02",
+      "condition": "untruncated_paths",
+      "failure": "HOLD_TRUNCATED"
+    },
+    {
+      "id": "R03",
+      "condition": "at_least_one_directed_path",
+      "failure": "NO_PATH"
+    },
+    {
+      "id": "R04",
+      "condition": "phase_operating",
+      "failure": "WATCH_PLAN_OR_COMMITMENT"
+    },
+    {
+      "id": "R05",
+      "condition": "event_exposure_scope_independently_reviewed",
+      "failure": "REVIEW_SCOPE"
+    },
+    {
+      "id": "R06",
+      "condition": "relation_scoped_parameters_available",
+      "failure": "REVIEW_DATA"
+    },
+    {
+      "id": "R07",
+      "condition": "causal_magnitude_and_timing_validated",
+      "failure": "REVIEW_CAUSALITY"
+    }
+  ],
+  "horizon_bins": {
+    "short_max_days": 90,
+    "medium_max_days": 365,
+    "basis": "EDITORIAL_BINS_NOT_EMPIRICAL_LAGS"
+  },
+  "ranking_weights": null,
+  "delivery": "disabled",
+  "price_prediction": null,
+  "sensitivity_models": {
+    "COST_SENSITIVITY_V1": {
+      "status": "SCENARIO_ONLY_NOT_CALIBRATED",
+      "formula": "input_cost_share * unhedged_share * reset_share * price_change * (1-pass_through)",
+      "output_unit": "fraction_of_same_period_baseline_cost",
+      "inputs": {
+        "input_cost_share": {
+          "unit": "fraction",
+          "min": 0,
+          "max": 1,
+          "meaning": "Affected input cost / same-period baseline cost pool; not revenue share."
+        },
+        "unhedged_share": {
+          "unit": "fraction",
+          "min": 0,
+          "max": 1,
+          "meaning": "Share of that input exposure without price protection."
+        },
+        "reset_share": {
+          "unit": "fraction",
+          "min": 0,
+          "max": 1,
+          "meaning": "Share of the unhedged slice whose purchase prices reset within the scenario period."
+        },
+        "price_change": {
+          "unit": "fraction_change",
+          "min": -1,
+          "max": 10,
+          "meaning": "Relative input price change; upper bound10 is a computational scenario limit, not an empirical threshold."
+        },
+        "pass_through": {
+          "unit": "fraction",
+          "min": 0,
+          "max": 1,
+          "meaning": "Realized recovery from customers / incremental cost of the same reset, unhedged slice."
+        }
+      },
+      "assumptions": [
+        "Same cost pool, scope and period",
+        "Conditional fractions; do not multiply unrelated marginal shares",
+        "Linear sensitivity; volumes, FX and demand fixed",
+        "No profit, revenue, EPS or stock-price prediction"
+      ]
+    }
+  }
+}
