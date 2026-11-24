@@ -212,6 +212,9 @@ def evaluate(directory: Path, labels_path: Path):
 
     packet, predictions, frozen = read("packet.json"), read("predictions.json"), read("freeze.json")
     labels = json.loads(labels_path.read_text(encoding="utf-8"))
+    if frozen.get("prediction_track") == "full_article_relevance":
+        from engine.evaluation.article_relevance import verify_frozen
+        verify_frozen(directory, packet, frozen)
     if frozen.get("prediction_track") == "text_relevance":
         feed_predictions = read("feed_predictions.json")
         if (digest(feed_predictions) != frozen.get("feed_predictions_sha256")
@@ -274,7 +277,9 @@ def evaluate(directory: Path, labels_path: Path):
         "prediction_track": frozen.get("prediction_track", "feed"),
         "packet_sha256": frozen["packet_sha256"], "labels_sha256": digest(labels),
         "errors": errors, "delivery": "disabled",
-        "limitations": ["Latest-URL convenience sample; pairs are correlated within articles",
+        "limitations": [("Curated full-body convenience sample; pairs are correlated within articles"
+                         if frozen.get("prediction_track") == "full_article_relevance" else
+                         "Latest-URL convenience sample; pairs are correlated within articles"),
                         "Unknown references excluded, never counted as negatives",
                         "Relevance only, not financial impact or push accuracy"]}
 

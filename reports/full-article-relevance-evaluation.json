@@ -1,0 +1,225 @@
+{
+  "cohort_date": "2026-11-24",
+  "prediction_track": "full_article_relevance",
+  "frozen_at": "2026-11-24T06:59:49.514841+00:00",
+  "packet_sha256": "24f7585d469a7ba2f1240b9704a86edfce08f5a451126d58a2b9231b6e93b01d",
+  "predictions_sha256": "7135c5a66e159888d0ad9c9d09854f43359327bbf5ec327e7bfe26ef5cb159a9",
+  "articles": 15,
+  "pairs": 150,
+  "profiles": {
+    "AMD": 7,
+    "DELL": 4,
+    "SNDK": 2,
+    "NVDA": 11,
+    "MU": 2
+  },
+  "metrics": {
+    "tp": 23,
+    "fp": 12,
+    "tn": 97,
+    "fn": 5,
+    "unresolved": 13,
+    "selected_unresolved": 3,
+    "precision": 0.6571428571428571,
+    "recall": 0.8214285714285714,
+    "by_narrative": {
+      "amd-supply-2026:foundry-resilience": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 15,
+        "fn": 0,
+        "unresolved": 0,
+        "precision": null,
+        "recall": null
+      },
+      "amd-supply-2026:rack-deployment": {
+        "tp": 6,
+        "fp": 0,
+        "tn": 8,
+        "fn": 1,
+        "unresolved": 0,
+        "precision": 1.0,
+        "recall": 0.8571428571428571
+      },
+      "dell-supply-2026:server-demand": {
+        "tp": 8,
+        "fp": 2,
+        "tn": 4,
+        "fn": 1,
+        "unresolved": 0,
+        "precision": 0.8,
+        "recall": 0.8888888888888888
+      },
+      "dell-supply-2026:input-resilience": {
+        "tp": 0,
+        "fp": 4,
+        "tn": 8,
+        "fn": 1,
+        "unresolved": 2,
+        "precision": 0.0,
+        "recall": 0.0
+      },
+      "mu-supply-2026:memory-supply": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 15,
+        "fn": 0,
+        "unresolved": 0,
+        "precision": null,
+        "recall": null
+      },
+      "nvda-h20-historical:market-access-example": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 15,
+        "fn": 0,
+        "unresolved": 0,
+        "precision": null,
+        "recall": null
+      },
+      "nvda-supply-2026:supply-resilience": {
+        "tp": 0,
+        "fp": 4,
+        "tn": 4,
+        "fn": 0,
+        "unresolved": 7,
+        "precision": 0.0,
+        "recall": null
+      },
+      "nvda-supply-2026:customer-buildout": {
+        "tp": 7,
+        "fp": 2,
+        "tn": 4,
+        "fn": 0,
+        "unresolved": 2,
+        "precision": 0.7777777777777778,
+        "recall": 1.0
+      },
+      "sndk-supply-2026:nand-supply": {
+        "tp": 2,
+        "fp": 0,
+        "tn": 13,
+        "fn": 0,
+        "unresolved": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "sndk-supply-2026:storage-demand": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 11,
+        "fn": 2,
+        "unresolved": 2,
+        "precision": null,
+        "recall": 0.0
+      }
+    }
+  },
+  "reviewers": 2,
+  "reference_kind": "AI_CONSENSUS_REVIEW_NOT_HUMAN_GOLD",
+  "disagreements": 13,
+  "previous_profile_comparison": {
+    "counts": {
+      "tp": 17,
+      "fp": 10,
+      "tn": 99,
+      "fn": 11,
+      "unresolved": 13
+    },
+    "by_narrative": {
+      "amd-supply-2026:foundry-resilience": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 15,
+        "fn": 0,
+        "unresolved": 0
+      },
+      "amd-supply-2026:rack-deployment": {
+        "tp": 1,
+        "fp": 0,
+        "tn": 8,
+        "fn": 6,
+        "unresolved": 0
+      },
+      "dell-supply-2026:server-demand": {
+        "tp": 7,
+        "fp": 0,
+        "tn": 6,
+        "fn": 2,
+        "unresolved": 0
+      },
+      "dell-supply-2026:input-resilience": {
+        "tp": 0,
+        "fp": 4,
+        "tn": 8,
+        "fn": 1,
+        "unresolved": 2
+      },
+      "mu-supply-2026:memory-supply": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 15,
+        "fn": 0,
+        "unresolved": 0
+      },
+      "nvda-h20-historical:market-access-example": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 15,
+        "fn": 0,
+        "unresolved": 0
+      },
+      "nvda-supply-2026:supply-resilience": {
+        "tp": 0,
+        "fp": 4,
+        "tn": 4,
+        "fn": 0,
+        "unresolved": 7
+      },
+      "nvda-supply-2026:customer-buildout": {
+        "tp": 7,
+        "fp": 2,
+        "tn": 4,
+        "fn": 0,
+        "unresolved": 2
+      },
+      "sndk-supply-2026:nand-supply": {
+        "tp": 2,
+        "fp": 0,
+        "tn": 13,
+        "fn": 0,
+        "unresolved": 0
+      },
+      "sndk-supply-2026:storage-demand": {
+        "tp": 0,
+        "fp": 0,
+        "tn": 11,
+        "fn": 2,
+        "unresolved": 2
+      }
+    },
+    "baseline_at": "2026-11-24T07:01:52.573758+00:00",
+    "comparison": "Previous profile matcher on current full-body targets; AMD scope clarification changed, not original-target historical evaluation",
+    "prediction_sha256": "bbc3dd1d1e205581b6a91c8201131d168d9c6e3c5d6c68e7c4fe86a9f6da1e2b",
+    "packet_sha256": "24f7585d469a7ba2f1240b9704a86edfce08f5a451126d58a2b9231b6e93b01d"
+  },
+  "active_registry_promoted": false,
+  "notifications_enabled": false,
+  "data_local": true,
+  "limitations": [
+    "Purposive 15-document convenience sample, not market-wide quality",
+    "Ten targets include one historical NVIDIA example; 150 pairs are not independent events",
+    "Current profiles and retrieved-now bodies on older publications; no historical as-of or freshness claim",
+    "AMD scope explicitly clarifies conditional industry constraints; previous-profile comparison uses current targets",
+    "Inline HTML can fragment visible lines; boilerplate and cautionary language still cause false positives",
+    "SNDK positive coverage remains small, no launch acceptance"
+  ],
+  "validation": {
+    "focused_tests": 37,
+    "final_full_article_tests": 9,
+    "ruff": "passed",
+    "mypy_files": 118,
+    "local_full_suite": "running",
+    "github_ci": "pending"
+  }
+}
