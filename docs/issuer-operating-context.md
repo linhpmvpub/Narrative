@@ -1,0 +1,15 @@
+# Own-issuer product operating context
+
+`ISSUER_OPERATING_CONTEXT` is an opt-in profile binding for informational relevance of a company's own product operations. It requires a sourced product anchor, explicit narrative IDs, current review clocks, issuer-supply scope and curated topic/context/change terms. Context phrases begin with `our ` or `we `. Party references and aliases are disallowed. Existing profile evidence verification and temporal product-to-narrative paths still apply.
+
+The caller must supply trusted source CIK matching the profile CIK. Payload ticker/CIK fields cannot activate this binding, so unverified RSS cannot use it. Topic, issuer context and change must occur in the same original sentence. Match spans preserve offsets, including decimal numbers. Quotation marks, third-party/competitor attribution, hypothetical/forward-looking or negated statements are withheld conservatively. This is bounded literal routing, not full semantic attribution or numerical impact extraction.
+
+No new supplier/customer edge, legal-entity merge, polarity, magnitude, price forecast or notification is produced. Reviewed-role feed projection still requires its existing explicit purchase-role evidence: this new capability is not an automatic release of operating claims into that endpoint. A separate reviewed operating-card integration and quote-speaker verification remain work to do.
+
+## Development evidence, 2026-11-24
+
+The active profile registry was copied into a separate ignored development registry at `source-cache/issuer-operations-development-2026-11-24/profiles`. Its NVIDIA v9 and Micron v3 add current, source-cited operating bindings to existing product paths. Active feed profiles remain NVIDIA v8/Micron v2. No new relationship facts or source clocks were invented; source bytes and original evidence were copied and verified, and added binding availability uses actual current UTC time.
+
+Replaying the exposed 20-pair event challenge changes TP0/FN3 to TP2/FN1 with FP0/TN10 and seven unresolved (none selected). This is post-label development only, not independent accuracy or a replacement for the immutable blind result. The remaining Micron positive is quoted speech; the matcher deliberately does not infer the speaker from the filing issuer. Only two excerpts supply the three positive pairs, so these counts do not establish broad quality.
+
+Before activating these profile versions or making quality claims, validate on different issuer/economic-event families with predictions frozen before new independent labels. The currently clean 19-family pool has already been reviewed; eleven context-limited families need additional evidence or a separately reviewed narrower scope. Preserve all prior frozen artifacts and exclude them from subsequent sampling. Raw profiles, sources, predictions and labels remain local; real notifications stay disabled.

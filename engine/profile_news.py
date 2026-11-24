@@ -16,6 +16,7 @@ from sqlalchemy import and_, select
 from engine.adapters.news import canonical_url, parse_feed
 from engine.company_profiles import RELATIONS, available_bundles, paths
 from engine.ingestion.contracts import digest
+from engine.issuer_operations import operating_matches
 from engine.models.contracts import utc
 from engine.models.schema_v13 import news_items, news_revisions, news_sources
 from engine.news_capture import read_capture
@@ -31,6 +32,8 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
     groups = ("topic_terms", "context_terms", "change_terms")
+    if binding.kind == "ISSUER_OPERATING_CONTEXT":
+        return operating_matches(binding, fields["summary"], issuer_cik, profile_cik)
     if binding.kind == "SUPPLIER_ROLE_DISCLOSURE":
         if (not valid_cik(issuer_cik) or not valid_cik(profile_cik)
                 or int(issuer_cik) == int(profile_cik)):

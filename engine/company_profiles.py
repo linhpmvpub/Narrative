@@ -244,7 +244,7 @@ class FactorBinding(Strict):
     context_terms: list[TEXT] = Field(min_length=1, max_length=20)
     change_terms: list[TEXT] = Field(default_factory=list, max_length=30)
     kind: Literal["ECONOMIC_CHANGE", "ISSUER_RELATIONSHIP_DISCLOSURE",
-                  "SUPPLIER_ROLE_DISCLOSURE"] = "ECONOMIC_CHANGE"
+                  "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT"] = "ECONOMIC_CHANGE"
     issuer_supply_scope: bool = False
     disclosure_terms: list[TEXT] = Field(default_factory=list, max_length=20)
     narrative_ids: list[ID] = Field(default_factory=list, max_length=20)
@@ -260,7 +260,7 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
-        if self.kind == "ECONOMIC_CHANGE":
+        if self.kind in {"ECONOMIC_CHANGE", "ISSUER_OPERATING_CONTEXT"}:
             if not self.change_terms or self.disclosure_terms:
                 raise ValueError("Economic rule requires changes, not disclosure terms")
         elif self.change_terms or not self.disclosure_terms or not self.narrative_ids:
@@ -277,6 +277,11 @@ class FactorBinding(Strict):
             raise ValueError("Disclosure subject phrases cannot be expanded by aliases")
         if self.kind == "SUPPLIER_ROLE_DISCLOSURE" and self.term_aliases:
             raise ValueError("Supplier role terms must be explicit, without aliases")
+        if self.kind == "ISSUER_OPERATING_CONTEXT" and (
+                not self.narrative_ids or not self.issuer_supply_scope
+                or self.entity_reference_id or self.term_aliases
+                or any(not t.casefold().startswith(("our ", "we ")) for t in self.context_terms)):
+            raise ValueError("Operating context requires explicit issuer/narrative scope without aliases or parties")
         if not self.term_aliases.keys() <= set(terms):
             raise ValueError("Alias key must be an explicit binding term")
         for key, variants in self.term_aliases.items():
@@ -381,7 +386,7 @@ class ProfileBundle(Strict):
                 raise ValueError("Binding references unknown narrative")
             if binding.issuer_supply_scope and not binding.narrative_ids:
                 raise ValueError("Issuer supply scope requires approved narratives")
-            if binding.kind == "SUPPLIER_ROLE_DISCLOSURE" and not any(
+            if binding.kind in {"SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT"} and not any(
                     n.id == binding.factor_id and n.kind == "product" for n in self.nodes):
                 raise ValueError("Supplier role must anchor a sourced product node")
             if binding.entity_reference_id is not None:
@@ -393,7 +398,7 @@ class ProfileBundle(Strict):
                         v.casefold() not in names for t in binding.topic_terms
                         for v in binding.term_aliases.get(t, [])):
                     raise ValueError("Entity-bound topic terms must be sourced reference names")
-            if (binding.kind != "SUPPLIER_ROLE_DISCLOSURE"
+            if (binding.kind not in {"SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT"}
                     and (binding.factor_id not in nodes or nodes[binding.factor_id].kind not in {
                         "factor", "input", "supplier", "market", "facility", "location"})):
                 raise ValueError("Binding requires a scoped economic factor")

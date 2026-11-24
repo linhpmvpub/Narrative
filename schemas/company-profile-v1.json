@@ -613,7 +613,8 @@
             "enum": [
               "ECONOMIC_CHANGE",
               "ISSUER_RELATIONSHIP_DISCLOSURE",
-              "SUPPLIER_ROLE_DISCLOSURE"
+              "SUPPLIER_ROLE_DISCLOSURE",
+              "ISSUER_OPERATING_CONTEXT"
             ],
             "title": "Kind",
             "type": "string"
