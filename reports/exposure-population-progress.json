@@ -114,7 +114,28 @@
   "active_feed_profile_root_changed": false,
   "private_artifacts_uploaded": false,
   "validation": {
-    "focused_tests": "pending final result",
-    "full_ci": "pending"
+    "focused_tests": {
+      "passed": 53,
+      "seconds": 15.61
+    },
+    "full_ci": {
+      "run_id": 45375976574,
+      "commit": "bb01fc0c8de110185c5e627c7af79ed69ada66c7",
+      "conclusion": "success",
+      "sqlite": {
+        "passed": 896,
+        "seconds": 149.78
+      },
+      "postgresql": {
+        "passed": 896,
+        "seconds": 267.28
+      }
+    },
+    "ruff": "passed",
+    "mypy_files": 126,
+    "javascript_syntax": "passed",
+    "edge_desktop_mobile": "passed; 31 facts source buttons, six profiles, five tickers; no HTTP requests",
+    "snapshot_hashes_and_sqlite_integrity": "passed",
+    "dependency_audits_and_migration_seed_replay_downgrade": "passed"
   }
 }

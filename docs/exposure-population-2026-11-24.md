@@ -36,9 +36,9 @@ Exact quotes, capture hashes, profile versions, reviewer and timestamps reside i
 
 ## Local access and verification
 
-Open `source-cache/exposure-expansion-2026-11-24/atlas-v3/index.html` locally. Choose a profile and inspect the sourced exposure cards for period, basis, scope and source quotes. SQLite, JSON and integrity manifest sit alongside HTML. No HTTP requests are needed; this is not the live news app or a remotely hosted map.
+Open `source-cache/exposure-expansion-2026-11-24/atlas-v4/index.html` locally. Choose a profile and inspect the sourced exposure cards for period, basis, scope and source quotes. SQLite, JSON and integrity manifest sit alongside HTML. No HTTP requests are needed; this is not the live news app or a remotely hosted map.
 
-Focused regression suite:53passed. Edge smoke exercised five tickers, six profiles, all31fact cards, source evidence, narrative paths, filters,42component slots, seven mechanisms and390px mobile layout with no HTTP requests. Full CI results are in checkpoint and aggregate progress report.
+Focused regression suite:53passed. Edge smoke exercised five tickers, six profiles, all31fact cards, source evidence, narrative paths, filters,42component slots, seven mechanisms and390px mobile layout with no HTTP requests. Full CI45375976574 succeeded on codebb01fc0:896SQLite tests149.78s and896PostgreSQL tests267.28s; dependency audits, lint/type/JS and migration/seed/replay/downgrade passed. Final atlas-v4 integrity checks passed; three preexisting facts advanced toversion2 for added period metadata, with previous snapshots retained.
 
 ## Remaining work
 
