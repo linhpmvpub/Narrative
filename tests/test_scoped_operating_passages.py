@@ -97,3 +97,21 @@ def test_cited_future_period_is_not_a_realized_reporting_period(scoped):
         save(path, review)
     selected, held = approved_rows(scope, source, reviews)
     assert not selected and len(held) == 1
+
+
+def test_sampling_protocol_is_recorded_without_relabeling(scoped, tmp_path, monkeypatch):
+    import engine.evaluation.scoped_operating_passages as module
+
+    scope, source, reviews = scoped
+    protocol = "FIRST_UNQUOTED_REALIZED_PRODUCT_OR_SEGMENT_PARAGRAPH_V1"
+    monkeypatch.setattr(module, "freeze_selected", lambda *args, **kwargs: kwargs["extra_receipt"])
+    receipt = freeze(scope, source, reviews, tmp_path / "new", sampling_protocol=protocol)
+    assert receipt["sampling"] == protocol
+    assert receipt["scope_report"]["selected"] == 1
+
+
+def test_unknown_sampling_protocol_cannot_freeze(scoped, tmp_path):
+    scope, source, reviews = scoped
+    with pytest.raises(ValueError, match="sampling protocol"):
+        freeze(scope, source, reviews, tmp_path / "new", sampling_protocol="PICK_POSITIVES")
+    assert not (tmp_path / "new").exists()

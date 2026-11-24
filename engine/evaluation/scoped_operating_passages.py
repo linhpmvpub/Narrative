@@ -73,7 +73,12 @@ def approved_rows(directory, source_root, review_paths):
     return selected, withheld
 
 
-def freeze(directory, source_root, reviews, output, previous=()):
+def freeze(directory, source_root, reviews, output, previous=(), *,
+           sampling_protocol="FIRST_UNQUOTED_OWN_ISSUER_OPERATING_PARAGRAPH_FIXED_TERMS"):
+    if sampling_protocol not in {
+            "FIRST_UNQUOTED_OWN_ISSUER_OPERATING_PARAGRAPH_FIXED_TERMS",
+            "FIRST_UNQUOTED_REALIZED_PRODUCT_OR_SEGMENT_PARAGRAPH_V1"}:
+        raise ValueError("Unknown fixed sampling protocol")
     if output.exists():
         raise ValueError("Frozen output exists")
     rows, held = approved_rows(directory, source_root, reviews)
@@ -115,8 +120,8 @@ def freeze(directory, source_root, reviews, output, previous=()):
     return freeze_selected(selected, output, len(rows) + len(held), excluded,
         digest(read(directory / "packet.json")), previous, extra_receipt={
             "scope_review_sha256": [digest(read(p)) for p in reviews], "scope_report": report,
-            "sampling": "FIRST_UNQUOTED_OWN_ISSUER_OPERATING_PARAGRAPH_FIXED_TERMS",
+            "sampling": sampling_protocol,
             "limitations": ["Independent exact-passage scope only; whole source remains incomplete",
                 "Source auditors saw documents; relevance labelers must use new contexts",
                 "Present profiles and captures, not point-in-time replay or human gold",
-                "Own-issuer unquoted-text convenience sample, not whole-market accuracy"]})
+                "Unquoted-text convenience sample, not whole-market accuracy"]})
