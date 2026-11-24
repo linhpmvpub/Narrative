@@ -343,5 +343,25 @@
     ],
     "discovery_reference": "https://www.dell.com/en-us/blog/feed/",
     "discovery_only": true
+  },
+  {
+    "id": "nvidia_blog_page2",
+    "name": "NVIDIA official blog page 2",
+    "url": "https://blogs.nvidia.com/feed/?paged=2",
+    "kind": "rss",
+    "category": "company",
+    "interval_seconds": 900,
+    "enabled": true,
+    "discovery_only": true
+  },
+  {
+    "id": "dell_blog_page2",
+    "name": "Dell official blog page 2",
+    "url": "https://www.dell.com/en-us/blog/feed/?paged=2",
+    "kind": "rss",
+    "category": "company",
+    "interval_seconds": 900,
+    "enabled": true,
+    "discovery_only": true
   }
 ]

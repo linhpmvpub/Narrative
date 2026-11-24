@@ -18,6 +18,8 @@ from engine.models.schema_v13 import news_revisions
 from engine.news_capture import archive_capture, read_capture
 
 HOSTS = {
+    "blogs.nvidia.com",
+    "www.dell.com",
     "www.sec.gov",
     "news.skhynix.com",
     "www.eia.gov",
