@@ -21,7 +21,21 @@
       "mobile": "passed",
       "qa_account_removed": true
     },
-    "github_ci": "pending"
+    "github_ci": {
+      "run_id": 45354355015,
+      "commit": "fd7660c4a9affe3802c0e4416fac2e07d9e40d1c",
+      "conclusion": "success",
+      "sqlite": {
+        "passed": 865,
+        "seconds": 72.66
+      },
+      "postgresql": {
+        "passed": 865,
+        "seconds": 148.59
+      },
+      "migration_seed_replay_downgrade": "passed",
+      "dependency_audit": "passed"
+    }
   },
   "limits": [
     "Research relevance only; not impact prediction",
