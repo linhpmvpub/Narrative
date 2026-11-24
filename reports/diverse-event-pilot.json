@@ -1,0 +1,299 @@
+{
+  "date": "2026-11-24",
+  "scope": "CURRENT_PROFILE_FULL_BODY_RELEVANCE_ONLY",
+  "baseline_sha256": "d5dcf77abc4b6ccf07a0d05274190f0c35d6825c95b994b6c58b6f41b871416b",
+  "packet_sha256": "2e57b24c3830ee738a3d77761101c3c0f41e83d76b3bc6dca46791800432be69",
+  "predictions_sha256": "3a19bf09a685a09898517b358396d0f95a869f7a82eb3c48ae5347ac37c154dc",
+  "predictions_locked_before_reviews": true,
+  "documents": 23,
+  "pairs": 230,
+  "sampling_families": 7,
+  "publisher_groups": 8,
+  "source_hosts": 9,
+  "controls": 3,
+  "date_range": [
+    "2024-04-01",
+    "2026-08-10"
+  ],
+  "prior_packet_files": 30,
+  "prior_distinct_packet_hashes": 23,
+  "prior_observed_urls": 432,
+  "consensus": {
+    "tp": 11,
+    "fp": 1,
+    "tn": 142,
+    "fn": 51,
+    "unresolved": 25,
+    "selected_unresolved": 1,
+    "pairs": 230,
+    "precision": 0.9166666666666666,
+    "recall": 0.1774193548387097,
+    "document_clusters": 23,
+    "clusters_with_any_resolved_positive": 16,
+    "clusters_all_resolved_negative": 5
+  },
+  "disagreements": 13,
+  "by_family": {
+    "capacity": {
+      "tp": 4,
+      "fp": 0,
+      "tn": 8,
+      "fn": 8,
+      "unresolved": 0,
+      "selected_unresolved": 0,
+      "pairs": 20,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "document_clusters": 2,
+      "clusters_with_any_resolved_positive": 2,
+      "clusters_all_resolved_negative": 0
+    },
+    "demand": {
+      "tp": 3,
+      "fp": 0,
+      "tn": 36,
+      "fn": 12,
+      "unresolved": 9,
+      "selected_unresolved": 1,
+      "pairs": 60,
+      "precision": 1.0,
+      "recall": 0.2,
+      "document_clusters": 6,
+      "clusters_with_any_resolved_positive": 4,
+      "clusters_all_resolved_negative": 0
+    },
+    "financing": {
+      "tp": 2,
+      "fp": 0,
+      "tn": 22,
+      "fn": 4,
+      "unresolved": 2,
+      "selected_unresolved": 0,
+      "pairs": 30,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "document_clusters": 3,
+      "clusters_with_any_resolved_positive": 2,
+      "clusters_all_resolved_negative": 1
+    },
+    "input_price": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 12,
+      "fn": 12,
+      "unresolved": 6,
+      "selected_unresolved": 0,
+      "pairs": 30,
+      "precision": null,
+      "recall": 0.0,
+      "document_clusters": 3,
+      "clusters_with_any_resolved_positive": 3,
+      "clusters_all_resolved_negative": 0
+    },
+    "policy": {
+      "tp": 2,
+      "fp": 0,
+      "tn": 20,
+      "fn": 3,
+      "unresolved": 5,
+      "selected_unresolved": 0,
+      "pairs": 30,
+      "precision": 1.0,
+      "recall": 0.4,
+      "document_clusters": 3,
+      "clusters_with_any_resolved_positive": 2,
+      "clusters_all_resolved_negative": 1
+    },
+    "supply_disruption": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 11,
+      "fn": 6,
+      "unresolved": 3,
+      "selected_unresolved": 0,
+      "pairs": 20,
+      "precision": null,
+      "recall": 0.0,
+      "document_clusters": 2,
+      "clusters_with_any_resolved_positive": 2,
+      "clusters_all_resolved_negative": 0
+    },
+    "technology": {
+      "tp": 0,
+      "fp": 1,
+      "tn": 33,
+      "fn": 6,
+      "unresolved": 0,
+      "selected_unresolved": 0,
+      "pairs": 40,
+      "precision": 0.0,
+      "recall": 0.0,
+      "document_clusters": 4,
+      "clusters_with_any_resolved_positive": 1,
+      "clusters_all_resolved_negative": 3
+    }
+  },
+  "by_company": {
+    "AMD": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 30,
+      "fn": 11,
+      "unresolved": 5,
+      "selected_unresolved": 0,
+      "pairs": 46,
+      "precision": null,
+      "recall": 0.0,
+      "document_clusters": 23,
+      "clusters_with_any_resolved_positive": 11,
+      "clusters_all_resolved_negative": 10
+    },
+    "DELL": {
+      "tp": 5,
+      "fp": 1,
+      "tn": 23,
+      "fn": 11,
+      "unresolved": 6,
+      "selected_unresolved": 0,
+      "pairs": 46,
+      "precision": 0.8333333333333334,
+      "recall": 0.3125,
+      "document_clusters": 23,
+      "clusters_with_any_resolved_positive": 11,
+      "clusters_all_resolved_negative": 7
+    },
+    "MU": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 13,
+      "fn": 8,
+      "unresolved": 2,
+      "selected_unresolved": 0,
+      "pairs": 23,
+      "precision": null,
+      "recall": 0.0,
+      "document_clusters": 23,
+      "clusters_with_any_resolved_positive": 8,
+      "clusters_all_resolved_negative": 13
+    },
+    "NVDA": {
+      "tp": 6,
+      "fp": 0,
+      "tn": 39,
+      "fn": 19,
+      "unresolved": 5,
+      "selected_unresolved": 1,
+      "pairs": 69,
+      "precision": 1.0,
+      "recall": 0.24,
+      "document_clusters": 23,
+      "clusters_with_any_resolved_positive": 14,
+      "clusters_all_resolved_negative": 8
+    },
+    "SNDK": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 37,
+      "fn": 2,
+      "unresolved": 7,
+      "selected_unresolved": 0,
+      "pairs": 46,
+      "precision": null,
+      "recall": 0.0,
+      "document_clusters": 23,
+      "clusters_with_any_resolved_positive": 1,
+      "clusters_all_resolved_negative": 15
+    }
+  },
+  "reference_kind": "AI_CONSENSUS_REVIEW",
+  "human_gold": false,
+  "independence_basis": "Separate contexts; declared no predictions/peer access; not filesystem isolation",
+  "group_acceptance": "NOT_MET_SAMPLE_SIZE_AND_IMPACT_DIMENSIONS_PENDING",
+  "causal_accuracy": null,
+  "strength_accuracy": null,
+  "horizon_accuracy": null,
+  "weights_changed": false,
+  "matcher_changed": false,
+  "delivery": "disabled",
+  "active_feed_changed": false,
+  "cloud_data_deployment": false,
+  "limitations": [
+    "Curated convenience sample; article-narrative pairs correlated",
+    "Current profiles on older articles, not historical as-of backtest",
+    "No direct Micron issuer articles: three requests returned 403",
+    "Only one frozen MU narrative and three NVDA narratives, not equal per-company coverage",
+    "Same economic themes may recur across documents; independence not established by URL/shingle checks",
+    "Seven-family assignment is operator metadata, not an automatic event classifier",
+    "This cohort is now exposed and must not become a new holdout after tuning"
+  ],
+  "source_dimensions": {
+    "document_clusters": 23,
+    "reference_kind": "AI_SOURCE_DIMENSION_REVIEW_NOT_GOLD",
+    "reviewers": [
+      {
+        "reviewer_id": "diverse-blind-a",
+        "sha256": "8560727419702ba00d417ba95aa7d6a4cf5d8934baadbd2a6d69145bcb08ff6d",
+        "phase_counts": {
+          "REPORTED_OBSERVATION": 8,
+          "PROPOSED": 8,
+          "COMMITTED": 4,
+          "OPERATING": 3
+        }
+      },
+      {
+        "reviewer_id": "diverse-blind-b",
+        "sha256": "7a12f4b1c617e0c32acc0344f15761ef2d646cb4560a18d4357eb493ca13a4c2",
+        "phase_counts": {
+          "OPERATING": 5,
+          "REPORTED_OBSERVATION": 8,
+          "UNCLEAR": 1,
+          "COMMITTED": 7,
+          "PROPOSED": 2
+        }
+      }
+    ],
+    "agreement": {
+      "event_phase": 15,
+      "horizon_support": 20,
+      "strength_support": 23
+    },
+    "algorithm_accuracy": null,
+    "limitations": [
+      "Supplementary source-level labels requested after relevance freeze, not scored algorithm predictions",
+      "Company effect means the source issuer, possibly outside the five tracked companies",
+      "Reviewer horizon text may be paraphrase, not an automatically verified verbatim quote",
+      "Mixed event phases and aggregation policies need adjudication",
+      "No pair-specific exposure or transmission strength inferred"
+    ]
+  },
+  "designated_controls": {
+    "documents": 3,
+    "pairs": 30,
+    "matcher_selected": 0,
+    "all_consensus_negative": true
+  },
+  "validation": {
+    "frozen_source_and_consensus_integrity": "passed",
+    "baseline_and_profile_pins": "passed",
+    "ruff": "passed",
+    "mypy_files": 130,
+    "ci": {
+      "run_id": 45401712334,
+      "commit": "fea7da9d28115e4391c1f71b5600c5edb441127f",
+      "conclusion": "success",
+      "sqlite_passed": 944,
+      "sqlite_seconds": 139.78,
+      "postgresql_passed": 944,
+      "postgresql_seconds": 254.19,
+      "dependency_audit": "passed",
+      "javascript": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    },
+    "local_full_suite": {
+      "status": "INTENTIONALLY_STOPPED_AFTER_COMPLETE_CI_SUCCESS",
+      "last_reported_progress_percent": 91,
+      "passed_total": null,
+      "reason": "Avoid duplicate full-suite work; full SQLite and PostgreSQL results are from CI, not this interrupted host run"
+    }
+  }
+}
