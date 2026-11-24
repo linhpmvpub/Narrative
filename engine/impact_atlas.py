@@ -39,7 +39,7 @@ DIMENSIONS = ["exposure_share", "supplier_concentration", "supplier_concentratio
               "inventory_days", "contract_reset_days", "pass_through", "hedging", "ramp_days",
               "utilization", "yield", "market_share", "competition", "qualification_days",
               "funding_conditions", "permit_status", "exemptions", "geographic_mix", "duration_days",
-              "procurement_terms", "customer_contract_terms", "manufacturing_model", "utility_dependency", "pricing_reset_frequency", "net_cost_basis", "contract_term", "inventory_context"]
+              "procurement_terms", "customer_contract_terms", "manufacturing_model", "utility_dependency", "pricing_reset_frequency", "net_cost_basis", "contract_term", "inventory_context", "pass_through_terms"]
 GROUPS = {
     "products_revenue": ["products", "segments", "revenue_model", "sales_mix"],
     "supply_capacity": ["inputs", "suppliers", "facilities", "capacity"],
@@ -55,7 +55,7 @@ def key(profile, local):
     return profile + "/" + local
 
 
-def snapshot(profile_root, at=None, facts=(), identities=()):
+def snapshot(profile_root, at=None, facts=(), identities=(), financials=()):
     from engine.company_profiles import COMPONENTS, RELATIONS, available_bundles
     at = at or datetime.now(UTC)
     if at.tzinfo is None or at > datetime.now(UTC):
@@ -124,6 +124,8 @@ def snapshot(profile_root, at=None, facts=(), identities=()):
     apply_facts(result, facts, profile_root, registry["items"], at)
     from engine.impact_inventory import apply_identities, field_inventory
     apply_identities(result, identities)
+    from engine.atlas_financials import apply_financials
+    apply_financials(result, financials, profile_root, registry["items"], at)
     result["field_inventory"] = field_inventory(result)
     result["coverage"] = coverage(result)
     return result
@@ -258,6 +260,7 @@ CREATE TABLE fact_evidence(fact_id TEXT NOT NULL REFERENCES exposure_facts(id), 
 CREATE TABLE components(id TEXT PRIMARY KEY, profile_id TEXT NOT NULL REFERENCES profiles(id), payload TEXT NOT NULL);
 CREATE TABLE narratives(id TEXT PRIMARY KEY, profile_id TEXT NOT NULL REFERENCES profiles(id), payload TEXT NOT NULL);
 CREATE TABLE mechanisms(id TEXT PRIMARY KEY, payload TEXT NOT NULL);
+CREATE TABLE financial_context(id TEXT PRIMARY KEY, profile_id TEXT NOT NULL REFERENCES profiles(id), source_id TEXT NOT NULL REFERENCES sources(id), payload TEXT NOT NULL);
 CREATE TABLE entity_references(id TEXT PRIMARY KEY, node_id TEXT NOT NULL REFERENCES nodes(id), payload TEXT NOT NULL);
 CREATE TABLE identity_groups(id TEXT PRIMARY KEY, payload TEXT NOT NULL);
 CREATE TABLE identity_members(group_id TEXT NOT NULL REFERENCES identity_groups(id), reference_id TEXT PRIMARY KEY REFERENCES entity_references(id));
@@ -297,6 +300,8 @@ def install(data, output):
                 db.executemany("INSERT INTO fact_evidence VALUES (?,?,?)",
                     [(fact["id"], e["source_id"], e["quote"]) for e in fact["evidence"]])
             db.executemany("INSERT INTO mechanisms VALUES (?,?)", [(k, encode(v)) for k, v in MECHANISMS.items()])
+            for row in data.get("financial_context", []):
+                db.execute("INSERT INTO financial_context VALUES (?,?,?,?)", (row["id"], row["profile_id"], row["source_id"], encode(row)))
             for ref in data.get("entity_references", []):
                 db.execute("INSERT INTO entity_references VALUES (?,?,?)", (ref["id"], ref["node_id"], encode(ref)))
             for group in data.get("identity_groups", []):
@@ -402,13 +407,15 @@ def main():
     parser.add_argument("--input", type=Path)
     parser.add_argument("--facts", type=Path)
     parser.add_argument("--identities", type=Path)
+    parser.add_argument("--financials", type=Path)
     args = parser.parse_args()
     if args.action == "build":
         if args.profiles is None:
             parser.error("--profiles required")
         facts = json.loads(args.facts.read_text(encoding="utf-8")) if args.facts else []
         identities = json.loads(args.identities.read_text(encoding="utf-8")) if args.identities else []
-        result = install(snapshot(args.profiles, facts=facts, identities=identities), args.output)
+        financials = json.loads(args.financials.read_text(encoding="utf-8")) if args.financials else []
+        result = install(snapshot(args.profiles, facts=facts, identities=identities, financials=financials), args.output)
     else:
         data = read_snapshot(args.output)
         if args.action == "scenario":

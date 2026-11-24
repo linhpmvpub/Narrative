@@ -35,6 +35,15 @@ with sync_playwright() as p:
             expect(card).to_contain_text('Người rà soát:')
             card.locator('button').click()
             expect(page.locator('#detail blockquote').first).to_be_visible()
+    if page.locator('#financials').count():
+        for option in page.locator('#profile option').all():
+            page.select_option('#profile', option.get_attribute('value'))
+            for card in page.locator('#financials .financial-context').all():
+                card.locator('summary').click()
+                expect(card.locator('table')).to_be_visible()
+                card.locator('button').click()
+                expect(page.locator('#detail pre')).to_contain_text('source_sha256')
+                expect(page.locator('#detail pre')).to_contain_text('impact_weight')
     if page.locator('#field-inventory').count():
         expect(page.locator('#field-inventory details')).to_have_count(7)
         group = page.evaluate('(data.identity_groups||[])[0]')

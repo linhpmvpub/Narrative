@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-24",
+  "scope": "LOCAL_RESEARCH_AI_OPERATOR_REVIEW_NOT_INDEPENDENT_GOLD",
+  "financial_context": {
+    "companies": 5,
+    "sets": 13,
+    "revenue_partitions": 8,
+    "inventory_current_prior_pairs": 5,
+    "selected_source_cells": 40,
+    "partition_parts": 22,
+    "exact_reconciliations": 8,
+    "impact_weights": null,
+    "buffer_days_inferred": false
+  },
+  "atlas": {
+    "profiles": 6,
+    "nodes": 76,
+    "relations": 83,
+    "sources": 6,
+    "narratives": 10,
+    "sourced_component_slots": 84,
+    "component_slots": 252,
+    "qualitative_and_exposure_facts": 39,
+    "numeric_exposure_facts": 7
+  },
+  "new_qualitative_facts": 4,
+  "active_feed_changed": false,
+  "delivery": "disabled",
+  "private_artifacts_uploaded": false,
+  "validation": {
+    "focused_passed": 83,
+    "focused_seconds": 23.63,
+    "ruff": "passed",
+    "mypy_files": 128,
+    "javascript": "passed",
+    "browser": "pending final screenshot inspection",
+    "full_ci": "pending"
+  }
+}
