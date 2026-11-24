@@ -1,0 +1,32 @@
+{
+  "real_scope_rules": 10,
+  "upstream_entities": 2,
+  "companies_with_rules": 1,
+  "companies_total": 5,
+  "covered_narratives": [
+    "AMD foundry-resilience"
+  ],
+  "scope_review": "AI_OPERATOR_NOT_INDEPENDENT_GOLD",
+  "synthetic_probe_cases": 50,
+  "synthetic_probe_passed": 50,
+  "exposed_diagnostic_documents": 23,
+  "documents_with_parsed_events": 0,
+  "parsed_events": 0,
+  "unsupported_clauses": 1571,
+  "matched_rules": 0,
+  "accuracy": null,
+  "delivery": "disabled",
+  "rules_sha256": "427c8673964d2014b1974b6f076dd1071441f2cff9cda55e2a27551b9c2ac499",
+  "baseline_sha256": "3d0ded8c28c4745c535ba5c25e1039d07899fbc683b45e09a9970c1b8c425b79",
+  "parent_baseline_sha256": "9247a27ef7e86c23f464d3077a81dbe1ee2a1be8f52bb548f0663ee37d060120",
+  "parent_artifacts_unchanged": true,
+  "validation": {
+    "focused_passed": 81,
+    "focused_seconds": 42.28,
+    "final_scope_tests": 11,
+    "final_scope_seconds": 2.4,
+    "ruff": "passed",
+    "mypy_files": 132,
+    "ci": "pending"
+  }
+}

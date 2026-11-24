@@ -56,7 +56,7 @@ PAST = {
 }
 UNSAFE = re.compile(
     r"\b(?:not|never|no|if|unless|may|might|could|would|reportedly|according|said|says|"
-    r'and|but|or|while|after|before|despite|it|they|we|he|she|which|that)\b|["“”?:]',
+    r'but|while|after|before|despite|it|they|we|he|she|which|that)\b|["“”?:]',
     re.I,
 )
 
@@ -90,6 +90,16 @@ def extract(text):
                 audit.append(
                     {"text": clause, "start": offset, "reason": "UNSUPPORTED_OR_AMBIGUOUS_CLAUSE"}
                 )
+            continue
+        # A compound object remains literal and must match an entire reviewed scope.
+        # Multiple actors/locations cannot borrow another party's identity or geography.
+        if any(
+            re.search(r"\b(?:and|or)\b|&", match[name] or "", re.I)
+            for name in ["actor", "location"]
+        ):
+            audit.append(
+                {"text": clause, "start": offset, "reason": "AMBIGUOUS_PARTIES_OR_LOCATION"}
+            )
             continue
         action = match["action"].lower()
         planned = bool(match["plan"])
@@ -131,6 +141,7 @@ class GroundingRule(BaseModel):
     profile_id: str
     profile_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
     relationship_id: str
+    identity_reference_id: str | None = None
     actor: str = Field(min_length=2, max_length=100)
     object: str = Field(min_length=2, max_length=120)
     location: str | None = Field(default=None, min_length=2, max_length=80)
@@ -168,10 +179,27 @@ def validate_rule(rule, bundle, at):
             r"(?<!\w)" + re.escape(value) + r"(?!\w)", rule.source_quote, re.I
         ):
             raise ValueError("Rule scope names absent from relationship evidence")
+    if rule.identity_reference_id is not None:
+        ref = next(
+            (r for r in bundle.entity_references if r.id == rule.identity_reference_id), None
+        )
+        if (
+            ref is None
+            or ref.status != "SOURCE_BACKED"
+            or ref.resolution != "EXACT_ENTITY"
+            or ref.identity_level != "LEGAL_ENTITY"
+            or ref.node_id != edge.from_id
+            or edge.id not in ref.relationship_ids
+            or not ref.reviewed_at <= rule.reviewed_at <= at < ref.review_until
+            or normalized(rule.actor) not in {normalized(n) for n in ref.names}
+        ):
+            raise ValueError("Actor identity does not authorize the upstream relationship")
     return edge
 
 
-def build(selections, rules, *, profile_root=None, article_root=None, at=None):
+def build(
+    selections, rules, *, profile_root=None, article_root=None, at=None, require_identity=False
+):
     at = at or datetime.now(UTC)
     if at.tzinfo is None or at > datetime.now(UTC) or not 1 <= len(selections) <= 100:
         raise ValueError("Bounded selections and nonfuture aware cutoff required")
@@ -184,6 +212,8 @@ def build(selections, rules, *, profile_root=None, article_root=None, at=None):
     before = digest([b.model_dump(mode="json") for b in registry["items"]])
     validated = []
     for rule in rules:
+        if require_identity and rule.identity_reference_id is None:
+            raise ValueError("Identity-anchored rules required in strict scope mode")
         if rule.profile_id not in bundles:
             raise ValueError("Unknown rule profile")
         edge = validate_rule(rule, bundles[rule.profile_id], at)
@@ -258,6 +288,11 @@ def build(selections, rules, *, profile_root=None, article_root=None, at=None):
                                 "source_url": selection["revision"]["payload"]["url"],
                                 "source_packet_sha256": selection["packet_sha256"],
                                 "profile_sha256": rule.profile_sha256,
+                                "identity_basis": (
+                                    "SOURCE_REVIEWED_UPSTREAM_ENTITY"
+                                    if rule.identity_reference_id
+                                    else "REVIEWER_DECLARED_NAME_ONLY"
+                                ),
                                 "financial_magnitude": "UNKNOWN",
                                 "horizon": "UNKNOWN",
                                 "stance": "RELATED_INFORMATION",
@@ -300,6 +335,7 @@ def build(selections, rules, *, profile_root=None, article_root=None, at=None):
         "audit": audits,
         "rules_sha256": digest([r.model_dump(mode="json") for r in rules]),
         "profiles_sha256": before,
+        "identity_required": require_identity,
         "delivery": "disabled",
         "active_feed_changed": False,
     }
@@ -309,6 +345,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ["selections", "rules", "profiles", "articles", "output"]:
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument(
+        "--require-identity",
+        action="store_true",
+        help="Reject all unanchored name-only rules (recommended for real profiles)",
+    )
     args = parser.parse_args()
     rules = [
         GroundingRule.model_validate(x) for x in json.loads(args.rules.read_text(encoding="utf-8"))
@@ -318,6 +359,7 @@ def main():
         rules,
         profile_root=args.profiles,
         article_root=args.articles,
+        require_identity=args.require_identity,
     )
     with args.output.open("x", encoding="utf-8") as stream:
         json.dump(result, stream, ensure_ascii=False, indent=2)
