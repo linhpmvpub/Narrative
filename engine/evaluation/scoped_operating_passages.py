@@ -56,6 +56,19 @@ def approved_rows(directory, source_root, review_paths):
         start, end = row["text_start"], row["text_end"]
         if not 0 <= start < end <= len(text) or text[start:end] != row["quote"]:
             raise ValueError("Exact scoped passage changed")
+        contexts = row.get("context_spans", [])
+        if contexts:
+            if len(contexts) > 3 or {c["purpose"] for c in contexts} != {"issuer_period", "document_heading"}:
+                raise ValueError("Explicit issuer-period and heading context required")
+            for context in contexts:
+                doc = context["document"]
+                if doc not in family["documents"]:
+                    raise ValueError("Context from another source family")
+                content = next(t for d, t, _ in docs if d == doc)
+                a, b = context["start"], context["end"]
+                if not 0 <= a < b <= len(content) or b - a > 1000 or content[a:b] != context["quote"]:
+                    raise ValueError("Exact context span changed")
+        scope = "EXACT_PASSAGE_WITH_CITED_CONTEXT" if contexts else "EXACT_PASSAGE_INFORMATIONAL_ONLY"
         pair = [v[row["id"]] for v in votes]
         quote_sha = hashlib.sha256(row["quote"].encode()).hexdigest()
         if any(v["quote_sha256"] != quote_sha for v in pair):
@@ -63,7 +76,7 @@ def approved_rows(directory, source_root, review_paths):
         period = pair[0]["economic_period"]
         citation = cited_date(docs, period, True)
         if (any(v["approved"] is not True or v["external_context_required"] is not False
-                or v["scope"] != "EXACT_PASSAGE_INFORMATIONAL_ONLY" for v in pair)
+                or v["scope"] != scope for v in pair)
                 or period != pair[1]["economic_period"] or not citation
                 or date.fromisoformat(period) > date.fromisoformat(family["filing_date"])):
             withheld.append(row["id"])
@@ -105,8 +118,13 @@ def freeze(directory, source_root, reviews, output, previous=(), *,
             "cluster_key": family["cik"] + ":EARNINGS:" + row["period"],
             "url": doc["url"], "source_sha256": doc["raw_sha256"],
             "source_text_span": {"start": row["text_start"], "end": row["text_end"]},
-            "scope": "EXACT_PASSAGE_INFORMATIONAL_ONLY", "scope_limitations": row["limitations"],
+            "scope": ("EXACT_PASSAGE_WITH_CITED_CONTEXT" if row.get("context_spans")
+                      else "EXACT_PASSAGE_INFORMATIONAL_ONLY"), "scope_limitations": row["limitations"],
             "whole_filing_verified": False, "period_citation": row["period_citation"]}
+        if row.get("context_spans"):
+            source["context_evidence"] = [{"purpose": c["purpose"], "url": c["document"]["url"],
+                "text_sha256": c["document"]["text_sha256"], "start": c["start"],
+                "end": c["end"], "quote": c["quote"]} for c in row["context_spans"]]
         selected.append({"source": source, "article": article,
                          "paragraph_index": row["paragraph_index"], "sampling_stratum": "scoped_text"})
         periods.add(key)

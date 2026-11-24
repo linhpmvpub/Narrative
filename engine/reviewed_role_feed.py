@@ -123,7 +123,7 @@ def role_feed(conn, limit=100, *, operating=False):
                 decisions = list(binding_decisions(b, n, {"summary": claim.claim_text}, at,
                                                   issuer_cik=filing["manifest"]["cik"]))
                 decisions = [d for d in decisions if
-                    (d["binding"].kind == "ISSUER_OPERATING_CONTEXT") == operating]
+                    (d["binding"].kind in {"ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"}) == operating]
                 if not decisions:
                     continue
                 nodes = {node.id: node.label for node in b.nodes}
@@ -159,7 +159,7 @@ def role_feed(conn, limit=100, *, operating=False):
                                      else "REVIEWED_SOURCE_ROLE_CONTEXT_NOT_VERIFIED_RELATIONSHIP"),
                     "decision_trace": ["Chỉ dùng phiên bản sự kiện mới nhất; không dùng lại bản đã bị thay thế",
                         "Đã kiểm tra lại phê duyệt độc lập, quyền nguồn, danh tính và đoạn trích",
-                        ("Cùng doanh nghiệp phát hành; cụm từ hoạt động và sản phẩm nằm trong một câu" if operating
+                        ("Cùng doanh nghiệp phát hành; khớp cụm hoạt động có nguồn, không xác nhận foundry hoặc công suất" if operating
                          else "Vai trò mua–cung cấp và sản phẩm giữ nguyên vị trí trong nguồn"),
                         "Chỉ ghép vào narrative khi hồ sơ và đường liên quan còn đủ bằng chứng",
                         "Chưa xác nhận quan hệ hiện tại hoặc quy mô tài chính; không gửi thông báo"]})

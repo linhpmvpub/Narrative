@@ -11,7 +11,9 @@ from test_sec_review import workspace as workspace
 
 @pytest.fixture
 def ready_operation(monkeypatch, request, dossier, tmp_path):
-    monkeypatch.setattr(sec_fixture, "TEXT", "The ramp of our systems increased this quarter.")
+    shipment = getattr(request, "param", "operating") == "shipment"
+    text = "Initial shipments of Example accelerators." if shipment else "The ramp of our systems increased this quarter."
+    monkeypatch.setattr(sec_fixture, "TEXT", text)
     work = request.getfixturevalue("workspace")
     client, author, reviewer, member, fid, _ = work
     root, data = dossier
@@ -22,6 +24,15 @@ def ready_operation(monkeypatch, request, dossier, tmp_path):
         "scope": "Synthetic own-product context", "reviewed_at": data["available_at"],
         "review_until": (datetime.now(UTC) + timedelta(days=1)).isoformat(),
         "evidence": data["relationships"][0]["evidence"]}]
+    if shipment:
+        data["factor_bindings"][0].update(kind="ISSUER_PRODUCT_SHIPMENTS",
+            topic_terms=["Example accelerators"], context_terms=["Initial shipments of Example accelerators"],
+            change_terms=["shipments"], evidence=[{"source_id": "ops", "quote": text}])
+        import hashlib
+        raw = ("<p>" + text + "</p>").encode()
+        (root / "operations.html").write_bytes(raw)
+        data["sources"].append({**data["sources"][0], "id": "ops", "file": "operations.html",
+                                "sha256": hashlib.sha256(raw).hexdigest()})
     seal(root, data)
     registry = tmp_path / "profiles"
     registry.mkdir()
@@ -34,6 +45,7 @@ def ready_operation(monkeypatch, request, dossier, tmp_path):
     return work, registry
 
 
+@pytest.mark.parametrize("ready_operation", ["operating", "shipment"], indirect=True)
 def test_operating_card_is_private_and_separate_from_supplier_roles(ready_operation):
     (client, _, _, member, _, _), _ = ready_operation
     route = "/api/v0/news/reviewed-operations"

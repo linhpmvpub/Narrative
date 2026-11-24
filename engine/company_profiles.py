@@ -244,7 +244,7 @@ class FactorBinding(Strict):
     context_terms: list[TEXT] = Field(min_length=1, max_length=20)
     change_terms: list[TEXT] = Field(default_factory=list, max_length=30)
     kind: Literal["ECONOMIC_CHANGE", "ISSUER_RELATIONSHIP_DISCLOSURE",
-                  "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT"] = "ECONOMIC_CHANGE"
+                  "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"] = "ECONOMIC_CHANGE"
     issuer_supply_scope: bool = False
     disclosure_terms: list[TEXT] = Field(default_factory=list, max_length=20)
     narrative_ids: list[ID] = Field(default_factory=list, max_length=20)
@@ -260,7 +260,7 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
-        if self.kind in {"ECONOMIC_CHANGE", "ISSUER_OPERATING_CONTEXT"}:
+        if self.kind in {"ECONOMIC_CHANGE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"}:
             if not self.change_terms or self.disclosure_terms:
                 raise ValueError("Economic rule requires changes, not disclosure terms")
         elif self.change_terms or not self.disclosure_terms or not self.narrative_ids:
@@ -282,6 +282,20 @@ class FactorBinding(Strict):
                 or self.entity_reference_id or self.term_aliases
                 or any(not t.casefold().startswith(("our ", "we ")) for t in self.context_terms)):
             raise ValueError("Operating context requires explicit issuer/narrative scope without aliases or parties")
+        if self.kind == "ISSUER_PRODUCT_SHIPMENTS":
+            if (not self.narrative_ids or not self.issuer_supply_scope or self.entity_reference_id
+                    or self.term_aliases or self.change_terms != ["shipments"]
+                    or any(len(t.split()) < 2 for t in self.topic_terms)):
+                raise ValueError("Product shipments require explicit product/narrative scope")
+            for context in self.context_terms:
+                if not any(context.casefold() in {
+                        "initial shipments of " + t.casefold(),
+                        "initial shipments of next-generation " + t.casefold(),
+                        "strong " + t.casefold() + " shipments"} for t in self.topic_terms):
+                    raise ValueError("Unsupported product shipment phrase")
+            if any(not any(t.casefold() in e.quote.casefold() for e in self.evidence)
+                   for t in [*self.topic_terms, *self.context_terms]):
+                raise ValueError("Shipment vocabulary requires literal source evidence")
         if not self.term_aliases.keys() <= set(terms):
             raise ValueError("Alias key must be an explicit binding term")
         for key, variants in self.term_aliases.items():
@@ -386,7 +400,7 @@ class ProfileBundle(Strict):
                 raise ValueError("Binding references unknown narrative")
             if binding.issuer_supply_scope and not binding.narrative_ids:
                 raise ValueError("Issuer supply scope requires approved narratives")
-            if binding.kind in {"SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT"} and not any(
+            if binding.kind in {"SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"} and not any(
                     n.id == binding.factor_id and n.kind == "product" for n in self.nodes):
                 raise ValueError("Supplier role must anchor a sourced product node")
             if binding.entity_reference_id is not None:
@@ -398,7 +412,7 @@ class ProfileBundle(Strict):
                         v.casefold() not in names for t in binding.topic_terms
                         for v in binding.term_aliases.get(t, [])):
                     raise ValueError("Entity-bound topic terms must be sourced reference names")
-            if (binding.kind not in {"SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT"}
+            if (binding.kind not in {"SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"}
                     and (binding.factor_id not in nodes or nodes[binding.factor_id].kind not in {
                         "factor", "input", "supplier", "market", "facility", "location"})):
                 raise ValueError("Binding requires a scoped economic factor")

@@ -614,7 +614,8 @@
               "ECONOMIC_CHANGE",
               "ISSUER_RELATIONSHIP_DISCLOSURE",
               "SUPPLIER_ROLE_DISCLOSURE",
-              "ISSUER_OPERATING_CONTEXT"
+              "ISSUER_OPERATING_CONTEXT",
+              "ISSUER_PRODUCT_SHIPMENTS"
             ],
             "title": "Kind",
             "type": "string"

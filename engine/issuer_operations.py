@@ -45,3 +45,29 @@ def operating_matches(binding, text, issuer_cik, profile_cik):
                 "start": sentence.start(), "end": sentence.end(), "text": segment,
                 "identity_merged": False, "impact_eligible": False}]
     return []
+
+
+def shipment_matches(binding, text, issuer_cik, profile_cik):
+    """Exact issuer-disclosed shipment bullet, never a foundry/capacity assertion."""
+    if (not valid_cik(issuer_cik) or not valid_cik(profile_cik)
+            or int(issuer_cik) != int(profile_cik) or not text or len(text) > 1600
+            or re.search(r"[\"'“”‘’]", text) or AMBIGUOUS.search(text)
+            or re.search(r"\b(cancel\w*|delay\w*|halt\w*|scheduled|target\w*|on track)\b", text, re.I)):
+        return []
+    if any(re.search(r"(?<!\w)" + re.escape(t) + r"(?!\w)", text, re.I)
+           for t in binding.exclude_terms):
+        return []
+    for phrase in binding.context_terms:
+        if not any(re.search(r"(?<!\w)" + re.escape(t) + r"(?!\w)", phrase, re.I)
+                   for t in binding.topic_terms):
+            continue
+        match = re.search(r"(?:^|[.!?;•‒ƒ\n])\s*(?P<claim>" + re.escape(phrase)
+                          + r")(?!\w)", text, re.I)
+        if match:
+            start, end = match.span("claim")
+            return [{"group": "product_shipment_phrase", "field": "summary",
+                "start": start, "end": end, "text": text[start:end],
+                "matched_term": phrase, "alias_used": False,
+                "identity_merged": False, "impact_eligible": False,
+                "foundry_exposure_verified": False}]
+    return []

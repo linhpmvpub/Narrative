@@ -5,7 +5,7 @@ from urllib.parse import urlsplit
 
 from engine.company_profiles import verify_sources
 from engine.ingestion.contracts import digest
-from engine.issuer_operations import operating_matches
+from engine.issuer_operations import operating_matches, shipment_matches
 from engine.supply_roles import valid_cik
 
 
@@ -28,7 +28,7 @@ def audit_vocabulary(directory, bundle, binding_ids):
     witnesses = []
     for key in binding_ids:
         binding = bindings[key]
-        if binding.kind != "ISSUER_OPERATING_CONTEXT":
+        if binding.kind not in {"ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"}:
             raise ValueError("Only explicit operating bindings supported")
         for evidence in binding.evidence:
             url = urlsplit(str(sources[evidence.source_id].url))
@@ -41,7 +41,8 @@ def audit_vocabulary(directory, bundle, binding_ids):
                 probe = binding.model_copy(update={group: [term]})
                 witness = None
                 for evidence in binding.evidence:
-                    spans = operating_matches(probe, evidence.quote, cik, cik)
+                    matcher = shipment_matches if binding.kind == "ISSUER_PRODUCT_SHIPMENTS" else operating_matches
+                    spans = matcher(probe, evidence.quote, cik, cik)
                     if spans:
                         witness = {"binding_id": key, "group": group, "term": term,
                             "source_id": evidence.source_id, "quote_sha256": digest(evidence.quote),

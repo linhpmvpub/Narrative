@@ -21,20 +21,43 @@ def scoped(packet, tmp_path):
     quote = (source / doc["text"]).read_text()
     scope = tmp_path / "scope"
     scope.mkdir()
-    rows = [{"id": family["id"], "family": family, "document": doc,
-             "quote": quote, "text_start": 0, "text_end": len(quote), "paragraph_index": 0}]
+    rows = [
+        {
+            "id": family["id"],
+            "family": family,
+            "document": doc,
+            "quote": quote,
+            "text_start": 0,
+            "text_end": len(quote),
+            "paragraph_index": 0,
+        }
+    ]
     save(scope / "packet.json", rows)
     save(scope / "receipt.json", {"packet_sha256": digest(rows)})
     paths = []
     for actor in "ab":
         path = tmp_path / ("scope-" + actor + ".json")
-        save(path, {"reviewer_id": actor, "reviewer_kind": "AI_INDEPENDENT",
-            "reviewed_at": datetime.now(UTC).isoformat(), "peer_reviews_accessed": False,
-            "packet_sha256": digest(rows), "passages": [{"id": family["id"],
-            "approved": True, "external_context_required": False,
-            "scope": "EXACT_PASSAGE_INFORMATIONAL_ONLY", "economic_period": "2026-04-26",
-            "quote_sha256": hashlib.sha256(quote.encode()).hexdigest(),
-            "limitations": ["No whole-filing verification"]}]})
+        save(
+            path,
+            {
+                "reviewer_id": actor,
+                "reviewer_kind": "AI_INDEPENDENT",
+                "reviewed_at": datetime.now(UTC).isoformat(),
+                "peer_reviews_accessed": False,
+                "packet_sha256": digest(rows),
+                "passages": [
+                    {
+                        "id": family["id"],
+                        "approved": True,
+                        "external_context_required": False,
+                        "scope": "EXACT_PASSAGE_INFORMATIONAL_ONLY",
+                        "economic_period": "2026-04-26",
+                        "quote_sha256": hashlib.sha256(quote.encode()).hexdigest(),
+                        "limitations": ["No whole-filing verification"],
+                    }
+                ],
+            },
+        )
         paths.append(path)
     return scope, source, paths
 
@@ -47,8 +70,15 @@ def test_scope_preserves_limitations_and_original_span(scoped):
     assert rows[0]["period_citation"]["quote"] == "April 26, 2026"
 
 
-@pytest.mark.parametrize("field,value", [("approved", False), ("external_context_required", True),
-    ("scope", "WHOLE_FILING"), ("economic_period", "2026-04-27")])
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("approved", False),
+        ("external_context_required", True),
+        ("scope", "WHOLE_FILING"),
+        ("economic_period", "2026-04-27"),
+    ],
+)
 def test_disagreement_cannot_release_passage(scoped, field, value):
     scope, source, reviews = scoped
     r = json.loads(reviews[0].read_text())
@@ -71,8 +101,12 @@ def test_scope_does_not_bypass_previous_period(scoped, tmp_path):
     scope, source, reviews = scoped
     old = tmp_path / "old"
     old.mkdir()
-    rows = [{"archive_source": {"ticker": "TEST", "report_period": "2026-04-26"},
-             "article": {"summary": "Different excerpt"}}]
+    rows = [
+        {
+            "archive_source": {"ticker": "TEST", "report_period": "2026-04-26"},
+            "article": {"summary": "Different excerpt"},
+        }
+    ]
     save(old / "packet.json", rows)
     save(old / "freeze.json", {"packet_sha256": digest(rows)})
     out = tmp_path / "out"
@@ -115,3 +149,65 @@ def test_unknown_sampling_protocol_cannot_freeze(scoped, tmp_path):
     with pytest.raises(ValueError, match="sampling protocol"):
         freeze(scope, source, reviews, tmp_path / "new", sampling_protocol="PICK_POSITIVES")
     assert not (tmp_path / "new").exists()
+
+
+def context_packet(scoped):
+    scope, source, reviews = scoped
+    rows = json.loads((scope / "packet.json").read_text())
+    row = rows[0]
+    row["context_spans"] = [
+        {
+            "purpose": purpose,
+            "document": row["document"],
+            "start": 0,
+            "end": len(row["quote"]),
+            "quote": row["quote"],
+        }
+        for purpose in ["issuer_period", "document_heading"]
+    ]
+    save(scope / "packet.json", rows)
+    save(scope / "receipt.json", {"packet_sha256": digest(rows)})
+    for path in reviews:
+        review = json.loads(path.read_text())
+        review["packet_sha256"] = digest(rows)
+        review["passages"][0]["scope"] = "EXACT_PASSAGE_WITH_CITED_CONTEXT"
+        save(path, review)
+    return scope, source, reviews
+
+
+def test_cited_context_does_not_rewrite_article(scoped, tmp_path, monkeypatch):
+    import engine.evaluation.scoped_operating_passages as module
+
+    scope, source, reviews = context_packet(scoped)
+    monkeypatch.setattr(module, "freeze_selected", lambda selected, *a, **kw: selected)
+    result = freeze(scope, source, reviews, tmp_path / "new")
+    original = json.loads((scope / "packet.json").read_text())[0]
+    assert result[0]["article"]["summary"] == original["quote"]
+    assert len(result[0]["source"]["context_evidence"]) == 2
+    assert result[0]["source"]["scope"] == "EXACT_PASSAGE_WITH_CITED_CONTEXT"
+
+
+@pytest.mark.parametrize("fault", ["quote", "family", "purpose", "review_scope"])
+def test_context_tampering_cannot_release_passage(scoped, fault):
+    scope, source, reviews = context_packet(scoped)
+    rows = json.loads((scope / "packet.json").read_text())
+    c = rows[0]["context_spans"][0]
+    if fault == "quote":
+        c["quote"] = "invented"
+    if fault == "family":
+        c["document"] = {**c["document"], "url": "https://example.test/other"}
+    if fault == "purpose":
+        c["purpose"] = "other"
+    save(scope / "packet.json", rows)
+    save(scope / "receipt.json", {"packet_sha256": digest(rows)})
+    for path in reviews:
+        r = json.loads(path.read_text())
+        r["packet_sha256"] = digest(rows)
+        if fault == "review_scope":
+            r["passages"][0]["scope"] = "EXACT_PASSAGE_INFORMATIONAL_ONLY"
+        save(path, r)
+    if fault == "review_scope":
+        assert approved_rows(scope, source, reviews)[0] == []
+    else:
+        with pytest.raises(ValueError):
+            approved_rows(scope, source, reviews)
