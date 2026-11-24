@@ -79,7 +79,9 @@ def full_body_decisions(bundle, narrative, title, body, at):
             offset += len(paragraph)
 
 
-def freeze(selections, output: Path, *, exclude_packets=(), at=None):
+def freeze(selections, output: Path, *, exclude_packets=(), at=None, matcher="legacy_paragraph"):
+    if matcher not in {"legacy_paragraph", "feed_cards"}:
+        raise ValueError("Unknown full article matcher")
     at = at or datetime.now(UTC)
     if at.tzinfo is None or at > datetime.now(UTC) or not 1 <= len(selections) <= 100:
         raise ValueError("Bounded selections and aware nonfuture cutoff required")
@@ -103,10 +105,16 @@ def freeze(selections, output: Path, *, exclude_packets=(), at=None):
             continue
         seen.add(cluster)
         texts.append(tokens)
+        if matcher == "feed_cards":
+            from engine.article_cards import decisions as card_decisions
+            from engine.article_cards import substantive_blocks
+            blocks, _ = substantive_blocks(selection, at)
         for bundle in bundles:
             for narrative in bundle.narratives:
-                key = digest([cluster, bundle.id, bundle.version, narrative.id, "full_body_v1"])
-                decisions = list(full_body_decisions(bundle, narrative, original["title"], body, at))
+                key = digest([cluster, bundle.id, bundle.version, narrative.id, "full_body_v1" if matcher == "legacy_paragraph" else "feed_cards_v1"])
+                decisions = (list(card_decisions(bundle, narrative, original["title"], blocks, at))
+                             if matcher == "feed_cards" else
+                             list(full_body_decisions(bundle, narrative, original["title"], body, at)))
                 predictions[key] = bool(decisions)
                 traces[key] = decisions
                 packet.append({"id": key, "cluster": cluster, "article": article,
@@ -133,7 +141,7 @@ def freeze(selections, output: Path, *, exclude_packets=(), at=None):
         raise ValueError("Registry changed during freeze")
     receipt = {"at": at.isoformat(), "packet_sha256": digest(packet),
         "predictions_sha256": digest(predictions), "traces_sha256": digest(traces),
-        "prediction_track": "full_article_relevance", "clusters": len(seen),
+        "prediction_track": "full_article_relevance", "matcher": matcher, "clusters": len(seen),
         "pairs": len(packet), "excluded_exposure_or_duplicates": excluded,
         "prior_packet_sha256": hashes, "selection_sha256": digest(selections),
         "sampling": "CURATED_UNSEEN_DOCUMENTS_NOT_RANDOM_MARKET_SAMPLE",
@@ -171,9 +179,10 @@ def main():
     parser.add_argument("--selections", type=Path, required=True)
     parser.add_argument("--directory", type=Path, required=True)
     parser.add_argument("--exclude-packet", type=Path, action="append", default=[])
+    parser.add_argument("--matcher", choices=["legacy_paragraph", "feed_cards"], default="legacy_paragraph")
     args = parser.parse_args()
     selections = json.loads(args.selections.read_text(encoding="utf-8"))
-    print(json.dumps(freeze(selections, args.directory, exclude_packets=args.exclude_packet), indent=2))
+    print(json.dumps(freeze(selections, args.directory, exclude_packets=args.exclude_packet, matcher=args.matcher), indent=2))
 
 
 if __name__ == "__main__":

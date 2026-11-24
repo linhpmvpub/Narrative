@@ -97,3 +97,19 @@ def test_no_cross_paragraph_or_headline_keyword_assembly(linked):
     narrative = bundle.narratives[0]
     assert not list(full_body_decisions(bundle, narrative, "memory", "server\nprices", datetime.now(UTC)))
     assert not list(full_body_decisions(bundle, narrative, "", "memory server\nprices", datetime.now(UTC)))
+
+
+def test_freeze_current_card_matcher_agrees_with_feed(linked, tmp_path, selection):
+    from engine.article_cards import build
+    at = datetime.now(UTC)
+    directory = tmp_path / 'cards-freeze'
+    receipt = freeze([selection], directory, at=at, matcher='feed_cards')
+    cards = build([selection], at)['items']
+    selected = {(c['profile_id'], c['narrative_id']) for c in cards}
+    packet = json.loads((directory / 'packet.json').read_text())
+    predictions = json.loads((directory / 'predictions.json').read_text())
+    assert receipt['matcher'] == 'feed_cards'
+    assert 'binding_id' not in json.dumps(packet)
+    for row in packet:
+        assert predictions[row['id']] == ((row['profile_id'], row['narrative']['id']) in selected)
+    assert evaluate(directory, reference(directory))['tp'] == len(cards)
