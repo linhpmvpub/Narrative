@@ -216,10 +216,34 @@
   ],
   "validation": {
     "focused_tests": 37,
+    "focused_seconds": 44.45,
     "final_full_article_tests": 9,
+    "final_full_article_seconds": 24.37,
+    "local_full_suite": {
+      "passed": 838,
+      "seconds": 711.06,
+      "note": "Collected before final added provenance test; final nine focused tests and exact-commit CI cover it."
+    },
     "ruff": "passed",
     "mypy_files": 118,
-    "local_full_suite": "running",
-    "github_ci": "pending"
+    "github_ci": {
+      "run_id": 45345343175,
+      "commit": "088f367463314d83a6c7c35367224d9032a093e0",
+      "status": "success",
+      "sqlite": {
+        "passed": 839,
+        "seconds": 121.89
+      },
+      "postgresql": {
+        "passed": 839,
+        "seconds": 225.68
+      },
+      "dependency_audits": "passed",
+      "javascript_syntax": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    },
+    "prior_packet_receipts": 27,
+    "prior_unique_packet_hashes_verified": 21,
+    "prior_normalized_title_matches": 0
   }
 }
