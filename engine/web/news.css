@@ -2,3 +2,6 @@ main{max-width:1060px;margin:auto;padding:24px}header,nav{display:flex;justify-c
 
 #result{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}#claims input[type=checkbox]{width:auto;margin-right:8px}#claims form select{margin:8px 0}
 #dossier-result{overflow-wrap:anywhere;max-width:100%}
+#reading-form label{display:flex;align-items:flex-start;gap:8px;margin:10px 0;overflow-wrap:anywhere}
+#reading-form input[type=checkbox]{width:auto;flex:none;margin:3px 0}
+#reading-tickers{display:flex;flex-wrap:wrap;gap:16px}

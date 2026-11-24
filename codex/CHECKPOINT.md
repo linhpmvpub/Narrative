@@ -1,5 +1,13 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-24
 
+## Persistent personal reading choices — 2026-11-24 (latest)
+
+- Added account-owned company/shared-narrative selections in local /news, under Theo dõi của tôi. Defaults remain empty: no choices made for the user. Followed narratives rank before followed companies and discovery, with explicit reason labels; archive and followed-only options persist across login/reload. This is reading relevance, not financial importance or impact prediction.
+- Migration0017 adds rie_article_preferences in account DB, separate from article inbox. Authenticated GET/PUT article-preferences use principal identity, bounded strict input, existing transactional account lock/idempotency, optimistic version conflicts. Unknown targets rejected; unavailable previously saved choices retained/removable. Source gates execute before personalization. No change to active profiles, canonical subscriptions or private user-authored theses.
+- Local account DB backed up to source-cache/personal-reading-2026-11-24/account-pre-migration.db and migrated0017. Owned API restarted on127.0.0.1:8888, launcher31956; metadata/logs in same ignored directory. Article source checker unchanged. Gateway endpoints remain blocked; no new cloud exposure. NotificationsFALSE, syntheticliveFALSE, LLMnone.
+- Validation:20 focused preference/feed tests passed50.36s; final ordering regression passed2.94s after sandbox hard-link restriction was resolved by authorized host execution. Ruff, mypy122files, JS syntax passed. Edge UI:24 discovery cards ->6 AMD followed cards ->14 AMD/company plus DELL/narrative cards; narrative priority first; reload restores choices; desktop/mobile fit; logout clears private selections. Temporary QA account and credentials removed. Actual user's preferences remain version0/empty; live catalog5companies/10shared narratives. Screenshots stay local. Full GitHub CI pending code push.
+- Next: source-body review queue and replacement workflow to keep changed articles usable without weakening evidence gates; then independent fresh-sample relevance evaluation and feedback-driven reading improvements. Shared target selection is not personal thesis authoring. Product acceptance and live push remain pending.
+
 ## Full-article feed integration and correction/withdrawal lifecycle — 2026-11-24 (latest)
 
 - Added engine.article_feed and authenticated GET /api/v0/news/profile-articles, integrated into existing /news with company/shared-narrative filters, excerpts, path citations and unknowns. This is a dedicated RESEARCH feed, not algorithm acceptance or canonical financial impact. No personal subscription persistence claimed. Old active profiles/feed projections unchanged.

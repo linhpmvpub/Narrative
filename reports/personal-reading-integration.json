@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-24",
+  "schema": "0017",
+  "scope": "account-owned shared research narrative and company reading choices",
+  "delivery": "disabled",
+  "cloud_data_deployment": false,
+  "defaults_changed": false,
+  "validation": {
+    "focused_tests": 20,
+    "focused_seconds": 50.36,
+    "final_ordering_test": "passed",
+    "ruff": "passed",
+    "mypy_files": 122,
+    "javascript_syntax": "passed",
+    "ui": {
+      "discovery_cards": 24,
+      "company_followed": 6,
+      "combined": 14,
+      "reload": "passed",
+      "logout": "passed",
+      "mobile": "passed",
+      "qa_account_removed": true
+    },
+    "github_ci": "pending"
+  },
+  "limits": [
+    "Research relevance only; not impact prediction",
+    "Shared targets only; not personal thesis creation",
+    "New endpoints remain local",
+    "No new independent algorithm accuracy evaluation"
+  ]
+}

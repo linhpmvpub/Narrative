@@ -3,11 +3,12 @@
 import os
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, Header, HTTPException, Query
 from pydantic import AwareDatetime
 from sqlalchemy import select
 
-from engine.api.accounts import Principal, principal
+from engine.api.accounts import Principal, principal, write
+from engine.article_preferences import Preferences
 from engine.db import database
 from engine.models.contracts import utc
 from engine.models.schema_v13 import news_items, news_revisions
@@ -161,13 +162,21 @@ def profile_rss(as_of: AwareDatetime | None = None):
 
 
 @router.get("/profile-articles")
-def profile_articles(ticker: str | None = None, narrative: str | None = None):
+def profile_articles(user: Annotated[Principal, Depends(principal)],
+                     ticker: str | None = None, narrative: str | None = None):
     from engine.article_feed import feed
+    from engine.article_preferences import personalize, read
 
+    account_db = database()
+    try:
+        with account_db.connect() as conn:
+            preferences = read(conn, user)
+    finally:
+        account_db.dispose()
     engine = database(os.getenv("ARTICLE_FEED_DATABASE_URL") or None)
     try:
         with engine.connect() as conn:
-            return feed(conn, ticker=ticker, narrative=narrative)
+            return personalize(feed(conn, ticker=ticker, narrative=narrative), preferences)
     finally:
         engine.dispose()
 
@@ -194,3 +203,21 @@ def reviewed_operations():
             return role_feed(conn, operating=True)
     finally:
         engine.dispose()
+
+
+@router.get("/article-preferences")
+def article_preferences(user: Annotated[Principal, Depends(principal)]):
+    from engine.article_preferences import catalog, read
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            return {**read(conn, user), "catalog": catalog()}
+    finally:
+        engine.dispose()
+
+
+@router.put("/article-preferences")
+def save_article_preferences(body: Preferences, user: Annotated[Principal, Depends(principal)],
+                             key: Annotated[str | None, Header(alias="Idempotency-Key")] = None):
+    from engine.article_preferences import save
+    return write(user, "article-preferences", key, body.model_dump(), lambda conn: save(conn, user, body))
