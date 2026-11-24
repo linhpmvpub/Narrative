@@ -7,8 +7,8 @@ active company registry and other feed sections are unchanged.
 
 The section supports company and shared-narrative filtering, source excerpts,
 profile evidence and uncertainty. It clears cards at refresh, failed reads, logout
-and page visibility changes. Selection is session-local; this is not yet persistent
-personal narrative subscriptions. The mobile gateway intentionally does not allow
+and page visibility changes. Temporary filters are session-local; account-owned company/shared-narrative choices
+are described in `personal-reading.md`. The mobile gateway intentionally does not allow
 the new endpoint; access is localhost only until remote data access is authorized.
 
 ## Operator setup
@@ -67,3 +67,6 @@ An exclusive writer lock serializes changes, and immutable `state-vN.json` snaps
 precede atomic pointer replacement. If interrupted with an orphan snapshot or lock,
 hold the feed and reconcile the last complete snapshot locally before restarting;
 do not delete history or silently overwrite it. The expiry gate remains in force.
+
+For a pinned queue, escaped source diff and conflict-checked review packet, use
+`python -m engine.article_review queue`; see `local-article-review.md`.

@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-24
 
+## Local source correction review queue — 2026-11-24 (latest)
+
+- Added engine.article_review CLI queue/prepare/approve. Bounded queue separates retryable outages/expired proof from explicit body review; compares current inbox anchors even before refresh. Queue is triage, not a replacement for feed integrity validation. Local live queue version9 has0pending items; no real selection or source approval changed.
+- prepare captures allowlisted source into existing private archive and creates a new local review directory containing escaped inert HTML diff, normalized candidate text, incomplete selection draft and pinned receipt. Complete body boundaries/reviewer/time must be entered explicitly. Draft cannot approve. Old captures and state snapshots remain. No remote API/UI route added; operator guide docs/local-article-review.md.
+- approve rejects candidate identity edits, changed entry snapshots and changed inbox anchors. Existing approve_replacement now supports these guards under the writer lock. Approval enters AWAITING_RECHECK only; publisher withdrawal/source freshness/profile checks still apply. Receipts are local operator artifacts, not independent identity attestation. Legacy low-level operator approval remains available.
+- Found and fixed a fresh-process import cycle introduced by personal preferences: catalog dependencies now load inside catalog(). Added subprocess regressions for article_feed/article_review CLI startup. Existing running API/collector unchanged; no restart required for local CLI. No cloud data transfer, real notificationsFALSE, syntheticliveFALSE, LLMnone.
+- Validation:initial14 review/feed tests passed32.30s; final6 review lifecycle tests passed17.88s; Ruff and mypy123files passed; CLI queue and article_feed --help passed against local environment. Preference/import regressions and full GitHub CI pending. Raw review artifacts must remain under ignored source-cache; only code/tests/docs/aggregate report pushed.
+- Next: collect fresh full-article examples with positive quotas across five companies and independently evaluate relevance; add operator UI if review volume warrants it. Personal thesis authoring, broader coverage and product acceptance remain pending. This iteration does not change algorithm accuracy or claim production readiness.
+
 ## Persistent personal reading choices — 2026-11-24 (latest)
 
 - Added account-owned company/shared-narrative selections in local /news, under Theo dõi của tôi. Defaults remain empty: no choices made for the user. Followed narratives rank before followed companies and discovery, with explicit reason labels; archive and followed-only options persist across login/reload. This is reading relevance, not financial importance or impact prediction.

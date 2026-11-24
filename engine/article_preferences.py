@@ -6,8 +6,6 @@ from fastapi import HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import select
 
-from engine.article_feed import root_dir
-from engine.company_profiles import available_bundles
 from engine.models.schema_v17 import article_preferences as table
 
 DEFAULT = {"tickers": [], "narratives": [], "following_only": False, "include_archive": True}
@@ -23,6 +21,9 @@ class Preferences(BaseModel):
 
 
 def catalog():
+    from engine.article_feed import root_dir
+    from engine.company_profiles import available_bundles
+
     try:
         state = json.loads((root_dir() / "current.json").read_text(encoding="utf-8"))
         registry = available_bundles(root=state["profiles"])

@@ -113,7 +113,7 @@ def refresh(conn, client, *, root=None):
                        for s in sorted({e["status"] for e in state["entries"]})}, "delivery": "disabled"}
 
 
-def approve_replacement(conn, selection, *, root=None):
+def approve_replacement(conn, selection, *, root=None, expected_entry=None, expected_anchors=None):
     """Explicit local operator review; a refresh can never perform this transition."""
     root = Path(root) if root is not None else root_dir()
     with writer_lock(root):
@@ -124,13 +124,18 @@ def approve_replacement(conn, selection, *, root=None):
             e["selection"]["revision"]["payload"]["url"]) == canonical_url(url)), None)
         if entry is None:
             raise ValueError("Replacement must identify an existing article")
+        if expected_entry is not None and digest(entry) != expected_entry:
+            raise ValueError("Review is stale; prepare a new review packet")
+        current_anchors = anchors(conn, url)
+        if expected_anchors is not None and current_anchors != expected_anchors:
+            raise ValueError("Inbox changed during review; prepare again")
         old = entry["selection"]
         cutoff = max(utc(old["body_review"]["reviewed_at"]),
                      utc(entry["checked_at"] or old["body_review"]["reviewed_at"]))
         if (selection["packet_sha256"] == old["packet_sha256"]
                 or utc(selection["body_review"]["reviewed_at"]) <= cutoff):
             raise ValueError("New capture and later explicit body review required")
-        entry.update(selection=selection, anchors=anchors(conn, url),
+        entry.update(selection=selection, anchors=current_anchors,
                      status="AWAITING_RECHECK", checked_at=None, proof=None)
         write_state(root, state)
     return {"status": "AWAITING_RECHECK", "version": state["version"], "delivery": "disabled"}
