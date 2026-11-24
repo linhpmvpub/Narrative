@@ -83,12 +83,13 @@ def primary_source(conn, version, at):
     return event, filing, claim, review, permission
 
 
-def role_feed(conn, limit=100):
+def role_feed(conn, limit=100, *, operating=False):
     at = datetime.now(UTC)
     result: dict = {"items": [], "enabled": Settings.from_env().dev_informational_feed,
               "delivery": "disabled", "graph_modified": False, "as_of": at.isoformat(),
               "examined": 0, "withheld": 0, "truncated": False,
-              "mode": "REVIEWED_SEC_ROLE_CONTEXT_NOT_VERIFIED_IMPACT"}
+              "mode": ("REVIEWED_SEC_OPERATING_CONTEXT_NOT_VERIFIED_IMPACT" if operating
+                       else "REVIEWED_SEC_ROLE_CONTEXT_NOT_VERIFIED_IMPACT")}
     if not result["enabled"]:
         return result
     if not 1 <= limit <= 200:
@@ -115,16 +116,20 @@ def role_feed(conn, limit=100):
             result["withheld"] += 1
             continue
         role_data = extract_supply_roles(claim.claim_text, filing["manifest"]["cik"])
-        if role_data["routing_withheld"] or not role_data["facts"]:
+        if role_data["routing_withheld"] or (not operating and not role_data["facts"]):
             continue
         for b in profiles["items"]:
             for n in b.narratives:
                 decisions = list(binding_decisions(b, n, {"summary": claim.claim_text}, at,
                                                   issuer_cik=filing["manifest"]["cik"]))
+                decisions = [d for d in decisions if
+                    (d["binding"].kind == "ISSUER_OPERATING_CONTEXT") == operating]
                 if not decisions:
                     continue
                 nodes = {node.id: node.label for node in b.nodes}
-                cards.append({"id": digest((version["id"], b.id, n.id)),
+                cards.append({"id": digest((version["id"], b.id, n.id, "operating") if operating
+                                         else (version["id"], b.id, n.id)),
+                    "context_kind": "ISSUER_OPERATING_CONTEXT" if operating else "SUPPLY_ROLE",
                     "event_id": version["event_id"], "event_version_id": version["id"],
                     "version": version["version_number"], "headline": event.factual_headline,
                     "excerpt": claim.claim_text, "source_url": filing["source_url"],
@@ -141,7 +146,7 @@ def role_feed(conn, limit=100):
                     "profile_sources": [{"id": s.id, "url": str(s.url)} for s in b.sources],
                     "narrative_id": n.id, "narrative_title": n.title,
                     "roles": [{**r, "document_start": claim.source_span.start + r["start"],
-                               "document_end": claim.source_span.start + r["end"]} for r in role_data["facts"]],
+                               "document_end": claim.source_span.start + r["end"]} for r in ([] if operating else role_data["facts"])],
                     "links": [{"binding_id": d["binding"].id, "kind": d["binding"].kind,
                         "scope": d["binding"].scope, "matches": d["matches"],
                         "path": [{"from": nodes[r.from_id], "to": nodes[r.to_id],
@@ -150,10 +155,12 @@ def role_feed(conn, limit=100):
                     "stance": "RELATED_INFORMATION", "impact": "UNKNOWN", "delivery": "disabled",
                     "impact_eligible": False, "graph_eligible": False,
                     "current_relationship_verified": False, "identity_merged": False,
-                    "verification": "REVIEWED_SOURCE_ROLE_CONTEXT_NOT_VERIFIED_RELATIONSHIP",
+                    "verification": ("REVIEWED_ISSUER_OPERATING_CONTEXT_NOT_VERIFIED_IMPACT" if operating
+                                     else "REVIEWED_SOURCE_ROLE_CONTEXT_NOT_VERIFIED_RELATIONSHIP"),
                     "decision_trace": ["Chỉ dùng phiên bản sự kiện mới nhất; không dùng lại bản đã bị thay thế",
                         "Đã kiểm tra lại phê duyệt độc lập, quyền nguồn, danh tính và đoạn trích",
-                        "Vai trò mua–cung cấp và sản phẩm giữ nguyên vị trí trong nguồn",
+                        ("Cùng doanh nghiệp phát hành; cụm từ hoạt động và sản phẩm nằm trong một câu" if operating
+                         else "Vai trò mua–cung cấp và sản phẩm giữ nguyên vị trí trong nguồn"),
                         "Chỉ ghép vào narrative khi hồ sơ và đường liên quan còn đủ bằng chứng",
                         "Chưa xác nhận quan hệ hiện tại hoặc quy mô tài chính; không gửi thông báo"]})
     result["items"] = cards[:100]

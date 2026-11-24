@@ -169,3 +169,15 @@ def reviewed_roles():
             return role_feed(conn)
     finally:
         engine.dispose()
+
+
+@router.get("/reviewed-operations")
+def reviewed_operations():
+    from engine.reviewed_role_feed import role_feed
+
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            return role_feed(conn, operating=True)
+    finally:
+        engine.dispose()
