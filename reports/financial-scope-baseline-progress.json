@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-24",
+  "scope": "LOCAL_RESEARCH_NOT_CAUSAL_APPROVAL",
+  "base_nodes": 76,
+  "base_relations": 83,
+  "reporting_bucket_nodes": 22,
+  "reported_composition_edges": 22,
+  "reviewed_scope_bindings": 4,
+  "companies_with_reporting_layer": 5,
+  "companies_with_product_scope_bindings": 3,
+  "automatic_affected_share": null,
+  "automatic_impact_weight": null,
+  "baseline_sha256": "d5dcf77abc4b6ccf07a0d05274190f0c35d6825c95b994b6c58b6f41b871416b",
+  "event_clusters": 0,
+  "predictions_locked": false,
+  "delivery": "disabled",
+  "active_feed_changed": false,
+  "validation": {
+    "focused_passed": 71,
+    "focused_seconds": 24.24,
+    "final_freeze_tests": 9,
+    "final_freeze_seconds": 3.54,
+    "ruff": "passed",
+    "mypy_files": 130,
+    "javascript": "passed",
+    "edge": "five financial layers,source binding evidence,desktop/mobile,no HTTP requests",
+    "baseline_verify": "passed",
+    "ci": "pending"
+  }
+}

@@ -55,7 +55,7 @@ def key(profile, local):
     return profile + "/" + local
 
 
-def snapshot(profile_root, at=None, facts=(), identities=(), financials=()):
+def snapshot(profile_root, at=None, facts=(), identities=(), financials=(), bindings=()):
     from engine.company_profiles import COMPONENTS, RELATIONS, available_bundles
     at = at or datetime.now(UTC)
     if at.tzinfo is None or at > datetime.now(UTC):
@@ -72,7 +72,7 @@ def snapshot(profile_root, at=None, facts=(), identities=(), financials=()):
     for b in registry["items"]:
         pid = b.id
         result["profiles"].append({"id": pid, "ticker": b.ticker, "version": b.version,
-            "legal_name": b.legal_name, "available_at": b.available_at.isoformat(),
+            "legal_name": b.legal_name, "company_id": key(pid, b.company_id), "available_at": b.available_at.isoformat(),
             "sha256": digest(b.model_dump(mode="json"))})
         for n in b.nodes:
             result["nodes"].append({**n.model_dump(), "id": key(pid, n.id), "profile_id": pid})
@@ -126,6 +126,8 @@ def snapshot(profile_root, at=None, facts=(), identities=(), financials=()):
     apply_identities(result, identities)
     from engine.atlas_financials import apply_financials
     apply_financials(result, financials, profile_root, registry["items"], at)
+    from engine.financial_graph import project_financial_graph
+    project_financial_graph(result, bindings, profile_root, registry["items"], at)
     result["field_inventory"] = field_inventory(result)
     result["coverage"] = coverage(result)
     return result
@@ -260,6 +262,7 @@ CREATE TABLE fact_evidence(fact_id TEXT NOT NULL REFERENCES exposure_facts(id), 
 CREATE TABLE components(id TEXT PRIMARY KEY, profile_id TEXT NOT NULL REFERENCES profiles(id), payload TEXT NOT NULL);
 CREATE TABLE narratives(id TEXT PRIMARY KEY, profile_id TEXT NOT NULL REFERENCES profiles(id), payload TEXT NOT NULL);
 CREATE TABLE mechanisms(id TEXT PRIMARY KEY, payload TEXT NOT NULL);
+CREATE TABLE financial_bindings(id TEXT PRIMARY KEY, node_id TEXT NOT NULL REFERENCES nodes(id), financial_id TEXT NOT NULL REFERENCES financial_context(id), payload TEXT NOT NULL);
 CREATE TABLE financial_context(id TEXT PRIMARY KEY, profile_id TEXT NOT NULL REFERENCES profiles(id), source_id TEXT NOT NULL REFERENCES sources(id), payload TEXT NOT NULL);
 CREATE TABLE entity_references(id TEXT PRIMARY KEY, node_id TEXT NOT NULL REFERENCES nodes(id), payload TEXT NOT NULL);
 CREATE TABLE identity_groups(id TEXT PRIMARY KEY, payload TEXT NOT NULL);
@@ -302,6 +305,8 @@ def install(data, output):
             db.executemany("INSERT INTO mechanisms VALUES (?,?)", [(k, encode(v)) for k, v in MECHANISMS.items()])
             for row in data.get("financial_context", []):
                 db.execute("INSERT INTO financial_context VALUES (?,?,?,?)", (row["id"], row["profile_id"], row["source_id"], encode(row)))
+            for row in data.get("financial_bindings", []):
+                db.execute("INSERT INTO financial_bindings VALUES (?,?,?,?)", (row["id"], row["node_id"], row["financial_id"], encode(row)))
             for ref in data.get("entity_references", []):
                 db.execute("INSERT INTO entity_references VALUES (?,?,?)", (ref["id"], ref["node_id"], encode(ref)))
             for group in data.get("identity_groups", []):
@@ -408,6 +413,7 @@ def main():
     parser.add_argument("--facts", type=Path)
     parser.add_argument("--identities", type=Path)
     parser.add_argument("--financials", type=Path)
+    parser.add_argument("--bindings", type=Path)
     args = parser.parse_args()
     if args.action == "build":
         if args.profiles is None:
@@ -415,7 +421,8 @@ def main():
         facts = json.loads(args.facts.read_text(encoding="utf-8")) if args.facts else []
         identities = json.loads(args.identities.read_text(encoding="utf-8")) if args.identities else []
         financials = json.loads(args.financials.read_text(encoding="utf-8")) if args.financials else []
-        result = install(snapshot(args.profiles, facts=facts, identities=identities, financials=financials), args.output)
+        bindings = json.loads(args.bindings.read_text(encoding="utf-8")) if args.bindings else []
+        result = install(snapshot(args.profiles, facts=facts, identities=identities, financials=financials, bindings=bindings), args.output)
     else:
         data = read_snapshot(args.output)
         if args.action == "scenario":

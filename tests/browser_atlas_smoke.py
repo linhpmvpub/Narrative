@@ -41,7 +41,7 @@ with sync_playwright() as p:
             for card in page.locator('#financials .financial-context').all():
                 card.locator('summary').click()
                 expect(card.locator('table')).to_be_visible()
-                card.locator('button').click()
+                card.locator('button').first.click()
                 expect(page.locator('#detail pre')).to_contain_text('source_sha256')
                 expect(page.locator('#detail pre')).to_contain_text('impact_weight')
     if page.locator('#field-inventory').count():
@@ -55,6 +55,19 @@ with sync_playwright() as p:
             page.locator('#identities button').last.click()
             expect(page.locator('#detail pre')).to_contain_text('REVIEWED_NAVIGATION_ONLY')
             expect(page.locator('#detail blockquote').first).to_be_visible()
+    if page.locator('#view option[value="FINANCIAL"]').count():
+        page.select_option('#view','FINANCIAL')
+        for ticker in ['AMD','DELL','MU','NVDA','SNDK']:
+            options=page.locator('#profile option').all()
+            value=next(o.get_attribute('value') for o in options if o.text_content().startswith(ticker+' ') and 'historical' not in o.get_attribute('value'))
+            page.select_option('#profile',value)
+            assert page.locator('#graph .node').count()>0
+            page.locator('#relations button').first.click()
+            expect(page.locator('#detail pre')).to_contain_text('causal_routing')
+        page.select_option('#profile','dell-supply-2026')
+        page.locator('#relations button').filter(has_text='SUBSET_OF_BUCKET').click()
+        expect(page.locator('#detail blockquote').first).to_be_visible()
+        expect(page.locator('#detail pre')).to_contain_text('affected_revenue_share')
     page.select_option('#view', 'MECHANISM')
     page.select_option('#view', 'all')
     page.evaluate('window.scrollTo(0,0)')
