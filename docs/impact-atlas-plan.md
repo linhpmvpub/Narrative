@@ -4,8 +4,8 @@
 
 `engine.impact_atlas` builds a new immutable local SQLite/JSON/HTML snapshot from a
 complete integrity-checked profile registry. SQLite stores profiles, nodes, relations,
-sources, evidence, components, narratives, exposures, reviewed exposure facts and
-the mechanism catalog. Foreign keys bind evidence and identities; profile IDs namespace
+sources, evidence, components, narratives, exposures, reviewed exposure facts,
+entity references, reviewed identity navigation groups and the mechanism catalog. Foreign keys bind evidence and identities; profile IDs namespace
 nodes so similar names never silently merge. Each snapshot has hashes and an explicit
 cutoff. Existing source files/profile versions remain the evidence authority.
 
@@ -37,13 +37,15 @@ or causal applicability. AI_OPERATOR remains distinct from HUMAN.
 
 ## B. Five-company population — in progress, measurable gaps
 
-The initial local atlas imports six existing research profiles for MU/NVDA/AMD/DELL/
-SNDK, including a separate historical NVIDIA profile. All 42 component statuses
-remain visible, with seven cross-company coverage groups. Unquantified relationship
-context is not renamed as quantified economic exposure. Existing 49 nodes/55 relations
-are a starting inventory, not comprehensive market coverage. No cross-profile entity
-resolution is asserted. The first three reviewed facts cover narrow AMD wafer sourcing
-and qualitative Sandisk wafer concentration, not total company revenue at risk.
+The current local atlas imports six research profiles for MU/NVDA/AMD/DELL/SNDK,
+including a separate historical NVIDIA profile. All42component statuses remain
+visible, with seven cross-company coverage groups. The latest inventory has74nodes,
+81relations,82/252component slots with some sourced evidence and35exposure facts,
+of which7are numeric. These are data inventory counts, not completeness or impact
+accuracy. One explicitly reviewed Sandisk identity group supports navigation between
+MU competitor context and the Sandisk issuer profile; it does not merge graph nodes
+or transmit impact across profiles. Unnamed counterparties and distinct legal entities
+remain separate. Numeric facts retain narrow periods, denominators and scopes.
 
 Complete identity/products/revenue, supply/capacity, demand/customers, prices/contracts,
 funding/financials, technology/competition and geography/hazards from sourced evidence.
@@ -90,7 +92,7 @@ Use prior blind cohorts only for diagnosis. The sourced Sandisk financing exampl
 a development demonstration using an already-exposed article, not a new holdout win.
 Future blind work should identify errors in extraction, exposure data, applicability,
 direction, timing and strength separately. Validate one family across multiple companies
-and counterexamples before extending coverage; restore missing Micron source coverage.
+and counterexamples before extending coverage; maintain positive-case coverage for Micron and the other four companies.
 
 ## E. Weight calibration — deliberately not started before data gates
 

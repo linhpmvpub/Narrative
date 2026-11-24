@@ -48,6 +48,20 @@
     "js": "passed",
     "browser": "five tickers,35facts,identity navigation,seven inventory groups,mobile fit,no HTTP requests",
     "sqlite_integrity": "passed",
-    "ci": "pending"
+    "ci": {
+      "run_id": 45378932764,
+      "commit": "3c36929a40025127f06a3374b112a9e0a4560ce5",
+      "conclusion": "success",
+      "sqlite_passed": 909,
+      "sqlite_seconds": 149.88,
+      "postgresql_passed": 909,
+      "postgresql_seconds": 238.88,
+      "dependency_audits": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    },
+    "final_identity_regressions": {
+      "passed": 13,
+      "seconds": 1.85
+    }
   }
 }
