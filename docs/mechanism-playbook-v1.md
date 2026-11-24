@@ -116,3 +116,21 @@ Lợi thế kỳ vọng đến từ chất lượng và độ phủ của dữ l
 ```
 
 Ưu tiên: nối thẩm định phạm vi có nguồn vào R05; bổ sung dữ liệu đúng mẫu số/kỳ cho từng cơ chế/công ty; mở rộng nhận diện trạng thái/thay đổi kinh tế và lời dẫn; đánh giá nhóm sự kiện mới và so sánh công bằng với baseline.25bất đồng nhãn của đợt trước còn chờ thẩm định. Chưa hiệu chỉnh trọng số, bật push hoặc thay thế matcher hiện tại.
+
+## Kiểm tra bổ sung với nguồn thật đã lưu
+
+Thông cáo TSMC về động đất tháng4/2024 được đối chiếu với hồ sơ AMD hiện có trong atlas.
+Khung sự kiện do AI_OPERATOR khai báo giữ nguyên cả thông tin gián đoạn, hồi phục và phần
+thiết bị quan trọng không bị hỏng trong đoạn nguồn. Engine tìm được một đường tới narrative,
+nhưng dừngR05REVIEW_SCOPE: sản phẩm/node công nghệ của AMD bị ảnh hưởng chưa xác minh.
+Mức tác động tài chính UNKNOWN. Đây là chẩn đoán trên nguồn đã xem và hồ sơ hiện có, không
+phải đánh giá mù, backtest đúng thời điểm hay thông báo sự cố đang diễn ra. Không tạo thẻ feed.
+
+EventFrame hiện phân biệt thời điểm nguồn được biết/rà soát nhưng chưa có đầy đủ thời điểm
+xảy ra, công bố và bắt đầu hiệu lực tách biệt. Phải bổ sung chúng cùng kiểm tra độ mới/rút nguồn
+trước tích hợp feed; nhãnOPERATING trong ví dụ diễn tả sự kiện được báo cáo lúc nguồn công bố,
+không chứng minh đang gián đoạn ở thời điểm chạy thử.
+
+## Kết quả kiểm thử
+
+48tests tập trung đạt97,81giây, gồm32tests mới. Ruff/mypy136files đạt. CI45429638803 tại92155f7 đạt1080testsSQLite132,51giây và1080testsPostgreSQL266,31giây,8ca model thật giả lập, dependency audit và migration/seed/replay/downgrade. Ba CLI đã chạy; hash cấu hình, baseline và các đầu ra cục bộ đã kiểm tra lại. Tests đạt không chứng minh mức chính xác tác động hoặc lợi thế so với LLM.

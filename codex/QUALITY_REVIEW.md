@@ -85,3 +85,27 @@ clusters. Detailed labels/predictions remain local and immutable; this cohort is
 Decision: no feed integration/strength calibration/push. Prioritize assertion contract and
 semantic interpretation, preserve this pilot as regression evidence, and evaluate improvements
 on a fresh disjoint cohort. No user decision is needed for those local engineering steps.
+
+## 2026-11-24: explicit knowledge/rule workbench
+
+User priority: concrete classifications, data definitions, parameters and reusable rules as
+an auditable product asset. Implemented7groups/21subtypes/30source-field definitions/7rule
+IDs/5scenario inputs.48focused tests passed; synthetic source-to-narrative trace stops a plan
+atR04. Real83relation inventory reused;0newsource facts and0newaccepted impacts. No proof
+of improved extraction or advantage over a comparable LLM baseline is claimed.
+
+| Priority | Current limitation | Feasible remedy | Verification gate |
+| --- | --- | --- | --- |
+| P0 | R05scope andR07causal magnitude/timing remainUNKNOWN; no accepted impact output. | Add explicit versioned source-bound scope adjudication for an identified entity/product/facility/period and anchored relationship; keep causal effect separate. | Independent positive/negative/near-miss scope cases, expiry/withdrawal/identity-confusion regressions; no user-supplied boolean bypass. |
+| P0 | Typed categories do not fix the previous~27–28%extraction recall. | Extend generic change/state/intransitive assertions and attribution; map reviewed assertions to typed groups/subtypes. | New disjoint source-first labels and per-mechanism metrics; old pilot remains regression only. |
+| P1 | Source fields often missing;581candidate row combinations are not581real exposures. | Prioritize applicable mechanisms per company and populate evidence with denominator, period and scope. | Applicability review first; no percent-completeness computed over irrelevant matrix cells. |
+| P1 | Cost sensitivity uses five assumptions, not sourced estimators or calibrated transmission. | Add evidence-bound quantities for the same cost pool and period, respecting conditional fractions and actual recovery terms. | Unit/denominator/period checks; counterfactual scenario stays distinct from realized impact. |
+| P1 | Horizon90/365bins are editorial; severity/ranking weights remain unset. | Collect supported timing intervals and group labels before fitting weights; expose editorial settings separately. | Out-of-sample calibration with uncertainty; no defaults pretending to be economic facts. |
+| P1 | Claimed competitive advantage over generic LLM is unmeasured. | Compare on one frozen disjoint corpus with equal source access, measuring missed relevant stories, wrong company/scope, traceability and correction behavior. | Disclose baseline configuration/cost/data access, independent labels and actual metrics; no marketing superiority claim from rules alone. |
+
+Decision: preserve a simple, inspectable version1. Source/provenance and rule infrastructure
+is the foundation; the moat must be earned through coverage, maintained facts, independent
+labels and reliable results.25prior label disagreements remain pending. No notifications or
+cloud data publication; all detailed artifacts remain local.
+
+Additional real diagnostic: archived2024TSMCstatement ->current AMD profile ->one path ->R05REVIEW_SCOPE. No sourced product/process exposure determination; financial magnitudeUNKNOWN. No new accuracy evidence. EventFrame capture/review chronology does not replace event occurrence/effective dates; add explicit temporal validity/freshness before any feed integration.

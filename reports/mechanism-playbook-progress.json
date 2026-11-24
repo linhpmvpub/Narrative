@@ -1,0 +1,61 @@
+{
+  "status": "EXPLICIT_PLAYBOOK_V1_UNCALIBRATED_LOCAL_WORKBENCH",
+  "groups": 7,
+  "event_subtypes": 21,
+  "source_parameter_definitions": 30,
+  "rules": 7,
+  "scenario_inputs": 5,
+  "ranking_weights": null,
+  "profiles": 6,
+  "companies": 5,
+  "relations_in_inventory": 83,
+  "candidate_relation_mechanism_rows": 581,
+  "rows_with_any_sourced_context": 21,
+  "inventory_applicability": "NOT_ASSESSED_NOT_COVERAGE_PERCENTAGE",
+  "new_source_facts": 0,
+  "synthetic_example": {
+    "paths": 1,
+    "relations_on_first_path": 2,
+    "first_unmet_rule": "R04",
+    "queue": "WATCH_PLAN_OR_COMMITMENT",
+    "cost_sensitivity_fraction": "0.006000",
+    "all_inputs_synthetic": true
+  },
+  "independent_scope_gate": "NOT_IMPLEMENTED_FAIL_CLOSED",
+  "causal_magnitude_gate": "NOT_IMPLEMENTED_FAIL_CLOSED",
+  "live_feed_changed": false,
+  "delivery": "disabled",
+  "playbook_sha256": "6795672e5210d3f446b4be665a96ac9f1b05646a986cda4460eaf3ad6e5c8cdf",
+  "baseline_sha256": "69a0de38c289c6da042061870405266c5a2a1792b1aff593e8b2e76dbf32b639",
+  "parent_artifacts_unchanged": true,
+  "validation": {
+    "focused_tests": 48,
+    "focused_seconds": 97.81,
+    "new_tests": 32,
+    "ruff": "passed",
+    "mypy_files": 136,
+    "three_clis": "passed",
+    "ci": {
+      "run_id": 45429638803,
+      "commit": "92155f72c21b2e04abdedaed2e791fb096ce96f1",
+      "status": "success",
+      "sqlite_passed": 1080,
+      "sqlite_seconds": 132.51,
+      "postgresql_passed": 1080,
+      "postgresql_seconds": 266.31,
+      "actual_model_synthetic_passed": 8,
+      "dependency_audit": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    }
+  },
+  "llm_comparison": "NOT_RUN_NO_SUPERIORITY_CLAIM",
+  "real_diagnostic": {
+    "source": "Archived2024TSMCearthquake statement",
+    "profile_basis": "Current frozen AMD profile; not historical backtest or current outage",
+    "candidate_paths": 1,
+    "first_unmet_rule": "R05",
+    "queue": "REVIEW_SCOPE",
+    "new_source_facts": 0,
+    "financial_magnitude": "UNKNOWN"
+  }
+}
