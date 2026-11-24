@@ -85,3 +85,30 @@ Local root: source-cache/extraction-blind-2026-11-24. Source documents, predicti
 per-case disagreements and detailed results remain ignored; publish aggregate counts only.
 Predictions were locked before two source-only reviewers began. The extractor was not
 changed or tuned on this cohort. Once scored, treat this cohort as exposed thereafter.
+
+## First-wave results
+
+Two independent source-only AI reviewers completed49cases. A marked160assertions with
+2UNSURE cases (156assertions scored); B marked168 with none unsure. Predictions were
+locked before review and the extractor was unchanged after seeing these sources.
+
+| Reference | Scored proposals | Source assertions | TP / FP / FN | Exact-anchor precision | Exact-anchor recall |
+| --- | ---: | ---: | --- | ---: | ---: |
+| AI A,47reviewed cases |65|156|44 /21 /112|67.69%|28.21%|
+| AI B,49reviewed cases |68|168|46 /22 /122|67.65%|27.38%|
+
+Shared160predicate anchors,8additional for B.24cases agree completely;25require adjudication.
+Across shared anchors,13actor and13object spans differ, plus2attribution and1phase labels.
+The source-only adjudication queue is local; no original labels were edited and no consensus
+gold was created. Low exact-case agreement is not the same as disagreement on every event.
+
+Null-object source assertions matched0/26(A) and2/33(B). Phase exact12/44(A),13/46(B) only
+among matched predicates. These measurements motivate generic intransitive/state extraction
+and attribution/phase improvements, not story-specific keyword tuning. Hold this now-exposed
+cohort for regression; judge improvements using a new disjoint source-first cohort.
+
+Exposure qualification: "new" means not detected in the screened local project artifacts. It does not prove that public historical articles were absent from the pretrained reviewers' training data. Same-model reviewers may share biases; independent contexts are not independent training.
+
+## Validation
+
+52focused tests passed4.21s; final18benchmark tests passed0.23s. Ruff passed and mypy135files passed. CI45423957149 at438b687:1048SQLite tests148.14s,1048PostgreSQL tests283.86s,8actual-model synthetic cases, dependency audit and migration/seed/replay/downgrade passed. Source/prediction receipt, blind packet copies, independent label digests and final runtime baseline reverified; original extractor unchanged.

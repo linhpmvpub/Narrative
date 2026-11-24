@@ -1,0 +1,133 @@
+{
+  "status": "BLIND_AI_PASSAGE_PILOT_SCORED_NOW_EXPOSED",
+  "source_universe": "EIA2022Jan-Nov",
+  "selected_documents": 50,
+  "captured_documents": 49,
+  "invalid_utf8_held": 1,
+  "evaluated_passages": 49,
+  "independent_event_clusters": null,
+  "prior_text_files_screened": 383,
+  "near_duplicate_hits": 0,
+  "syntax_proposals": 68,
+  "reviewers": [
+    {
+      "reviewer_id": "independent-ai-a",
+      "cases": 49,
+      "unsure_cases_excluded": 2,
+      "source_assertions": 156,
+      "syntax_proposals": 65,
+      "predicate_tp": 44,
+      "predicate_fp": 21,
+      "predicate_fn": 112,
+      "predicate_precision": 0.676923076923077,
+      "predicate_recall": 0.28205128205128205,
+      "matched_predicates": 44,
+      "actor_exact": 38,
+      "object_exact": 30,
+      "phase_exact": 12,
+      "null_object_gold": 26,
+      "null_object_matched": 0,
+      "uncertainty_flags_on_matched_only": {
+        "NEGATED": {
+          "matched_gold": 1,
+          "flagged": 1
+        },
+        "CONDITIONAL": {
+          "matched_gold": 5,
+          "flagged": 4
+        },
+        "ATTRIBUTED": {
+          "matched_gold": 13,
+          "flagged": 3
+        }
+      },
+      "human_gold": false,
+      "delivery": "disabled",
+      "metric": "EXACT_PREDICATE_ANCHOR_DIAGNOSTIC"
+    },
+    {
+      "reviewer_id": "independent-ai-b",
+      "cases": 49,
+      "unsure_cases_excluded": 0,
+      "source_assertions": 168,
+      "syntax_proposals": 68,
+      "predicate_tp": 46,
+      "predicate_fp": 22,
+      "predicate_fn": 122,
+      "predicate_precision": 0.6764705882352942,
+      "predicate_recall": 0.27380952380952384,
+      "matched_predicates": 46,
+      "actor_exact": 36,
+      "object_exact": 31,
+      "phase_exact": 13,
+      "null_object_gold": 33,
+      "null_object_matched": 2,
+      "uncertainty_flags_on_matched_only": {
+        "NEGATED": {
+          "matched_gold": 1,
+          "flagged": 1
+        },
+        "CONDITIONAL": {
+          "matched_gold": 5,
+          "flagged": 4
+        },
+        "ATTRIBUTED": {
+          "matched_gold": 14,
+          "flagged": 4
+        }
+      },
+      "human_gold": false,
+      "delivery": "disabled",
+      "metric": "EXACT_PREDICATE_ANCHOR_DIAGNOSTIC"
+    }
+  ],
+  "exact_case_agreements": 24,
+  "cases_requiring_adjudication": 25,
+  "consensus_gold_created": false,
+  "human_gold": false,
+  "freeze_sha256": "045f612832c320356dee60a4e46fcfa98c74fc214ea3307de6151786e3b29c84",
+  "label_sha256": [
+    "9b4fd997c2eca579d7af475aa8dda6286e6f23aaf2658570b7a6efbb4daf4667",
+    "8e1d95a46736858c3592a3c6d0ea52597a7eb456345f005cab3525814eb4c74e"
+  ],
+  "runtime_baseline_sha256": "0f92d7487a1da736b662b0aaa1a3098989842dc0767aaf2b2898380caa5f12c9",
+  "extractor_changed": false,
+  "canonical_events_created": 0,
+  "feed_cards_created": 0,
+  "delivery": "disabled",
+  "validation": {
+    "focused_passed": 52,
+    "focused_seconds": 4.21,
+    "new_regressions": 18,
+    "ruff": "passed",
+    "mypy_files": 135,
+    "ci": {
+      "run_id": 45423957149,
+      "commit": "438b687e83e99f4e6b26e018192c711614659f1f",
+      "status": "success",
+      "sqlite_passed": 1048,
+      "sqlite_seconds": 148.14,
+      "postgresql_passed": 1048,
+      "postgresql_seconds": 283.86,
+      "actual_model_synthetic_passed": 8,
+      "dependency_audit": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    },
+    "final_benchmark_tests": 18,
+    "final_benchmark_seconds": 0.23
+  },
+  "prior_eia_urls_screened": 32,
+  "label_comparison": {
+    "common_predicate_anchors": 160,
+    "only_reviewer_a": 0,
+    "only_reviewer_b": 8,
+    "field_disagreements_on_common_anchors": {
+      "object": 13,
+      "actor": 13,
+      "attributed": 2,
+      "phase": 1
+    },
+    "queue_cases": 25,
+    "consensus_gold_created": false
+  }
+}

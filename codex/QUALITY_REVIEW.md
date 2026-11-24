@@ -63,3 +63,25 @@ Measured:23exposed documents ->345syntax proposals,296flagged;95focused tests an
 | P2 | Model uses generic English training and optional environment; no domain benchmark. | Keep pluggable proposal contract, pin versions and capture complete runtime/model fingerprints; compare alternatives on the same frozen source-first labels. | Dedicated actual-model CI smoke plus blind benchmark; package audit excludes model not indexed on PyPI. |
 
 Next decision: validate semantics on unseen source-first labels before increasing output volume, tuning weights or routing proposals into feed. All new scope comparisons explicitly deny impact authorization. The protocol is documented; actual fresh collection/reviewer execution remains pending.
+
+## 2026-11-24: source-first blind AI passage pilot
+
+Predictions locked before two independent AI reviewers labelled49new EIA lead passages.
+Exact predicate diagnostics: A44/65precision and44/156recall (2UNSURE cases excluded);
+B46/68precision and46/168recall. Shared160predicate anchors, B8extra.24/49full cases agree
+exactly,25await adjudication. These are not human gold, full-article accuracy or49independent
+clusters. Detailed labels/predictions remain local and immutable; this cohort is now exposed.
+
+| Priority | Measured limitation | General remedy | Verification gate |
+| --- | --- | --- | --- |
+| P0 | Recall27.4–28.2%; null-object source assertions matched0/26(A),2/33(B). Direct-object syntax is not a sufficient economic-event contract. | Support intransitive changes and numeric/state complements; explicitly distinguish economic measured states, changes, plans and background context. Preserve spans/unknown roles; no issuer/news-specific phrase patches. | Fresh source-first assertion labels; per-assertion-type precision/recall including null-object cases and non-economic controls. |
+| P0 | Syntax proposal precision~67.7%; definitions, tool descriptions and analytic scaffolding can become proposals. | Add general semantic assertion classification, separate reporting verb from its economic proposition. Do not blacklist verbs based on these49examples. | Disjoint source/outlet/time groups; negative/control coverage; report abstentions and conditional hypotheses. |
+| P1 | Phase exact12/44(A),13/46(B) on matchedpredicates; many UNKNOWN abstentions, nine measured states labelledUNKNOWN becameREPORTED_ACTION in both references. | Treat grammatical past tense separately from economic phase; classify measured state vs change before phase. | Fresh phase confusion matrix, separating abstention from wrong affirmative assertions. |
+| P1 | Attribution flags only3/13(A),4/14(B),conditional4/5both among matched assertions. | Clause-scoped attribution/conditions and reference resolution; retain source chains rather than borrow nearby names. | Independent complete-source uncertainty labels; false-positive flag rate and recall beyond already matched assertions. |
+| P1 |25cases need adjudication; role-span disagreements dominate, shared160predicate anchors. | Source-only disagreement queue prepared; clarify role/complement boundary conventions and adjudicate without editing original labels. | Auditable adjudication provenance and reference version; no automatic conversion of AI agreement to human truth. |
+| P1 |49lead passages/one public outlet/year; cluster independence and seven-family coverage not established. | Broaden to multiple company/industry/policy sources, explicit economic-cluster grouping and whole-article coverage. |50–100disjoint event clusters; temporal/source controls and per-family denominators before product claims. |
+| P2 |One of50selected captures failed invalidUTF8. | Review HTTPcharset/BOM and raw bytes; define explicit bounded encoding fallback with immutable raw capture, never silently replace malformed text. | Encoding adversarial fixtures and source text review before admission. |
+
+Decision: no feed integration/strength calibration/push. Prioritize assertion contract and
+semantic interpretation, preserve this pilot as regression evidence, and evaluate improvements
+on a fresh disjoint cohort. No user decision is needed for those local engineering steps.
