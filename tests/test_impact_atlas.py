@@ -130,6 +130,31 @@ def test_horizon_and_dimensions_validate_without_defaults(dossier):
         ExposureFact.model_validate(f)
 
 
+@pytest.mark.parametrize("missing", ["period_label", "measurement_basis", "precision"])
+def test_numeric_exposure_requires_period_denominator_and_precision(dossier, missing):
+    f = fact(dossier)
+    f.update(dimension='customer_concentration',unit='fraction',value='0.12')
+    with pytest.raises(ValueError, match='Numeric exposure'):
+        ExposureFact.model_validate(f)
+    f.update(period_label='Synthetic fiscal quarter',period_end='2024-01-01',
+             measurement_basis='One anonymous customer revenue / total company revenue',
+             precision='EXACT_REPORTED')
+    parsed = ExposureFact.model_validate(f)
+    assert parsed.value == '0.12'
+    incomplete = {k: v for k, v in f.items() if k != missing}
+    with pytest.raises(ValueError, match='Numeric exposure'):
+        ExposureFact.model_validate(incomplete)
+    root, _ = dossier
+    result = snapshot(root.parent, facts=[f])
+    stored = result['exposures'][0]['dimensions']['customer_concentration']
+    assert stored['measurement_basis'] == f['measurement_basis']
+    assert stored['period_end'] == '2024-01-01'
+    assert stored['precision'] == 'EXACT_REPORTED'
+    f['period_end'] = '2999-01-01'
+    with pytest.raises(ValueError, match='chronology'):
+        ExposureFact.model_validate(f)
+
+
 def test_html_embedded_source_text_cannot_execute(dossier, tmp_path):
     root, _ = dossier
     data = snapshot(root.parent)

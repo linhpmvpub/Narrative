@@ -25,6 +25,16 @@ with sync_playwright() as p:
         expect(page.locator('#detail blockquote').first).to_be_visible()
         page.locator('#narratives button').first.click()
         expect(page.locator('#detail pre')).to_contain_text('thesis')
+    # Every optional exposure card must preserve period/basis/provenance and source access.
+    for option in page.locator('#profile option').all():
+        page.select_option('#profile', option.get_attribute('value'))
+        for card in page.locator('#facts .exposure-fact').all():
+            card.locator('summary').click()
+            expect(card).to_contain_text('Kỳ:')
+            expect(card).to_contain_text('Mẫu số / cơ sở đo:')
+            expect(card).to_contain_text('Người rà soát:')
+            card.locator('button').click()
+            expect(page.locator('#detail blockquote').first).to_be_visible()
     page.select_option('#view', 'MECHANISM')
     page.select_option('#view', 'all')
     page.evaluate('window.scrollTo(0,0)')

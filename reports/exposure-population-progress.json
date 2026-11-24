@@ -1,0 +1,120 @@
+{
+  "date": "2026-11-24",
+  "scope": "LOCAL_RESEARCH_AI_OPERATOR_REVIEW_NOT_INDEPENDENT_GOLD",
+  "companies": {
+    "AMD": {
+      "profile_version": 8,
+      "sourced_before": 4,
+      "sourced_after": 11,
+      "added_components": [
+        "procurement",
+        "inventory",
+        "resilience",
+        "customers",
+        "utilities",
+        "markets",
+        "input_prices"
+      ],
+      "new_context_relations": 2,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000191/amd-20260926.htm"
+    },
+    "DELL": {
+      "profile_version": 6,
+      "sourced_before": 7,
+      "sourced_after": 14,
+      "added_components": [
+        "procurement",
+        "inventory",
+        "resilience",
+        "fx_hedging",
+        "accounting",
+        "debt",
+        "revenue_model"
+      ],
+      "new_context_relations": 3,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1571996/000157199626000046/dell-20260731.htm"
+    },
+    "MU": {
+      "profile_version": 3,
+      "sourced_before": 5,
+      "sourced_after": 15,
+      "added_components": [
+        "identity",
+        "facilities",
+        "capacity",
+        "channels",
+        "procurement",
+        "selling_prices",
+        "utilities",
+        "resilience",
+        "technology",
+        "segments"
+      ],
+      "new_context_relations": 2,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/723125/000072312526000023/mu-20260903.htm"
+    },
+    "NVDA": {
+      "profile_version": 12,
+      "sourced_before": 11,
+      "sourced_after": 17,
+      "added_components": [
+        "channels",
+        "markets",
+        "resilience",
+        "inventory",
+        "selling_prices",
+        "geopolitics"
+      ],
+      "new_context_relations": 3,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm"
+    },
+    "SNDK": {
+      "profile_version": 3,
+      "sourced_before": 8,
+      "sourced_after": 15,
+      "added_components": [
+        "procurement",
+        "orders",
+        "revenue_model",
+        "selling_prices",
+        "debt",
+        "accounting",
+        "partners"
+      ],
+      "new_context_relations": 4,
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2023554/000162828026068601/sndk-20261002.htm"
+    }
+  },
+  "totals": {
+    "profiles": 6,
+    "companies": 5,
+    "nodes_before": 49,
+    "nodes_after": 63,
+    "relations_before": 55,
+    "relations_after": 69,
+    "sourced_component_slots_before": 41,
+    "sourced_component_slots_after": 78,
+    "component_slots": 252,
+    "current_profile_sourced_slots": 72,
+    "current_profile_total_slots": 210,
+    "facts_before": 3,
+    "facts_after": 31,
+    "numeric_facts_before": 1,
+    "numeric_facts_after": 7
+  },
+  "per_company_fact_counts": {
+    "AMD": 7,
+    "DELL": 6,
+    "MU": 8,
+    "NVDA": 4,
+    "SNDK": 6
+  },
+  "delivery": "disabled",
+  "weights": null,
+  "active_feed_profile_root_changed": false,
+  "private_artifacts_uploaded": false,
+  "validation": {
+    "focused_tests": "pending final result",
+    "full_ci": "pending"
+  }
+}

@@ -3,7 +3,7 @@ import argparse
 import hashlib
 import json
 import sqlite3
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Literal
@@ -35,10 +35,11 @@ MECHANISMS: dict[str, dict[str, Any]] = {
         "conditions": ["Đúng khu vực, sản phẩm và pháp nhân", "Kiểm tra hiệu lực, ngoại lệ và thời hạn"],
         "mitigants": ["exemptions", "geographic_mix", "substitutability"]},
 }
-DIMENSIONS = ["exposure_share", "supplier_concentration", "supplier_concentration_qualitative", "customer_concentration", "substitutability",
+DIMENSIONS = ["exposure_share", "supplier_concentration", "supplier_concentration_qualitative", "customer_concentration", "customer_concentration_qualitative", "substitutability",
               "inventory_days", "contract_reset_days", "pass_through", "hedging", "ramp_days",
               "utilization", "yield", "market_share", "competition", "qualification_days",
-              "funding_conditions", "permit_status", "exemptions", "geographic_mix", "duration_days"]
+              "funding_conditions", "permit_status", "exemptions", "geographic_mix", "duration_days",
+              "procurement_terms", "customer_contract_terms", "manufacturing_model", "utility_dependency", "pricing_reset_frequency", "net_cost_basis"]
 GROUPS = {
     "products_revenue": ["products", "segments", "revenue_model", "sales_mix"],
     "supply_capacity": ["inputs", "suppliers", "facilities", "capacity"],
@@ -154,6 +155,10 @@ class ExposureFact(BaseModel):
     reviewed_at: AwareDatetime
     reviewer_id: str = Field(min_length=1)
     reviewer_kind: Literal["HUMAN", "AI_OPERATOR"]
+    period_label: str | None = Field(default=None, min_length=1, max_length=1000)
+    period_end: date | None = None
+    measurement_basis: str | None = Field(default=None, min_length=1, max_length=2000)
+    precision: Literal["EXACT_REPORTED", "APPROXIMATE_REPORTED", "QUALITATIVE", "UNSPECIFIED"] = "UNSPECIFIED"
     evidence: list[FactEvidence] = Field(min_length=1, max_length=10)
 
     @model_validator(mode="after")
@@ -166,6 +171,9 @@ class ExposureFact(BaseModel):
         if self.unit != expected:
             raise ValueError("Exposure dimension/unit mismatch")
         if expected != "category":
+            if not self.period_label or not self.measurement_basis or self.precision not in {
+                    "EXACT_REPORTED", "APPROXIMATE_REPORTED"}:
+                raise ValueError("Numeric exposure requires period, denominator/basis and reported precision")
             try:
                 number = Decimal(self.value)
             except InvalidOperation as exc:
@@ -173,7 +181,8 @@ class ExposureFact(BaseModel):
             if not number.is_finite() or number < 0 or (expected == "fraction" and number > 1):
                 raise ValueError("Invalid exposure value")
         if (self.known_at > self.reviewed_at or
-                (self.valid_until is not None and self.valid_until <= self.valid_from)):
+                (self.valid_until is not None and self.valid_until <= self.valid_from) or
+                (self.period_end is not None and self.period_end > self.known_at.date())):
             raise ValueError("Invalid exposure chronology")
         return self
 
