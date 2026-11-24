@@ -28,3 +28,23 @@ scope representation, not calibrating weights or broadening keywords one story a
 No need for a user decision to continue local parser/contract experiments. A paid/external
 model service, new data transfer or live notification activation would require a concrete
 proposal within the user's authorization. No such service was enabled in this iteration.
+
+### Concrete extractor experiment to prepare next
+
+The current virtualenv has no spaCy, Stanza, transformers, torch or onnxruntime.
+An isolated spaCy English pipeline is a feasible local candidate for dependency
+relations and noun chunks; these are syntactic proposals, not financial semantics.
+Pin both package and trained-model versions/checksums before a new comparison.
+Use source span validation and a common event schema so the extractor can be replaced.
+Do not assume pretrained entity recognition resolves semiconductor products or legal
+subsidiaries. No model/package was installed and no private article was sent to an API.
+
+Primary references checked2026-11-24:
+[spaCy linguistic features](https://spacy.io/usage/linguistic-features) and
+[trained pipeline installation/versioning](https://spacy.io/usage/models).
+The proposal is an engineering hypothesis to test, not an accuracy claim.
+
+Diagnostic counting note: the1571unsupported units are parser fragments, including
+non-event prose and financial table cells. They are not1571missed economic events.
+No supported-event recall denominator was independently labelled in this iteration;
+the defensible observation is zero extracted candidates across23exposed documents.

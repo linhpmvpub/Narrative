@@ -27,6 +27,17 @@
     "final_scope_seconds": 2.4,
     "ruff": "passed",
     "mypy_files": 132,
-    "ci": "pending"
-  }
+    "ci": {
+      "run_id": 45410011275,
+      "commit": "e35ac01b1fca6054ac2809ba3c9b7877659be9a1",
+      "status": "success",
+      "sqlite_passed": 1004,
+      "sqlite_seconds": 170.93,
+      "postgresql_passed": 1004,
+      "postgresql_seconds": 255.39,
+      "dependency_audit": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    }
+  },
+  "diagnostic_limit": "Unsupported fragments include non-event prose and table cells; not a missed-event denominator. Exposed diagnostic, not blind accuracy."
 }

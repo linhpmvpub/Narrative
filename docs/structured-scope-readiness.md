@@ -42,3 +42,12 @@ See codex/QUALITY_REVIEW.md for ranked remedies and acceptance gates. All detail
 sources/rules/probes/diagnostics remain in source-cache/structured-scope-2026-11-24.
 The successor baseline pins the same atlas with the new runtime; the rule hash is
 recorded separately in the manifest and aggregate report. Prior baselines are retained.
+
+Diagnostic counting note: the1571unsupported units are parser fragments, including
+non-event prose and financial table cells. They are not1571missed economic events.
+No supported-event recall denominator was independently labelled in this iteration;
+the defensible observation is zero extracted candidates across23exposed documents.
+
+## Final validation
+
+CI45410011275 at e35ac01 passed:1004SQLite tests (170.93s),1004PostgreSQL tests (255.39s), dependency audit and migration/seed/replay/downgrade. Canonical rule digest and frozen baseline reverified; delivery remains disabled. Full test success establishes software regressions only, not real-news extraction quality.
