@@ -79,11 +79,14 @@ def sample_articles(rows, count, stratified):
 
 
 def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
-           stratified=False, max_age_days=None):
+           stratified=False, max_age_days=None, prediction_track="feed"):
+    if prediction_track not in {"feed", "text_relevance"}:
+        raise ValueError("Unknown prediction track")
     if not 1 <= count <= 100:
         raise ValueError("Choose 1..100 article clusters")
-    if max_age_days is not None and not 1 <= max_age_days <= 30:
-        raise ValueError("Age window must be 1..30 days")
+    max_window = 90 if prediction_track == "text_relevance" else 30
+    if max_age_days is not None and not 1 <= max_age_days <= max_window:
+        raise ValueError(f"Age window must be 1..{max_window} days")
     at = at or datetime.now(UTC)
     if at.tzinfo is None or at > datetime.now(UTC):
         raise ValueError("Aware, nonfuture cutoff required")
@@ -142,7 +145,7 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
     if not articles:
         raise ValueError("No eligible articles")
     matched = {c["id"] for c in prediction["items"]}
-    packet, predictions = [], {}
+    packet, predictions, feed_predictions = [], {}, {}
     for r in articles:
         for b in profiles["items"]:
             # Historical example-only profiles have no current RSS bindings.
@@ -162,7 +165,12 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
                     "entity_references": [v.model_dump(mode="json") for v in b.entity_references],
                     "relationships": [v.model_dump(mode="json") for v in b.relationships],
                     "nodes": [v.model_dump() for v in b.nodes]})
-                predictions[key] = key in matched
+                feed_predictions[key] = key in matched
+                if prediction_track == "text_relevance":
+                    from engine.profile_routing import binding_decisions
+                    predictions[key] = any(binding_decisions(b, n, r["payload"], at))
+                else:
+                    predictions[key] = key in matched
     if not packet:
         raise ValueError("No narrative pairs")
     current = available_bundles(at)
@@ -173,6 +181,8 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
     output.mkdir(parents=True, exist_ok=False)
     write_new(output / "packet.json", packet)
     write_new(output / "predictions.json", predictions)
+    if prediction_track == "text_relevance":
+        write_new(output / "feed_predictions.json", feed_predictions)
     receipt = {"at": at.isoformat(), "packet_sha256": digest(packet),
         "predictions_sha256": digest(predictions), "clusters": len(articles),
         "pairs": len(packet), "sampling": "LATEST_VALID_DEDUPLICATED_URLS",
@@ -185,6 +195,10 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
         "prior_packet_sha256": prior_hashes,
         "requested_clusters": count,
         "mode": "DEVELOPMENT_RELEVANCE_AUDIT_NOT_INDEPENDENT_GOLD", "delivery": "disabled"}
+    receipt["prediction_track"] = prediction_track
+    if prediction_track == "text_relevance":
+        receipt["feed_predictions_sha256"] = digest(feed_predictions)
+        receipt["prediction_scope"] = "Current-profile text relevance; freshness eligibility frozen separately; not historical as-of"
     if stratified:
         receipt["sampling"] = "TOPIC_ROUND_ROBIN_NOT_PREDICTION_SELECTED"
         receipt["strata_definitions"] = STRATA
@@ -198,6 +212,12 @@ def evaluate(directory: Path, labels_path: Path):
 
     packet, predictions, frozen = read("packet.json"), read("predictions.json"), read("freeze.json")
     labels = json.loads(labels_path.read_text(encoding="utf-8"))
+    if frozen.get("prediction_track") == "text_relevance":
+        feed_predictions = read("feed_predictions.json")
+        if (digest(feed_predictions) != frozen.get("feed_predictions_sha256")
+                or set(feed_predictions) != set(predictions)
+                or any(type(v) is not bool for v in feed_predictions.values())):
+            raise ValueError("Frozen feed eligibility artifact mismatch")
     if (digest(packet) != frozen["packet_sha256"]
             or digest(predictions) != frozen["predictions_sha256"]
             or labels["packet_sha256"] != frozen["packet_sha256"]):
@@ -251,6 +271,7 @@ def evaluate(directory: Path, labels_path: Path):
         "precision": tp / (tp + fp) if tp + fp else None,
         "recall": tp / (tp + fn) if tp + fn else None,
         "reference_kind": labels["reference_kind"], "independent_gold": False,
+        "prediction_track": frozen.get("prediction_track", "feed"),
         "packet_sha256": frozen["packet_sha256"], "labels_sha256": digest(labels),
         "errors": errors, "delivery": "disabled",
         "limitations": ["Latest-URL convenience sample; pairs are correlated within articles",
@@ -319,6 +340,7 @@ def main():
     parser.add_argument("--review", type=Path, action="append", default=[])
     parser.add_argument("--stratified", action="store_true")
     parser.add_argument("--max-age-days", type=int)
+    parser.add_argument("--prediction-track", choices=["feed", "text_relevance"], default="feed")
     args = parser.parse_args()
     if args.action == "freeze":
         db = database()
@@ -326,7 +348,7 @@ def main():
             with db.connect() as conn:
                 result = freeze(conn, args.directory, count=args.count,
                                 exclude_packets=args.exclude_packet, stratified=args.stratified,
-                                max_age_days=args.max_age_days)
+                                max_age_days=args.max_age_days, prediction_track=args.prediction_track)
         finally:
             db.dispose()
     elif args.action == "consensus":

@@ -44,6 +44,7 @@ def quality(directory, reviews, policy):
     t = policy["quality_targets"]
     lower = wilson_lower(metrics["tp"], metrics["tp"] + metrics["fp"])
     checks = {
+        "feed_prediction_track": frozen.get("prediction_track", "feed") == "feed",
         "article_clusters": clusters >= t["min_event_clusters"],
         "positive_pairs": metrics["tp"] + metrics["fn"] >= t["min_resolved_positive_pairs"],
         "negative_pairs": metrics["tn"] + metrics["fp"] >= t["min_resolved_negative_pairs"],

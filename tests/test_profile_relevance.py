@@ -23,9 +23,14 @@ def separate_profile_store(linked, tmp_path, monkeypatch):
 
 def reference(root, relevance="RELEVANT"):
     packet = json.loads((root / "packet.json").read_text())
-    data = {"packet_sha256": digest(packet), "reference_kind": "AI_DEVELOPMENT_REVIEW",
-            "labels": [{"id": r["id"], "relevance": relevance,
-                        "rationale": "Synthetic test judgment"} for r in packet]}
+    data = {
+        "packet_sha256": digest(packet),
+        "reference_kind": "AI_DEVELOPMENT_REVIEW",
+        "labels": [
+            {"id": r["id"], "relevance": relevance, "rationale": "Synthetic test judgment"}
+            for r in packet
+        ],
+    }
     path = root / "labels.json"
     write_new(path, data)
     return path
@@ -62,8 +67,10 @@ def test_negative_and_unknown_are_not_interchangeable(db, linked, tmp_path, labe
         assert result["precision"] is None and result["recall"] is None
 
 
-@pytest.mark.parametrize("fault", ["packet", "predictions", "labels_hash", "duplicate",
-                                    "missing", "rationale", "provenance"])
+@pytest.mark.parametrize(
+    "fault",
+    ["packet", "predictions", "labels_hash", "duplicate", "missing", "rationale", "provenance"],
+)
 def test_audit_rejects_corrupt_or_incomplete_inputs(db, linked, tmp_path, fault):
     root = tmp_path / "audit"
     with db.connect() as conn:
@@ -114,3 +121,21 @@ def test_conflicting_duplicates_excluded(db, linked, tmp_path):
     linked[2](source=second, title="Conflicting current version")
     with db.connect() as conn, pytest.raises(ValueError, match="No eligible articles"):
         freeze(conn, tmp_path / "audit")
+
+
+def test_text_relevance_freezes_freshness_separately(db, linked, tmp_path):
+    from engine.ingestion.contracts import digest
+
+    linked[2](age=20)
+    root = tmp_path / "dual-track"
+    with db.connect() as conn:
+        receipt = freeze(conn, root, prediction_track="text_relevance", max_age_days=60)
+    predictions = json.loads((root / "predictions.json").read_text())
+    eligibility = json.loads((root / "feed_predictions.json").read_text())
+    assert any(predictions.values()) and not any(eligibility.values())
+    assert receipt["feed_predictions_sha256"] == digest(eligibility)
+    report = evaluate(root, reference(root))
+    assert report["tp"] == 1 and report["prediction_track"] == "text_relevance"
+    (root / "feed_predictions.json").write_text(json.dumps({k: True for k in eligibility}))
+    with pytest.raises(ValueError, match="feed eligibility"):
+        evaluate(root, root / "labels.json")

@@ -363,5 +363,15 @@
     "interval_seconds": 900,
     "enabled": true,
     "discovery_only": true
+  },
+  {
+    "id": "nvidia_blog_page3",
+    "name": "NVIDIA official blog page 3",
+    "url": "https://blogs.nvidia.com/feed/?paged=3",
+    "kind": "rss",
+    "category": "company",
+    "interval_seconds": 900,
+    "enabled": true,
+    "discovery_only": true
   }
 ]
