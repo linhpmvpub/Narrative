@@ -23,6 +23,23 @@
     "ruff": "passed",
     "mypy_files": 120,
     "javascript_syntax": "passed",
-    "github_ci": "pending"
+    "github_ci": {
+      "run_id": 45351208303,
+      "commit": "cc5eea4aa72d624dacf7067ca87103b1466f9693",
+      "status": "success",
+      "sqlite_passed": 855,
+      "sqlite_seconds": 133.11,
+      "postgresql_passed": 855,
+      "postgresql_seconds": 200.45,
+      "dependency_audits_migrations_replay": "passed"
+    },
+    "focused_passed": 60,
+    "focused_seconds": 132.06,
+    "final_local_smoke": {
+      "cards": 24,
+      "checked_articles": 15,
+      "held_articles": 0,
+      "delivery": "disabled"
+    }
   }
 }
