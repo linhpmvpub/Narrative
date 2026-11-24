@@ -31,6 +31,9 @@ def main():
         assert len(events) == 1, (text, row)
         event = events[0]
         assert event["voice"] == voice, (text, event)
+        expected_actor = "they" if text.startswith("They ") else "alpha"
+        assert event["actor"]["text"].casefold() == expected_actor, (text, event)
+        assert event["object"]["text"].casefold() == "factories", (text, event)
         if flag:
             assert flag in event["review_flags"], (text, event)
         for field in ["actor", "object", "predicate", "sentence"]:
