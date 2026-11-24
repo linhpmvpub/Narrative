@@ -1,0 +1,33 @@
+{
+  "status": "EXPOSED_DIAGNOSTIC_NOT_BLIND_ACCURACY",
+  "documents": 23,
+  "blocks": 964,
+  "syntax_proposals": 345,
+  "documents_with_proposals": 23,
+  "proposals_with_review_flags": 296,
+  "flags": {
+    "COORDINATION_REQUIRES_REVIEW": 222,
+    "EMBEDDED_OR_ATTRIBUTED_CLAIM": 142,
+    "UNRESOLVED_ACTOR_REFERENCE": 91,
+    "CONDITIONAL_OR_MODAL": 53,
+    "NEGATION_IN_SENTENCE": 21
+  },
+  "unresolved_predicates": 1224,
+  "accuracy": null,
+  "canonical_events_created": 0,
+  "feed_cards_created": 0,
+  "source_bound_scopes": 2,
+  "companies_with_scopes": 1,
+  "delivery": "disabled",
+  "baseline_sha256": "3e5588945d8fa1d344a67c412e2455b4972591b8c988efec2ba46c4ec774f1de",
+  "parent_artifacts_unchanged": true,
+  "validation": {
+    "focused_passed": 95,
+    "focused_seconds": 7.62,
+    "model_synthetic_cases_passed": 8,
+    "ruff": "passed",
+    "mypy_files": 134,
+    "optional_dependency_audit": "No known vulnerabilities among indexed packages; model not on PyPI, official wheel checksum pinned",
+    "ci": "pending"
+  }
+}

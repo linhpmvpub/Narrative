@@ -48,3 +48,18 @@ Diagnostic counting note: the1571unsupported units are parser fragments, includi
 non-event prose and financial table cells. They are not1571missed economic events.
 No supported-event recall denominator was independently labelled in this iteration;
 the defensible observation is zero extracted candidates across23exposed documents.
+
+## 2026-11-24: local dependency proposals and scope algebra
+
+Measured:23exposed documents ->345syntax proposals,296flagged;95focused tests and8actual-model synthetic cases passed. This improves reviewable extraction coverage, not proven accuracy. No canonical events/cards, no new blind evaluation.
+
+| Priority | Current limitation | Feasible remedy | Verification gate |
+| --- | --- | --- | --- |
+| P0 | Syntax proposals include metrics/descriptions, not necessarily economic events; zero precision/recall labels. | Independent source-first assertion labels on50–100new disjoint clusters, then general event/mechanism normalization. | Freeze before labels; report candidate precision and source-assertion recall separately by group. |
+| P0 |296/345proposals flagged;91include pronoun actors; explicit subject inheritance/coreference unsupported. Common noun references also remain unresolved even without a pronoun flag. | Add separately evaluated reference/attribution resolution; preserve ambiguity and source span chains. | Cross-company, quoted speaker, passive/negation/conditional and multi-clause adversarial cases; no wrong affirmative promotion. |
+| P1 | Sentence-wide flags over-hold unrelated clauses; phase mostly UNKNOWN and time/quantity only raw tokens. | Evaluate clause-scoped cues plus explicit temporal/unit normalization; never infer committed/operating from a plan. | Independently labelled phase/negation matrices and unit/period checks. |
+| P1 | Two scope annotations/one company; no automatic source-backed synonym/subset taxonomy. | Populate versioned reviewer vocabulary and product/facility scopes from sources across remaining companies. | Independent scope labels; broad wafer news stays UNKNOWN when process/geography missing. |
+| P1 | Exported queue is a snapshot and does not follow source corrections. | Revalidate packet/profile/source status at future review acceptance and integration; invalidate stale decisions. | Correction/withdrawal/review-expiry end-to-end tests before cards. |
+| P2 | Model uses generic English training and optional environment; no domain benchmark. | Keep pluggable proposal contract, pin versions and capture complete runtime/model fingerprints; compare alternatives on the same frozen source-first labels. | Dedicated actual-model CI smoke plus blind benchmark; package audit excludes model not indexed on PyPI. |
+
+Next decision: validate semantics on unseen source-first labels before increasing output volume, tuning weights or routing proposals into feed. All new scope comparisons explicitly deny impact authorization. The protocol is documented; actual fresh collection/reviewer execution remains pending.

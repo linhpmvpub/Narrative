@@ -20,7 +20,7 @@ def runtime_fingerprint():
     paths = sorted(p for p in (root/'engine').rglob('*') if p.is_file()
                    and p.suffix in {'.py','.js','.html','.css','.json'})
     paths += sorted((root/'config').glob('*.json'))
-    paths += [root/name for name in ['pyproject.toml','requirements-validated.txt','requirements-container.txt'] if (root/name).is_file()]
+    paths += [root/name for name in ['pyproject.toml','requirements-validated.txt','requirements-container.txt','requirements-extraction.txt'] if (root/name).is_file()]
     return {p.relative_to(root).as_posix():sha(p) for p in paths}
 
 
