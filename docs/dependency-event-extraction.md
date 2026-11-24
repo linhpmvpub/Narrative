@@ -105,3 +105,7 @@ Official references:
 [dependency parsing and linguistic annotations](https://spacy.io/usage/linguistic-features),
 [model versioning](https://spacy.io/usage/models),
 [pinned model release/checksum](https://github.com/explosion/spacy-models/releases/tag/en_core_web_sm-3.8.0).
+
+## Final validation
+
+CI45414558098 at96287e2 passed1030SQLite tests (136.71s),1030PostgreSQL tests (249.16s),8actual-model synthetic cases with exact actor/object assertions, dependency audits and migration/seed/replay/downgrade. Post-audit local queue-final.json reproduces the same345proposals/model hashes and records pip26.3. Frozen baseline, input/code hashes and all proposal source spans reverified. These checks do not establish market-news precision or recall.

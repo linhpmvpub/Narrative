@@ -28,6 +28,18 @@
     "ruff": "passed",
     "mypy_files": 134,
     "optional_dependency_audit": "No known vulnerabilities among indexed packages; model not on PyPI, official wheel checksum pinned",
-    "ci": "pending"
+    "ci": {
+      "run_id": 45414558098,
+      "commit": "96287e2d1d823c0ac5b04f4102d46e2910b101e8",
+      "status": "success",
+      "sqlite_passed": 1030,
+      "sqlite_seconds": 136.71,
+      "postgresql_passed": 1030,
+      "postgresql_seconds": 249.16,
+      "actual_model_synthetic_passed": 8,
+      "dependency_audit": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    },
+    "post_audit_replay": "Identical345proposals and model hashes after pip26.3 upgrade; final queue records current runtime"
   }
 }
