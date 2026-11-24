@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-24",
+  "schema": "IMPACT_ATLAS_V1",
+  "companies": 5,
+  "profiles": 6,
+  "nodes": 49,
+  "relations": 55,
+  "sources": 6,
+  "narratives": 10,
+  "component_slots": 252,
+  "sourced_component_slots": 41,
+  "reviewed_exposure_facts": 3,
+  "quantified_relationship_contexts": 1,
+  "mechanism_groups": 7,
+  "synthetic_group_scenarios": 42,
+  "real_development_example_candidate_paths": 2,
+  "acceptance": "NOT_COMPLETE_DATA_AND_CALIBRATION_GAPS",
+  "phases": {
+    "A": "IMPLEMENTED_SCHEMA_AND_LOCAL_DATABASE",
+    "B": "PARTIAL_EXISTING_DATA_AND_GAP_INVENTORY",
+    "C": "IMPLEMENTED_CONDITIONAL_MECHANISMS_AND_REVIEWED_FRAME_INTERFACE",
+    "D": "SYNTHETIC_TESTED_EMPIRICAL_GROUP_VALIDATION_PENDING",
+    "E": "WEIGHTS_NULL_PENDING_DATA_AND_LABELS",
+    "F": "OFFLINE_ATLAS_IMPLEMENTED_LIVE_PUSH_DISABLED"
+  },
+  "validation": {
+    "atlas_profile_tests": 42,
+    "atlas_profile_seconds": 3.58,
+    "final_atlas_event_tests": 20,
+    "final_seconds": 12.6,
+    "ruff": "passed",
+    "mypy_files": 126,
+    "browser": "desktop/mobile, five company views, evidence/narrative/filter/component checks, no network",
+    "github_ci": {
+      "run_id": 45371596590,
+      "commit": "ad4bdfbb34662f6276a355eb5f4de5d68baf1b86",
+      "conclusion": "success",
+      "sqlite": {
+        "passed": 893,
+        "seconds": 139.14
+      },
+      "postgresql": {
+        "passed": 893,
+        "seconds": 264.1
+      },
+      "dependency_audit": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    },
+    "sourced_example_ui": "passed; candidate paths, uncertainty, AI provenance"
+  },
+  "delivery": "disabled",
+  "cloud_data_deployment": false,
+  "limits": [
+    "Snapshots require rebuild to reflect revoked sources",
+    "Namespaces prevent unreviewed cross-profile identity merges",
+    "Topology is not accepted causal attribution",
+    "No numerical stock-price/financial impact estimate",
+    "Exposure source review by AI operator, not independent human verification",
+    "Existing frozen blind cohorts untouched"
+  ]
+}
