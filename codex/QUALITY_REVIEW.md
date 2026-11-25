@@ -1,5 +1,15 @@
 # Quality review after each iteration
 
+## Commodity relevance / no fabricated data — 2026-11-25 (latest)
+
+Goal: remove a legal-entity prerequisite that excludes market-wide commodity price news while preserving sourced company exposure. Added typed input bindings, explicit price arithmetic/reported-percent contract and configurable >5%/strong >=10% gates. Separate commodity price significance from financial magnitude. No active feed/map change.
+
+Evidence: 109 focused regressions passed120.13s; Ruff/mypy140 passed; synthetic CLI produces1 +12% candidate with0legal refs. Full CI pending code push. Source quotes and reviewer annotations are synthetic, not independent or human labels; no accuracy gain claimed. Frozen successor dd4200029609135e2091695fb5f4128b429f9edd1abba1bf08b559b72c68aeb7, real atlas unchanged.
+
+Observed limitations: sparse typed real commodity inputs; exact aliases only; direct narrative watches; no per-company benchmark grade/geography or purchasing terms; reviewer-declared source semantics. Thresholds/freshness are engineering defaults. Conservative phrase checks can suppress valid news; no measured false-negative rate. No cross-run dedup or active feed integration. A financial effect remains conditional even for a large commodity move.
+
+Remedy/acceptance: prioritize sourced input registry and applicable price benchmarks, then freeze new grouped positive/near-miss commodity events and independently evaluate company/narrative relevance. Report uncertainty separately from relevance; do not require quantified margins to show useful context. Integrate dedup/retractions before private-feed rollout. Preserve actual source data, explicit arithmetic and UNKNOWNs; no article-specific keyword patches. L012 records this general lesson. User supplied product direction; no further decision needed. Local-only data and disabled notifications retained.
+
 ## Mechanism-specific context scope — 2026-11-25
 
 Product goal: retain useful broad context without pretending it proves an economic effect. Added

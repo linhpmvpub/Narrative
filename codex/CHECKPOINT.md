@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-25
 
+## Commodity input relevance without legal anchor — 2026-11-25 (latest)
+
+- User decision: commodity price news can route to sourced company input inventories without a legal upstream entity. Implemented separate commodity lane and CLI, not relaxation of strict R05 for other events. Default absolute move >5%, strong >=10%, both directions; exactly 5% suppressed. Policy version/hash explicit; thresholds experimental, not profit impact calibration.
+- Exact source spans, currencies/units and explicit comparison periods required. Reported relative periods preserved with null dates and publication reference; no invented baseline prices. Conditional cost pressure only, magnitude/horizon UNKNOWN, probability null. Source epoch/registry freshness/race/withdrawal, atlas pin and binding expiry checked. No generic industry fanout without input evidence.
+- Validation: 109 focused tests passed, 1 existing Starlette warning, 120.13s; Ruff and mypy140 passed. Local synthetic CLI: 1 candidate for +12%, zero legal entity references, delivery disabled. These are software checks, not independent relevance labels. Full CI pending this code push.
+- Local artifacts: source-cache/commodity-context-2026-11-25; successor baseline dd4200029609135e2091695fb5f4128b429f9edd1abba1bf08b559b72c68aeb7. Prior baseline receipt/artifacts unchanged; old runtime correctly fails current-runtime comparison. No new real commodity facts added. Failed initial local demo attempts were sandbox hardlink/runner assertion issues, corrected and successful output verified.
+- Product direction, AGENTS and L012 persist the no-fabrication rule and commodity exception. Read docs/commodity-price-relevance.md. Historical entry below saying actorless commodities unsupported is superseded for this dedicated lane.
+- Next: sourced real input/commodity registry with benchmark/grade/geography applicability; grouped new positive/negative evaluation; private-feed integration with correction/retraction and dedup. Current lane is local workbench, direct narrative watches, reviewer-declared semantics and exact names only. Do not label it live feed or proven financial impact. Detailed data local, notificationsfalse,syntheticlivefalse,LLMnone. No user decision pending.
+
 ## Mechanism-specific context scope and cards — 2026-11-25 (latest)
 
 - User reaffirmed following AGENTS/product direction/principles/workflow for all future tasks. Read guidance and current plans; chose over-restrictive uniform scope as a product gap. Implemented config/mechanism-scope.json with7mechanisms,5dimensions and required/conditional requirements. Conditional is MATCH or explicitly source-grounded NOT_APPLICABLE with rationale, never missing=NA. New optional Proposal.context_scope pins policy/mechanism and is covered by both votes; strict legacy serialization/hashes preserved.

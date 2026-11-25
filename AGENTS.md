@@ -19,6 +19,8 @@ chứng một server, nguồn hoặc test vẫn ở trạng thái cũ.
 
 ## Quy tắc làm việc
 
+- Không bịa dữ liệu: dùng dữ kiện trong tin và database có nguồn; tách quan sát, phép tính, suy luận có điều kiện và UNKNOWN. Không tự điền tỷ trọng, hợp đồng, kỳ, giá hoặc xác suất.
+- Tin giá hàng hóa không cần pháp nhân đầu nguồn: ghép vào đầu vào công ty có nguồn. Ngưỡng thử nghiệm >5%, mạnh từ 10% là biến động giá, không phải tác động lợi nhuận; xem docs/commodity-price-relevance.md.
 - Ưu tiên hồ sơ công ty, database quan hệ có nguồn, cơ chế rõ ràng và thẻ tin giải thích được.
   Không tối ưu từng bài để đẹp điểm; không thay mục tiêu bằng việc tích lũy công cụ thẩm định.
 - Phân biệt tin liên quan, cơ chế có điều kiện, tác động được xác minh và độ lớn được định lượng.

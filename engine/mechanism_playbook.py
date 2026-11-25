@@ -396,7 +396,9 @@ def cost_scenario(values, book=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["inventory", "evaluate", "cost-scenario"])
+    parser.add_argument("action", choices=["inventory", "evaluate", "cost-scenario", "commodity"])
+    parser.add_argument("--commodity-bindings", type=Path)
+    parser.add_argument("--commodity-policy", type=Path)
     parser.add_argument("--playbook", type=Path, default=DEFAULT)
     parser.add_argument("--atlas", type=Path)
     parser.add_argument("--input", type=Path)
@@ -414,7 +416,49 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     book = load(args.playbook)
-    if args.action == "cost-scenario":
+    if args.action == "commodity":
+        from contextlib import ExitStack
+
+        from engine.commodity_context import DEFAULT as COMMODITY_POLICY
+        from engine.commodity_context import InputBinding, Observation
+        from engine.commodity_context import evaluate as commodity_evaluate
+        from engine.db import database
+        from engine.scope_review import Store
+        from engine.settings import Settings
+
+        if not all(
+            [
+                args.atlas,
+                args.input,
+                args.selection,
+                args.articles,
+                args.scope_store,
+                args.commodity_bindings,
+            ]
+        ):
+            parser.error(
+                "commodity requires --atlas --input --selection --articles --scope-store --commodity-bindings"
+            )
+        with ExitStack() as stack:
+            conn = None
+            if args.news_current:
+                engine = database(Settings.from_env().database_url)
+                stack.callback(engine.dispose)
+                conn = stack.enter_context(engine.connect())
+            result = commodity_evaluate(
+                read_snapshot(args.atlas),
+                Observation.model_validate_json(args.input.read_bytes()),
+                json.loads(args.selection.read_text(encoding="utf-8")),
+                [
+                    InputBinding.model_validate(b)
+                    for b in json.loads(args.commodity_bindings.read_text(encoding="utf-8"))
+                ],
+                store=Store(args.scope_store),
+                article_root=args.articles,
+                news_conn=conn,
+                policy_path=args.commodity_policy or COMMODITY_POLICY,
+            )
+    elif args.action == "cost-scenario":
         if args.input is None:
             parser.error("--input required")
         result = cost_scenario(json.loads(args.input.read_text(encoding="utf-8")), book=book)

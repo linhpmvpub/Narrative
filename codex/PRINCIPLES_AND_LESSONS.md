@@ -1,5 +1,14 @@
 # Nguyên tắc và bài học phát triển
 
+## L012 — Dữ liệu thật, quan hệ đầu vào và độ lớn biến động
+
+- Trạng thái: quyết định người dùng 2026-11-25; hành vi phần mềm có tests synthetic, chưa có đánh giá thị trường độc lập.
+- Không bịa số liệu hoặc ngữ cảnh: giữ nguyên quote/span, đơn vị, tiền tệ, kỳ và phiên bản nguồn; phép tính phải có toán hạng thật và công thức. Tin chỉ nêu phần trăm thì không tự dựng giá gốc/giá mới. Kỳ tương đối giữ nguyên nhãn, không bịa ngày đầu/cuối.
+- Database quan hệ có nguồn là nền tảng ghép tin; commodity không phải pháp nhân. Quan hệ USES_INPUT/DEPENDS_ON có nguồn đủ để tạo liên quan có điều kiện, không cần tên doanh nghiệp trong tin.
+- Phân biệt observed / derived / inferred / unknown. Ngưỡng 5–10% phản ánh biến động giá hàng hóa; không suy ra lợi nhuận đổi cùng tỷ lệ hoặc xác suất tác động khi thiếu tỷ trọng, tồn kho, phòng hộ, hợp đồng và chuyển giá.
+- Bằng chứng: tests/test_commodity_context.py; kiểm tra biên ngưỡng, tăng/giảm, sai đơn vị, nguồn rút, nguồn thay đổi và nhiều công ty cùng đầu vào. Các ca đều synthetic, không phải nhãn độc lập.
+- Khắc phục tiếp: bổ sung danh mục đầu vào chuẩn hóa có nguồn và benchmark/grade/thị trường; đánh giá nhóm tin mới trước khi hiệu chỉnh ngưỡng hoặc đưa vào feed thật.
+
 Cập nhật: 2026-11-25. Sổ kiến thức sống, được rà soát sau mỗi task; không phải mọi quan sát đều
 là quy luật. Mục tiêu gốc nằm trong [PRODUCT_DIRECTION](PRODUCT_DIRECTION.md).
 

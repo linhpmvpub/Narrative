@@ -1,5 +1,12 @@
 # TASKS — implementation execution checklist
 
+## Commodity follow-through — 2026-11-25
+
+- [x] Dedicated sourced-input commodity relevance, no legal anchor, explicit price/period evidence and versioned >5% / >=10% policy; local dry-run only.
+- [x] Persist non-fabrication and conditional impact rules in agent/product guidance.
+- [ ] Populate real commodity-input bindings and benchmark applicability.
+- [ ] New grouped independent relevance evaluation, then dedup/retraction-safe private-feed integration.
+
 Each task must end with an appropriate check or inspectable artifact. Start with [AGENTS](../AGENTS.md),
 [current product direction](PRODUCT_DIRECTION.md) and [development workflow](DEVELOPMENT_WORKFLOW.md).
 Latest user instructions take precedence; original README seed requirements and P0–P5 entries are

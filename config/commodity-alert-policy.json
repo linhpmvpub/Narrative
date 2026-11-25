@@ -1,0 +1,11 @@
+{
+  "schema": "commodity-alert-policy-v1",
+  "version": 1,
+  "minimum_absolute_change_pct": "5",
+  "strong_absolute_change_pct": "10",
+  "maximum_period_end_age_days": 7,
+  "comparison": "STRICTLY_GREATER_MINIMUM_STRONG_AT_OR_ABOVE",
+  "period_policy": "EXPLICIT_SOURCE_PERIOD_NO_DEFAULT_WINDOW",
+  "basis": "USER_REQUESTED_EXPERIMENTAL_PRICE_MOVE_NOT_COMPANY_IMPACT",
+  "delivery": "disabled"
+}

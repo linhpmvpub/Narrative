@@ -1,5 +1,20 @@
 # Mục tiêu và định hướng sản phẩm
 
+## Quyết định hàng hóa và bằng chứng — 2026-11-25
+
+Tin biến động giá hàng hóa có thể ảnh hưởng toàn ngành và không cần một pháp nhân đầu nguồn.
+Ghép hàng hóa vào danh mục đầu vào sản phẩm/phân khúc/cơ sở của từng công ty có nguồn trong database;
+không yêu cầu tin phải nêu tên công ty, không tự suy ra mọi doanh nghiệp cùng ngành đều dùng nguyên liệu đó.
+Mặc định thử nghiệm: biến động tuyệt đối vượt 5% trong kỳ được tin nêu rõ mới tạo ứng viên cảnh báo;
+từ 10% là biến động giá mạnh. Hai ngưỡng có phiên bản, chưa phải trọng số đã hiệu chỉnh thực nghiệm.
+Liên quan đầu vào không đồng nghĩa tác động lợi nhuận đã xác minh, cũng không dự báo giá cổ phiếu.
+
+Tuyệt đối không bịa dữ liệu. Dữ kiện lấy đúng từ tin, kết hợp database có nguồn (ưu tiên trọng tâm)
+và quy tắc thuật toán minh bạch để suy luận mức liên quan/cơ chế. Thiếu tỷ trọng, kỳ, hợp đồng hoặc
+bằng chứng về thời gian truyền dẫn thì để UNKNOWN; không dùng LLM lấp khoảng trống như sự thật.
+Chi tiết triển khai và giới hạn: [commodity-price-relevance](../docs/commodity-price-relevance.md).
+Quyết định này thay yêu cầu pháp nhân đầu nguồn đối với nhánh hàng hóa; các đường xác minh khác giữ contract riêng.
+
 Cập nhật: 2026-11-25. Chủ quyết định sản phẩm: người dùng. Agent duy trì tài liệu theo chỉ đạo
 và bằng chứng; không tự thay mục tiêu. Đây là định hướng hiện hành, không phải tuyên bố đã hoàn thành.
 
