@@ -1,7 +1,7 @@
 {
   "date": "2026-11-25",
   "schema": "CORE_PROFILE_V1",
-  "status": "IMPLEMENTED_LOCAL_CI_PENDING",
+  "status": "IMPLEMENTED_LOCAL_CI_PASSED",
   "core_groups": 7,
   "core_relation_types": 10,
   "projected_profiles": 6,
@@ -41,5 +41,18 @@
     "No numeric market series imported",
     "Product-scope annotation is reviewer-declared",
     "Active feed/map integration remains next"
-  ]
+  ],
+  "code_commit": "bdd7f00ce25c542378a25224d0e9c44b359b7555",
+  "documentation_local_links_checked": 34,
+  "ci": {
+    "run_id": 45651790189,
+    "conclusion": "success",
+    "sqlite_passed": 1239,
+    "sqlite_seconds": 146.89,
+    "postgresql_passed": 1239,
+    "postgresql_seconds": 270.68,
+    "model_synthetic_cases_passed": 8,
+    "dependency_audit": "success",
+    "migration_seed_replay_downgrade": "success"
+  }
 }
