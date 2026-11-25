@@ -4,7 +4,7 @@
 
 Product contribution: priors now reach source-linked commodity workbench cards with explicit label/conditions/exceptions instead of remaining only a lookup database. Paired comparison proves no silent promotion of relevance, magnitude or threshold decisions.
 
-Evidence:69focused tests passed12.43s; Ruff/mypy142passed; actual CLI synthetic event produces1candidate both ways and1explanation. Real premise audit16/16consistent with pinned atlas; this check independently corroborates no LLM conclusions. CI pending code push. Baseline7a11500466644c1134d62a42b97c72359ee31ea89866e603d57d426463b1405e; no new independent labels or real news clusters.
+Evidence:69focused tests passed12.43s; Ruff/mypy142passed; actual CLI synthetic event produces1candidate both ways and1explanation. Real premise audit16/16consistent with pinned atlas; this check independently corroborates no LLM conclusions. CI45647992967 SUCCESS onad4a217:1221SQLite tests146.12s +1221PostgreSQL tests270.05s (1existing warning each),8actual-model synthetic cases,dependency audit,lint/type/JS and migration/seed/replay/downgrade passed. Baseline7a11500466644c1134d62a42b97c72359ee31ea89866e603d57d426463b1405e; no new independent labels or real news clusters.
 
 Limits: current prior catalog explains existing edges; cannot claim improved recall. Only qualitative commodity input-cost integration; dependency/competition/numeric scenarios and active feed/map remain out of scope. Exact hashes do not validate semantic applicability or current publisher state. Explanation utility remains unmeasured.
 

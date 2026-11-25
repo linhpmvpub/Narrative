@@ -1,6 +1,6 @@
 {
   "date": "2026-11-25",
-  "status": "LOCAL_EXPLANATION_ABLATION_CI_PENDING",
+  "status": "LOCAL_EXPLANATION_ABLATION_CI_PASSED",
   "real_prior_premises_audited": 16,
   "available_priors": 16,
   "independent_labels": 0,
@@ -27,5 +27,18 @@
   ],
   "focused_tests_passed": 69,
   "focused_test_seconds": 12.43,
-  "mypy_files": 142
+  "mypy_files": 142,
+  "code_commit": "ad4a2170cb83faf529c47a029a4b217e115cbd42",
+  "previous_baseline_artifacts_unchanged": true,
+  "ci": {
+    "run_id": 45647992967,
+    "conclusion": "success",
+    "sqlite_passed": 1221,
+    "sqlite_seconds": 146.12,
+    "postgresql_passed": 1221,
+    "postgresql_seconds": 270.05,
+    "model_synthetic_cases_passed": 8,
+    "dependency_audit": "success",
+    "migration_seed_replay_downgrade": "success"
+  }
 }
