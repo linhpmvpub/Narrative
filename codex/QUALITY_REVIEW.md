@@ -1,5 +1,15 @@
 # Quality review after each iteration
 
+## Commodity prior explanation ablation — 2026-11-25 (latest)
+
+Product contribution: priors now reach source-linked commodity workbench cards with explicit label/conditions/exceptions instead of remaining only a lookup database. Paired comparison proves no silent promotion of relevance, magnitude or threshold decisions.
+
+Evidence:69focused tests passed12.43s; Ruff/mypy142passed; actual CLI synthetic event produces1candidate both ways and1explanation. Real premise audit16/16consistent with pinned atlas; this check independently corroborates no LLM conclusions. CI pending code push. Baseline7a11500466644c1134d62a42b97c72359ee31ea89866e603d57d426463b1405e; no new independent labels or real news clusters.
+
+Limits: current prior catalog explains existing edges; cannot claim improved recall. Only qualitative commodity input-cost integration; dependency/competition/numeric scenarios and active feed/map remain out of scope. Exact hashes do not validate semantic applicability or current publisher state. Explanation utility remains unmeasured.
+
+Remedies: evaluate factual correctness and usefulness of explanation separately from precision/recall; collect new source-backed input/benchmark coverage for genuine matching gains. Prepare fresh review packet only when its target is explicit; do not relabel synthetic cases as blind evidence or raise scores to manufacture an ablation delta. L014 records this lesson. No external model calls/cloud data; notifications remain disabled.
+
 ## LLM knowledge enrichment — 2026-11-25 (latest)
 
 User value: fill genuine knowledge gaps instead of blocking all relevance reasoning on unavailable company disclosures. Implemented separate one-step prior database with3clear general rules and16local qualitative priors (4input-cost,11dependency,1competition); existing sourced competitor field preserved. Source facts unchanged; no active feed/map rollout.

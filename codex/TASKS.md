@@ -1,5 +1,12 @@
 # TASKS — implementation execution checklist
 
+## Prior explanation integration — 2026-11-25
+
+- [x] Audit16prior premises and pair commodity outputs with/without labeled explanations.
+- [x] Preserve candidate/threshold/magnitude decisions and source withdrawal behavior.
+- [ ] Fresh independent explanation-usefulness evaluation; not completed by synthetic tests.
+- [ ] New sourced input/benchmark coverage, then private feed/map integration.
+
 ## One-step LLM priors — 2026-11-25
 
 - [x] Local knowledge overlay, explicit provenance/no chaining, source precedence;16qualitative priors seeded.

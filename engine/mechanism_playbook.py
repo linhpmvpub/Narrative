@@ -399,6 +399,11 @@ def main():
     parser.add_argument("action", choices=["inventory", "evaluate", "cost-scenario", "commodity"])
     parser.add_argument("--commodity-bindings", type=Path)
     parser.add_argument("--commodity-policy", type=Path)
+    parser.add_argument(
+        "--knowledge-priors",
+        type=Path,
+        help="Local commodity explanation comparison; never changes decisions",
+    )
     parser.add_argument("--playbook", type=Path, default=DEFAULT)
     parser.add_argument("--atlas", type=Path)
     parser.add_argument("--input", type=Path)
@@ -415,6 +420,8 @@ def main():
     )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.knowledge_priors and args.action != "commodity":
+        parser.error("--knowledge-priors currently supports commodity only")
     book = load(args.playbook)
     if args.action == "commodity":
         from contextlib import ExitStack
@@ -458,6 +465,13 @@ def main():
                 news_conn=conn,
                 policy_path=args.commodity_policy or COMMODITY_POLICY,
             )
+            if args.knowledge_priors:
+                from engine.knowledge_priors import read as read_priors
+                from engine.prior_context import compare
+
+                result = compare(
+                    result, read_snapshot(args.atlas), read_priors(args.knowledge_priors)
+                )
     elif args.action == "cost-scenario":
         if args.input is None:
             parser.error("--input required")

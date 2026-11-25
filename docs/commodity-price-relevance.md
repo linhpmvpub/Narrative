@@ -26,6 +26,8 @@ python -m engine.mechanism_playbook commodity --atlas <snapshot-directory> --inp
 
 Optional `--commodity-policy <versioned-policy.json>` and `--news-current` (configured database). Bindings file is a JSON list of `InputBinding`; input is `Observation`. See models and tests for exact fields.
 
+Optional `--knowledge-priors <directory>` returns a paired explanation comparison rather than the single result: `without_priors`, `with_priors`, `comparison`, `prior_audit`. Only labeled qualitative input-cost context is attached; candidate decisions and all financial fields remain unchanged. See [knowledge priors](knowledge-priors.md). This is local workbench output, not an active feed/map rollout.
+
 ## Limits and next acceptance gate
 
 Current tests use synthetic prices/companies, not independent labels. No new real commodity facts or measured accuracy improvement are claimed. Existing generic input nodes need sourced, commodity-specific bindings; aliases/grade/geography are not automated. Relative-period vocabulary is bounded and conservative wording checks can hold valid news. Direct narrative watches only; no multi-hop narrative expansion. No cross-run bundling/dedup or active feed integration yet.

@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-25",
+  "status": "LOCAL_EXPLANATION_ABLATION_CI_PENDING",
+  "real_prior_premises_audited": 16,
+  "available_priors": 16,
+  "independent_labels": 0,
+  "fresh_real_event_clusters": 0,
+  "synthetic_cli": {
+    "candidate_count_without": 1,
+    "candidate_count_with": 1,
+    "candidate_delta": 0,
+    "cards_with_explanation": 1,
+    "decision_fields_unchanged": true,
+    "accuracy_improvement": "NOT_MEASURED",
+    "independent_labels": 0
+  },
+  "baseline_sha256": "7a11500466644c1134d62a42b97c72359ee31ea89866e603d57d426463b1405e",
+  "delivery": "disabled",
+  "active_feed_changed": false,
+  "accuracy_improvement": "NOT_MEASURED",
+  "source_check": "PINNED_ATLAS_PREMISE_INTEGRITY_NOT_INDEPENDENT_CORROBORATION",
+  "limitations": [
+    "Only commodity input-cost explanations integrated",
+    "No changed relevance decisions or ranking",
+    "No independent semantic validation",
+    "No active feed/map rollout"
+  ],
+  "focused_tests_passed": 69,
+  "focused_test_seconds": 12.43,
+  "mypy_files": 142
+}

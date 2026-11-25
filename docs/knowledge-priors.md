@@ -34,4 +34,14 @@ Optional `--rules` selects a maintained versioned catalog. Use `read(output)` th
 
 ## Review and next work
 
+### Commodity explanation comparison — implemented 2026-11-25
+
+`engine.prior_context.audit` checks all prior derivations against their pinned atlas, availability and source-evidence references. This is premise integrity, not independent corroboration of an LLM conclusion or a current publisher-page check.
+
+The commodity CLI now accepts `--knowledge-priors <prior-directory>` and returns `without_priors`, `with_priors`, `comparison`, and `prior_audit`. Both variants use the **same freshly evaluated** commodity result. The enriched variant adds labeled `knowledge_context` only to existing eligible input-cost cards. It contains rule/version, scope, conditions, exceptions and premise evidence whose role is explicitly distinguished from support for the LLM conclusion.
+
+No prior changes candidate selection, the >5% / >=10% gates, scores, magnitude, probability or horizon. Numeric priors are not propagated. Missing priors do not hide otherwise eligible cards; withdrawn sources cannot be rescued; changed atlas/derivation fails. The implementation compares all decision fields after stripping explanations. This is a paired software ablation, not a blind accuracy benchmark. Direct dependency/competition annotations and active feed/map presentation remain future work.
+
+Local validation:16real prior premises match the pinned atlas;0independently corroborated LLM conclusions established by this check. One synthetic source-to-card CLI case has1candidate in both variants and1additional explanation. No fresh real-news cohort or independent labels was generated. Evaluating precision/recall on identical decisions would not demonstrate a benefit; next evaluate explanation correctness/usefulness and collect genuinely new source-backed exposure data to improve coverage.
+
 The initial local population is a database enrichment, not proof of improved ranking. Commonness and clarity are author judgments, explicitly unverified. Assess new grouped events with/without priors, track false relevance and source contradictions, and replace/rebuild priors when evidence arrives. Prioritize supported material recipes and scoped dependence/competition coverage; avoid filling every blank. Integrate clearly labeled priors into feed/map only with source lifecycle and provenance preserved. Notifications remain disabled.

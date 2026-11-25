@@ -1,5 +1,12 @@
 # Nguyên tắc và bài học phát triển
 
+## L014 — Đo đúng giá trị bổ sung của tri thức nền
+
+- Quan sát 2026-11-25: tích hợp prior hiện tại chỉ bổ sung giải thích cho thẻ đã ghép qua quan hệ có nguồn; quyết định ghép tin giữ nguyên theo contract. Synthetic CLI cho1thẻ ở cả hai nhánh, thêm1giải thích; không phải thử nghiệm thị trường.
+- Phân biệt kiểm tra tiền đề nguồn với xác minh kết luận LLM.16prior khớp snapshot không đồng nghĩa16kết luận được nguồn xác nhận độc lập.
+- Khi predictions giống nhau, không dùng precision/recall để tuyên bố prior tăng chất lượng. Đánh giá tính đúng/hữu ích của lời giải thích riêng; muốn đo coverage phải có dữ liệu quan hệ/đường ghép mới và tập tin mới phù hợp.
+- Bằng chứng: engine/prior_context.py, tests/test_prior_context.py, báo cáo aggregate prior-context-progress.json. Chưa có nhãn độc lập; next ưu tiên nguồn bổ sung và gói đánh giá giải thích, không tạo cohort giả hoặc nâng trọng số để tạo chênh lệch.
+
 ## L013 — Ước lượng có nhãn khác với bịa dữ kiện
 
 - Quyết định người dùng 2026-11-25: cho phép tri thức LLM phổ biến, không mơ hồ, suy luận tối đa một bước để bổ sung database. Sửa phạm vi L012: không cấm mọi ước lượng, chỉ cấm giả làm dữ kiện thật hoặc suy luận thiếu cơ sở.
