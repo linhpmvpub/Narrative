@@ -6,14 +6,14 @@ Product goal: retain useful broad context without pretending it proves an econom
 a7mechanism required/conditional scope matrix, explicit source-grounded NA decisions and context
 cards with source-backed human-readable paths in the local workbench. Strict R05/R07 unchanged;
 no active feed/map rollout. Synthetic source-to-card CLI yields1card before withdrawal and0after.
-Final27new tests plus102initial regressions passed; CI to be recorded in checkpoint. New real
+Final27new tests plus102initial regressions passed; CI45636311100 on6f4e4d9 passed1152tests each on SQLite/PostgreSQL,8model smoke cases,dependency audit and migration/replay. New real
 source facts0,independent labels0; no measured recall improvement or causal accuracy claim.
 
 | Priority | Remaining limitation | Remedy and acceptance gate |
 |---|---|---|
 | P0 | Legal-entity identity is still mandatory; generic commodity news has no such actor. | Populate reviewed commodity/product/market factor references with a dedicated type contract. Test ambiguous benchmark, different grade, wrong geography and unrelated company negatives before enabling routes. |
 | P0 | NA rationale is reviewer interpretation supported by quotes, not machine-verified semantics. | Collect independent source-only scope labels after freeze; score incorrect NA separately from missing scope and match errors. No self-authored independent labels. |
-| P0 | Matrix/context output is not fresh-cohort relevance evidence or additional real relationship data. | Prioritize real input/product/segment coverage and disjoint price/demand/disruption clusters; measure context usefulness and verified impact separately. |
+| P0 | Matrix/context output is not fresh-cohort relevance evidence or additional real relationship data. Existing atlas audit shows36factor/input/market nodes with0eligible legal-entity references; this is a type-contract gap, not a measured event-coverage percentage. | Prioritize real input/product/segment coverage and disjoint price/demand/disruption clusters; measure context usefulness and verified impact separately. |
 | P1 | Literal matching and declared periods restrict coverage; proposed states can be misread in UI. | Add typed scope/time relations with evidence and explicit UX level/phase; test broad/near-miss examples and user interpretation before integration. |
 | P1 | Full-article publisher revalidation and delivery-time lifecycle remain incomplete. | Preserve local-only workbench until lifecycle guards apply where cards are consumed; no stale synthetic JSON treated as live feed. |
 

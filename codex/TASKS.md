@@ -9,6 +9,17 @@ historical contracts, not proof of current implementation or product acceptance.
 
 ## Customer-profile and relevance follow-up — 2026-11-24
 
+### Ưu tiên cập nhật — 2026-11-25
+
+- [x] Required/conditional scope matrix for seven mechanisms, with explicit evidenced NA; no missing-to-NA default.
+- [x] Local context cards with source-backed paths, phase and unknown magnitude; strict R05/R07 and lifecycle gates retained.
+- [x] Synthetic positive/near-miss/revocation/binding regressions and preserved legacy proposal hashes.
+- [ ] Source-backed product/commodity/market factor reference contracts beyond legal entities; populate relevant company exposure without invented links.
+- [ ] Freeze fresh grouped source-only review cases; score contextual relevance separately from verified transmission, including wrong-grade/region/period negatives.
+- [ ] Integrate context into private feed/map with explicit level/phase and source lifecycle recheck at use; do not enable real notifications.
+
+These priorities supplement the original checklist below. Context protocol tests are not acceptance of real-news accuracy.
+
 - [x] Complete source-backed DELL/SNDK research profiles with ten explicit component areas and bounded narratives.
 - [x] Add same-sentence activity matching and reject enabled bindings without structural narrative routes.
 - [x] Add official company blog discovery and preserve immutable correction/source captures.
