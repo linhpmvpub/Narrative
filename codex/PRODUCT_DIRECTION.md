@@ -1,5 +1,16 @@
 # Mục tiêu và định hướng sản phẩm
 
+## Bổ sung tri thức LLM có giới hạn — 2026-11-25
+
+Người dùng cho phép lấp khoảng trống database bằng tri thức LLM phổ biến khi nguyên tắc
+ước lượng/suy luận rõ ràng, tối đa một bước. Đây là lớp LLM_PRIOR_UNVERIFIED riêng, không phải
+dữ kiện công ty công bố. Dữ kiện có nguồn được ưu tiên; prior không được dùng làm tiền đề cho
+prior tiếp theo hoặc âm thầm trở thành SOURCE_BACKED. Tỷ trọng/độ phụ thuộc có thể dùng khoảng
+ước lượng nếu phạm vi, mẫu số, cách ước lượng và cơ sở kiến thức đủ rõ; không phổ biến/mơ hồ thì
+để UNKNOWN. Không giả định số cụ thể chỉ để database đầy. Xem [contract](../docs/knowledge-priors.md).
+Quyết định này thay lệnh cấm tuyệt đối ước lượng chỗ thiếu trước đây; giữ nguyên cấm bịa dữ kiện
+trong tin, nguồn, kỳ, giá, hợp đồng và tuyên bố tác động đã xác minh.
+
 ## Quyết định hàng hóa và bằng chứng — 2026-11-25
 
 Tin biến động giá hàng hóa có thể ảnh hưởng toàn ngành và không cần một pháp nhân đầu nguồn.
@@ -11,7 +22,7 @@ Liên quan đầu vào không đồng nghĩa tác động lợi nhuận đã xá
 
 Tuyệt đối không bịa dữ liệu. Dữ kiện lấy đúng từ tin, kết hợp database có nguồn (ưu tiên trọng tâm)
 và quy tắc thuật toán minh bạch để suy luận mức liên quan/cơ chế. Thiếu tỷ trọng, kỳ, hợp đồng hoặc
-bằng chứng về thời gian truyền dẫn thì để UNKNOWN; không dùng LLM lấp khoảng trống như sự thật.
+bằng chứng về thời gian truyền dẫn thì dữ kiện gốc vẫn UNKNOWN; có thể bổ sung prior theo quy tắc một bước ở trên, không trình bày prior như sự thật.
 Chi tiết triển khai và giới hạn: [commodity-price-relevance](../docs/commodity-price-relevance.md).
 Quyết định này thay yêu cầu pháp nhân đầu nguồn đối với nhánh hàng hóa; các đường xác minh khác giữ contract riêng.
 

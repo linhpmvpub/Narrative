@@ -1,5 +1,12 @@
 # TASKS — implementation execution checklist
 
+## One-step LLM priors — 2026-11-25
+
+- [x] Local knowledge overlay, explicit provenance/no chaining, source precedence;16qualitative priors seeded.
+- [x] Numeric interval contract; no unjustified real numeric estimates.
+- [ ] Scoped common-knowledge recipe selection and independent with/without-prior evaluation.
+- [ ] Labeled feed/map integration; preserve source lifecycle and unknown magnitude.
+
 ## Commodity follow-through — 2026-11-25
 
 - [x] Dedicated sourced-input commodity relevance, no legal anchor, explicit price/period evidence and versioned >5% / >=10% policy; local dry-run only.

@@ -1,5 +1,15 @@
 # Quality review after each iteration
 
+## LLM knowledge enrichment — 2026-11-25 (latest)
+
+User value: fill genuine knowledge gaps instead of blocking all relevance reasoning on unavailable company disclosures. Implemented separate one-step prior database with3clear general rules and16local qualitative priors (4input-cost,11dependency,1competition); existing sourced competitor field preserved. Source facts unchanged; no active feed/map rollout.
+
+Evidence:40focused tests passed4.47s, Ruff/mypy141passed, all16real local priors round-tripped and looked up. CI pending code push. Tests validate contracts, not truth of LLM knowledge. Numeric interval support tested synthetically;0actual numeric priors because no sufficiently clear representative recipe established.
+
+Limits: general principles can be inapplicable to specific products/contracts; commonness/clarity declarations are subjective. Qualitative priors do not estimate dependence strength or financial magnitude. Separate DB is not yet integrated into active news ranking. Atlas revision invalidates priors; live publisher withdrawals require current registry/snapshot refresh. Hashes prove integrity, not semantic truth.
+
+Remedies: establish scoped recipes/benchmarks for defensible interval estimates, retain source precedence and no chaining, evaluate fresh grouped events with/without priors and track contradictions. Integrate clearly labeled results into feed/map after lifecycle checks. L013 refines L012 per user permission; no further approval needed. Local data, disabled notifications and no external LLM calls maintained.
+
 ## Commodity relevance / no fabricated data — 2026-11-25 (latest)
 
 Goal: remove a legal-entity prerequisite that excludes market-wide commodity price news while preserving sourced company exposure. Added typed input bindings, explicit price arithmetic/reported-percent contract and configurable >5%/strong >=10% gates. Separate commodity price significance from financial magnitude. No active feed/map change.

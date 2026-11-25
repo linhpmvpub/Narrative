@@ -1,5 +1,13 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-25
 
+## One-step LLM knowledge database — 2026-11-25 (latest)
+
+- User permits missing database information to be supplemented with clear, widely known LLM knowledge, at most one inference step. Supersedes blanket no-estimation wording, not the prohibition on fabricating news facts/disclosures. Updated AGENTS, PRODUCT_DIRECTION and L013; read docs/knowledge-priors.md.
+- Added engine.knowledge_priors and maintained3-rule catalog. Separate immutable SQLite/JSON prior database pins the source atlas. Active SOURCE_REPORTED premises only; prior/candidate/conditional-mechanism premises forbidden. Sourced/disputed/not-applicable values win. Lookup checks pin, derivation replay and90-day expiry. Labels distinguish premise evidence from unverified conclusion. Numeric interval schema requires units/denominator/method; no real numeric values seeded without clear basis.
+- Populated16actual local priors:4input-cost,11dependency,1competition substitution. All16read/lookup verified. One other competitor dimension already sourced, so not overwritten. No new verified source facts or independent labels. Artifacts source-cache/knowledge-priors-2026-11-25/v1 (ignored). Source atlas unchanged; no active feed/map integration. LLM-authored offline catalog, no external model calls; LLM_MODE=none retained.
+- Tests40passed4.47s, one existing warning; Ruff/mypy141passed. CI pending code push. New baseline 77cf226bb221967fec6e95ff9f1a1f729e01e01ee00242f27a9bfebd02b1e579; detailed records remain local. No empirical accuracy improvement claim.
+- Review: commonness/clarity are LLM-author judgments, not semantic guarantees; qualitative prior does not establish magnitude. Recipe/benchmark/product specificity missing for numeric estimates. Next prioritize clear representative input recipes where applicable and fresh grouped with/without-prior evaluation; then labeled feed/map integration with lifecycle. Do not derive a second-step economic forecast from a prior. Notificationsfalse,syntheticlivefalse; no user decision pending.
+
 ## Commodity input relevance without legal anchor — 2026-11-25 (latest)
 
 - User decision: commodity price news can route to sourced company input inventories without a legal upstream entity. Implemented separate commodity lane and CLI, not relaxation of strict R05 for other events. Default absolute move >5%, strong >=10%, both directions; exactly 5% suppressed. Policy version/hash explicit; thresholds experimental, not profit impact calibration.

@@ -1,5 +1,13 @@
 # Nguyên tắc và bài học phát triển
 
+## L013 — Ước lượng có nhãn khác với bịa dữ kiện
+
+- Quyết định người dùng 2026-11-25: cho phép tri thức LLM phổ biến, không mơ hồ, suy luận tối đa một bước để bổ sung database. Sửa phạm vi L012: không cấm mọi ước lượng, chỉ cấm giả làm dữ kiện thật hoặc suy luận thiếu cơ sở.
+- Giữ hai lớp: nguồn công bố và LLM_PRIOR_UNVERIFIED. Ưu tiên nguồn; không ghi đè UNKNOWN bằng một số được gọi là sourced. Prior có rule/version, tiền đề, scope, điều kiện, ngoại lệ, tác giả, thời điểm biết và hạn rà soát.
+- Một bước nghĩa là từ quan hệ SOURCE_REPORTED tới kết luận có điều kiện; không lấy prior, cơ chế suy ra hoặc kết luận đối thủ làm tiền đề tiếp. Không suy từ đối thủ gián đoạn → công ty hưởng lợi → doanh thu tăng.
+- Số ước lượng phải có khoảng, đơn vị/mẫu số và cách tính/ước lượng rõ. Mức định tính không chuyển thành xác suất hoặc phần trăm tùy ý. “Phổ biến/rõ ràng” là phán đoán của người/LLM biên soạn rule, chưa được phần mềm xác minh về ngữ nghĩa.
+- Bằng chứng phần mềm: tests/test_knowledge_priors.py; dữ liệu thực bổ sung là prior chưa kiểm chứng, không phải nhãn độc lập. Tiếp theo đối chiếu prior với nguồn mới và đánh giá riêng sai lệch do tri thức nền.
+
 ## L012 — Dữ liệu thật, quan hệ đầu vào và độ lớn biến động
 
 - Trạng thái: quyết định người dùng 2026-11-25; hành vi phần mềm có tests synthetic, chưa có đánh giá thị trường độc lập.

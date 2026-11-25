@@ -19,7 +19,7 @@ chứng một server, nguồn hoặc test vẫn ở trạng thái cũ.
 
 ## Quy tắc làm việc
 
-- Không bịa dữ liệu: dùng dữ kiện trong tin và database có nguồn; tách quan sát, phép tính, suy luận có điều kiện và UNKNOWN. Không tự điền tỷ trọng, hợp đồng, kỳ, giá hoặc xác suất.
+- Không bịa dữ kiện trong tin hoặc giả làm số liệu công bố. Được bổ sung chỗ thiếu trong database bằng tri thức LLM phổ biến, rõ ràng, tối đa một bước từ dữ kiện có nguồn; gắn nhãn LLM_PRIOR_UNVERIFIED, cơ sở/điều kiện/phiên bản. Ước lượng số phải là khoảng có mẫu số và phương pháp; không suy tiếp từ prior, không điền nếu mơ hồ. Xem docs/knowledge-priors.md. Không tự bịa giá, kỳ, hợp đồng hoặc xác suất.
 - Tin giá hàng hóa không cần pháp nhân đầu nguồn: ghép vào đầu vào công ty có nguồn. Ngưỡng thử nghiệm >5%, mạnh từ 10% là biến động giá, không phải tác động lợi nhuận; xem docs/commodity-price-relevance.md.
 - Ưu tiên hồ sơ công ty, database quan hệ có nguồn, cơ chế rõ ràng và thẻ tin giải thích được.
   Không tối ưu từng bài để đẹp điểm; không thay mục tiêu bằng việc tích lũy công cụ thẩm định.

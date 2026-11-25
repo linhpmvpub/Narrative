@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-25",
+  "status": "LOCAL_DATABASE_ENRICHMENT_CI_PENDING",
+  "priors": 16,
+  "by_rule": {
+    "scoped-dependency": 11,
+    "input-purchase-cost": 4,
+    "competitor-substitution": 1
+  },
+  "profiles": 4,
+  "numeric_priors": 0,
+  "inference_steps": 1,
+  "verified_facts_added": 0,
+  "independent_labels": 0,
+  "focused_tests_passed": 40,
+  "focused_test_seconds": 4.47,
+  "mypy_files": 141,
+  "baseline_sha256": "77cf226bb221967fec6e95ff9f1a1f729e01e01ee00242f27a9bfebd02b1e579",
+  "delivery": "disabled",
+  "active_feed_changed": false,
+  "external_llm_api_calls": 0,
+  "limitations": [
+    "Commonness and clarity are LLM-author judgments, not semantic proof",
+    "No numeric estimate justified for current dossiers",
+    "Companion database not yet consumed by active feed/map",
+    "Snapshot freshness is not live publisher verification"
+  ]
+}

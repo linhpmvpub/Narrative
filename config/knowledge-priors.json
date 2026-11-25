@@ -1,0 +1,39 @@
+{
+  "schema": "ONE_STEP_LLM_PRIORS_V1",
+  "delivery": "disabled",
+  "rules": [
+    {
+      "id": "input-purchase-cost", "version": 1,
+      "relation_types": ["USES_INPUT"], "target_kinds": ["input"],
+      "dimension": "input_cost_sensitivity", "unit": "category",
+      "category": "POSSIBLE_PURCHASE_COST_PRESSURE",
+      "knowledge_basis": "LLM general accounting knowledge: buying a used input at a higher unit purchase price can increase its cost contribution, holding quantity and other terms fixed.",
+      "common_knowledge": true, "clarity": "CLEAR",
+      "applicability": "Only the documented product/input scope; a market benchmark need not equal the contracted purchase price.",
+      "conditions": ["The company bears this purchase cost", "Price change reaches the actual purchase terms"],
+      "exceptions": ["Hedging, inventory and fixed contracts can delay or offset transmission", "No input weight, margin effect or horizon is inferred"]
+    },
+    {
+      "id": "scoped-dependency", "version": 1,
+      "relation_types": ["DEPENDS_ON"], "target_kinds": ["input", "supplier", "location", "factor"],
+      "dimension": "dependency_context", "unit": "category",
+      "category": "POSSIBLE_CONSTRAINT_IN_DOCUMENTED_SCOPE",
+      "knowledge_basis": "LLM general dependency reasoning: an adverse change in a documented dependency can constrain the dependent activity if alternatives do not compensate.",
+      "common_knowledge": true, "clarity": "CLEAR",
+      "applicability": "Only the activity and dependency named by the source relationship, not all operations or company revenue.",
+      "conditions": ["The adverse event applies to the documented dependency", "The dependency remains relevant to the activity"],
+      "exceptions": ["Substitutes, spare capacity or inventory may compensate", "No monopoly, criticality score, dependence percentage or timing is inferred"]
+    },
+    {
+      "id": "competitor-substitution", "version": 1,
+      "relation_types": ["COMPETES_WITH"], "target_kinds": ["company"],
+      "dimension": "competition", "unit": "category",
+      "category": "POSSIBLE_CUSTOMER_SUBSTITUTION",
+      "knowledge_basis": "LLM general competition knowledge: a rival's supply or product changes can alter customer alternatives where offerings are substitutes; realized gains are not automatic.",
+      "common_knowledge": true, "clarity": "CLEAR",
+      "applicability": "Only the sourced competitive market; no inference that all products, geographies or customers overlap.",
+      "conditions": ["The affected offerings are substitutable for the relevant customers", "Switching is feasible and alternative capacity is available"],
+      "exceptions": ["Shared demand shocks can hurt both rivals", "Qualification, ecosystem lock-in and contracts can prevent switching", "No market share, sales gain or net impact direction is inferred"]
+    }
+  ]
+}
