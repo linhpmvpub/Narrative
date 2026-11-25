@@ -68,6 +68,9 @@ trusted local operator state; không có API hoặc chứng thực từ nhà xu�
    correction, disappearance, fetch error và confirmed withdrawal. Test cả quá trình mất/kết nối lại.
 2. Ưu tiên điền dữ liệu quan hệ thật theo cơ chế: đầu vào → sản phẩm/phân khúc → công ty → narrative,
    gồm tỷ trọng/đơn vị/kỳ, tồn kho, nguồn thay thế và chuyển giá. Dùng trạng thái UNKNOWN cho chỗ thiếu.
+   Xây ma trận phạm vi bắt buộc/có điều kiện/không áp dụng theo từng cơ chế: không ép tin giá hàng hóa
+   toàn thị trường phải có một nhà máy cụ thể. “Tin có liên quan” và “tác động đã xác minh/định lượng”
+   cần tiêu chí riêng; thiếu độ lớn không tự động loại bỏ mọi tin bối cảnh hữu ích.
 3. Tách thời điểm sự kiện, điều kiện tác động và kênh truyền; thẻ tin/map phải hiển thị nguồn,
    lý do liên quan, phạm vi và phần chưa xác minh, không hứa dự báo giá.
 4. Đóng băng database/rule version, đánh giá các nhóm tin mới bằng nhãn độc lập. Đo đúng/sót/sai
