@@ -1,5 +1,18 @@
 # Mục tiêu và định hướng sản phẩm
 
+## Phạm vi v1 gọn và trình tự triển khai — quyết định 2026-11-25
+
+Chốt sớm cấu trúc dùng lại cho nhiều công ty: 7 nhóm cốt lõi và 10 loại quan hệ theo
+[core-profile-v1](../docs/core-profile-v1.md), không mở rộng database quá rộng/khó kiểm soát.
+42component cũ là thư viện mở rộng, không phải checklist bắt buộc để thêm một công ty.
+Mã hàng hóa/thị trường giá dùng chung; quan hệ với công ty luôn giữ phạm vi sản phẩm và nguồn.
+Ưu tiên hoàn thiện database và thuật toán, rồi xem xét toàn diện hiệu suất, hướng dữ liệu và
+các vòng lặp cải thiện. **Không triển khai đánh giá riêng tính đúng/hữu ích tri thức LLM lúc này.**
+Các đề xuất explanation-review/blind evaluation riêng trong checkpoint/L014 cũ được hoãn,
+không phải yêu cầu tiếp tục ngay. Tests, kiểm tra dữ liệu/nguồn và sửa lỗi vẫn bắt buộc;
+không hạ tiêu chí chất lượng phát hành hoặc tuyên bố accuracy khi chưa đo. Giữ dữ liệu cục bộ,
+thông báo thật tắt. Đợt đầu chỉ mở rộng đầu vào bộ nhớ có nguồn để kiểm tra cấu trúc dùng chung.
+
 ## Bổ sung tri thức LLM có giới hạn — 2026-11-25
 
 Người dùng cho phép lấp khoảng trống database bằng tri thức LLM phổ biến khi nguyên tắc

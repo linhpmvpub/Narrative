@@ -1,0 +1,18 @@
+{
+  "schema": "CORE_PROFILE_V1",
+  "version": 1,
+  "required_identity": ["profile_id", "ticker", "legal_name"],
+  "groups": {
+    "identity": ["identity", "securities", "ownership"],
+    "products": ["products", "segments", "revenue_model"],
+    "inputs": ["inputs", "suppliers", "input_prices", "procurement", "inventory", "capacity"],
+    "output_markets": ["customers", "markets", "demand_drivers", "selling_prices"],
+    "counterparties": ["competition", "partners"],
+    "financial_exposure": ["financials", "sales_mix", "debt", "fx_hedging"],
+    "narratives": []
+  },
+  "core_relations": ["HAS_SEGMENT", "SELLS", "USES_INPUT", "DEPENDS_ON", "SUPPLIES", "BUYS", "SOLD_IN", "COMPETES_WITH", "HAS_METRIC", "APPLIES_TO"],
+  "extensions": "Optional sector modules; do not require all legacy 42 components",
+  "evaluation_phase": "DEFER_COMPREHENSIVE_EVALUATION_UNTIL_DATABASE_AND_ALGORITHM_READY",
+  "delivery": "disabled"
+}

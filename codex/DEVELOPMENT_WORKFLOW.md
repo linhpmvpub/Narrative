@@ -21,6 +21,10 @@ quyết định sản phẩm/quyền/chi phí không thể suy ra; tiếp tục 
 
 ## 2. Chọn việc có giá trị
 
+Ưu tiên giai đoạn hiện hành (người dùng 2026-11-25): hoàn thiện khung database v1 gọn và thuật toán.
+Hoãn đánh giá riêng tri thức LLM; benchmark toàn diện/vòng lặp cải thiện thực hiện sau khi nền tảng
+sẵn sàng. Không tự mở đợt đánh giá chỉ vì checklist cũ đề xuất. Kiểm chứng phần mềm và nguồn vẫn làm.
+
 Ưu tiên lỗi tạo khẳng định sai, nhầm pháp nhân/phạm vi/kỳ, dùng nguồn đã bị thay thế; sau đó
 thiếu dữ liệu và bỏ sót có tính hệ thống. Cân nhắc độ hữu ích, phạm vi tác động, mức bằng chứng
 và công sức; không tự gán điểm ROI giả định như số liệu đo được.

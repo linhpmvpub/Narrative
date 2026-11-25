@@ -1,5 +1,7 @@
 # Commodity price → company input relevance
 
+Update2026-11-25: shared sourced input/market registry is implemented; see [core profile v1](core-profile-v1.md). Use `--input-market-registry` instead of legacy bindings for this path. Historical limitations below describe the earlier implementation; active feed/map remains unmodified and numeric market time series remain a next implementation task.
+
 Implemented 2026-11-25 as a local workbench, not live feed/map delivery. User decision supersedes the legal-entity prerequisite for this separate commodity lane. Strict legacy R05 remains unchanged for other paths.
 
 ## Data and rules

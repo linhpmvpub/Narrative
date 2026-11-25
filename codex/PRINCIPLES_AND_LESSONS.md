@@ -1,5 +1,13 @@
 # Nguyên tắc và bài học phát triển
 
+## L015 — Chốt lõi dùng lại trước khi mở rộng coverage
+
+- Quyết định người dùng 2026-11-25: khung v1 gọn, hoàn thiện database/thuật toán trước; hoãn đánh giá riêng priors và thực hiện đánh giá tổng thể ở giai đoạn sau. L014 giữ bài học về ranh giới bằng chứng nhưng đề xuất đánh giá riêng không còn là task ngay.
+- Chia mã đầu vào dùng chung khỏi phạm vi sản phẩm công ty và thị trường báo giá. DDR5, HBM3 và HBM3e không phải alias của nhau; chip spot, module và hợp đồng mua không đồng nghĩa.
+- Bằng chứng triển khai:7quan hệ đầu vào,4mã hàng hóa,2thị trường,3liên kết proxy; HBM3 dùng chung cho hai công ty nhưng mỗi quan hệ có nguồn riêng. Đây là inventory/routing, không phải completeness hoặc accuracy.
+- Thêm công ty bằng hồ sơ + evidence + exposure, không thêm regex ticker. Duy trì7nhóm/10quan hệ cốt lõi; phần ngành đặc thù là extension, không bắt buộc mọi hồ sơ đầy đủ42component.
+- Kiểm chứng: tests/test_input_markets.py kiểm tra ranh giới mã/đơn vị/nguồn, threshold và withdrawal; đánh giá hiệu suất toàn diện deferred theo chỉ đạo, không thay bằng số tests.
+
 ## L014 — Đo đúng giá trị bổ sung của tri thức nền
 
 - Quan sát 2026-11-25: tích hợp prior hiện tại chỉ bổ sung giải thích cho thẻ đã ghép qua quan hệ có nguồn; quyết định ghép tin giữ nguyên theo contract. Synthetic CLI cho1thẻ ở cả hai nhánh, thêm1giải thích; không phải thử nghiệm thị trường.

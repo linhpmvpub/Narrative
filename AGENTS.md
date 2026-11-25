@@ -19,6 +19,8 @@ chứng một server, nguồn hoặc test vẫn ở trạng thái cũ.
 
 ## Quy tắc làm việc
 
+- Ưu tiên v1 hiện hành: chốt khung 7 nhóm/10 quan hệ trong config/core-profile-v1.json; mở rộng bằng dữ liệu có nguồn, không bắt buộc điền đủ 42 component lịch sử. Xem docs/core-profile-v1.md.
+- Theo quyết định người dùng 2026-11-25, chưa thực hiện đánh giá riêng tính đúng/hữu ích của tri thức LLM. Hoàn thiện database và thuật toán trước, đánh giá hiệu suất/hướng dữ liệu toàn diện và vòng lặp cải thiện sau. Vẫn chạy tests, kiểm tra nguồn và rà soát lỗi triển khai; không gọi đó là benchmark chất lượng thị trường.
 - Không bịa dữ kiện trong tin hoặc giả làm số liệu công bố. Được bổ sung chỗ thiếu trong database bằng tri thức LLM phổ biến, rõ ràng, tối đa một bước từ dữ kiện có nguồn; gắn nhãn LLM_PRIOR_UNVERIFIED, cơ sở/điều kiện/phiên bản. Ước lượng số phải là khoảng có mẫu số và phương pháp; không suy tiếp từ prior, không điền nếu mơ hồ. Xem docs/knowledge-priors.md. Không tự bịa giá, kỳ, hợp đồng hoặc xác suất.
 - Tin giá hàng hóa không cần pháp nhân đầu nguồn: ghép vào đầu vào công ty có nguồn. Ngưỡng thử nghiệm >5%, mạnh từ 10% là biến động giá, không phải tác động lợi nhuận; xem docs/commodity-price-relevance.md.
 - Ưu tiên hồ sơ công ty, database quan hệ có nguồn, cơ chế rõ ràng và thẻ tin giải thích được.

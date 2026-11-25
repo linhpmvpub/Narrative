@@ -1,5 +1,7 @@
 # Database-first relationship and impact development
 
+Current v1 scope (user decision2026-11-25): use [seven-group core](core-profile-v1.md) and shared input/market registry; the richer legacy catalog below is optional expansion. Finish database/algorithm first; separate LLM-prior evaluation is deferred, comprehensive evaluation follows. Tests and source checks remain required.
+
 ## A. Data foundation — implemented
 
 `engine.impact_atlas` builds a new immutable local SQLite/JSON/HTML snapshot from a

@@ -398,6 +398,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=["inventory", "evaluate", "cost-scenario", "commodity"])
     parser.add_argument("--commodity-bindings", type=Path)
+    parser.add_argument("--input-market-registry", type=Path)
+    parser.add_argument("--market-id")
     parser.add_argument("--commodity-policy", type=Path)
     parser.add_argument(
         "--knowledge-priors",
@@ -420,6 +422,8 @@ def main():
     )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if (args.input_market_registry or args.market_id) and args.action != "commodity":
+        parser.error("Input market registry options currently support commodity only")
     if args.knowledge_priors and args.action != "commodity":
         parser.error("--knowledge-priors currently supports commodity only")
     book = load(args.playbook)
@@ -440,30 +444,49 @@ def main():
                 args.selection,
                 args.articles,
                 args.scope_store,
-                args.commodity_bindings,
+                args.commodity_bindings or args.input_market_registry,
             ]
         ):
             parser.error(
-                "commodity requires --atlas --input --selection --articles --scope-store --commodity-bindings"
+                "commodity requires --atlas --input --selection --articles --scope-store and either --commodity-bindings or --input-market-registry"
             )
+        if args.commodity_bindings and args.input_market_registry:
+            parser.error("Choose legacy bindings or shared registry, not both")
+        if args.market_id and not args.input_market_registry:
+            parser.error("--market-id requires --input-market-registry")
         with ExitStack() as stack:
             conn = None
             if args.news_current:
                 engine = database(Settings.from_env().database_url)
                 stack.callback(engine.dispose)
                 conn = stack.enter_context(engine.connect())
-            result = commodity_evaluate(
+            from typing import Any, Callable
+
+            evaluator: Callable[..., Any]
+            binding_input: Any
+            if args.input_market_registry:
+                from engine.commodity_context import evaluate_registry
+
+                evaluator = evaluate_registry
+                binding_input = args.input_market_registry
+                extra = {"market_id": args.market_id}
+            else:
+                evaluator = commodity_evaluate
+                binding_input = [
+                    InputBinding.model_validate(b)
+                    for b in json.loads(args.commodity_bindings.read_text(encoding="utf-8"))
+                ]
+                extra = {}
+            result = evaluator(
                 read_snapshot(args.atlas),
                 Observation.model_validate_json(args.input.read_bytes()),
                 json.loads(args.selection.read_text(encoding="utf-8")),
-                [
-                    InputBinding.model_validate(b)
-                    for b in json.loads(args.commodity_bindings.read_text(encoding="utf-8"))
-                ],
+                binding_input,
                 store=Store(args.scope_store),
                 article_root=args.articles,
                 news_conn=conn,
                 policy_path=args.commodity_policy or COMMODITY_POLICY,
+                **extra,
             )
             if args.knowledge_priors:
                 from engine.knowledge_priors import read as read_priors

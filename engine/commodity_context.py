@@ -422,3 +422,91 @@ def evaluate(
         "observation_sha256": digest(observation.model_dump(mode="json")),
         "atlas_sha256": digest(data),
     }
+
+
+def evaluate_registry(data, observation, selection, registry_root, *, market_id=None, **kwargs):
+    """Shared commodity registry, retaining the existing source/measurement gates."""
+    from engine.input_markets import read, route
+
+    registry = read(registry_root, data)
+    result = evaluate(data, observation, selection, [], **kwargs)
+    result["input_registry_sha256"] = digest(registry.model_dump(mode="json"))
+    result["input_registry_version"] = registry.version
+    commodity = next((c for c in registry.commodities if c.id == observation.commodity_id), None)
+    if result.get("status") == "INSUFFICIENT_EVIDENCE":
+        return result
+    if commodity is None or result["measurement"]["source_fields"]["commodity"].casefold() not in {
+        a.casefold() for a in commodity.aliases
+    }:
+        result["registry_hold"] = "UNKNOWN_OR_MISMATCHED_COMMODITY"
+        return result
+    if market_id:
+        market = next((m for m in registry.markets if m.id == market_id), None)
+        if (
+            market is None
+            or market.commodity_id != commodity.id
+            or not contains(observation.quote, market.instrument)
+            or not contains(observation.quote.casefold(), market.basis.casefold())
+        ):
+            result["registry_hold"] = "MARKET_NOT_EXPLICIT_OR_INCOMPATIBLE"
+            return result
+        fields = result["measurement"]["source_fields"]
+        if observation.basis == "PRICE_PAIR" and (
+            (market.currency and fields["current_currency"] != market.currency)
+            or (market.unit and fields["current_unit"] != market.unit)
+        ):
+            result["registry_hold"] = "MARKET_UNIT_MISMATCH"
+            return result
+    if (
+        not result["source_current"]
+        or not result["period_recent"]
+        or result["price_move_band"] == "BELOW_OR_AT_THRESHOLD"
+    ):
+        return result
+    profiles = {p["id"]: p for p in data["profiles"]}
+    sources = {s.id: s for s in registry.sources}
+    for row in route(registry, commodity.id, market_id=market_id, at=kwargs.get("at")):
+        e = row["exposure"]
+        p = profiles[e["profile_id"]]
+        result["candidate_alerts"].append(
+            {
+                "kind": "COMMODITY_PRICE_ALERT_CANDIDATE",
+                "ticker": p["ticker"],
+                "company_id": p["company_id"],
+                "commodity_id": commodity.id,
+                "commodity": commodity.label,
+                "product": e["product_label"],
+                "scope": e["scope"],
+                "usage_relation_id": "input-registry/" + e["id"],
+                "usage_evidence": e["evidence"],
+                "usage_source_urls": sorted(
+                    {str(sources[x["source_id"]].url) for x in e["evidence"]}
+                ),
+                "narrative_ids": [
+                    n["id"]
+                    for n in data["narratives"]
+                    if n["profile_id"] == p["id"] and e["product_node_id"] in n["watched_nodes"]
+                ],
+                "relevance": "DIRECT_SOURCED_PRODUCT_INPUT_MATCH",
+                "price_move_band": result["price_move_band"],
+                "measurement": result["measurement"],
+                "source_quote": observation.quote,
+                "source_url": selection["revision"]["payload"]["url"],
+                "source_packet_sha256": selection["packet_sha256"],
+                "price_markets": row["price_markets"],
+                "selected_market_id": market_id,
+                "benchmark_grade_geography_applicability": "BENCHMARK_PROXY_ONLY"
+                if market_id
+                else "NOT_SELECTED",
+                "conditional_cost_pressure": "UP"
+                if Decimal(result["measurement"]["signed_change_pct"]) > 0
+                else "DOWN",
+                "impact_basis": "INPUT_COST_PRESSURE_IF_PURCHASE_PRICES_TRANSMIT",
+                "financial_magnitude": "UNKNOWN",
+                "horizon": "UNKNOWN",
+                "probability": None,
+                "purchase_price_verified": False,
+                "delivery": "disabled",
+            }
+        )
+    return result

@@ -1,5 +1,7 @@
 # One-step LLM knowledge in the relationship database
 
+Current sequencing, superseding the separate-review next steps below: user2026-11-25 defers standalone prior correctness/usefulness evaluation. Finish the bounded [core database and algorithm](core-profile-v1.md), then assess the system comprehensively. Preserve provenance and software tests in the meantime.
+
 User decision, 2026-11-25: fill missing knowledge with clear, widely known LLM reasoning, at most one inference step. Do not estimate obscure or ambiguous information. This refines the earlier no-fabrication rule: estimates are allowed when labeled; invented news facts or misrepresented disclosures are not.
 
 ## Implemented contract

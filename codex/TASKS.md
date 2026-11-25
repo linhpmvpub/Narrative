@@ -1,5 +1,14 @@
 # TASKS — implementation execution checklist
 
+## Current v1 priority — user decision2026-11-25
+
+- [x] Freeze compact7-group/10-relation core and shared sourced input/market schema.
+- [x] Populate7exposures/4commodities/2market definitions and wire source-to-card routing.
+- [ ] Integrate compact core into private feed/map and bundle same-event product cards.
+- [ ] Add bounded price observations/adapters with units, periods and revisions; finish algorithm/lifecycle.
+- [ ] Comprehensive evaluation and improvement loops AFTER implementation.
+- Separate LLM-prior evaluation is deferred by user; older pending review tasks below are historical priorities, not current instructions.
+
 ## Prior explanation integration — 2026-11-25
 
 - [x] Audit16prior premises and pair commodity outputs with/without labeled explanations.

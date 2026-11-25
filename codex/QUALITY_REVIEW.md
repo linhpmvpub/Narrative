@@ -1,5 +1,15 @@
 # Quality review after each iteration
 
+## Compact v1 database expansion — 2026-11-25 (latest)
+
+Product value: stable7-group/10-relation core reusable across tickers; added actual source-grounded product inputs and benchmark metadata rather than another standalone evaluation layer. User deferred separate prior evaluation and comprehensive evaluation until database/algorithm completion. Testing/source validation remain required.
+
+Evidence:4commodities,7input exposures across4companies,2market definitions,3proxy links.6source captures including5new primary pages. Registry readback and routing verified; synthetic12%HBM3 event on real registry routes2cards AMD/NVDA, excludes DDR5/HBM3e.63focused tests passed36.41s; Ruff/mypy144passed. CI pending code push. No numeric price series or measured accuracy gain claimed. Source records remain local; public aggregate only.
+
+Observed limits: chip spot/module procurement differ; NAND market category does not identify Sandisk's price or grade. HBM market absent from registry. Unknown dates/currency/unit/geography remain null. Exact quote/hash validates capture integrity, not semantic table alignment or live publisher status. Narrow product models are not company-wide exposure shares; generic MU materials not expanded by guessing. No active feed/map integration, same-company product cards not bundled yet.
+
+Remedies in implementation order: use compact core in private feed/map with scope-preserving bundling; add bounded market observations with explicit series/units/periods and correction handling; finish source lifecycle and algorithm, then evaluate comprehensively. Do not launch separate LLM usefulness review. L015 records scope and sequencing; no approval blocker. Data local, notifications disabled.
+
 ## Commodity prior explanation ablation — 2026-11-25 (latest)
 
 Product contribution: priors now reach source-linked commodity workbench cards with explicit label/conditions/exceptions instead of remaining only a lookup database. Paired comparison proves no silent promotion of relevance, magnitude or threshold decisions.
