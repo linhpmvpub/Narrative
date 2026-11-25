@@ -22,8 +22,15 @@ from engine.scope_review import Proposal, Store, check
 
 @pytest.fixture
 def scoped(identified, tmp_path):
+    return make_scoped(identified, tmp_path)
+
+
+def make_scoped(
+    identified,
+    tmp_path,
+    quote="Alpha Foundry raised prices for wafers from Fab A in Texas during 2026.",
+):
     root, profile, selection, _ = identified
-    quote = "Alpha Foundry raised prices for wafers from Fab A in Texas during 2026."
     raw = (root / "source.html").read_bytes() + ("<p>" + quote + "</p>").encode()
     (root / "source.html").write_bytes(raw)
     profile["sources"][0]["sha256"] = hashlib.sha256(raw).hexdigest()

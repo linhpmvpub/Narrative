@@ -1,5 +1,27 @@
 # Quality review after each iteration
 
+## Mechanism-specific context scope — 2026-11-25
+
+Product goal: retain useful broad context without pretending it proves an economic effect. Added
+a7mechanism required/conditional scope matrix, explicit source-grounded NA decisions and context
+cards with source-backed human-readable paths in the local workbench. Strict R05/R07 unchanged;
+no active feed/map rollout. Synthetic source-to-card CLI yields1card before withdrawal and0after.
+Final27new tests plus102initial regressions passed; CI to be recorded in checkpoint. New real
+source facts0,independent labels0; no measured recall improvement or causal accuracy claim.
+
+| Priority | Remaining limitation | Remedy and acceptance gate |
+|---|---|---|
+| P0 | Legal-entity identity is still mandatory; generic commodity news has no such actor. | Populate reviewed commodity/product/market factor references with a dedicated type contract. Test ambiguous benchmark, different grade, wrong geography and unrelated company negatives before enabling routes. |
+| P0 | NA rationale is reviewer interpretation supported by quotes, not machine-verified semantics. | Collect independent source-only scope labels after freeze; score incorrect NA separately from missing scope and match errors. No self-authored independent labels. |
+| P0 | Matrix/context output is not fresh-cohort relevance evidence or additional real relationship data. | Prioritize real input/product/segment coverage and disjoint price/demand/disruption clusters; measure context usefulness and verified impact separately. |
+| P1 | Literal matching and declared periods restrict coverage; proposed states can be misread in UI. | Add typed scope/time relations with evidence and explicit UX level/phase; test broad/near-miss examples and user interpretation before integration. |
+| P1 | Full-article publisher revalidation and delivery-time lifecycle remain incomplete. | Preserve local-only workbench until lifecycle guards apply where cards are consumed; no stale synthetic JSON treated as live feed. |
+
+Lesson L011: relevance/context and economic transmission need separate typed outputs and gates;
+synthetic tests validate non-promotion, not market usefulness. L005 is partially addressed by the
+context matrix, not resolved empirically. Next work should add real database coverage and test
+general factor types rather than endlessly add approval machinery.
+
 ## Agent guidance and learning workflow — 2026-11-25
 
 Product contribution: preserve database-first product direction across sessions and avoid repeating

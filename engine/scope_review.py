@@ -9,9 +9,10 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Literal
 
-from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, model_serializer
 
 from engine.ingestion.contracts import digest
+from engine.mechanism_scope import ContextScope
 from engine.structured_news import normalized
 
 
@@ -48,6 +49,15 @@ class Proposal(BaseModel):
     effective_until: AwareDatetime
     created_at: AwareDatetime
     review_until: AwareDatetime
+    context_scope: ContextScope | None = None
+
+    @model_serializer(mode="wrap")
+    def serialize(self, handler):
+        value = handler(self)
+        # Keep canonical hashes of existing strict proposals unchanged.
+        if self.context_scope is None:
+            value.pop("context_scope", None)
+        return value
 
 
 class Review(BaseModel):
@@ -234,7 +244,14 @@ def check(store, identity, policy, data, frame, selection, path, book, at, *, re
         or at >= datetime.fromisoformat(ref["review_until"])
     ):
         raise ValueError("Upstream legal identity unavailable or expired")
-    if set(p.facets) != {"legal_entity", "product", "facility", "geography", "period"}:
+    context = None
+    if p.context_scope is not None:
+        from engine.mechanism_scope import assess
+
+        context = assess(
+            p.context_scope, p.facets, frame.source_quote, p.exposure_quote, frame.mechanism_id
+        )
+    elif set(p.facets) != {"legal_entity", "product", "facility", "geography", "period"}:
         raise ValueError("All five explicit scope facets required")
     for name, facet in p.facets.items():
         if not re.search(
@@ -271,13 +288,14 @@ def check(store, identity, policy, data, frame, selection, path, book, at, *, re
             raise ValueError("Missing, conflicting, unauthorized or self-review vote")
         seen.add(vote.reviewer_id)
     return {
-        "status": "PASS",
+        "status": "CONTEXT" if context else "PASS",
         "review_id": identity,
         "version": record["version"],
         "review_sha256": record["sha256"],
         "reviewers": sorted(seen),
         "source_epoch": p.source_epoch,
-        "scope_basis": "TWO_REVIEWER_LITERAL_SCOPE",
+        "scope_basis": "TWO_REVIEWER_CONTEXT_SCOPE" if context else "TWO_REVIEWER_LITERAL_SCOPE",
+        "context_scope": context,
         "human_gold": False,
         "reviewer_kinds": {x: reviewers[x] for x in seen},
         "reviewer_policy_sha256": digest(policy),

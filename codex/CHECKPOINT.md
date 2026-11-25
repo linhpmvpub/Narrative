@@ -1,5 +1,13 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-25
 
+## Mechanism-specific context scope and cards — 2026-11-25 (latest)
+
+- User reaffirmed following AGENTS/product direction/principles/workflow for all future tasks. Read guidance and current plans; chose over-restrictive uniform scope as a product gap. Implemented config/mechanism-scope.json with7mechanisms,5dimensions and required/conditional requirements. Conditional is MATCH or explicitly source-grounded NOT_APPLICABLE with rationale, never missing=NA. New optional Proposal.context_scope pins policy/mechanism and is covered by both votes; strict legacy serialization/hashes preserved.
+- Scope review CONTEXT is separate from PASS. Workbench related_context_cards expose source/packet/phase, narrative, human-readable source-backed relationship path, facet decisions, conditions and UNKNOWN strength/horizon/magnitude. Proposed context retains PROPOSED/R04FAIL. Context never clears strict R05/R07, truncated graphs/unreviewed paths do not create cards, source lifecycle/revocation/binding checks still apply. No active feed/map change or cloud deployment.
+- Local synthetic demo source-cache/mechanism-scope-2026-11-25: one market-wide price context card without an invented facility, R05UNKNOWN; after source withdrawal zero cards. Votes fixture-generated, not independent labels. Baseline01cb70959714a90d40d20499cce6c49abda41b1d537afd1a9cc2f6d01dc4a424, same real atlas. No new real source facts or accuracy improvement claim.
+- Validation:102initial focused regressions passed120.30s; final27new tests passed5.87s, Ruff/mypy139files passed. Full CI pending. Read docs/mechanism-context-scope.md and QUALITY_REVIEW.md for actual coverage and limits. Keep detailed data local,notificationsfalse,syntheticlivefalse,LLMnone.
+- Remaining: legal-entity upstream reference still mandatory, so generic actorless commodity news remains unsupported; literal matches/declared periods and reviewer interpretation are not semantic proof. Matrix is engineering policy, not empirical calibration. Next prioritize source-backed input/product/segment data and typed non-legal-factor references; freeze fresh grouped positive/near-miss cases for independent context-vs-impact evaluation. No per-article keyword patches. No user decision needed.
+
 ## Hướng dẫn sản phẩm và vòng học hỏi cho agent — 2026-11-25 (latest)
 
 - User requested durable product goals/direction, principles and accumulated lessons, and a self-review/improvement workflow to read before future tasks. Audited existing atlas plan, acceptance, profile framework, QUALITY_REVIEW, TASKS, README and startup guide. Existing technical docs retained; legacy seed/Threadnote startup wording explicitly marked historical.

@@ -5,6 +5,10 @@ Mục đích: kiểm soát việc một sự kiện có cùng phạm vi với m�
 Không xác nhận nhân quả, mức tác động, thời gian tác động hoặc giá cổ phiếu.
 Không thay đổi feed đang hoạt động; delivery luôn disabled, R07 luôn UNKNOWN.
 
+Bổ sung 2026-11-25: [phạm vi bối cảnh theo cơ chế](mechanism-context-scope.md) dùng trường
+Proposal.context_scope tùy chọn. Kết quả CONTEXT tạo thẻ bối cảnh trong workbench, không phải
+PASS của strict R05. Hợp đồng strict năm chiều và canonical hash của proposal cũ được giữ nguyên.
+
 ## Dữ liệu và quy tắc
 
 | Thành phần | Điều kiện bắt buộc |

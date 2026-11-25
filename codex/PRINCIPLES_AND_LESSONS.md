@@ -44,6 +44,7 @@ không có nghĩa đã giải quyết xong.
 | L008 · 2026-11-25 · giới hạn đánh giá | Nhiều bài/pair cùng sự kiện tương quan; current-profile archive khác backtest; [acceptance](../docs/product-v1-acceptance.md) | Báo theo cụm/công ty/cơ chế và giữ riêng kiểu replay; số pair không phải số sự kiện độc lập |
 | L009 · 2026-11-25 · đã quan sát | README/start guide còn gọi dự án là seed và phụ thuộc Threadnote dù định hướng đã đổi | Điểm vào rõ, một nguồn mục tiêu hiện hành, lịch sử được gắn nhãn; kiểm tra link và xung đột khi thay quyết định |
 | L010 · 2026-11-25 · giới hạn vận hành | Hash chain không chống rollback toàn store; hai lần đọc không là distributed transaction; [lifecycle](../docs/scope-source-lifecycle.md) | Trước delivery cần kiểm tra tại thời điểm dùng/durable invalidation; không gọi local snapshot là bảo đảm gửi thật |
+| L011 · 2026-11-25 · đã kiểm chứng bằng synthetic | Một tin có phạm vi bối cảnh đủ căn cứ vẫn có thể chưa xác minh truyền tác động; [context scope](../docs/mechanism-context-scope.md) tạo CONTEXT/card riêng, giữ R05/R07UNKNOWN | Phân tầng output/gates, không nới gate tác động để cứu recall. Missing khác NA có căn cứ. L005 được xử lý một phần về phần mềm, chưa chứng minh cải thiện recall trên tin thật |
 
 ## Cách bổ sung và sửa bài học
 

@@ -260,6 +260,8 @@ def evaluate(
     ]
     trace = [{**rule, "result": state} for rule, state in zip(book["rules"], states, strict=True)]
     first = next(r for r in trace if r["result"] != "PASS")
+    edges = {edge["id"]: edge for edge in data["relations"]}
+    labels = {node["id"]: node["label"] for node in data["nodes"]}
     return {
         "schema": "mechanism-decision-v1",
         "playbook_sha256": digest(book),
@@ -269,6 +271,40 @@ def evaluate(
         "data_requirements": requirements,
         "decision_trace": trace,
         "scope_reviews": scope_results,
+        "related_context_cards": [
+            {
+                "kind": "RELATED_CONTEXT",
+                "label": "Bối cảnh liên quan — chưa xác minh tác động",
+                "narrative_id": path["narrative_id"],
+                "relations": path["relations"],
+                "relationship_path": [
+                    {
+                        "id": rid,
+                        "type": edges[rid]["type"],
+                        "from": labels[edges[rid]["from_id"]],
+                        "to": labels[edges[rid]["to_id"]],
+                        "evidence": edges[rid]["evidence"],
+                    }
+                    for rid in path["relations"]
+                ],
+                "event_id": frame.id,
+                "event_quote": frame.source_quote,
+                "phase": frame.phase,
+                "source_url": base["source_url"],
+                "source_packet_sha256": selection["packet_sha256"],
+                "scope_review": result,
+                "conditions": group["conditions"],
+                "why_related": "Đường quan hệ có nguồn và phạm vi bối cảnh được thẩm định; chưa chứng minh truyền tác động",
+                "strength": "UNKNOWN",
+                "horizon": "UNKNOWN",
+                "financial_magnitude": "UNKNOWN",
+                "price_prediction": None,
+                "delivery": "disabled",
+                "active_feed_changed": False,
+            }
+            for path, result in zip(base["paths"], scope_results, strict=True)
+            if result["status"] == "CONTEXT" and not base["truncated"]
+        ],
         "source_lifecycle": lifecycle or {"basis": "MANUAL_LOCAL_RESEARCH_ONLY"},
         "review_queue": first["failure"],
         "first_unmet_rule": first["id"],

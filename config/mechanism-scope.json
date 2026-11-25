@@ -1,0 +1,88 @@
+{
+  "schema": "mechanism-scope-v1",
+  "version": 1,
+  "level": "RELATED_CONTEXT_ONLY",
+  "delivery": "disabled",
+  "groups": {
+    "supply_disruption": {
+      "required": [
+        "legal_entity",
+        "product",
+        "facility",
+        "geography",
+        "period"
+      ],
+      "conditional": []
+    },
+    "input_price": {
+      "required": [
+        "legal_entity",
+        "product",
+        "geography",
+        "period"
+      ],
+      "conditional": [
+        "facility"
+      ]
+    },
+    "capacity": {
+      "required": [
+        "legal_entity",
+        "product",
+        "geography",
+        "period"
+      ],
+      "conditional": [
+        "facility"
+      ]
+    },
+    "demand": {
+      "required": [
+        "legal_entity",
+        "product",
+        "period"
+      ],
+      "conditional": [
+        "facility",
+        "geography"
+      ]
+    },
+    "technology": {
+      "required": [
+        "legal_entity",
+        "product",
+        "period"
+      ],
+      "conditional": [
+        "facility",
+        "geography"
+      ]
+    },
+    "financing": {
+      "required": [
+        "legal_entity",
+        "period"
+      ],
+      "conditional": [
+        "product",
+        "facility",
+        "geography"
+      ]
+    },
+    "policy": {
+      "required": [
+        "legal_entity",
+        "product",
+        "geography",
+        "period"
+      ],
+      "conditional": [
+        "facility"
+      ]
+    }
+  },
+  "conditional_policy": "MATCH_OR_EXPLICIT_SOURCE_BACKED_NOT_APPLICABLE",
+  "unknown_policy": "HOLD_CONTEXT",
+  "impact_gate": "UNCHANGED_STRICT_R05",
+  "status": "ENGINEERING_POLICY_NOT_EMPIRICALLY_VALIDATED"
+}
