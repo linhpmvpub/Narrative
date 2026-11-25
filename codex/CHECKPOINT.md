@@ -1,4 +1,13 @@
-# Checkpoint tiếp tục phiên sau — cập nhật 2026-11-24
+# Checkpoint tiếp tục phiên sau — cập nhật 2026-11-25
+
+## R05 versioned local scope review — 2026-11-25 (latest)
+
+- Implemented engine.scope_review: append-only SQLite review/source histories, hash chains, optimistic expected-head transactions, canonical proposal-hash CLI. Proposals pin event/selection/atlas/playbook/narrative/ordered path/source epoch. Two distinct locally authorized reviewers, excluding proposal author and EventFrame reviewer; all votes approve the exact normalized proposal. Trusted operator identities, not authenticated signatures or proof of AI independence.
+- R05 checks sourced upstream legal identity and five literal grounded facets (entity/product/facility/geography/period), relation validity over the completed retrospective interval, review chronology/expiry, latest source state and latest review. New source epoch, withdrawal/dispute, revocation or changed pins hold the gate. All candidate paths must pass; ledger mutation during evaluation holds all. R07 remains UNKNOWN even with complete R06 context. Feed unchanged; no financial magnitude or price prediction.
+- Private source-cache/scope-review-2026-11-25 contains fully SYNTHETIC source/profile/atlas/event/votes and CLI decision. Votes are fixture-generated, NOT real independent agent reviews or human labels. Positive end-to-end R05 PASS stops R06. No new real source facts, labels or precision/recall claim. Old extraction cohort remains exposed;25disagreements still pending.
+- Successor runtime baseline f2db54a8368942cc30b99cce56dbc089095f22337d9aa0d19d8c7a555badbdba, same real atlas as previous turn. Prior baseline retained unchanged. Read docs/scope-review-v1.md for operator CLI/schema/trust boundary and next gates.
+- Validation in progress: focused regressions passed; final full local suite and GitHub CI results will be appended after completion. Notificationsfalse,syntheticlivefalse,LLMnone verified. Detailed artifacts remain gitignored; no cloud data deployment.
+- Next: automatically connect ingestion correction/withdrawal revisions to scope source epochs; source freshness and explicit event timing; collect genuinely complete real scope evidence and obtain separate independent reviews. Then add event-applicable denominators/periods for R06 and measured causal assessment for R07. Literal scopes are intentionally narrow; no per-article keyword patches or weight calibration. No user decision currently required.
 
 ## Điểm tiếp tục đã lưu theo yêu cầu — 2026-11-24
 

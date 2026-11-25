@@ -154,8 +154,23 @@ def inventory(data, book):
     return rows
 
 
-def evaluate(data, frame, selection, subtype, *, book=None, article_root=None, at=None):
+def evaluate(
+    data,
+    frame,
+    selection,
+    subtype,
+    *,
+    book=None,
+    article_root=None,
+    at=None,
+    scope_store=None,
+    reviewer_policy=None,
+    scope_reviews=None,
+):
+    from datetime import UTC, datetime
+
     book = book or load()
+    at = at or datetime.now(UTC)
     if frame.mechanism_id not in book["groups"]:
         raise ValueError("R01: unknown event mechanism")
     group = book["groups"][frame.mechanism_id]
@@ -163,6 +178,43 @@ def evaluate(data, frame, selection, subtype, *, book=None, article_root=None, a
         raise ValueError("Subtype must belong to event mechanism")
     # Existing source hash, quote, chronology and directed graph gates remain authoritative.
     base = assess(data, frame, selection, article_root=article_root, at=at)
+    from engine.scope_review import check
+
+    bindings = scope_reviews or {}
+    ledger_before = scope_store.fingerprint() if scope_store is not None else None
+    path_keys = {digest([p["narrative_id"], p["relations"]]) for p in base["paths"]}
+    if not set(bindings) <= path_keys:
+        raise ValueError("Scope review binding names an unrelated path")
+    scope_results = []
+    for path in base["paths"]:
+        key = digest([path["narrative_id"], path["relations"]])
+        result = {"status": "UNKNOWN", "reason": "NO_SCOPE_REVIEW"}
+        if key in bindings and scope_store is not None:
+            try:
+                result = check(
+                    scope_store,
+                    bindings[key],
+                    reviewer_policy,
+                    data,
+                    frame,
+                    selection,
+                    path,
+                    book,
+                    at,
+                )
+            except (ValueError, OSError) as exc:
+                result = {"status": "UNKNOWN", "reason": str(exc)}
+        scope_results.append({"path_sha256": key, **result})
+    if scope_store is not None and scope_store.fingerprint() != ledger_before:
+        scope_results = [
+            {
+                "path_sha256": r["path_sha256"],
+                "status": "UNKNOWN",
+                "reason": "LEDGER_CHANGED_DURING_EVALUATION",
+            }
+            for r in scope_results
+        ]
+    scoped = bool(scope_results) and all(r["status"] == "PASS" for r in scope_results)
     relation_ids = {rid for path in base["paths"] for rid in path["relations"]}
     requirements = [
         r
@@ -175,7 +227,7 @@ def evaluate(data, frame, selection, subtype, *, book=None, article_root=None, a
         "FAIL" if base["truncated"] else "PASS",
         "PASS" if base["paths"] else "FAIL",
         "PASS" if frame.phase == "OPERATING" else "FAIL",
-        "UNKNOWN",
+        "PASS" if scoped else "UNKNOWN",
         "PASS" if complete else "UNKNOWN",
         "UNKNOWN",
     ]
@@ -189,6 +241,7 @@ def evaluate(data, frame, selection, subtype, *, book=None, article_root=None, a
         "source_assessment": base,
         "data_requirements": requirements,
         "decision_trace": trace,
+        "scope_reviews": scope_results,
         "review_queue": first["failure"],
         "first_unmet_rule": first["id"],
         "explanation": {
@@ -205,7 +258,7 @@ def evaluate(data, frame, selection, subtype, *, book=None, article_root=None, a
         "price_prediction": None,
         "delivery": "disabled",
         "active_feed_changed": False,
-        "independent_scope_and_causality_review": "NOT_IMPLEMENTED_FAIL_CLOSED",
+        "independent_scope_and_causality_review": "R05_LOCAL_REVIEW_LEDGER_R07_UNKNOWN",
     }
 
 
@@ -286,6 +339,9 @@ def main():
     parser.add_argument("--selection", type=Path)
     parser.add_argument("--articles", type=Path)
     parser.add_argument("--subtype")
+    parser.add_argument("--scope-store", type=Path)
+    parser.add_argument("--scope-reviews", type=Path)
+    parser.add_argument("--reviewer-policy", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     book = load(args.playbook)
@@ -309,6 +365,11 @@ def main():
         else:
             if not all([args.input, args.selection, args.articles, args.subtype]):
                 parser.error("--input --selection --articles --subtype required")
+            from engine.scope_review import Store
+
+            supplied = [args.scope_store, args.scope_reviews, args.reviewer_policy]
+            if any(supplied) and not all(supplied):
+                parser.error("--scope-store --scope-reviews --reviewer-policy required together")
             result = evaluate(
                 data,
                 EventFrame.model_validate_json(args.input.read_bytes()),
@@ -316,6 +377,13 @@ def main():
                 args.subtype,
                 book=book,
                 article_root=args.articles,
+                scope_store=Store(args.scope_store) if args.scope_store else None,
+                scope_reviews=json.loads(args.scope_reviews.read_text(encoding="utf-8"))
+                if args.scope_reviews
+                else None,
+                reviewer_policy=json.loads(args.reviewer_policy.read_text(encoding="utf-8"))
+                if args.reviewer_policy
+                else None,
             )
     with args.output.open("x", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2, default=str)

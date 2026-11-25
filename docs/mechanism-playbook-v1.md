@@ -71,7 +71,7 @@ Mỗi số liệu phải gắn với đúng cạnh quan hệ, sản phẩm/phạ
 | R06 | Có các tham số cần thiết trên đúng cạnh? | REVIEW_DATA |
 | R07 | Có xác minh quan hệ nhân quả, độ lớn và thời gian? | REVIEW_CAUSALITY |
 
-R01–R04 và kiểm kê R06 được thực thi trên dữ liệu hiện có. R05 và R07 **chưa có giao dịch thẩm định độc lập được nối vào workbench**, nên luôn UNKNOWN; không có nhánh tự chấp nhận impact. R06 PASS chỉ có nghĩa các trường ngữ cảnh có nguồn được điền, không chứng minh mẫu số/kỳ/phạm vi phù hợp với sự kiện. Tất cả kết quả giữ thông báo tắt và độ lớn tài chính UNKNOWN.
+R01–R04 và kiểm kê R06 được thực thi trên dữ liệu hiện có. Từ 2026-11-25, R05 có sổ thẩm định cục bộ có phiên bản, nguồn và hai phiếu duyệt; xem [scope-review-v1.md](scope-review-v1.md). Không có bản duyệt hợp lệ thì R05 vẫn UNKNOWN. R07 luôn UNKNOWN; không có nhánh tự chấp nhận impact. R06 PASS chỉ có nghĩa các trường ngữ cảnh có nguồn được điền, không chứng minh mẫu số/kỳ/phạm vi phù hợp với sự kiện. Tất cả kết quả giữ thông báo tắt và độ lớn tài chính UNKNOWN.
 
 Một lỗi nguồn bị bộ kiểm tra hiện có từ chối bằng ngoại lệ; trace bảy bước chỉ được xuất cho đầu vào đã qua kiểm tra nguồn. Mã nguồn thực thi các điều kiện đã biết, không dùng eval hoặc thực thi chuỗi công thức từ file. Thay đổi ngữ nghĩa công thức/đơn vị cần phiên bản và tests tương ứng; chỉnh mô tả không được lén đổi hành vi.
 
