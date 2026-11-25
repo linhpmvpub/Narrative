@@ -1,5 +1,19 @@
 # Quality review after each iteration
 
+## R05 review iteration — 2026-11-25
+
+Implemented a versioned local review protocol, not an accuracy improvement claim. Source capture -> sourced graph -> five scope facets -> two distinct authorized local votes -> R05 PASS is covered with synthetic fixtures. Wrong pins/identity/scope, self/duplicate/reject votes, source epochs, revocation, tamper, concurrent mutation and multi-path isolation are regression gates. Complete R06 still cannot approve R07. No new real independent labels or supported financial estimates.
+
+| Priority | Current limitation | Feasible remedy and acceptance gate |
+|---|---|---|
+| P0 | Source ledger notices are manual; capture integrity does not prove current publisher state. | Bridge ingestion revision/correction/withdrawal IDs to atomic source epochs and enforce freshness. Test correction, withdrawal, restore, missed/delayed updates and replay. Do this before active feed integration. |
+| P0 | Local reviewer roles are operator declarations; no authentication or proof of blind independence. | Separate review sessions/accounts and sealed source-only packets. Preserve role disclosure; no AI labels described as human gold. Verify disagreement and provenance rather than trusting a boolean. |
+| P0 | Five literal facets are deliberately strict; event intervals are declared, not semantically parsed. | Add explicit occurrence/publication/effective time and scoped set algebra with unknown handling. Evaluate disjoint scope positives/near misses; do not invent missing facility/product coverage. |
+| P1 | Full-store rollback is outside local hash-chain protection. | External receipt/immutable backup before multi-operator deployment; test rollback detection against an independently pinned head. |
+| P1 | No quantitative applicability, causal magnitude or horizon approval. | Require sourced denominator/period and mechanism assumptions; evaluate grouped events before weights or push. R07 remains UNKNOWN. |
+
+Prior extraction recall around27–28% and25unadjudicated cases remain unchanged. This turn adds software controls, not real-news coverage or superiority over an LLM. Validation:29new tests passed locally; CI45621042013 on dbc6acc passed1109tests each on SQLite/PostgreSQL plus8model smoke cases,dependency audit and migration/replay. Duplicate Windows full suite stopped after CI success; no complete local-full-suite claim. CLI positive stopsR06; after synthetic source withdrawal stopsR05; exposed real diagnostic remainsR05UNKNOWN. Runtime baseline and previous artifact hashes verified.
+
 Standing user request: after every iteration, identify current system limitations,
 feasible remedies and the evidence needed to verify improvement. Read this alongside
 CHECKPOINT.md. Do not treat passing software tests as market accuracy or product acceptance.
@@ -109,17 +123,3 @@ labels and reliable results.25prior label disagreements remain pending. No notif
 cloud data publication; all detailed artifacts remain local.
 
 Additional real diagnostic: archived2024TSMCstatement ->current AMD profile ->one path ->R05REVIEW_SCOPE. No sourced product/process exposure determination; financial magnitudeUNKNOWN. No new accuracy evidence. EventFrame capture/review chronology does not replace event occurrence/effective dates; add explicit temporal validity/freshness before any feed integration.
-# R05 review iteration — 2026-11-25
-
-Implemented a versioned local review protocol, not an accuracy improvement claim. Source capture -> sourced graph -> five scope facets -> two distinct authorized local votes -> R05 PASS is covered with synthetic fixtures. Wrong pins/identity/scope, self/duplicate/reject votes, source epochs, revocation, tamper, concurrent mutation and multi-path isolation are regression gates. Complete R06 still cannot approve R07. No new real independent labels or supported financial estimates.
-
-| Priority | Current limitation | Feasible remedy and acceptance gate |
-|---|---|---|
-| P0 | Source ledger notices are manual; capture integrity does not prove current publisher state. | Bridge ingestion revision/correction/withdrawal IDs to atomic source epochs and enforce freshness. Test correction, withdrawal, restore, missed/delayed updates and replay. Do this before active feed integration. |
-| P0 | Local reviewer roles are operator declarations; no authentication or proof of blind independence. | Separate review sessions/accounts and sealed source-only packets. Preserve role disclosure; no AI labels described as human gold. Verify disagreement and provenance rather than trusting a boolean. |
-| P0 | Five literal facets are deliberately strict; event intervals are declared, not semantically parsed. | Add explicit occurrence/publication/effective time and scoped set algebra with unknown handling. Evaluate disjoint scope positives/near misses; do not invent missing facility/product coverage. |
-| P1 | Full-store rollback is outside local hash-chain protection. | External receipt/immutable backup before multi-operator deployment; test rollback detection against an independently pinned head. |
-| P1 | No quantitative applicability, causal magnitude or horizon approval. | Require sourced denominator/period and mechanism assumptions; evaluate grouped events before weights or push. R07 remains UNKNOWN. |
-
-Prior extraction recall around27–28% and25unadjudicated cases remain unchanged. This turn adds software controls, not real-news coverage or superiority over an LLM. Final test counts/CI will be recorded in CHECKPOINT.md after completion.
-

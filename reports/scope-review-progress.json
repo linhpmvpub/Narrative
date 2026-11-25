@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-25",
+  "status": "LOCAL_R05_REVIEW_PROTOCOL_IMPLEMENTED",
+  "new_source_facts": 0,
+  "new_independent_labels": 0,
+  "human_gold": false,
+  "synthetic_votes_only": true,
+  "scope_facets": [
+    "legal_entity",
+    "product",
+    "facility",
+    "geography",
+    "period"
+  ],
+  "minimum_distinct_reviewers": 2,
+  "reviewer_authentication": "TRUSTED_LOCAL_OPERATOR_POLICY_NOT_AUTHENTICATED_IDENTITIES",
+  "source_lifecycle": "MANUAL_LEDGER_NOTICES_NOT_AUTOMATIC_INGESTION_BRIDGE",
+  "review_max_days": 90,
+  "scope_mode": "LITERAL_MATCH_COMPLETED_RETROSPECTIVE_INTERVAL",
+  "synthetic_source_to_rules": {
+    "r05": "PASS",
+    "first_unmet_rule": "R06"
+  },
+  "exposed_real_source_diagnostic": {
+    "first_unmet_rule": "R05",
+    "fresh_holdout": false,
+    "historical_as_of_backtest": false
+  },
+  "r07": "UNKNOWN",
+  "financial_magnitude": "UNKNOWN",
+  "ranking_weights": null,
+  "delivery": "disabled",
+  "active_feed_changed": false,
+  "llm_mode": "none",
+  "allow_synthetic_live": false,
+  "baseline_sha256": "f2db54a8368942cc30b99cce56dbc089095f22337d9aa0d19d8c7a555badbdba",
+  "previous_baseline_artifacts_unchanged": true,
+  "validation": {
+    "new_tests": 29,
+    "new_tests_seconds": 8.09,
+    "focused_prior_run": 58,
+    "ruff": "passed",
+    "mypy_files": 137,
+    "ci_run": 45621042013,
+    "ci_status": "success",
+    "code_commit": "dbc6acc159c02af7823c6b535a0743927e476ba7",
+    "sqlite_tests": 1109,
+    "sqlite_seconds": 141.81,
+    "postgresql_tests": 1109,
+    "postgresql_seconds": 260.4,
+    "actual_model_synthetic_cases": 8,
+    "dependency_audit": "passed",
+    "migration_seed_replay_downgrade": "passed",
+    "local_full_suite": "INTENTIONALLY_STOPPED_AFTER_FULL_CI_SUCCESS_NOT_COUNTED_AS_COMPLETED"
+  },
+  "accuracy_improvement_claim": false,
+  "llm_superiority_claim": false,
+  "synthetic_withdrawal_cli": {
+    "source_epoch": 2,
+    "first_unmet_rule": "R05",
+    "previous_review_invalidated": true
+  }
+}

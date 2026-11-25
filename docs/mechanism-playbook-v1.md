@@ -115,7 +115,7 @@ Lợi thế kỳ vọng đến từ chất lượng và độ phủ của dữ l
 .venv/Scripts/python -m engine.mechanism_playbook cost-scenario --input <five-explicit-assumptions.json> --output <new-scenario.json>
 ```
 
-Ưu tiên: nối thẩm định phạm vi có nguồn vào R05; bổ sung dữ liệu đúng mẫu số/kỳ cho từng cơ chế/công ty; mở rộng nhận diện trạng thái/thay đổi kinh tế và lời dẫn; đánh giá nhóm sự kiện mới và so sánh công bằng với baseline.25bất đồng nhãn của đợt trước còn chờ thẩm định. Chưa hiệu chỉnh trọng số, bật push hoặc thay thế matcher hiện tại.
+Ưu tiên sau giao thức R05: nối tự động trạng thái sửa/rút nguồn từ ingestion vào ledger và kiểm tra độ mới; bổ sung dữ liệu đúng mẫu số/kỳ cho từng cơ chế/công ty; mở rộng nhận diện trạng thái/thay đổi kinh tế và lời dẫn; đánh giá nhóm sự kiện mới và so sánh công bằng với baseline.25bất đồng nhãn của đợt trước còn chờ thẩm định. Chưa hiệu chỉnh trọng số, bật push hoặc thay thế matcher hiện tại.
 
 ## Kiểm tra bổ sung với nguồn thật đã lưu
 
