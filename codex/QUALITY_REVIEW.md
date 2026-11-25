@@ -1,5 +1,19 @@
 # Quality review after each iteration
 
+## RSS source lifecycle iteration — 2026-11-25
+
+Product contribution: reusable invalidation of stale source approvals before routing news through the relationship database. Implemented current RSS revision synchronization and a declared3600second poll freshness gate; no story-specific matching changes. Actual synthetic CLI: current reviewed revision passesR05/stopsR06; ingesting a changed item makes the old decision stopR05. Independent labels0,new real relationship facts0,financial magnitudeUNKNOWN. Tests demonstrate protocol behavior, not relevance accuracy.
+
+| Priority | Remaining limitation | Remedy and measurable gate |
+|---|---|---|
+| P0 | RSS freshness is not full-article verification; confirmed publisher withdrawal not integrated. | Revalidate captured body with versioned receipts; add sourced withdrawal/restoration transactions. Distinguish absence/404/network error from confirmed withdrawal; test restore cannot revive an old review. |
+| P0 | Two reads are not a distributed transaction or delivery-time consistency guarantee. | Integrate durable invalidation/outbox or recheck source version at feed use; test crash/retry and concurrent updates before any real delivery. |
+| P0 | Relationship/parameter coverage did not grow; extraction recall remains around27–28% on old exposed pilot. | Prioritize source-backed product/segment/input scope and denominators/periods for existing five companies. Evaluate fresh grouped news after freezing data/rules; no one-off phrase patches. |
+| P1 | Event occurrence/publication/effective times not explicit;3600seconds is an operational threshold only. | Add typed event clocks with evidence and old-news negatives; measure operational delay separately from economic horizon. |
+| P1 | Local IDs/reviewer policy are trusted declarations, not proven independent humans. | Preserve AI disclosure; use isolated review packets and adjudication for new cohorts, keeping25old disagreements pending until actually resolved. |
+
+Next direction: strengthen factual company→factor→product/segment→narrative coverage and explainable news cards, with conservative missing-data states. R07, calibrated weights and push remain held. Do not confuse accumulating validation code with improving investor usefulness. Validation details are recorded in CHECKPOINT.md.
+
 ## R05 review iteration — 2026-11-25
 
 Implemented a versioned local review protocol, not an accuracy improvement claim. Source capture -> sourced graph -> five scope facets -> two distinct authorized local votes -> R05 PASS is covered with synthetic fixtures. Wrong pins/identity/scope, self/duplicate/reject votes, source epochs, revocation, tamper, concurrent mutation and multi-path isolation are regression gates. Complete R06 still cannot approve R07. No new real independent labels or supported financial estimates.

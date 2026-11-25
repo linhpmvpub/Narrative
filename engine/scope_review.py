@@ -110,9 +110,17 @@ class Store:
             value = review.model_dump(mode="json")
         else:
             if (
-                set(value) != {"packet_sha256", "status", "observed_at"}
+                set(value)
+                not in (
+                    {"packet_sha256", "status", "observed_at"},
+                    {"packet_sha256", "status", "observed_at", "registry_sha256"},
+                )
                 or value["status"] not in {"CURRENT", "WITHDRAWN", "DISPUTED"}
                 or not re.fullmatch(r"[a-f0-9]{64}", value["packet_sha256"])
+                or (
+                    "registry_sha256" in value
+                    and not re.fullmatch(r"[a-f0-9]{64}", value["registry_sha256"])
+                )
             ):
                 raise ValueError("Explicit source state required")
             time = datetime.fromisoformat(value["observed_at"])
@@ -122,6 +130,13 @@ class Store:
             conn.execute("BEGIN IMMEDIATE")
             history = self.history(kind, identity, conn)
             previous = history[-1]["sha256"] if history else None
+            if (
+                kind == "source"
+                and history
+                and history[-1]["payload"].get("registry_sha256")
+                and "registry_sha256" not in value
+            ):
+                raise ValueError("Cannot remove ingestion binding from source history")
             if previous != expected_head:
                 raise ValueError("Stale ledger head; reread before appending")
             time_key = "recorded_at" if kind == "review" else "observed_at"
@@ -147,7 +162,7 @@ class Store:
         return digest(rows)
 
 
-def check(store, identity, policy, data, frame, selection, path, book, at):
+def check(store, identity, policy, data, frame, selection, path, book, at, *, registry_sha256=None):
     """A review approves exactly one path's literal scope, never its economic magnitude."""
     if at.tzinfo is None or at > datetime.now(UTC):
         raise ValueError("Nonfuture aware evaluation cutoff required")
@@ -175,6 +190,11 @@ def check(store, identity, policy, data, frame, selection, path, book, at):
     if not sources:
         raise ValueError("Current source state not registered")
     current = sources[-1]
+    if (
+        current["payload"].get("registry_sha256") is not None
+        and current["payload"]["registry_sha256"] != registry_sha256
+    ):
+        raise ValueError("Ingestion-bound review requires current registry verification")
     if (
         current["version"] != p.source_epoch
         or current["payload"]["status"] != "CURRENT"

@@ -166,6 +166,7 @@ def evaluate(
     scope_store=None,
     reviewer_policy=None,
     scope_reviews=None,
+    news_conn=None,
 ):
     from datetime import UTC, datetime
 
@@ -179,6 +180,14 @@ def evaluate(
     # Existing source hash, quote, chronology and directed graph gates remain authoritative.
     base = assess(data, frame, selection, article_root=article_root, at=at)
     from engine.scope_review import check
+
+    lifecycle = None
+    if news_conn is not None:
+        if scope_store is None:
+            raise ValueError("Ingestion lifecycle requires a scope store")
+        from engine.scope_sources import sync
+
+        lifecycle = sync(scope_store, news_conn, selection, at)
 
     bindings = scope_reviews or {}
     ledger_before = scope_store.fingerprint() if scope_store is not None else None
@@ -201,10 +210,28 @@ def evaluate(
                     path,
                     book,
                     at,
+                    registry_sha256=lifecycle["registry_sha256"] if lifecycle else None,
                 )
             except (ValueError, OSError) as exc:
                 result = {"status": "UNKNOWN", "reason": str(exc)}
         scope_results.append({"path_sha256": key, **result})
+    if lifecycle is not None:
+        from engine.scope_sources import inspect
+
+        try:
+            after = inspect(news_conn, selection, at)
+            current = after == lifecycle and after["fresh"] and after["status"] == "CURRENT"
+        except ValueError:
+            current = False
+        if not current:
+            scope_results = [
+                {
+                    "path_sha256": r["path_sha256"],
+                    "status": "UNKNOWN",
+                    "reason": "INGESTION_CHANGED_SUPERSEDED_DISABLED_OR_STALE",
+                }
+                for r in scope_results
+            ]
     if scope_store is not None and scope_store.fingerprint() != ledger_before:
         scope_results = [
             {
@@ -242,6 +269,7 @@ def evaluate(
         "data_requirements": requirements,
         "decision_trace": trace,
         "scope_reviews": scope_results,
+        "source_lifecycle": lifecycle or {"basis": "MANUAL_LOCAL_RESEARCH_ONLY"},
         "review_queue": first["failure"],
         "first_unmet_rule": first["id"],
         "explanation": {
@@ -342,6 +370,11 @@ def main():
     parser.add_argument("--scope-store", type=Path)
     parser.add_argument("--scope-reviews", type=Path)
     parser.add_argument("--reviewer-policy", type=Path)
+    parser.add_argument(
+        "--news-current",
+        action="store_true",
+        help="Require current ingestion revision and RSS poll freshness",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     book = load(args.playbook)
@@ -370,21 +403,33 @@ def main():
             supplied = [args.scope_store, args.scope_reviews, args.reviewer_policy]
             if any(supplied) and not all(supplied):
                 parser.error("--scope-store --scope-reviews --reviewer-policy required together")
-            result = evaluate(
-                data,
-                EventFrame.model_validate_json(args.input.read_bytes()),
-                json.loads(args.selection.read_text(encoding="utf-8")),
-                args.subtype,
-                book=book,
-                article_root=args.articles,
-                scope_store=Store(args.scope_store) if args.scope_store else None,
-                scope_reviews=json.loads(args.scope_reviews.read_text(encoding="utf-8"))
-                if args.scope_reviews
-                else None,
-                reviewer_policy=json.loads(args.reviewer_policy.read_text(encoding="utf-8"))
-                if args.reviewer_policy
-                else None,
-            )
+            from contextlib import ExitStack
+
+            from engine.db import database
+            from engine.settings import Settings
+
+            with ExitStack() as stack:
+                news_conn = None
+                if args.news_current:
+                    engine = database(Settings.from_env().database_url)
+                    stack.callback(engine.dispose)
+                    news_conn = stack.enter_context(engine.connect())
+                result = evaluate(
+                    data,
+                    EventFrame.model_validate_json(args.input.read_bytes()),
+                    json.loads(args.selection.read_text(encoding="utf-8")),
+                    args.subtype,
+                    book=book,
+                    article_root=args.articles,
+                    scope_store=Store(args.scope_store) if args.scope_store else None,
+                    scope_reviews=json.loads(args.scope_reviews.read_text(encoding="utf-8"))
+                    if args.scope_reviews
+                    else None,
+                    reviewer_policy=json.loads(args.reviewer_policy.read_text(encoding="utf-8"))
+                    if args.reviewer_policy
+                    else None,
+                    news_conn=news_conn,
+                )
     with args.output.open("x", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2, default=str)
     print(json.dumps({"delivery": "disabled", "output": str(args.output)}))

@@ -58,9 +58,10 @@ Trace lưu hash/version bản duyệt, source_epoch, reviewer kinds và policy h
 
 - Đây là local trusted-operator store, chưa có đăng nhập/chữ ký xác minh danh tính hay chứng minh
   các agent thực sự độc lập. Nhãn AI_INDEPENDENT là khai báo của operator, không phải chứng thực.
-- Trạng thái nguồn do operator ghi vào ledger. Chưa nối tự động với ingestion correction/withdrawal;
-  do đó không bảo đảm website nguồn chưa thay đổi kể từ lần kiểm tra. Trước feed phải nối lifecycle
-  và thêm giới hạn độ mới nguồn.
+- Trạng thái nguồn có thể đồng bộ revision RSS bằng [scope-source-lifecycle.md](scope-source-lifecycle.md)
+  và `--news-current`; bản manual vẫn chỉ dành cho nghiên cứu. Withdrawal có bằng chứng vẫn do
+  operator ghi nhận; poll RSS không bảo đảm toàn văn website chưa đổi. Trước feed cần revalidation
+  toàn văn, withdrawal ingestion và kiểm tra tại thời điểm sử dụng.
 - Hash chain không chống operator có quyền thay toàn bộ database bằng bản cũ. Cần receipt ngoài
   store nếu dùng nhiều người hoặc vận hành thật; chưa mở API quản trị mới.
 - Trích dẫn khớp từ không chứng minh hai phạm vi kinh tế tương đương; trách nhiệm nằm ở thẩm định.
