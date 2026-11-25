@@ -4,7 +4,7 @@
 
 User value: fill genuine knowledge gaps instead of blocking all relevance reasoning on unavailable company disclosures. Implemented separate one-step prior database with3clear general rules and16local qualitative priors (4input-cost,11dependency,1competition); existing sourced competitor field preserved. Source facts unchanged; no active feed/map rollout.
 
-Evidence:40focused tests passed4.47s, Ruff/mypy141passed, all16real local priors round-tripped and looked up. CI pending code push. Tests validate contracts, not truth of LLM knowledge. Numeric interval support tested synthetically;0actual numeric priors because no sufficiently clear representative recipe established.
+Evidence:40focused tests passed4.47s, Ruff/mypy141passed, all16real local priors round-tripped and looked up. CI45645398456 SUCCESS on9927ce4:1210SQLite tests136.82s +1210PostgreSQL tests232.23s (1existing warning each),8actual-model synthetic cases,dependency audit,lint/type/JS and migration/seed/replay/downgrade passed. Tests validate contracts, not truth of LLM knowledge. Numeric interval support tested synthetically;0actual numeric priors because no sufficiently clear representative recipe established.
 
 Limits: general principles can be inapplicable to specific products/contracts; commonness/clarity declarations are subjective. Qualitative priors do not estimate dependence strength or financial magnitude. Separate DB is not yet integrated into active news ranking. Atlas revision invalidates priors; live publisher withdrawals require current registry/snapshot refresh. Hashes prove integrity, not semantic truth.
 

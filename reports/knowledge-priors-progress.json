@@ -1,6 +1,6 @@
 {
   "date": "2026-11-25",
-  "status": "LOCAL_DATABASE_ENRICHMENT_CI_PENDING",
+  "status": "LOCAL_DATABASE_ENRICHMENT_CI_PASSED",
   "priors": 16,
   "by_rule": {
     "scoped-dependency": 11,
@@ -24,5 +24,19 @@
     "No numeric estimate justified for current dossiers",
     "Companion database not yet consumed by active feed/map",
     "Snapshot freshness is not live publisher verification"
-  ]
+  ],
+  "code_commit": "9927ce45cd55f80848f749b3a664460e7c87787a",
+  "ci": {
+    "run_id": 45645398456,
+    "conclusion": "success",
+    "sqlite_passed": 1210,
+    "sqlite_seconds": 136.82,
+    "postgresql_passed": 1210,
+    "postgresql_seconds": 232.23,
+    "model_synthetic_cases_passed": 8,
+    "dependency_audit": "success",
+    "migration_seed_replay_downgrade": "success"
+  },
+  "guidance_local_links_checked": 28,
+  "previous_baseline_artifacts_unchanged": true
 }
