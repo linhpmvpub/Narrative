@@ -1,5 +1,14 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-25
 
+## Hướng dẫn sản phẩm và vòng học hỏi cho agent — 2026-11-25 (latest)
+
+- User requested durable product goals/direction, principles and accumulated lessons, and a self-review/improvement workflow to read before future tasks. Audited existing atlas plan, acceptance, profile framework, QUALITY_REVIEW, TASKS, README and startup guide. Existing technical docs retained; legacy seed/Threadnote startup wording explicitly marked historical.
+- New repository AGENTS.md is the entry point. Required reading: codex/PRODUCT_DIRECTION.md, PRINCIPLES_AND_LESSONS.md, DEVELOPMENT_WORKFLOW.md, then latest CHECKPOINT/QUALITY_REVIEW and task-specific contracts. Parent workspace AGENTS.md points into this repository so sessions started one directory above also find it; parent pointer is local, outside repository Git tracking.
+- Direction consolidates user steering: standalone, sourced company/factor/relationship database first, broader narrative-related news rather than price prediction, grouped blind evaluation before calibrated weights; contextual relevance separate from verified/quantified impact. Existing v1 acceptance targets unchanged.
+- Lessons L001–L010 capture sourced observations and explicit design limits, with status/evidence/validation; no new market fact or accuracy claim. Workflow requires per-task limitation/remedy/next-priority review and learning updates when warranted; no invented lesson quota or background automation. New user decisions can supersede documents with a recorded reason.
+- Documentation-only change. Runtime, data, baseline, active feed, configuration and notification settings untouched. Validated8entry/guidance documents and46local Markdown links:0missing; required reading pointers and local parent entry verified; git diff whitespace checks passed. No full software tests rerun for documentation-only changes. Previous CI1125+1125 pertains to23ec82b, not a fresh run for this documentation task.
+- Next implementation priorities remain per-mechanism scope requirements and sourced company/product/segment/input coverage, plus full-article lifecycle evidence before live use. Keep detailed data local, real notificationsfalse,syntheticlivefalse,LLMnone. Follow the new workflow; do not restart P0–P5 or require Threadnote. No user decision pending.
+
 ## RSS revision bridge and freshness — 2026-11-25 (latest)
 
 - Latest user reaffirmed mandatory review of limitations/remedies/next direction, anchored to the product plan: sourced company/factor/relationship database first, then group-level algorithm evaluation; no article-specific keyword tuning or price prediction.

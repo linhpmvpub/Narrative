@@ -1,3 +1,5 @@
+> Tài liệu trạng thái lịch sử. Đọc [AGENTS](../AGENTS.md), [định hướng hiện hành](PRODUCT_DIRECTION.md) và [CHECKPOINT mới nhất](CHECKPOINT.md) trước khi chọn task. Các mốc “latest” bên dưới chỉ thuộc thời điểm ghi, không phải trạng thái hiện tại.
+
 # Current project status — standalone continuation
 
 ## Cross-source assessment + assigned annotation UI — 2026-11-21 (latest)

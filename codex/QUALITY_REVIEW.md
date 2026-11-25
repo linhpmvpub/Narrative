@@ -1,5 +1,25 @@
 # Quality review after each iteration
 
+## Agent guidance and learning workflow — 2026-11-25
+
+Product contribution: preserve database-first product direction across sessions and avoid repeating
+legacy seed/Threadnote tasks. Existing plans and acceptance retained; added AGENTS entry point,
+PRODUCT_DIRECTION, PRINCIPLES_AND_LESSONS and DEVELOPMENT_WORKFLOW. README/start guide/TASKS now
+route agents to current guidance and distinguish historical contracts from current status.
+
+Observed limitation: product intent and lessons were scattered; entry-point wording contradicted
+the implemented standalone project. Remedy: one maintained product charter, one lesson register,
+one reusable review workflow, links to existing technical contracts instead of copying them.
+Validation:8entry/guidance documents,46local links with0missing, reading order, legacy/current consistency and diff whitespace;
+no new runtime tests or market benchmark warranted. Lessons L001–L010 consolidate prior evidence;
+L009 records this documentation failure mode. No new labels/data/accuracy claim.
+
+Remaining limits: guidance relies on agents actually reading repository instructions; no scheduler
+or technical enforcement is implied. Parent workspace pointer is local, while repository AGENTS is
+versioned for future clones. Docs can drift: review the charter/entry points when a user decision changes,
+and mark lessons superseded when disproved. Next task must still improve real product coverage and
+mechanism-specific scope, not expand process documentation for its own sake.
+
 ## RSS source lifecycle iteration — 2026-11-25
 
 Product contribution: reusable invalidation of stale source approvals before routing news through the relationship database. Implemented current RSS revision synchronization and a declared3600second poll freshness gate; no story-specific matching changes. Actual synthetic CLI: current reviewed revision passesR05/stopsR06; ingesting a changed item makes the old decision stopR05. Independent labels0,new real relationship facts0,financial magnitudeUNKNOWN. Tests demonstrate protocol behavior, not relevance accuracy.

@@ -1,6 +1,11 @@
 # TASKS — implementation execution checklist
 
-Each task must end with an automated test or inspectable artifact. `README.md` governs any ambiguity. `P#` labels are **dependencies**, not independent checklists that may be bypassed.
+Each task must end with an appropriate check or inspectable artifact. Start with [AGENTS](../AGENTS.md),
+[current product direction](PRODUCT_DIRECTION.md) and [development workflow](DEVELOPMENT_WORKFLOW.md).
+Latest user instructions take precedence; original README seed requirements and P0–P5 entries are
+historical contracts, not proof of current implementation or product acceptance. Read the latest
+[checkpoint](CHECKPOINT.md) and [quality review](QUALITY_REVIEW.md) before choosing the next task.
+`P#` labels remain dependencies for their original scope, not independent checklists to bypass.
 
 ## Customer-profile and relevance follow-up — 2026-11-24
 

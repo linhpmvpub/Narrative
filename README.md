@@ -1,4 +1,24 @@
-# Relationship & Impact Engine v0 — Codex implementation handoff
+# Narrative — Relationship & Impact Engine
+
+## Điểm vào hiện hành — 2026-11-25
+
+Đây là repository sản phẩm standalone đã có implementation, đang phát triển database/bản đồ
+quan hệ có nguồn để tìm và giải thích tin liên quan đến công ty/narrative. Không phụ thuộc
+Threadnote; không dự báo giá. Chưa tuyên bố hoàn thành sản phẩm hoặc vượt baseline LLM.
+
+Agent bắt đầu mỗi task tại [AGENTS.md](AGENTS.md). Bộ hướng dẫn dùng chung:
+
+- [Mục tiêu và định hướng sản phẩm](codex/PRODUCT_DIRECTION.md).
+- [Nguyên tắc và bài học tích lũy](codex/PRINCIPLES_AND_LESSONS.md).
+- [Quy trình phát triển, tự đánh giá và cải thiện](codex/DEVELOPMENT_WORKFLOW.md).
+- [Checkpoint hiện hành](codex/CHECKPOINT.md) và [rà soát chất lượng theo lượt](codex/QUALITY_REVIEW.md).
+- [Kế hoạch database/bản đồ](docs/impact-atlas-plan.md) và [tiêu chí nghiệm thu v1](docs/product-v1-acceptance.md).
+
+Giữ dữ liệu chi tiết cục bộ, thông báo thật tắt theo chỉ đạo hiện hành. Phần đặc tả gốc dưới đây
+được giữ để tra cứu; mô tả seed chưa triển khai và tích hợp Threadnote không phải trạng thái/
+mục tiêu hiện tại. Giới hạn graph canonical và atlas research là các contract riêng.
+
+## Đặc tả bàn giao gốc — lịch sử v0
 
 **Version:** 0.1.0 | **Prepared:** 2026-11-19 | **Language:** Vietnamese (product) / English (machine contracts)  
 **Purpose:** A reproducible, explainable engine that tracks economic relationships and narrative hypotheses for 5 US equities, judges whether new evidence matters, and supplies Threadnote-compatible feeds and story timelines.
