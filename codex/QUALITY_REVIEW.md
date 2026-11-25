@@ -4,7 +4,7 @@
 
 Goal: remove a legal-entity prerequisite that excludes market-wide commodity price news while preserving sourced company exposure. Added typed input bindings, explicit price arithmetic/reported-percent contract and configurable >5%/strong >=10% gates. Separate commodity price significance from financial magnitude. No active feed/map change.
 
-Evidence: 109 focused regressions passed120.13s; Ruff/mypy140 passed; synthetic CLI produces1 +12% candidate with0legal refs. Full CI pending code push. Source quotes and reviewer annotations are synthetic, not independent or human labels; no accuracy gain claimed. Frozen successor dd4200029609135e2091695fb5f4128b429f9edd1abba1bf08b559b72c68aeb7, real atlas unchanged.
+Evidence: 109 focused regressions passed120.13s; Ruff/mypy140 passed; synthetic CLI produces1 +12% candidate with0legal refs. CI45642275971 SUCCESS for code9f3f716:1186SQLite tests137.38s +1186PostgreSQL tests240.32s (1existing warning each),8actual-model synthetic cases,dependency audit,lint/type/JS and migration/seed/replay/downgrade passed. Source quotes and reviewer annotations are synthetic, not independent or human labels; no accuracy gain claimed. Frozen successor dd4200029609135e2091695fb5f4128b429f9edd1abba1bf08b559b72c68aeb7, real atlas unchanged.
 
 Observed limitations: sparse typed real commodity inputs; exact aliases only; direct narrative watches; no per-company benchmark grade/geography or purchasing terms; reviewer-declared source semantics. Thresholds/freshness are engineering defaults. Conservative phrase checks can suppress valid news; no measured false-negative rate. No cross-run dedup or active feed integration. A financial effect remains conditional even for a large commodity move.
 

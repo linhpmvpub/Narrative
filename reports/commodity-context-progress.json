@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-25",
+  "code_commit": "9f3f7169e25093040e2bc05d0c25cc8a16180000",
+  "status": "LOCAL_WORKBENCH_CI_PASSED",
+  "policy": {
+    "schema": "commodity-alert-policy-v1",
+    "version": 1,
+    "minimum_absolute_change_pct": "5",
+    "strong_absolute_change_pct": "10",
+    "maximum_period_end_age_days": 7,
+    "comparison": "STRICTLY_GREATER_MINIMUM_STRONG_AT_OR_ABOVE",
+    "period_policy": "EXPLICIT_SOURCE_PERIOD_NO_DEFAULT_WINDOW",
+    "basis": "USER_REQUESTED_EXPERIMENTAL_PRICE_MOVE_NOT_COMPANY_IMPACT",
+    "delivery": "disabled"
+  },
+  "policy_sha256": "30c90886f7b3f682b53b8ed756459d589b8034951427cc14f05d3a550082712f",
+  "focused_tests": {
+    "passed": 109,
+    "seconds": 120.13,
+    "warnings": 1
+  },
+  "synthetic_cli": {
+    "candidate_alerts": 1,
+    "price_change_pct": "12",
+    "legal_entity_references": 0,
+    "independent_labels": false
+  },
+  "existing_real_atlas_inventory": {
+    "input_nodes": 4,
+    "eligible_input_usage_edges": 4,
+    "new_real_commodity_facts_added": 0
+  },
+  "baseline_sha256": "dd4200029609135e2091695fb5f4128b429f9edd1abba1bf08b559b72c68aeb7",
+  "accuracy_improvement_claimed": false,
+  "delivery": "disabled",
+  "active_feed_changed": false,
+  "source_data_uploaded": false,
+  "limitations": [
+    "Reviewer-declared source semantics",
+    "Sparse real commodity input bindings",
+    "Benchmark grade/geography applicability unverified",
+    "Direct narrative watches only",
+    "No cross-run event dedup or active feed integration"
+  ],
+  "ci": {
+    "run_id": 45642275971,
+    "head_sha": "9f3f7169e25093040e2bc05d0c25cc8a16180000",
+    "conclusion": "success",
+    "sqlite_passed": 1186,
+    "sqlite_seconds": 137.38,
+    "postgresql_passed": 1186,
+    "postgresql_seconds": 240.32,
+    "model_synthetic_cases_passed": 8,
+    "dependency_audit": "success",
+    "migration_seed_replay_downgrade": "success"
+  },
+  "guidance_local_links_checked": 27
+}
