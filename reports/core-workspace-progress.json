@@ -9,5 +9,13 @@
   "delivery": "disabled",
   "public_deployment": false,
   "baseline_sha256": "f2adc3960cc1fcbbf97e09ff85601dc4d45ef7721bb1de3318a9d0d9aead5d76",
-  "market_accuracy_evaluated": false
+  "market_accuracy_evaluated": false,
+  "focused_tests_passed": 57,
+  "browser_desktop_mobile": "PASSED_LOCAL_INTERCEPTED_HTTP",
+  "ci_run": 45821421919,
+  "ci_code_commit": "81bba226baaa9c931311a5d1775d86eab34dd846",
+  "ci_result": "SUCCESS",
+  "sqlite_tests_passed": 1244,
+  "postgresql_tests_passed": 1244,
+  "actual_model_synthetic_cases": 8
 }
