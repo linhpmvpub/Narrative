@@ -2809,7 +2809,23 @@
     "focused_final": 27,
     "ruff": "PASS",
     "mypy_files": 153,
-    "ci": "PENDING",
+    "ci": {
+      "run_id": 45851652543,
+      "commit": "aec889a9d116dfa80d76824875a91e3670e1ee33",
+      "conclusion": "success",
+      "sqlite": {
+        "passed": 1287,
+        "seconds": 98.97
+      },
+      "postgresql": {
+        "passed": 1287,
+        "seconds": 191.2
+      },
+      "existing_warnings_per_suite": 1,
+      "other_jobs": "Dependency audit and actual-model extraction smoke passed",
+      "migration_lint_type_js": "PASS"
+    },
     "browser": "Desktop/mobile auth/filter/logout passed, no page errors"
-  }
+  },
+  "runtime_baseline_sha256": "6b5301567a68426a1a813de3b38b0f1cf37deeaeb0b540ff1c6d5596fdf596bc"
 }
