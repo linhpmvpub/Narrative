@@ -17,5 +17,12 @@
   "price_alerts": 0,
   "delivery": "disabled",
   "accuracy_evaluated": false,
-  "baseline_sha256": "b3c657523702f23b3efab83d8372506ca16a967c329876394b9a36056c1077ac"
+  "baseline_sha256": "b3c657523702f23b3efab83d8372506ca16a967c329876394b9a36056c1077ac",
+  "ci_run": 45824592454,
+  "ci_commit": "f64122c84c775d759d6ab23337d748fbd55e59b8",
+  "ci_result": "SUCCESS",
+  "sqlite_tests": 1251,
+  "postgres_tests": 1251,
+  "model_synthetic_cases": 8,
+  "steps_1_to_3_fully_complete": false
 }
