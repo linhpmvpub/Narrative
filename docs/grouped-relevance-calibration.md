@@ -32,7 +32,11 @@ as-of historical replay or a measurement of delivered-feed precision.
 
 Seven fixed lexical multi-label topic strata plus other are assigned from source text,
 not predictions. They can overlap; summing their counts double-counts stories. They are
-coverage/error-analysis strata, not verified causal mechanisms. Changed company evidence
+coverage/error-analysis strata, not verified causal mechanisms. Calibration inspection found
+financial-services technology-adoption language can enter the financing stratum; this is
+a topic-classification limitation, not evidence of a funding event. Preserve the declared
+strata for this report; future mechanism-specific calibration needs reviewed event types.
+Changed company evidence
 can also change interpretation despite exact narrative equality; scope equality alone
 does not make old labels a current gold standard.
 
@@ -46,7 +50,8 @@ does not make old labels a current gold standard.
 258/1,716pairs(15.0%) are unresolved and excluded from precision/recall, never treated as
 negative. Selected unresolved counts are11for routing and6for priority. There are58positive
 RSS clusters; pair counts are correlated. The priority rule suppresses35resolved relevant
-pairs already found by the database routing path. Absence of directional change language
+pairs already found by the database routing path. They may still be visible in the background
+section; this is not evidence that all35were dropped from the complete feed. Absence of directional change language
 is therefore not a reliable proxy for absence of informational relevance. Some references
 include broad/educational context: this does not imply all should become important alerts.
 
@@ -87,6 +92,9 @@ The sourced-path feature is constant on eligible cards and sponsorship is a hard
 multiple coefficients/thresholds produce identical selections. The retained coefficients
 are not identifiable estimates of relationship strength. Numeric impact/lag labels are
 absent. No magnitude, probability or horizon is filled from these relevance scores.
+The commodity >5%/>=10%gates are unchanged engineering thresholds: the input-price topic
+slice is not a benchmark of normalized commodity alerts. Two real price observations do
+not support calibrating those thresholds or the7/30day windows.
 
 ## Reproduce locally
 
@@ -123,3 +131,8 @@ Missing source artifacts fail verification; do not turn off that check to obtain
 4. Calibrate relation strength/lag only when their own source-supported reference dimensions
    exist. Keep unknowns explicit. No cloud/service changes or real notifications follow
    automatically from any benchmark result.
+
+Validation:41focused tests passed; Ruff/mypy151passed. GitHub Actions45833469991 on20579ab
+passed1,264SQLite tests and1,264PostgreSQL tests, actual-model smoke, dependency audit,
+JS syntax and migration/seed/replay/downgrade. Each database run has one existing Starlette
+warning. Detailed artifacts remain ignored and delivery stays disabled.

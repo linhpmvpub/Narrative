@@ -2607,7 +2607,9 @@
     "Multi-label topic strata overlap and are not verified causal mechanisms",
     "Full-body predictions remain in historical reports, not RSS fitting",
     "Relevance labels cannot calibrate financial magnitude, lag or personal push utility",
-    "Prior reviewer declarations are provenance, not independent human validation"
+    "Prior reviewer declarations are provenance, not independent human validation",
+    "Calibration inspection: financial-services adoption can enter the lexical financing stratum; these are topic diagnostics, not verified mechanism labels.",
+    "Commodity >5%/>=10% thresholds and 7/30day windows are not calibrated by these relevance labels; input-price topic metrics are not commodity-alert accuracy."
   ],
   "historical": {
     "customer-scope-blind-2026-11-24": {
@@ -2872,8 +2874,27 @@
       "seconds": 90.7,
       "warnings": 1
     },
-    "ci": "pending",
+    "ci": {
+      "run_id": 45833469991,
+      "code_commit": "20579abf7d02be83cf35d350baf5fadc9d96d18f",
+      "conclusion": "success",
+      "sqlite": {
+        "passed": 1264,
+        "seconds": 192.24,
+        "warnings": 1
+      },
+      "postgresql": {
+        "passed": 1264,
+        "seconds": 295.79,
+        "warnings": 1
+      },
+      "extraction_model_smoke": "passed",
+      "dependency_audit": "passed",
+      "migration_seed_replay_downgrade": "passed",
+      "javascript_syntax": "passed"
+    },
     "ruff": "passed",
     "mypy_files": 151
-  }
+  },
+  "runtime_baseline_sha256": "c1a958cdb8e12c6ed8165ba889e90bcbd535a00a225ce5c91bc80c756d2f5e07"
 }
