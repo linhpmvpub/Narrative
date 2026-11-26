@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-26",
+  "scope": "BOUNDED_LIVE_RSS_CORE_PIPELINE",
+  "profiles": 6,
+  "tickers": 5,
+  "input_paths": 7,
+  "rss_sources_polled": 8,
+  "context_cards": 35,
+  "cards_by_ticker": {
+    "DELL": 7,
+    "NVDA": 25,
+    "AMD": 3
+  },
+  "examined": 500,
+  "truncated": true,
+  "price_observations": 1,
+  "price_alerts": 0,
+  "delivery": "disabled",
+  "accuracy_evaluated": false,
+  "baseline_sha256": "b3c657523702f23b3efab83d8372506ca16a967c329876394b9a36056c1077ac"
+}

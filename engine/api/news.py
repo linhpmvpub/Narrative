@@ -230,7 +230,7 @@ def core_workspace(include_synthetic: bool = False):
     manifest = os.environ.get("CORE_WORKSPACE_MANIFEST")
     if not manifest:
         raise HTTPException(503, "Local core workspace is not configured")
-    engine = database()
+    engine = database(os.getenv("CORE_WORKSPACE_DATABASE_URL") or None)
     try:
         with engine.connect() as conn:
             return build(manifest, include_synthetic=include_synthetic, news_conn=conn)

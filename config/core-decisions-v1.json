@@ -1,0 +1,127 @@
+{
+  "schema": "CORE_DECISION_V1",
+  "version": 1,
+  "delivery": "disabled",
+  "max_source_age_seconds": 3600,
+  "max_hops": 2,
+  "ranking": "RECENCY_ONLY_UNCALIBRATED",
+  "relations": {
+    "AFFECTS_COST": "input_price",
+    "AFFECTS_SUPPLY": "supply_disruption",
+    "AFFECTS_DEMAND": "demand",
+    "AFFECTS_ACCESS": "policy",
+    "AFFECTS_FINANCING": "financing",
+    "AFFECTS_CASH": "financing",
+    "AFFECTS_REVENUE": "revenue",
+    "AFFECTS_MARGIN": "profitability",
+    "COMPETES_WITH": "competition"
+  },
+  "groups": {
+    "profitability": {
+      "conditions": [
+        "Same product/market and reporting period required"
+      ],
+      "required_parameters": [
+        "scoped_exposure",
+        "comparison_period"
+      ],
+      "direction": "UNKNOWN",
+      "magnitude": "UNKNOWN",
+      "horizon": "UNKNOWN"
+    },
+    "input_price": {
+      "conditions": [
+        "Giá mới áp dụng với hợp đồng mua",
+        "Phân biệt chi phí và biên lợi nhuận"
+      ],
+      "required_parameters": [
+        "contract_reset_days",
+        "pass_through",
+        "hedging"
+      ],
+      "direction": "UNKNOWN",
+      "magnitude": "UNKNOWN",
+      "horizon": "UNKNOWN"
+    },
+    "financing": {
+      "conditions": [
+        "Đúng đơn vị nhận vốn và mục đích sử dụng",
+        "Cam kết chưa đồng nghĩa giải ngân hoặc công suất"
+      ],
+      "required_parameters": [
+        "funding_conditions",
+        "ramp_days",
+        "permit_status"
+      ],
+      "direction": "UNKNOWN",
+      "magnitude": "UNKNOWN",
+      "horizon": "UNKNOWN"
+    },
+    "competition": {
+      "conditions": [
+        "Same product/market and reporting period required"
+      ],
+      "required_parameters": [
+        "scoped_exposure",
+        "comparison_period"
+      ],
+      "direction": "UNKNOWN",
+      "magnitude": "UNKNOWN",
+      "horizon": "UNKNOWN"
+    },
+    "revenue": {
+      "conditions": [
+        "Same product/market and reporting period required"
+      ],
+      "required_parameters": [
+        "scoped_exposure",
+        "comparison_period"
+      ],
+      "direction": "UNKNOWN",
+      "magnitude": "UNKNOWN",
+      "horizon": "UNKNOWN"
+    },
+    "supply_disruption": {
+      "conditions": [
+        "Đúng đầu vào và phạm vi cơ sở",
+        "Tồn kho/nguồn thay thế không bù hết"
+      ],
+      "required_parameters": [
+        "inventory_days",
+        "substitutability",
+        "supplier_concentration"
+      ],
+      "direction": "UNKNOWN",
+      "magnitude": "UNKNOWN",
+      "horizon": "UNKNOWN"
+    },
+    "policy": {
+      "conditions": [
+        "Đúng khu vực, sản phẩm và pháp nhân",
+        "Kiểm tra hiệu lực, ngoại lệ và thời hạn"
+      ],
+      "required_parameters": [
+        "exemptions",
+        "geographic_mix",
+        "substitutability"
+      ],
+      "direction": "UNKNOWN",
+      "magnitude": "UNKNOWN",
+      "horizon": "UNKNOWN"
+    },
+    "demand": {
+      "conditions": [
+        "Đúng thị trường/sản phẩm",
+        "Nhu cầu chưa đồng nghĩa đơn hàng của công ty"
+      ],
+      "required_parameters": [
+        "market_share",
+        "customer_concentration",
+        "competition"
+      ],
+      "direction": "UNKNOWN",
+      "magnitude": "UNKNOWN",
+      "horizon": "UNKNOWN"
+    }
+  }
+}

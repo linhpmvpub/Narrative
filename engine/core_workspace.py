@@ -27,6 +27,7 @@ class Event(BaseModel):
 
 class Workspace(BaseModel):
     model_config = ConfigDict(extra="forbid")
+    profiles: str | None = None
     atlas: str
     registry: str
     events: list[Event] = Field(default_factory=list, max_length=100)
@@ -101,6 +102,13 @@ def build(manifest, *, include_synthetic=False, news_conn=None):
     registry = read(path(config.registry), data)
     core = project(data, registry)
     paths = [row for c in registry.commodities for row in route(registry, c.id)]
+    context = {"items": [], "delivery": "disabled"}
+    if config.profiles is not None:
+        if news_conn is None:
+            raise ValueError("Current news connection required")
+        from engine.core_decisions import feed
+
+        context = feed(news_conn, data, path(config.profiles))
     cards, held = [], []
     for event in config.events:
         if event.mode == "SYNTHETIC" and not include_synthetic:
@@ -132,6 +140,7 @@ def build(manifest, *, include_synthetic=False, news_conn=None):
         raise ValueError("Workspace changed during refresh")
     return {
         "core": core,
+        "context": context,
         "paths": paths,
         "commodities": [c.model_dump(mode="json") for c in registry.commodities],
         "sources": [{"id": s.id, "url": str(s.url), "status": s.status} for s in registry.sources],

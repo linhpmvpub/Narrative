@@ -200,12 +200,12 @@ def verified_row(row, at, capture_cache):
     return pub, received, proof
 
 
-def candidate_feed(conn, as_of=None, limit=500):
+def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None):
     at = as_of or datetime.now(UTC)
     if at.tzinfo is None or not 1 <= limit <= 500:
         raise ValueError("Aware cutoff and bounded limit required")
     at = min(at, datetime.now(UTC))
-    profiles = available_bundles(at)
+    profiles = available_bundles(at, root=profile_root)
     result = {"items": [], "enabled": profiles["enabled"], "as_of": at.isoformat(),
               "delivery": "disabled", "graph_modified": False, "examined": 0,
               "withheld": 0, "profiles_withheld": profiles.get("withheld", 0),

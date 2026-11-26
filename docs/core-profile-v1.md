@@ -107,3 +107,35 @@ company purchase price, exposure weight, financial magnitude or time-horizon est
 Next implement bounded sourced price observations with unit/instrument/period/revision
 identity, then connect their reviewed observations to this manifest. Comprehensive
 algorithm/database evaluation remains later; no separate LLM-prior evaluation now.
+
+## Real RSS bridge and local runner (2026-11-26)
+
+A core manifest can add `profiles`: a relative local directory containing current
+company bundles. The RSS bridge uses only profiles whose model digest matches the
+atlas. `CORE_WORKSPACE_DATABASE_URL` selects the news database independently of API
+authentication. Defaults remain opt-in; no server is reconfigured automatically.
+
+`engine.core_pipeline --manifest <local.json> --database sqlite:///<local.db> --output
+<new-local-directory> --poll --price-board` polls configured RSS, projects current
+source-backed matches, audits seven core groups and optionally captures a public DDR5
+spot board. Set DEV_INFORMATIONAL_FEED=true only in that local process; keep delivery
+flags false and LLM_MODE=none. Use the module with `python -m engine.core_pipeline`.
+
+CORE_DECISION_V1 assigns conditional mechanism context from typed path relations,
+not headline sentiment. Group by canonical article URL/profile; retain narratives and
+source paths, stable ID and separate revision digest. No semantic cross-article dedup.
+Raw capture required; source last success must be within1hour. Truncated paths and
+paths beyond2hops are withheld. Feed scan capped500rows/100upstream cards and visibly
+marked when truncated. Recency ranking is not economic materiality. No RSS topic card
+becomes a price alert without the existing measured-change gates.
+
+Price-board records retain exact chip instrument, SPOT basis, source timestamp,
+session average, quote and capture hash. Same capture is idempotent; changed captures
+at the same observation timestamp remain separate revisions. No automatic current-head
+selection or inferred units, currency, comparison period or company purchase price.
+Those missing fields block numerical alerts; the price series is not yet complete.
+
+Current result is an end-to-end real RSS context flow, not completion of every item
+in steps1–3. Financial exposure/counterparty gaps, normalized price series, calibrated
+priority and measured matching quality remain open. Raw records and detailed audits
+are ignored local artifacts; only aggregate progress is committed.
