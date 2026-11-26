@@ -1,5 +1,7 @@
 # Product v1: scope and measurable acceptance
 
+Current stage2026-11-26: user authorized comprehensive grouped calibration; see [grouped evaluation](grouped-relevance-calibration.md). The earlier implementation-first deferral below is historical; separate prior evaluation stays deferred. Acceptance targets are unchanged.
+
 Implementation sequencing update2026-11-25: [core profile v1](core-profile-v1.md) fixes7groups/10relations for initial expansion. Complete the bounded database and algorithm before comprehensive evaluation; do not require a separate LLM-prior evaluation now. Release-quality targets below remain future acceptance targets, not a gate preventing current authorized implementation or a claim of measured readiness.
 
 The first product covers MU, NVDA, AMD, DELL and SNDK. It surfaces source-linked developments that plausibly matter to selected company narratives, including supply chains, input costs, demand, finance, policy and infrastructure. It does not predict stock prices or equate relevance with verified impact. SNDK and WDC remain distinct identities. The canonical seed's ten templates are unchanged; private company dossiers can have additional explicit scopes.

@@ -1,5 +1,15 @@
 # TASKS — implementation execution checklist
 
+## Grouped calibration — user request2026-11-26
+
+- [x] Audit19prior two-agent AI cohorts, pin current profiles/predictions and scope exclusions.
+- [x] Replay compatible targets; group duplicate/event aliases transitively; separate RSS/archive/full-body tracks.
+- [x] Measure routing vs priority errors by7topics and5issuers; bounded offline weight/threshold search on calibration only.
+- [x] Preserve failed acceptance and unidentifiable weights; retain production policy.
+- [ ] Fresh independently labeled cohort enriched for AMD/MU/SNDK positives and policy/supply/finance; no reuse of exposed clusters.
+- [ ] Separate relevance from editorial importance labels; evaluate broader sourced-context candidate before changing main-card visibility.
+- [ ] Source-grounded grouped recall improvements, then lock a new candidate and evaluate fresh holdout; impact strength/lag remain uncalibrated.
+
 ## Current v1 priority — user decision2026-11-25
 
 - [x] Freeze compact7-group/10-relation core and shared sourced input/market schema.

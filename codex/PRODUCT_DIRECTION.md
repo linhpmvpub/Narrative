@@ -1,5 +1,14 @@
 # Mục tiêu và định hướng sản phẩm
 
+## Đánh giá toàn diện theo nhóm tin — quyết định 2026-11-26
+
+Người dùng yêu cầu bắt đầu giai đoạn đánh giá/hiệu chỉnh sau khi luồng bước1–3 đã triển khai.
+Thay thế trạng thái hoãn benchmark tổng thể bên dưới; vẫn không mở đánh giá riêng tri thức LLM.
+Đo ghép hồ sơ và chọn thẻ riêng; phân biệt relevance, độ đáng ưu tiên và tác động tài chính.
+Không biến tập phát triển cũ thành kiểm tra mù mới, không đổi trọng số khi dữ liệu không nhận diện
+được đóng góp của chúng. Giữ tiêu chí nghiệm thu, dữ liệu cục bộ và thông báo thật tắt.
+Xem [quy trình/đợt đo hiện tại](../docs/grouped-relevance-calibration.md).
+
 ## Phạm vi v1 gọn và trình tự triển khai — quyết định 2026-11-25
 
 Chốt sớm cấu trúc dùng lại cho nhiều công ty: 7 nhóm cốt lõi và 10 loại quan hệ theo

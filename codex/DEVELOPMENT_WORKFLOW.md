@@ -1,5 +1,12 @@
 # Quy trình phát triển, tự đánh giá và cải thiện
 
+## Giai đoạn đang thực hiện — 2026-11-26
+
+Người dùng đã kích hoạt đánh giá tổng thể theo nhóm tin và hiệu chỉnh. Trình tự hoãn benchmark
+ở mục2 bên dưới đã hoàn tất vai trò; đánh giá riêng priors vẫn hoãn. Freeze kế hoạch, mục tiêu,
+phiên bản và predictions trước labels; tách hiệu chỉnh/kiểm tra theo cụm. Các bộ cũ đã lộ nhãn
+chỉ là development regression dù được chia lại. Giữ riêng RSS/full-body/hồ sơ lưu trữ.
+
 Cập nhật: 2026-11-25. Áp dụng theo [AGENTS](../AGENTS.md). Dùng quy trình vừa đủ cho task;
 không biến việc nhỏ thành một đợt đánh giá thị trường hay thêm thủ tục phê duyệt không cần thiết.
 

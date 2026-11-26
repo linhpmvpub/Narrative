@@ -1,5 +1,12 @@
 # Hướng dẫn cho agent làm việc trong repository
 
+## Giai đoạn hiện hành — 2026-11-26
+
+Người dùng đã yêu cầu đánh giá toàn diện theo nhóm tin và hiệu chỉnh thuật toán/trọng số.
+Chuyển sang vòng đo–chẩn đoán–hiệu chỉnh sau bước1–3; chỉ hoãn đánh giá riêng priors.
+Tập đã dùng phát triển là regression, không trở thành holdout mới nhờ chia lại.
+Xem [đánh giá nhóm](docs/grouped-relevance-calibration.md).
+
 Áp dụng cho toàn bộ repository. Đọc trước khi đề xuất hoặc thực hiện task; đây là dự án
 Narrative đang phát triển, không phải bộ seed chưa triển khai. Không cần repository Threadnote.
 Chỉ dẫn hiện hành của người dùng và chỉ dẫn cấp hệ thống cao hơn luôn được ưu tiên.

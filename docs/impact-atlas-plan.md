@@ -1,5 +1,7 @@
 # Database-first relationship and impact development
 
+Current stage2026-11-26: user authorized comprehensive grouped calibration; see [grouped evaluation](grouped-relevance-calibration.md). The earlier implementation-first deferral below is historical; separate prior evaluation stays deferred. Acceptance targets are unchanged.
+
 Current v1 scope (user decision2026-11-25): use [seven-group core](core-profile-v1.md) and shared input/market registry; the richer legacy catalog below is optional expansion. Finish database/algorithm first; separate LLM-prior evaluation is deferred, comprehensive evaluation follows. Tests and source checks remain required.
 
 ## A. Data foundation — implemented

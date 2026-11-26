@@ -1,5 +1,7 @@
 # Core company profile v1
 
+Current stage2026-11-26: user authorized comprehensive grouped calibration; see [grouped evaluation](grouped-relevance-calibration.md). The earlier implementation-first deferral below is historical; separate prior evaluation stays deferred. Acceptance targets are unchanged.
+
 Decision frozen for the first implementation on 2026-11-25. Keep the database small and reusable; finish the database and algorithm before comprehensive performance evaluation. Separate LLM-prior usefulness/correctness evaluation is deferred by the user. Source checks, software tests and provenance remain required. No public rollout or live notifications.
 
 ## Seven core groups

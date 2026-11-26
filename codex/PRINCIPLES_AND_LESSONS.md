@@ -1,5 +1,12 @@
 # Nguyên tắc và bài học phát triển
 
+## L017 — Nhãn liên quan không hiệu chỉnh được độ mạnh hoặc mức ưu tiên
+
+- Bằng chứng2026-11-26: trên1716cặp RSS đã lộ nhãn, routing tìm54/96cặp liên quan, priority chỉ giữ19/96. Không có động từ chỉ hướng thay đổi không đồng nghĩa tin không hữu ích; quy tắc này bỏ sót cả bối cảnh có đường quan hệ.
+- Tuy nhiên, đưa toàn bộ match lên thẻ chính chưa được chứng minh: reference đánh giá relevance, không đánh giá độ mới, mức quan trọng hay nhu cầu push. Phương án ngưỡng20đạt recall69.7%trên development validation, chưa đạt mục tiêu và không phải holdout mù mới.
+- Hệ số không nhận diện được khi feature không biến thiên hoặc quyết định do hard gate; không gọi bộ40/30/20/20giữ nguyên là trọng số tác động đã học. Độ mạnh tài chính/độ trễ cần nhãn và dữ liệu riêng.
+- Kiểm chứng: evaluator khóa split/predictions trước labels, tests chặn trộn validation, đếm cụm thay vì tăng support bằng nhiều narrative, giữ unresolved và kiểm hash. Thực hiện tiếp: tập mới cân bằng coverage, nhãn relevance/importance riêng, đánh giá candidate trước đổi chính sách feed.
+
 ## L015 — Chốt lõi dùng lại trước khi mở rộng coverage
 
 - Quyết định người dùng 2026-11-25: khung v1 gọn, hoàn thiện database/thuật toán trước; hoãn đánh giá riêng priors và thực hiện đánh giá tổng thể ở giai đoạn sau. L014 giữ bài học về ranh giới bằng chứng nhưng đề xuất đánh giá riêng không còn là task ngay.
