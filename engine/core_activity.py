@@ -21,11 +21,19 @@ def assess(item, links, policy):
                             "start": sentence.start(),
                             "end": sentence.end(),
                             "text": sentence.group(),
+                            **({"activity_assertion": spans[0]["activity_assertion"]}
+                               if spans[0].get("activity_assertion") else {}),
                         }
                     )
     signals = []
     for window in windows:
         text = window["text"].lower()
+        assertion = window.get("activity_assertion")
+        if assertion:
+            signals.append({**window, "driver_direction": "UNKNOWN",
+                            "phase": assertion["phase"], "source_duration": None,
+                            "event_horizon": "UNKNOWN", "horizon_basis": "NOT_ESTIMATED"})
+            continue
         if re.search(r"\b(no|not|never|without|unchanged|denied)\b", text):
             continue
         directions = [

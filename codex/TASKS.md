@@ -5,7 +5,8 @@
 - [x] Add AMD/Sandisk source collection; preserve Micron403 and issuer-quota shortfalls.
 - [x] Freeze and independently label24RSS/216pairs plus3complete-body/30pairs; separate relevance/priority/event groups.
 - [x] Evaluate prior locked broader candidate; reject promotion, preserve failures and disagreements.
-- [ ] Implement generic event-role/action/phase routing to sourced factors; correct vendor-exclusive scope leakage using exposed regression only.
+- [x] Implement initial bounded structured activity routing to sourced factors; recent exposed scope errors corrected, candidate experimental (see docs/activity-routing.md).
+- [ ] Resolve shared-context versus direct-vendor/competitor scope in the database; recover broader regressions before promoting this candidate.
 - [ ] Obtain unseen MU/SNDK positives and sufficient group/company support; new candidate/new blind holdout after improvements.
 
 ## Grouped calibration — user request2026-11-26

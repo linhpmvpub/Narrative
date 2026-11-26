@@ -13,6 +13,7 @@ from types import SimpleNamespace
 
 from sqlalchemy import and_, select
 
+from engine.activity_events import activity_matches
 from engine.adapters.news import canonical_url, parse_feed
 from engine.company_profiles import RELATIONS, available_bundles, paths
 from engine.ingestion.contracts import digest
@@ -31,6 +32,8 @@ def pattern(term):
 def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name=""):
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
+    if binding.kind == "STRUCTURED_ACTIVITY":
+        return activity_matches(binding, fields)
     groups = ("topic_terms", "context_terms", "change_terms")
     if binding.kind == "SCOPED_ACTIVITY":
         # Three literal groups must co-occur in one sentence/heading. Do not join

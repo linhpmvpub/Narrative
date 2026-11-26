@@ -236,6 +236,27 @@ class EntityReference(Strict):
         return self
 
 
+class ActivityRule(Strict):
+    version: Literal["activity-assertions-v1"] = "activity-assertions-v1"
+    market: Literal["DATA_CENTER", "AI_COMPUTE", "NAMED_PRODUCT"]
+    event_types: list[Literal["FACILITY_PROJECT", "PROJECT_FINANCING", "COMPUTE_DEPLOYMENT", "PRODUCT_INTEGRATION"]] = Field(min_length=1, max_length=4)
+    product_terms: list[TEXT] = Field(default_factory=list, max_length=10)
+    vendor_names: list[TEXT] = Field(default_factory=list, max_length=10)
+
+    @model_validator(mode="after")
+    def bounded(self):
+        if (self.market == "NAMED_PRODUCT") != bool(self.product_terms):
+            raise ValueError("Named product requires explicit product terms only")
+        allowed = {"DATA_CENTER": {"FACILITY_PROJECT", "PROJECT_FINANCING"},
+                   "AI_COMPUTE": {"COMPUTE_DEPLOYMENT", "PROJECT_FINANCING"},
+                   "NAMED_PRODUCT": {"PRODUCT_INTEGRATION", "COMPUTE_DEPLOYMENT"}}
+        if not set(self.event_types) <= allowed[self.market]:
+            raise ValueError("Event type outside market scope")
+        if any(t != t.strip() or not 2 <= len(t) <= 80 for t in self.product_terms + self.vendor_names):
+            raise ValueError("Invalid bounded activity term")
+        return self
+
+
 class FactorBinding(Strict):
     """Curated literal topic/context/change groups, never a financial event classifier."""
     id: ID
@@ -244,7 +265,8 @@ class FactorBinding(Strict):
     context_terms: list[TEXT] = Field(min_length=1, max_length=20)
     change_terms: list[TEXT] = Field(default_factory=list, max_length=30)
     kind: Literal["ECONOMIC_CHANGE", "ISSUER_RELATIONSHIP_DISCLOSURE",
-                  "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY"] = "ECONOMIC_CHANGE"
+                  "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY"] = "ECONOMIC_CHANGE"
+    activity_rule: ActivityRule | None = Field(default=None, exclude_if=lambda value: value is None)
     issuer_supply_scope: bool = False
     disclosure_terms: list[TEXT] = Field(default_factory=list, max_length=20)
     narrative_ids: list[ID] = Field(default_factory=list, max_length=20)
@@ -260,7 +282,16 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
-        if self.kind in {"ECONOMIC_CHANGE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY"}:
+        if self.kind == "STRUCTURED_ACTIVITY":
+            if (not self.activity_rule or not self.narrative_ids or self.entity_reference_id
+                    or self.change_terms or self.disclosure_terms or self.term_aliases):
+                raise ValueError("Structured activity requires scoped rule without inferred party or legacy terms")
+            for term in self.activity_rule.product_terms + self.activity_rule.vendor_names:
+                if not any(re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", e.quote, re.I) for e in self.evidence):
+                    raise ValueError("Activity product/vendor name requires literal source evidence")
+        elif self.activity_rule is not None:
+            raise ValueError("Activity rule requires structured activity kind")
+        elif self.kind in {"ECONOMIC_CHANGE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY"}:
             if not self.change_terms or self.disclosure_terms:
                 raise ValueError("Economic rule requires changes, not disclosure terms")
         elif self.change_terms or not self.disclosure_terms or not self.narrative_ids:

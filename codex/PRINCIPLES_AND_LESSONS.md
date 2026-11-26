@@ -127,3 +127,15 @@ its row date differs from its page update date. Use it only as labeled unit cont
 not confirmation of today's price. Tests cover inferred-unit labeling, rejection of
 multi-step metadata, correction/withdrawal, exact instrument and threshold suppression.
 No independent market accuracy claim. Existing no-fabrication/source-period principles remain.
+
+
+## L019 — 2026-11-26 — scope fixes require broad regression
+
+Evidence: typed activity routing recovers6recent resolved positive pairs and removes2false positives,
+but loses9previously positive older RSS pairs. A latest-cohort win is not overall improvement.
+Keep a candidate local/experimental when broad regression worsens. Preserve labels, previous
+predictions and selected unresolved counts; do not silently resolve a competitor-context
+ambiguity in favor of a preferred score. Distinguish shared industry context, customer demand
+and sourced competitor mechanisms in the database. Validate source-backed applicability and
+all exposed cohorts before a fresh holdout. Event phase and editorial priority never establish
+orders, profit direction or financial impact magnitude.
