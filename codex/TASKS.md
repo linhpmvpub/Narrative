@@ -1,5 +1,13 @@
 # TASKS — implementation execution checklist
 
+## Dual-label follow-through — 2026-11-26
+
+- [x] Add AMD/Sandisk source collection; preserve Micron403 and issuer-quota shortfalls.
+- [x] Freeze and independently label24RSS/216pairs plus3complete-body/30pairs; separate relevance/priority/event groups.
+- [x] Evaluate prior locked broader candidate; reject promotion, preserve failures and disagreements.
+- [ ] Implement generic event-role/action/phase routing to sourced factors; correct vendor-exclusive scope leakage using exposed regression only.
+- [ ] Obtain unseen MU/SNDK positives and sufficient group/company support; new candidate/new blind holdout after improvements.
+
 ## Grouped calibration — user request2026-11-26
 
 - [x] Audit19prior two-agent AI cohorts, pin current profiles/predictions and scope exclusions.

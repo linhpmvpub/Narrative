@@ -1,5 +1,12 @@
 # Nguyên tắc và bài học phát triển
 
+## L018 — Đo đúng tầng lỗi và công khai thiếu coverage
+
+- Đợt mới2026-11-26: RSS bỏ sót7cặp liên quan dù hạ ngưỡng; không có match đầu vào thì trọng số không khắc phục được. Tập đầy đủ3bài cho thấy phương án rộng tăng FP mà không tăng TP, liên quan đến nhầm phạm vi công ty/sản phẩm.
+- Ưu tiên event role/action/phase và đường nối factor có nguồn, không tiếp tục tăng/giảm điểm để chữa lỗi upstream. Tin triển khai cụ thể cho đối thủ không tự thành nhu cầu khách hàng của công ty; cơ chế cạnh tranh và cơ chế dùng chung cần đường riêng.
+- Quota nguồn không phải quota nhãn dương tính. Thu20bản tin issuer mới vào DB nhưng loại dữ liệu đã dùng còn0AMD/1Sandisk; báo đúng thiếu hụt, không lấp bằng bài cũ hoặc đổi tiêu chí sau khi nhìn nhãn.
+- Kiểm chứng: hai reviewer độc lập, nhãn relevance/priority riêng, giữ bất đồng, source-body/packet/prediction hashes, tests chống drift và nới cửa sổ tin thật. Tập đã đo trở thành regression. Khắc phục tiếp cần corpus mới và positive support thật, không coi agreement AI hoặc tests là chất lượng sản phẩm.
+
 ## L017 — Nhãn liên quan không hiệu chỉnh được độ mạnh hoặc mức ưu tiên
 
 - Bằng chứng2026-11-26: trên1716cặp RSS đã lộ nhãn, routing tìm54/96cặp liên quan, priority chỉ giữ19/96. Không có động từ chỉ hướng thay đổi không đồng nghĩa tin không hữu ích; quy tắc này bỏ sót cả bối cảnh có đường quan hệ.

@@ -79,21 +79,27 @@ def sample_articles(rows, count, stratified):
 
 
 def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
-           stratified=False, max_age_days=None, prediction_track="feed"):
+           stratified=False, max_age_days=None, prediction_track="feed",
+           profile_root=None, scan_limit=500, source_quotas=None, exclude_title_pattern=None):
     if prediction_track not in {"feed", "text_relevance"}:
         raise ValueError("Unknown prediction track")
     if not 1 <= count <= 100:
         raise ValueError("Choose 1..100 article clusters")
-    max_window = 90 if prediction_track == "text_relevance" else 30
+    if not 1 <= scan_limit <= 5000:
+        raise ValueError("Choose 1..5000 scan rows")
+    if source_quotas and (any(type(v) is not int or v < 0 for v in source_quotas.values())
+                          or sum(source_quotas.values()) > count):
+        raise ValueError("Source quotas must fit the cluster budget")
+    max_window = 365 if prediction_track == "text_relevance" else 30
     if max_age_days is not None and not 1 <= max_age_days <= max_window:
         raise ValueError(f"Age window must be 1..{max_window} days")
     at = at or datetime.now(UTC)
     if at.tzinfo is None or at > datetime.now(UTC):
         raise ValueError("Aware, nonfuture cutoff required")
-    profiles = available_bundles(at)
+    profiles = available_bundles(at, root=profile_root)
     if not profiles["enabled"] or profiles.get("withheld") or profiles.get("truncated"):
         raise ValueError("Profiles disabled, withheld or truncated")
-    prediction = candidate_feed(conn, at)
+    prediction = candidate_feed(conn, at, profile_root=profile_root, limit=scan_limit, card_limit=1000)
     if prediction["truncated"]:
         raise ValueError("Truncated routing cannot be evaluated as full coverage")
     rows = conn.execute(select(news_items,
@@ -102,8 +108,8 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
         news_revisions, (news_revisions.c.item_id == news_items.c.id)
         & (news_revisions.c.version == news_items.c.version)).join(
         news_sources, news_sources.c.id == news_items.c.source_id).order_by(
-        news_revisions.c.received_at.desc(), news_items.c.id).limit(501)).mappings().all()
-    if len(rows) > 500:
+        news_revisions.c.received_at.desc(), news_items.c.id).limit(scan_limit + 1)).mappings().all()
+    if len(rows) > scan_limit:
         raise ValueError("Inbox window truncated")
     groups: dict = {}
     blocked: set = set()
@@ -124,9 +130,12 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
     articles: list = []
     selected_texts: list = []
     excluded_exposure = excluded_near_duplicates = 0
-    excluded_age = 0
+    excluded_age = excluded_title = 0
     for key, r in groups.items():
         if key in blocked:
+            continue
+        if exclude_title_pattern and re.search(exclude_title_pattern, r["payload"]["title"], re.I):
+            excluded_title += 1
             continue
         if max_age_days is not None and datetime.fromisoformat(r["payload"]["published_at"]) < (
                 at - timedelta(days=max_age_days)):
@@ -141,7 +150,12 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
             continue
         articles.append(r)
         selected_texts.append(text)
-    articles = sample_articles(articles, count, stratified)
+    quota_rows = []
+    for source, quota in (source_quotas or {}).items():
+        quota_rows.extend([r for r in articles if r["source_id"] == source][:quota])
+    quota_ids = {r["id"] for r in quota_rows}
+    articles = quota_rows + sample_articles([r for r in articles if r["id"] not in quota_ids],
+                                            count - len(quota_rows), stratified)
     if not articles:
         raise ValueError("No eligible articles")
     matched = {c["id"] for c in prediction["items"]}
@@ -173,7 +187,7 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
                     predictions[key] = key in matched
     if not packet:
         raise ValueError("No narrative pairs")
-    current = available_bundles(at)
+    current = available_bundles(at, root=profile_root)
     if (current.get("withheld") or current.get("truncated") or not current["enabled"]
             or digest([b.model_dump(mode="json") for b in current["items"]])
             != digest([b.model_dump(mode="json") for b in profiles["items"]])):
@@ -190,6 +204,13 @@ def freeze(conn, output: Path, *, count=60, at=None, exclude_packets=(),
         "excluded_prior_exposure": excluded_exposure,
         "excluded_near_duplicates": excluded_near_duplicates,
         "excluded_age": excluded_age,
+        "excluded_title": excluded_title,
+        "exclude_title_pattern": exclude_title_pattern,
+        "source_quotas": source_quotas,
+        "sampling_sources": dict(Counter(r["source_id"] for r in articles)),
+        "source_quota_shortfalls": {source: max(0, quota - sum(
+            r["source_id"] == source for r in articles)) for source, quota in (source_quotas or {}).items()},
+        "scan_limit": scan_limit,
         "max_age_days": max_age_days,
         "sampling_strata": dict(Counter(stratum(r["payload"]) for r in articles)),
         "prior_packet_sha256": prior_hashes,

@@ -106,5 +106,23 @@
     "url": "https://www.datacenterknowledge.com/rss.xml",
     "interval_seconds": 600,
     "enabled": true
+  },
+  {
+    "id": "amd_ir",
+    "name": "AMD Investor Relations",
+    "kind": "rss",
+    "category": "issuer_disclosure",
+    "url": "https://ir.amd.com/news-events/press-releases/rss",
+    "interval_seconds": 1800,
+    "enabled": true
+  },
+  {
+    "id": "sandisk_ir",
+    "name": "Sandisk Investor Relations",
+    "kind": "rss",
+    "category": "issuer_disclosure",
+    "url": "https://investor.sandisk.com/rss/news-releases.xml",
+    "interval_seconds": 1800,
+    "enabled": true
   }
 ]
