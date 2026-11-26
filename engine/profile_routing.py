@@ -31,6 +31,9 @@ def binding_decisions(bundle, narrative, article, at, *, issuer_cik=None):
                 continue
         routes, truncated = paths(bundle, SimpleNamespace(anchors=[binding.factor_id]),
                                   narrative, effective_at=at)
+        if binding.relevance_scope and binding.relevance_scope.relationship_id:
+            routes = [route for route in routes if any(
+                r.id == binding.relevance_scope.relationship_id for r in route)]
         if routes:
             yield {"binding": binding, "matches": spans, "roles": roles["facts"],
                    "path": min(routes, key=len), "paths_truncated": truncated}

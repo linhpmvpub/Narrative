@@ -6,7 +6,8 @@
 - [x] Freeze and independently label24RSS/216pairs plus3complete-body/30pairs; separate relevance/priority/event groups.
 - [x] Evaluate prior locked broader candidate; reject promotion, preserve failures and disagreements.
 - [x] Implement initial bounded structured activity routing to sourced factors; recent exposed scope errors corrected, candidate experimental (see docs/activity-routing.md).
-- [ ] Resolve shared-context versus direct-vendor/competitor scope in the database; recover broader regressions before promoting this candidate.
+- [x] Add initial sourced own/shared/competitor scope; recover9net older RSS positives with no additional resolved RSS FP (docs/relevance-scope.md).
+- [ ] Refine component/application/infrastructure applicability and sourced aliases; full-body background FP and priority/coverage gaps still block promotion.
 - [ ] Obtain unseen MU/SNDK positives and sufficient group/company support; new candidate/new blind holdout after improvements.
 
 ## Grouped calibration — user request2026-11-26

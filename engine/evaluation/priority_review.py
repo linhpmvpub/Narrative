@@ -49,7 +49,7 @@ def decisions(row, bundle, narrative, at, policy):
 
         blocks, _ = substantive_blocks(row["source_observation"], at)
         units = [{"title": article["title"], "summary": ""}] + [
-            {"title": "", "summary": sentence.group()}
+            {"title": "", "summary": sentence.group(), "context_title": article["title"]}
             for block in blocks for sentence in re.finditer(r"[^.!?;\n]+", block["text"])
             if len(sentence.group()) <= 1600]
     assessments, matched = [], False

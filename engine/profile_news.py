@@ -32,13 +32,17 @@ def pattern(term):
 def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name=""):
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
+    scope = binding.relevance_scope
+    if scope and any(pattern(t).search(value) for t in scope.excluded_subject_terms
+                     for value in [*fields.values(), payload.get("context_title", "")]):
+        return []
     if binding.kind == "STRUCTURED_ACTIVITY":
         return activity_matches(binding, fields)
     groups = ("topic_terms", "context_terms", "change_terms")
     if binding.kind == "SCOPED_ACTIVITY":
         # Three literal groups must co-occur in one sentence/heading. Do not join
         # an issuer's share-price headline with an unrelated customer's project.
-        rule = binding.model_copy(update={"kind": "ECONOMIC_CHANGE"})
+        rule = binding.model_copy(update={"kind": "ECONOMIC_CHANGE", "relevance_scope": None})
         for field, text in fields.items():
             for window in re.finditer(r"[^.!?;\n]+", text):
                 if len(window.group()) > 1200:
@@ -47,7 +51,10 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
                 if hits:
                     return [{**h, "start": h["start"] + window.start(),
                              "end": h["end"] + window.start(),
-                             "scope_basis": "SAME_SENTENCE_TOPIC_ACTIVITY_NOT_VERIFIED_PARTY"}
+                             "scope_basis": "SAME_SENTENCE_TOPIC_ACTIVITY_NOT_VERIFIED_PARTY",
+                             **({"relevance_role": scope.role,
+                                 "context_only": scope.role != "OWN_PRODUCT",
+                                 "news_party_verified": False} if scope else {})}
                             for h in hits]
         return []
 
@@ -275,6 +282,9 @@ def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit
                             continue
                     routes, truncated = paths(bundle, SimpleNamespace(anchors=[binding.factor_id]),
                                               narrative, effective_at=at)
+                    if binding.relevance_scope and binding.relevance_scope.relationship_id:
+                        routes = [route for route in routes if any(
+                            r.id == binding.relevance_scope.relationship_id for r in route)]
                     if not routes:
                         continue
                     routes.sort(key=lambda path: (
@@ -315,6 +325,8 @@ def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit
                     cards[key]["links"].append({"binding_id": binding.id,
                         "factor_id": binding.factor_id, "factor": nodes[binding.factor_id],
                         "scope": binding.scope, "matches": spans,
+                        **({"relevance_role": binding.relevance_scope.role}
+                           if binding.relevance_scope else {}),
                         "entity_context": entity,
                         "entity_context_path": [{"id": r.id, "from": nodes[r.from_id],
                             "to": nodes[r.to_id], "type": r.type, "scope": r.scope,

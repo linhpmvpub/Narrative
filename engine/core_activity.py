@@ -7,6 +7,8 @@ def assess(item, links, policy):
     windows: list[dict] = []
     for link in links:
         matches = link.get("matches", [])
+        if matches and all(m.get("context_only") for m in matches):
+            continue
         for field in ("title", "summary"):
             spans = [m for m in matches if m["field"] == field]
             if not spans:

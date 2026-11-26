@@ -1,6 +1,6 @@
 {
   "schema": "CORE_DECISION_V1",
-  "version": 3,
+  "version": 4,
   "delivery": "disabled",
   "max_source_age_seconds": 3600,
   "max_hops": 2,

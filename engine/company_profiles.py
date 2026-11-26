@@ -257,6 +257,24 @@ class ActivityRule(Strict):
         return self
 
 
+class RelevanceScope(Strict):
+    """Reviewed applicability, never a verified news-party relationship."""
+    role: Literal["OWN_PRODUCT", "SHARED_MARKET", "COMPETITOR_PLATFORM"]
+    subject_terms: list[TEXT] = Field(default_factory=list, max_length=20)
+    excluded_subject_terms: list[TEXT] = Field(default_factory=list, max_length=20)
+    relationship_id: ID | None = None
+
+    @model_validator(mode="after")
+    def bounded(self):
+        if (self.role != "SHARED_MARKET") != bool(self.subject_terms):
+            raise ValueError("Named scope requires subjects; shared scope must not infer them")
+        if (self.role == "COMPETITOR_PLATFORM") != bool(self.relationship_id):
+            raise ValueError("Competitor scope requires an explicit relationship")
+        if any(t != t.strip() or not 2 <= len(t) <= 80 for t in self.subject_terms + self.excluded_subject_terms):
+            raise ValueError("Invalid scope term")
+        return self
+
+
 class FactorBinding(Strict):
     """Curated literal topic/context/change groups, never a financial event classifier."""
     id: ID
@@ -267,6 +285,7 @@ class FactorBinding(Strict):
     kind: Literal["ECONOMIC_CHANGE", "ISSUER_RELATIONSHIP_DISCLOSURE",
                   "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY"] = "ECONOMIC_CHANGE"
     activity_rule: ActivityRule | None = Field(default=None, exclude_if=lambda value: value is None)
+    relevance_scope: RelevanceScope | None = Field(default=None, exclude_if=lambda value: value is None)
     issuer_supply_scope: bool = False
     disclosure_terms: list[TEXT] = Field(default_factory=list, max_length=20)
     narrative_ids: list[ID] = Field(default_factory=list, max_length=20)
@@ -282,6 +301,15 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
+        if self.relevance_scope:
+            scope = self.relevance_scope
+            if self.kind != "SCOPED_ACTIVITY" or self.term_aliases:
+                raise ValueError("Relevance scope requires a same-sentence rule without aliases")
+            if scope.subject_terms and not set(self.topic_terms) <= set(scope.subject_terms):
+                raise ValueError("Named relevance topic must be a sourced subject")
+            for term in scope.subject_terms + scope.excluded_subject_terms:
+                if not any(re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", e.quote, re.I) for e in self.evidence):
+                    raise ValueError("Relevance scope name requires literal source evidence")
         if self.kind == "STRUCTURED_ACTIVITY":
             if (not self.activity_rule or not self.narrative_ids or self.entity_reference_id
                     or self.change_terms or self.disclosure_terms or self.term_aliases):
@@ -429,6 +457,17 @@ class ProfileBundle(Strict):
                     sources[e.source_id].retrieved_at > ref.reviewed_at for e in ref.evidence):
                 raise ValueError("Entity reference review must follow acquisition")
         for binding in self.factor_bindings:
+            scope = binding.relevance_scope
+            competitor = scope is not None and scope.role == "COMPETITOR_PLATFORM"
+            if scope and scope.role == "OWN_PRODUCT" and not set(scope.subject_terms) <= {
+                    self.ticker, self.legal_name, nodes[self.company_id].label}:
+                raise ValueError("Own-product scope must name the profile company")
+            if scope and competitor:
+                assert scope.relationship_id is not None
+                relation = relationships.get(scope.relationship_id)
+                if (relation is None or relation.type != "COMPETES_WITH"
+                        or relation.from_id != binding.factor_id or relation.status != "SOURCE_BACKED"):
+                    raise ValueError("Competitor scope requires a sourced outgoing competition relation")
             if not set(binding.narrative_ids) <= {n.id for n in self.narratives}:
                 raise ValueError("Binding references unknown narrative")
             if binding.issuer_supply_scope and not binding.narrative_ids:
@@ -445,7 +484,7 @@ class ProfileBundle(Strict):
                         v.casefold() not in names for t in binding.topic_terms
                         for v in binding.term_aliases.get(t, [])):
                     raise ValueError("Entity-bound topic terms must be sourced reference names")
-            if (binding.kind not in {"SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"}
+            if (not competitor and binding.kind not in {"SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"}
                     and (binding.factor_id not in nodes or nodes[binding.factor_id].kind not in {
                         "factor", "input", "supplier", "market", "facility", "location"})):
                 raise ValueError("Binding requires a scoped economic factor")
@@ -627,8 +666,11 @@ def audit_binding_routes(bundle):
         targets = [n for n in bundle.narratives
                    if not binding.narrative_ids or n.id in binding.narrative_ids]
         event = type("FactorAnchor", (), {"anchors": [binding.factor_id]})()
-        reachable = [bool(paths(bundle, event, n, effective_at=bundle.available_at)[0])
-                     for n in targets]
+        routes = [paths(bundle, event, n, effective_at=bundle.available_at)[0] for n in targets]
+        if binding.relevance_scope and binding.relevance_scope.relationship_id:
+            rid = binding.relevance_scope.relationship_id
+            routes = [[p for p in group if any(r.id == rid for r in p)] for group in routes]
+        reachable = [bool(group) for group in routes]
         if not any(reachable) or (binding.narrative_ids and not all(reachable)):
             raise ValueError("Enabled binding has no sourced route to its narrative: " + binding.id)
 

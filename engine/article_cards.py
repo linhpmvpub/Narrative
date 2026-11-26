@@ -93,7 +93,7 @@ def decisions(bundle, narrative, title, blocks, at):
         for sentence in re.finditer(r"[^.!?;\n]+", block["text"]):
             if len(sentence.group()) > 1600:
                 continue
-            for result in binding_decisions(bundle, narrative, {"summary": sentence.group()}, at):
+            for result in binding_decisions(bundle, narrative, {"summary": sentence.group(), "context_title": title}, at):
                 yield {"binding_id": result["binding"].id, "scope": result["binding"].scope,
                     "excerpt": sentence.group().strip(), "field": field,
                     "source_spans": block["source_spans"],
