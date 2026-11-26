@@ -7,6 +7,7 @@ from pathlib import Path
 from sqlalchemy import select
 
 from engine.company_profiles import available_bundles
+from engine.core_activity import assess
 from engine.ingestion.contracts import digest
 from engine.models.contracts import utc
 from engine.models.schema_v13 import news_sources
@@ -60,10 +61,16 @@ def project(items, policy):
                 name = policy["relations"].get(edge["type"])
                 if name:
                     card["mechanisms"][name] = policy["groups"][name]
+        card["assessment"] = assess(item, card["links"], policy)
+        card["priority"] = card["assessment"]["tier"]
         card["revision_sha256"] = digest(
             [card["news_revisions"], card["links"], card["narratives"]]
         )
-    return sorted(grouped.values(), key=lambda c: (c["published_at"], c["id"]), reverse=True)
+    return sorted(
+        grouped.values(),
+        key=lambda c: (c["assessment"]["editorial_score"], c["published_at"], c["id"]),
+        reverse=True,
+    )
 
 
 def feed(conn, data, profile_root):
@@ -75,7 +82,9 @@ def feed(conn, data, profile_root):
     matching = {
         b.id for b in current["items"] if pinned.get(b.id) == digest(b.model_dump(mode="json"))
     }
-    result = candidate_feed(conn, profile_root=profile_root)
+    result = candidate_feed(
+        conn, profile_root=profile_root, limit=policy["scan_limit"], card_limit=policy["card_limit"]
+    )
     now = datetime.now(UTC)
     sources = {s["id"]: s for s in conn.execute(select(news_sources)).mappings()}
     selected = []
@@ -97,8 +106,24 @@ def feed(conn, data, profile_root):
         digest(b.model_dump(mode="json")) for b in current["items"]
     ]:
         raise ValueError("Profiles changed during projection")
+    cards = project(selected, policy)
+    for card in cards:
+        relation_ids = {
+            card["profile_id"] + "/" + edge["id"] for link in card["links"] for edge in link["path"]
+        }
+        card["exposure_parameters"] = [
+            f for f in data.get("exposure_facts", []) if f["relation_id"] in relation_ids
+        ]
+        card["financial_context"] = [
+            f for f in data.get("financial_context", []) if f["profile_id"] == card["profile_id"]
+        ]
     return {
-        "items": project(selected, policy),
+        "items": [
+            c for c in cards if c["priority"] not in {"BACKGROUND_THEME", "SPONSORED_RESEARCH"}
+        ],
+        "background": [
+            c for c in cards if c["priority"] in {"BACKGROUND_THEME", "SPONSORED_RESEARCH"}
+        ],
         "examined": result["examined"],
         "withheld": result["withheld"],
         "truncated": result["truncated"],

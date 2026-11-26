@@ -1,10 +1,10 @@
 {
   "schema": "CORE_DECISION_V1",
-  "version": 1,
+  "version": 2,
   "delivery": "disabled",
   "max_source_age_seconds": 3600,
   "max_hops": 2,
-  "ranking": "RECENCY_ONLY_UNCALIBRATED",
+  "ranking": "EXPLICIT_EDITORIAL_PRIORITY_NOT_CALIBRATED",
   "relations": {
     "AFFECTS_COST": "input_price",
     "AFFECTS_SUPPLY": "supply_disruption",
@@ -123,5 +123,61 @@
       "magnitude": "UNKNOWN",
       "horizon": "UNKNOWN"
     }
-  }
+  },
+  "priority_weights": {
+    "resolved_entity": 40,
+    "concrete_change": 30,
+    "sourced_path": 20,
+    "sponsored_penalty": 20
+  },
+  "scan_limit": 5000,
+  "card_limit": 1000,
+  "change_terms": {
+    "UP": [
+      "rise",
+      "rises",
+      "rose",
+      "increase",
+      "increases",
+      "increased",
+      "expand",
+      "expands",
+      "expanded",
+      "surge",
+      "surges",
+      "surged"
+    ],
+    "DOWN": [
+      "fall",
+      "falls",
+      "fell",
+      "decrease",
+      "decreases",
+      "decreased",
+      "reduce",
+      "reduces",
+      "reduced",
+      "cut",
+      "cuts",
+      "delay",
+      "delays",
+      "delayed",
+      "shortage",
+      "shortages",
+      "disruption",
+      "disruptions"
+    ]
+  },
+  "phase_terms": [
+    "may",
+    "might",
+    "could",
+    "would",
+    "expects",
+    "expected",
+    "forecast",
+    "plans",
+    "planned",
+    "will"
+  ]
 }

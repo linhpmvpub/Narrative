@@ -39,6 +39,20 @@ def project(data, registry, policy_path=DEFAULT):
                     }
                     for name, keys in policy["groups"].items()
                 },
+                "financial_context": [
+                    f for f in data.get("financial_context", []) if f["profile_id"] == p["id"]
+                ],
+                "exposure_parameters": [
+                    f
+                    for f in data.get("exposure_facts", [])
+                    if f["relation_id"].startswith(p["id"] + "/")
+                ],
+                "counterparties": [
+                    e for e in data.get("entity_references", []) if e["profile_id"] == p["id"]
+                ],
+                "source_references": [
+                    s for s in data.get("sources", []) if s["profile_id"] == p["id"]
+                ],
                 "product_node_ids": [
                     n["id"]
                     for n in data["nodes"]

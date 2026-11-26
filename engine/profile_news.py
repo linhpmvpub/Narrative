@@ -200,9 +200,9 @@ def verified_row(row, at, capture_cache):
     return pub, received, proof
 
 
-def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None):
+def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit=100):
     at = as_of or datetime.now(UTC)
-    if at.tzinfo is None or not 1 <= limit <= 500:
+    if at.tzinfo is None or not 1 <= limit <= 5000 or not 1 <= card_limit <= 1000:
         raise ValueError("Aware cutoff and bounded limit required")
     at = min(at, datetime.now(UTC))
     profiles = available_bundles(at, root=profile_root)
@@ -327,6 +327,6 @@ def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None):
                             "sha256": source_map[sid].sha256,
                             "published_at": source_map[sid].published_at.isoformat()}
                             for sid in sorted(citations)]})
-    result["truncated"] |= len(cards) > 100
-    result["items"] = list(cards.values())[:100]
+    result["truncated"] |= len(cards) > card_limit
+    result["items"] = list(cards.values())[:card_limit]
     return result

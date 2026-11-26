@@ -14,20 +14,30 @@ URL = "https://www.trendforce.com/price/dram/dram_spot"
 INSTRUMENT = "DDR5 16Gb (2Gx8) 4800/5600"
 
 
-def parse(raw, at):
+def parse(raw, at, *, allow_history=False):
     text = source_text(raw)
-    if "Last Update " not in text or "DRAM Spot Price" not in text:
+    if "Last Update" not in text or "DRAM Spot Price" not in text:
         raise ValueError("Missing spot board")
-    section = text.split("Last Update ", 1)[1]
+    legacy = "Last Update:" in text
+    section = (
+        text.split("Last Update:", 1)[1].lstrip() if legacy else text.split("Last Update ", 1)[1]
+    )
     if not all(label in section for label in ("Daily High", "Daily Low", "Session Average")):
         raise ValueError("Unknown price columns")
     stamp = re.match(r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}) \(GMT\+8\)", section)
-    if stamp is None:
+    if legacy:
+        old = re.match(r"([A-Za-z]{3}\.\d{1,2} \d{4} \d{2}:\d{2}) \(GMT\+8\)", section)
+        stamp_text = (
+            datetime.strptime(old[1], "%b.%d %Y %H:%M").strftime("%Y-%m-%d %H:%M") if old else None
+        )
+    else:
+        stamp_text = stamp[1] if stamp else None
+    if stamp_text is None:
         raise ValueError("Spot-board timestamp absent")
-    observed = datetime.strptime(stamp[1], "%Y-%m-%d %H:%M").replace(
+    observed = datetime.strptime(stamp_text, "%Y-%m-%d %H:%M").replace(
         tzinfo=timezone(timedelta(hours=8))
     )
-    if observed > at or at - observed > timedelta(days=7):
+    if observed > at or (not allow_history and at - observed > timedelta(days=7)):
         raise ValueError("Future or stale spot board")
     # Exact instrument and five named price columns; never read module/contract rows.
     row = re.search(
@@ -47,7 +57,7 @@ def parse(raw, at):
         "retrieved_at": at.isoformat(),
         "session_average": values[4],
         "quote": row[0],
-        "source_url": URL,
+        "source_url": "https://www.dramexchange.com/" if legacy else URL,
         "currency": None,
         "unit": None,
         "comparison_period": None,

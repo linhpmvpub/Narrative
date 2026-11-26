@@ -139,3 +139,48 @@ Current result is an end-to-end real RSS context flow, not completion of every i
 in steps1–3. Financial exposure/counterparty gaps, normalized price series, calibrated
 priority and measured matching quality remain open. Raw records and detailed audits
 are ignored local artifacts; only aggregate progress is committed.
+
+## Steps1–3 implementation contract (2026-11-26; supersedes earlier pending entries)
+
+| Requested step | Implemented behavior | Intentional unknown / later acceptance |
+|---|---|---|
+| Core company database | Six pinned profiles/five issuers, seven groups,13existing financial sets,39scoped parameter facts,8entity references exposed with original source/period | Undisclosed hedge/contract/impact weights remain UNKNOWN; no mandatory42-component fill |
+| Real ingestion→cards | Current captured RSS, dedup/revision/withdrawal, up to5000rows/1000candidate cards per bounded run, visible truncation, current price-series heads and1/7/30day windows | Actual free history currently2daily points; missing periods never synthesized |
+| General decision algorithm | Same-window change/negation/forecast checks, entity/sector/background/sponsored tiers, explicit priority weights, source-duration bins, threshold price candidates through exact commodity registry | Editorial weights not empirical calibration; source duration not causal impact lag; financial magnitude unknown without applicable facts |
+
+Core profile projection references authoritative atlas facts rather than silently replacing
+legacy component status. Financial partitions are contextual data, not automatic exposure
+weights. The current counterparties list includes only existing resolved references;
+unnamed counterparties remain unknown. `financial_context`/`exposure_parameters` on cards
+are scoped context, not newly verified causal coefficients.
+
+Core manifest optional fields: `price_series` (local relative directory) and
+`price_metadata` (local relative JSON). `engine.price_series.append` validates exact
+instrument/date/column parsing and appends revisions, retaining immutable raw captures.
+Identical observations are idempotent. `observations` verifies capture/record hashes;
+`compare` uses the latest current observation and latest baseline at/before the requested
+window, within3days of that target, exposing actual endpoints. A withdrawn point is not
+silently replaced by an older active point. Latest price must be at most7days old.
+Historical import is allowed but never makes a stale latest point current.
+
+Metadata contains file/hash/exact quote, instrument,basis,currency,unit,known_at,review_until.
+`basis_kind` is SOURCE_DECLARED or CROSS_SOURCE_INFERRED; inference additionally requires
+inference_steps=1 and explanatory notes. Metadata and capture live in the same directory.
+The user authorized cross-source inference on2026-11-26. Source-declared and inferred
+units remain visibly separate; inferred units never become independently verified prices.
+Metadata expiry invalidates use. Numeric primary prices are never overwritten or averaged
+with secondary values. Registered market identity/basis and known units must agree.
+
+If absolute change>5%, generate scoped conditional cost candidates; >=10% is a price-move
+band, not company impact strength. Purchase price, financial magnitude and impact lag
+remain unknown. At/below threshold creates no alert. Same-period correction replaces the
+projection; source withdrawal suppresses it. No real delivery is enabled.
+
+Run locally with a new output directory:
+`python -m engine.core_pipeline --manifest source-cache/core-complete-workspace-2026-11-26.json --database sqlite:///source-cache/core-live-2026-11-26/news.sqlite --output <new-local-output> --poll --price-board`
+Set DEV_INFORMATIONAL_FEED=true for that local process. The read-only API uses
+CORE_WORKSPACE_MANIFEST and CORE_WORKSPACE_DATABASE_URL only when explicitly configured.
+Never point an old tunneled service at local detailed data without authorization.
+
+Implementation readiness is not v1 release acceptance. Next stages remain product
+personalization, operational observation and comprehensive grouped evaluation/calibration.

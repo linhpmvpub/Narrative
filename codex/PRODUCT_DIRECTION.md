@@ -129,3 +129,12 @@ cập nhật checkpoint và tài liệu liên quan. Không sao chép số liệu
 | 2026-11-25 | Chuẩn hóa tài liệu bắt buộc đọc và cơ chế học hỏi sau mỗi task | Yêu cầu người dùng của phiên này |
 
 Ngày trên là ngày tổng hợp quyết định, không suy đoán ngày phát biểu gốc trong lịch sử chat.
+
+## Cross-source price context — user decision 2026-11-26
+
+The user permits one-step inference from comparable sources when price metadata is
+missing. Preserve source prices, exact instrument/market/period and separate inferred
+units from source-declared units. Do not assume a chip, module, retail and contract
+quote must be similar; do not use numerical closeness as sole identity evidence.
+See L016 and the core price-series contract. This does not authorize live delivery,
+cloud publication, invented observations or calibrated-impact claims.

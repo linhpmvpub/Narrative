@@ -6,7 +6,7 @@ from collections import Counter
 from pathlib import Path
 
 from engine.adapters.news import NewsClient
-from engine.core_workspace import build
+from engine.core_workspace import Workspace, build, local_path
 from engine.db import database
 from engine.ingestion.contracts import digest
 from engine.news import poll, register
@@ -36,6 +36,7 @@ def audit(result):
         "schema": "CORE_PIPELINE_AUDIT_V1",
         "profiles": profiles,
         "context_cards": len(context.get("items", [])),
+        "background_cards": len(context.get("background", [])),
         "cards_by_ticker": dict(Counter(c["ticker"] for c in context.get("items", []))),
         "price_alerts": len(result["cards"]),
         "scan_truncated": context.get("truncated", False),
@@ -71,19 +72,24 @@ def main():
                 collection = poll(db, client)
             finally:
                 client.close()
-        with db.connect() as conn:
-            result = build(args.manifest, news_conn=conn)
         price = None
         if args.price_board:
             import httpx
 
-            from engine.price_board import URL, ingest
+            from engine.price_series import append
 
-            response = httpx.get(URL, timeout=40, follow_redirects=True)
+            manifest = Workspace.model_validate_json(args.manifest.read_bytes())
+            if not manifest.price_series:
+                parser.error("--price-board requires price_series in the local manifest")
+            response = httpx.get("https://www.dramexchange.com/", timeout=40, follow_redirects=True)
             response.raise_for_status()
-            price = ingest(response.content, args.output.parent / "prices")
+            price = append(
+                local_path(args.manifest.parent, manifest.price_series), response.content
+            )
+        with db.connect() as conn:
+            result = build(args.manifest, news_conn=conn)
         report = audit(result)
-        report["price_observation_status"] = price["status"] if price else "NOT_REQUESTED"
+        report["price_observation_status"] = "SERIES_REVALIDATED" if price else "NOT_REQUESTED"
         args.output.mkdir(parents=True, exist_ok=False)
         for name, value in [("result", result), ("audit", report), ("collection", collection)]:
             (args.output / (name + ".json")).write_text(

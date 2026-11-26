@@ -27,7 +27,7 @@ def test_real_pipeline_revision_withdrawal_and_pin(db, linked):
     assert result["items"]
     first = result["items"][0]
     assert first["financial_magnitude"] == first["direction"] == first["horizon"] == "UNKNOWN"
-    assert first["priority"] == "RELATED_CONTEXT_NOT_ALERT"
+    assert first["priority"] == "SECTOR_CHANGE_CONTEXT"
     insert(title="Server memory prices fall")
     with db.connect() as conn:
         second = feed(conn, data, root.parent)["items"][0]

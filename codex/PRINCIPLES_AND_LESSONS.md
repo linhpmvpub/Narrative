@@ -97,3 +97,19 @@ Gộp bài học trùng bằng liên kết; không ghi một quy tắc mới cho
 dấu superseded kèm lý do khi bị bác bỏ. Chỉ nâng giả thuyết thành nguyên tắc ổn định khi có bằng
 chứng hoặc quyết định rõ của người dùng. Không có bài học mới thì ghi “đã rà soát, không bổ sung”.
 Rà soát định kỳ theo mốc phát triển, không tự tạo scheduler hay gửi thông báo vì yêu cầu này.
+
+## L016 — 2026-11-26 — cross-source price inference authorized
+
+User permits inferring price context by comparison with other sources. Match instrument,
+capacity/grade, chip versus module, spot versus contract/retail and observation period
+before treating prices as comparable. Similar numerical levels alone do not establish
+identity or units. Preserve the original quote and separate observed values from a
+one-step inferred unit convention; propagate CROSS_SOURCE_INFERRED and unit_verified=false.
+Do not chain priors into invented profit/EPS effects. A secondary page can repeat the
+primary source, so agreement is not automatically independent corroboration.
+
+Observed example: the exact DDR5 chip is described as USD/die on a secondary page, but
+its row date differs from its page update date. Use it only as labeled unit context,
+not confirmation of today's price. Tests cover inferred-unit labeling, rejection of
+multi-step metadata, correction/withdrawal, exact instrument and threshold suppression.
+No independent market accuracy claim. Existing no-fabrication/source-period principles remain.

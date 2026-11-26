@@ -27,6 +27,8 @@ class Event(BaseModel):
 
 class Workspace(BaseModel):
     model_config = ConfigDict(extra="forbid")
+    price_series: str | None = None
+    price_metadata: str | None = None
     profiles: str | None = None
     atlas: str
     registry: str
@@ -131,6 +133,25 @@ def build(manifest, *, include_synthetic=False, news_conn=None):
                 held.append({"event_id": event.id, "reason": "NO_CURRENT_ELIGIBLE_PATH"})
         except (ValueError, OSError, KeyError):
             held.append({"event_id": event.id, "reason": "EVIDENCE_UNAVAILABLE_OR_INVALID"})
+    comparisons = []
+    if config.price_series:
+        from engine.price_series import cards as price_cards
+        from engine.price_series import compare
+
+        for days in (1, 7, 30):
+            comparison = compare(
+                path(config.price_series),
+                days=days,
+                metadata=path(config.price_metadata) if config.price_metadata else None,
+            )
+            comparisons.append(comparison)
+            cards.extend(
+                bundle(
+                    "price-series-" + str(days),
+                    "PRICE_SERIES_CURRENT",
+                    price_cards(comparison, registry, data),
+                )
+            )
     # Detect a configuration/registry swap while building a response.
     if (
         manifest.read_bytes() != raw
@@ -141,6 +162,7 @@ def build(manifest, *, include_synthetic=False, news_conn=None):
     return {
         "core": core,
         "context": context,
+        "price_comparisons": comparisons,
         "paths": paths,
         "commodities": [c.model_dump(mode="json") for c in registry.commodities],
         "sources": [{"id": s.id, "url": str(s.url), "status": s.status} for s in registry.sources],

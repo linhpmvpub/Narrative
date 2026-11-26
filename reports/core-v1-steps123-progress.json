@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-26",
+  "scope": "STEPS_1_3_LOCAL_V1_IMPLEMENTATION",
+  "implementation_status": "IMPLEMENTED_WITH_EXPLICIT_DATA_UNKNOWN_STATES",
+  "profiles": 6,
+  "tickers": 5,
+  "financial_context_sets": 13,
+  "exposure_parameters": 39,
+  "entity_references": 8,
+  "examined": 683,
+  "priority_cards": 7,
+  "background_cards": 39,
+  "scan_truncated": false,
+  "real_price_observations": 2,
+  "real_daily_change_pct": "0",
+  "price_windows_days": [
+    1,
+    7,
+    30
+  ],
+  "real_windows_with_enough_history": [
+    1
+  ],
+  "metadata_basis": "CROSS_SOURCE_INFERRED",
+  "unit_verified": false,
+  "price_alerts": 0,
+  "delivery": "disabled",
+  "accuracy_evaluated": false,
+  "baseline_sha256": "3f56fdbb9c39b4c736dbaf8a04538512b98ccdc0467579401d266f968a3cd32c",
+  "ci_status": "PENDING"
+}
