@@ -4640,7 +4640,21 @@
     "ruff": "PASS",
     "mypy_files": 153,
     "js_syntax": "PASS",
-    "ci": "PENDING",
+    "ci": {
+      "id": 45855518846,
+      "commit": "972a4c7f79050e2546606bab1ce1b173e0a2dabe",
+      "conclusion": "success",
+      "sqlite": {
+        "passed": 1294,
+        "seconds": 155.16
+      },
+      "postgresql": {
+        "passed": 1294,
+        "seconds": 283.85
+      },
+      "existing_warnings_per_suite": 1,
+      "other_checks": "Migration/seed/replay/downgrade, lint/type/JS, dependency audit and actual-model smoke passed"
+    },
     "browser": "Desktop/mobile auth/filter/logout passed; no page errors"
   },
   "limitations": [
@@ -6499,5 +6513,6 @@
   "comparison_basis": {
     "broad": "Previous activity candidate versus current scope candidate under identical runtime",
     "recent": "old_* keys preserve original frozen pre-activity predictions; previous_activity_recent supplies preceding candidate results"
-  }
+  },
+  "runtime_baseline_sha256": "99f0d35594117cfffc32ea3087a0fdd3426b847edd3f076e5ab5ffb682aaad19"
 }

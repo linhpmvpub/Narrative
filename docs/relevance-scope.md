@@ -7,7 +7,7 @@ extends the compact company profile; it does not add a price forecast or enable 
 | --- | --- | --- |
 | OWN_PRODUCT | Same-sentence company subject, scoped topic/action, source evidence; subject must identify the profile company | News names the company in the applicable market; an order or impact is not verified |
 | SHARED_MARKET | Reviewed factor/path and same-sentence market/activity; sourced exclusions for known competing subjects | Market context, with customer and hardware participation unknown |
-| COMPETITOR_PLATFORM | Named subject with evidence, product anchor, outgoing sourced COMPETES_WITH relation present in the selected route | Competitive product context; substitution, share and profit effects unknown |
+| COMPETITOR_PLATFORM | Named subject with evidence, company/product anchor, outgoing sourced COMPETES_WITH relation present in the selected route | Competitive product context; substitution, share and profit effects unknown |
 
 `FactorBinding.relevance_scope` is optional and omitted when absent, preserving
 legacy serialized profile hashes. Scoped rules reject aliases and unsupported
@@ -49,7 +49,8 @@ Earlier candidate versions, source captures and frozen predictions are preserved
 See [aggregate results](../reports/relevance-scope-regression.json). The comparison
 is against the preceding activity-routing candidate, using exposed two-agent AI
 labels and unchanged narrative targets. It is not a new blind evaluation or human
-gold. Cohorts are reported separately; do not pool overlapping economic stories.
+gold. This uses current profiles on historical text, not a strict as-of backtest.
+Cohorts are reported separately; do not pool overlapping economic stories.
 
 | Track | Pairs | True positives before → after | False positives before → after |
 | --- | ---: | ---: | ---: |
