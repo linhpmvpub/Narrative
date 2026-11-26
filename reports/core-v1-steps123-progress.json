@@ -27,5 +27,12 @@
   "delivery": "disabled",
   "accuracy_evaluated": false,
   "baseline_sha256": "3f56fdbb9c39b4c736dbaf8a04538512b98ccdc0467579401d266f968a3cd32c",
-  "ci_status": "PENDING"
+  "ci_status": "SUCCESS",
+  "ci_run": 45829236006,
+  "ci_code_commit": "16dd69885b0161888ea8772fc6723762e2c1fd80",
+  "sqlite_tests": 1258,
+  "postgres_tests": 1258,
+  "model_synthetic_cases": 8,
+  "steps_1_3_implementation_complete": true,
+  "release_acceptance_complete": false
 }

@@ -4,8 +4,10 @@
 
 - [x] Freeze compact7-group/10-relation core and shared sourced input/market schema.
 - [x] Populate7exposures/4commodities/2market definitions and wire source-to-card routing.
-- [ ] Integrate compact core into private feed/map and bundle same-event product cards.
-- [ ] Add bounded price observations/adapters with units, periods and revisions; finish algorithm/lifecycle.
+- [x] Integrate compact core into private feed/map and bundle same-event product cards; local opt-in API/UI, no deployment.
+- [x] Add bounded price series, units/provenance, periods/revisions/withdrawal and exact input routing; one-step cross-source unit inference authorized2026-11-26. Explicit editorial tiers/weights and source-duration handling implemented; financial impact/lag unknown where unsupported.
+- [x] Surface13financial sets/39scoped parameters/8entity references across5current issuers and scan683available RSS records without truncation in local acceptance run.
+- [ ] Accumulate or source longer real price history (currently2points;7/30day windows correctly insufficient); expand sources only within bounded product scope.
 - [ ] Comprehensive evaluation and improvement loops AFTER implementation.
 - Separate LLM-prior evaluation is deferred by user; older pending review tasks below are historical priorities, not current instructions.
 
