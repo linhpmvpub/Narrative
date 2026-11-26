@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-26",
+  "scope": "LOCAL_CORE_WORKSPACE",
+  "profiles": 6,
+  "input_paths": 7,
+  "real_price_cards": 0,
+  "synthetic_price_cards": 2,
+  "synthetic_default_visible": false,
+  "delivery": "disabled",
+  "public_deployment": false,
+  "baseline_sha256": "f2adc3960cc1fcbbf97e09ff85601dc4d45ef7721bb1de3318a9d0d9aead5d76",
+  "market_accuracy_evaluated": false
+}

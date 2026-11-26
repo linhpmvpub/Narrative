@@ -1,5 +1,13 @@
 # Quality review after each iteration
 
+## Compact core workspace — 2026-11-26 (latest)
+
+Product value: makes the bounded database inspectable from profile to sourced input path and grouped news card. Preserves conditional impact and UNKNOWN financial magnitude/horizon. Existing canonical map remains separate; no new graph approval or causal proof is implied.
+
+Acceptance evidence:6real profiles/7sourced input paths; default0real price cards, explicit synthetic mode2cards.57focused tests20.23s cover source withdrawal, registry corruption, price thresholds, revision/market/period bundling boundaries, API authorization/disabled default and safe error responses. Desktop/mobile browser smoke uses actual local projection with intercepted HTTP; verifies filters, synthetic opt-in, no credential storage, no horizontal overflow, clearing on503/logout and ignoring late responses. No page errors. Ruff/mypy145/JS passed. Full CI pending. No active service restart or cloud publication.
+
+Limitations and remedies: no normalized real price series yet → next add bounded observations with source/period/unit/revision identity and feed handoff. Event identity/current revision operator maintained → later connect ingestion event identity; this is product-card bundling, not cross-source semantic dedup. Manual research source-current means local ledger state, not publisher freshness. UI shows compact status/path details, not a complete company financial model. No measured precision/recall or independent correctness improvement; tests establish implementation behavior. No separate prior evaluation requested. Existing principles reviewed, unchanged; no new general lesson needed for this integration.
+
 ## Compact v1 database expansion — 2026-11-25 (latest)
 
 Product value: stable7-group/10-relation core reusable across tickers; added actual source-grounded product inputs and benchmark metadata rather than another standalone evaluation layer. User deferred separate prior evaluation and comprehensive evaluation until database/algorithm completion. Testing/source validation remain required.

@@ -1,0 +1,25 @@
+"use strict";
+(() => {
+  const $ = id => document.getElementById(id);
+  let token = "", epoch = 0, data = null;
+  const el = (tag, text, cls) => { const n = document.createElement(tag); n.textContent = text; if(cls)n.className=cls; return n; };
+  const names = {identity:"Định danh",products:"Sản phẩm",inputs:"Đầu vào",output_markets:"Thị trường đầu ra",counterparties:"Đối tác / đối thủ",financial_exposure:"Tài chính",narratives:"Narrative"};
+  function clear(){ data=null; $("content").hidden=true; for(const id of ["profiles","paths","cards"]) $(id).replaceChildren(); $("company").replaceChildren(new Option("Tất cả","")); }
+  function source(parent, url, label){ try{const u=new URL(url);if(u.protocol!=="https:")return;const a=el("a",label);a.href=u.href;a.target="_blank";a.rel="noopener noreferrer";parent.append(a);}catch{} }
+  function render(){
+    if(!data)return;
+    const selected=$("company").value;
+    for(const id of ["profiles","paths","cards"]) $(id).replaceChildren();
+    const profiles=data.core.profiles.filter(p=>!selected||p.ticker===selected);
+    for(const p of profiles){const a=el("article","");a.append(el("h3",p.ticker+" · "+p.legal_name),el("p",p.profile_id,"muted"));for(const [key,g] of Object.entries(p.groups)){const d=el("details","");d.append(el("summary",names[key]||key));const ul=el("ul","");for(const c of g.components)ul.append(el("li",c.key+": "+c.status));if(key==="narratives")for(const id of p.narrative_ids)ul.append(el("li",id));d.append(ul);a.append(d);}$("profiles").append(a);}
+    for(const row of data.paths){const e=row.exposure,p=profiles.find(p=>p.profile_id===e.profile_id);if(!p)continue;const a=el("article","");a.append(el("h3",p.ticker),el("p",e.input_label+" → "+e.product_label+" → "+p.ticker,"route"),el("p",e.scope));for(const evidence of e.evidence){const d=el("details","");d.append(el("summary","Bằng chứng đầu vào"),el("p",evidence.quote));const s=data.sources.find(s=>s.id===evidence.source_id);if(s)source(d,s.url,"Mở nguồn");a.append(d);}for(const market of row.price_markets)a.append(el("p",market.market.instrument+" · "+market.market.basis+" · "+market.limitations,"muted"));if(!row.price_markets.length)a.append(el("p","Chưa có thị trường giá tham chiếu phù hợp.","muted"));$("paths").append(a);}
+    const cards=data.cards.filter(c=>!selected||c.ticker===selected);
+    for(const c of cards){const a=el("article","");a.append(el("h3",c.ticker+" · "+c.commodity),el("span",c.mode==="SYNTHETIC"?"MÔ PHỎNG":c.mode==="MANUAL_RESEARCH"?"NGHIÊN CỨU THỦ CÔNG":"RSS HIỆN HÀNH","badge"),el("p","Biến động giá: "+c.measurement.signed_change_pct+"%"),el("p",c.source_quote));for(const p of c.products)a.append(el("p",p.product+" — "+p.scope));a.append(el("p","Áp lực chi phí có điều kiện: "+c.conditional_cost_pressure+". Chưa xác định mức tác động lợi nhuận hoặc thời hạn.","muted"));source(a,c.source_url,"Nguồn tin");$("cards").append(a);}
+    if(!cards.length)$("cards").append(el("p","Chưa có tin đủ điều kiện ở bộ lọc hiện tại. Không suy diễn thêm sự kiện."));
+    $("content").hidden=false;
+  }
+  async function refresh(){const id=++epoch;clear();if(!token){$("status").textContent="Nhập mã truy cập để mở dữ liệu.";return;}$("status").textContent="Đang kiểm tra nguồn và phiên bản hiện hành…";try{const r=await fetch("/api/v0/news/core?include_synthetic="+$("synthetic").checked,{headers:{Authorization:"Bearer "+token},cache:"no-store"});if(!r.ok)throw Error("Dữ liệu chưa sẵn sàng hoặc phiên truy cập không hợp lệ ("+r.status+").");const result=await r.json();if(id!==epoch)return;data=result;for(const ticker of [...new Set(data.core.profiles.map(p=>p.ticker))].sort())$("company").append(new Option(ticker,ticker));render();$("status").textContent=data.core.profiles.length+" hồ sơ · "+data.paths.length+" đường đầu vào · "+data.cards.length+" thẻ tin · "+data.held.length+" sự kiện chưa đủ điều kiện · thông báo tắt.";}catch(e){if(id===epoch){clear();$("status").textContent=e.message;}}}
+  $("login").onsubmit=e=>{e.preventDefault();token=$("token").value;$("token").value="";refresh();};
+  $("logout").onclick=()=>{++epoch;token="";$("token").value="";$("synthetic").checked=false;clear();$("status").textContent="Đã xóa phiên và dữ liệu khỏi trang.";};
+  $("refresh").onclick=refresh;$("synthetic").onchange=refresh;$("company").onchange=render;
+})();

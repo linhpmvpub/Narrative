@@ -67,3 +67,43 @@ Current use is a local workbench. No active feed/map changes. One end-to-end dem
 1. Use this fixed core in private feed/map and bundle same-event/product cards without losing scope/provenance.
 2. Add bounded market observations/adapters with explicit series, unit, period and revisions; no broad commodity expansion until the current path works consistently.
 3. Finish applicable source-lifecycle handling and end-to-end algorithm behavior, then run comprehensive evaluation and improvement loops. Do not launch a separate prior-evaluation workstream now.
+
+## Local core workspace — 2026-11-26
+
+`/core` is a separate authenticated-data workspace linked from `/news` and `/map`.
+It shows the seven-group profile projection, sourced input → scoped product → company
+paths and an event/company feed. The old canonical causal graph is not reclassified.
+Profile component summaries retain the original status; registry input paths do not
+silently mark all legacy components complete.
+
+The API `/api/v0/news/core` is disabled unless `CORE_WORKSPACE_MANIFEST` points to a
+local JSON manifest. Paths must resolve beneath its parent, including symlink targets.
+Format: `atlas`, `registry`, `events` (at most100). Each event has a unique `id`,
+`mode` (`RSS_CURRENT`, `MANUAL_RESEARCH`, `SYNTHETIC`), `observation`, `selection`,
+`articles`, `store`, and optional `market_id`. Paths are relative to the manifest.
+The manifest is operator-maintained, not accepted from API clients. Keep it under
+ignored source-cache. Only the current event revision belongs in the manifest; event
+IDs must remain stable on correction. Do not load cached result exports as live cards.
+
+Every refresh validates atlas/registry and reruns commodity source/period/threshold
+checks. RSS mode requires the current ingestion connection; manual research remains
+explicitly labeled and is not a live-source freshness guarantee. Synthetic events are
+excluded by default, including on logout. Same-event/company cards are combined only
+when revision, measurement, commodity, selected market and all common decision fields
+agree; each product scope/evidence/market limitation and narrative ID remains present.
+This bundles product duplicates, not semantic duplicate articles from different sources.
+
+The browser keeps the access token in memory, clears data on errors/logout, rejects
+late responses after a new refresh/logout, and uses text nodes/HTTPS-only source links.
+No auto-polling, notification delivery, cloud deployment or old-server restart occurs.
+For local use configure the manifest in a separate process bound to127.0.0.1; do not
+attach it to a tunneled service. Current local manifest is
+`source-cache/core-workspace-2026-11-26.json`. Browser validation intercepts localhost
+HTTP with the actual local projection; it is not a claim that a deployed server changed.
+
+Current local result:6profiles,7sourced paths,0real price cards;2AMD/NVDA cards only when
+synthetic mode is explicitly selected. There is still no normalized real price series,
+company purchase price, exposure weight, financial magnitude or time-horizon estimate.
+Next implement bounded sourced price observations with unit/instrument/period/revision
+identity, then connect their reviewed observations to this manifest. Comprehensive
+algorithm/database evaluation remains later; no separate LLM-prior evaluation now.

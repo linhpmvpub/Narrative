@@ -45,6 +45,7 @@ jobs:
       - run: pip install -c requirements-validated.txt -e '.[dev]'
       - run: ruff check engine alembic tests
       - run: |
+          node --check engine/web/core.js
           node --check engine/web/app.js
           node --check engine/web/news.js
           node --check engine/web/news-review.js

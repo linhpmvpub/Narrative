@@ -25,6 +25,10 @@ def install(app):
     def news():
         return shell("news.html")
 
+    @app.get("/core", include_in_schema=False)
+    def core():
+        return shell("core.html")
+
     @app.get("/map", include_in_schema=False)
     def impact_map():
         return shell("map.html")
@@ -50,6 +54,8 @@ def install(app):
     @app.get("/assets/{name}", include_in_schema=False)
     def asset(name: str):
         if name not in {
+            "core.js",
+            "core.css",
             "app.js",
             "news.js",
             "news-review.js",

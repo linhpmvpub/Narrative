@@ -221,3 +221,20 @@ def save_article_preferences(body: Preferences, user: Annotated[Principal, Depen
                              key: Annotated[str | None, Header(alias="Idempotency-Key")] = None):
     from engine.article_preferences import save
     return write(user, "article-preferences", key, body.model_dump(), lambda conn: save(conn, user, body))
+
+
+@router.get("/core")
+def core_workspace(include_synthetic: bool = False):
+    from engine.core_workspace import build
+
+    manifest = os.environ.get("CORE_WORKSPACE_MANIFEST")
+    if not manifest:
+        raise HTTPException(503, "Local core workspace is not configured")
+    engine = database()
+    try:
+        with engine.connect() as conn:
+            return build(manifest, include_synthetic=include_synthetic, news_conn=conn)
+    except (ValueError, OSError, KeyError):
+        raise HTTPException(503, "Core evidence unavailable; refresh after local review") from None
+    finally:
+        engine.dispose()
