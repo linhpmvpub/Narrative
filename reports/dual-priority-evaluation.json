@@ -1665,7 +1665,30 @@
     "warnings": 1,
     "ruff": "passed",
     "mypy_files": 152,
-    "ci": "pending"
+    "ci": {
+      "run_id": 45839674450,
+      "commit": "4468f4df1fef88c54f18677fdb39354f1690e71e",
+      "conclusion": "success",
+      "sqlite": {
+        "passed": 1271,
+        "seconds": 137.44,
+        "warnings": 1
+      },
+      "postgresql": {
+        "passed": 1271,
+        "seconds": 197.74,
+        "warnings": 1
+      },
+      "extraction_model_smoke": "passed",
+      "dependency_audit": "passed",
+      "javascript_syntax": "passed",
+      "migration_seed_replay_downgrade": "passed"
+    },
+    "frozen_prediction_replay": {
+      "pairs": 246,
+      "exact_match": true,
+      "code_commit": "4468f4df1fef88c54f18677fdb39354f1690e71e"
+    }
   },
   "acceptance_blockers": [
     "RSS selects no pairs: 7 resolved relevance FN; undefined precision; unresolved56/216 above20%",

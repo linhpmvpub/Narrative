@@ -124,4 +124,10 @@ directory for every freeze and preserve receipts. Full-body evaluation requires 
 `NEWS_ARTICLE_DIR`. No raw articles, per-case labels or databases are committed.
 
 Focused validation:45tests passed,1existing Starlette warning; Ruff and mypy152passed.
-Full CI is recorded in the checkpoint after completion. Live notifications remain disabled.
+CI45839674450 on4468f4d passed1,271SQLite tests137.44s and1,271PostgreSQL tests197.74s
+(one existing Starlette warning each), actual-model smoke, dependency audit, JS syntax and
+migration/seed/replay/downgrade. Live notifications remain disabled.
+
+Reproduction check: the committed runtime reproduced all246locked decisions/assessments
+exactly after reviews, without rewriting any frozen artifact. This confirms reproducibility,
+not accuracy or independence of the event clusters.
