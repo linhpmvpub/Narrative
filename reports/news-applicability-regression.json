@@ -3740,7 +3740,19 @@
     "ruff": "passed",
     "mypy": "154 source files passed",
     "javascript": "passed",
-    "ci": "pending"
+    "ci": {
+      "run": 46003305544,
+      "code_sha": "070900eeb5d0a4c30576539b86f4474d8304b638",
+      "conclusion": "success",
+      "sqlite": "1315 passed, 1 warning in 162.74s",
+      "postgresql": "1315 passed, 1 warning in 292.11s",
+      "warning": "existing Starlette httpx deprecation",
+      "other": "lint, types, JavaScript, migrations/seed/replay/downgrade, dependency audit, actual-model smoke passed"
+    },
+    "browser": "Desktop/mobile authentication, filtering, logout, error clearing and late-response checks passed; no page errors. Initial run lacked DEV_INFORMATIONAL_FEED, repeated with explicit local flag.",
+    "legacy_profile_hashes": "6 unchanged",
+    "runtime_baseline": "12f724c096e8b22606c413cd61af918ff79ac5288d99275ac096ccb904ec8116",
+    "handoff_files": 98
   },
   "limitations": [
     "Opt-in scoped rules, not complete semantic classification",

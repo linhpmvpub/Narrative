@@ -8,7 +8,7 @@ Review found two over-filtering failures: TPU context lacked a sourced competito
 
 Remaining risks: five opt-in rules do not classify every path, English syntax/whole-window negation and first-window matching can under-match, historical current-profile evaluation is exposed, AI label uncertainty persists, MU/SNDK support is inadequate. Still3RSS/1full-body resolved false positives and42RSS/6full-body false negatives. No commercial acceptance or calibrated strength/time horizon claim. Next prioritize unseen balanced component/application/infrastructure examples with both positive and negative targets, including MU/SNDK; preserve labels/freeze before future blind evaluation.
 
-Validation:53focused tests, Ruff/mypy154/JS pass; local10-source pipeline21main cards,0alerts,notifications disabled. Full CI/browser status tracked in checkpoint and aggregate report. No cloud/data upload or service changes.
+Validation:53focused tests, Ruff/mypy154/JS pass; local10-source pipeline21main cards,0alerts,notifications disabled. Desktop/mobile browser checks passed. CI46003305544 on070900e:1315SQLite +1315PostgreSQL tests passed (1existing warning each), plus migration, dependency audit and actual-model smoke. Baseline and98local artifacts pinned;6legacy profile hashes unchanged. No cloud/data upload or service changes.
 
 ## Relevance scope and competitor context — 2026-11-26 (latest)
 
