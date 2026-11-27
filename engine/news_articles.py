@@ -31,6 +31,8 @@ HOSTS = {
     "www.ecb.europa.eu",
     "nvidianews.nvidia.com",
     "investors.micron.com",
+    "micron.gcs-web.com",
+    "www.sandisk.com",
     "ir.amd.com",
     "investors.delltechnologies.com",
     "investor.sandisk.com",

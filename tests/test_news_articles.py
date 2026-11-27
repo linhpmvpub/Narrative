@@ -48,6 +48,24 @@ def test_article_integrity_roles_and_no_backdating(packet):
     assert evidence(revision)["items"][0]["status"] == "INVALID_OR_UNAVAILABLE"
 
 
+@pytest.mark.parametrize("host", ["micron.gcs-web.com", "www.sandisk.com"])
+def test_public_issuer_capture_is_local_unreviewed_and_exact_host(tmp_path, host):
+    revision = {"id": "synthetic-issuer", "received_at": datetime.now(UTC),
+                "payload": {"url": f"https://{host}/synthetic-release"}}
+    c = NewsClient(transport=httpx.MockTransport(lambda r: httpx.Response(
+        200, content=HTML, headers={"content-type": "text/html"})))
+    try:
+        saved = capture(revision, c, root=tmp_path)
+        checked, text = read_packet(revision, saved["packet_sha256"], root=tmp_path)
+        assert text and not checked["impact_eligible"]
+        assert checked["review_status"] == "UNREVIEWED"
+        with pytest.raises(ValueError, match="allowlisted"):
+            capture(revision, c, root=tmp_path, url=f"https://{host}.example.org/a",
+                    relation="issuer_context")
+    finally:
+        c.close()
+
+
 @pytest.mark.parametrize("code", [302, 403, 429])
 def test_article_no_redirect_or_access_bypass(packet, code):
     revision, _ = packet
