@@ -278,6 +278,22 @@ class RelevanceScope(Strict):
 class SignalRule(Strict):
     components: list[Literal["MEMORY", "COOLING", "PACKAGING", "NETWORKING"]] = Field(min_length=1, max_length=4)
     market: Literal["DATA_CENTER"] = "DATA_CENTER"
+    event_types: list[Literal["READINESS", "PRODUCTION", "CAPACITY", "CONSTRAINT", "ADOPTION"]] = Field(default_factory=list, max_length=5, exclude_if=lambda value: not value)
+
+
+class AssertionScope(Strict):
+    mode: Literal["NAMED_OPERATOR", "NAMED_PLATFORM_OR_MARKET_CONSTRAINT"]
+    subject_terms: list[TEXT] = Field(min_length=1, max_length=20)
+    relationship_id: ID
+    event_types: list[Literal["READINESS", "PRODUCTION", "CAPACITY", "CONSTRAINT", "ADOPTION"]] = Field(min_length=1, max_length=5)
+
+    @model_validator(mode="after")
+    def bounded(self):
+        if (len(set(self.event_types)) != len(self.event_types)
+                or len(set(self.subject_terms)) != len(self.subject_terms)
+                or any(t != t.strip() or not 2 <= len(t) <= 80 for t in self.subject_terms)):
+            raise ValueError("Unique bounded assertion scope required")
+        return self
 
 
 class NarrativeRoutingPolicy(Strict):
@@ -296,6 +312,7 @@ class FactorBinding(Strict):
     kind: Literal["ECONOMIC_CHANGE", "ISSUER_RELATIONSHIP_DISCLOSURE",
                   "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY", "CLASSIFIED_CONTEXT"] = "ECONOMIC_CHANGE"
     signal_rule: SignalRule | None = Field(default=None, exclude_if=lambda value: value is None)
+    assertion_scope: AssertionScope | None = Field(default=None, exclude_if=lambda value: value is None)
     activity_rule: ActivityRule | None = Field(default=None, exclude_if=lambda value: value is None)
     relevance_scope: RelevanceScope | None = Field(default=None, exclude_if=lambda value: value is None)
     market_scope: Literal["COMPONENT_MARKET", "APPLICATION_SOFTWARE", "INFRASTRUCTURE_DEMAND"] | None = Field(default=None, exclude_if=lambda value: value is None)
@@ -315,6 +332,12 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
+        if self.assertion_scope:
+            from engine.news_assertions import evidence_supports
+
+            if (self.kind not in {"CLASSIFIED_CONTEXT", "SCOPED_ACTIVITY"} or not self.narrative_ids
+                    or not evidence_supports(self.assertion_scope.subject_terms, self.evidence)):
+                raise ValueError("Assertion scope requires literal source evidence and explicit narratives")
         if self.kind == "CLASSIFIED_CONTEXT":
             from engine.news_framework import first, policy
 
@@ -499,6 +522,11 @@ class ProfileBundle(Strict):
                     sources[e.source_id].retrieved_at > ref.reviewed_at for e in ref.evidence):
                 raise ValueError("Entity reference review must follow acquisition")
         for binding in self.factor_bindings:
+            if binding.assertion_scope:
+                relation = relationships.get(binding.assertion_scope.relationship_id)
+                if (relation is None or relation.status != "SOURCE_BACKED"
+                        or binding.factor_id not in {relation.from_id, relation.to_id}):
+                    raise ValueError("Assertion scope requires a sourced incident graph relationship")
             scope = binding.relevance_scope
             competitor = scope is not None and scope.role == "COMPETITOR_PLATFORM"
             if scope and scope.role == "OWN_PRODUCT" and not set(scope.subject_terms) <= {
@@ -711,6 +739,9 @@ def audit_binding_routes(bundle):
         routes = [paths(bundle, event, n, effective_at=bundle.available_at)[0] for n in targets]
         if binding.relevance_scope and binding.relevance_scope.relationship_id:
             rid = binding.relevance_scope.relationship_id
+            routes = [[p for p in group if any(r.id == rid for r in p)] for group in routes]
+        if binding.assertion_scope:
+            rid = binding.assertion_scope.relationship_id
             routes = [[p for p in group if any(r.id == rid for r in p)] for group in routes]
         reachable = [bool(group) for group in routes]
         if not any(reachable) or (binding.narrative_ids and not all(reachable)):

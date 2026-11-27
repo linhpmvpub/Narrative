@@ -1,0 +1,70 @@
+"""Bounded source assertions and data-declared graph applicability, not facts."""
+
+import json
+import re
+from functools import lru_cache
+from pathlib import Path
+
+from engine.news_framework import classify, first, literal
+
+
+@lru_cache(maxsize=1)
+def policy():
+    return json.loads((Path(__file__).resolve().parent.parent /
+                       "config/news-assertions-v1.json").read_text(encoding="utf-8"))
+
+
+def windows(text):
+    # Contrast clauses cannot donate a subject or market to each other.
+    return re.finditer(r"[^.!?;\n]+", text)
+
+
+@lru_cache(maxsize=4096)
+def frame(text):
+    p = policy()
+    signal = classify(text)
+    events = {k: h for k, terms in p["activities"].items() if (h := first(terms, text))}
+    negation = first(p["negations"], text)
+    phase = ("RETROSPECTIVE" if first(p["retrospective"], text) else
+             "FORWARD_LOOKING" if first(p["planned"], text) else "SOURCE_REPORTED")
+    return {"version": p["version"], "text": text, "components": signal["components"],
+            "markets": signal["markets"], "activities": events, "phase": phase,
+            "negation": negation, "actor": "UNKNOWN", "recipient": "UNKNOWN",
+            "platform": "UNKNOWN", "reference_period": "UNKNOWN",
+            "offset_basis": "RELATIVE_TO_ASSERTION_TEXT", "financial_impact": "UNKNOWN"}
+
+
+def applicability(scope, text):
+    """A literal bridge is conditional scope evidence, not verified actor identity."""
+    f = frame(text)
+    events = {k: h for k, h in f["activities"].items() if k in scope.event_types}
+    subject = first(scope.subject_terms, text)
+    industry = first(policy()["industry_scope"], text)
+    constraint = f["activities"].get("CONSTRAINT")
+    reason, allowed = "SCOPE_NOT_ESTABLISHED", False
+    if events and not f["negation"]:
+        if scope.mode == "NAMED_OPERATOR":
+            # Active subject directly precedes its predicate. Mentioning the
+            # operator as a comparison, investor or customer is insufficient.
+            for term in scope.subject_terms:
+                for hit in re.finditer(r"(?<!\w)" + re.escape(term) + r"(?!\w)", text, re.I):
+                    for event in events.values():
+                        gap = text[hit.end():event["start"]] if hit.end() <= event["start"] else None
+                        if gap is not None and len(gap) <= 100 and re.fullmatch(
+                                r"(?:\s|,|has|have|had|is|are|was|were|will|now|also|recently|already|successfully)*",
+                                gap, re.I):
+                            subject = {"start": hit.start(), "end": hit.end(), "text": hit.group(), "term": term}
+                            allowed, reason = True, "NAMED_OPERATOR_ACTIVITY"
+        elif subject and not re.search(r"\b(but|whereas|while)\b", text, re.I):
+            allowed, reason = True, "NAMED_PLATFORM_CONTEXT"
+        elif (industry and constraint and "CONSTRAINT" in scope.event_types
+              and f["components"] and f["markets"]):
+            allowed, reason = True, "EXPLICIT_SHARED_MARKET_CONSTRAINT"
+    return {"allowed": allowed, "reason": reason, "mode": scope.mode,
+            "relationship_id": scope.relationship_id, "subject_span": subject,
+            "industry_span": industry, "assertion": f, "news_party_verified": False,
+            "financial_impact": "UNKNOWN"}
+
+
+def evidence_supports(terms, evidence):
+    return all(any(literal(t, e.quote) for e in evidence) for t in terms)

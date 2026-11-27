@@ -35,6 +35,24 @@ def pattern(term):
 def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name=""):
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
+    if binding.assertion_scope:
+        from engine.news_assertions import applicability as assertion_applicability
+        from engine.news_assertions import windows
+
+        rule = binding.model_copy(update={"assertion_scope": None})
+        for field, text in fields.items():
+            for window in windows(text):
+                if len(window.group()) > 1200:
+                    continue
+                trace = assertion_applicability(binding.assertion_scope, window.group())
+                if not trace["allowed"]:
+                    continue
+                hits = matches(rule, {field: window.group(), "context_title": payload.get("context_title", fields["title"])},
+                               issuer_cik=issuer_cik, profile_cik=profile_cik, legal_name=legal_name)
+                if hits:
+                    return [{**h, "start": h["start"] + window.start(), "end": h["end"] + window.start(),
+                             "assertion_scope": trace} for h in hits]
+        return []
     if binding.kind == "CLASSIFIED_CONTEXT":
         return signal_matches(binding.signal_rule, fields)
     if binding.market_scope or binding.routing_guards:
