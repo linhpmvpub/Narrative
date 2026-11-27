@@ -85,8 +85,8 @@ before reviewers start; running old profiles through new code is not that baseli
 Optional `AssertionScope.object_components` declares one or more existing component
 classes backed by literal profile evidence. OWNERSHIP and FINANCING_PURPOSE require
 these classes, NAMED_OPERATOR and SCOPED_ACTIVITY. The optional field is omitted
-from old serialization, preserving legacy profile hashes. No company identifier
-or headline enters the extraction grammar.
+from old serialization, preserving legacy profile hashes. The grammar has no ticker or headline-specific branch;
+actor names come from the sourced profile.
 
 `news-objects-v1.json` holds bounded predicate, asset-head, funding, purpose and
 exclusion vocabularies. `news_objects` binds a source-backed named actor to:

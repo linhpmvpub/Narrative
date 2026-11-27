@@ -13,6 +13,8 @@
 
 - Follow-up2026-11-27, actor resolution: a typed accepted predicate and an independent legacy verb list were contradictory action gates. Use one authoritative action contract, retaining separate product/actor/graph/lifecycle gates. Sourced product/facility scope and traced acronym normalization recovered all3known supply misses;7other resolved positives are still missed on the new77pairset. Recovering regressions is not new-set improvement: candidate and actual previous runtime both5TP/0FP/7FN. Archive and execute the real previous runtime before labels when code changes; previous profiles executed by new code are not a valid previous-engine baseline. Keep unresolved labels and all prior targets. Next: typed consolidation/asset and explicit financing-purpose coverage, then genuinely unused multi-publisher families.
 
+- Follow-up2026-11-27, asset/purpose scope: actor+transaction keyword+product somewhere in a sentence is insufficient. Bind the asset or use-of-proceeds object to the actual predicate; reject recipient/other-clause donation and silent object truncation. Sourced component classes limit applicability,not identity or verified output. Uniform6peer-binding migration recovers1exposed asset case; financing-purpose synthetic tests pass but recover0real financing cards. Report this distinction,keep6remaining misses and priority gap,then improve shared source boundaries/explicit references instead of expanding headline-specific vocabulary.
+
 ## L018 — Đo đúng tầng lỗi và công khai thiếu coverage
 
 - Đợt mới2026-11-26: RSS bỏ sót7cặp liên quan dù hạ ngưỡng; không có match đầu vào thì trọng số không khắc phục được. Tập đầy đủ3bài cho thấy phương án rộng tăng FP mà không tăng TP, liên quan đến nhầm phạm vi công ty/sản phẩm.

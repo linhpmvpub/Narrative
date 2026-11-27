@@ -1,5 +1,16 @@
 # TASKS — implementation execution checklist
 
+## Active next — source boundaries, explicit references and priority (2026-11-27)
+
+- [x] Typed OWNERSHIP/FINANCING_PURPOSE: sourced named actor, bounded product/asset object, completion/planned/passive forms, exact spans; unrelated-assets/stock-trade/other-clause/truncation counterexamples.
+- [x] Uniform6peer-binding migration via COMPETES_WITH/evidence, unchanged narrative targets; shared RSS/article/graph contract and local archived card. MU9,others unchanged; no ticker exceptions.
+- [x] Exposed77+older cohorts replay:one additionalTP,no additional resolvedFP; initial/final artifacts preserved. No new blind claim.86final focused tests,lint/types/UI verified; full CI receipt in latest checkpoint.
+- [ ] Shared sentence/paragraph boundaries for legal suffixes and decimals, preserving original offsets and RSS/full-body parity. Add explicit source-local actor references only with ambiguity controls; no implicit multi-hop story assembly.
+- [ ] Operating/product-improvement and source-linked financing-purpose context beyond simple clauses. Keep supplier/recipient/competition/market scopes distinct and quantify unknown coverage honestly.
+- [ ] Matched-assertion priority/phase/novelty audit;77main tier still misses5resolved priority labels. No numerical weight change until these feature/gating gaps are measured.
+- [ ] Later unused multi-publisher/family freeze and independent AI reviews; no reuse of77as holdout. Release/observation/human validation/cloud/real notifications remain separate gates.
+
+
 ## Active next — reusable asset and purpose attribution (2026-11-27)
 
 - [x] Bounded active/planned/joint/explicit-passive actor predicates; keep all verb spans, reject passive patients/recipients, remove duplicate legacy action veto. Names and scope remain profile data; no ticker/headline patches.
