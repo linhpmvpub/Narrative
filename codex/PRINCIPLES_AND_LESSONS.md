@@ -154,3 +154,21 @@ priority match until a general quantified deployment assertion was supported.
 Verify both near-miss negatives and deployment positives, broad exposed regression
 and unchanged unresolved counts. Announced capacity remains announced, never proof
 of realized orders or financial effect. This does not establish independent accuracy.
+
+
+## L021 — 2026-11-27 — sourced database coverage is not routing coverage
+
+Observed: an unseen memory-company challenge contains10resolved MU positives, yet
+none routes. Its profile already holds manufacturing/customer/competition facts,
+while its two bindings cover narrow material terms and first-person supplier text.
+Database completeness and executable news coverage must be checked separately.
+
+For each relevant core group, trace source-backed factor -> applicable activity/market
+scope -> traversable typed route -> narrative/card role. Mark missing routing explicitly;
+do not add nodes or adjust weights as a substitute. Conditional component-readiness and
+competitive context may be useful without proving a customer order or infrastructure demand.
+
+Evidence: memory-unseen-2026-11-27 locked150pair two-AI challenge; aggregate report and
+quality review. This is an observed development failure, not human-validated market truth.
+Verify a repair on both exposed positives and scope near misses, retain earlier cohorts,
+then evaluate a newly frozen candidate on unseen events. Never relabel failures to match rules.

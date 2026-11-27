@@ -1,5 +1,17 @@
 # Quality review after each iteration
 
+## Review — 2026-11-27 — unseen MU/SNDK coverage
+
+Product value: obtained previously missing positive MU/SNDK references and exposed the database-to-routing gap. Collected25candidates, selected15complete issuer articles(8MU/7SNDK),150pairs frozen before two separate-context AI reviews.27prior packet hashes/595article representations checked; one BiCS10 family conservatively excluded. Not random sampling, historical as-of, forward testing or human gold.
+
+Evidence: routing13TP/3FP/25FN,5unresolved; MU0/10positive pairs found, SNDK4/8. Main priority4TP/1FP/28FN against priority labels.5relevance and11priority disagreements retained. One shared investment family reduces15lexical clusters to14family components; MU support9positive families, SNDK6. No price/policy/disruption group coverage. Counts are small/correlated, broadening thresholds cannot recover unmatched upstream cases. No acceptance or accuracy-improvement claim.
+
+Observed limitations/remedies: MU's sourced manufacturing/customer/competition facts have no usable current activity routes; map existing core facts to explicit market/role/path bindings before expanding ontology. SNDK Consumer/Edge and external flash agreements under-match. False-positive classes need financing recipient/project, automotive-vs-server input scope and bilateral-vs-sector constraint distinctions. Some component-readiness labels are relevant context without actual infrastructure demand; keep a context role rather than weakening demand guards or silently changing the target. Quantitative strength/lag still unknown.
+
+Next priority: core profile-to-routing coverage, first MU, then SNDK, with exposed grouped regressions and negative market/role controls. Afterwards lock a new candidate and collect fresh events. Keep this failed challenge/labels untouched, retain old failures, avoid headline patches and weight tuning. L021 records the uncovered execution gap; L019/L020 retained; direction unchanged.
+
+Software validation:47focused tests, Ruff/mypy154passed. CI46009475555 on a914791 passed1317SQLite+1317PostgreSQL tests,1existing warning each, plus migrations, dependency audit and actual-model smoke. New host support is exact allowlisting, no redirect/access bypass or fact approval. Source data/labels local, notifications off, no running service/cloud changes.140local artifacts pinned; final aggregate and checkpoint prepared for GitHub.
+
 ## Review — 2026-11-27 — market applicability
 
 Objective: reduce incorrect component/software to infrastructure routing while preserving broader useful news through sourced paths. Implementation and paired exposed regression improve RSS FP4->3 and full-body FP2->1 with unchanged true positives and priority positives. Archive and recent cohorts unchanged. Exact source quotes and profile lifecycle remain mandatory; unknown financial impact remains unknown. No threshold/weight optimization or label changes.
