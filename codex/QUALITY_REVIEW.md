@@ -1,5 +1,15 @@
 # Quality review after each iteration
 
+## Review — 2026-11-27 — market applicability
+
+Objective: reduce incorrect component/software to infrastructure routing while preserving broader useful news through sourced paths. Implementation and paired exposed regression improve RSS FP4->3 and full-body FP2->1 with unchanged true positives and priority positives. Archive and recent cohorts unchanged. Exact source quotes and profile lifecycle remain mandatory; unknown financial impact remains unknown. No threshold/weight optimization or label changes.
+
+Review found two over-filtering failures: TPU context lacked a sourced competitor product path; GPU-only evidence needed a general quantified deployment bridge. Both fixed and regression rerun, intermediate failures retained locally. These findings reinforce L019; new L020 records the path-level distinction.
+
+Remaining risks: five opt-in rules do not classify every path, English syntax/whole-window negation and first-window matching can under-match, historical current-profile evaluation is exposed, AI label uncertainty persists, MU/SNDK support is inadequate. Still3RSS/1full-body resolved false positives and42RSS/6full-body false negatives. No commercial acceptance or calibrated strength/time horizon claim. Next prioritize unseen balanced component/application/infrastructure examples with both positive and negative targets, including MU/SNDK; preserve labels/freeze before future blind evaluation.
+
+Validation:53focused tests, Ruff/mypy154/JS pass; local10-source pipeline21main cards,0alerts,notifications disabled. Full CI/browser status tracked in checkpoint and aggregate report. No cloud/data upload or service changes.
+
 ## Relevance scope and competitor context — 2026-11-26 (latest)
 
 - Continued database-first product workflow and L019. Added optional source-bound RelevanceScope: OWN_PRODUCT, SHARED_MARKET, COMPETITOR_PLATFORM. Named terms require evidence; own subject must identify profile company; competitor anchor requires a sourced outgoing COMPETES_WITH edge and selected route must include it. Expired/revoked edge cannot be bypassed. Legacy serialization preserved. Full-article titles can exclude competing subjects, never donate positive terms to a sentence. Shared/competitor matches remain context-only, no concrete-change score from direction words. Core policy v4 retains numerical weights; UI explains role beside sourced path.

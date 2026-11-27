@@ -286,6 +286,7 @@ class FactorBinding(Strict):
                   "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY"] = "ECONOMIC_CHANGE"
     activity_rule: ActivityRule | None = Field(default=None, exclude_if=lambda value: value is None)
     relevance_scope: RelevanceScope | None = Field(default=None, exclude_if=lambda value: value is None)
+    market_scope: Literal["COMPONENT_MARKET", "APPLICATION_SOFTWARE", "INFRASTRUCTURE_DEMAND"] | None = Field(default=None, exclude_if=lambda value: value is None)
     issuer_supply_scope: bool = False
     disclosure_terms: list[TEXT] = Field(default_factory=list, max_length=20)
     narrative_ids: list[ID] = Field(default_factory=list, max_length=20)
@@ -301,6 +302,9 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
+        if self.market_scope and (not self.narrative_ids or self.kind not in {
+                "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY", "ECONOMIC_CHANGE"}):
+            raise ValueError("Market scope requires explicit narratives and an activity binding")
         if self.relevance_scope:
             scope = self.relevance_scope
             if self.kind != "SCOPED_ACTIVITY" or self.term_aliases:

@@ -139,3 +139,18 @@ ambiguity in favor of a preferred score. Distinguish shared industry context, cu
 and sourced competitor mechanisms in the database. Validate source-backed applicability and
 all exposed cohorts before a fresh holdout. Event phase and editorial priority never establish
 orders, profit direction or financial impact magnitude.
+
+
+## L020 — 2026-11-27 — market applicability belongs to a sourced path
+
+Component capacity and software capability are not additional infrastructure demand.
+Restrict the target path, not the entire article: retain relevant input/competition
+context through supported relationships. A title can constrain applicability but
+cannot donate an assertion to another sentence. Record exact window evidence.
+
+Evidence: a global component interpretation lost useful competitor context; adding
+its sourced product path recovered it. A GPU guard also lowered a valid deployment
+priority match until a general quantified deployment assertion was supported.
+Verify both near-miss negatives and deployment positives, broad exposed regression
+and unchanged unresolved counts. Announced capacity remains announced, never proof
+of realized orders or financial effect. This does not establish independent accuracy.

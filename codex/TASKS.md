@@ -7,7 +7,8 @@
 - [x] Evaluate prior locked broader candidate; reject promotion, preserve failures and disagreements.
 - [x] Implement initial bounded structured activity routing to sourced factors; recent exposed scope errors corrected, candidate experimental (see docs/activity-routing.md).
 - [x] Add initial sourced own/shared/competitor scope; recover9net older RSS positives with no additional resolved RSS FP (docs/relevance-scope.md).
-- [ ] Refine component/application/infrastructure applicability and sourced aliases; full-body background FP and priority/coverage gaps still block promotion.
+- [x] Add initial component/application/infrastructure applicability and sourced group/product competition path (docs/news-applicability.md); paired exposed regression preserves positives and reduces two false matches.
+- [ ] Expand unseen group/company coverage; remaining applicability, priority and recall gaps still block promotion.
 - [ ] Obtain unseen MU/SNDK positives and sufficient group/company support; new candidate/new blind holdout after improvements.
 
 ## Grouped calibration — user request2026-11-26
