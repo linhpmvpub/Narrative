@@ -1,5 +1,25 @@
 # Quality review after each iteration
 
+## Review — shared framework and scope limitations, 2026-11-27
+
+**Outcome: useful reusable infrastructure, candidate NOT_PROMOTED.** Shared component classification, explicit narrative intent and graph-route selection work in RSS/full-body paths without ticker branches. Core7groups/10relations and weights remain unchanged. Source class membership is still too coarse to establish platform or operator applicability. Local opt-in workspace only; real notifications/cloud unchanged.
+
+**Evidence.** Fresh121pairs/11articles, two independent AI contexts:24TP/8FP/24FN,5unresolved(3selected); priority9unresolved. On110 unchanged targets:20TP/5FP/20FN→24TP/8FP/16FN,precision80→75%,recall50→60%. Main-priority unchanged. Additional11competition targets miss8resolved positives.11lexical clusters reduce to5connected product-family components in sensitivity; no human-gold, random-market, historical-as-of or release-acceptance claim. Profiles/runtime were not tuned after labels.
+
+| Limitation | Observed evidence | General remedy and next verification |
+|---|---|---|
+| Product/platform applicability too broad | New classifier adds4TP for NVDA/DELL but3AMD FP | Typed assertion actor/product/market/platform/phase, joined to sourced graph scope; renamed-company positive and counterexamples before fresh review. |
+| Operator/party not resolved | All5SNDK FP already exist in legacy wafer-supply binding | Separate own/facility-specific supply from shared market context; require a sourced operator/party bridge for narrow paths, not publisher exclusions. |
+| Source facts not materialized into executable graph | Source names a competitor, but new MU competition target misses8positives | Audit source→entity→relation→binding coverage; add sourced graph data through the shared schema, not ticker rules. |
+| Assertion segmentation/vocabulary and priority | Sampling, production and industry-constraint misses; main-priority9TP/2FP vs relevance,3TP/7FP vs priority on121 | Class-level assertion extraction, retain phase and reference period; rank the matched assertion rather than unrelated whole-article language. Do not tune weights to hide routing failures. |
+| Narrative migration can conceal losses | Old memory150 loses4TP on original supply targets;4articles retained on new competition target | Keep original labels/targets. Report article/company coverage separately; migration is not original-target recall gain. |
+
+**Regression boundaries.** Old memory15027/0/11→23/0/15; olderfull15023/3/5→23/1/5,main12/0unchanged. OlderRSS1716=54/3/42,archive300=5/0/7,recent216RSS=5/0/2,recent30full=2/0/0unchanged. No exposed cohort relabeled. Fresh cohort now becomes development regression; future validation must use predeclared new families.
+
+**Engineering checks.**48focused tests passed119.57s,1existing warning; Ruff/mypy156/JS passed. Desktop/mobile auth/filter/logout/error/late-response smoke and synthetic UI-only role explanations passed; no page errors.6legacy hashes unchanged, frozen runtime verified. Local poll10attempts8OK/2NOT_MODIFIED,6created/4updated;23main/40background/0pricealerts,no truncation. Current RSS links onlyDIRECT_CONTEXT; archived evaluation and synthetic UI checks are not evidence of new live readiness cards. CI46021254909 on86a265f0af543b667542f8d54ace8b6555529e33 SUCCESS:1352SQLite167.74s+1352PostgreSQL308.20s,1existing warning each; migration/seed/replay/downgrade,dependency audit and actual-model smoke passed.317local artifacts pinned; source-cache remains ignored.
+
+**Decision.** Keep candidate opt-in, no promotion/weight change/push. Next implement assertion and graph applicability contracts, materialize existing sourced competitor coverage, then review by new event family. LessonL022 records the general failure mechanism. No user decision required. See docs/news-framework.md, reports/news-framework-review.json and latest CHECKPOINT for handoff hashes and final CI.
+
 ## Review — 2026-11-27 — MU/SNDK executable scope
 
 Product outcome: connect existing sourced manufacturing/material/customer/competition facts to bounded news routes; add SNDK Consumer/Edge and flash-adoption context. Core schema and narrative targets unchanged. Three scope guards remove the three observed memory-cohort FPs. Exact quotes, source lifecycle, relation paths and UNKNOWN financial effect remain mandatory.

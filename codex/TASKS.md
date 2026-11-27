@@ -1,5 +1,16 @@
 # TASKS — implementation execution checklist
 
+## Active next — shared assertion and graph applicability (2026-11-27)
+
+- [x] Shared source-only component classifier, explicit narrative intents, RSS/full-body parity, conditional explanations; no company-name code branching. Local candidate only.
+- [x] Frozen121pairs/11articles, two independent AI reviews, paired110common-target comparison and exposed regressions; preserve failed results. See docs/news-framework.md and reports/news-framework-review.json.
+- [ ] Define reusable assertion frame: source spans, actor/recipient, product family, end market/platform, activity and phase; UNKNOWN is allowed. Separate broad industry constraint from bilateral/named-platform news using graph scope data.
+- [ ] Materialize competitor relationships already named by source and migrate generic supply bindings to typed applicability. Measure source→structured graph→binding coverage; do not add company/headline exceptions.
+- [ ] Route readiness, sampling/production, shared demand and competition by class; audit editorial priority on the matched assertion and source time. Keep numerical weights unchanged until features/gates are understood.
+- [ ] Predeclare a fresh multi-family set after implementation; freeze predictions, two independent AI contexts, separate relevance/priority and article/company/narrative metrics. Current121pairs are now exposed regression, not a reusable holdout.
+- [ ] Release acceptance and eventual push remain gated; local only, real notifications off. No user decision blocks the next implementation.
+
+
 ## Dual-label follow-through — 2026-11-26
 
 - [x] Add AMD/Sandisk source collection; preserve Micron403 and issuer-quota shortfalls.

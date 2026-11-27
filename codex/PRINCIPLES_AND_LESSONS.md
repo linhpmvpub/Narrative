@@ -1,5 +1,14 @@
 # Nguyên tắc và bài học phát triển
 
+## L022 — Shared taxonomy needs scoped graph applicability, not ticker exceptions
+
+- User direction2026-11-27: prioritize a reusable crawl→deduplicate→classify→bind→graph→rank→explain→deliver workflow. Company-specific content belongs in sourced profiles/relations, not headline-specific code branches. The shared signal API has no ticker input; renamed-company tests preserve decisions.
+- Evidence: fresh121pairs/11articles, two independent AI contexts. On110 unchanged targets, new component-readiness bindings add4TP and3FP; source-backed generic memory dependency does not prove compatibility with a named platform. A shared classifier can still overgeneralize even without ticker branches.
+- Diagnose scope in database/graph: actor, product/technology, end market, platform, broad industry constraint versus bilateral announcement, event phase. Missing scope stays unknown; do not replace it with confidence or adjust numerical weights to conceal a hard-routing error. Five legacy wafer-supply FPs likewise need source-party/operating-scope attribution, not a blacklist of publishers.
+- Competition target migration retains4 old articles at company level but creates4 misses on the unchanged supply reference. Preserve those labels/misses and report target coverage separately; do not call movement between narratives a recall improvement. New competitor coverage needs materialized sourced relations, not merely a name buried in a source quote.
+- Validation: same-sentence signal spans, no title donation, source withdrawal/expired-edge tests, unchanged legacy hashes, freeze-before-review and scope-transfer audit. New cohort is now exposed regression; do not tune it and call it holdout again. Only5 connected family components under conservative sensitivity; not enough for market acceptance. Next: shared assertion frame and typed applicability constraints, then a predeclared fresh event-family sample.
+
+
 ## L018 — Đo đúng tầng lỗi và công khai thiếu coverage
 
 - Đợt mới2026-11-26: RSS bỏ sót7cặp liên quan dù hạ ngưỡng; không có match đầu vào thì trọng số không khắc phục được. Tập đầy đủ3bài cho thấy phương án rộng tăng FP mà không tăng TP, liên quan đến nhầm phạm vi công ty/sản phẩm.
