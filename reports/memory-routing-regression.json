@@ -891,11 +891,36 @@
   },
   "validation": {
     "focused_initial": "44 passed, 1 existing Starlette warning, 39.28s",
-    "full_suite": "RUNNING",
-    "ci": "PENDING",
+    "full_suite": "Final exact-commit CI:1336 SQLite +1336 PostgreSQL passed. Earlier local full run intentionally interrupted after CI success; no local full-pass claim.",
+    "ci": {
+      "run_id": 46015108381,
+      "code_commit": "d13b28a3a3464df9db0cffdf2ce713803219999d",
+      "status": "SUCCESS",
+      "sqlite": {
+        "passed": 1336,
+        "seconds": 198.55,
+        "warnings": 1
+      },
+      "postgresql": {
+        "passed": 1336,
+        "seconds": 298.07,
+        "warnings": 1
+      },
+      "checks": [
+        "Ruff",
+        "mypy155",
+        "JavaScript syntax",
+        "migrations/seed/replay/downgrade",
+        "dependency audit",
+        "actual-model smoke"
+      ],
+      "warning": "Existing Starlette/httpx deprecation"
+    },
     "browser": "desktop/mobile auth,filter,logout,error,late-response: passed; no page errors",
     "legacy_profiles": "All6digests unchanged",
-    "runtime_baseline": "9796d17b6bdf0f6b7ded1e2182a4900b1da7d98841ff47e7910135f0ce2b7b43"
+    "runtime_baseline": "9796d17b6bdf0f6b7ded1e2182a4900b1da7d98841ff47e7910135f0ce2b7b43",
+    "focused_final": "47 passed, 1 existing Starlette warning, 69.43s",
+    "handoff_local_files": 308
   },
   "limitations": [
     "Preserved old full-article labels count two new MU competitor matches as false positives.",
@@ -957,7 +982,8 @@
       "updated": 4,
       "all_ok_or_not_modified": true
     },
-    "fresh_mu_sndk_cards": 0
+    "fresh_mu_sndk_cards": 0,
+    "final_runtime_reprojection": "22main/40background/0price alerts; no truncation"
   },
   "development_corrections": [
     "Company boilerplate and legal-agreement scope failures retained in initial runs; corrected.",

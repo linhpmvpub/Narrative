@@ -92,3 +92,8 @@ support for policy, price and disruption groups. Keep delivery disabled and cand
 
 The fresh local RSS snapshot contains no MU/SNDK cards; those route demonstrations use
 archived full-body replay, without changing publication dates or bypassing freshness.
+
+Validation:47focused tests; exact-commit CI1336SQLite+1336PostgreSQL, migrations,
+lint/types/JS, dependency audit and actual-model smoke passed. Desktop/mobile smoke
+passed. [CI run](https://github.com/linhpmvpub/Narrative/actions/runs/46015108381)
+verifies code commit `d13b28a3a3464df9db0cffdf2ce713803219999d`.
