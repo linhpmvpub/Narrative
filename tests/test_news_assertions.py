@@ -28,11 +28,25 @@ def scope(mode="NAMED_OPERATOR", subject="Orion", relationship="r1"):
     ("Orion plans to expand memory capacity.", False),  # Unsupported predicate remains unknown.
     ("OtherVendor ships memory for Orion.", False),
     ("Orion discusses OtherVendor which ships server memory.", False),
+    ("A partnership with Orion expands server memory production.", False),
     ("Orion has not shipped memory samples.", False),
     ("Orion might launch new server memory.", False),
 ])
 def test_named_operator_is_not_a_customer_or_comparison(text, allowed):
     assert applicability(scope(), text)["allowed"] == allowed
+
+
+@pytest.mark.parametrize("text,allowed", [
+    ("Orion and Aurora will invest in a new memory factory.", True),
+    ("Orion and Aurora extended their memory manufacturing agreement.", True),
+    ("Orion and UnknownVendor extended their memory manufacturing agreement.", False),
+    ("UnknownVendor extended its agreement with Orion and Aurora.", False),
+    ("Orion and Aurora have not signed the new agreement.", False),
+])
+def test_joint_subjects_need_sourced_names_and_matching_predicate(text, allowed):
+    rule = AssertionScope(mode="NAMED_OPERATOR", subject_terms=["Orion", "Aurora"],
+                          relationship_id="r1", event_types=["FINANCING", "AGREEMENT"])
+    assert applicability(rule, text)["allowed"] == allowed
 
 
 @pytest.mark.parametrize("text,allowed", [
@@ -72,6 +86,7 @@ def test_renamed_company_scope_and_later_eligible_window(ready):
         assert hits and hits[0]["assertion_scope"]["reason"] == "NAMED_OPERATOR_ACTIVITY"
         assert all(text[h["start"]:h["end"]] == h["text"] for h in hits)
         assert not matches(b, {"title": name, "summary": "OtherVendor ships server memory."})
+        assert not matches(b, {"summary": f"{name} ships sensors but OtherVendor ships server memory."})
 
 
 def test_evidence_and_graph_reference_required(ready):

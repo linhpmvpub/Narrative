@@ -285,7 +285,7 @@ class AssertionScope(Strict):
     mode: Literal["NAMED_OPERATOR", "NAMED_PLATFORM_OR_MARKET_CONSTRAINT"]
     subject_terms: list[TEXT] = Field(min_length=1, max_length=20)
     relationship_id: ID
-    event_types: list[Literal["READINESS", "PRODUCTION", "CAPACITY", "CONSTRAINT", "ADOPTION"]] = Field(min_length=1, max_length=5)
+    event_types: list[Literal["READINESS", "PRODUCTION", "CAPACITY", "CONSTRAINT", "ADOPTION", "FINANCING", "AGREEMENT"]] = Field(min_length=1, max_length=7)
 
     @model_validator(mode="after")
     def bounded(self):

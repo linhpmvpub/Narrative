@@ -16,7 +16,15 @@ def policy():
 
 def windows(text):
     # Contrast clauses cannot donate a subject or market to each other.
-    return re.finditer(r"[^.!?;\n]+", text)
+    for sentence in re.finditer(r"[^.!?;\n]+", text):
+        cursor = sentence.start()
+        for boundary in re.finditer(r"\b(but|whereas|while)\b", sentence.group(), re.I):
+            end = sentence.start() + boundary.start()
+            if chunk := re.compile(r"[\s\S]+").match(text, cursor, end):
+                yield chunk
+            cursor = sentence.start() + boundary.end()
+        if chunk := re.compile(r"[\s\S]+").match(text, cursor, sentence.end()):
+            yield chunk
 
 
 @lru_cache(maxsize=4096)
@@ -48,8 +56,15 @@ def applicability(scope, text):
             # operator as a comparison, investor or customer is insufficient.
             for term in scope.subject_terms:
                 for hit in re.finditer(r"(?<!\w)" + re.escape(term) + r"(?!\w)", text, re.I):
+                    if re.search(r"\b(for|with|to|from|by)\s*$", text[:hit.start()], re.I):
+                        continue
                     for event in events.values():
                         gap = text[hit.end():event["start"]] if hit.end() <= event["start"] else None
+                        if gap is not None:
+                            names = "|".join(re.escape(t) for t in sorted(scope.subject_terms, key=len, reverse=True))
+                            # A joint subject must consist entirely of source-backed
+                            # names in this scope, not an arbitrary intervening actor.
+                            gap = re.sub(r"^(?:\s*(?:,|and|&)\s*(?:" + names + r")(?!\w))+", "", gap, flags=re.I)
                         if gap is not None and len(gap) <= 100 and re.fullmatch(
                                 r"(?:\s|,|has|have|had|is|are|was|were|will|now|also|recently|already|successfully)*",
                                 gap, re.I):
