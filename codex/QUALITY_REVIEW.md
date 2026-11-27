@@ -1,5 +1,24 @@
 # Quality review after each iteration
 
+## Review — source assertions and scoped graph routes, 2026-11-27
+
+**Product value:** shared source-window activities now bind to sourced operator/platform/market scope and an explicit graph edge. Four missing peers from one existing competition paragraph are materialized together. Same code applies to renamed synthetic subjects and companies; no canonical facts, forecasts or notifications are inferred.
+
+**Evidence:** exposed121pairs improve24TP/8FP/24FN→30/0/18;6new correct competition contexts,8FP removed,5unresolved(3selected) retained. Main priority remains9TP/0FP against relevance and3TP/5FP/25FN against priority labels. These are development results, not a fresh blind evaluation; only11lexical/5family components. Older memory150 loses2TP and olderfull150 loses1TP; other regressions and main tiers unchanged. No labels or targets rewritten.
+
+| Remaining limitation | Evidence | General remedy |
+|---|---|---|
+| Narrow actor scope loses useful supply context |3older positives still lost after joint/finance syntax support | Typed planned/passive/coordinated operation grammar and sourced scope/aliases; no publisher/headline whitelist |
+| Partial assertion parser | Explicit active/joint names pass; indirect speech, pronouns, legal-name variants and planned forms remain gaps | Reusable argument extraction with UNKNOWN, source spans and contrast/recipient counterexamples |
+| Literal scope is not compatibility or causal proof | Named platform and activity establish only contextual connection | Conditional explanation; sourced compatibility links where available; no financial magnitude inference |
+| Context and priority differ | Main relevance9TP unchanged, priority3TP/5FP | Evaluate assertion novelty/phase separately; do not change weights to conceal upstream gaps |
+| No unseen generalization evidence | All measured labels exposed; no new blind cohort this turn | Predeclare fresh families, freeze candidate+baseline, two independent AI contexts before promotion |
+
+**Validation:**61initial,49joint-scope,26final assertion tests passed; Ruff/mypy157/JS passed. Local pipeline24main/40background/0pricealerts,no truncation; desktop/mobile smoke passed.6legacy hashes and final runtime/replay receipts verified. CI46025701942 onfc2c3fd1f25ec293855fccf1c8769c002deef0c0 SUCCESS:1378SQLite141.27s+1378PostgreSQL220.35s,1existing warning each; migration/seed/replay/downgrade,dependency audit and actual-model smoke passed. Initial synthetic fixture failed because the short added paragraph was excluded from visible source extraction; fixture corrected without weakening evidence validation. Failed iterations retained.
+
+**Decision:** local opt-in candidate NOT_PROMOTED, real notifications off, no cloud data. L022 reinforced, current direction/release criteria unchanged. Next improve argument coverage and inspect scope losses, then run fresh family-diverse evaluation and priority calibration. Tests are engineering evidence, not market acceptance.
+
+
 ## Review — shared framework and scope limitations, 2026-11-27
 
 **Outcome: useful reusable infrastructure, candidate NOT_PROMOTED.** Shared component classification, explicit narrative intent and graph-route selection work in RSS/full-body paths without ticker branches. Core7groups/10relations and weights remain unchanged. Source class membership is still too coarse to establish platform or operator applicability. Local opt-in workspace only; real notifications/cloud unchanged.

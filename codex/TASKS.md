@@ -1,5 +1,16 @@
 # TASKS — implementation execution checklist
 
+## Active next — argument coverage and fresh validation (2026-11-27)
+
+- [x] Shared source frame, sourced scope names and explicit graph relationship; operator/platform/market-constraint modes, contrast-clause separation, limited joint-subject/finance/agreement support.
+- [x] Materialize all4missing peers from one source paragraph; build local atlas83nodes/97relations and feed explanations.
+- [x] Replay exposed121and older cohorts; retain3lost supply positives and all unresolved labels. Audit priority separately; numerical weights unchanged.
+- [ ] Extend generic planned/passive/coordinated/contract argument coverage; investigate narrow-supply losses using source-backed aliases/scope, no company/headline exceptions.
+- [ ] Predeclare fresh family-diverse set, collect unused full bodies, freeze previous/candidate predictions, then two independent AI reviews. No new blind-market claim this turn.
+- [ ] Improve priority using matched-assertion phase/novelty and separate labels; context eligibility is not push authorization.
+- [ ] Release acceptance, observation period and real push/cloud remain gated. Local-only/off remains standing instruction.
+
+
 ## Active next — shared assertion and graph applicability (2026-11-27)
 
 - [x] Shared source-only component classifier, explicit narrative intents, RSS/full-body parity, conditional explanations; no company-name code branching. Local candidate only.

@@ -9,6 +9,8 @@
 - Validation: same-sentence signal spans, no title donation, source withdrawal/expired-edge tests, unchanged legacy hashes, freeze-before-review and scope-transfer audit. New cohort is now exposed regression; do not tune it and call it holdout again. Only5 connected family components under conservative sensitivity; not enough for market acceptance. Next: shared assertion frame and typed applicability constraints, then a predeclared fresh event-family sample.
 
 
+- Follow-up2026-11-27: shared actor/platform scope and complete peer materialization improve exposed121from24TP/8FP to30TP/0FP but lose3older supply positives. Generic joint/finance/agreement synthetic tests passed while those3losses remained. Report both; grammar support is not demonstrated real coverage. Require fresh-family evaluation before promotion and preserve source gates when a synthetic paragraph is too short for extraction.
+
 ## L018 — Đo đúng tầng lỗi và công khai thiếu coverage
 
 - Đợt mới2026-11-26: RSS bỏ sót7cặp liên quan dù hạ ngưỡng; không có match đầu vào thì trọng số không khắc phục được. Tập đầy đủ3bài cho thấy phương án rộng tăng FP mà không tăng TP, liên quan đến nhầm phạm vi công ty/sản phẩm.
