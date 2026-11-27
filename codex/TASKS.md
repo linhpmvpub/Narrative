@@ -1,5 +1,16 @@
 # TASKS — implementation execution checklist
 
+## Active next — reusable asset and purpose attribution (2026-11-27)
+
+- [x] Bounded active/planned/joint/explicit-passive actor predicates; keep all verb spans, reject passive patients/recipients, remove duplicate legacy action veto. Names and scope remain profile data; no ticker/headline patches.
+- [x] Source-backed product/facility scope migration; recover all3known SNDK supply misses without rewriting labels or targets. Final-v2 exposed replays and actual-baseline provenance verified.
+- [x] Freeze both actual previous runtime and candidate on7unused complete articles/77pairs; two independent AI contexts,4relevance/7priority disagreements retained. New performance unchanged5TP/0FP/7FN; candidate NOT_PROMOTED, no human gold. This cohort is now exposed regression.
+- [ ] Add reusable ownership/consolidation action and acquired asset/product scope, with source-specific actor/recipient and planned/completed phase. Guard passive patients, financing-only corporate news, unrelated assets and graph withdrawal.
+- [ ] Model operating/product improvements and explicit use-of-proceeds-to-product connections without assuming output, compatibility or financial effect. Do not broadly whitelist ESG, financing or memory-company mentions.
+- [ ] Audit priority from the matched assertion/phase/novelty separately:0main selected versus5resolved priority references on fresh77. Keep weights unchanged until routing/feature gaps are resolved.
+- [ ] Fresh multi-publisher/family validation with positive/negative support by group after implementation. No more tuning on77while calling it holdout; release, cloud and real notifications remain gated.
+
+
 ## Active next — argument coverage and fresh validation (2026-11-27)
 
 - [x] Shared source frame, sourced scope names and explicit graph relationship; operator/platform/market-constraint modes, contrast-clause separation, limited joint-subject/finance/agreement support.
