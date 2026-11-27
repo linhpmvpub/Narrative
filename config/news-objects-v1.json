@@ -1,0 +1,103 @@
+{
+  "version": "news-objects-v1",
+  "delivery": "disabled",
+  "ownership_verbs": [
+    "acquire",
+    "acquires",
+    "acquired",
+    "divest",
+    "divests",
+    "divested"
+  ],
+  "completion_verbs": [
+    "complete",
+    "completes",
+    "completed",
+    "close",
+    "closes",
+    "closed"
+  ],
+  "transaction_nouns": [
+    "acquisition",
+    "divestiture"
+  ],
+  "asset_heads": [
+    "business",
+    "division",
+    "unit",
+    "operations",
+    "assets",
+    "facility",
+    "facilities",
+    "fab",
+    "plant",
+    "factory",
+    "portfolio",
+    "manufacturing"
+  ],
+  "allocation_verbs": [
+    "invest",
+    "invests",
+    "invested",
+    "fund",
+    "funds",
+    "funded",
+    "finance",
+    "finances",
+    "financed"
+  ],
+  "raising_verbs": [
+    "raise",
+    "raises",
+    "raised",
+    "issue",
+    "issues",
+    "issued",
+    "secure",
+    "secures",
+    "secured"
+  ],
+  "funding_terms": [
+    "capital",
+    "funds",
+    "funding",
+    "financing",
+    "bond",
+    "bonds",
+    "loan",
+    "loans",
+    "proceeds"
+  ],
+  "purpose_actions": [
+    "develop",
+    "development",
+    "build",
+    "building",
+    "construct",
+    "construction",
+    "expand",
+    "expansion",
+    "manufacturing",
+    "production",
+    "research"
+  ],
+  "financial_objects": [
+    "shares",
+    "stock",
+    "stocks",
+    "securities",
+    "debt",
+    "refinancing",
+    "general corporate purposes",
+    "buyback",
+    "buybacks"
+  ],
+  "object_bound_chars": 240,
+  "bridge_bound_chars": 120,
+  "unrelated_assets": [
+    "office",
+    "offices",
+    "headquarters",
+    "real estate"
+  ]
+}

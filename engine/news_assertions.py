@@ -89,7 +89,16 @@ def applicability(scope, text):
     industry = first(policy()["industry_scope"], text)
     constraint = f["activities"].get("CONSTRAINT")
     reason, allowed = "SCOPE_NOT_ESTABLISHED", False
-    if events and not f["negation"]:
+    argument = None
+    if scope.object_components and not f["negation"]:
+        from engine.news_objects import object_events
+
+        argument = next(object_events(scope, text), None)
+        if argument:
+            subject, predicate, voice = argument["subject_span"], argument["predicate_span"], argument["voice"]
+            f = {**f, "phase": "FORWARD_LOOKING" if argument["planned"] else f["phase"]}
+            allowed, reason = True, argument["event_type"] + "_OBJECT"
+    if not allowed and events and not f["negation"]:
         if scope.mode == "NAMED_OPERATOR":
             match = operator_predicate(scope, text, [e for e in f["activity_candidates"] if e["event_type"] in events])
             if match:
@@ -104,6 +113,7 @@ def applicability(scope, text):
     return {"allowed": allowed, "reason": reason, "mode": scope.mode,
             "relationship_id": scope.relationship_id, "subject_span": subject,
             "predicate_span": predicate, "voice": voice,
+            **({"object_argument": argument} if argument else {}),
             "industry_span": industry, "assertion": f, "news_party_verified": False,
             "financial_impact": "UNKNOWN"}
 

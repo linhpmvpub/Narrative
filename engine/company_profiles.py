@@ -285,10 +285,16 @@ class AssertionScope(Strict):
     mode: Literal["NAMED_OPERATOR", "NAMED_PLATFORM_OR_MARKET_CONSTRAINT"]
     subject_terms: list[TEXT] = Field(min_length=1, max_length=20)
     relationship_id: ID
-    event_types: list[Literal["READINESS", "PRODUCTION", "CAPACITY", "CONSTRAINT", "ADOPTION", "FINANCING", "AGREEMENT"]] = Field(min_length=1, max_length=7)
+    event_types: list[Literal["READINESS", "PRODUCTION", "CAPACITY", "CONSTRAINT", "ADOPTION", "FINANCING", "AGREEMENT", "OWNERSHIP", "FINANCING_PURPOSE"]] = Field(min_length=1, max_length=9)
+    object_components: list[Literal["MEMORY", "COOLING", "PACKAGING", "NETWORKING"]] = Field(default_factory=list, max_length=4, exclude_if=lambda value: not value)
 
     @model_validator(mode="after")
     def bounded(self):
+        if set(self.event_types) & {"OWNERSHIP", "FINANCING_PURPOSE"}:
+            if self.mode != "NAMED_OPERATOR" or not self.object_components:
+                raise ValueError("Object events require a named operator and sourced object components")
+        if len(set(self.object_components)) != len(self.object_components):
+            raise ValueError("Unique object components required")
         if (len(set(self.event_types)) != len(self.event_types)
                 or len(set(self.subject_terms)) != len(self.subject_terms)
                 or any(t != t.strip() or not 2 <= len(t) <= 80 for t in self.subject_terms)):
@@ -334,10 +340,17 @@ class FactorBinding(Strict):
     def bounded_rule(self):
         if self.assertion_scope:
             from engine.news_assertions import evidence_supports
+            from engine.news_framework import first, policy
 
             if (self.kind not in {"CLASSIFIED_CONTEXT", "SCOPED_ACTIVITY"} or not self.narrative_ids
                     or not evidence_supports(self.assertion_scope.subject_terms, self.evidence)):
                 raise ValueError("Assertion scope requires literal source evidence and explicit narratives")
+            if self.assertion_scope.object_components:
+                if self.kind != "SCOPED_ACTIVITY":
+                    raise ValueError("Object events require a scoped activity binding")
+                for component in self.assertion_scope.object_components:
+                    if not any(first(policy()["components"][component], e.quote) for e in self.evidence):
+                        raise ValueError("Object component requires literal source evidence")
         if self.kind == "CLASSIFIED_CONTEXT":
             from engine.news_framework import first, policy
 

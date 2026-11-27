@@ -56,6 +56,7 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
                                issuer_cik=issuer_cik, profile_cik=profile_cik, legal_name=legal_name)
                 if hits:
                     return [{**h, "start": h["start"] + window.start(), "end": h["end"] + window.start(),
+                             **({"context_only": True} if trace.get("object_argument") else {}),
                              "assertion_scope": trace} for h in hits]
         return []
     if binding.kind == "CLASSIFIED_CONTEXT":

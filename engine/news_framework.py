@@ -96,6 +96,8 @@ def route_contract(bundle, narrative, route, spans):
             "NAMED_OPERATOR_ACTIVITY": "Nguồn nêu hoạt động của bên có tên trong phạm vi quan hệ; chưa xác minh giao dịch với công ty.",
             "NAMED_PLATFORM_CONTEXT": "Nguồn nêu nền tảng thuộc phạm vi đang theo dõi; chưa xác minh tương thích hay triển khai thực tế.",
             "EXPLICIT_SHARED_MARKET_CONSTRAINT": "Nguồn nêu ràng buộc của thị trường chung; mức ảnh hưởng riêng tới công ty chưa xác định.",
+            "OWNERSHIP_OBJECT": "Nguồn gắn bên có tên với giao dịch tài sản thuộc nhóm sản phẩm liên quan; chưa xác minh thay đổi nguồn cung hoặc tác động tài chính.",
+            "FINANCING_PURPOSE_OBJECT": "Nguồn nêu mục đích phân bổ vốn gắn với sản phẩm hoặc hoạt động liên quan; chưa chứng minh triển khai, sản lượng hay lợi nhuận.",
         }[scoped["reason"]]
     return {"version": policy()["version"], "allowed": bool(allowed), "role": role,
             "intents": declared.intents if declared else [],

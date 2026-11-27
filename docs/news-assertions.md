@@ -1,7 +1,7 @@
 # Source assertions and graph applicability
 
 The local candidate adds a shared assertion layer to [news-framework](news-framework.md).
-Core policy9 retains the numerical editorial weights. No stock-price, financial
+Core policy10 retains the numerical editorial weights. No stock-price, financial
 magnitude, verified actor, or notification decision is produced by this layer.
 
 `news-assertions-v1.json` declares activity classes READINESS, PRODUCTION, CAPACITY,
@@ -79,3 +79,39 @@ Current opt-in manifest: `source-cache/actor-resolution-workspace-2026-11-27.jso
 The preceding assertion-routing workspace remains intact. Blind evaluation locks
 both candidate predictions and predictions executed by an archived previous runtime
 before reviewers start; running old profiles through new code is not that baseline.
+
+## Asset and financing-purpose arguments (2026-11-27)
+
+Optional `AssertionScope.object_components` declares one or more existing component
+classes backed by literal profile evidence. OWNERSHIP and FINANCING_PURPOSE require
+these classes, NAMED_OPERATOR and SCOPED_ACTIVITY. The optional field is omitted
+from old serialization, preserving legacy profile hashes. No company identifier
+or headline enters the extraction grammar.
+
+`news-objects-v1.json` holds bounded predicate, asset-head, funding, purpose and
+exclusion vocabularies. `news_objects` binds a source-backed named actor to:
+
+- A directly acquired/divested component business or operating asset, including
+  explicit completion phrases and regular passives with a named by-agent.
+- An explicit product/operating allocation, or raised funds/bonds with an explicit
+  same-clause development/construction/production purpose.
+
+Trace fields include exact actor, predicate, object and component spans, source
+voice, planned phase, party role and any funding-purpose connector. Identity,
+operational result, purpose outcome and financial effect stay unverified/UNKNOWN.
+The parser never updates the ownership graph from an article. Only existing sourced
+routes within the narrative are eligible; relation expiry/withdrawal still apply.
+
+Objects end before adjuncts or coordination; unrelated software, share trades,
+offices, general financing, recipients and different-clause products are withheld.
+Overlong objects are rejected, never silently truncated. This deliberately misses
+some coordinated objects, decimal/abbreviation-fragmented sentences, irregular
+passives, legal-name parentheticals, pronouns and cross-sentence uses of proceeds.
+Generic memory-company/ESG mentions do not establish an object connection.
+
+Eligible local competition bindings are migrated uniformly from sourced relation
+kind and component evidence, not ticker tests. New object routes remain context
+only; priority weights and push are unchanged. Evidence on an exposed corpus is
+regression evidence, not a new blind result. See the latest checkpoint and aggregate
+`reports/asset-purpose-review.json`; opt-in local manifest is
+`source-cache/asset-purpose-workspace-2026-11-27.json`.
