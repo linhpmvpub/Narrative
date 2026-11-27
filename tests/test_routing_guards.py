@@ -28,6 +28,8 @@ from engine.routing_guards import assess
     ("SECTOR_CONSTRAINT", "Shortage", "Operators face no memory shortages in data centers.", False),
     ("SECTOR_CONSTRAINT", "Outlook", "Operators could face memory shortages in data centers.", False),
     ("SECTOR_CONSTRAINT", "Construction costs", "Data center developers face higher construction costs.", True),
+    ("SECTOR_CONSTRAINT", "Grid constraints", "Power delays postpone data center commissioning.", True),
+    ("SECTOR_CONSTRAINT", "Billing", "An accounting delay affects memory supply invoicing.", False),
 ])
 def test_guard_boundaries(guard, title, text, allowed):
     trace = assess([guard], title, text)

@@ -73,17 +73,22 @@ No price/policy/disruption references in this cohort.
 The older full-article set gains one SNDK true positive but adds two MU competitor
 matches labeled NOT_RELEVANT in the preserved reference. They remain counted as FPs;
 their new sourced competitor path does not authorize relabeling. Main-priority true
-positives fall12→11 (zero FP), while routing retains the item. No claim of globally
-improved precision or unchanged priority recall. This tradeoff blocks release acceptance.
+positives remain12 (zero FP). An initial loss was traced to missing explicit power-delay
+vocabulary and corrected with a general infrastructure-delay constraint, preserving the
+failed run. No claim of globally improved precision. The two additional reference FPs
+still block release acceptance.
 
 ## Local handoff and next work
 
 Workspace: `source-cache/memory-routing-workspace-2026-11-27.json`;
 artifacts: `source-cache/memory-routing-2026-11-27/` with final `profiles-v3`, `atlas-v3`,
-`registry-v3`, `news-v3.sqlite`, `paired-replay-final`, `broad-replay-final` and pipeline.
+`registry-v3`, `news-v3.sqlite`, `paired-replay-release`, `broad-replay-release-v2` and pipeline.
 Aggregate validation: [report](../reports/memory-routing-regression.json).
 
 Next: evaluate sourced competition versus the precise supply narrative on fresh events;
 separate component readiness context from concrete infrastructure demand without losing
 useful background; audit priority-window selection before tuning weights. Extend independent
 support for policy, price and disruption groups. Keep delivery disabled and candidate opt-in.
+
+The fresh local RSS snapshot contains no MU/SNDK cards; those route demonstrations use
+archived full-body replay, without changing publication dates or bypassing freshness.

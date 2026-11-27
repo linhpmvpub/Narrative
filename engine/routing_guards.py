@@ -6,7 +6,7 @@ VERSION = "routing-guards-v1"
 INFRA_ASSET = r"\b(?:data[ -]?cent(?:er|re)s?|server farms?|GPU clusters?|compute capacity|AI supercomputers?)\b|\b\d+(?:\.\d+)?\s*(?:MW|GW|megawatts?|gigawatts?)\b"
 OTHER_MARKET = r"\b(?:automotive|vehicles?|cars?|smartphones?|handsets?|mobile phones?)\b"
 SERVER_MARKET = r"\b(?:servers?|data[ -]?cent(?:er|re)s?|enterprise SSDs?|hyperscalers?)\b"
-CONSTRAINT = r"\b(?:shortages?|bottlenecks?|constraints?|scarcity|disruptions?|outages?|limited supply|supply limits?|supply crunch|power limits?)\b|\b(?:prices?|costs?)\s+(?:ris(?:e|es|ing)|increas(?:e|es|ed|ing))\b|\b(?:higher|rising|increased)\s+(?:\w+\s+){0,2}(?:prices?|costs?)\b"
+CONSTRAINT = r"\b(?:shortages?|bottlenecks?|constraints?|scarcity|disruptions?|outages?|limited supply|supply limits?|supply crunch|power limits?)\b|\b(?:prices?|costs?)\s+(?:ris(?:e|es|ing)|increas(?:e|es|ed|ing))\b|\b(?:higher|rising|increased)\s+(?:\w+\s+){0,2}(?:prices?|costs?)\b|\b(?:power|grid|connection|permitting|construction)\s+delays?\b"
 NEGATION = r"\b(?:no|not|never|without|denied|hypothetical|rumou?rs?|could|might)\b"
 
 

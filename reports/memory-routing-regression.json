@@ -861,10 +861,10 @@
         },
         "candidate_priority": {
           "overall": {
-            "tp": 11,
+            "tp": 12,
             "fp": 0,
             "tn": 109,
-            "fn": 17,
+            "fn": 16,
             "unresolved": 13,
             "pairs": 150,
             "clusters": 15,
@@ -873,7 +873,7 @@
             "selected_positive_clusters": 6,
             "selected_unresolved": 0,
             "precision": 1.0,
-            "recall": 0.39285714285714285,
+            "recall": 0.42857142857142855,
             "unresolved_fraction": 0.08666666666666667
           }
         }
@@ -895,12 +895,73 @@
     "ci": "PENDING",
     "browser": "desktop/mobile auth,filter,logout,error,late-response: passed; no page errors",
     "legacy_profiles": "All6digests unchanged",
-    "runtime_baseline": "f3ff425748f57d7b5106935de8fe76b4fc158d92b8fa0b45fec1c0c2976494a3"
+    "runtime_baseline": "9796d17b6bdf0f6b7ded1e2182a4900b1da7d98841ff47e7910135f0ce2b7b43"
   },
   "limitations": [
     "Preserved old full-article labels count two new MU competitor matches as false positives.",
-    "Older main-priority true positives fall 12 to 11; routing retains the article.",
     "Bounded English same-window guards do not verify causal recipient or industry-wide effect.",
-    "No fresh blind evaluation or human gold; no financial strength/lag calibration."
+    "No fresh blind evaluation or human gold; no financial strength/lag calibration.",
+    "Current fresh RSS snapshot has no MU/SNDK cards; archival paired replay demonstrates these routes without bypassing freshness."
+  ],
+  "memory_priority_reference": {
+    "previous_priority": {
+      "tp": 4,
+      "fp": 1,
+      "tn": 106,
+      "fn": 28,
+      "unresolved": 11,
+      "pairs": 150,
+      "clusters": 15,
+      "positive_clusters": 10,
+      "negative_clusters": 15,
+      "selected_positive_clusters": 2,
+      "selected_unresolved": 0,
+      "precision": 0.8,
+      "recall": 0.125,
+      "unresolved_fraction": 0.07333333333333333
+    },
+    "candidate_priority": {
+      "tp": 7,
+      "fp": 0,
+      "tn": 107,
+      "fn": 25,
+      "unresolved": 11,
+      "pairs": 150,
+      "clusters": 15,
+      "positive_clusters": 10,
+      "negative_clusters": 15,
+      "selected_positive_clusters": 3,
+      "selected_unresolved": 0,
+      "precision": 1.0,
+      "recall": 0.21875,
+      "unresolved_fraction": 0.07333333333333333
+    }
+  },
+  "local_pipeline": {
+    "schema": "CORE_PIPELINE_AUDIT_V1",
+    "context_cards": 22,
+    "background_cards": 40,
+    "cards_by_ticker": {
+      "NVDA": 6,
+      "DELL": 16
+    },
+    "price_alerts": 0,
+    "scan_truncated": false,
+    "delivery": "disabled",
+    "accuracy_evaluated": false,
+    "acceptance": "DEVELOPMENT_NOT_RELEASE",
+    "price_observation_status": "NOT_REQUESTED",
+    "collection": {
+      "attempts": 10,
+      "created": 18,
+      "updated": 4,
+      "all_ok_or_not_modified": true
+    },
+    "fresh_mu_sndk_cards": 0
+  },
+  "development_corrections": [
+    "Company boilerplate and legal-agreement scope failures retained in initial runs; corrected.",
+    "Generic storage scope admitted incidental server context; replaced with explicit flash or memory-and-storage scope.",
+    "Missing explicit power/grid/permitting/construction delay vocabulary initially lowered one priority card; restored12TP/0FP after same-window constraint correction."
   ]
 }
