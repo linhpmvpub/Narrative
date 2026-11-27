@@ -22,6 +22,7 @@ from engine.models.contracts import utc
 from engine.models.schema_v13 import news_items, news_revisions, news_sources
 from engine.news_applicability import assess as assess_applicability
 from engine.news_capture import read_capture
+from engine.news_framework import eligible_route, signal_matches
 from engine.routing_guards import assess as assess_guards
 from engine.supply_roles import extract_supply_roles, supplier_span, valid_cik
 
@@ -34,6 +35,8 @@ def pattern(term):
 def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name=""):
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
+    if binding.kind == "CLASSIFIED_CONTEXT":
+        return signal_matches(binding.signal_rule, fields)
     if binding.market_scope or binding.routing_guards:
         rule = binding.model_copy(update={"market_scope": None, "routing_guards": []})
         title = payload.get("context_title") or fields["title"]
@@ -311,7 +314,11 @@ def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit
                         continue
                     routes.sort(key=lambda path: (
                         not any(RELATIONS[r.type][0] == "MECHANISM" for r in path), len(path)))
-                    route = routes[0]
+                    qualified_route = eligible_route(bundle, narrative, routes, spans)
+                    if qualified_route is None:
+                        continue
+                    route, contract = qualified_route
+                    qualified_spans = [{**s, "routing_contract": contract} for s in spans] if contract else spans
                     key = (article_key, bundle.id, narrative.id)
                     citations = {e.source_id for e in binding.evidence}
                     citations.update(e.source_id for r in route for e in r.evidence)
@@ -346,7 +353,8 @@ def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit
                                 "No polarity, magnitude, company-specific event or push inferred"]}
                     cards[key]["links"].append({"binding_id": binding.id,
                         "factor_id": binding.factor_id, "factor": nodes[binding.factor_id],
-                        "scope": binding.scope, "matches": spans,
+                        "scope": binding.scope, "matches": qualified_spans,
+                        **({"routing_contract": contract} if contract else {}),
                         **({"relevance_role": binding.relevance_scope.role}
                            if binding.relevance_scope else {}),
                         "entity_context": entity,

@@ -1,5 +1,9 @@
 # Mục tiêu và định hướng sản phẩm
 
+## Framework chung và chống overfit — quyết định 2026-11-27
+
+Người dùng yêu cầu phát triển luồng dùng chung: crawler → phiên bản/lọc trùng → phân loại phát biểu → ghép yếu tố có nguồn → graph/phạm vi narrative → nhãn/giải thích ngắn → ưu tiên cá nhân hóa → push. Không thêm nhánh theo ticker, tên công ty hoặc tiêu đề để sửa benchmark. Khác biệt giữa doanh nghiệp nằm trong hồ sơ, quan hệ và phạm vi narrative có nguồn; thuật toán/contract dùng chung. Mỗi lần đổi rule phải có phản ví dụ và kiểm tra hoán đổi tên công ty/phạm vi. Tin cạnh tranh không tự trở thành nguồn cung; tin linh kiện sẵn sàng có thể là bối cảnh triển khai mà chưa chứng minh nhu cầu. Giữ các tầng đã triển khai, nối bằng contract rõ ràng thay vì xây lại toàn bộ crawler. Push thật và cloud vẫn tắt.
+
 ## Đánh giá toàn diện theo nhóm tin — quyết định 2026-11-26
 
 Người dùng yêu cầu bắt đầu giai đoạn đánh giá/hiệu chỉnh sau khi luồng bước1–3 đã triển khai.

@@ -275,6 +275,17 @@ class RelevanceScope(Strict):
         return self
 
 
+class SignalRule(Strict):
+    components: list[Literal["MEMORY", "COOLING", "PACKAGING", "NETWORKING"]] = Field(min_length=1, max_length=4)
+    market: Literal["DATA_CENTER"] = "DATA_CENTER"
+
+
+class NarrativeRoutingPolicy(Strict):
+    narrative_id: ID
+    intents: list[Literal["SUPPLY", "DEPLOYMENT", "DEMAND", "COMPETITION"]] = Field(min_length=1, max_length=4)
+    scope_note: TEXT
+
+
 class FactorBinding(Strict):
     """Curated literal topic/context/change groups, never a financial event classifier."""
     id: ID
@@ -283,7 +294,8 @@ class FactorBinding(Strict):
     context_terms: list[TEXT] = Field(min_length=1, max_length=20)
     change_terms: list[TEXT] = Field(default_factory=list, max_length=30)
     kind: Literal["ECONOMIC_CHANGE", "ISSUER_RELATIONSHIP_DISCLOSURE",
-                  "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY"] = "ECONOMIC_CHANGE"
+                  "SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY", "CLASSIFIED_CONTEXT"] = "ECONOMIC_CHANGE"
+    signal_rule: SignalRule | None = Field(default=None, exclude_if=lambda value: value is None)
     activity_rule: ActivityRule | None = Field(default=None, exclude_if=lambda value: value is None)
     relevance_scope: RelevanceScope | None = Field(default=None, exclude_if=lambda value: value is None)
     market_scope: Literal["COMPONENT_MARKET", "APPLICATION_SOFTWARE", "INFRASTRUCTURE_DEMAND"] | None = Field(default=None, exclude_if=lambda value: value is None)
@@ -303,6 +315,18 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
+        if self.kind == "CLASSIFIED_CONTEXT":
+            from engine.news_framework import first, policy
+
+            if (not self.signal_rule or not self.narrative_ids or self.change_terms
+                    or self.disclosure_terms or self.term_aliases or self.entity_reference_id
+                    or self.relevance_scope or self.activity_rule or self.market_scope or self.routing_guards):
+                raise ValueError("Classified context requires a dedicated signal rule and explicit narratives")
+            for component in self.signal_rule.components:
+                if not any(first(policy()["components"][component], e.quote) for e in self.evidence):
+                    raise ValueError("Component class requires literal source evidence")
+        elif self.signal_rule is not None:
+            raise ValueError("Signal rule requires classified context kind")
         if self.routing_guards and (not self.narrative_ids or self.kind not in {
                 "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY", "ECONOMIC_CHANGE"}
                 or len(set(self.routing_guards)) != len(self.routing_guards)):
@@ -331,7 +355,7 @@ class FactorBinding(Strict):
         elif self.kind in {"ECONOMIC_CHANGE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY"}:
             if not self.change_terms or self.disclosure_terms:
                 raise ValueError("Economic rule requires changes, not disclosure terms")
-        elif self.change_terms or not self.disclosure_terms or not self.narrative_ids:
+        elif self.kind != "CLASSIFIED_CONTEXT" and (self.change_terms or not self.disclosure_terms or not self.narrative_ids):
             raise ValueError("Disclosure requires separate terms and explicit narrative scope")
         if self.kind == "SCOPED_ACTIVITY" and (not self.narrative_ids or self.entity_reference_id):
             raise ValueError("Scoped activity requires explicit narratives without inferred parties")
@@ -399,6 +423,7 @@ class ProfileBundle(Strict):
     factor_bindings: list[FactorBinding] = Field(default_factory=list, max_length=50)
     entity_references: list[EntityReference] = Field(default_factory=list, max_length=100)
     narratives: list[Narrative] = Field(default_factory=list, max_length=20)
+    routing_policies: list[NarrativeRoutingPolicy] = Field(default_factory=list, max_length=20, exclude_if=lambda value: not value)
     events: list[Event] = Field(default_factory=list, max_length=100)
     author_kind: Literal["AI_ASSISTED_SOURCE_EXTRACTION"] = "AI_ASSISTED_SOURCE_EXTRACTION"
 
@@ -411,6 +436,14 @@ class ProfileBundle(Strict):
             if len({getattr(r, key) for r in rows}) != len(rows):
                 raise ValueError("Duplicate identity")
         nodes = {n.id: n for n in self.nodes}
+        if (len({p.narrative_id for p in self.routing_policies}) != len(self.routing_policies)
+                or any(p.narrative_id not in {n.id for n in self.narratives}
+                       or len(set(p.intents)) != len(p.intents) for p in self.routing_policies)):
+            raise ValueError("Unique existing narrative policy and intents required")
+        for binding in self.factor_bindings:
+            if binding.kind == "CLASSIFIED_CONTEXT" and not set(binding.narrative_ids) <= {
+                    p.narrative_id for p in self.routing_policies}:
+                raise ValueError("Classified context requires declared narrative policies")
         if self.company_id not in nodes or nodes[self.company_id].kind != "company":
             raise ValueError("Company node missing")
         if self.snapshot_at > self.available_at:

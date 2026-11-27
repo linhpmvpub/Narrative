@@ -1,5 +1,9 @@
 # Quy trình phát triển, tự đánh giá và cải thiện
 
+## Kiểm tra khả năng dùng chung — 2026-11-27
+
+Trước khi thêm rule, xác định tầng lỗi và đối chiếu contract của crawler/revision, classification, graph, narrative, explanation, ranking hoặc delivery. Tên doanh nghiệp, sản phẩm riêng, quan hệ và nguồn thuộc data/config của hồ sơ; mã matcher chung không rẽ nhánh theo ticker/headline. Kiểm thử cùng phát biểu trên ít nhất hai hồ sơ synthetic đổi tên, thêm ca khác thị trường và trường hợp không có/đã rút quan hệ. Khóa runtime/profile/predictions trước nhãn của tập mới; không chỉnh theo nhãn holdout trong cùng lượt. Báo riêng độ liên quan theo narrative và coverage tin cấp công ty; chuyển tin sang narrative khác không được tính là cứu recall của target cũ.
+
 ## Giai đoạn đang thực hiện — 2026-11-26
 
 Người dùng đã kích hoạt đánh giá tổng thể theo nhóm tin và hiệu chỉnh. Trình tự hoãn benchmark

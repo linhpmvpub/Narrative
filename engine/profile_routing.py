@@ -3,6 +3,7 @@
 from types import SimpleNamespace
 
 from engine.company_profiles import paths
+from engine.news_framework import eligible_route
 from engine.profile_news import entity_context, matches
 from engine.supply_roles import extract_supply_roles, valid_cik
 
@@ -35,5 +36,10 @@ def binding_decisions(bundle, narrative, article, at, *, issuer_cik=None):
             routes = [route for route in routes if any(
                 r.id == binding.relevance_scope.relationship_id for r in route)]
         if routes:
-            yield {"binding": binding, "matches": spans, "roles": roles["facts"],
-                   "path": min(routes, key=len), "paths_truncated": truncated}
+            qualified_route = eligible_route(bundle, narrative, sorted(routes, key=len), spans)
+            if qualified_route is None:
+                continue
+            route, contract = qualified_route
+            qualified = [{**s, "routing_contract": contract} for s in spans] if contract else spans
+            yield {"binding": binding, "matches": qualified, "roles": roles["facts"],
+                   "path": route, "paths_truncated": truncated}
