@@ -10,7 +10,7 @@
 - [x] Add initial component/application/infrastructure applicability and sourced group/product competition path (docs/news-applicability.md); paired exposed regression preserves positives and reduces two false matches.
 - [ ] Expand unseen group/company coverage; remaining applicability, priority and recall gaps still block promotion.
 - [x] Obtain initial unseen MU/SNDK positive references:15full articles/150pairs, two independent AI contexts; preserve failed candidate and disagreements (docs/memory-unseen-evaluation.md).
-- [ ] Map sourced MU manufacturing/customer/competition facts and SNDK Consumer/Edge scope to explicit routing; constrain financing recipient/project, product market and bilateral/sector roles.
+- [x] Map sourced MU manufacturing/customer/competition facts and SNDK Consumer/Edge scope to explicit routing; constrain financing recipient/project, product market and bilateral/sector roles.
 - [ ] Obtain sufficient independent company/group support, including price/policy/disruption; new frozen candidate/new blind holdout after improvements.
 
 ## Grouped calibration — user request2026-11-26

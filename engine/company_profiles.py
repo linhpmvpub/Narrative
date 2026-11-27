@@ -287,6 +287,7 @@ class FactorBinding(Strict):
     activity_rule: ActivityRule | None = Field(default=None, exclude_if=lambda value: value is None)
     relevance_scope: RelevanceScope | None = Field(default=None, exclude_if=lambda value: value is None)
     market_scope: Literal["COMPONENT_MARKET", "APPLICATION_SOFTWARE", "INFRASTRUCTURE_DEMAND"] | None = Field(default=None, exclude_if=lambda value: value is None)
+    routing_guards: list[Literal["INFRASTRUCTURE_FINANCING", "SERVER_COMPONENT_MARKET", "SECTOR_CONSTRAINT"]] = Field(default_factory=list, max_length=3, exclude_if=lambda value: not value)
     issuer_supply_scope: bool = False
     disclosure_terms: list[TEXT] = Field(default_factory=list, max_length=20)
     narrative_ids: list[ID] = Field(default_factory=list, max_length=20)
@@ -302,6 +303,10 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
+        if self.routing_guards and (not self.narrative_ids or self.kind not in {
+                "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY", "ECONOMIC_CHANGE"}
+                or len(set(self.routing_guards)) != len(self.routing_guards)):
+            raise ValueError("Routing guards require unique constraints and explicit activity narratives")
         if self.market_scope and (not self.narrative_ids or self.kind not in {
                 "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY", "ECONOMIC_CHANGE"}):
             raise ValueError("Market scope requires explicit narratives and an activity binding")

@@ -22,6 +22,7 @@ from engine.models.contracts import utc
 from engine.models.schema_v13 import news_items, news_revisions, news_sources
 from engine.news_applicability import assess as assess_applicability
 from engine.news_capture import read_capture
+from engine.routing_guards import assess as assess_guards
 from engine.supply_roles import extract_supply_roles, supplier_span, valid_cik
 
 
@@ -33,23 +34,25 @@ def pattern(term):
 def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name=""):
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
-    if binding.market_scope:
-        rule = binding.model_copy(update={"market_scope": None})
+    if binding.market_scope or binding.routing_guards:
+        rule = binding.model_copy(update={"market_scope": None, "routing_guards": []})
         title = payload.get("context_title") or fields["title"]
         for field, text in fields.items():
             for window in re.finditer(r"[^.!?;\n]+", text):
                 if len(window.group()) > 1600:
                     continue
-                applicability = assess_applicability(binding.market_scope, title, window.group())
-                if not applicability["allowed"]:
+                applicability = assess_applicability(binding.market_scope, title, window.group()) if binding.market_scope else None
+                guard_trace = assess_guards(binding.routing_guards, title, window.group())
+                if (applicability and not applicability["allowed"]) or not guard_trace["allowed"]:
                     continue
                 hits = matches(rule, {field: window.group(), "context_title": title},
                                issuer_cik=issuer_cik, profile_cik=profile_cik, legal_name=legal_name)
                 if hits:
                     return [{**h, "start": h["start"] + window.start(),
                              "end": h["end"] + window.start(),
-                             "applicability": {**applicability, "window_text": window.group(),
-                                               "offset_basis": "RELATIVE_TO_WINDOW_TEXT_OR_CONTEXT_TITLE"}} for h in hits]
+                             **({"routing_guard_trace": guard_trace} if binding.routing_guards else {}),
+                             **({"applicability": {**applicability, "window_text": window.group(),
+                                               "offset_basis": "RELATIVE_TO_WINDOW_TEXT_OR_CONTEXT_TITLE"}} if applicability else {})} for h in hits]
         return []
     scope = binding.relevance_scope
     if scope and any(pattern(t).search(value) for t in scope.excluded_subject_terms

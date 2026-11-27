@@ -1,5 +1,15 @@
 # Quality review after each iteration
 
+## Review — 2026-11-27 — MU/SNDK executable scope
+
+Product outcome: connect existing sourced manufacturing/material/customer/competition facts to bounded news routes; add SNDK Consumer/Edge and flash-adoption context. Core schema and narrative targets unchanged. Three scope guards remove the three observed memory-cohort FPs. Exact quotes, source lifecycle, relation paths and UNKNOWN financial effect remain mandatory.
+
+Evidence: memory150 pairs13TP/3FP/25FN→27TP/0FP/11FN, recovering all10MU and8SNDK positives in this exposed set. Five unresolved labels remain; no fresh blind or human labels. Older1716RSS/300archive and recent216RSS/30full unchanged. Older150full gains1TP and2FP; priority12TP→11TP with noFP. The new competitor facts do not justify changing old NOT_RELEVANT labels. No pooled accuracy, generalization or release acceptance claim. Policy6 weights unchanged.
+
+Failures retained and fixes: initial own-manufacturing nouns matched company boilerplate, agreement wording matched arbitration; bounded activity vocabulary and legal-context exclusion correct those errors. Generic storage admitted an incidental server portfolio description; explicit flash/compound memory-and-storage scope preserves useful procurement context. Paired revisions are retained locally. Initial replay assertion incorrectly equated older frozen predictions with immediate previous profiles; restricted that identity assertion to the memory freeze and retained paired previous/candidate comparisons for older cohorts. Initial workspace build lacked DEV_INFORMATIONAL_FEED and correctly failed closed; rerun explicitly enabled the local private feed.
+
+Limitations and next: same-window lexical guards cannot independently verify financing recipient or industry-wide constraints; mixed clauses, negation and first-window priority remain imperfect. Current dataset is issuer-enriched and correlated, lacks price/policy/disruption support. Fresh scoped competition/readiness references and priority-window audit take precedence over more ad-hoc rules or weight changes. The candidate stays opt-in; local22main+40background cards are operational evidence, not a delivered-feed accuracy score. Source data, labels and captures stay local, notifications disabled. L019–L021 reviewed and retained; direction unchanged. See docs/memory-routing.md and aggregate report for final validation.
+
 ## Review — 2026-11-27 — unseen MU/SNDK coverage
 
 Product value: obtained previously missing positive MU/SNDK references and exposed the database-to-routing gap. Collected25candidates, selected15complete issuer articles(8MU/7SNDK),150pairs frozen before two separate-context AI reviews.27prior packet hashes/595article representations checked; one BiCS10 family conservatively excluded. Not random sampling, historical as-of, forward testing or human gold.
