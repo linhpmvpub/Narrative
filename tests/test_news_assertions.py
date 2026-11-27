@@ -25,7 +25,7 @@ def scope(mode="NAMED_OPERATOR", subject="Orion", relationship="r1"):
 @pytest.mark.parametrize("text,allowed", [
     ("Orion ships server memory samples.", True),
     ("Orion has recently expanded memory capacity.", True),
-    ("Orion plans to expand memory capacity.", False),  # Unsupported predicate remains unknown.
+    ("Orion plans to expand memory capacity.", True),
     ("OtherVendor ships memory for Orion.", False),
     ("Orion discusses OtherVendor which ships server memory.", False),
     ("A partnership with Orion expands server memory production.", False),

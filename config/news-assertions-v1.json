@@ -1,17 +1,135 @@
 {
-  "version": "news-assertions-v1",
+  "version": "news-assertions-v2",
   "delivery": "disabled",
   "activities": {
-    "READINESS": ["samples", "sampling", "sampled", "introduces", "introduced", "unveils", "unveiled", "launches", "launched", "showcases", "showcased", "demonstrates", "demonstrated", "develops", "developed", "certified", "qualified"],
-    "PRODUCTION": ["ships", "shipping", "shipped", "supplies", "supplied", "produces", "produced", "mass production", "volume production", "manufactures", "manufactured"],
-    "CAPACITY": ["expands", "expanded", "builds", "building", "constructs", "construction", "capacity expansion"],
-    "CONSTRAINT": ["shortage", "shortages", "supply constraints", "supply constraint", "supply tightness", "supply disruption", "price increases", "higher prices", "cost increases"],
-    "ADOPTION": ["deploys", "deployed", "adopts", "adopted", "orders", "ordered", "procurement", "integrates", "integrated"],
-    "FINANCING": ["invest", "invests", "invested", "investing", "funds", "funded"],
-    "AGREEMENT": ["extend", "extends", "extended", "renew", "renews", "renewed", "signs", "signed"]
+    "READINESS": [
+      "samples",
+      "sampling",
+      "sampled",
+      "introduces",
+      "introduced",
+      "unveils",
+      "unveiled",
+      "launches",
+      "launched",
+      "showcases",
+      "showcased",
+      "demonstrates",
+      "demonstrated",
+      "develops",
+      "developed",
+      "certified",
+      "qualified",
+      "introduce",
+      "unveil",
+      "launch",
+      "showcase",
+      "demonstrate",
+      "develop",
+      "qualify"
+    ],
+    "PRODUCTION": [
+      "ships",
+      "shipping",
+      "shipped",
+      "supplies",
+      "supplied",
+      "produces",
+      "produced",
+      "mass production",
+      "volume production",
+      "manufactures",
+      "manufactured",
+      "ship",
+      "supply",
+      "produce",
+      "manufacture"
+    ],
+    "CAPACITY": [
+      "expands",
+      "expanded",
+      "builds",
+      "building",
+      "constructs",
+      "construction",
+      "capacity expansion",
+      "expand",
+      "build",
+      "construct"
+    ],
+    "CONSTRAINT": [
+      "shortage",
+      "shortages",
+      "supply constraints",
+      "supply constraint",
+      "supply tightness",
+      "supply disruption",
+      "price increases",
+      "higher prices",
+      "cost increases"
+    ],
+    "ADOPTION": [
+      "deploys",
+      "deployed",
+      "adopts",
+      "adopted",
+      "orders",
+      "ordered",
+      "procurement",
+      "integrates",
+      "integrated"
+    ],
+    "FINANCING": [
+      "invest",
+      "invests",
+      "invested",
+      "investing",
+      "funds",
+      "funded"
+    ],
+    "AGREEMENT": [
+      "extend",
+      "extends",
+      "extended",
+      "renew",
+      "renews",
+      "renewed",
+      "signs",
+      "signed"
+    ]
   },
-  "negations": ["no", "not", "never", "denied", "rumor", "rumour", "could", "might"],
-  "planned": ["will", "plans", "planned", "expects", "expected", "intends", "targets"],
-  "retrospective": ["previously", "historically", "last year", "years ago"],
-  "industry_scope": ["industry-wide", "industry wide", "across the industry", "global", "worldwide", "market-wide", "across the market"]
+  "negations": [
+    "no",
+    "not",
+    "never",
+    "denied",
+    "rumor",
+    "rumour",
+    "could",
+    "might"
+  ],
+  "planned": [
+    "will",
+    "plans",
+    "planned",
+    "expects",
+    "expected",
+    "intends",
+    "targets"
+  ],
+  "retrospective": [
+    "previously",
+    "historically",
+    "last year",
+    "years ago"
+  ],
+  "industry_scope": [
+    "industry-wide",
+    "industry wide",
+    "across the industry",
+    "global",
+    "worldwide",
+    "market-wide",
+    "across the market"
+  ]
 }

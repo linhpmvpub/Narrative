@@ -1,7 +1,7 @@
 # Source assertions and graph applicability
 
 The local candidate adds a shared assertion layer to [news-framework](news-framework.md).
-Core policy8 retains the numerical editorial weights. No stock-price, financial
+Core policy9 retains the numerical editorial weights. No stock-price, financial
 magnitude, verified actor, or notification decision is produced by this layer.
 
 `news-assertions-v1.json` declares activity classes READINESS, PRODUCTION, CAPACITY,
@@ -20,7 +20,7 @@ are omitted from legacy serialization; previous profile hashes are preserved.
 
 | Mode | Required source evidence | Intended use |
 |---|---|---|
-| NAMED_OPERATOR | Explicit name or bounded joint names before a recognized active predicate; names must be sourced | Facility/operator-specific supply or named-competitor activity; mention as customer/comparison is insufficient |
+| NAMED_OPERATOR | Explicit sourced name or bounded joint names with an active/planned predicate, or explicit passive by-agent; names must be sourced | Facility/operator-specific supply or named-competitor activity; mention as customer/comparison is insufficient |
 | NAMED_PLATFORM_OR_MARKET_CONSTRAINT | Named platform in the assertion, or explicit industry breadth + component + data-center market + constraint | Named deployment narratives with a conditional industry-constraint route |
 
 The matcher checks successive source windows until an eligible one is found, splitting contrast clauses.
@@ -39,7 +39,7 @@ platform bindings are migrated using the same schema. Detailed profiles stay loc
 ## Boundaries and next work
 
 This is a conservative English pattern parser, not complete linguistic role
-resolution. Passive predicates, unsupported joint-subject syntax, indirect speech, pronouns and
+resolution. Irregular/complex passive predicates, unsupported joint-subject syntax, indirect speech, pronouns and
 cross-sentence attribution may be withheld. Literal platform co-occurrence still
 does not establish compatibility. Unmarked historical assertions can retain
 SOURCE_REPORTED because the parser does not invent a date; phase and financial
@@ -54,3 +54,28 @@ acceptance is unchanged. Local data only, notifications disabled.
 
 Candidate workspace: `source-cache/assertion-routing-workspace-2026-11-27.json`.
 See the latest CHECKPOINT/QUALITY_REVIEW and aggregate assertion-routing-review report.
+
+## Operator grammar revision (2026-11-27)
+
+Assertion vocabulary version2 retains all predicate occurrences, so an earlier verb
+from another actor cannot hide a later valid predicate of the same class. Bounded
+active auxiliaries/adverbs support joint named subjects and explicit plans (`to`,
+`plans to`, `will`). Regular passive predicates require an explicit `by` agent;
+a passive patient, recipient, agentless passive or supplier-of phrase is insufficient.
+Names come only from source-backed profile data. Traces retain exact subject and
+predicate spans, voice and planned phase; identity and financial effect stay unknown.
+
+For SCOPED_ACTIVITY with this contract, the accepted typed predicate supplies the
+action test. The legacy change-term vocabulary no longer applies a second competing
+action test. Topic, product/facility context, exclusions, evidence validity and the
+declared graph edge still apply. Tests use interchangeable fictional names.
+
+The local SNDK12 migration connects existing sourced memory/solid-state-drive and
+Yokkaichi/Kitakami facility scope to the same binding. SSD/SSDs are explicitly traced
+aliases of solid-state drives, not invented quotations or new financial evidence.
+No company-specific code branch, changed narrative target or numerical weight.
+
+Current opt-in manifest: `source-cache/actor-resolution-workspace-2026-11-27.json`.
+The preceding assertion-routing workspace remains intact. Blind evaluation locks
+both candidate predictions and predictions executed by an archived previous runtime
+before reviewers start; running old profiles through new code is not that baseline.

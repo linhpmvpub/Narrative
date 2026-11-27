@@ -47,7 +47,12 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
                 trace = assertion_applicability(binding.assertion_scope, window.group())
                 if not trace["allowed"]:
                     continue
-                hits = matches(rule, {field: window.group(), "context_title": payload.get("context_title", fields["title"])},
+                scoped_rule = rule
+                if rule.kind == "SCOPED_ACTIVITY" and trace.get("predicate_span"):
+                    # The typed predicate already passed the source-actor contract;
+                    # a second legacy verb vocabulary must not veto that same event.
+                    scoped_rule = rule.model_copy(update={"change_terms": [trace["predicate_span"]["text"]]})
+                hits = matches(scoped_rule, {field: window.group(), "context_title": payload.get("context_title", fields["title"])},
                                issuer_cik=issuer_cik, profile_cik=profile_cik, legal_name=legal_name)
                 if hits:
                     return [{**h, "start": h["start"] + window.start(), "end": h["end"] + window.start(),
