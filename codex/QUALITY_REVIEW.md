@@ -1,5 +1,14 @@
 # Quality review after each iteration
 
+## Undated evidence and resource-scope review — 2026-11-28
+
+- Product gain: a reviewed official product page can support conditional structural exposure without a fabricated release date. Power/cooling readiness now has a sourced DELL graph route; date uncertainty survives to atlas inspection. Shared resource logic is reusable for any sourced profile, not a company exception.
+- Measured result:1relevance recovery in infra160,zero regressions; all priority decisions and other9cohorts unchanged across3040exposed pairs. Remaining9relevance/4priority misses and olderFP/unresolved labels remain. This does not establish generalization, causal accuracy or user usefulness. Local feed remains50main44background, no new poll; same IDs are expected because the recovered benchmark article is absent from that current eligible snapshot.
+- Evidence limits: product-page source is undated; capture/review clocks bound use, not original physical effective time. Marketing capacity/cost-saving claims were not converted to financial effects. Context-only matches cannot assert company incidents or priority. Construction/permitting remains unsourced; no invented exposure.
+- Implementation checks: source metadata, before-capture exclusion, dated event/financial guards, atlas serialization, synthetic renamed companies and cooling negatives passed. Windows hard-link fixture failures reran successfully outside sandbox. Exact-code CI and aggregate detail are recorded in checkpoint/report. No change to default service, remote hosting or live delivery.
+- Next: separate missing graph mechanisms from actor/asset/reference failures before adding rules. A source-local reference must not donate scope across unrelated statements. Evaluate unused event families with independent AI labels and keep priority separate; do not lower thresholds or relabel known misses to improve the score. Direction and release criteria unchanged;L030added.
+
+
 ## Source statement focus review — 2026-11-28
 
 - Product value: reduce background noise from incidental company/facility descriptions, without discarding a new event elsewhere in the article. Implemented shared source-role-v1 across readiness and infrastructure matching; original spans, predicate attachment, same-clause focus and context-only capability state. Profiles/targets/labels/numeric weights unchanged.

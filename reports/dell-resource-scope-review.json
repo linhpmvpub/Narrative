@@ -3879,7 +3879,35 @@
     "focused": "139 passed, 1 warning in 15.87s",
     "ruff": "PASS",
     "mypy_files": 172,
-    "exact_commit_ci": "PENDING"
+    "exact_commit_ci": {
+      "run_id": 46126027969,
+      "head_sha": "87fef7f04ed935b3676cb5bcfc2269cc1bffdbb1",
+      "conclusion": "success",
+      "test_results": [
+        "1817 passed, 1 warning in 162.84s (0:02:42)",
+        "1817 passed, 1 warning in 304.55s (0:05:04)"
+      ],
+      "jobs": [
+        {
+          "id": 140920709333,
+          "name": "dependency-audit",
+          "conclusion": "success"
+        },
+        {
+          "id": 140920709485,
+          "name": "verify",
+          "conclusion": "success"
+        },
+        {
+          "id": 140920709616,
+          "name": "extraction-model-smoke",
+          "conclusion": "success"
+        }
+      ],
+      "dependency_audits": 2,
+      "model_smoke": 8,
+      "url": "https://github.com/linhpmvpub/Narrative/actions/runs/46126027969"
+    }
   },
   "unmeasured": [
     "financial_magnitude",

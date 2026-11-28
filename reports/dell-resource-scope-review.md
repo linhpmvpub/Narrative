@@ -22,7 +22,7 @@ Six profiles,85nodes,103relations,11narratives; atlas/registry rebuilt and dated
 
 ## Validation and remaining work
 
-139focused tests passed with one existing Starlette warning; Ruff, mypy172files and atlas JavaScript syntax passed. Tests cover metadata/chronology, no historical backfill, financial guards, source lifecycle and renamed synthetic companies with cooling positives and negatives. Initial fixture/type issues and sandbox hard-link errors were corrected; failure history remains local. Exact-code CI: PENDING.
+139focused tests passed with one existing Starlette warning; Ruff, mypy172files and atlas JavaScript syntax passed. Tests cover metadata/chronology, no historical backfill, financial guards, source lifecycle and renamed synthetic companies with cooling positives and negatives. Initial fixture/type issues and sandbox hard-link errors were corrected; failure history remains local. Exact-code CI[46126027969](https://github.com/linhpmvpub/Narrative/actions/runs/46126027969)SUCCESS on87fef7f: 1817 passed, 1 warning in 162.84s (0:02:42); 1817 passed, 1 warning in 304.55s (0:05:04);JS,migrations/seed/replay/downgrade,both audits and8model-smoke cases passed.
 
 Remaining infra160 misses:9relevance,4priority; the recovered context does not resolve priority. Source publication/effective history remains unknown. DELL construction/permitting exposure still lacks the required source; do not invent it. Generalization to complex actor/asset references, fresh event families, financial magnitude/horizon and user utility is unmeasured. Next prioritize source-local actor/asset references and unused-family evaluation over weight tuning or ticker-specific exclusions. Public v1acceptance remains unmet.
 

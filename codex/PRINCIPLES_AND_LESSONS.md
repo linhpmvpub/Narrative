@@ -1,5 +1,14 @@
 # Nguyên tắc và bài học phát triển
 
+## L030 — Unknown publication is explicit evidence, not an invented date (2026-11-28)
+
+- Official product/technical pages can substantiate structural exposure without establishing original publication or historical effective dates. Store original publication as null with source kind, uncertainty basis and review note. A displayed update is separate from publication; acquisition/review is when the system learned, not when the real-world relationship began.
+- Keep literal source bytes/hash/URL/quote review. A metadata label does not authenticate a publisher. Require graph validity/knowledge no earlier than capture; no undated backfill into dated events, metric observations or financial extraction/scope bindings. Preserve legacy dated serialization and expose uncertainty in the atlas.
+- A product capability may support conditional customer deployment and a shared resource context path. It does not establish a current incident, realized demand change, financial magnitude or construction-permit dependency. Source each declared resource/mechanism; do not reuse a demand path as a supply path to satisfy an exposed label.
+- Evidence: DELL source-backed power/cooling profile adds1factor/2edges;3040pair benchmark improves1relevance decision and changes no priority decisions. The current feed snapshot remains unchanged. Distinguish database completeness, measured regression improvement and live usefulness; do not imply one proves the others.
+- Verify with source-time invalidity cases, financial/event rejection, atlas serialization, renamed companies and unrelated-market/component/negation cases; rerun benchmark independently after runtime and profile updates. Fresh-family/human and financial-impact evaluation remain separate future work.
+
+
 ## L029 — A capability description is not a new operating event (2026-11-28)
 
 - A sourced company path plus resource words can surface an unrelated article when the matched passage merely describes a persistent state. Classify the statement role after its own literal evidence matches; a title may retain relevant descriptive context but must not supply missing actors/resources or bridge unrelated clauses.

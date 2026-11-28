@@ -1,5 +1,15 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — undated resource evidence (2026-11-28)
+
+- [x] Explicit unknown-publication contract, capture-bounded graph use, dated event/financial safeguards and atlas display.
+- [x] Shared opt-in cooling readiness; sourced DELL power/cooling profile15,1factor/2relations; no construction/financial inference.
+- [x] Per-step benchmark plus final gate:3040pairs,1relevance recovery,no regressions,no priority changes. Rebuilt local atlas/registry/feed;139focused tests and full exact-code CI passed;data local/live notifications off.
+- [ ] Diagnose9remaining infra160relevance/4priority misses by missing graph mechanism versus shared actor/asset/reference extraction. Source missing dependencies; never invent demand→supply links or silently change narrative targets.
+- [ ] Implement bounded same-source references with positive and negative families, then independently label unused event/discourse families with frozen predictions. Current labels remain exposed AI regression.
+- [ ] Close release gates for user usefulness, source freshness/coverage, reliability and personalization; v1notcomplete. No live push or cloud deployment authorized by test success.
+
+
 ## Current next steps — source statement focus (2026-11-28)
 
 - [x] Shared persistent-state/capability role across readiness and infrastructure market matching, original spans and same-clause focus. No new-event priority from a capability description; later substantive activity survives.
