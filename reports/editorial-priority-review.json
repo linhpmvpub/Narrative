@@ -1,0 +1,724 @@
+{
+  "schema": "EDITORIAL_PRIORITY_REVIEW_V1",
+  "date": "2026-11-28",
+  "baseline_code": "d8a2922be280f7d2522d7816700d6b2427282956",
+  "reference": "EXPOSED_AI_LABELS_NOT_NEW_BLIND_OR_HUMAN_GOLD",
+  "release_status": "NOT_ACCEPTED_FOR_PUBLIC_RELEASE",
+  "policy_version": 12,
+  "editorial_policy": "editorial-priority-v1",
+  "numerical_weights_changed": false,
+  "profiles_unchanged": true,
+  "delivery": "disabled",
+  "runtime_baseline": "99ada89c268dae83ad637b85dd6906028aab7f54acf4c57469c6a11cb1bd78ec",
+  "cohorts": {
+    "actor77": {
+      "pairs": 77,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 6,
+        "fp": 0,
+        "tn": 61,
+        "fn": 6,
+        "unresolved": 4,
+        "pairs": 77,
+        "clusters": 7,
+        "positive_clusters": 6,
+        "negative_clusters": 7,
+        "selected_positive_clusters": 3,
+        "selected_unresolved": 1,
+        "precision": 1.0,
+        "recall": 0.5,
+        "unresolved_fraction": 0.05194805194805195
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 61,
+          "fn": 12,
+          "unresolved": 4,
+          "pairs": 77,
+          "clusters": 7,
+          "positive_clusters": 6,
+          "negative_clusters": 7,
+          "selected_positive_clusters": 0,
+          "selected_unresolved": 0,
+          "precision": null,
+          "recall": 0.0,
+          "unresolved_fraction": 0.05194805194805195
+        },
+        "candidate_priority": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 61,
+          "fn": 9,
+          "unresolved": 4,
+          "pairs": 77,
+          "clusters": 7,
+          "positive_clusters": 6,
+          "negative_clusters": 7,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.25,
+          "unresolved_fraction": 0.05194805194805195
+        }
+      },
+      "priority_promotions": 3,
+      "priority_demotions": 0,
+      "main_vs_priority": {
+        "previous_priority": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 65,
+          "fn": 5,
+          "unresolved": 7,
+          "pairs": 77,
+          "clusters": 7,
+          "positive_clusters": 4,
+          "negative_clusters": 7,
+          "selected_positive_clusters": 0,
+          "selected_unresolved": 0,
+          "precision": null,
+          "recall": 0.0,
+          "unresolved_fraction": 0.09090909090909091
+        },
+        "candidate_priority": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 65,
+          "fn": 2,
+          "unresolved": 7,
+          "pairs": 77,
+          "clusters": 7,
+          "positive_clusters": 4,
+          "negative_clusters": 7,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.6,
+          "unresolved_fraction": 0.09090909090909091
+        }
+      },
+      "priority_layers": {
+        "previous_priority": {
+          "selected": 0,
+          "routing_miss": 1,
+          "matched_not_selected": 4
+        },
+        "candidate_priority": {
+          "selected": 3,
+          "routing_miss": 1,
+          "matched_not_selected": 1
+        }
+      }
+    },
+    "framework121": {
+      "pairs": 121,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 31,
+        "fp": 0,
+        "tn": 68,
+        "fn": 17,
+        "unresolved": 5,
+        "pairs": 121,
+        "clusters": 11,
+        "positive_clusters": 10,
+        "negative_clusters": 11,
+        "selected_positive_clusters": 9,
+        "selected_unresolved": 3,
+        "precision": 1.0,
+        "recall": 0.6458333333333334,
+        "unresolved_fraction": 0.04132231404958678
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 9,
+          "fp": 0,
+          "tn": 68,
+          "fn": 39,
+          "unresolved": 5,
+          "pairs": 121,
+          "clusters": 11,
+          "positive_clusters": 10,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 5,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.1875,
+          "unresolved_fraction": 0.04132231404958678
+        },
+        "candidate_priority": {
+          "tp": 15,
+          "fp": 0,
+          "tn": 68,
+          "fn": 33,
+          "unresolved": 5,
+          "pairs": 121,
+          "clusters": 11,
+          "positive_clusters": 10,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 8,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.3125,
+          "unresolved_fraction": 0.04132231404958678
+        }
+      },
+      "priority_promotions": 6,
+      "priority_demotions": 0,
+      "main_vs_priority": {
+        "previous_priority": {
+          "tp": 3,
+          "fp": 5,
+          "tn": 79,
+          "fn": 25,
+          "unresolved": 9,
+          "pairs": 121,
+          "clusters": 11,
+          "positive_clusters": 9,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 1,
+          "precision": 0.375,
+          "recall": 0.10714285714285714,
+          "unresolved_fraction": 0.0743801652892562
+        },
+        "candidate_priority": {
+          "tp": 9,
+          "fp": 5,
+          "tn": 79,
+          "fn": 19,
+          "unresolved": 9,
+          "pairs": 121,
+          "clusters": 11,
+          "positive_clusters": 9,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 8,
+          "selected_unresolved": 1,
+          "precision": 0.6428571428571429,
+          "recall": 0.32142857142857145,
+          "unresolved_fraction": 0.0743801652892562
+        }
+      },
+      "priority_layers": {
+        "previous_priority": {
+          "selected": 3,
+          "routing_miss": 10,
+          "matched_not_selected": 15
+        },
+        "candidate_priority": {
+          "selected": 9,
+          "routing_miss": 10,
+          "matched_not_selected": 9
+        }
+      }
+    },
+    "memory-unseen-2026-11-27": {
+      "pairs": 150,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 25,
+        "fp": 0,
+        "tn": 107,
+        "fn": 13,
+        "unresolved": 5,
+        "pairs": 150,
+        "clusters": 15,
+        "positive_clusters": 10,
+        "negative_clusters": 15,
+        "selected_positive_clusters": 10,
+        "selected_unresolved": 1,
+        "precision": 1.0,
+        "recall": 0.6578947368421053,
+        "unresolved_fraction": 0.03333333333333333
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 7,
+          "fp": 0,
+          "tn": 107,
+          "fn": 31,
+          "unresolved": 5,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 10,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.18421052631578946,
+          "unresolved_fraction": 0.03333333333333333
+        },
+        "candidate_priority": {
+          "tp": 9,
+          "fp": 0,
+          "tn": 107,
+          "fn": 29,
+          "unresolved": 5,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 10,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 5,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.23684210526315788,
+          "unresolved_fraction": 0.03333333333333333
+        }
+      },
+      "priority_promotions": 2,
+      "priority_demotions": 0,
+      "main_vs_priority": {
+        "previous_priority": {
+          "tp": 7,
+          "fp": 0,
+          "tn": 107,
+          "fn": 25,
+          "unresolved": 11,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 10,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.21875,
+          "unresolved_fraction": 0.07333333333333333
+        },
+        "candidate_priority": {
+          "tp": 9,
+          "fp": 0,
+          "tn": 107,
+          "fn": 23,
+          "unresolved": 11,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 10,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 5,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.28125,
+          "unresolved_fraction": 0.07333333333333333
+        }
+      },
+      "priority_layers": {
+        "previous_priority": {
+          "selected": 7,
+          "routing_miss": 10,
+          "matched_not_selected": 15
+        },
+        "candidate_priority": {
+          "selected": 9,
+          "routing_miss": 10,
+          "matched_not_selected": 13
+        }
+      }
+    },
+    "priority-blind-2026-11-26": {
+      "pairs": 216,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 5,
+        "fp": 0,
+        "tn": 153,
+        "fn": 2,
+        "unresolved": 56,
+        "pairs": 216,
+        "clusters": 24,
+        "positive_clusters": 5,
+        "negative_clusters": 22,
+        "selected_positive_clusters": 4,
+        "selected_unresolved": 0,
+        "precision": 1.0,
+        "recall": 0.7142857142857143,
+        "unresolved_fraction": 0.25925925925925924
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 153,
+          "fn": 2,
+          "unresolved": 56,
+          "pairs": 216,
+          "clusters": 24,
+          "positive_clusters": 5,
+          "negative_clusters": 22,
+          "selected_positive_clusters": 4,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.7142857142857143,
+          "unresolved_fraction": 0.25925925925925924
+        },
+        "candidate_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 153,
+          "fn": 2,
+          "unresolved": 56,
+          "pairs": 216,
+          "clusters": 24,
+          "positive_clusters": 5,
+          "negative_clusters": 22,
+          "selected_positive_clusters": 4,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.7142857142857143,
+          "unresolved_fraction": 0.25925925925925924
+        }
+      },
+      "priority_promotions": 0,
+      "priority_demotions": 0,
+      "main_vs_priority": {
+        "previous_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 155,
+          "fn": 0,
+          "unresolved": 56,
+          "pairs": 216,
+          "clusters": 24,
+          "positive_clusters": 4,
+          "negative_clusters": 22,
+          "selected_positive_clusters": 4,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.25925925925925924
+        },
+        "candidate_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 155,
+          "fn": 0,
+          "unresolved": 56,
+          "pairs": 216,
+          "clusters": 24,
+          "positive_clusters": 4,
+          "negative_clusters": 22,
+          "selected_positive_clusters": 4,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.25925925925925924
+        }
+      },
+      "priority_layers": {
+        "previous_priority": {
+          "selected": 5,
+          "routing_miss": 0,
+          "matched_not_selected": 0
+        },
+        "candidate_priority": {
+          "selected": 5,
+          "routing_miss": 0,
+          "matched_not_selected": 0
+        }
+      }
+    },
+    "priority-issuer-archive-2026-11-26": {
+      "pairs": 30,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 2,
+        "fp": 0,
+        "tn": 25,
+        "fn": 0,
+        "unresolved": 3,
+        "pairs": 30,
+        "clusters": 3,
+        "positive_clusters": 2,
+        "negative_clusters": 3,
+        "selected_positive_clusters": 2,
+        "selected_unresolved": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "unresolved_fraction": 0.1
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 25,
+          "fn": 0,
+          "unresolved": 3,
+          "pairs": 30,
+          "clusters": 3,
+          "positive_clusters": 2,
+          "negative_clusters": 3,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.1
+        },
+        "candidate_priority": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 25,
+          "fn": 0,
+          "unresolved": 3,
+          "pairs": 30,
+          "clusters": 3,
+          "positive_clusters": 2,
+          "negative_clusters": 3,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.1
+        }
+      },
+      "priority_promotions": 0,
+      "priority_demotions": 0,
+      "main_vs_priority": {
+        "previous_priority": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 25,
+          "fn": 0,
+          "unresolved": 3,
+          "pairs": 30,
+          "clusters": 3,
+          "positive_clusters": 2,
+          "negative_clusters": 3,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.1
+        },
+        "candidate_priority": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 25,
+          "fn": 0,
+          "unresolved": 3,
+          "pairs": 30,
+          "clusters": 3,
+          "positive_clusters": 2,
+          "negative_clusters": 3,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.1
+        }
+      },
+      "priority_layers": {
+        "previous_priority": {
+          "selected": 2,
+          "routing_miss": 0,
+          "matched_not_selected": 0
+        },
+        "candidate_priority": {
+          "selected": 2,
+          "routing_miss": 0,
+          "matched_not_selected": 0
+        }
+      }
+    },
+    "older_rss": {
+      "pairs": 1716,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 54,
+        "fp": 3,
+        "tn": 1359,
+        "fn": 42,
+        "unresolved": 258,
+        "pairs": 1716,
+        "clusters": 308,
+        "positive_clusters": 58,
+        "negative_clusters": 302,
+        "selected_positive_clusters": 40,
+        "selected_unresolved": 12,
+        "precision": 0.9473684210526315,
+        "recall": 0.5625,
+        "unresolved_fraction": 0.15034965034965034
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 17,
+          "fp": 1,
+          "tn": 1361,
+          "fn": 79,
+          "unresolved": 258,
+          "pairs": 1716,
+          "clusters": 308,
+          "positive_clusters": 58,
+          "negative_clusters": 302,
+          "selected_positive_clusters": 13,
+          "selected_unresolved": 5,
+          "precision": 0.9444444444444444,
+          "recall": 0.17708333333333334,
+          "unresolved_fraction": 0.15034965034965034
+        },
+        "candidate_priority": {
+          "tp": 16,
+          "fp": 1,
+          "tn": 1361,
+          "fn": 80,
+          "unresolved": 258,
+          "pairs": 1716,
+          "clusters": 308,
+          "positive_clusters": 58,
+          "negative_clusters": 302,
+          "selected_positive_clusters": 12,
+          "selected_unresolved": 5,
+          "precision": 0.9411764705882353,
+          "recall": 0.16666666666666666,
+          "unresolved_fraction": 0.15034965034965034
+        }
+      },
+      "priority_promotions": 0,
+      "priority_demotions": 1
+    },
+    "older_archive": {
+      "pairs": 300,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 5,
+        "fp": 0,
+        "tn": 275,
+        "fn": 7,
+        "unresolved": 13,
+        "pairs": 300,
+        "clusters": 75,
+        "positive_clusters": 8,
+        "negative_clusters": 74,
+        "selected_positive_clusters": 3,
+        "selected_unresolved": 0,
+        "precision": 1.0,
+        "recall": 0.4166666666666667,
+        "unresolved_fraction": 0.043333333333333335
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 275,
+          "fn": 12,
+          "unresolved": 13,
+          "pairs": 300,
+          "clusters": 75,
+          "positive_clusters": 8,
+          "negative_clusters": 74,
+          "selected_positive_clusters": 0,
+          "selected_unresolved": 0,
+          "precision": null,
+          "recall": 0.0,
+          "unresolved_fraction": 0.043333333333333335
+        },
+        "candidate_priority": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 275,
+          "fn": 12,
+          "unresolved": 13,
+          "pairs": 300,
+          "clusters": 75,
+          "positive_clusters": 8,
+          "negative_clusters": 74,
+          "selected_positive_clusters": 0,
+          "selected_unresolved": 0,
+          "precision": null,
+          "recall": 0.0,
+          "unresolved_fraction": 0.043333333333333335
+        }
+      },
+      "priority_promotions": 0,
+      "priority_demotions": 0
+    },
+    "older_full_article": {
+      "pairs": 150,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 24,
+        "fp": 1,
+        "tn": 108,
+        "fn": 4,
+        "unresolved": 13,
+        "pairs": 150,
+        "clusters": 15,
+        "positive_clusters": 12,
+        "negative_clusters": 15,
+        "selected_positive_clusters": 12,
+        "selected_unresolved": 1,
+        "precision": 0.96,
+        "recall": 0.8571428571428571,
+        "unresolved_fraction": 0.08666666666666667
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 12,
+          "fp": 0,
+          "tn": 109,
+          "fn": 16,
+          "unresolved": 13,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 12,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 6,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.42857142857142855,
+          "unresolved_fraction": 0.08666666666666667
+        },
+        "candidate_priority": {
+          "tp": 13,
+          "fp": 0,
+          "tn": 109,
+          "fn": 15,
+          "unresolved": 13,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 12,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 7,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.4642857142857143,
+          "unresolved_fraction": 0.08666666666666667
+        }
+      },
+      "priority_promotions": 1,
+      "priority_demotions": 0
+    }
+  },
+  "limitations": [
+    "Five framework priority false positives remain:4generic change-language paths and1legacy compute-deployment assertion; no ticker/headline tuning.",
+    "Older RSS demotes1relevance-positive pair to background; no independent priority label exists for that cohort.",
+    "Explicit typed scoped events only; missing actor/purpose/operating references still limit recall.",
+    "No fresh blind evaluation or release acceptance; current-profile archival and recent RSS cohorts are separate."
+  ],
+  "validation": {
+    "focused_passed": 78,
+    "focused_seconds": 88.41,
+    "final_guard_passed": 27,
+    "final_guard_seconds": 3.13,
+    "ruff": "passed",
+    "mypy_modules": 160,
+    "browser": "desktop_mobile_passed_no_page_errors",
+    "ci": "PENDING"
+  },
+  "pipeline": {
+    "context_cards": 25,
+    "background_cards": 42,
+    "cards_by_ticker": {
+      "NVDA": 6,
+      "DELL": 19
+    },
+    "price_alerts": 0,
+    "scan_truncated": false,
+    "attempts": 10,
+    "ok": 7,
+    "not_modified": 3,
+    "created": 0,
+    "updated": 0
+  }
+}

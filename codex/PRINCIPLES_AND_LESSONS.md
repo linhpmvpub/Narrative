@@ -1,5 +1,13 @@
 # Nguyên tắc và bài học phát triển
 
+## L024 — Conditional relevance and editorial priority need separate contracts
+
+- Evidence2026-11-28: scoped actor/event/phase/route eligibility adds3priority TP on actor77,6on framework121 and2on memory150 without new resolved priority FP; all relevance decisions unchanged. These exposed AI references are development evidence, not independent market acceptance. Five framework priority FP remain in legacy change-word/deployment paths.
+- Keep context_only as conditional relation evidence; it need not suppress every concrete source development. Conversely, recognizing a sourced party is not an event. Record why a specific source assertion merits attention, while identity, realized operational results and financial magnitude remain unverified/UNKNOWN.
+- Do not bypass upstream source/revision/freshness/withdrawal/graph gates or commodity thresholds through a new priority branch. Archived content priority is not today's news. Apply generic event/phase/object rules, not ticker/headline exceptions; preserve unresolved and downgraded-but-relevant background items.
+- Verify both selection and false promotions. Numeric weights may stay unchanged while feature eligibility changes; do not call this learned impact calibration. Improve remaining legacy semantics, then use untouched families/publishers for independent evaluation.
+
+
 ## L023 — Preserve source boundaries and diagnose priority independently
 
 - Evidence2026-11-28: seven archived articles had302regex segments versus257shared-source segments; all2760exposed pair decisions stayed unchanged. A parser correction is not measured recall improvement. Keep exact spans and original quotes across RSS, article cards and review.

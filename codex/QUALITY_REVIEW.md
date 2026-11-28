@@ -1,5 +1,14 @@
 # Quality review after each iteration
 
+## 2026-11-28 — Scoped editorial event priority
+
+- Product value: conditional competitor/input developments can reach main research cards without pretending financial impact is verified. Source event/phase, exact window and declared narrative path explain eligibility; entity mention alone loses automatic priority. UI distinguishes plans. Shared rules and unchanged sourced profiles; no ticker exceptions.
+- Measured on exposed AI references, not new blind/human gold:priority TP/FP/FN actor77=3/0/2 versus0/0/5;framework121=9/5/19 versus3/5/25;memory150=9/0/23 versus7/0/25. Unresolved7/9/11preserved, framework1selected unresolved. Recent216RSS/30full unchanged. All2760relevance decisions unchanged. OlderRSS loses1main relevance-positive to background; that cohort has no priority labels, so do not claim the demotion correct. Olderfull gains1main relevance-positive. No pooled release score.
+- Tests78focused+27guard pass;Ruff/mypy160/JS;desktop/mobile smoke passes. Final-v2 semantic decisions identical to first run, with price-only scoped constraint guard added from product principles, not label tuning. CI pending exact receipt. Pipeline25main42background/0alerts,10polls7OK3NOT_MODIFIED,0new/updated items; no new scoped promotion in live RSS. Archival proof and synthetic current RSS integration remain distinct.
+- Remaining observed defects:framework5priority FP unchanged (4legacy change-word paths,1compute-deployment assertion); scoped branch cannot repair untyped action/object meaning. Missing actor/purpose/operating references still cause routing misses. Broad exclusions may withhold useful uncertain developments; keep them visible as background and evaluate independently. Small/overlapping archival families and AI labels cannot prove market quality; no public acceptance.
+- Next: explicit action/object/operating-purpose contracts for legacy ranking, with negatives and unchanged financial UNKNOWN; fresh unused publisher/family cohort locked before independent labels. Do not hide failure by adjusting weights, moving narratives or patching source titles. L024recorded; direction and acceptance unchanged.
+
+
 ## 2026-11-28 — Shared boundaries and priority withholding
 
 - Value: RSS/full body/review now share literal sentence offsets; decimal/abbreviation fragmentation is reduced. Explicit source-declared aliases can route through existing sourced relations without inferred identity. Renamed actors, wrong markets, recipient/negation, ambiguous/two-hop references, expired edges and priority score ties covered.

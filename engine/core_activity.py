@@ -2,19 +2,31 @@
 
 import re
 
+from engine.editorial_priority import exclusion, scoped
 from engine.source_sentences import sentences
 
 
 def assess(item, links, policy):
     windows: list[dict] = []
+    editorial, typed_signals = [], []
     audit = {"matched_links": len(links), "context_only_links": 0,
              "scoped_assertion_links": 0, "eligible_windows": 0}
     for link in links:
         matches = link.get("matches", [])
         audit["scoped_assertion_links"] += int(any(m.get("assertion_scope") for m in matches))
+        decision = scoped(item, matches)
+        if decision is not None:
+            editorial.append(decision)
+            if decision["eligible"]:
+                typed_signals.append({**decision["source_window"], "driver_direction": "UNKNOWN",
+                    "phase": decision["phase"], "event_type": decision["event_type"],
+                    "source_duration": None, "event_horizon": "UNKNOWN", "horizon_basis": "NOT_ESTIMATED",
+                    "editorial_basis": decision["reason"]})
         if matches and all(m.get("context_only") for m in matches):
             audit["context_only_links"] += 1
             continue
+        if decision is not None:
+            continue  # Rejected scope cannot be rescued by a generic change word.
         for field in ("title", "summary"):
             spans = [m for m in matches if m["field"] == field]
             if not spans:
@@ -34,9 +46,12 @@ def assess(item, links, policy):
                         }
                     )
     audit["eligible_windows"] = len(windows)
-    signals = []
+    signals = list(typed_signals)
     for window in windows:
         text = window["text"].lower()
+        if reason := exclusion(text):
+            editorial.append({"eligible": False, "reason": reason, "source_window": window})
+            continue
         assertion = window.get("activity_assertion")
         if assertion:
             signals.append({**window, "driver_direction": "UNKNOWN",
@@ -82,13 +97,13 @@ def assess(item, links, policy):
     weights = policy["priority_weights"]
     score = (
         weights["sourced_path"]
-        + weights["resolved_entity"] * resolved
+        + weights["resolved_entity"] * (resolved and bool(signals))
         + weights["concrete_change"] * bool(signals)
         - weights["sponsored_penalty"] * sponsored
     )
     tier = (
         "COMPANY_CONTEXT"
-        if resolved
+        if resolved and signals
         else "SECTOR_CHANGE_CONTEXT"
         if signals
         else "BACKGROUND_THEME"
@@ -100,14 +115,19 @@ def assess(item, links, policy):
         "editorial_score": score,
         "score_basis": "UNCALIBRATED_RELEVANCE_NOT_FINANCIAL_IMPACT",
         "signals": signals,
+        "editorial_decisions": editorial,
+        "resolved_entity": resolved,
         "priority_audit": {**audit, "concrete_signals": len(signals),
                            "weights_changed": False, "delivery": "disabled"},
         "sponsored": sponsored,
         "direction": "UNKNOWN",
         "horizon": "UNKNOWN",
         "reason": "Resolved relationship entity"
-        if resolved
+        if resolved and signals
+        else "Scoped source development within narrative; financial effect unknown"
+        if typed_signals
         else "Same-window economic change language"
         if signals
+        else "Related entity without a qualifying development" if resolved
         else "Topic match without a specific change assertion",
     }

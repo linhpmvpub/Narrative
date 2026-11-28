@@ -31,7 +31,8 @@ def test_generic_theme_is_not_company_change():
         == "BACKGROUND_THEME"
     )
     r = activity("Data center power shortages could delay deliveries.")
-    assert r["signals"][0]["phase"] == "FORWARD_LOOKING"
+    assert r["tier"] == "BACKGROUND_THEME"
+    assert r["editorial_decisions"][0]["reason"] == "UNCERTAIN_SOURCE_WINDOW"
     assert r["direction"] == "UNKNOWN"
 
 

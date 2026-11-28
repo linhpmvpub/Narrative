@@ -147,4 +147,5 @@ def test_priority_audit_explains_context_without_promoting_it():
     assert result["priority_audit"]["concrete_signals"] == 0
     hit["context_only"] = False
     result = assess({"headline": "Update", "excerpt": text}, [{"matches": [hit]}], policy)
-    assert result["priority_audit"]["eligible_windows"] == 1
+    assert result["priority_audit"]["eligible_windows"] == 0
+    assert result["editorial_decisions"][0]["reason"] == "DECLARED_NARRATIVE_ROUTE_REQUIRED"

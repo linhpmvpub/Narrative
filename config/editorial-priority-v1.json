@@ -1,0 +1,25 @@
+{
+  "version": "editorial-priority-v1",
+  "meaning": "CONTENT_PRIORITY_NOT_FINANCIAL_IMPACT_OR_PUSH",
+  "phases": ["SOURCE_REPORTED", "FORWARD_LOOKING"],
+  "events": ["READINESS", "PRODUCTION", "CAPACITY", "ADOPTION", "CONSTRAINT", "OWNERSHIP", "FINANCING_PURPOSE"],
+  "roles": {
+    "COMPETITION_CONTEXT": ["COMPETITION"],
+    "INPUT_READINESS_CONTEXT": ["SUPPLY", "DEPLOYMENT"],
+    "INPUT_MARKET_CONTEXT": ["SUPPLY", "DEPLOYMENT"],
+    "DIRECT_CONTEXT": ["SUPPLY", "DEPLOYMENT", "DEMAND", "COMPETITION"]
+  },
+  "actor_reasons": ["NAMED_OPERATOR_ACTIVITY", "OWNERSHIP_OBJECT", "FINANCING_PURPOSE_OBJECT"],
+  "ongoing_production_predicates": ["supplies", "produces", "manufactures"],
+  "change_markers": ["new", "first", "now", "began", "begins", "started"],
+  "capacity_objects": ["capacity", "fab", "plant", "factory", "facility", "facilities", "production line", "campus"],
+  "physical_constraints": ["shortage", "shortages", "supply constraints", "supply constraint", "supply tightness", "supply disruption"],
+  "routine_patterns": [
+    "\\b(?:participates?|attends?|speaks?|present)\\s+(?:at|in)\\b",
+    "\\b(?:conference agenda|investor conference|fireside chat|webinar)\\b",
+    "\\b(?:guide to|how to|overview of|learn about)\\b"
+  ],
+  "retrospective_patterns": ["\\b(?:previously|historically|last year|years ago)\\b"],
+  "uncertain_patterns": ["\\b(?:no|not|never|without|unchanged|denied|rumou?rs?|could|might|hypothetical)\\b"],
+  "delivery": "disabled"
+}

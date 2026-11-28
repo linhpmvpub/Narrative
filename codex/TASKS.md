@@ -1,5 +1,14 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — editorial priority (2026-11-28)
+
+- [x] Versioned source event/phase/narrative priority contract; conditional typed developments can be highlighted, entity mention alone cannot. Exact decision traces and Vietnamese phase labels; final validation in checkpoint.
+- [x] Separate priority/relevance replay of8exposed cohorts; preserve all labels, targets, failures, unresolved and local sources. Public release gates unchanged.
+- [ ] Migrate legacy change-word/deployment priority to explicit action/object/operating-purpose semantics;5framework priority FP remain. Test renamed actors, contexts and negative examples without per-ticker patches.
+- [ ] Expand bounded operating-purpose/actor-reference coverage where supported by sources; retain UNKNOWN when ambiguous.
+- [ ] Freeze unused multi-publisher/family events before independent AI labels; report priority versus routing separately and keep seven-day operations/public human validation as separate gates.
+
+
 ## Current next steps — 2026-11-28
 
 - [x] Shared sentence boundaries with exact offsets; legal suffix/decimal handling; one-hop explicit source aliases; RSS/article/review parity and separate priority audit. See latest checkpoint for validation receipts.
