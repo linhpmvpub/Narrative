@@ -65,10 +65,15 @@ def company_rows(rows):
             kind = "WATCHED_NARRATIVE_UNION_PROXY_NOT_ALL_COMPANY_NEWS"
         if direct and label == "NOT_RELEVANT" and any(r["label"] == "RELEVANT" for r in items):
             raise ValueError("Narrative relevance contradicts negative company reference")
+        discovery = [r["company_selected"] for r in items if "company_selected" in r]
+        if direct and discovery and (len(discovery) != len(items) or len(set(discovery)) != 1
+                          or any(type(v) is not bool for v in discovery)):
+            raise ValueError("Inconsistent company discovery predictions")
         result.append({"id": digest((source, ticker)), "ticker": ticker, "label": label,
                        "source_unit_id": source, "event_cluster": items[0]["event_cluster"],
                        "groups": sorted({g for r in items for g in r["groups"]}),
-                       "selected": any(r["selected"] for r in items), "reference_scope": kind,
+                       "selected": any(r["selected"] for r in items) or bool(direct and discovery and discovery[0]),
+                       "reference_scope": kind,
                        "complete_watched_targets": targets == expected[ticker],
                        "narrative_pairs": len(items)})
     return result
@@ -80,7 +85,7 @@ def company_report(rows):
         return metrics(items, lambda r: r["selected"])
     return {"status": "EXPOSED_REGRESSION", "overall": score(units),
             "reference_scopes": sorted({r["reference_scope"] for r in units}),
-            "unit": "Exact source representation x company, OR watched narrative selections",
+            "unit": "Exact source representation x company; direct discovery plus watched narrative selections. Legacy proxies use narrative selections only.",
             "by_company": {t: score([r for r in units if r["ticker"] == t])
                            for t in sorted({r["ticker"] for r in units})},
             "by_group": {g: score([r for r in units if g in r["groups"]])

@@ -289,7 +289,7 @@ def verified_row(row, at, capture_cache):
     return pub, received, proof
 
 
-def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit=100):
+def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit=100, include_company=False):
     at = as_of or datetime.now(UTC)
     if at.tzinfo is None or not 1 <= limit <= 5000 or not 1 <= card_limit <= 1000:
         raise ValueError("Aware cutoff and bounded limit required")
@@ -327,6 +327,7 @@ def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit
                 blocked.add(row["article_key"])
             result["withheld"] += 1
     cards: dict = {}
+    company_cards = []
     for article_key, variants in groups.items():
         if article_key in blocked or len({digest([v[0]["payload"]["title"],
             v[0]["payload"].get("summary", "")]) for v in variants}) > 1:
@@ -337,7 +338,33 @@ def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit
         for bundle in profiles["items"]:
             nodes = {n.id: n.label for n in bundle.nodes}
             source_map = {s.id: s for s in bundle.sources}
+            if include_company:
+                from engine.company_discovery import decisions as company_decisions
+
+                discovery = [d for d in company_decisions(bundle, payload, at)
+                             if all(v[1] >= at - timedelta(days=d["max_news_age_days"]) for v in variants)]
+                if discovery:
+                    revisions = [{"item_id": v[0]["id"], "version": v[0]["version"],
+                                  "revision_id": v[0]["revision_id"], "source_id": v[0]["source_id"],
+                                  "payload_sha256": v[0]["content_sha256"], "capture_proof": v[3]}
+                                 for v in variants]
+                    company_cards.append({"id": digest([payload["url"], bundle.id]),
+                        "ticker": bundle.ticker, "profile_id": bundle.id, "profile_version": bundle.version,
+                        "headline": payload["title"], "excerpt": payload.get("summary", ""),
+                        "url": payload["url"], "published_at": pub.isoformat(),
+                        "news_revisions": revisions, "company_discovery": discovery,
+                        "narratives": [], "links": [], "mechanisms": {},
+                        "revision_sha256": digest([revisions, discovery, bundle.version]),
+                        "verification": "SOURCED_COMPANY_SCOPE_UNVERIFIED_NEWS",
+                        "priority": "COMPANY_CONTEXT_UNASSIGNED", "direction": "UNKNOWN",
+                        "financial_magnitude": "UNKNOWN", "horizon": "UNKNOWN", "delivery": "disabled",
+                        "graph_eligible": False,
+                        "decision_trace": ["Current source revision and captured RSS checked",
+                            "Reviewed company scope is independent of watched narratives",
+                            "No canonical event, narrative assignment or financial effect inferred"]})
             for binding in bundle.factor_bindings:
+                if binding.company_only:
+                    continue
                 if not binding.enabled or not binding.reviewed_at <= at < binding.review_until:
                     continue
                 if any(v[1] < at - timedelta(days=binding.max_news_age_days) for v in variants):
@@ -428,4 +455,7 @@ def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit
                             for sid in sorted(citations)]})
     result["truncated"] |= len(cards) > card_limit
     result["items"] = list(cards.values())[:card_limit]
+    if include_company:
+        result["company_items"] = company_cards[:card_limit]
+        result["truncated"] |= len(company_cards) > card_limit
     return result

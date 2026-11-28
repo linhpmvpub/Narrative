@@ -37,6 +37,7 @@ def audit(result):
         "profiles": profiles,
         "context_cards": len(context.get("items", [])),
         "background_cards": len(context.get("background", [])),
+        "company_context_cards": len(context.get("company_context", [])),
         "cards_by_ticker": dict(Counter(c["ticker"] for c in context.get("items", []))),
         "price_alerts": len(result["cards"]),
         "scan_truncated": context.get("truncated", False),

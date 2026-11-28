@@ -78,9 +78,12 @@ def signal_matches(rule, fields):
     return []
 
 
-def route_contract(bundle, narrative, route, spans):
+def route_contract(bundle, narrative, route, spans, *, company_scope=None):
+    if company_scope is not None and narrative is not None:
+        raise ValueError("Company scope cannot override a narrative")
+    declared = company_scope if company_scope is not None else next(
+        (p for p in bundle.routing_policies if narrative is not None and p.narrative_id == narrative.id), None)
     if finance := next((s.get("project_finance") for s in spans if s.get("project_finance")), None):
-        declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
         allowed = bool(declared and set(declared.intents) & {"DEMAND", "DEPLOYMENT"}
             and any(r.id == finance['relationship_id'] and r.type == "AFFECTS_DEMAND" for r in route)
             and all(r.type != "COMPETES_WITH" for r in route))
@@ -90,7 +93,6 @@ def route_contract(bundle, narrative, route, spans):
             "relationship_id":finance['relationship_id'],"relation_types":[r.type for r in route],
             "financial_impact":"UNKNOWN"}
     if readiness := next((s.get("readiness_context") for s in spans if s.get("readiness_context")), None):
-        declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
         deployment = readiness["scope"] == "CUSTOMER_DEPLOYMENT"
         mechanism = "AFFECTS_DEMAND" if deployment else "AFFECTS_SUPPLY"
         intents = {"DEMAND", "DEPLOYMENT"} if deployment else {"SUPPLY"}
@@ -113,7 +115,6 @@ def route_contract(bundle, narrative, route, spans):
                              if s.get("activity_assertion", {}).get("relationship_id")), None)
         reference = next((s.get("activity_assertion", {}).get("source_reference") for s in spans
                           if s.get("activity_assertion", {}).get("source_reference")), None)
-        declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
         allowed = bool(declared and set(declared.intents) & {"DEMAND", "DEPLOYMENT"}
                        and any(r.type in {"AFFECTS_DEMAND", "AFFECTS_ACCESS"} for r in route)
                        and (not mechanism_id or any(r.id == mechanism_id for r in route))
@@ -126,7 +127,6 @@ def route_contract(bundle, narrative, route, spans):
                 **({"relationship_id": mechanism_id} if mechanism_id else {}),
                 "financial_impact": "UNKNOWN", "relation_types": [r.type for r in route]}
     """One contract for RSS and full-body paths; no ticker/headline condition."""
-    declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
     competition = any(r.type == "COMPETES_WITH" for r in route)
     input_role = next((s["relevance_role"] for s in spans if s.get("relevance_role") in {
         "INPUT_READINESS_CONTEXT", "INPUT_MARKET_CONTEXT"}), None)
@@ -161,23 +161,26 @@ def route_contract(bundle, narrative, route, spans):
         }[scoped["reason"]]
     return {"version": policy()["version"], "allowed": bool(allowed), "role": role,
             "intents": declared.intents if declared else [],
-            "reason": "SOURCED_ROUTE_WITHIN_NARRATIVE" if allowed else "ROUTE_OUTSIDE_DECLARED_NARRATIVE",
+            "reason": ("SOURCED_ROUTE_WITHIN_COMPANY_SCOPE" if allowed else "ROUTE_OUTSIDE_COMPANY_SCOPE")
+                  if company_scope is not None else
+                  ("SOURCED_ROUTE_WITHIN_NARRATIVE" if allowed else "ROUTE_OUTSIDE_DECLARED_NARRATIVE"),
             "explanation": explanation,
             **({"source_role": source_role} if source_role else {}),
             **({"assertion_scope": scoped} if scoped else {}),
             **({"infrastructure_scope": infrastructure} if infrastructure else {}),
             "relation_types": [r.type for r in route], "financial_impact": "UNKNOWN",
             "stages": ["SOURCE_VERSION_CHECKED", "FACTOR_MATCHED", "SOURCED_GRAPH_ROUTE",
-                       "NARRATIVE_SCOPE_CHECKED", "CONTEXT_EXPLAINED", "DELIVERY_DISABLED"]}
+                       "COMPANY_SCOPE_CHECKED" if company_scope is not None else "NARRATIVE_SCOPE_CHECKED",
+                       "CONTEXT_EXPLAINED", "DELIVERY_DISABLED"]}
 
 
-def eligible_route(bundle, narrative, routes, spans):
+def eligible_route(bundle, narrative, routes, spans, *, company_scope=None):
     """A rejected short path must not hide another valid sourced path."""
     for route in routes:
         required = {s["assertion_scope"]["relationship_id"] for s in spans if s.get("assertion_scope")}
         if required and not required <= {r.id for r in route}:
             continue
-        contract = route_contract(bundle, narrative, route, spans)
+        contract = route_contract(bundle, narrative, route, spans, company_scope=company_scope)
         if contract is None or contract["allowed"]:
             return route, contract
     return None

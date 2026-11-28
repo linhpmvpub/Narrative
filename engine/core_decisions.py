@@ -83,31 +83,43 @@ def feed(conn, data, profile_root):
         b.id for b in current["items"] if pinned.get(b.id) == digest(b.model_dump(mode="json"))
     }
     result = candidate_feed(
-        conn, profile_root=profile_root, limit=policy["scan_limit"], card_limit=policy["card_limit"]
+        conn,
+        profile_root=profile_root,
+        limit=policy["scan_limit"],
+        card_limit=policy["card_limit"],
+        include_company=True,
     )
     now = datetime.now(UTC)
     sources = {s["id"]: s for s in conn.execute(select(news_sources)).mappings()}
-    selected = []
-    for item in result["items"]:
+
+    def eligible(item):
         if item["profile_id"] not in matching:
-            continue
-        if not all(
+            return False
+        return all(
             r["capture_proof"] == "RAW_RSS_MATCH_NOT_FACT_VERIFICATION"
             and sources[r["source_id"]]["last_success"] is not None
             and 0
             <= (now - utc(sources[r["source_id"]]["last_success"])).total_seconds()
             <= policy["max_source_age_seconds"]
             for r in item["news_revisions"]
-        ):
-            continue
-        selected.append(item)
+        )
+
+    selected = [item for item in result["items"] if eligible(item)]
+    company = [item for item in result.get("company_items", []) if eligible(item)]
     after = available_bundles(root=profile_root)
     if [digest(b.model_dump(mode="json")) for b in after["items"]] != [
         digest(b.model_dump(mode="json")) for b in current["items"]
     ]:
         raise ValueError("Profiles changed during projection")
     cards = project(selected, policy)
+    discoveries = {c["id"]: c for c in company}
+    assigned = {c["id"] for c in cards}
     for card in cards:
+        if card["id"] in discoveries:
+            card["company_discovery"] = discoveries[card["id"]]["company_discovery"]
+            card["revision_sha256"] = digest(
+                [card["revision_sha256"], discoveries[card["id"]]["revision_sha256"]]
+            )
         relation_ids = {
             card["profile_id"] + "/" + edge["id"] for link in card["links"] for edge in link["path"]
         }
@@ -118,6 +130,11 @@ def feed(conn, data, profile_root):
             f for f in data.get("financial_context", []) if f["profile_id"] == card["profile_id"]
         ]
     return {
+        "company_context": sorted(
+            [c for c in company if c["id"] not in assigned],
+            key=lambda c: (c["published_at"], c["id"]),
+            reverse=True,
+        ),
         "items": [
             c for c in cards if c["priority"] not in {"BACKGROUND_THEME", "SPONSORED_RESEARCH"}
         ],

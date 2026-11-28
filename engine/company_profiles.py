@@ -370,6 +370,7 @@ class ReadinessContextRule(Strict):
 
 class FactorBinding(Strict):
     """Curated literal topic/context/change groups, never a financial event classifier."""
+    company_only: bool = Field(default=False, exclude_if=lambda value: not value)
     id: ID
     factor_id: ID
     topic_terms: list[TEXT] = Field(min_length=1, max_length=20)
@@ -402,6 +403,8 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
+        if self.company_only and (self.narrative_ids or self.kind not in {"STRUCTURED_ACTIVITY", "ECONOMIC_CHANGE"}):
+            raise ValueError("Company-only binding requires a supported event rule without narrative targets")
         if self.project_finance:
             from engine.project_finance import supported as finance_supported
 
@@ -483,7 +486,7 @@ class FactorBinding(Strict):
                 if not any(re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", e.quote, re.I) for e in self.evidence):
                     raise ValueError("Relevance scope name requires literal source evidence")
         if self.kind == "STRUCTURED_ACTIVITY":
-            if (not self.activity_rule or not self.narrative_ids or self.entity_reference_id
+            if (not self.activity_rule or (not self.narrative_ids and not self.company_only) or self.entity_reference_id
                     or self.change_terms or self.disclosure_terms or self.term_aliases):
                 raise ValueError("Structured activity requires scoped rule without inferred party or legacy terms")
             if self.activity_rule.version == "activity-assertions-v2" and not any(
@@ -545,6 +548,38 @@ class FactorBinding(Strict):
         return self
 
 
+class CompanyDiscoveryRule(Strict):
+    """Reviewed company scope, independent of the inventory of narratives."""
+    id: ID
+    kind: Literal["ISSUER_EVENT", "FACTOR_EXPOSURE"]
+    enabled: bool = True
+    names: list[TEXT] = Field(default_factory=list, max_length=10)
+    binding_id: ID | None = None
+    relation_ids: list[ID] = Field(default_factory=list, max_length=2)
+    membership_ids: list[ID] = Field(default_factory=list, max_length=3)
+    intents: list[Literal["SUPPLY", "DEPLOYMENT", "DEMAND", "COMPETITION"]] = Field(default_factory=list, max_length=4)
+    scope: TEXT
+    reviewed_at: AwareDatetime
+    review_until: AwareDatetime
+    max_news_age_days: int = Field(default=30, ge=1, le=30)
+    evidence: list[Evidence] = Field(min_length=1, max_length=20)
+
+    @model_validator(mode="after")
+    def contract(self):
+        if self.review_until <= self.reviewed_at:
+            raise ValueError("Company discovery review expiry required")
+        if self.kind == "ISSUER_EVENT":
+            if (not self.names or self.binding_id or self.relation_ids or self.membership_ids or self.intents
+                    or len(set(n.casefold() for n in self.names)) != len(self.names)
+                    or any(len(n) < 3 or not any(re.search(r"(?<!\w)" + re.escape(n) + r"(?!\w)",
+                           e.quote, re.I) for e in self.evidence) for n in self.names)):
+                raise ValueError("Issuer discovery requires explicit sourced names, not exposure paths")
+        elif (self.names or not self.binding_id or not self.relation_ids or not self.membership_ids
+              or not self.intents or len(set(self.intents)) != len(self.intents)):
+            raise ValueError("Exposure discovery requires exact paths and declared business intents")
+        return self
+
+
 class ProfileBundle(Strict):
     schema_version: Literal["company-profile-v1"] = "company-profile-v1"
     id: ID
@@ -566,6 +601,7 @@ class ProfileBundle(Strict):
     entity_references: list[EntityReference] = Field(default_factory=list, max_length=100)
     narratives: list[Narrative] = Field(default_factory=list, max_length=20)
     routing_policies: list[NarrativeRoutingPolicy] = Field(default_factory=list, max_length=20, exclude_if=lambda value: not value)
+    company_discovery: list[CompanyDiscoveryRule] = Field(default_factory=list, max_length=30, exclude_if=lambda value: not value)
     events: list[Event] = Field(default_factory=list, max_length=100)
     author_kind: Literal["AI_ASSISTED_SOURCE_EXTRACTION"] = "AI_ASSISTED_SOURCE_EXTRACTION"
 
@@ -574,7 +610,7 @@ class ProfileBundle(Strict):
         for rows, key in ((self.sources, "id"), (self.components, "key"), (self.nodes, "id"),
                           (self.relationships, "id"), (self.narratives, "id"), (self.events, "id"),
                           (self.observations, "id"), (self.factor_bindings, "id"),
-                          (self.entity_references, "id")):
+                          (self.entity_references, "id"), (self.company_discovery, "id")):
             if len({getattr(r, key) for r in rows}) != len(rows):
                 raise ValueError("Duplicate identity")
         nodes = {n.id: n for n in self.nodes}
@@ -583,6 +619,8 @@ class ProfileBundle(Strict):
                        or len(set(p.intents)) != len(p.intents) for p in self.routing_policies)):
             raise ValueError("Unique existing narrative policy and intents required")
         for binding in self.factor_bindings:
+            if binding.company_only and not any(r.binding_id == binding.id for r in self.company_discovery):
+                raise ValueError("Company-only binding requires an explicit discovery scope")
             if binding.access_constraint and not {n.casefold() for n in binding.access_constraint.company_terms} <= {
                     self.legal_name.casefold(), nodes[self.company_id].label.casefold()}:
                 raise ValueError("Access constraint must name the profile company")
@@ -620,13 +658,21 @@ class ProfileBundle(Strict):
                 raise ValueError("Observation requires a metric node")
             if o.period_end > self.snapshot_at.date():
                 raise ValueError("Future observation period")
-        items: list[Component | Relationship | Event | MetricObservation | FactorBinding | EntityReference] = [
+        items: list[Component | Relationship | Event | MetricObservation | FactorBinding | EntityReference | CompanyDiscoveryRule] = [
             *self.components, *self.relationships, *self.events, *self.observations,
-            *self.factor_bindings, *self.entity_references]
+            *self.factor_bindings, *self.entity_references, *self.company_discovery]
         for item in items:
             if any(e.source_id not in source_ids for e in item.evidence):
                 raise ValueError("Missing evidence source")
         sources = {s.id: s for s in self.sources}
+        for discovery_rule in self.company_discovery:
+            if (discovery_rule.reviewed_at > self.available_at
+                    or any(sources[e.source_id].retrieved_at > discovery_rule.reviewed_at for e in discovery_rule.evidence)):
+                raise ValueError("Company discovery cannot predate its evidence")
+            if discovery_rule.kind == "FACTOR_EXPOSURE":
+                from engine.company_discovery import validate_exposure
+
+                validate_exposure(self, discovery_rule)
         for undated_relation in self.relationships:
             for evidence in undated_relation.evidence:
                 source = sources[evidence.source_id]
@@ -782,9 +828,9 @@ def verify_sources(directory, bundle):
         if hashlib.sha256(raw).hexdigest() != s.sha256:
             raise ValueError("Source version changed")
         texts[s.id] = source_text(raw)
-    items: list[Component | Relationship | Event | MetricObservation | FactorBinding | EntityReference] = [
+    items: list[Component | Relationship | Event | MetricObservation | FactorBinding | EntityReference | CompanyDiscoveryRule] = [
         *bundle.components, *bundle.relationships, *bundle.events, *bundle.observations,
-        *bundle.factor_bindings, *bundle.entity_references]
+        *bundle.factor_bindings, *bundle.entity_references, *bundle.company_discovery]
     for item in items:
         if any(e.quote not in texts[e.source_id] for e in item.evidence):
             raise ValueError("Evidence quote not in visible source")
@@ -903,6 +949,10 @@ def audit_binding_routes(bundle):
     """Reject enabled rules whose stated narratives have no sourced structural route."""
     for binding in bundle.factor_bindings:
         if not binding.enabled:
+            continue
+        if binding.company_only:
+            if binding.narrative_ids or not any(r.binding_id == binding.id for r in bundle.company_discovery):
+                raise ValueError("Company-only binding requires discovery scope and no narrative targets")
             continue
         targets = [n for n in bundle.narratives
                    if not binding.narrative_ids or n.id in binding.narrative_ids]

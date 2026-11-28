@@ -13,6 +13,8 @@ def binding_decisions(bundle, narrative, article, at, *, issuer_cik=None):
     if roles["routing_withheld"]:
         return
     for binding in bundle.factor_bindings:
+        if binding.company_only:
+            continue
         if roles["issuer_supply_context"] and binding.kind != "SUPPLIER_ROLE_DISCLOSURE":
             if (not binding.issuer_supply_scope or not valid_cik(bundle.identifiers.get("CIK"))
                     or int(issuer_cik) != int(bundle.identifiers["CIK"])):

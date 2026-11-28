@@ -32,8 +32,11 @@ sample. Subsequent replay of the anchor is **exposed AI regression**, not fresh
 blind evidence. Report score delta only within the same suite/policy/anchor, with
 component and group regressions even when the scalar rises.
 
-Company discovery uses one exact source representation × company, selected if any
-watched narrative selects it. Different source revisions or articles are not merged
+Company discovery uses one exact source representation × company, selected if a
+reviewed company discovery rule or any watched narrative selects it. Discovery is
+measured against direct company references only; the legacy proxy below continues
+to use narrative selections alone. Reports preserve each changed company decision
+separately from narrative/priority changes. Different source revisions or articles are not merged
 just because they share an economic cluster. Independent company labels assess the
 supplied business scope **even outside watched narratives**; a missed company event
 outside all watched targets is a company FN. Narrative accuracy remains pair-level:

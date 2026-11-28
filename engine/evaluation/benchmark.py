@@ -12,6 +12,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from engine.atlas_freeze import runtime_fingerprint, sha
+from engine.company_discovery import source_decisions as company_decisions
 from engine.company_profiles import available_bundles
 from engine.core_activity import assess
 from engine.core_decisions import POLICY
@@ -213,6 +214,18 @@ def comparison(previous, current):
                                 "before": prior[field], "after": row[field],
                                 "outcome": "UNRESOLVED" if unresolved else
                                 "IMPROVED" if row[field] == truth else "REGRESSION"})
+        # Direct company truth was frozen separately; never score new company
+        # discovery against the narrower legacy narrative-union proxy.
+        if rows and all("company_label" in r for r in rows):
+            before = {r["id"]: r for r in company_rows(previous[cohort])}
+            for unit in company_rows(rows):
+                prior = before[unit["id"]]
+                if unit["selected"] == prior["selected"]:
+                    continue
+                changes.append({"cohort": cohort, "id": unit["id"], "dimension": "company",
+                                "before": prior["selected"], "after": unit["selected"],
+                                "outcome": "UNRESOLVED" if unit["label"] == "INSUFFICIENT_CONTEXT" else
+                                "IMPROVED" if unit["selected"] == (unit["label"] == "RELEVANT") else "REGRESSION"})
     return {"changes": changes, "regressions": sum(c["outcome"] == "REGRESSION" for c in changes),
             "improvements": sum(c["outcome"] == "IMPROVED" for c in changes),
             "unresolved_changes": sum(c["outcome"] == "UNRESOLVED" for c in changes)}
@@ -244,6 +257,7 @@ def run(suite_path, expected, profile_root, output, baseline=None, as_of=None):
         policy, results = read(POLICY), {}
         for cohort in suite["cohorts"]:
             rows = []
+            discovery_cache = {}
             with local_environment(cohort["article_dir"]):
                 for row in read(cohort["rows"]["path"]):
                     value = row["input"]
@@ -252,8 +266,13 @@ def run(suite_path, expected, profile_root, output, baseline=None, as_of=None):
                     if n.model_dump(mode="json") != value["narrative"]:
                         raise ValueError("Narrative target changed; new suite required")
                     matched, activity = predict(row, b, n, at, policy)
+                    key = (identity(value)["source_unit_id"], b.id)
+                    if key not in discovery_cache:
+                        discovery_cache[key] = company_decisions(value, b, at) if "company_label" in row else []
                     rows.append({k: v for k, v in row.items() if k != "input"} | {
                         **identity(value),
+                        "company_selected": bool(discovery_cache[key]),
+                        "company_discovery": discovery_cache[key],
                         "selected": matched, "main": matched and activity["tier"] not in
                         {"BACKGROUND_THEME", "SPONSORED_RESEARCH"}, "assessment": activity})
             results[cohort["id"]] = rows
