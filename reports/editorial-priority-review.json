@@ -704,7 +704,22 @@
     "ruff": "passed",
     "mypy_modules": 160,
     "browser": "desktop_mobile_passed_no_page_errors",
-    "ci": "PENDING"
+    "ci": {
+      "run_id": 46096003013,
+      "code_commit": "b2b007884bcc093eec8d996aa26664f9dfdf1129",
+      "conclusion": "success",
+      "url": "https://github.com/linhpmvpub/Narrative/actions/runs/46096003013",
+      "sqlite": {
+        "passed": 1485,
+        "seconds": 184.2,
+        "warnings": 1
+      },
+      "postgresql": {
+        "passed": 1485,
+        "seconds": 291.82,
+        "warnings": 1
+      }
+    }
   },
   "pipeline": {
     "context_cards": 25,
@@ -720,5 +735,6 @@
     "not_modified": 3,
     "created": 0,
     "updated": 0
-  }
+  },
+  "older_rss_demotion_basis": "Resolved entity without a qualifying development; relevance-positive, independent priority label unavailable."
 }

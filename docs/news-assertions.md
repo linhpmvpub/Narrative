@@ -144,3 +144,13 @@ a separate editorial event-priority contract, not a financial-impact inference.
 See `reports/source-boundary-review.json`. Local opt-in manifest:
 `source-cache/source-boundaries-workspace-2026-11-28.json`. Data stays local and
 notifications disabled; no new blind evaluation or quality promotion is claimed.
+
+## Editorial eligibility follow-up (2026-11-28)
+
+Core policy12 now separates conditional relevance from editorial event selection.
+The source assertion, relation scope and context_only flag remain unchanged; an
+accepted actor/event/phase/narrative contract can justify highlighting the news
+without verifying financial impact. This supersedes policy11's blanket priority
+withholding described above. Generic entity mentions do not qualify alone; legacy
+change-word paths still have observed limitations. See [editorial priority](editorial-priority.md)
+for rules, source lifecycle boundaries, tests and remaining failures.
