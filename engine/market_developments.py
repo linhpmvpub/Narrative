@@ -9,6 +9,7 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
+from engine.source_role import assess as source_role
 from engine.source_sentences import sentences
 
 
@@ -26,6 +27,7 @@ def classify(text):
     p = policy()
     if len(text) > p["max_window_chars"] or re.search(p["negation"], text, re.I):
         return None
+    fallback = None
     for asset in re.finditer(p["assets"], text, re.I):
         # Same-clause operating object; neither a title nor another clause donates it.
         starts = list(re.finditer(p["boundary"], text[:asset.start()], re.I))
@@ -52,22 +54,27 @@ def classify(text):
                 continue  # A purpose infinitive is not an operator's decision.
             planned = bool(re.search(p["plans"], clause, re.I))
             experimental = bool(re.search(p["experiments"], clause, re.I))
-            return {"version": p["version"], "event_type": "INFRASTRUCTURE_DEVELOPMENT",
-                    "phase": "EXPERIMENTAL_PLAN" if experimental and planned else
+            descriptive = source_role(text, action.start(), asset.end(),
+                                      predicate_start=action.start())["role"] == "INCIDENTAL_DESCRIPTION"
+            result = {"version": p["version"], "event_type": "INFRASTRUCTURE_BACKGROUND" if descriptive else "INFRASTRUCTURE_DEVELOPMENT",
+                    "phase": "BACKGROUND" if descriptive else "EXPERIMENTAL_PLAN" if experimental and planned else
                     "EXPERIMENTAL_ACTIVITY" if experimental else "FORWARD_LOOKING" if planned else "SOURCE_REPORTED_ACTIVITY",
-                    "editorial_eligible": True, "action_span": span(action), "object_span": span(asset),
+                    "editorial_eligible": not descriptive, "action_span": span(action), "object_span": span(asset),
                     "text": text, "financial_impact": "UNKNOWN", "company_order_verified": False,
                     "identity_verified": False, "offset_basis": "RELATIVE_TO_SOURCE_WINDOW_TEXT"}
+            if not descriptive:
+                return result
+            fallback = fallback or result
         background = re.search(p["background"], clause, re.I)
         if background and not any(left <= a.start() < right for a in actions):
-            return {"version": p["version"], "event_type": "INFRASTRUCTURE_BACKGROUND",
+            fallback = fallback or {"version": p["version"], "event_type": "INFRASTRUCTURE_BACKGROUND",
                     "phase": "BACKGROUND", "editorial_eligible": False, "object_span": span(asset),
                     "text": text, "financial_impact": "UNKNOWN", "company_order_verified": False,
                     "identity_verified": False, "offset_basis": "RELATIVE_TO_SOURCE_WINDOW_TEXT"}
-    return None
+    return fallback
 
 
-def matches(binding, fields, *, bundle=None, at=None):
+def matches(binding, fields, *, bundle=None, at=None, context_title=""):
     for field, text in fields.items():
         for sentence in sentences(text):
             if any(re.search(r"(?<!\w)" + re.escape(t) + r"(?!\w)", sentence.group(), re.I)
@@ -75,6 +82,14 @@ def matches(binding, fields, *, bundle=None, at=None):
                 continue
             development = classify(sentence.group())
             if development:
+                action = development.get("action_span")
+                obj = development["object_span"]
+                role = source_role(sentence.group(), action["start"] if action else obj["start"], obj["end"],
+                    predicate_start=action["start"] if action else None,
+                    headline=fields.get("title", "") or context_title, is_headline=field == "title",
+                    focus_patterns=(policy()["assets"], policy()["actions"]))
+                if not role["allowed"]:
+                    continue
                 if binding.infrastructure_scope:
                     from engine.infrastructure_scope import assess
 
@@ -88,6 +103,8 @@ def matches(binding, fields, *, bundle=None, at=None):
                 return [{**s, "start": s["start"] + sentence.start(),
                          "end": s["end"] + sentence.start(), "field": field,
                          "group": "market_development", "news_party_verified": False,
+                         "source_role": role,
+                         **({"context_only": True} if role["role"] == "FOCUSED_DESCRIPTION" else {}),
                          "relevance_role": "MARKET_DEVELOPMENT_CONTEXT",
                          "activity_assertion": {**development, "market": "DATA_CENTER",
                                                 "vendor_scope": "UNSPECIFIED"}}

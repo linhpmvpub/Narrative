@@ -36,14 +36,14 @@ def literal(term, text):
     return re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", text, re.I)
 
 
-def activity_matches(binding, fields, *, bundle=None, at=None):
+def activity_matches(binding, fields, *, bundle=None, at=None, context_title=""):
     rule = binding.activity_rule
     if rule is None:
         return []
     if rule.version == "activity-assertions-v2":
         from engine.market_developments import matches
 
-        return matches(binding, fields, bundle=bundle, at=at)
+        return matches(binding, fields, bundle=bundle, at=at, context_title=context_title)
     for field, text in fields.items():
         for window in sentences(text):
             value = window.group()

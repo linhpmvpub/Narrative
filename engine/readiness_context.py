@@ -2,6 +2,7 @@
 
 import re
 
+from engine.source_role import assess as source_role
 from engine.source_sentences import sentences
 
 VERSION = "readiness-context-v1"
@@ -40,7 +41,7 @@ def supported(rule, evidence):
                for resource in rule.resources)
 
 
-def matches(binding, fields):
+def matches(binding, fields, *, context_title=""):
     rule = binding.readiness_context
     for field, text in fields.items():
         for sentence in sentences(text):
@@ -70,8 +71,14 @@ def matches(binding, fields):
                             # never claims a realized financial effect.
                             if re.search(r"\b(?:not|never|denied|no)\b", value, re.I):
                                 continue
+                            role = source_role(value, left, right,
+                                headline=fields.get("title", "") or context_title, is_headline=field == "title",
+                                focus_patterns=(RESOURCES[resource], MARKETS[rule.scope], OPERATING))
+                            if not role["allowed"]:
+                                continue
                             trace = {"version": VERSION, "scope": rule.scope, "resource": resource,
                                      "relationship_id": rule.relationship_id, "text": value,
+                                     "source_role": role,
                                      "company_incident_verified": False, "financial_impact": "UNKNOWN"}
                             return [{"field": field, "start": h.start()+sentence.start(),
                                      "end": h.end()+sentence.start(), "text": h.group(), "group": group,

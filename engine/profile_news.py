@@ -39,7 +39,7 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
     if binding.readiness_context:
         from engine.readiness_context import matches as readiness_matches
 
-        return readiness_matches(binding, fields)
+        return readiness_matches(binding, fields, context_title=payload.get("context_title", ""))
     if binding.access_constraint:
         from engine.access_constraints import matches as access_matches
 
@@ -112,7 +112,7 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
                      for value in [*fields.values(), payload.get("context_title", "")]):
         return []
     if binding.kind == "STRUCTURED_ACTIVITY":
-        return activity_matches(binding, fields, bundle=bundle, at=at)
+        return activity_matches(binding, fields, bundle=bundle, at=at, context_title=payload.get("context_title", ""))
     groups = ("topic_terms", "context_terms", "change_terms")
     if binding.kind == "SCOPED_ACTIVITY":
         # Three literal groups must co-occur in one sentence/heading. Do not join

@@ -87,9 +87,13 @@ def route_contract(bundle, narrative, route, spans):
         allowed = bool(declared and set(declared.intents) & intents
                        and any(r.id == readiness["relationship_id"] and r.type == mechanism for r in route)
                        and all(r.type != "COMPETES_WITH" for r in route))
+        source_role = readiness.get("source_role", {})
+        description = source_role.get("role") == "FOCUSED_DESCRIPTION"
         return {"version": readiness["version"], "allowed": allowed, "role": "OPERATING_READINESS_CONTEXT",
                 "reason": "CONDITIONAL_RESOURCE_EXPOSURE_NOT_COMPANY_INCIDENT",
-                "explanation": "Bối cảnh nguồn lực và điều kiện vận hành có đường liên hệ trong hồ sơ. Chưa xác minh sự cố tại công ty, đơn hàng hoặc tác động tài chính.",
+                "explanation": "Bối cảnh nguồn lực và điều kiện vận hành có đường liên hệ trong hồ sơ. Chưa xác minh sự cố tại công ty, đơn hàng hoặc tác động tài chính."
+                    + (" Đây là mô tả năng lực hoặc trạng thái có sẵn, chưa phải thay đổi mới." if description else ""),
+                **({"source_role": source_role} if source_role else {}),
                 "financial_impact": "UNKNOWN", "relation_types": [r.type for r in route]}
     if any(s.get("relevance_role") == "ACCESS_CONSTRAINT_CONTEXT" for s in spans):
         declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
@@ -116,6 +120,9 @@ def route_contract(bundle, narrative, route, spans):
         bool(set(declared.intents) & {"SUPPLY", "DEPLOYMENT"}) if readiness else True)
     scoped = next((s["assertion_scope"] for s in spans if s.get("assertion_scope")), None)
     explanation = policy()["route_explanations"][role]
+    source_role = next((s["source_role"] for s in spans if s.get("source_role")), None)
+    if source_role and source_role["role"] == "FOCUSED_DESCRIPTION":
+        explanation += " Đây là mô tả năng lực hoặc trạng thái có sẵn, chưa phải thay đổi mới."
     infrastructure = next((s.get("activity_assertion", {}).get("infrastructure_scope")
                            for s in spans if s.get("activity_assertion", {}).get("infrastructure_scope")), None)
     if infrastructure:
@@ -135,6 +142,7 @@ def route_contract(bundle, narrative, route, spans):
             "intents": declared.intents if declared else [],
             "reason": "SOURCED_ROUTE_WITHIN_NARRATIVE" if allowed else "ROUTE_OUTSIDE_DECLARED_NARRATIVE",
             "explanation": explanation,
+            **({"source_role": source_role} if source_role else {}),
             **({"assertion_scope": scoped} if scoped else {}),
             **({"infrastructure_scope": infrastructure} if infrastructure else {}),
             "relation_types": [r.type for r in route], "financial_impact": "UNKNOWN",
