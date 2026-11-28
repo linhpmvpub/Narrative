@@ -1,5 +1,15 @@
 # Nguyên tắc và bài học phát triển
 
+## L036 — Event contracts need both source grammar and a sourced identity inventory (2026-11-28)
+
+- Use explicit reusable actor/action/object/phase contracts; company names and aliases belong to sourced profile data. Shipment/capacity/metric activity differs from share-price movement and capability prose. A versioned catalog gives inspectable rules and business-variable labels; it does not establish a realized economic effect or calibrated weight.
+- Prefer the longest contained evidence over overlapping aliases/general declarations, without suppressing separate events. Keep source offsets and actor/object spans. Evidence: initial tests found duplicate financial metric/result matches; deduplication fixed that without changing labels or discarding a distinct event.
+- Priority needs the unchanged event sentence, not an entire unrelated RSS field. Preserve uncertainty in that window and fail on tampered offsets. Forward-looking source plans stay plans through assessment and UI. Unknown direction/magnitude/horizon cannot be replaced by an attention tier.
+- Diagnose database gaps separately from extraction. Here shared shipment rules recover one case in both dimensions (6.50→10.64), while a missed financial article uses a short name absent from its issuer rule. Do not write a ticker exception; review aliases with primary evidence across profiles. Do not infer identity by stripping arbitrary legal/product terms.
+- A synthetic capability is not a measured gain. New capacity/financial grammars pass renamed-company tests but add no recovered benchmark cases this iteration. Keep42remaining company misses and source/reference limits visible; no fresh-blind/generalization claim from exposedAI regression or zeroFP over3positives.
+- Source polls and code changes can both alter a feed snapshot. Use fixed-source/policy/reference replay for attribution, preserve prior snapshots and holds, and report operations separately. Company usefulness and arbitrary narrative outcome tracking remain later acceptance work.
+
+
 ## L035 — Separate the product contract, then measure its missing coverage (2026-11-28)
 
 - Runtime independence must span schema, matcher, assessment, API and rendering. A separate company section still depends on narratives if ranking or primary cards do. Shared production/benchmark assessment plus zero-narrative and add/remove invariance tests prevent this mismatch;120real cases are invariant in this iteration.

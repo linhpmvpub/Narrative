@@ -1,5 +1,15 @@
 # Company assessment and private feed
 
+## Issuer-event extension — 2026-11-28
+
+[Shared issuer contracts](issuer-events.md) add financial-performance, shipment and capacity
+recognition with exact actor/action/object and source-window traces. Attention uses the unchanged
+event sentence and preserves explicit forward plans; cards state completion is unconfirmed.
+Company score is now10.64on the same fixed reference (+4.14); older6.50figures below describe
+initial foundation acceptance. Sources/graph/numeric financial data remain unchanged; no impact
+magnitude or generalization claim follows from this small exposed-reference gain.
+
+
 Implemented 2026-11-28; this is the company foundation, not completed v1 acceptance.
 Follow [product direction](../codex/PRODUCT_DIRECTION.md), [workflow](../codex/DEVELOPMENT_WORKFLOW.md),
 [principles](../codex/PRINCIPLES_AND_LESSONS.md) and [company-first plan](company-first-product-plan.md).

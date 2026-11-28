@@ -1,5 +1,17 @@
 # TASKS — implementation execution checklist
 
+## Next after issuer-event contracts — 2026-11-28 (latest)
+
+- [x] Versioned shared issuer catalog for result/performance, shipment/capacity, financing, governance and credit; literal evidence and plan phase, no ticker branches.
+- [x] Source-sentence attention, UI plan disclosure, lifecycle/invariance integration tests; both frozen benchmark replays and local feed snapshot.
+- [ ] NEXT: source-backed alias inventory audit across all five current profiles, including short issuer names; version descriptive issuer scopes to match catalog semantics. Do not automatically infer identity or change graph facts to satisfy labels.
+- [ ] Complete shared capacity/delivery/access, product-market demand and capital constraint exposures with exact primary evidence. Separate source assertion, identity, graph applicability and attention failures; broad infrastructure relevance is not a supplier order.
+- [ ] Improve common role/asset/event contracts, replay both exposed references per stage, then freeze unused fuller sources before independentAI reviews. Include difficult negatives and positive input-price support; keep group regressions visible.
+- [ ] Company watchlists/history/attention controls, explanation/human usefulness and numerical company-target/operational acceptance. Optional narrative specification/history/outcomes remain later.
+
+Current company score10.64,legacy25.18; v1notcomplete. See latest checkpoint and [issuer contracts](../docs/issuer-events.md).
+
+
 ## Current execution — company foundation before breadth (2026-11-28 latest)
 
 This section supersedes pending foundation items below; historical checklists remain as records.
