@@ -1,5 +1,11 @@
 {
-  "version": "operating-developments-v1",
+  "version": "operating-developments-v2",
+  "interruptions": {
+    "actions": "\\b(?:paus(?:e|es|ed)|halt(?:s|ed)?|suspend(?:s|ed)?|stop(?:s|ped)?|delay(?:s|ed)?|cancel(?:s|led|ed)?)\\b",
+    "objects": ["construction", "production", "manufacturing", "operations", "shipments", "deliveries", "data center", "data centre", "factory", "factories", "plant", "plants", "fab", "fabs", "production line"],
+    "object_modifiers": "\\s*(?:(?:a|an|the|its|their|all|new|planned|ongoing|existing|chip|memory|semiconductor|component)\\s+){0,5}",
+    "non_assertion": "\\b(?:no|not|never|without|denied|if|unless|may|might|could|would|can|risk|risks|prevent|prevents|avoid|avoids|potential|possible|hypothetical|simulation|simulated|rumor|rumour)\\b"
+  },
   "object_bound_chars": 140,
   "objects": {
     "CAPACITY": ["capacity", "output", "production", "manufacturing", "facility", "facilities", "fab", "fabs", "factory", "factories", "plant", "plants", "campus", "site", "production line", "compute", "computing", "AI infrastructure"],

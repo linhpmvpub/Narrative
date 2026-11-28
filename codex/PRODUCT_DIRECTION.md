@@ -1,5 +1,16 @@
 # Mục tiêu và định hướng sản phẩm
 
+## Chất lượng được theo dõi qua mỗi phiên bản — quyết định 2026-11-28
+
+Benchmark cục bộ có phiên bản trở thành bước thường xuyên sau thay đổi hệ thống,
+database và thuật toán; xem [contract](../docs/quality-benchmark.md). Theo dõi độ liên
+quan, ưu tiên, bỏ sót và ghép sai theo nhóm/công ty, không tối ưu một điểm tổng hay
+vá theo từng bản tin. Phạm vi sản phẩm, tiêu chí nghiệm thu, giới hạn dữ kiện và lệnh
+giữ dữ liệu cục bộ/thông báo thật tắt không đổi. Đo tác động tài chính cần bằng chứng
+riêng; không suy từ điểm relevance. Benchmark là công cụ hỗ trợ cải thiện luồng đến
+thẻ tin, không thay thế việc hoàn thiện hồ sơ và quan hệ có nguồn.
+
+
 ## Framework chung và chống overfit — quyết định 2026-11-27
 
 Người dùng yêu cầu phát triển luồng dùng chung: crawler → phiên bản/lọc trùng → phân loại phát biểu → ghép yếu tố có nguồn → graph/phạm vi narrative → nhãn/giải thích ngắn → ưu tiên cá nhân hóa → push. Không thêm nhánh theo ticker, tên công ty hoặc tiêu đề để sửa benchmark. Khác biệt giữa doanh nghiệp nằm trong hồ sơ, quan hệ và phạm vi narrative có nguồn; thuật toán/contract dùng chung. Mỗi lần đổi rule phải có phản ví dụ và kiểm tra hoán đổi tên công ty/phạm vi. Tin cạnh tranh không tự trở thành nguồn cung; tin linh kiện sẵn sàng có thể là bối cảnh triển khai mà chưa chứng minh nhu cầu. Giữ các tầng đã triển khai, nối bằng contract rõ ràng thay vì xây lại toàn bộ crawler. Push thật và cloud vẫn tắt.

@@ -1,5 +1,18 @@
 # Quy trình phát triển, tự đánh giá và cải thiện
 
+## Benchmark sau mỗi update — quyết định 2026-11-28
+
+Áp dụng [quality-benchmark](../docs/quality-benchmark.md): chốt suite/target/labels,
+kiểm tra run trước, sửa framework/data, chạy tests và benchmark so với baseline,
+đọc từng quyết định đổi rồi chạy quality_gate --all sau lần sửa runtime/database cuối.
+Ghi phiên bản và kết quả theo nhóm trong QUALITY_REVIEW/CHECKPOINT, giữ lần thất bại.
+Hook commit kiểm tra freshness cho engine/config; CI dùng synthetic vì corpus riêng
+ở cục bộ. Đổi database vẫn cần chạy gate dù Git không thấy file ignore. Chỉ cập nhật
+current-run pointer sau khi đánh giá; không sửa run cũ. Nhãn AI exposed không chứng minh
+chất lượng holdout hoặc mức độ/thời hạn tác động tài chính. Không cần mở lại đánh giá
+riêng priors. Khi thay target hoặc bổ sung nhãn/cohort, tạo suite phiên bản mới.
+
+
 ## Kiểm tra khả năng dùng chung — 2026-11-27
 
 Trước khi thêm rule, xác định tầng lỗi và đối chiếu contract của crawler/revision, classification, graph, narrative, explanation, ranking hoặc delivery. Tên doanh nghiệp, sản phẩm riêng, quan hệ và nguồn thuộc data/config của hồ sơ; mã matcher chung không rẽ nhánh theo ticker/headline. Kiểm thử cùng phát biểu trên ít nhất hai hồ sơ synthetic đổi tên, thêm ca khác thị trường và trường hợp không có/đã rút quan hệ. Khóa runtime/profile/predictions trước nhãn của tập mới; không chỉnh theo nhãn holdout trong cùng lượt. Báo riêng độ liên quan theo narrative và coverage tin cấp công ty; chuyển tin sang narrative khác không được tính là cứu recall của target cũ.

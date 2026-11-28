@@ -1,0 +1,9 @@
+#!/bin/sh
+# Private-corpus freshness gate; synthetic integrity tests run separately in CI.
+if [ -x .venv/Scripts/python.exe ]; then
+    exec .venv/Scripts/python.exe -m engine.evaluation.quality_gate
+elif [ -x .venv/bin/python ]; then
+    exec .venv/bin/python -m engine.evaluation.quality_gate
+else
+    exec python -m engine.evaluation.quality_gate
+fi

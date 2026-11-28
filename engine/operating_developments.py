@@ -77,8 +77,13 @@ def assess(window, core_policy):
         return {**base, "reason": "PRODUCT_DESCRIPTION_NOT_OPERATING_CHANGE"}
     if activity:
         return structured(base, text, activity)
+    from engine.operating_interruptions import assess as interruption
     from engine.operating_purposes import assess as purpose
 
+    if development := interruption(text):
+        return {**base, **development, "eligible": True, "reason": "EXPLICIT_OPERATING_INTERRUPTION"}
+    if re.search(policy()["interruptions"]["actions"], text, re.I):
+        return {**base, "reason": "INTERRUPTION_ACTION_OBJECT_REQUIRED"}
     if development := purpose(text):
         return {**base, **development, "eligible": True, "reason": "EXPLICIT_OPERATING_PURPOSE_OBJECT"}
     for direction, terms in core_policy["change_terms"].items():

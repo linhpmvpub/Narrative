@@ -1,5 +1,17 @@
 # Hướng dẫn cho agent làm việc trong repository
 
+## Benchmark bắt buộc sau thay đổi — 2026-11-28
+
+Đọc [benchmark chất lượng](docs/quality-benchmark.md). Sau mỗi thay đổi engine, cấu hình,
+thuật toán hoặc hồ sơ/database, chạy lại suite cục bộ đã khóa và so sánh với run trước.
+Sau sửa cuối cùng chạy quality_gate --all; kết quả stale/thiếu/failed không được báo đã
+kiểm chứng. Hook pre-commit kiểm tra runtime/config đã stage; thay đổi DB cục bộ cần gate
+riêng. Báo FP/FN/unresolved theo cohort/nhóm/công ty, relevance và priority riêng, giữ
+các regression. Nhãn đã lộ là hồi quy AI, không phải holdout mới/human gold. Dữ liệu
+chi tiết không lên GitHub; chỉ code, tests synthetic và aggregate. Xem checkpoint để
+lấy suite SHA, profiles, current-run pointer. Không đổi target/nhãn/baseline âm thầm.
+
+
 ## Giai đoạn hiện hành — 2026-11-26
 
 Người dùng đã yêu cầu đánh giá toàn diện theo nhóm tin và hiệu chỉnh thuật toán/trọng số.
