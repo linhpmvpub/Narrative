@@ -63,11 +63,24 @@ def assess(window, core_policy):
             "reason": "OPERATING_ACTION_OBJECT_REQUIRED", "source_window": window,
             "financial_impact": "UNKNOWN", "identity_verified": False,
             "offset_basis": "RELATIVE_TO_SOURCE_WINDOW_TEXT", "delivery": "disabled"}
+    activity = window.get("activity_assertion")
+    if activity and activity.get("version") == "market-developments-v1":
+        from engine.market_developments import classify
+
+        checked = classify(text)
+        if not checked or any(checked.get(k) != activity.get(k) for k in checked):
+            return {**base, "reason": "SOURCE_WINDOW_MISMATCH"}
+        return {**base, **checked, "eligible": checked["editorial_eligible"],
+                "reason": "EXPLICIT_MARKET_DEVELOPMENT" if checked["editorial_eligible"] else "MARKET_BACKGROUND_ONLY",
+                "driver_direction": "UNKNOWN"}
     if descriptive(text):
         return {**base, "reason": "PRODUCT_DESCRIPTION_NOT_OPERATING_CHANGE"}
-    activity = window.get("activity_assertion")
     if activity:
         return structured(base, text, activity)
+    from engine.operating_purposes import assess as purpose
+
+    if development := purpose(text):
+        return {**base, **development, "eligible": True, "reason": "EXPLICIT_OPERATING_PURPOSE_OBJECT"}
     for direction, terms in core_policy["change_terms"].items():
         for action in re.finditer(r"\b(?:" + "|".join(re.escape(t) for t in terms) + r")\b", text, re.I):
             left, before = prefix(text, action.start())

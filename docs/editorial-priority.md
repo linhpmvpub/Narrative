@@ -1,5 +1,9 @@
 # Editorial priority for scoped developments
 
+Current extension: [infrastructure and operating purposes](market-developments.md)
+adds opt-in source-backed market routes and explicit allocation/agreement phases.
+Core policy14 retains numerical weights and all financial uncertainty.
+
 The engine answers two separate questions: is this news related to a narrative,
 and does the supplied source describe a concrete development worth highlighting?
 Neither answer establishes financial impact or authorizes a notification.

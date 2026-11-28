@@ -84,6 +84,7 @@
     "might"
   ],
   "route_explanations": {
+    "MARKET_DEVELOPMENT_CONTEXT": "Phát triển hạ tầng thuộc thị trường có nguồn trong hồ sơ. Kế hoạch và thử nghiệm chưa phải công suất thương mại; chưa xác minh khách hàng, thiết bị hay đơn hàng của công ty.",
     "INPUT_READINESS_CONTEXT": "Phát triển linh kiện thuộc phạm vi đầu vào/triển khai có nguồn trong hồ sơ. Đây là bối cảnh về khả năng đáp ứng; chưa chứng minh đơn hàng, nhu cầu hoặc tác động tài chính.",
     "COMPETITION_CONTEXT": "Phát triển của đối thủ qua quan hệ cạnh tranh có nguồn. Chưa chứng minh thay đổi nguồn cung của công ty, thị phần hay tác động tài chính.",
     "DIRECT_CONTEXT": "Tin đi qua yếu tố và đường quan hệ có nguồn phù hợp với phạm vi narrative; tác động tài chính chưa xác định.",

@@ -40,6 +40,10 @@ def activity_matches(binding, fields):
     rule = binding.activity_rule
     if rule is None:
         return []
+    if rule.version == "activity-assertions-v2":
+        from engine.market_developments import matches
+
+        return matches(binding, fields)
     for field, text in fields.items():
         for window in sentences(text):
             value = window.group()

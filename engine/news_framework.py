@@ -85,11 +85,13 @@ def route_contract(bundle, narrative, route, spans):
     input_role = next((s["relevance_role"] for s in spans if s.get("relevance_role") in {
         "INPUT_READINESS_CONTEXT", "INPUT_MARKET_CONTEXT"}), None)
     readiness = input_role is not None
-    role = "COMPETITION_CONTEXT" if competition else input_role if readiness else "DIRECT_CONTEXT"
-    if declared is None and not readiness:
+    market = any(s.get("relevance_role") == "MARKET_DEVELOPMENT_CONTEXT" for s in spans)
+    role = "COMPETITION_CONTEXT" if competition else "MARKET_DEVELOPMENT_CONTEXT" if market else input_role if readiness else "DIRECT_CONTEXT"
+    if declared is None and not readiness and not market:
         return None  # Legacy profiles preserve their original representation/behavior.
-    allowed = declared is not None and (
+    allowed = not (market and competition) and declared is not None and (
         "COMPETITION" in declared.intents if competition else
+        bool(set(declared.intents) & {"DEPLOYMENT", "DEMAND"}) if market else
         bool(set(declared.intents) & {"SUPPLY", "DEPLOYMENT"}) if readiness else True)
     scoped = next((s["assertion_scope"] for s in spans if s.get("assertion_scope")), None)
     explanation = policy()["route_explanations"][role]

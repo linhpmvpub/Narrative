@@ -237,14 +237,19 @@ class EntityReference(Strict):
 
 
 class ActivityRule(Strict):
-    version: Literal["activity-assertions-v1"] = "activity-assertions-v1"
+    version: Literal["activity-assertions-v1", "activity-assertions-v2"] = "activity-assertions-v1"
     market: Literal["DATA_CENTER", "AI_COMPUTE", "NAMED_PRODUCT"]
-    event_types: list[Literal["FACILITY_PROJECT", "PROJECT_FINANCING", "COMPUTE_DEPLOYMENT", "PRODUCT_INTEGRATION"]] = Field(min_length=1, max_length=4)
+    event_types: list[Literal["FACILITY_PROJECT", "PROJECT_FINANCING", "COMPUTE_DEPLOYMENT", "PRODUCT_INTEGRATION", "INFRASTRUCTURE_DEVELOPMENT"]] = Field(min_length=1, max_length=4)
     product_terms: list[TEXT] = Field(default_factory=list, max_length=10)
     vendor_names: list[TEXT] = Field(default_factory=list, max_length=10)
 
     @model_validator(mode="after")
     def bounded(self):
+        if self.version == "activity-assertions-v2":
+            if (self.market != "DATA_CENTER" or self.event_types != ["INFRASTRUCTURE_DEVELOPMENT"]
+                    or self.product_terms or self.vendor_names):
+                raise ValueError("Market developments require an unbranded data-center scope")
+            return self
         if (self.market == "NAMED_PRODUCT") != bool(self.product_terms):
             raise ValueError("Named product requires explicit product terms only")
         allowed = {"DATA_CENTER": {"FACILITY_PROJECT", "PROJECT_FINANCING"},
@@ -383,6 +388,9 @@ class FactorBinding(Strict):
             if (not self.activity_rule or not self.narrative_ids or self.entity_reference_id
                     or self.change_terms or self.disclosure_terms or self.term_aliases):
                 raise ValueError("Structured activity requires scoped rule without inferred party or legacy terms")
+            if self.activity_rule.version == "activity-assertions-v2" and not any(
+                    re.search(r"\bdata[ -]?cent(?:er|re)s?\b", e.quote, re.I) for e in self.evidence):
+                raise ValueError("Infrastructure market scope requires literal source evidence")
             for term in self.activity_rule.product_terms + self.activity_rule.vendor_names:
                 if not any(re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", e.quote, re.I) for e in self.evidence):
                     raise ValueError("Activity product/vendor name requires literal source evidence")

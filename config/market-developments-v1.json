@@ -1,0 +1,15 @@
+{
+  "version": "market-developments-v1",
+  "max_window_chars": 1200,
+  "object_bound_chars": 180,
+  "assets": "\\b(?:data[ -]?cent(?:er|re)s?|AI (?:compute|infrastructure)|rack-scale computing|server farms?|GPU clusters?)\\b",
+  "actions": "\\b(?:propos(?:e|es|ed|ing)|pitch(?:es|ed|ing)?|plans?|planned|builds?|building|construct(?:s|ed|ing)?|opens?|opened|deploy(?:s|ed|ing)?|install(?:s|ed|ing)?|launch(?:es|ed)?|expand(?:s|ed|ing)?|conduct(?:s|ed|ing)?|begin(?:s)?|began)\\b",
+  "plans": "\\b(?:propos\\w*|pitch\\w*|plans?|planned|will|intends?|files?|filing|seeks?|seeking)\\b|\\bto\\s+(?:build|deploy|construct|open|install)\\b",
+  "experiments": "\\b(?:tests?|trials?|pilots?|experimental|experiments?)\\b",
+  "background": "\\b(?:operators?|hosting business)\\b",
+  "negation": "\\b(?:no|not|never|denied|denies|rumou?rs?|could|might|hypothetical|cancell?ed|abandoned)\\b",
+  "nonoperating": "\\b(?:guide|webinar|conference|showcas\\w*|demo(?:nstration)?s?|stocks?|shares?|rules|regulations|legislation|bill|lawsuit|litigation)\\b",
+  "boundary": "[,;!?\\n]|\\b(?:but|whereas|while|and)\\b",
+  "object_boundary": "\\b(?:for|from|with|by|about|because|which|that|of|in|across|alongside)\\b",
+  "delivery": "disabled"
+}
