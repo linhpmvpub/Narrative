@@ -38,7 +38,7 @@ Six profiles,84nodes,101relations,11narratives. Four added relations comprise tw
 
 RSS poll:10attempts,7OK/3NOT_MODIFIED,0created/updated. Isolated pipeline:50main/45background,0price alerts,no truncation. Three current-feed cards carry the new context trace; all stay background/sponsored. All95cards have delivery disabled and financial direction/magnitude/horizonUNKNOWN. This is a snapshot, not a7day reliability or newly acquired event test. Default server/database/tunnel untouched; no new browser acceptance claim.
 
-Final focused tests:157passed,1existing Starlette warning,72.43s. Ruff and mypy171passed. Benchmark freshness gate current. Exact-code GitHub CI: pending; final receipt will be recorded after completion.
+Final focused tests:157passed,1existing Starlette warning,72.43s. Ruff and mypy171passed. Benchmark freshness gate current. Exact-code CI[46121885998](https://github.com/linhpmvpub/Narrative/actions/runs/46121885998)SUCCESS on3b06d6f: 1752 passed, 1 warning in 171.57s (0:02:51); 1752 passed, 1 warning in 304.92s (0:05:04); JS,migrations/seed/replay/downgrade,both dependency audits and actual-model smoke8passed.
 
 ## Limitations and next step
 

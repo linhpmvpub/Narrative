@@ -1,5 +1,14 @@
 # Nguyên tắc và bài học phát triển
 
+## L028 — Resource availability is distinct from component efficiency (2026-11-28)
+
+- Evidence: the first readiness matcher improved4exposed relevance decisions but added1false positive by mixing component power efficiency with memory capacity. Same-sentence co-occurrence was insufficient. Requiring a bounded resource-condition phrase removed the regression while preserving the4recoveries; no ticker or headline exception was added.
+- Put source-backed exposure and mechanism into data first; declare resource, operating scope and exact mechanism in an opt-in binding. Customer deployment requires a demand path, manufacturing utility dependence a supply path. Do not substitute one to satisfy broad labels.
+- Generic engineering explainers can be conditional background without verified company facilities, identity, orders or quantified financial effects. Keep context_only through priority; a graph match does not prove a company incident or merit push.
+- Background remains subject to quality review: current-feed sponsored facility descriptions can match even when the primary news concerns something else. One such example lacks independent labels. Next review primary-event/paragraph scope and incidental descriptions as a shared failure class; do not credit an unlabelled selection as correct.
+- Keep initial failed runs and compare the final result to the original task baseline. Here0→4improvements is the cumulative outcome, not5by adding the correction of the newly introduced error. Tests and exposed AI labels do not establish fresh generalization or causal truth.
+
+
 ## L027 — Graph roles, source event roles and economic outcomes are distinct (2026-11-28)
 
 - One node can be a sourced competitor, buyer and supplier through different directed, scoped edges. Product competition does not establish a company-wide identity or the technology vendor of every facility it operates. Preserve all current roles and their source IDs; do not infer customer/supplier edges from a name in news.

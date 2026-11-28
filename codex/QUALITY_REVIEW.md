@@ -1,5 +1,15 @@
 # Quality review after each iteration
 
+## Operating readiness review — 2026-11-28
+
+- Goal: map sourced electricity/water/construction dependencies into explainable company narrative context without claiming a company incident. Result:2shared scope types,3resource classes,2new sourced mechanisms,2exposure edges,2bindings;6profiles84nodes101relations. No ticker/headline exception or numeric-weight tuning.
+- Evidence: step1data alone changes0of3040decisions. Initial matcher recovers4but introduces1false positive from low-power component capacity; bounded resource-condition attachment removes it. Final cumulative4relevance improvements,0regressions,0unresolved changes,0priority changes. infra160now13/0/10relevance and5/0/4priority; other9cohorts unchanged. All references exposed AI, not fresh blind/human truth. No broad generalization or causal-impact claim.
+- Verification:157focused tests,ruff,mypy171,current benchmark gate; exact-code CI46121885998success (1752 passed, 1 warning in 171.57s (0:02:51); 1752 passed, 1 warning in 304.92s (0:05:04)),both dependency audits and model smoke8. RSS correction/retraction/withdrawal/source corruption, renamed companies, market separation, path/intent validity and future-source rejection covered. See reports/deployment-readiness-review.md/.json and docs/readiness-context.md.
+- Local projection:50main45background,all95deliverydisabled/financialUNKNOWN,3new context traces. One unlabelled sponsored audit/facility description may be incidental context; keep it disclosed rather than manufacture a positive label. Preserve original failed benchmark/test/atlas attempts. No browser retest or7day reliability acceptance.
+- Remaining risks: broad source-description context can overmatch; English clause/phrase rules can miss coordination and references; DELL source gap and NVIDIA supply-vs-demand target gaps persist. Ten relevance and4priority misses remain in infra160; older false positives and unlabelled priority downgrades remain. Next implement shared primary-event vs descriptive paragraph scope, then evaluate unused families; do not optimize individual stories/tickers. Magnitude,horizon,causal truth,personal usefulness and live coverage unmeasured. v1release gates unchanged/cloud off.
+- Direction/principles reviewed: unchanged product goal. Added L028on resource attachment and intermediate regression retention. No new user approval needed.
+
+
 ## Review: roles, access and finance — 2026-11-28 (latest)
 
 - Product outcome: typed source events now reach the private feed through existing sourced graph paths. Competition is no longer treated as an exclusive company role. Project operators, technology vendors, source assertions and economic outcomes remain distinct; no customer/supplier transaction is invented.

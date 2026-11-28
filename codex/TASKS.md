@@ -1,5 +1,16 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — operating readiness (2026-11-28)
+
+- [x] Source-backed AMD customer-buildout demand and MU manufacturing-utility supply paths;2mechanisms/2exposure edges with exact filing evidence, no changed targets.
+- [x] Shared opt-in resource/market/condition binding through RSS/full-body, exact route/intents, source lifecycle and context_only priority. Separate component efficiency from utility availability.
+- [x] Benchmark after data, matcher, hardening and final;4cumulative relevance recoveries,0measured regressions;157focused tests and exact-code CI success. Source/DB/labels stay local; cloud/push off.
+- [ ] Improve primary-event vs incidental facility-description scope and implicit actor/asset references through shared paragraph contracts. Keep conditional context separate from verified company exposure.
+- [ ] Add DELL utility/construction applicability only after obtaining primary evidence; audit remaining10infra160relevance misses (AMD1,DELL2,NVDA7) and4NVDApriority misses without inventing demand-to-supply routes.
+- [ ] Add unused event families and independent labels; retain older false positives, unlabelled priority changes and conservative coordination costs. Existing exposed3040pairs remain regression, not fresh holdout.
+- [ ] Unchanged v1gates: causal/magnitude/horizon uncertainty,personal utility,source coverage,7dayoperations,eventualhumanvalidation; no live push/cloud enablement.
+
+
 ## Current next steps — roles/access/finance (2026-11-28)
 
 - [x] Non-exclusive directional graph roles with current sourced edges; project operator is not automatically a technology vendor. Preserve explicit other-vendor and scoped collaboration exclusions.
