@@ -1,5 +1,16 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — quality benchmark v1 (2026-11-28)
+
+- [x] Reusable local create/run/check benchmark;10cohorts3040pairs, pinned provenance and full-body sources, separate relevance/priority, group/company metrics and decision changes.
+- [x] Local commit freshness hook plus database-update gate; direction/workflow/AGENTS require rerun after changes. Private data stays ignored; CI uses synthetic integrity tests.
+- [x] Shared operating-interruption action/object/phase priority, no ticker branches or numeric weight change. One exposed priority positive recovered; two unlabelled priority downgrades retained for review.
+- [ ] Resolve company/project-operator/product-supplier role ambiguity in sourced graph applicability. A competitor can also be a customer; do not infer exclusive vendor identity from project actor alone.
+- [ ] Shared access-restriction and capital-backing event contracts plus sourced narrative paths; infra160 still15relevance FN and7priority FN. Treat relevance coverage separately from ranking.
+- [ ] New independent event-family review after framework/data changes, including priority on explanatory versus concrete developments; exposed3040pairs remain regression.
+- [ ] Close unchanged product acceptance gaps (coverage, seven-day operations, later human validation). Financial magnitude/horizon/causality are unmeasured, notifications/cloud stay disabled.
+
+
 ## Next after infrastructure-scope blind review — 2026-11-28
 
 - [x] Shared optional actor/asset/vendor scope with source-backed graph references; no ticker branching. Removed observed full-body FP without losing other exposed matches.

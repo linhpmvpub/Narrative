@@ -1,5 +1,26 @@
 # Source assertions and graph applicability
 
+## Operating interruption priority — 2026-11-28
+
+Policy16 adds a common source-local OPERATING_INTERRUPTION event for an already
+matched narrative: active interruption of a bounded operating object or an
+object immediately preceding a passive/reduced headline predicate. Explicit will/
+plan language remains FORWARD_LOOKING; source-reported interruptions are not
+independently verified outcomes. Rules and object modifiers are in
+config/operating-developments-v1.json (contract version2). No new relevance route,
+actor identity, graph edge, company exposure or financial magnitude is inferred.
+
+Negation, hypothetical/purpose language, unrelated conference/share-trading
+objects and clause boundaries cannot create a signal. A rejected interruption
+must not be rescued by the older generic change-word fallback. The fallback
+withholding is conservative and can also catch nominal delay references; review
+those costs in the benchmark instead of claiming all removals are correct.
+
+See [quality benchmark](quality-benchmark.md) and the aggregate report for the
+3040pair regression, one measured priority gain and two unlabelled downgrades.
+Numeric weights and relevance targets are unchanged; delivery remains disabled.
+
+
 The local candidate adds a shared assertion layer to [news-framework](news-framework.md).
 Core policy10 retains the numerical editorial weights. No stock-price, financial
 magnitude, verified actor, or notification decision is produced by this layer.

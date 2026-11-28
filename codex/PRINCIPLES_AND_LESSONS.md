@@ -1,5 +1,14 @@
 # Nguyên tắc và bài học phát triển
 
+## L026 — Benchmark freshness and dimensions must be explicit (2026-11-28)
+
+- Evidence: importing10previous cohorts and rerunning3040pairs reproduced every stored relevance/priority decision. Relevance labels cannot substitute for priority labels; three older cohorts intentionally report priority unmeasured. Exposed AI references are regression, not fresh holdout/human truth.
+- Pin original packets, reviews/consensus, source bodies, targets and normalized membership. Version inputs separately from runtime/database runs; never overwrite baselines. Final runtime/profile/source fingerprints must match the actual run. A passing freshness gate does not mean release acceptance.
+- Preserve individual gains, losses and unknown outcomes instead of reporting only net counts. One priority recovery on infra160 coexists with two older full-body downgrades without priority labels; the latter cannot be called correct or harmless from these references.
+- Tests found that an old generic change-word fallback could rescue a rejected interruption object (conference about production). Typed rejection must retain its boundary through fallback; validate active/passive/planned forms, unrelated objects and renamed companies. Conservative withholding also needs recall review; no ticker/headline exception.
+- Keep current-profile replay timestamps explicit. Do not pretend new database knowledge existed at the event date. After any runtime/config/profile update, rerun/check the local suite and document temporal/data effects; retain old exposed suites and add independently reviewed event families separately.
+
+
 ## L025 — Event roles constrain shared-market applicability
 
 - Evidence2026-11-28: adding sourced participant/competitor scope removes one exposed full-body relevance/priority false positive while leaving the other2879pair decisions unchanged. A valid infrastructure event plus a general demand edge is insufficient when the source assigns the project to another vendor. Generic market context may remain useful without identifying a beneficiary.
