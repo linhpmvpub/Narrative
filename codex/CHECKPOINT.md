@@ -1,5 +1,15 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-28
 
+## Điểm tiếp tục đã lưu theo yêu cầu người dùng — 2026-11-28
+
+- Đọc AGENTS, PRODUCT_DIRECTION, DEVELOPMENT_WORKFLOW, PRINCIPLES_AND_LESSONS, QUALITY_REVIEW và TASKS trước khi triển khai tiếp. Ưu tiên nền nhận diện/đánh giá tin cấp công ty; narrative là lớp sau. Không vá theo ticker hoặc từng bài.
+- Trạng thái bàn giao: mã `ffcde6ad22a580b5845fa70b90d0d159cb774373`; báo cáo đã đẩy ở commit `106b3365e31c3fe26c621e410d1533cd3ee2a8f4`. CI 46156324690 đạt 2.053 tests SQLite và 2.053 tests PostgreSQL. Đây là kết quả kiểm thử phiên triển khai trước; lượt lưu checkpoint chỉ sửa tài liệu.
+- Kết quả phải giữ nguyên: engine 10,64/100; LLM thường 28,41 điểm thô và 0 sau kiểm tra; LLM + graph 33,57 điểm thô và 0 sau kiểm tra. Cả 53/60 đề xuất liên quan của hai nhánh mô hình bị chặn. Chưa tích hợp agent vào feed, chưa chứng minh lợi thế sản phẩm, chưa hoàn tất nghiên cứu mù 100 cụm.
+- **Task tiếp theo:** trích dữ kiện bài báo thành fact IDs có bằng chứng; tách chủ thể sự kiện khỏi công ty chịu ảnh hưởng; cho phân tích graph chọn fact IDs/route IDs để code dựng trích dẫn. Thiết kế trạng thái relevance/attention nhất quán. Sau đó loại bằng chứng graph lặp và cải thiện phân bổ ngữ cảnh/truy xuất dùng chung.
+- Giữ thí nghiệm thất bại làm baseline. Chạy hai benchmark sau mỗi thay đổi runtime/database; chỉ khóa đợt đánh giá mù mới sau khi sửa được giao diện và kiểm tra nguồn. Kho 266 bài RSS mới là ứng viên, còn cần nội dung đầy đủ và kiểm tra độc lập theo sự kiện/lịch sử sử dụng.
+- Dữ liệu riêng: `source-cache/hybrid-shadow-2026-11-28`. Handoff SHA `a0be2aa63c93bbe5fd4ff04d0ec147e8c672ebc0188be60af50d4df38bc25acf`; đã kiểm lại 136 tệp cục bộ và pointer benchmark không đổi khi lưu checkpoint. Dùng `experiment-v3`, `model-run-v3`, `aggregate-final.json`, `contract-diagnosis.json`; giữ các lần thử cũ. Chi tiết ở [báo cáo](../reports/hybrid-company-shadow-2026-11-28.md).
+- Dữ liệu chi tiết tiếp tục ở máy. `SEND_NOTIFICATIONS=false`, `ALLOW_SYNTHETIC_LIVE=false`, `LLM_MODE=none` cho luồng chính. Server mô hình thử nghiệm đã được dừng ở cuối lượt triển khai; không tự khởi động lại, bật cloud hoặc thông báo khi chỉ đọc checkpoint.
+
 ## Executed local hybrid analyst experiment — 2026-11-28 (latest)
 
 - Followed AGENTS/direction/workflow/principles. Built company-first A/B/C shadow harness; no narrative, per-ticker matcher, profile/label/weight change or production promotion. See [experiment contract](../docs/hybrid-shadow-experiment.md) and [aggregate report](../reports/hybrid-company-shadow-2026-11-28.md).

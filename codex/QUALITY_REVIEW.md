@@ -1,5 +1,9 @@
 # Quality review after each iteration
 
+## Checkpoint save — 2026-11-28
+
+Saved an explicit resume point at the user's request. Verified the existing handoff SHA, all 136 local artifact pins and the unchanged benchmark pointer. No runtime, profile, source, label or policy changes; previous CI results remain historical validation, with no new test or model run claimed. Next work remains source fact IDs, actor/affected-company separation and shared retrieval improvements. L037 and product direction remain unchanged.
+
 ## Local hybrid experiment: measured, not promoted — 2026-11-28
 
 - Product fit: tests a shared semantic reader using the private company graph without narrative dependency or ticker-specific patches. Preserves existing source lifecycle, deterministic attention and delivery boundary. Runtime company score 10.64 and legacy 25.18 unchanged.
@@ -7,7 +11,7 @@
 - Readout: B/C gated scores are 0 because all 53 / 60 relevant proposals violate evidence/consistency contracts. Raw relevance precision 48.7% / 53.2% is also below the unchanged target. Treat this as a failed model/interface pilot, not a measured production gain. Fix the common workflow before scaling the blind study.
 - Failures preserved: output omitted targets, corrected at schema boundary; model confused profile quote with article quote, withheld; f16 cache caused slow CPU offload, separateq4hardwareconfiguration recorded. Tests initially used invalid future profiles/wrong list element, corrected fixtures without weakening validators. Strong contracts are necessary but do not verify semantic applicability.
 - Database/retrieval limitation: only 21/45 positive units receive any route;10 budget-limited and 14 without lexical hit. Fix the generic retrieval/source-reading workflow before scaling labels or expanding an unbounded database. Complete-route 16 KB budget can favor earlier/higher-overlap companies. Do not hide this as a model-only recall problem.
-- Validation:86 focused tests; exact-codeCI 461563246902053 SQLite / 2053 PostgreSQL passed, existing warning only,lint/types/JS,migrations,2 audits, 8 spaCy smoke. Three fixed benchmark replays current/nochanges. Actual Qwen calls are separate from spaCysmoke. Data local and all notifications off.
+- Validation: 86 focused tests; exact-code CI 46156324690 passed 2053 SQLite and 2053 PostgreSQL tests, with one existing warning each. Lint/types/JS, migrations, two audits and eight spaCy smoke cases passed. Three fixed benchmark replays remain current with no decision changes. Actual Qwen calls are separate from spaCy smoke. Data local and all notifications off.
 - Next: source-first extraction, bounded semantic/alias retrieval and context allocation; 100 unused economic clusters/predictionfreeze/twoindependent AIreviews; explanation fidelity/multievent/revisions/latency/repeat checks. L037 added; product direction and acceptance unchanged. First executable experiment completed; full blind study and production agent integration remain open.
 
 
