@@ -4,17 +4,9 @@ No ticker branches, inferred suppliers, canonical events or delivery authorizati
 Profile rules own names, exact exposure paths and business scope; code owns syntax.
 """
 
-import re
-
-from engine.source_sentences import sentences
+from engine.issuer_events import matches as issuer_matches
 
 MEMBERSHIP = {"SELLS", "HAS_SEGMENT", "HAS_METRIC"}
-ISSUER_EVENTS = {
-    "FINANCIAL_RESULTS": r"\s+(?:reports?|announces?|posts?)\s+(?:[\w-]+\s+){0,9}(?:financial results|earnings|revenue|net income)\b",
-    "FINANCING": r"\s+(?:raises?|secures?|issues?|repays?|refinances?)\s+[^.;!?]{0,90}\b(?:debt|bonds?|loans?|funding|financing|credit facility)\b",
-    "GOVERNANCE": r"\s+(?:appoints?|names?|removes?|dismisses?)\s+[^.;!?]{0,90}\b(?:CEO|CFO|chief executive|chief financial|director|board chair)\b",
-    "CREDIT_RISK": r"(?:['’]s)?\s+credit (?:rating|outlook)\s+(?:(?:could|may|might|will|be|was|is|has|been|by|a|one|notch)\s+){0,7}(?:cut|downgraded|upgraded|lowered|raised)\b",
-}
 
 
 def validate_exposure(bundle, rule):
@@ -36,24 +28,6 @@ def validate_exposure(bundle, rule):
         if binding.relevance_scope.relationship_id not in rule.relation_ids:
             raise ValueError("Discovery cannot bypass the binding's exact mechanism")
     return binding, path, ownership
-
-
-def issuer_matches(names, article):
-    for field in ("title", "summary"):
-        text = article.get(field, "")
-        for sentence in sentences(text):
-            if len(sentence.group()) > 1200:
-                continue
-            for name in sorted(names, key=len, reverse=True):
-                for family, tail in ISSUER_EVENTS.items():
-                    hit = re.search(r"(?<!\w)" + re.escape(name) + r"(?!\w)" + tail, sentence.group(), re.I)
-                    if (hit and not re.search(r"\b(?:not|never|no|fake|falsely)\b", hit.group(), re.I)
-                            and not re.search(r"\b(?:if|whether|how)\s*$", sentence.group()[:hit.start()], re.I)
-                            and not text[sentence.end():].startswith("?")):
-                        yield {"field": field, "start": sentence.start() + hit.start(),
-                               "end": sentence.start() + hit.end(), "text": hit.group(),
-                               "event_family": family, "context_only": True,
-                               "news_party_verified": False}
 
 
 def decisions(bundle, article, at):

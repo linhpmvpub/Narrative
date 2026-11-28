@@ -27,13 +27,19 @@ def assess(item, discoveries):
             for span in spans:
                 text = unit.get(span["field"], "")
                 valid = text[span["start"]:span["end"]] == span["text"]
-                reason = exclusion(text) if valid else "SOURCE_SPAN_MISMATCH"
+                event = span.get("issuer_event")
+                window = event["source_window"] if event else None
+                if window:
+                    valid = (valid and window["field"] == span["field"]
+                             and 0 <= window["start"] <= span["start"] < span["end"] <= window["end"] <= len(text)
+                             and text[window["start"]:window["end"]] == window["text"])
+                reason = exclusion(window["text"] if window else text) if valid else "SOURCE_SPAN_MISMATCH"
                 eligible = valid and reason is None
                 decisions.append({"eligible": eligible, "reason": reason or "EXPLICIT_ISSUER_EVENT",
                                   "rule_id": discovery["rule_id"]})
                 if eligible:
                     issuer_development = True
-                    signals.append({**span, "phase": "SOURCE_REPORTED", "driver_direction": "UNKNOWN",
+                    signals.append({**span, "phase": event["phase"] if event else "SOURCE_REPORTED", "driver_direction": "UNKNOWN",
                                     "rule_id": discovery["rule_id"]})
         else:
             matches = [{**s, "routing_contract": discovery["routing_contract"]} for s in spans]

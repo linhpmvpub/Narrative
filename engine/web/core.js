@@ -30,6 +30,7 @@
     const tiers={ISSUER_DEVELOPMENT:"Diễn biến tại công ty",EXPOSURE_DEVELOPMENT:"Diễn biến qua quan hệ kinh doanh",RELATED_BACKGROUND:"Bối cảnh liên quan",SPONSORED_CONTEXT:"Nội dung tài trợ"};
     a.append(el("h3",c.ticker+" · "+c.headline),el("span",tiers[assessment.tier]||assessment.tier,"badge"),el("p",c.excerpt));
     a.append(el("p",assessment.explanation),el("p",c.source_representation==="REVIEWED_COMPLETE_BODY"?"Nội dung bài đầy đủ đã kiểm tra nguồn":"Tiêu đề và bản trích RSS","muted"));
+    if(assessment.signals.some(s=>s.phase==="FORWARD_LOOKING"))a.append(el("p","Có kế hoạch theo nguồn; chưa xác nhận hoàn tất.","muted"));
     for(const d of c.company_discovery)companyEvidence(a,d);
     for(const channel of assessment.business_channels){const detail=el("details", "");detail.append(el("summary","Điều kiện của đường liên quan"),el("p",channel.scope));for(const condition of channel.conditions)detail.append(el("p",condition));a.append(detail);}
     a.append(el("p","Mức độ, chiều và thời hạn tác động tài chính: chưa xác định. Mức ưu tiên đọc không phải mức ảnh hưởng lợi nhuận.","muted"),el("p",c.published_at,"muted"));

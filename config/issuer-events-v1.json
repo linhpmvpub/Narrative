@@ -1,0 +1,55 @@
+{
+  "version": "ISSUER_EVENTS_V1",
+  "purpose": "Named issuer source developments; no inferred suppliers, financial size or stock-price direction",
+  "rules": [
+    {
+      "id": "legacy_financial_results",
+      "family": "FINANCIAL_RESULTS",
+      "business_variable": "REPORTED_RESULTS",
+      "tail": "\\s+(?:reports?|announces?|posts?)\\s+(?:[\\w-]+\\s+){0,9}(?:financial results|earnings|revenue|net income)\\b"
+    },
+    {
+      "id": "legacy_financing",
+      "family": "FINANCING",
+      "business_variable": "FINANCING",
+      "tail": "\\s+(?:raises?|secures?|issues?|repays?|refinances?)\\s+[^.;!?]{0,90}\\b(?:debt|bonds?|loans?|funding|financing|credit facility)\\b"
+    },
+    {
+      "id": "legacy_governance",
+      "family": "GOVERNANCE",
+      "business_variable": "GOVERNANCE",
+      "tail": "\\s+(?:appoints?|names?|removes?|dismisses?)\\s+[^.;!?]{0,90}\\b(?:CEO|CFO|chief executive|chief financial|director|board chair)\\b"
+    },
+    {
+      "id": "legacy_credit_risk",
+      "family": "CREDIT_RISK",
+      "business_variable": "CREDIT_ACCESS",
+      "tail": "(?:['\u2019]s)?\\s+credit (?:rating|outlook)\\s+(?:(?:could|may|might|will|be|was|is|has|been|by|a|one|notch)\\s+){0,7}(?:cut|downgraded|upgraded|lowered|raised)\\b"
+    },
+    {
+      "id": "reported_metric_change",
+      "family": "FINANCIAL_PERFORMANCE",
+      "business_variable": "REPORTED_METRIC_CHANGE",
+      "tail": "\\s+(?P<action>reports?|posts?|records?|sees?|saw)\\s+(?P<object>(?:(?:annual|quarterly|fiscal|net|consolidated|total|record)\\s+){0,3}(?:revenue|sales|net income|operating income|gross margin|operating margin|earnings|backlog))\\s+(?P<change>(?:(?:more than|nearly|almost|roughly)\\s+)?(?:double[sd]?|triple[sd]?|quadruple[sd]?|grow[sn]?|grew|ris(?:e[sn]?|ing)|rose|fall[sn]?|fell|declin(?:e[sd]?|ing)|increas(?:e[sd]?|ing)|decreas(?:e[sd]?|ing)|drop(?:s|ped)?|plung(?:e[sd]?|ing)|surge[sd]?)\\b)"
+    },
+    {
+      "id": "issuer_metric_change",
+      "family": "FINANCIAL_PERFORMANCE",
+      "business_variable": "REPORTED_METRIC_CHANGE",
+      "tail": "(?:['\u2019]s)?\\s+(?P<object>(?:(?:annual|quarterly|fiscal|net|consolidated|total|record)\\s+){0,3}(?:revenue|sales|net income|operating income|gross margin|operating margin|earnings|backlog))\\s+(?P<action>(?:(?:more than|nearly|almost|roughly)\\s+)?(?:double[sd]?|triple[sd]?|quadruple[sd]?|grow[sn]?|grew|ris(?:e[sn]?|ing)|rose|fall[sn]?|fell|declin(?:e[sd]?|ing)|increas(?:e[sd]?|ing)|decreas(?:e[sd]?|ing)|drop(?:s|ped)?|plung(?:e[sd]?|ing)|surge[sd]?)\\b)"
+    },
+    {
+      "id": "shipment_change",
+      "family": "SHIPMENT_CHANGE",
+      "business_variable": "SHIPMENTS_OR_MARKET_ACCESS",
+      "tail": "\\s+(?P<plan>plans? to\\s+|to\\s+|will\\s+)?(?P<action>halts?|halted|pauses?|paused|suspends?|suspended|resumes?|resumed|stops?|stopped|restarts?|restarted|cuts?|curtails?|curtailed)\\s+(?P<object>(?:(?:its|the|new|international|global)\\s+){0,2}(?:(?:server|chip|processor|memory|wafer|semiconductor|device|product|storage|GPU|CPU)\\s+){0,2}(?:shipments|deliveries|exports))\\b"
+    },
+    {
+      "id": "capacity_change",
+      "family": "CAPACITY_CHANGE",
+      "business_variable": "OPERATING_CAPACITY",
+      "tail": "\\s+(?P<plan>plans? to\\s+|to\\s+|will\\s+)?(?P<action>expands?|expanded|doubles?|doubled|triples?|tripled|builds?|built|opens?|opened|closes?|closed|shuts?|cuts?|reduces?|reduced)\\s+(?P<object>(?:(?:its|the|a|an|new|existing)\\s+){0,2}(?:(?:server|chip|wafer|semiconductor|manufacturing|production|assembly|packaging|data center)\\s+){0,2}(?:capacity|factories|factory|plants?|facilities|facility|fabs?|production lines?|campus))\\b"
+    }
+  ],
+  "delivery": "disabled"
+}
