@@ -38,14 +38,14 @@ def scoped(linked, own="Orion", peer="Cobalt"):
 @pytest.mark.parametrize('text,allowed', [
     ('An operator plans a new data center.', True),
     ('{own} opens a new data center.', True),
-    ('{peer} opens a new data center.', False),
+    ('{peer} opens a new data center.', True),
     ('{peer} and Atlas Systems are working with a university on its expanding AI infrastructure footprint.', False),
     ('{own} and {peer} are working with a university on its expanding AI infrastructure footprint.', True),
     ('An operator builds a data center powered by {peer} GPUs.', False),
     ('An operator builds a data center powered by {own} GPUs.', True),
     ('An operator builds a data center powered by Uncatalogued GPUs.', False),
     ('{own} builds a data center powered by {peer} GPUs.', False),
-    ('{own} builds offices and {peer} opens a new data center.', False),
+    ('{own} builds offices and {peer} opens a new data center.', True),
     ('An operator opens a data center while {peer} sells GPUs.', True),
     ('A researcher at {peer} discusses plans to build a new data center.', True),
 ])
@@ -68,7 +68,7 @@ def test_field_boundary_and_next_valid_sentence(db, linked):
     b = ProfileBundle.model_validate(data)
     binding = b.factor_bindings[0]
     now = datetime.now(UTC)
-    bad = 'Cobalt builds a new data center.'
+    bad = 'An operator builds a new data center powered by Cobalt GPUs.'
     assert not matches(binding, {'title': 'Orion infrastructure', 'summary': bad}, bundle=b, at=now)
     text = bad + ' An operator plans a new data center.'
     spans = matches(binding, {'summary': text}, bundle=b, at=now)

@@ -64,6 +64,14 @@ def assess(window, core_policy):
             "financial_impact": "UNKNOWN", "identity_verified": False,
             "offset_basis": "RELATIVE_TO_SOURCE_WINDOW_TEXT", "delivery": "disabled"}
     activity = window.get("activity_assertion")
+    if activity and activity.get("version") == "access-constraints-v1":
+        from engine.access_constraints import classify as access
+
+        checked = access(text)
+        if not checked or any(checked.get(k) != activity.get(k) for k in checked):
+            return {**base, "reason": "SOURCE_WINDOW_MISMATCH"}
+        return {**base, **checked, "eligible": True, "reason": "EXPLICIT_ACCESS_CONSTRAINT",
+                "driver_direction": "UNKNOWN"}
     if activity and activity.get("version") == "market-developments-v1":
         from engine.market_developments import classify
 
@@ -77,9 +85,12 @@ def assess(window, core_policy):
         return {**base, "reason": "PRODUCT_DESCRIPTION_NOT_OPERATING_CHANGE"}
     if activity:
         return structured(base, text, activity)
+    from engine.capital_backing import assess as backing
     from engine.operating_interruptions import assess as interruption
     from engine.operating_purposes import assess as purpose
 
+    if development := backing(text):
+        return {**base, **development, "eligible": True, "reason": "EXPLICIT_CAPITAL_BACKING_PURPOSE"}
     if development := interruption(text):
         return {**base, **development, "eligible": True, "reason": "EXPLICIT_OPERATING_INTERRUPTION"}
     if re.search(policy()["interruptions"]["actions"], text, re.I):

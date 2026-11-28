@@ -36,6 +36,10 @@ def pattern(term):
 def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="", bundle=None, at=None):
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
+    if binding.access_constraint:
+        from engine.access_constraints import matches as access_matches
+
+        return access_matches(binding, fields)
     if binding.assertion_scope:
         from engine.news_assertions import applicability as assertion_applicability
         from engine.news_assertions import windows

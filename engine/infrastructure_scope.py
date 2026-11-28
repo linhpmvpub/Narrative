@@ -7,9 +7,10 @@ demand to every supplier. No cross-sentence, headline or pronoun inference.
 
 import re
 
+from engine.relationship_roles import roles
 from engine.source_sentences import LEGAL_SUFFIX
 
-VERSION = "infrastructure-scope-v1"
+VERSION = "infrastructure-scope-v2"
 NAME = r"[A-Z][\w.-]*(?:\s+[A-Z][\w.-]*){0,3}"
 AUX = r"(?:(?:has|have|had|is|are|was|were|will|also|now|jointly|recently|plans? to)\s+)*"
 ACTION = r"(?:plans?|planned|propos(?:es?|ed)|builds?|building|construct(?:s|ed|ing)?|opens?|opened|deploy(?:s|ed|ing)?|launch(?:es|ed)?|expand(?:s|ed|ing)?|install(?:s|ed|ing)?)\b"
@@ -86,9 +87,19 @@ def assess(scope, development, bundle, at):
             explicit.append(hit(text, m.start('vendor'), m.end('vendor')))
     unsupported = [v for v in explicit if not any(list(literal(n, v['text'])) for n in scope.own_names)]
     own_technology = any(p['role'] == 'TECHNOLOGY_REFERENCE' for p in own)
-    allowed = (bool(own) and (not unsupported or own_technology)) or not (peers or unsupported)
+    # Competition is product scoped, not an exclusive company identity. Merely
+    # operating a facility cannot establish its technology vendor or customer.
+    # A named third-party collaboration stays scoped to its explicit participants;
+    # generic sector context must not invent the profile company's participation.
+    vendor_scoped = [p for p in peers if p['role'] != 'PROJECT_ACTOR']
+    allowed = (bool(own) and (not unsupported or own_technology)) or not (vendor_scoped or unsupported)
+    graph_roles = {node: roles(bundle, node, at) for c in scope.competitors
+                   for node in (edges[c.relationship_id].from_id, edges[c.relationship_id].to_id)}
     return {**base, 'allowed': allowed,
             'reason': 'OTHER_VENDOR_PROJECT_SCOPE' if not allowed else
                       'OWN_PARTICIPATION_CONDITIONAL' if own else 'GENERIC_MARKET_NOT_VENDOR_PROOF',
             'own_participants': own, 'other_participants': peers, 'explicit_technology_vendors': explicit,
+            'graph_roles': graph_roles, 'roles_are_nonexclusive': True,
+            'customer_relationship_inferred': False, 'supplier_relationship_inferred': False,
+            'operator_is_not_technology_vendor': True,
             'asset_span': asset, 'text': text}

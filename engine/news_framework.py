@@ -79,6 +79,15 @@ def signal_matches(rule, fields):
 
 
 def route_contract(bundle, narrative, route, spans):
+    if any(s.get("relevance_role") == "ACCESS_CONSTRAINT_CONTEXT" for s in spans):
+        declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
+        allowed = bool(declared and set(declared.intents) & {"DEMAND", "DEPLOYMENT"}
+                       and any(r.type in {"AFFECTS_DEMAND", "AFFECTS_ACCESS"} for r in route)
+                       and all(r.type != "COMPETES_WITH" for r in route))
+        return {"version": policy()["version"], "allowed": allowed, "role": "ACCESS_CONSTRAINT_CONTEXT",
+                "reason": "SOURCE_REPORTED_ACCESS_ON_SOURCED_DEMAND_ROUTE",
+                "explanation": "Nguồn nêu hạn chế tiếp cận năng lực tính toán; có thể ảnh hưởng khả năng triển khai hoặc nhu cầu. Chưa xác minh hiệu lực pháp lý, giao dịch hay tác động tài chính.",
+                "financial_impact": "UNKNOWN", "relation_types": [r.type for r in route]}
     """One contract for RSS and full-body paths; no ticker/headline condition."""
     declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
     competition = any(r.type == "COMPETES_WITH" for r in route)
