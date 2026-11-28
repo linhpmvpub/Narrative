@@ -1,5 +1,15 @@
 # TASKS — implementation execution checklist
 
+## Next after market-purpose implementation — 2026-11-28
+
+- [x] Shared sourced infrastructure route opt-in and explicit proposal/experimental/background phases; generic input financing/access and customer-agreement priority. Tests, nine exposed regressions, local pipeline/browser, CI and checkpoint recorded.
+- [ ] Prioritize shared actor/asset/vendor applicability for infrastructure context: retain one observed competitor-project false positive as regression; avoid ticker/headline exclusions and unsupported market-wide→specific-vendor assertions.
+- [ ] Audit four remaining RSS120 supply-target misses against sourced narrative scope. Add a route only with justified mechanism/evidence; don't alter old targets/labels to claim recall.
+- [ ] Extend unambiguous source-local references if evidence permits; preserve field/sentence boundaries and UNKNOWN counterpart/order/financial outcomes.
+- [ ] Predeclare unused economic families/publishers, freeze baseline/candidate predictions and obtain separate AI relevance/priority labels. The120previous pairs are exposed; don't reuse as blind. Calibrate weights only after routing/phase scope stabilizes.
+- Release gates unchanged; data local, notifications off, no user decision currently needed.
+
+
 ## Current next steps — operating semantics and routing coverage (2026-11-28)
 
 - [x] Legacy action/object/operating-purpose priority with same-link entity bonus, source phase/spans and generic counterexamples. Policy13, weights unchanged;97focused and full CI details in checkpoint.

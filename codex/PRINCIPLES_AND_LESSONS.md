@@ -1,5 +1,12 @@
 # Nguyên tắc và bài học phát triển
 
+### L024 follow-up — purpose recovery and market scope costs (2026-11-28)
+
+- Source-local action/object/purpose semantics recover4exposed memory priority positives without extra resolved FP there; allocations, changed input access and agreements are distinct from delivered capacity or realized financial benefit. Preserve exact spans and phase rather than requiring absent amounts or inferring terms.
+- Opt-in sourced market-demand paths recover7RSS120 relevance positives but add1FP in another full-body cohort. A valid generic infrastructure event plus a company demand edge still does not prove that vendor participates. Address actor/asset/platform applicability as shared graph data/contract, not ticker exceptions or a lower score threshold.
+- Keep four unsupported supply-target misses and original negative labels. Do not manufacture demand-to-supply causality, quietly move a target, or reinterpret unresolved selections to improve metrics. Validate renamed actors, vendor-specific versus broad-market scope, expiry/withdrawal, and unused-family relevance/priority separately. Development gain is not independent acceptance.
+
+
 ## L024 — Conditional relevance and editorial priority need separate contracts
 
 - Evidence2026-11-28: scoped actor/event/phase/route eligibility adds3priority TP on actor77,6on framework121 and2on memory150 without new resolved priority FP; all relevance decisions unchanged. These exposed AI references are development evidence, not independent market acceptance. Five framework priority FP remain in legacy change-word/deployment paths.
