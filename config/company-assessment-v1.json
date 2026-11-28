@@ -1,0 +1,16 @@
+{
+  "schema": "COMPANY_ASSESSMENT_V1",
+  "version": 1,
+  "delivery": "disabled",
+  "rank_basis": "ORDINAL_EDITORIAL_TIERS_NOT_IMPACT_OR_PROBABILITY",
+  "tiers": {
+    "ISSUER_DEVELOPMENT": 3,
+    "EXPOSURE_DEVELOPMENT": 2,
+    "RELATED_BACKGROUND": 1,
+    "SPONSORED_CONTEXT": 0
+  },
+  "attention_tiers": ["ISSUER_DEVELOPMENT", "EXPOSURE_DEVELOPMENT"],
+  "unknowns": ["REALIZED_COMPANY_EFFECT", "FINANCIAL_MAGNITUDE", "TRANSMISSION_HORIZON"],
+  "financial_impact": "UNKNOWN",
+  "description": "Company scope and source developments determine editorial attention. No narrative inventory or user thesis enters this assessment."
+}

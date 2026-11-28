@@ -30,6 +30,7 @@ class Workspace(BaseModel):
     price_series: str | None = None
     price_metadata: str | None = None
     profiles: str | None = None
+    reviewed_articles: str | None = None
     atlas: str
     registry: str
     events: list[Event] = Field(default_factory=list, max_length=100)
@@ -108,9 +109,10 @@ def build(manifest, *, include_synthetic=False, news_conn=None):
     if config.profiles is not None:
         if news_conn is None:
             raise ValueError("Current news connection required")
-        from engine.core_decisions import feed
+        from engine.company_feed import feed
 
-        context = feed(news_conn, data, path(config.profiles))
+        context = feed(news_conn, data, path(config.profiles),
+                       article_feed_root=path(config.reviewed_articles) if config.reviewed_articles else None)
     cards, held = [], []
     for event in config.events:
         if event.mode == "SYNTHETIC" and not include_synthetic:

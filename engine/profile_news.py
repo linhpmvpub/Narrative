@@ -289,7 +289,7 @@ def verified_row(row, at, capture_cache):
     return pub, received, proof
 
 
-def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit=100, include_company=False):
+def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit=100, include_company=False, include_narratives=True):
     at = as_of or datetime.now(UTC)
     if at.tzinfo is None or not 1 <= limit <= 5000 or not 1 <= card_limit <= 1000:
         raise ValueError("Aware cutoff and bounded limit required")
@@ -362,6 +362,8 @@ def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit
                         "decision_trace": ["Current source revision and captured RSS checked",
                             "Reviewed company scope is independent of watched narratives",
                             "No canonical event, narrative assignment or financial effect inferred"]})
+            if not include_narratives:
+                continue
             for binding in bundle.factor_bindings:
                 if binding.company_only:
                     continue

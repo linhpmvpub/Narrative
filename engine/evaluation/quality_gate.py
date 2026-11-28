@@ -19,7 +19,12 @@ def relevant(path):
 
 def gate(pointer):
     value = read(pointer)
-    return check(value["suite"], value["suite_sha256"], value["profiles"], value["run"])
+    result = check(value["suite"], value["suite_sha256"], value["profiles"], value["run"])
+    if "company_benchmark" in value:
+        from engine.evaluation.company_benchmark import check as company_check
+
+        result["company_benchmark"] = company_check(value["company_benchmark"])
+    return result
 
 
 def main():

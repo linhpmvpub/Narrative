@@ -403,12 +403,12 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
-        if self.company_only and (self.narrative_ids or self.kind not in {"STRUCTURED_ACTIVITY", "ECONOMIC_CHANGE"}):
+        if self.company_only and self.narrative_ids:
             raise ValueError("Company-only binding requires a supported event rule without narrative targets")
         if self.project_finance:
             from engine.project_finance import supported as finance_supported
 
-            if (self.kind != "SCOPED_ACTIVITY" or not self.narrative_ids
+            if (self.kind != "SCOPED_ACTIVITY" or (not self.narrative_ids and not self.company_only)
                     or any((self.assertion_scope, self.activity_rule, self.signal_rule,
                             self.infrastructure_scope, self.relevance_scope, self.market_scope,
                             self.routing_guards, self.access_constraint, self.readiness_context,
@@ -418,7 +418,7 @@ class FactorBinding(Strict):
         if self.readiness_context:
             from engine.readiness_context import supported
 
-            if (self.kind != "SCOPED_ACTIVITY" or not self.narrative_ids
+            if (self.kind != "SCOPED_ACTIVITY" or (not self.narrative_ids and not self.company_only)
                     or any((self.assertion_scope, self.activity_rule, self.signal_rule,
                             self.infrastructure_scope, self.relevance_scope, self.market_scope,
                             self.routing_guards, self.access_constraint, self.term_aliases, self.issuer_supply_scope))
@@ -427,7 +427,7 @@ class FactorBinding(Strict):
                 raise ValueError("Readiness context requires sourced resource/market scope and dedicated narratives")
         if self.access_constraint:
             names = self.access_constraint.company_terms
-            if (self.kind != "SCOPED_ACTIVITY" or not self.narrative_ids
+            if (self.kind != "SCOPED_ACTIVITY" or (not self.narrative_ids and not self.company_only)
                     or any((self.assertion_scope, self.activity_rule, self.signal_rule,
                             self.infrastructure_scope, self.relevance_scope, self.market_scope, self.routing_guards))
                     or any(n != n.strip() or not 2 <= len(n) <= 80 for n in names)
@@ -448,7 +448,7 @@ class FactorBinding(Strict):
             from engine.news_assertions import evidence_supports
             from engine.news_framework import first, policy
 
-            if (self.kind not in {"CLASSIFIED_CONTEXT", "SCOPED_ACTIVITY"} or not self.narrative_ids
+            if (self.kind not in {"CLASSIFIED_CONTEXT", "SCOPED_ACTIVITY"} or (not self.narrative_ids and not self.company_only)
                     or not evidence_supports(self.assertion_scope.subject_terms, self.evidence)):
                 raise ValueError("Assertion scope requires literal source evidence and explicit narratives")
             if self.assertion_scope.object_components:
@@ -460,7 +460,7 @@ class FactorBinding(Strict):
         if self.kind == "CLASSIFIED_CONTEXT":
             from engine.news_framework import first, policy
 
-            if (not self.signal_rule or not self.narrative_ids or self.change_terms
+            if (not self.signal_rule or (not self.narrative_ids and not self.company_only) or self.change_terms
                     or self.disclosure_terms or self.term_aliases or self.entity_reference_id
                     or self.relevance_scope or self.activity_rule or self.market_scope or self.routing_guards):
                 raise ValueError("Classified context requires a dedicated signal rule and explicit narratives")
@@ -469,11 +469,11 @@ class FactorBinding(Strict):
                     raise ValueError("Component class requires literal source evidence")
         elif self.signal_rule is not None:
             raise ValueError("Signal rule requires classified context kind")
-        if self.routing_guards and (not self.narrative_ids or self.kind not in {
+        if self.routing_guards and ((not self.narrative_ids and not self.company_only) or self.kind not in {
                 "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY", "ECONOMIC_CHANGE"}
                 or len(set(self.routing_guards)) != len(self.routing_guards)):
             raise ValueError("Routing guards require unique constraints and explicit activity narratives")
-        if self.market_scope and (not self.narrative_ids or self.kind not in {
+        if self.market_scope and ((not self.narrative_ids and not self.company_only) or self.kind not in {
                 "SCOPED_ACTIVITY", "STRUCTURED_ACTIVITY", "ECONOMIC_CHANGE"}):
             raise ValueError("Market scope requires explicit narratives and an activity binding")
         if self.relevance_scope:
@@ -500,9 +500,9 @@ class FactorBinding(Strict):
         elif self.kind in {"ECONOMIC_CHANGE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS", "SCOPED_ACTIVITY"}:
             if not self.change_terms or self.disclosure_terms:
                 raise ValueError("Economic rule requires changes, not disclosure terms")
-        elif self.kind != "CLASSIFIED_CONTEXT" and (self.change_terms or not self.disclosure_terms or not self.narrative_ids):
+        elif self.kind != "CLASSIFIED_CONTEXT" and (self.change_terms or not self.disclosure_terms or (not self.narrative_ids and not self.company_only)):
             raise ValueError("Disclosure requires separate terms and explicit narrative scope")
-        if self.kind == "SCOPED_ACTIVITY" and (not self.narrative_ids or self.entity_reference_id):
+        if self.kind == "SCOPED_ACTIVITY" and ((not self.narrative_ids and not self.company_only) or self.entity_reference_id):
             raise ValueError("Scoped activity requires explicit narratives without inferred parties")
         if any(not term.casefold().startswith("we ") for term in self.disclosure_terms):
             raise ValueError("Disclosure must use an explicit issuer first-person phrase")
@@ -517,12 +517,12 @@ class FactorBinding(Strict):
         if self.kind == "SUPPLIER_ROLE_DISCLOSURE" and self.term_aliases:
             raise ValueError("Supplier role terms must be explicit, without aliases")
         if self.kind == "ISSUER_OPERATING_CONTEXT" and (
-                not self.narrative_ids or not self.issuer_supply_scope
+                (not self.narrative_ids and not self.company_only) or not self.issuer_supply_scope
                 or self.entity_reference_id or self.term_aliases
                 or any(not t.casefold().startswith(("our ", "we ")) for t in self.context_terms)):
             raise ValueError("Operating context requires explicit issuer/narrative scope without aliases or parties")
         if self.kind == "ISSUER_PRODUCT_SHIPMENTS":
-            if (not self.narrative_ids or not self.issuer_supply_scope or self.entity_reference_id
+            if ((not self.narrative_ids and not self.company_only) or not self.issuer_supply_scope or self.entity_reference_id
                     or self.term_aliases or self.change_terms != ["shipments"]
                     or any(len(t.split()) < 2 for t in self.topic_terms)):
                 raise ValueError("Product shipments require explicit product/narrative scope")
@@ -757,7 +757,7 @@ class ProfileBundle(Strict):
                     raise ValueError("Competitor scope requires a sourced outgoing competition relation")
             if not set(binding.narrative_ids) <= {n.id for n in self.narratives}:
                 raise ValueError("Binding references unknown narrative")
-            if binding.issuer_supply_scope and not binding.narrative_ids:
+            if binding.issuer_supply_scope and not binding.narrative_ids and not binding.company_only:
                 raise ValueError("Issuer supply scope requires approved narratives")
             if binding.kind in {"SUPPLIER_ROLE_DISCLOSURE", "ISSUER_OPERATING_CONTEXT", "ISSUER_PRODUCT_SHIPMENTS"} and not any(
                     n.id == binding.factor_id and n.kind == "product" for n in self.nodes):

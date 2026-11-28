@@ -70,6 +70,7 @@ def decisions(bundle, article, at):
         if not rule.enabled or not rule.reviewed_at <= at < rule.review_until:
             continue
         route, membership, contract = [], [], None
+        entity = None
         if rule.kind == "ISSUER_EVENT":
             spans = list(issuer_matches(rule.names, article))
         else:
@@ -79,8 +80,10 @@ def decisions(bundle, article, at):
             if any(r.status != "SOURCE_BACKED" or r.known_at > at or not r.valid_from <= at
                    or r.valid_until is not None and at >= r.valid_until for r in [*route, *membership]):
                 continue
-            if binding.entity_reference_id and not entity_context(bundle, binding.entity_reference_id, article, at):
-                continue
+            if binding.entity_reference_id:
+                entity = entity_context(bundle, binding.entity_reference_id, article, at)
+                if entity is None:
+                    continue
             spans = matches(binding, article, bundle=bundle, at=at)
             if not spans:
                 continue
@@ -97,6 +100,8 @@ def decisions(bundle, article, at):
                     "type": edge.type, "scope": edge.scope, "conditions": edge.conditions,
                     "evidence": [e.model_dump() for e in edge.evidence]}
         result.append({"rule_id": rule.id, "kind": rule.kind, "scope": rule.scope,
+                       "source_unit": {"title": article.get("title", ""), "summary": article.get("summary", "")},
+                       "entity_context": entity,
                        "matches": spans, "path": [serialize(r) for r in route],
                        "membership_path": [serialize(r) for r in membership],
                        "company": nodes[bundle.company_id], "routing_contract": contract,
@@ -113,7 +118,7 @@ def decisions(bundle, article, at):
     return result
 
 
-def source_decisions(value, bundle, at):
+def source_decisions(value, bundle, at, *, article_root=None):
     """Shared RSS/reviewed full-body entry point, with original unit spans."""
     if not bundle.company_discovery:
         return []
@@ -123,7 +128,7 @@ def source_decisions(value, bundle, at):
     from engine.article_cards import substantive_blocks
     from engine.source_sentences import source_units
 
-    blocks, _ = substantive_blocks(value["source_observation"], at)
+    blocks, _ = substantive_blocks(value["source_observation"], at, article_root=article_root)
     result = decisions(bundle, {"title": article.get("title", "")}, at)
     for block in blocks:
         for unit in source_units(block["text"]):

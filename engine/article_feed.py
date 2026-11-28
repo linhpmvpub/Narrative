@@ -141,34 +141,45 @@ def approve_replacement(conn, selection, *, root=None, expected_entry=None, expe
     return {"status": "AWAITING_RECHECK", "version": state["version"], "delivery": "disabled"}
 
 
+def current_selections(conn, root):
+    """Revalidate current complete bodies before either company or narrative projection."""
+    root = Path(root)
+    raw = (root / "current.json").read_bytes()
+    state = json.loads(raw)
+    if state["schema"] != "ARTICLE_FEED_V1" or not 1 <= len(state["entries"]) <= 100:
+        raise ValueError("Invalid bounded manifest")
+    now = datetime.now(UTC)
+    selections = []
+    blocked_urls = []
+    for entry in state["entries"]:
+        blocked_urls.append(entry["selection"]["revision"]["payload"]["url"])
+        if entry["status"] != "ACTIVE":
+            continue
+        try:
+            if not now - timedelta(hours=1) <= utc(entry["checked_at"]) <= now:
+                continue
+            selection = entry["selection"]
+            rev = {**selection["revision"], "received_at": utc(selection["revision"]["received_at"])}
+            if anchors(conn, rev["payload"]["url"]) != entry["anchors"]:
+                continue
+            old, _ = reviewed_body(selection, now, article_root=state["articles"])
+            proof, text = read_packet(rev, entry["proof"], root=state["articles"])
+            if (proof["text_sha256"] != old["text_sha256"] or WITHDRAWAL.search(text)
+                    or proof["retrieved_at"] != entry["checked_at"]):
+                continue
+            selections.append(selection)
+            blocked_urls.remove(selection["revision"]["payload"]["url"])
+        except (OSError, ValueError, KeyError, TypeError):
+            continue
+    return {"raw": raw, "state": state, "selections": selections, "blocked_urls": blocked_urls, "at": now}
+
+
 def feed(conn, *, root=None, ticker=None, narrative=None):
     root = Path(root) if root is not None else root_dir()
     empty: dict = {"items": [], "delivery": "disabled", "mode": "RESEARCH_FULL_ARTICLE_FEED"}
     try:
-        raw = (root / "current.json").read_bytes()
-        state = json.loads(raw)
-        if state["schema"] != "ARTICLE_FEED_V1" or not 1 <= len(state["entries"]) <= 100:
-            raise ValueError("Invalid bounded manifest")
-        now = datetime.now(UTC)
-        selections = []
-        for entry in state["entries"]:
-            if entry["status"] != "ACTIVE":
-                continue
-            try:
-                if not now - timedelta(hours=1) <= utc(entry["checked_at"]) <= now:
-                    continue
-                selection = entry["selection"]
-                rev = {**selection["revision"], "received_at": utc(selection["revision"]["received_at"])}
-                if anchors(conn, rev["payload"]["url"]) != entry["anchors"]:
-                    continue
-                old, _ = reviewed_body(selection, now, article_root=state["articles"])
-                proof, text = read_packet(rev, entry["proof"], root=state["articles"])
-                if (proof["text_sha256"] != old["text_sha256"] or WITHDRAWAL.search(text)
-                        or proof["retrieved_at"] != entry["checked_at"]):
-                    continue
-                selections.append(selection)
-            except (OSError, ValueError, KeyError, TypeError):
-                continue
+        checked = current_selections(conn, root)
+        raw, state, selections, now = (checked[k] for k in ("raw", "state", "selections", "at"))
         result = build(selections, now, profile_root=state["profiles"], article_root=state["articles"]) if selections else empty
         if (root / "current.json").read_bytes() != raw:
             raise ValueError("Source revalidation changed during projection")
