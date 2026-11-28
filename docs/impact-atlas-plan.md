@@ -1,5 +1,16 @@
 # Database-first relationship and impact development
 
+## Primary consumer: company intelligence — 2026-11-28
+
+The user's current [company-first plan](company-first-product-plan.md) supersedes
+mandatory narrative endpoints in older sequencing below. Database facts, entity/
+product scopes and business mechanisms must support company assessment without
+example narratives. Narrative is an optional downstream view; its templates must
+not decide which company exposures exist. Preserve source/knowledge/effective
+clocks and immutable revisions for future user-thesis historical replay. This
+changes implementation priority, not existing source facts or snapshot counts.
+
+
 Current stage2026-11-26: user authorized comprehensive grouped calibration; see [grouped evaluation](grouped-relevance-calibration.md). The earlier implementation-first deferral below is historical; separate prior evaluation stays deferred. Acceptance targets are unchanged.
 
 Current v1 scope (user decision2026-11-25): use [seven-group core](core-profile-v1.md) and shared input/market registry; the richer legacy catalog below is optional expansion. Finish database/algorithm first; separate LLM-prior evaluation is deferred, comprehensive evaluation follows. Tests and source checks remain required.

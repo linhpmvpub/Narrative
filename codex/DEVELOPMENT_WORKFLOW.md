@@ -1,5 +1,23 @@
 # Quy trình phát triển, tự đánh giá và cải thiện
 
+## Quy trình ưu tiên nền cấp công ty — 2026-11-28
+
+Áp dụng [kế hoạch mới](../docs/company-first-product-plan.md); thay thứ tự ưu tiên
+narrative-first trong hướng dẫn cũ. Mỗi task nêu giá trị cho nhận diện/đánh giá/thẻ tin
+công ty trước. Narrative là consumer tùy chọn; kiểm tra công ty vẫn hoạt động khi
+bỏ toàn bộ narrative mẫu và không đổi đánh giá công ty khi thêm/xóa một narrative.
+Các ca mẫu dùng kiểm chứng cơ chế chung, không quyết định phạm vi crawler/database.
+
+Tiếp theo: audit/tách ranking, API/feed và đo lường còn phụ thuộc narrative; nối
+nguồn đầy đủ và company assessment; đánh giá theo event family/quan hệ cốt lõi.
+Giữ suite cũ như regression, không thay target/nhãn. Chốt benchmark công ty mới
+trước freeze/nhãn độc lập và trình bày riêng với điểm hỗn hợp lịch sử. Không tính
+cải thiện từ thay đổi công thức. Đối với narrative tương lai, lưu luận điểm/tiêu chí/
+thời hạn/phiên bản trước diễn biến và tách evidence tracking khỏi outcome scoring.
+Task chỉ cập nhật định hướng: kiểm tra diff/liên kết/tính nhất quán, không chạy lại
+tests hay benchmark để ngụ ý đã nâng chất lượng thuật toán.
+
+
 ## Báo điểm và giữ chẩn đoán — quyết định 2026-11-28
 
 Từ phiên sau: điểm hiệu quả 0–100 trước, sau đó company discovery / narrative /

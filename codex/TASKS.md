@@ -1,5 +1,19 @@
 # TASKS — implementation execution checklist
 
+## Current priority — company product before optional narratives (2026-11-28)
+
+User direction supersedes narrative-first sequencing below. See [company-first plan](../docs/company-first-product-plan.md).
+
+- [x] Record company intelligence as the primary product; example narratives are reusable demonstrations/regression fixtures, not a closed coverage target. Specify future arbitrary user thesis tracking and honest historical outcome review.
+- [ ] NEXT: audit and decouple company assessment/attention priority/API/feed from narrative targets. Make the primary company card useful with zero narratives; adding/removing example narratives must not alter company relevance/priority for identical source/profile inputs. Retain optional narrative projection and old regression cases.
+- [ ] Bridge reviewed full-article assertions and source lifecycle into that company pipeline; classify primary developments, affected business variables, sourced exposures, conditions and unknown magnitude/horizon. Expand common company event families without ticker/headline patches.
+- [ ] Predeclare a versioned company benchmark (direct company relevance, company priority, explanation fidelity and group/company support), freeze predictions before independent labels. Keep old25.18mixed-index reference unchanged; no cross-definition gain claim or silent reassignment of narrative priority labels.
+- [ ] Complete company watchlists/feed/evidence diagrams and event history, attention controls, user usefulness and operational acceptance. Existing numeric release gates must be mapped/versioned to the new target before claiming readiness; do not lower them or mark passed by changing scope.
+- [ ] THEN: optional narrative specification from user wording, original thesis/criteria/horizon versions, supporting/challenging evidence timeline, as-of replay and outcome assessment. Ambiguous/unobserved/not-yet-due claims remain unscored. No narrative catalog expansion as the immediate objective.
+
+Data local; real notifications/cloud/runtime LLM remain disabled. This update is documentation, not implementation of the pending decoupling or narrative outcome features.
+
+
 ## Current next steps — fuller evidence after company discovery (2026-11-28)
 
 This section supersedes the company-discovery implementation item below; the wider product roadmap remains open.

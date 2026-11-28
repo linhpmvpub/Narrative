@@ -1,5 +1,14 @@
 # Quality review after each iteration
 
+## Company-first direction alignment — 2026-11-28 (latest)
+
+- Identified product risk: narrow example narratives can constrain discovery, priority, UI and evaluation even after a separate company matcher is added. Existing main/background cards and mixed40/40/20 score still contain narrative dependencies. The company-only section is an incremental bridge, not the completed company product.
+- Recorded user direction and implementation order in company-first-product-plan: foundation company assessment first, optional narrative tracking later. No code/data change or measured quality gain this task. Old25.18score remains an exposed mixed reference, not a company-product score; no weights/labels changed.
+- Next acceptance work: company relevance/priority invariant to adding/removing templates; zero-narrative primary feed; source-backed business channels and unknown financial fields; direct-company benchmark independent of sample narrative targets. Fuller article context and event-family evaluation remain necessary. Numeric release-policy mapping is pending a versioned target, not waived.
+- Future narrative risk: confirmation bias, duplicated evidence, revised success criteria and hindsight leakage could produce a misleading “prediction accuracy.” Preserve original thesis/versions/times and counterevidence; score only measurable predeclared outcomes, show pending/unknown states separately. User thesis outcome is not engine relevance quality or automatic stock forecasting.
+- Documentation links/diff and runtime/config invariance checked; no new tests/benchmark required for prose-only changes. Existing source/data and notifications/cloud constraints retained. L034 captures the decision and verification principle; arbitrary narrative tracking/history features remain unimplemented.
+
+
 ## Independent company candidate layer — 2026-11-28 (latest)
 
 - Investor value: relevant issuer or sourced-exposure news remains visible even without a watched narrative. Company discovery is a separate reviewed graph contract, not a forced supply/demand narrative. Names and exact paths live in data; shared extraction remains ticker-independent. Company-only bindings never silently fall through to narrative matching.

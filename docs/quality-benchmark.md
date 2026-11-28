@@ -1,5 +1,24 @@
 # Continuous local quality benchmark
 
+## Measurement transition: company product first — 2026-11-28
+
+The user prioritizes company news intelligence; narratives are an advanced layer
+and current templates are examples. Follow the [company-first plan](company-first-product-plan.md).
+The mixed40/40/20 index below remains an immutable legacy development series, not
+the primary optimization target for the company product. Report its identity when
+retained and do not reinterpret25.18as a company-only score. This supersedes the
+older instruction to use the mixed headline as the primary product signal.
+
+Next implementation must predeclare/version a company-focused target and scoring
+policy, including direct company relevance and company attention priority, before
+sample/prediction freeze and independent labels. Narrative priority labels cannot
+be silently reused as company-priority truth. Keep explanation fidelity, unresolved
+coverage, false matches/misses and per-company/event-family support visible. New
+metric values are not comparable deltas against the old formula. No reference,
+weight, runtime or score changed in this documentation update; existing regression
+gate still applies to every subsequent runtime/database change.
+
+
 ## Headline score and separate company coverage — 2026-11-28
 
 At the user's request, subsequent session reports lead with one **0–100 development

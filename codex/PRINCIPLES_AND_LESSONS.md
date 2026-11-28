@@ -1,5 +1,14 @@
 # Nguyên tắc và bài học phát triển
 
+## L034 — Sản phẩm công ty độc lập với narrative mẫu (2026-11-28)
+
+- Căn cứ là chỉ đạo sản phẩm của người dùng, không phải kết quả đo mới: company intelligence là nền, narrative tùy chọn là sản phẩm nâng cao. Không để ví dụ thử nghiệm trở thành biên giới nhận diện tin, database hay hàm mục tiêu.
+- Company relevance, đánh giá cơ chế và ưu tiên công ty phải tồn tại khi không có narrative. Thêm/xóa narrative không được đổi kết quả công ty trên cùng nguồn/phiên bản. Tin có liên quan không nên chỉ tồn tại như phần phụ “chưa gắn narrative”; kiểm tra cả ranking/API/UI, không chỉ matcher.
+- Chọn benchmark đúng sản phẩm: direct company truth và company priority, giải thích, nhóm tin và độ phủ. Giữ nhãn/điểm mixed cũ để hồi quy; tạo chuẩn có phiên bản trước nhãn cho mục tiêu mới, không hồi tố thay trọng số để báo tăng điểm.
+- Theo dõi luận điểm cần giữ bản gốc, lần sửa, tiêu chí quan sát và thời hạn. Evidence support khác outcome correctness; nhiều tin cùng nói một điều không phải nhiều bằng chứng độc lập hay phần trăm dự đoán đúng. Lưu phản bác và phần chưa biết, không chỉ tin xác nhận quan điểm.
+- Chấm lịch sử chỉ dùng những gì có thể biết ở thời điểm đó; correction/supersession không xóa lịch sử cũ. Tách cơ chế, kết quả kinh doanh và diễn biến giá. Chuẩn bị provenance/thời gian ngay ở nền; chưa chuyển nguồn lực sang tối ưu catalog narrative mẫu.
+
+
 ## L033 — Preserve relevant unassigned company context without inventing a narrative (2026-11-28)
 
 - Separate company discovery from narrative attribution in runtime as well as measurement. A bounded issuer event or sourced exposure may be useful company context with no watched endpoint. Keep that state explicit; never manufacture demand→supply links. Evidence:3company recoveries with all3240narrative/priority decisions unchanged;25.18vs21.82fixed-anchor index.

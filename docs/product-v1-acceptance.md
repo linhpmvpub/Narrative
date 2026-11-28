@@ -1,5 +1,21 @@
 # Product v1: scope and measurable acceptance
 
+## Scope supersession — user decision 2026-11-28
+
+The primary v1 product is company/stock news intelligence, usable without any
+narrative. Narrative templates are examples; arbitrary user narratives and thesis
+history/outcome review are the advanced layer. The narrative-first scope and
+mandatory narrative endpoint below are superseded by the [company-first plan](company-first-product-plan.md).
+
+The existing config/product-v1.json and frozen narrative-based references retain
+their original semantics; they do not yet constitute company-only acceptance.
+Map/version the assessment target and benchmark before the next company-product
+acceptance run. Do not relabel old pairs, lower numeric quality/reliability gates,
+or claim readiness by removing narrative work. Evidence, temporal integrity,
+corrections, data privacy and explicit release authorization still apply. The
+current task records direction only; policy/runtime migration remains pending.
+
+
 Current stage2026-11-26: user authorized comprehensive grouped calibration; see [grouped evaluation](grouped-relevance-calibration.md). The earlier implementation-first deferral below is historical; separate prior evaluation stays deferred. Acceptance targets are unchanged.
 
 Implementation sequencing update2026-11-25: [core profile v1](core-profile-v1.md) fixes7groups/10relations for initial expansion. Complete the bounded database and algorithm before comprehensive evaluation; do not require a separate LLM-prior evaluation now. Release-quality targets below remain future acceptance targets, not a gate preventing current authorized implementation or a claim of measured readiness.

@@ -1,5 +1,15 @@
 # Checkpoint tiếp tục phiên sau — cập nhật 2026-11-28
 
+## Product priority clarified: company intelligence first — 2026-11-28 (latest)
+
+- User explicitly prioritizes company/stock news identification and assessment. Narrative is an advanced product built on that foundation; current narratives are examples to exercise principles, not the product's coverage boundary. Future users can define narratives and review their history against original predictions.
+- Updated AGENTS,direction,workflow,L034,tasks and related design/benchmark/acceptance notes; added docs/company-first-product-plan.md. Company pipeline must work without narratives; assessments distinguish relevance, business mechanism, attention priority, direction/magnitude/horizon and evidence uncertainty. No implemented arbitrary-narrative/outcome-scoring claim.
+- NEXT implementation: audit and decouple company priority/API/feed/evaluation from narrative inventory; zero-narrative operation and narrative-add/remove invariance tests. Then fuller source assertions and company assessment/graph coverage, independently frozen company-focused evaluation, company experience/reliability. Narrative specification/timeline/outcome product follows. Preserve temporal/version provenance now, do not optimize example catalog.
+- Current runtime/data remains code997e730ce04ae83c00855f25c0a400055efcc8e8, previous handoff/reports/benchmark pointer unchanged as detailed below. Mixed score25.18/100 is historical evidence, not a new company-only score or gain from this direction change. New company metric/target needs versioning and freeze; old labels/weights not reassigned. Numeric release gates not lowered or declared passed.
+- Narrative history design: original user wording/criteria/horizon/version before events; supporting and contradictory evidence, revisions and as-of replay; separate observed outcomes from evidence sentiment. No percent-correct from headline counts or retrospective knowledge. Unmeasurable/pending/unknown claims stay unscored.
+- Documentation-only task: verify links/diff/scope and unchanged runtime/config; no rerun tests/benchmark or new accuracy claim. Previous1937SQLite/1937PostgreSQL exact-code CI remains historical validation. Data local,SEND_NOTIFICATIONS=false,ALLOW_SYNTHETIC_LIVE=false,LLM_MODE=none;cloud/push off. No user decision needed.
+
+
 ## Sourced company discovery → private context cards — 2026-11-28 (latest)
 
 - Followed direction/workflow/principles and the approved company-discovery-first tranche. Started clean c21fc1b, verified prior benchmark and1568handoff files. Implemented shared discovery, required database additions and end-to-end private cards/visual paths. The wider six-step product roadmap and v1 are not complete; no altered acceptance, ticker/headline branch, rank-weight tuning or new blind-label claim.

@@ -1,5 +1,31 @@
 # Mục tiêu và định hướng sản phẩm
 
+## Sản phẩm nền cấp công ty, narrative là lớp nâng cao — quyết định 2026-11-28
+
+Nhận diện và đánh giá tin cấp công ty/cổ phiếu là sản phẩm chính cần hoàn thiện trước.
+Database quan hệ/tác động, cơ chế và thuật toán dùng chung phải nhận ra tin trực tiếp
+và gián tiếp, giải thích liên quan, mức đáng quan tâm, điều kiện và phần chưa biết,
+độc lập với việc người dùng có chọn narrative hay không. Đây là chỉ đạo ưu tiên hiện
+hành, thay các đoạn mô tả gắn narrative như bước bắt buộc trước thẻ tin bên dưới.
+
+Narrative hiện có là ví dụ để xây nguyên lý và kiểm thử nền, không phải catalog đóng
+hay danh sách mục tiêu để tối ưu từng trường hợp. Sản phẩm nâng cao cho phép người
+dùng chọn/diễn đạt narrative mới, theo dõi bằng chứng và xem lại diễn biến lịch sử
+để đối chiếu dự đoán ban đầu với kết quả. Hệ thống phải lưu luận điểm, tiêu chí quan
+sát, thời hạn và từng phiên bản; phân biệt bằng chứng ủng hộ/phản bác với kết quả thực
+tế. Không biến số tin ủng hộ thành tỷ lệ dự đoán đúng, không dùng dữ liệu biết sau để
+chấm lại quá khứ như dự báo trước. Narrative mơ hồ/chưa đến hạn/chưa có dữ liệu phải
+hiện trạng thái chưa kết luận; không hứa bao phủ mọi luận điểm ngay từ đầu.
+
+Chi tiết kiến trúc, trường đánh giá công ty, vòng đời narrative và lộ trình:
+[company-first-product-plan](../docs/company-first-product-plan.md). Trước mắt tách
+assessment/priority/feed công ty khỏi narrative, bổ sung nội dung nguồn đầy đủ và
+quan hệ cốt lõi, đánh giá trực tiếp nhóm tin công ty; sau đó trải nghiệm/độ tin cậy,
+rồi narrative tùy chọn và retrospective. Chuỗi benchmark hỗn hợp hiện có giữ nguyên
+để hồi quy; điểm cấp công ty cần chuẩn mới được khóa trước nhãn, không tái trọng số
+để làm đẹp kết quả. Không thay dữ kiện/nguồn hay tự bật cloud/push/LLM runtime.
+
+
 ## Điểm hiệu quả dễ hiểu và hai tầng liên quan — quyết định 2026-11-28
 
 Theo yêu cầu mới, từ phiên sau dẫn đầu kết quả bằng điểm benchmark phát triển 0–100

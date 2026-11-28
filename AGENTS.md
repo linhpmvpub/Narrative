@@ -1,5 +1,23 @@
 # Hướng dẫn cho agent làm việc trong repository
 
+## Ưu tiên hiện hành: sản phẩm cấp công ty — 2026-11-28
+
+Người dùng xác định nhận diện/phân tích/đánh giá tin cấp công ty là sản phẩm nền;
+narrative là lớp nâng cao dùng lại nền đó. Đọc [kế hoạch company-first](docs/company-first-product-plan.md)
+cùng các tài liệu bắt buộc. Narrative mẫu chỉ là ví dụ kiểm thử, không giới hạn
+phạm vi tin, database hay thứ tự ưu tiên phát triển. Luồng công ty phải dùng được
+khi không có narrative; không ép tin vào narrative để hiển thị hoặc đánh giá.
+Ưu tiên tách company assessment/priority/feed khỏi narrative, rồi chất lượng nguồn,
+quan hệ, giải thích và đo trực tiếp sản phẩm công ty. Giữ thời gian/phiên bản để
+sau này theo dõi narrative tùy chọn và đối chiếu luận điểm ban đầu với kết quả.
+
+Phần này thay thứ tự narrative-first và cách dùng điểm tổng hợp làm mục tiêu chính
+ở các mục cũ. Giữ benchmark40/40/20 đã khóa như chuỗi hồi quy lịch sử; không sửa
+nhãn/trọng số hồi tố. Benchmark cấp công ty mới cần policy/target có phiên bản và
+freeze trước nhãn; báo riêng, không coi đổi công thức là tăng chất lượng. Kiểm chứng
+nguồn/tests/benchmark sau thay đổi runtime, dữ liệu cục bộ và thông báo tắt giữ nguyên.
+
+
 ## Báo điểm dễ hiểu từ phiên sau — quyết định 2026-11-28
 
 Dẫn đầu báo cáo benchmark bằng điểm hiệu quả 0–100 của anchor đã khóa trong current
