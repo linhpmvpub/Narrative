@@ -419,7 +419,69 @@
     "existing_starlette_warnings_per_run": 1,
     "ruff": "passed",
     "mypy_modules": 159,
-    "ci": "PENDING",
+    "ci": {
+      "run_id": 46091832102,
+      "code_commit": "3e2f198cf1341cd7ba03970123b325c7e6cfe791",
+      "conclusion": "success",
+      "url": "https://github.com/linhpmvpub/Narrative/actions/runs/46091832102",
+      "sqlite": {
+        "passed": 1461,
+        "seconds": 131.19,
+        "warnings": 1
+      },
+      "postgresql": {
+        "passed": 1461,
+        "seconds": 205.55,
+        "warnings": 1
+      }
+    },
     "browser": "desktop_mobile_passed_no_page_errors"
+  },
+  "priority_failure_layers": {
+    "actor77": {
+      "priority_positive_pairs": 5,
+      "selected_priority_positives": 0,
+      "routing_misses": 1,
+      "matched_but_not_prioritized": 4,
+      "selected_nonpriority": 0,
+      "unresolved_priority": 7,
+      "selected_unresolved_priority": 0
+    },
+    "framework121": {
+      "priority_positive_pairs": 28,
+      "selected_priority_positives": 3,
+      "routing_misses": 10,
+      "matched_but_not_prioritized": 15,
+      "selected_nonpriority": 5,
+      "unresolved_priority": 9,
+      "selected_unresolved_priority": 1
+    },
+    "memory-unseen-2026-11-27": {
+      "priority_positive_pairs": 32,
+      "selected_priority_positives": 7,
+      "routing_misses": 10,
+      "matched_but_not_prioritized": 15,
+      "selected_nonpriority": 0,
+      "unresolved_priority": 11,
+      "selected_unresolved_priority": 0
+    },
+    "priority-blind-2026-11-26": {
+      "priority_positive_pairs": 5,
+      "selected_priority_positives": 5,
+      "routing_misses": 0,
+      "matched_but_not_prioritized": 0,
+      "selected_nonpriority": 0,
+      "unresolved_priority": 56,
+      "selected_unresolved_priority": 0
+    },
+    "priority-issuer-archive-2026-11-26": {
+      "priority_positive_pairs": 2,
+      "selected_priority_positives": 2,
+      "routing_misses": 0,
+      "matched_but_not_prioritized": 0,
+      "selected_nonpriority": 0,
+      "unresolved_priority": 3,
+      "selected_unresolved_priority": 0
+    }
   }
 }
