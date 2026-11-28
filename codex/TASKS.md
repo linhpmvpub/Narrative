@@ -1,5 +1,16 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — actor/asset and mechanism contracts (2026-11-28)
+
+- [x] Shared adjacent source references with original spans; no title/body, multi-hop or ambiguous actor/asset donation. Background-only new matches.
+- [x] Exact access/financing mechanism selection and sourced physical deployment purpose; profile24 reuses existing evidence/edges, no invented supply effects.
+- [x] Benchmark after all three steps and final:3,040 decisions unchanged,zero measured gains/regressions. Final224focused tests and exact-code CI passed; fresh local RSS/feed verified; cloud/live push off.
+- [x] Read-only cross-target audit:7/9 misses already covered in another relevant narrative,4/4 priority misses already priority there. Original target errors retained, no relabeling or aggregate accuracy claim.
+- [ ] Collect unused source/event families and freeze predictions for independent evaluation before more grammar/weight changes. Three newly polled items remain unlabelled collection, not a fresh benchmark.
+- [ ] Specify separate company-discovery and narrative-target evaluation; reconcile target scope with graph endpoints without silently changing old references. Source missing construction/deployment dependencies; do not fabricate links.
+- [ ] Close user usefulness, coverage/latency, reliability and personalization gates. Financial magnitude/horizon and public v1 acceptance remain unproven; notifications/cloud stay off.
+
+
 ## Current next steps — undated resource evidence (2026-11-28)
 
 - [x] Explicit unknown-publication contract, capture-bounded graph use, dated event/financial safeguards and atlas display.

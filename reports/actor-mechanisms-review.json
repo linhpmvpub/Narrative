@@ -3461,7 +3461,35 @@
     "final": "224 passed, 1 warning in 76.09s",
     "ruff": "PASS",
     "mypy_files": 174,
-    "exact_commit_ci": "PENDING"
+    "exact_commit_ci": {
+      "run_id": 46135471382,
+      "head_sha": "c7987a8475d18f50740a9293157547fcbbf9bfbf",
+      "conclusion": "success",
+      "test_results": [
+        "1879 passed, 1 warning in 151.28s (0:02:31)",
+        "1879 passed, 1 warning in 288.17s (0:04:48)"
+      ],
+      "jobs": [
+        {
+          "id": 140949697729,
+          "name": "dependency-audit",
+          "conclusion": "success"
+        },
+        {
+          "id": 140949697927,
+          "name": "verify",
+          "conclusion": "success"
+        },
+        {
+          "id": 140949698030,
+          "name": "extraction-model-smoke",
+          "conclusion": "success"
+        }
+      ],
+      "dependency_audits": 2,
+      "model_smoke": 8,
+      "url": "https://github.com/linhpmvpub/Narrative/actions/runs/46135471382"
+    }
   },
   "unmeasured": [
     "financial_magnitude",
@@ -3480,5 +3508,15 @@
   ],
   "delivery": "disabled",
   "cloud": "off",
-  "release_acceptance": "NOT_MET"
+  "release_acceptance": "NOT_MET",
+  "cross_target_audit": {
+    "cohort": "infra160",
+    "original_missed_relevance_pairs": 9,
+    "selected_on_another_relevant_target": 7,
+    "original_missed_priority_pairs": 4,
+    "main_on_another_priority_target": 4,
+    "original_target_errors_retained": true,
+    "is_new_accuracy_measurement": false,
+    "same_company_event_grouping_only": true
+  }
 }

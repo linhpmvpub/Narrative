@@ -1,5 +1,14 @@
 # Quality review after each iteration
 
+## Actor/reference and mechanism review — 2026-11-28
+
+- Implemented shared typed source references and exact access/financing paths. Profiles own names, evidence and mechanism IDs; code has no ticker/headline special cases. The new capital path uses existing primary evidence and no new graph edges or figures. Context-only treatment prevents reference resolution from becoming verified identity, realized impact or priority.
+- All 3,040 exposed benchmark decisions are unchanged after each step and final hardening. Tests demonstrate new bounded behavior, not measured quality gain. The refreshed feed also has no new matcher traces. Stop adding grammar merely to accumulate passing synthetic cases; next obtain unused real source families and evaluate their failure classes.
+- Read-only target audit changes the diagnosis, not the scores: seven of nine infra160 missed narrative pairs already route to another relevant narrative for the same company/event. All four missed priority pairs already have priority there. Preserve the original target FN and report company-discovery separately; do not invent supply effects to make demand news satisfy a supply endpoint. AMD/DELL each have one pair without another selected target in this cohort.
+- First feed snapshot expired and withheld all cards; preserve it. Fresh RSS poll: ten attempts/eight OK/two NOT_MODIFIED/three new items/zero revisions. Final50main44background IDs unchanged from previous task, all disabled/financial unknown. This is not a controlled timing/input comparison or seven-day reliability evidence. New items saved without labels; no benchmark extension or new blind claim.
+- Final224focused tests, lint/types and exact-code CI passed; detailed report/checkpoint hold counts and failures corrected. Remaining English syntax/ellipsis, narrative-scope and graph-evidence gaps are explicit. No browser acceptance, personalized utility, causal or financial-horizon claim. L031 added; product direction and release gates unchanged.
+
+
 ## Undated evidence and resource-scope review — 2026-11-28
 
 - Product gain: a reviewed official product page can support conditional structural exposure without a fabricated release date. Power/cooling readiness now has a sourced DELL graph route; date uncertainty survives to atlas inspection. Shared resource logic is reusable for any sourced profile, not a company exception.

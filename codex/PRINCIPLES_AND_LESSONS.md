@@ -1,5 +1,14 @@
 # Nguyên tắc và bài học phát triển
 
+## L031 — Preserve source references and distinguish target misses from discovery misses (2026-11-28)
+
+- Resolve only an explicit typed role/asset from an unambiguous adjacent source sentence, at most one hop. Preserve both spans; never rewrite source text or combine title and body to manufacture an assertion. A role reference does not verify legal identity, and a data-center reference does not make its operator a supplier/customer. Keep ambiguous, canceled and remote antecedents withheld.
+- A matcher should identify the reviewed mechanism it consumes. Another valid demand edge cannot replace a revoked exact access/finance edge. Capital plus a physical deployment purpose differs from funding software, a component startup, disbursement or delivered capacity. Each route still needs its own source and narrative intent; no demand→supply shortcut.
+- Measure narrative relevance separately from company-level discovery. In infra160, seven of nine missed target pairs already select another relevant narrative for the same company/event; all four missed priority pairs already have priority there. This does not repair the original target or justify changing its labels. Use the diagnosis to review scope/endpoints and prioritize truly undiscovered events, not to optimize a misleading aggregate.
+- All 3,040 exposed pair decisions and the refreshed94card selection stayed unchanged this turn; synthetic tests establish capability, not real-world improvement. After repeated zero-change iterations, prioritize unused real families and source-backed database gaps over further grammar expansion. Keep narrative and company-discovery metrics separate and frozen before new independent review.
+- Verify same-source/full-body parity, literal offsets, role/asset ambiguity, canceled antecedents, exact-edge lifecycle with alternative paths, RSS corrections/withdrawal and finance/supply negatives using renamed companies. No fresh/human or financial-impact claim follows from these checks.
+
+
 ## L030 — Unknown publication is explicit evidence, not an invented date (2026-11-28)
 
 - Official product/technical pages can substantiate structural exposure without establishing original publication or historical effective dates. Store original publication as null with source kind, uncertainty basis and review note. A displayed update is separate from publication; acquisition/review is when the system learned, not when the real-world relationship began.
