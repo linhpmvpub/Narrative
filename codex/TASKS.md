@@ -1,5 +1,22 @@
 # TASKS — implementation execution checklist
 
+## Current execution — company foundation before breadth (2026-11-28 latest)
+
+This section supersedes pending foundation items below; historical checklists remain as records.
+Read [company assessment](../docs/company-assessment.md) and [company benchmark](../docs/company-benchmark.md).
+
+- [x] Independent company schema/discovery/assessment/priority/API/primary feed; zero-narrative operation and120real-case invariance. Legacy narrative projection remains optional.
+- [x] Reviewed full-body source lifecycle→company feed, exact source spans, no stale RSS fallback, corrections/withdrawals/expiry tests; local desktop/mobile acceptance snapshot. This is infrastructure integration, not proven body-only recall improvement.
+- [x] Freeze direct-company60/40metric,24unused-source articles/120units before two independentAI reviews; first6.50baseline, unknowns preserved. Combined company+legacy freshness gate; old25.18/3,240pair decisions unchanged.
+- [ ] NEXT: reusable company event catalog and evidence contracts across results, capacity/shipments/access, market demand and capital constraints. Audit each failure layer and source missing product/market/member scopes; names in data, no headline/ticker branches. Preserve exact mechanism/source guards and distinguish market context from a specific supplier win.
+- [ ] Broaden current reviewed source bodies and original source assertions; measure missing/held/expired coverage. Compare RSS/body only on the same source/reference target; source eligibility is not relevance or fact verification.
+- [ ] Improve shared discovery before tuning attention weights. Replay both exposed references after each logical update, keep all group/company regressions; collect unused fuller-source families with prediction freeze before independentAI labels. Expand positive input-price and difficult negative support; explanation fidelity remains a separate unmeasured dimension.
+- [ ] Company watchlists, concise summaries, source/event/company timelines, dedup/correction UX and attention budgets. Version company-only acceptance mapping without lowering existing numeric gates; usefulness/source coverage/latency/7day reliability still open.
+- [ ] Later: arbitrary narrative specification, immutable original thesis/criteria/horizon, supporting/challenging timeline and honest outcome review. No example-catalog optimization first.
+
+Data and labels local; cloud/live notifications/runtime LLM disabled. See latest checkpoint for pointers and exact-code CI.
+
+
 ## Current priority — company product before optional narratives (2026-11-28)
 
 User direction supersedes narrative-first sequencing below. See [company-first plan](../docs/company-first-product-plan.md).

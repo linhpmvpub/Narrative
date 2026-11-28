@@ -1,5 +1,17 @@
 # Hướng dẫn cho agent làm việc trong repository
 
+## Company benchmark now active — 2026-11-28
+
+Read [docs/company-benchmark.md](docs/company-benchmark.md) and [docs/company-assessment.md](docs/company-assessment.md).
+Company relevance/attention is the primary measured target. Lead results with COMPANY_EFFECTIVENESS_V1
+(first6.50/100), preserve legacy mixed25.18as a separate regression series. Do not compare formulas.
+For each runtime/config/profile update, replay both fixed references, review all changes and run
+quality_gate --all with company_benchmark retained in the current pointer. No missing/unknown/human
+labels may be manufactured. New reference is now exposed; new blind claims require new frozen data.
+Current foundation is implemented; next tasks target shared event/exposure coverage and source quality,
+not narrative templates. Read latest tasks/checkpoint before work; all other source/privacy rules remain.
+
+
 ## Ưu tiên hiện hành: sản phẩm cấp công ty — 2026-11-28
 
 Người dùng xác định nhận diện/phân tích/đánh giá tin cấp công ty là sản phẩm nền;

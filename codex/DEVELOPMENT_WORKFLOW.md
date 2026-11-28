@@ -1,5 +1,17 @@
 # Quy trình phát triển, tự đánh giá và cải thiện
 
+## Company benchmark now active — 2026-11-28
+
+Read [../docs/company-benchmark.md](../docs/company-benchmark.md) and [../docs/company-assessment.md](../docs/company-assessment.md).
+Company relevance/attention is the primary measured target. Lead results with COMPANY_EFFECTIVENESS_V1
+(first6.50/100), preserve legacy mixed25.18as a separate regression series. Do not compare formulas.
+For each runtime/config/profile update, replay both fixed references, review all changes and run
+quality_gate --all with company_benchmark retained in the current pointer. No missing/unknown/human
+labels may be manufactured. New reference is now exposed; new blind claims require new frozen data.
+Current foundation is implemented; next tasks target shared event/exposure coverage and source quality,
+not narrative templates. Read latest tasks/checkpoint before work; all other source/privacy rules remain.
+
+
 ## Quy trình ưu tiên nền cấp công ty — 2026-11-28
 
 Áp dụng [kế hoạch mới](../docs/company-first-product-plan.md); thay thứ tự ưu tiên

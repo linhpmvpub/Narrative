@@ -1,5 +1,16 @@
 # Product v1: scope and measurable acceptance
 
+## Foundation progress, acceptance still open — 2026-11-28
+
+Independent company assessment/feed and direct-company benchmark are implemented; see
+[contract](company-assessment.md) and [evaluation](company-benchmark.md). First company score6.50/100
+shows major missed coverage. The24article reference is below the existing100cluster requirement;
+43company misses and unresolved attention evidence also preclude a readiness claim. No numerical
+target was lowered. Company-only acceptance-policy mapping, explanation/human usefulness and live
+operational gates remain open; narrative outcome features are later product work. Existing older
+narrative-target acceptance scripts retain their original semantics, not company release approval.
+
+
 ## Scope supersession — user decision 2026-11-28
 
 The primary v1 product is company/stock news intelligence, usable without any

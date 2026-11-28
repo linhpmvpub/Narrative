@@ -1,5 +1,17 @@
 # Company intelligence foundation and optional narrative product
 
+## Implementation status — 2026-11-28
+
+Foundation step1 is implemented: company schema, matching, assessment, ranking, primary API/feed
+and UI do not require narratives;120real-case removal invariance verified. Step2 now has the reviewed
+body lifecycle bridge; broad company event/evidence coverage remains incomplete. Step3 has a frozen
+direct-company relevance/attention benchmark and combined freshness gate; explanation/human/operations
+dimensions remain open. First6.50/100 exposes major coverage gaps; no comparable change from25.18legacy.
+See [implementation](company-assessment.md), [benchmark](company-benchmark.md) and [review](../reports/company-foundation-review.md).
+Next implement reusable company event/exposure coverage and fuller sources before watchlists/history
+and optional narratives. Remaining target text below describes the full roadmap, not completed v1.
+
+
 User direction, 2026-11-28. This document specifies the target and next work, not
 implemented capabilities. It supersedes narrative-first sequencing and treating
 example narratives as the coverage boundary. Existing sources, tests and frozen

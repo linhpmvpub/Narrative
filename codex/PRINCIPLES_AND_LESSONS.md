@@ -1,5 +1,15 @@
 # Nguyên tắc và bài học phát triển
 
+## L035 — Separate the product contract, then measure its missing coverage (2026-11-28)
+
+- Runtime independence must span schema, matcher, assessment, API and rendering. A separate company section still depends on narratives if ranking or primary cards do. Shared production/benchmark assessment plus zero-narrative and add/remove invariance tests prevent this mismatch;120real cases are invariant in this iteration.
+- Decoupling does not automatically broaden a database designed around narrow examples. Evidence: first direct-company benchmark6.50/100 with43relevance and22attention misses, while all3,240legacy decisions stay unchanged. Diagnose missing source assertions, typed roles/assets and sourced exposure contracts before tuning priority weights; absent candidates cannot be rescued by weights. Improve shared families, never individual headlines.
+- Freeze target/formula/source/profile/predictions before labels. A new company score is a new baseline, not a comparable delta from mixed narrative score25.18. Two AI reviewers remain nonhuman references; preserve14/23disagreements and group uncertainty. No positive input-price support or explanation-fidelity measurement means those dimensions remain unproven. ZeroFP on two positive selections is weak evidence.
+- Source representations require lifecycle parity. A checked complete body can replace RSS only with current anchors/proof/boundary; held bodies must not fall back to stale RSS. Source-current, publication-age eligible, company-related and fact-verified are different states. One real full-body card here matches the issuer title; do not claim a body-only recall gain from that integration.
+- Ordinal reading priority is not impact magnitude or learned probability. Preserve unknown financial direction/size/horizon, conditional business channels and original source statements. Future user narratives consume this foundation; they do not constrain it or supply fabricated outcomes.
+- Keep failed attempts, exposed references and self-review. Fresh article URLs/near-duplicate filters do not prove economic-period independence. Use unused fuller-source families and independent frozen review for generalization, alongside fixed regression and operational/user acceptance.
+
+
 ## L034 — Sản phẩm công ty độc lập với narrative mẫu (2026-11-28)
 
 - Căn cứ là chỉ đạo sản phẩm của người dùng, không phải kết quả đo mới: company intelligence là nền, narrative tùy chọn là sản phẩm nâng cao. Không để ví dụ thử nghiệm trở thành biên giới nhận diện tin, database hay hàm mục tiêu.

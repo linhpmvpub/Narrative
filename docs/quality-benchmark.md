@@ -1,5 +1,15 @@
 # Continuous local quality benchmark
 
+## Active direct-company reference — 2026-11-28
+
+[COMPANY_EFFECTIVENESS_V1](company-benchmark.md) is implemented and is now the primary company-product
+index: first6.50/100,24articles/120units,two independentAI reviews. It measures relevance and attention
+with predeclared60/40F1×resolvedshare; explanation quality and operations remain unmeasured. This is a
+new baseline, not a change from the legacy mixed25.18. Keep all historical targets/labels unchanged.
+Combined current pointer includes company_benchmark; replay both references after each update and
+require quality_gate --all to pass both. This supersedes pending metric-implementation wording below.
+
+
 ## Measurement transition: company product first — 2026-11-28
 
 The user prioritizes company news intelligence; narratives are an advanced layer

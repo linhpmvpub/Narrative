@@ -1,5 +1,15 @@
 # Mục tiêu và định hướng sản phẩm
 
+## Định hướng đã có nền triển khai — 2026-11-28
+
+Luồng công ty hiện đã tách khỏi narrative: nhận diện, đánh giá, ưu tiên và feed chính.
+Tiếp tục tập trung độ phủ sự kiện/quan hệ, nguồn và giá trị thẻ tin cấp công ty. Chuẩn
+đo mới [company-benchmark](../docs/company-benchmark.md) là tín hiệu phát triển chính;
+điểm đầu6,50không so trực tiếp với25,18của chuẩn hỗn hợp cũ. Giữ cả hai để hồi quy.
+Đổi kiến trúc chưa chứng minh chất lượng đủ dùng; phát triển tiếp cơ chế và dữ liệu
+chung theo nhóm tin, sau đó trải nghiệm/độ tin cậy. Narrative tùy chọn vẫn là lớp sau.
+
+
 ## Sản phẩm nền cấp công ty, narrative là lớp nâng cao — quyết định 2026-11-28
 
 Nhận diện và đánh giá tin cấp công ty/cổ phiếu là sản phẩm chính cần hoàn thiện trước.
