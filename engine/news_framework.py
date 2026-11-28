@@ -95,6 +95,13 @@ def route_contract(bundle, narrative, route, spans):
         bool(set(declared.intents) & {"SUPPLY", "DEPLOYMENT"}) if readiness else True)
     scoped = next((s["assertion_scope"] for s in spans if s.get("assertion_scope")), None)
     explanation = policy()["route_explanations"][role]
+    infrastructure = next((s.get("activity_assertion", {}).get("infrastructure_scope")
+                           for s in spans if s.get("activity_assertion", {}).get("infrastructure_scope")), None)
+    if infrastructure:
+        allowed = allowed and infrastructure["allowed"]
+        explanation += (" Nguồn nêu công ty tham gia dự án hoặc công nghệ; chưa xác minh đơn hàng."
+                        if infrastructure["reason"] == "OWN_PARTICIPATION_CONDITIONAL" else
+                        " Đây là bối cảnh thị trường; nguồn chưa xác định nhà cung cấp hưởng lợi.")
     if scoped:
         explanation += " " + {
             "NAMED_OPERATOR_ACTIVITY": "Nguồn nêu hoạt động của bên có tên trong phạm vi quan hệ; chưa xác minh giao dịch với công ty.",
@@ -108,6 +115,7 @@ def route_contract(bundle, narrative, route, spans):
             "reason": "SOURCED_ROUTE_WITHIN_NARRATIVE" if allowed else "ROUTE_OUTSIDE_DECLARED_NARRATIVE",
             "explanation": explanation,
             **({"assertion_scope": scoped} if scoped else {}),
+            **({"infrastructure_scope": infrastructure} if infrastructure else {}),
             "relation_types": [r.type for r in route], "financial_impact": "UNKNOWN",
             "stages": ["SOURCE_VERSION_CHECKED", "FACTOR_MATCHED", "SOURCED_GRAPH_ROUTE",
                        "NARRATIVE_SCOPE_CHECKED", "CONTEXT_EXPLAINED", "DELIVERY_DISABLED"]}

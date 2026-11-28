@@ -33,7 +33,7 @@ def pattern(term):
     return re.compile(r"(?<!\w)" + re.escape(term) + r"(?!\w)", re.IGNORECASE)
 
 
-def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name=""):
+def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="", bundle=None, at=None):
     """Exact original-field spans; context groups must all match, no ticker shortcut."""
     fields = {k: payload.get(k, "") for k in ("title", "summary")}
     if binding.assertion_scope:
@@ -71,7 +71,7 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
                     # a second legacy verb vocabulary must not veto that same event.
                     scoped_rule = scoped_rule.model_copy(update={"change_terms": [trace["predicate_span"]["text"]]})
                 hits = matches(scoped_rule, {field: window.group(), "context_title": payload.get("context_title", fields["title"])},
-                               issuer_cik=issuer_cik, profile_cik=profile_cik, legal_name=legal_name)
+                               issuer_cik=issuer_cik, profile_cik=profile_cik, legal_name=legal_name, bundle=bundle, at=at)
                 if hits:
                     return [{**h, "start": h["start"] + window.start(), "end": h["end"] + window.start(),
                              **({"context_only": True} if trace.get("object_argument") else {}),
@@ -91,7 +91,7 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
                 if (applicability and not applicability["allowed"]) or not guard_trace["allowed"]:
                     continue
                 hits = matches(rule, {field: window.group(), "context_title": title},
-                               issuer_cik=issuer_cik, profile_cik=profile_cik, legal_name=legal_name)
+                               issuer_cik=issuer_cik, profile_cik=profile_cik, legal_name=legal_name, bundle=bundle, at=at)
                 if hits:
                     return [{**h, "start": h["start"] + window.start(),
                              "end": h["end"] + window.start(),
@@ -104,7 +104,7 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
                      for value in [*fields.values(), payload.get("context_title", "")]):
         return []
     if binding.kind == "STRUCTURED_ACTIVITY":
-        return activity_matches(binding, fields)
+        return activity_matches(binding, fields, bundle=bundle, at=at)
     groups = ("topic_terms", "context_terms", "change_terms")
     if binding.kind == "SCOPED_ACTIVITY":
         # Three literal groups must co-occur in one sentence/heading. Do not join
@@ -335,7 +335,7 @@ def candidate_feed(conn, as_of=None, limit=500, *, profile_root=None, card_limit
                     entity = entity_context(bundle, binding.entity_reference_id, payload, at)
                     if entity is None:
                         continue
-                spans = matches(binding, payload)
+                spans = matches(binding, payload, bundle=bundle, at=at)
                 if not spans:
                     continue
                 for narrative in bundle.narratives:

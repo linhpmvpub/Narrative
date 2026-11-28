@@ -67,7 +67,7 @@ def classify(text):
     return None
 
 
-def matches(binding, fields):
+def matches(binding, fields, *, bundle=None, at=None):
     for field, text in fields.items():
         for sentence in sentences(text):
             if any(re.search(r"(?<!\w)" + re.escape(t) + r"(?!\w)", sentence.group(), re.I)
@@ -75,6 +75,13 @@ def matches(binding, fields):
                 continue
             development = classify(sentence.group())
             if development:
+                if binding.infrastructure_scope:
+                    from engine.infrastructure_scope import assess
+
+                    scope = assess(binding.infrastructure_scope, development, bundle, at)
+                    if not scope["allowed"]:
+                        continue  # Another independently supported sentence may still qualify.
+                    development = {**development, "infrastructure_scope": scope}
                 spans = [development["object_span"]]
                 if development.get("action_span"):
                     spans.append(development["action_span"])

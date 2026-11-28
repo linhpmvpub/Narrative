@@ -262,6 +262,27 @@ class ActivityRule(Strict):
         return self
 
 
+class InfrastructureCompetitor(Strict):
+    names: list[TEXT] = Field(min_length=1, max_length=10)
+    relationship_id: ID
+
+
+class InfrastructureScope(Strict):
+    """Reviewed names on existing graph scope; not news-party identity proof."""
+    own_names: list[TEXT] = Field(min_length=1, max_length=10)
+    competitors: list[InfrastructureCompetitor] = Field(default_factory=list, max_length=20)
+
+    @model_validator(mode="after")
+    def bounded(self):
+        groups = [self.own_names, *(c.names for c in self.competitors)]
+        names = [n for g in groups for n in g]
+        if (any(n != n.strip() or not 2 <= len(n) <= 80 for n in names)
+                or len({n.casefold() for n in names}) != len(names)
+                or len({c.relationship_id for c in self.competitors}) != len(self.competitors)):
+            raise ValueError("Unique bounded infrastructure names and graph references required")
+        return self
+
+
 class RelevanceScope(Strict):
     """Reviewed applicability, never a verified news-party relationship."""
     role: Literal["OWN_PRODUCT", "SHARED_MARKET", "COMPETITOR_PLATFORM"]
@@ -325,6 +346,7 @@ class FactorBinding(Strict):
     signal_rule: SignalRule | None = Field(default=None, exclude_if=lambda value: value is None)
     assertion_scope: AssertionScope | None = Field(default=None, exclude_if=lambda value: value is None)
     activity_rule: ActivityRule | None = Field(default=None, exclude_if=lambda value: value is None)
+    infrastructure_scope: InfrastructureScope | None = Field(default=None, exclude_if=lambda value: value is None)
     relevance_scope: RelevanceScope | None = Field(default=None, exclude_if=lambda value: value is None)
     market_scope: Literal["COMPONENT_MARKET", "APPLICATION_SOFTWARE", "INFRASTRUCTURE_DEMAND"] | None = Field(default=None, exclude_if=lambda value: value is None)
     routing_guards: list[Literal["INFRASTRUCTURE_FINANCING", "SERVER_COMPONENT_MARKET", "SECTOR_CONSTRAINT"]] = Field(default_factory=list, max_length=3, exclude_if=lambda value: not value)
@@ -343,6 +365,14 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
+        if self.infrastructure_scope:
+            names = [*self.infrastructure_scope.own_names,
+                     *(n for c in self.infrastructure_scope.competitors for n in c.names)]
+            if (self.kind != "STRUCTURED_ACTIVITY" or not self.activity_rule
+                    or self.activity_rule.version != "activity-assertions-v2"
+                    or any(not any(re.search(r"(?<!\w)" + re.escape(n) + r"(?!\w)", e.quote, re.I)
+                                   for e in self.evidence) for n in names)):
+                raise ValueError("Infrastructure scope requires v2 and literal sourced names")
         if self.assertion_scope:
             from engine.news_assertions import evidence_supports
             from engine.news_framework import first, policy
@@ -543,6 +573,20 @@ class ProfileBundle(Strict):
                     sources[e.source_id].retrieved_at > ref.reviewed_at for e in ref.evidence):
                 raise ValueError("Entity reference review must follow acquisition")
         for binding in self.factor_bindings:
+            if binding.infrastructure_scope:
+                infrastructure = binding.infrastructure_scope
+                if not set(infrastructure.own_names) & {self.legal_name, nodes[self.company_id].label}:
+                    raise ValueError("Infrastructure own names must include the profile company")
+                for peer in infrastructure.competitors:
+                    relation = relationships.get(peer.relationship_id)
+                    owned = {self.company_id} | {r.to_id for r in self.relationships
+                        if r.type == "SELLS" and r.from_id == self.company_id and r.status == "SOURCE_BACKED"}
+                    if (relation is None or relation.type != "COMPETES_WITH"
+                            or relation.status != "SOURCE_BACKED"
+                            or not {relation.from_id, relation.to_id} & owned
+                            or any(not any(re.search(r"(?<!\w)" + re.escape(n) + r"(?!\w)", e.quote, re.I)
+                                           for e in relation.evidence) for n in peer.names)):
+                        raise ValueError("Infrastructure competitor needs sourced competition edge and names")
             if binding.assertion_scope:
                 relation = relationships.get(binding.assertion_scope.relationship_id)
                 if (relation is None or relation.status != "SOURCE_BACKED"

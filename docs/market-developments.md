@@ -1,5 +1,45 @@
 # Infrastructure development and operating-purpose contracts
 
+## Participant and vendor scope — 2026-11-28
+
+Optional `FactorBinding.infrastructure_scope` declares sourced `own_names` and
+competitor names attached to existing `COMPETES_WITH` relationship IDs. It applies
+only to the v2 infrastructure rule. Names must occur literally in binding evidence;
+competitor names must also occur in the referenced edge evidence, which must touch
+the company or one of its directly sold products. The own-name list must include
+the profile company name. This is reviewed applicability data, not entity proof.
+Legacy profiles omit the field and keep their serialization and behavior.
+
+The shared `infrastructure_scope` parser distinguishes:
+
+| Source scope | Treatment on an existing demand/deployment route |
+|---|---|
+| Generic operator or market buildout, no scoped vendor assertion | Conditional market context; beneficiary/vendor remains unknown |
+| Sourced company explicitly acts or participates in the project | Conditional own participation; no inferred customer/order |
+| Sourced competitor acts/participates, without target participation | Withhold this general demand route; other independently supported bindings remain eligible |
+| Asset explicitly powered/built with another vendor's technology | Withhold; being an operator does not prove use of the target company's technology |
+| Explicit target technology or joint target participation | Keep the conditional path when supported; never assert exclusive supply |
+| Another clause, title mention, analyst affiliation, or unrelated asset | Cannot donate a participant or technology owner |
+
+The parser uses exact source spans, bounded active/coordinated subjects, limited
+project-work phrases and explicit technology connectors. Capitalized unknown vendor
+names in `powered by`, `built with/using` or `based on` claims can constrain scope
+without inventing a database entity. It does not understand every passive,
+possessive, alias or cross-sentence form. A company name alone is not a role.
+Competitor references are checked against source status, knowledge and validity
+time; missing context or an expired scope is withheld. Source, revision, withdrawal,
+freshness and route validity still apply upstream. A rejected sentence cannot hide
+a later independently eligible sentence, or borrow a positive headline.
+
+Accepted trace/explanation reaches RSS and reviewed full-body cards through their
+shared matching API. Source actor identity, orders and financial magnitude remain
+UNKNOWN/unverified. Numerical priority weights are unchanged. Changes to company
+coverage are reviewed profile versions, never ticker/headline branches.
+
+See `reports/infrastructure-scope-review.json` and the latest checkpoint for
+exposed regressions, separately frozen new AI reviews, remaining errors and CI.
+Local workspace: `source-cache/infrastructure-scope-workspace-2026-11-28.json`.
+
 The engine surfaces conditional research context through existing sourced profile
 routes. A data-center story does not establish a company customer, hardware order,
 commercial capacity, or financial impact. This contract separates missed routing

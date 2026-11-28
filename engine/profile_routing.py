@@ -22,7 +22,7 @@ def binding_decisions(bundle, narrative, article, at, *, issuer_cik=None):
         if not binding.enabled or not binding.reviewed_at <= at < binding.review_until:
             continue
         spans = matches(binding, article, issuer_cik=issuer_cik,
-                        profile_cik=bundle.identifiers.get("CIK"), legal_name=bundle.legal_name)
+                        profile_cik=bundle.identifiers.get("CIK"), legal_name=bundle.legal_name, bundle=bundle, at=at)
         if not spans:
             continue
         if binding.entity_reference_id:
