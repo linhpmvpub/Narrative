@@ -1,5 +1,13 @@
 # Nguyên tắc và bài học phát triển
 
+## L025 — Event roles constrain shared-market applicability
+
+- Evidence2026-11-28: adding sourced participant/competitor scope removes one exposed full-body relevance/priority false positive while leaving the other2879pair decisions unchanged. A valid infrastructure event plus a general demand edge is insufficient when the source assigns the project to another vendor. Generic market context may remain useful without identifying a beneficiary.
+- Store own names and competition scope in reviewed profile data with source evidence, graph references, versions and validity. Parse roles/asset links in the source window. A company merely mentioned as analyst/employer/in another clause is not a project actor; an operator is not necessarily the technology supplier. Joint participation is not exclusive supply or a verified order.
+- Keep first rejected sentence from suppressing a later independently valid sentence. Never rescue an inapplicable asset using a headline or unrelated company activity. Verify renamed companies, coordinated subjects, foreign/unknown technology, correction and source/relationship withdrawal.
+- URL/text novelty alone missed three already-used economic-family articles in the prelabel sample. Exclude known repeated events before labels, retain exclusion records, and report cluster sensitivity for correlated fresh stories. Frozen independent AI review can expose new coverage gaps; it must not become a same-turn tuning set. No human-gold or public-acceptance claim.
+
+
 ### L024 follow-up — purpose recovery and market scope costs (2026-11-28)
 
 - Source-local action/object/purpose semantics recover4exposed memory priority positives without extra resolved FP there; allocations, changed input access and agreements are distinct from delivered capacity or realized financial benefit. Preserve exact spans and phase rather than requiring absent amounts or inferring terms.

@@ -1,5 +1,17 @@
 # TASKS — implementation execution checklist
 
+## Next after infrastructure-scope blind review — 2026-11-28
+
+- [x] Shared optional actor/asset/vendor scope with source-backed graph references; no ticker branching. Removed observed full-body FP without losing other exposed matches.
+- [x] New16article/160pair packet, actual old/new prediction freezes and two independent AI labels; reported unresolved, family sensitivity and source quotas. This packet is now exposed regression.
+- [x] Local pipeline/mobile checks,125focused tests,full SQLite/PostgreSQL CI,checkpoint and aggregate report.
+- [ ] Audit product-specific competitor/customer/vendor roles for the unlabeled withheld project; do not equate a named competitor with exclusive technology ownership.
+- [ ] Build shared source-actor/controlled-asset event contracts for access restrictions, capacity interruptions and capital backing; separately audit sourced narrative paths for infrastructure readiness/context. Preserve supplier identity and phase boundaries, do not fabricate supply edges or simply lower weights.
+- [ ] Continue sourced scope coverage for current pilot companies; missing competition/market metadata and ambiguous suppliers remain explicit gaps, not guessed links.
+- [ ] New unused-family evaluation after next shared change; separate relevance, priority and financial effects. Do not change weights to hide upstream misses.
+- Public v1 gates unchanged; data local and real notifications disabled. No user decision required.
+
+
 ## Next after market-purpose implementation — 2026-11-28
 
 - [x] Shared sourced infrastructure route opt-in and explicit proposal/experimental/background phases; generic input financing/access and customer-agreement priority. Tests, nine exposed regressions, local pipeline/browser, CI and checkpoint recorded.
