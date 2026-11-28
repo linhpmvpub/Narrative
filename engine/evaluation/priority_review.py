@@ -11,6 +11,7 @@ from engine.atlas_freeze import runtime_fingerprint
 from engine.company_profiles import available_bundles
 from engine.core_activity import assess
 from engine.core_decisions import POLICY
+from engine.evaluation.company_quality import LABELS, SCORE_POLICY, company_id
 from engine.evaluation.grouped_relevance import connected_clusters, metrics
 from engine.evaluation.profile_relevance import consensus, write_new
 from engine.ingestion.contracts import digest
@@ -34,6 +35,12 @@ RUBRIC = {
     "event_groups": "Label the actual event described, not mere vocabulary: financial-services adoption is not financing; a funding/borrowing transaction is. Use one to three groups, other or UNKNOWN alone. Keep groups identical for all pairs of the same article.",
     "event_groups_values": sorted(GROUPS),
     "instructions": "Use supplied packet only, no browsing or predictions/peer labels. Do not fill missing facts. Treat claims as source-reported, not independently verified. Explain each pair's relevance and priority briefly in rationale. No human gold or filesystem isolation claim.",
+}
+COMPANY_RUBRIC = {
+    "RELEVANT": "The reported event has a defensible direct or conditional connection to this company's supplied business/product/customer/supplier/market scope, whether or not any watched narrative fits. A name or generic AI theme alone is insufficient. Do not infer a transaction with an unnamed supplier.",
+    "NOT_RELEVANT": "Outside the supplied company's business scope, with no defensible connection in this source.",
+    "INSUFFICIENT_CONTEXT": "Source excerpt or supplied company dossier does not establish whether this company is affected. Do not fill missing source facts.",
+    "instructions": "Label company relevance independently first, then narrative relevance and priority. A RELEVANT narrative requires RELEVANT company. A RELEVANT company may have zero relevant watched narratives. No stock-return prediction, causal verification or quantified effect implied.",
 }
 
 
@@ -71,7 +78,7 @@ def decisions(row, bundle, narrative, at, policy):
     return matched, {**activity, "review_audit": {**audit, "source_units": len(units)}}
 
 
-def freeze(directory, profile_root, review_directory):
+def freeze(directory, profile_root, review_directory, *, company_scope=False):
     """Add locked baseline/broader decisions and a prediction-free compact packet."""
     directory, review_directory = Path(directory), Path(review_directory)
     if review_directory.exists() or (directory / "priority-freeze.json").exists():
@@ -100,7 +107,7 @@ def freeze(directory, profile_root, review_directory):
                                   "broader": matched and not activity["sponsored"],
                                   "event_cluster": cluster, "assessment": activity}
         profile = profiles.setdefault(bundle.id, {k: row.get(k, []) for k in
-                    ("profile_id", "ticker", "nodes", "relationships", "sources", "entity_references")})
+                    ("profile_id", "ticker", "nodes", "relationships", "sources", "entity_references", "components")})
         profile.setdefault("narratives", {})[narrative.id] = row["narrative"]
         article = articles.setdefault(row["cluster"], {"cluster": row["cluster"],
                                       "article": row["article"], "pairs": []})
@@ -108,6 +115,16 @@ def freeze(directory, profile_root, review_directory):
                                  "narrative_id": narrative.id})
     compact = {"packet_sha256": digest(packet), "profiles": list(profiles.values()),
                "articles": list(articles.values()), "rubric": RUBRIC}
+    if company_scope:
+        compact["rubric"] = {**RUBRIC, "company_relevance": COMPANY_RUBRIC}
+        units: dict = {}
+        for row in packet:
+            key = company_id(row, row["ticker"])
+            unit = units.setdefault(key, {"id": key, "cluster": row["cluster"],
+                                          "ticker": row["ticker"], "profile_id": row["profile_id"],
+                                          "pair_ids": []})
+            unit["pair_ids"].append(row["id"])
+        compact["company_units"] = list(units.values())
     if runtime != runtime_fingerprint():
         raise ValueError("Runtime changed during freeze")
     after = available_bundles(at, root=Path(profile_root))
@@ -116,11 +133,13 @@ def freeze(directory, profile_root, review_directory):
         raise ValueError("Profile registry changed during freeze")
     receipt = {"at": datetime.now(UTC).isoformat(), "original_freeze_sha256": digest(original),
                "packet_sha256": digest(packet), "predictions_sha256": digest(predictions),
-               "compact_sha256": digest(compact), "rubric_sha256": digest(RUBRIC),
+               "compact_sha256": digest(compact), "rubric_sha256": digest(compact["rubric"]),
                "runtime": runtime, "policy_sha256": digest(policy),
                "clusters": len(set(clusters)), "pairs": len(packet), "delivery": "disabled",
                "candidate": "ALL_SOURCE_MATCHED_NON_SPONSORED_CONTEXT_LOCKED_BEFORE_LABELS",
                "promotion": "NO_AUTOMATIC_PROMOTION; require existing group/product gates and priority evidence"}
+    if company_scope:
+        receipt.update(company_units=compact["company_units"], score_policy=SCORE_POLICY)
     write_new(directory / "priority-predictions.json", predictions)
     write_new(directory / "priority-freeze.json", receipt)
     review_directory.mkdir(parents=True)
@@ -128,6 +147,34 @@ def freeze(directory, profile_root, review_directory):
     write_new(review_directory / "receipt.json", {k: receipt[k] for k in
               ("at", "packet_sha256", "compact_sha256", "rubric_sha256", "clusters", "pairs")})
     return receipt
+
+
+def company_consensus(reviews, units):
+    """Validate direct company votes independently of narrative agreement."""
+    ids, maps = {u["id"] for u in units}, []
+    if len(reviews) != 2:
+        raise ValueError("Two company reviewers required")
+    for review in reviews:
+        votes = review.get("company_labels", [])
+        if len(votes) != len(ids) or {v["id"] for v in votes} != ids:
+            raise ValueError("Company review coverage incomplete or duplicated")
+        if any(v["relevance"] not in LABELS or not v.get("rationale", "").strip() for v in votes):
+            raise ValueError("Invalid company review label")
+        by_id = {v["id"]: v for v in votes}
+        pairs = {v["id"]: v for v in review["labels"]}
+        for unit in units:
+            if (any(pairs[k]["relevance"] == "RELEVANT" for k in unit["pair_ids"])
+                    and by_id[unit["id"]]["relevance"] != "RELEVANT"):
+                raise ValueError("Company/narrative reference contradiction")
+        maps.append(by_id)
+    labels, disagreements = [], 0
+    for unit in units:
+        a, b = (m[unit["id"]] for m in maps)
+        agree = a["relevance"] == b["relevance"]
+        disagreements += not agree
+        labels.append({**unit, "relevance": a["relevance"] if agree else "INSUFFICIENT_CONTEXT",
+                       "rationale": "Reviewer A: " + a["rationale"] + " Reviewer B: " + b["rationale"]})
+    return {"labels": labels, "disagreements": disagreements}
 
 
 def validate_review(review, packet, frozen):
@@ -170,6 +217,17 @@ def evaluate(directory, review_paths):
     reviews = [read(p) for p in review_paths]
     for review in reviews:
         validate_review(review, packet, frozen)
+    if "company_units" in frozen:
+        expected: dict = {}
+        for row in packet:
+            key = company_id(row, row["ticker"])
+            unit = expected.setdefault(key, {"id": key, "cluster": row["cluster"],
+                                            "ticker": row["ticker"], "profile_id": row["profile_id"],
+                                            "pair_ids": []})
+            unit["pair_ids"].append(row["id"])
+        if frozen["company_units"] != list(expected.values()) or frozen["score_policy"] != SCORE_POLICY:
+            raise ValueError("Frozen company units or score policy changed")
+        combined["company"] = company_consensus(reviews, frozen["company_units"])
     maps = [{v["id"]: v for v in r["labels"]} for r in reviews]
     by_id = {r["id"]: r for r in packet}
     rows, priority_disagreements, group_disagreements = [], 0, set()

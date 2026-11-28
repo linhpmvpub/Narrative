@@ -1,5 +1,18 @@
 # Quy trình phát triển, tự đánh giá và cải thiện
 
+## Báo điểm và giữ chẩn đoán — quyết định 2026-11-28
+
+Từ phiên sau: điểm hiệu quả 0–100 trước, sau đó company discovery / narrative /
+priority với FP/FN/unresolved và hỗ trợ mẫu. Dùng anchor/policy đã khóa trong suite;
+chỉ báo delta trên cùng suite/nhãn. Formula V1: 40% company F1, 40% narrative F1,
+20% priority F1, mỗi phần nhân tỷ lệ đã có nhãn rõ. Thiếu positive support hoặc nhãn
+company độc lập thì chưa có điểm; không tự bù nhãn. Nhãn cũ chỉ cho proxy coverage
+trong tập narrative đã quan sát. Tập mới phải khóa sample/predictions/công thức
+trước hai reviewer độc lập, không chỉnh matcher sau khi đọc nhãn. Benchmark này
+không đo độ phủ crawler ngoài sample hay mức độ tác động tài chính. Chi tiết:
+[contract](../docs/quality-benchmark.md). Các bước kiểm chứng và nghiệm thu giữ nguyên.
+
+
 ## Nhiều bước trong một task — bổ sung 2026-11-28
 
 Theo yêu cầu người dùng, sau mỗi bước thay đổi chức năng/database phải chạy benchmark,

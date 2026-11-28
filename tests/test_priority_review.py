@@ -23,7 +23,8 @@ def make_review(packet, receipt, reviewer):
                 for r in packet]}
 
 
-def test_dual_labels_disagree_without_discarding_relevance(db, linked, tmp_path):
+@pytest.mark.parametrize("company_scope", [False, True])
+def test_dual_labels_disagree_without_discarding_relevance(db, linked, tmp_path, company_scope):
     root = tmp_path / "frozen"
     with db.connect() as conn:
         original = freeze_relevance(conn, root, prediction_track="text_relevance", count=4,
@@ -32,12 +33,19 @@ def test_dual_labels_disagree_without_discarding_relevance(db, linked, tmp_path)
     assert original["source_quota_shortfalls"] == {"missing-source": 2}
     assert original["clusters"] == 1
     blind = tmp_path / "blind"
-    receipt = freeze(root, os.environ["COMPANY_PROFILE_ROOT"], blind)
+    receipt = freeze(root, os.environ["COMPANY_PROFILE_ROOT"], blind, company_scope=company_scope)
     packet = read(root / "packet.json")
     compact = read(blind / "packet.json")
     assert "event_groups_values" in compact["rubric"]
     assert not {"predictions", "factor_bindings", "assessment", "policy"} & compact.keys()
     a, b = make_review(packet, receipt, "a"), make_review(packet, receipt, "b")
+    if company_scope:
+        assert "company_relevance" in compact["rubric"]
+        assert "components" in compact["profiles"][0]
+        for review in (a, b):
+            review["company_labels"] = [{"id": u["id"], "relevance": "RELEVANT",
+                                         "rationale": "Synthetic sourced business event"}
+                                        for u in compact["company_units"]]
     b["labels"][0]["priority"] = "PRIORITY"
     for name, review in (("a", a), ("b", b)):
         write_new(blind / (name + ".json"), review)
@@ -47,6 +55,16 @@ def test_dual_labels_disagree_without_discarding_relevance(db, linked, tmp_path)
     assert result["variants"]["matched"]["relevance"]["tp"] == 1
     assert result["variants"]["matched"]["priority"]["unresolved"] == 1
     assert result["promotion"] == "NOT_PROMOTED"
+    if company_scope:
+        assert read(root / "dual-consensus.json")["company"]["disagreements"] == 0
+        path = root / "priority-freeze.json"
+        original_bytes = path.read_bytes()
+        altered = read(path)
+        altered["company_units"][0]["pair_ids"] = []
+        path.write_text(json.dumps(altered), encoding="utf-8")
+        with pytest.raises(ValueError, match="Frozen company units"):
+            evaluate(root, [blind / "a.json", blind / "b.json"])
+        path.write_bytes(original_bytes)
     predictions = read(root / "priority-predictions.json")
     predictions[packet[0]["id"]]["broader"] = False
     (root / "priority-predictions.json").write_text(json.dumps(predictions), encoding="utf-8")

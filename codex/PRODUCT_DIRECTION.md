@@ -1,5 +1,17 @@
 # Mục tiêu và định hướng sản phẩm
 
+## Điểm hiệu quả dễ hiểu và hai tầng liên quan — quyết định 2026-11-28
+
+Theo yêu cầu mới, từ phiên sau dẫn đầu kết quả bằng điểm benchmark phát triển 0–100
+trên anchor cố định, dùng công thức/giới hạn trong docs/quality-benchmark.md. Đây là
+cách trình bày dễ theo dõi; thay thế cách báo chỉ nhiều chỉ số rời rạc, không thay
+nghiệm thu hay tối ưu điểm tổng bất chấp lỗi. Tách tìm được tin cấp công ty khỏi
+đưa vào đúng narrative. Tin công ty ngoài narrative đang theo dõi vẫn có thể là
+bỏ sót công ty; tìm thấy qua narrative khác không xóa lỗi target cũ. Giữ FP/FN,
+unresolved và hỗ trợ mẫu từng nhóm/công ty. Không gọi điểm là độ chính xác thị
+trường, tác động tài chính, dự báo cổ phiếu hoặc phần trăm sản phẩm đã hoàn thành.
+
+
 ## Chất lượng được theo dõi qua mỗi phiên bản — quyết định 2026-11-28
 
 Benchmark cục bộ có phiên bản trở thành bước thường xuyên sau thay đổi hệ thống,

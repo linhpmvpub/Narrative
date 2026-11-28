@@ -15,6 +15,13 @@ from engine.atlas_freeze import runtime_fingerprint, sha
 from engine.company_profiles import available_bundles
 from engine.core_activity import assess
 from engine.core_decisions import POLICY
+from engine.evaluation.company_quality import (
+    SCORE_POLICY,
+    company_report,
+    company_rows,
+    headline,
+    identity,
+)
 from engine.evaluation.grouped_relevance import metrics
 from engine.evaluation.priority_review import decisions, read
 from engine.ingestion.contracts import digest
@@ -64,6 +71,7 @@ def validate_rows(rows):
             raise ValueError("Unknown source track")
         if row["track"] == "full_article" and "source_observation" not in row["input"]:
             raise ValueError("Full article source observation required")
+    company_rows([{**r, **identity(r["input"]), "selected": False} for r in rows])
 
 
 def create(spec, output):
@@ -88,6 +96,11 @@ def create(spec, output):
     suite = {"schema": SCHEMA, "version": spec["version"], "as_of": at.isoformat(),
              "reference_kind": REFERENCE, "cohorts": cohorts, "delivery": "disabled",
              "limitations": spec["limitations"], "no_pooled_accuracy": True}
+    if spec.get("headline_score") is not None:
+        config = spec["headline_score"]
+        if config.get("policy") != SCORE_POLICY or config.get("anchor") not in names:
+            raise ValueError("Unknown headline score policy or anchor")
+        suite["headline_score"] = config
     write(output, suite)
     return {"suite_sha256": sha(output), "pairs": sum(c["pairs"] for c in cohorts)}
 
@@ -153,6 +166,7 @@ def predict(row, bundle, narrative, at, policy):
 
 
 def dimension(rows, name):
+    total = len(rows)
     if name == "priority":
         labelled = [r for r in rows if r.get("priority") is not None]
         rows = [{**r, "label": "RELEVANT" if r["priority"] == "PRIORITY" else
@@ -164,10 +178,13 @@ def dimension(rows, name):
     def score(items):
         return metrics(items, lambda r: r[field])
     return {"status": "EXPOSED_REGRESSION", "overall": score(rows),
+            "reference_total_pairs": total, "unlabelled_pairs": total - len(rows),
             "by_group": {g: score([r for r in rows if g in r["groups"]])
                          for g in sorted({g for r in rows for g in r["groups"]})},
             "by_company": {t: score([r for r in rows if r["ticker"] == t])
-                           for t in sorted({r["ticker"] for r in rows})}}
+                           for t in sorted({r["ticker"] for r in rows})},
+            "by_narrative": {t: score([r for r in rows if r.get("target_id") == t])
+                             for t in sorted({r["target_id"] for r in rows if "target_id" in r})}}
 
 
 def comparison(previous, current):
@@ -180,9 +197,12 @@ def comparison(previous, current):
             raise ValueError("Cannot compare different pair membership")
         for row in rows:
             prior = old[row["id"]]
-            for key in ("label", "priority", "groups", "event_cluster", "ticker", "track"):
+            for key in ("label", "priority", "groups", "event_cluster", "ticker", "track", "company_label"):
                 if prior.get(key) != row.get(key):
                     raise ValueError("Reference changed between runs")
+            for key in ("source_unit_id", "target_id"):
+                if key in prior and prior[key] != row.get(key):
+                    raise ValueError("Source or narrative identity changed between runs")
             for dim, field, label in (("relevance", "selected", row["label"]),
                                       ("priority", "main", row.get("priority"))):
                 if row[field] == prior[field]:
@@ -233,6 +253,7 @@ def run(suite_path, expected, profile_root, output, baseline=None, as_of=None):
                         raise ValueError("Narrative target changed; new suite required")
                     matched, activity = predict(row, b, n, at, policy)
                     rows.append({k: v for k, v in row.items() if k != "input"} | {
+                        **identity(value),
                         "selected": matched, "main": matched and activity["tier"] not in
                         {"BACKGROUND_THEME", "SPONSORED_RESEARCH"}, "assessment": activity})
             results[cohort["id"]] = rows
@@ -243,13 +264,20 @@ def run(suite_path, expected, profile_root, output, baseline=None, as_of=None):
               "suite_as_of": suite["as_of"], "as_of": at.isoformat(),
               "baseline_as_of": prior_run[0]["as_of"] if prior_run else None,
               "pairs": sum(len(r) for r in results.values()),
-              "cohorts": {c: {d: dimension(rows, d) for d in ("relevance", "priority")}
+              "cohorts": {c: {**{d: dimension(rows, d) for d in ("relevance", "priority")},
+                              "company": company_report(rows)}
                           for c, rows in results.items()},
               "comparison": comparison(previous, results) if previous is not None else None,
               "limitations": suite["limitations"], "delivery": "disabled", "promotion": "NOT_AUTHORIZED",
               "unmeasured": ["financial_magnitude", "impact_horizon", "causal_truth", "personalized_utility",
                              "live_source_coverage_latency", "fresh_blind_generalization"],
               "no_pooled_accuracy": True}
+    report["headline"] = headline(report["cohorts"], suite.get("headline_score"))
+    if prior_run and suite.get("headline_score"):
+        old_score = prior_run[2].get("headline", {}).get("score")
+        new_score = report["headline"]["score"]
+        report["headline"]["delta"] = (round(new_score - old_score, 2)
+                                       if new_score is not None and old_score is not None else None)
     output.mkdir(parents=True)
     write(output / "predictions.json", results)
     write(output / "report.json", report)

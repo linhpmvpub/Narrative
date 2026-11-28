@@ -1,5 +1,56 @@
 # Continuous local quality benchmark
 
+## Headline score and separate company coverage — 2026-11-28
+
+At the user's request, subsequent session reports lead with one **0–100 development
+effectiveness index**, then the company/narrative/priority diagnostics below. This is
+not a percentage of correct market decisions, a stock forecast or product completion.
+No release criteria or routing weights change.
+
+The versioned `COMPANY_NARRATIVE_EFFECTIVENESS_V1` reporting formula is:
+
+`100 × (0.40 × company F1 × resolved share + 0.40 × narrative F1 × resolved share + 0.20 × priority F1 × resolved share)`
+
+F1 is `2TP / (2TP + FP + FN)`; true negatives do not inflate it. Each dimension's
+resolved share counts unresolved and unlabelled units against its coverage. There
+must be at least one positive reference in **each** dimension, and direct company
+references; otherwise the score is unavailable, never renormalized to look better.
+Small positive support still needs prominent disclosure; this minimum only makes
+the arithmetic defined and does not establish representative product quality.
+
+Use one fixed, explicitly named anchor cohort (`headline_score.anchor`) and the
+exact `SCORE_POLICY` in the suite spec. Do not pool the older overlapping cohorts
+into the score. Freeze the formula, source sample, profile/runtime and predictions
+before independent reviewers label the anchor. A new source sample, target or
+label set requires a new suite/version; its score is not a gain against the old
+sample. Subsequent replay of the anchor is **exposed AI regression**, not fresh
+blind evidence. Report score delta only within the same suite/policy/anchor, with
+component and group regressions even when the scalar rises.
+
+Company discovery uses one exact source representation × company, selected if any
+watched narrative selects it. Different source revisions or articles are not merged
+just because they share an economic cluster. Independent company labels assess the
+supplied business scope **even outside watched narratives**; a missed company event
+outside all watched targets is a company FN. Narrative accuracy remains pair-level:
+finding an article under another narrative never repairs the original target FN.
+
+Older cohorts without direct company labels report a limited **watched-narrative
+union proxy**: any relevant narrative is company-relevant within that scope; all
+negative only when every target observed for that company in the cohort is present
+and negative. Otherwise unresolved. This proxy is not coverage of all company news
+and cannot supply the headline anchor's company truth. These measurements are
+conditional on collected source packets, not crawler coverage of the internet.
+
+`priority_review.freeze(..., company_scope=True)` adds the sourced company dossier,
+company units and separate rubric to a prediction-free reviewer packet. Two separate
+AI contexts label company relevance, narrative relevance and priority; exact
+agreements become references, disagreements remain unresolved in their own
+dimension. A relevant narrative requires a relevant company in each review. Root
+does not adjudicate disagreements or tune the model after these labels. Labelled
+rows repeat the agreed `company_label` consistently across that company's source
+unit; benchmark validation rejects conflicts and duplicate article/target units.
+Private packets, labels, predictions and detailed source captures remain local.
+
 The user requested a benchmark after every system, relationship database or algorithm
 update (2026-11-28). `engine.evaluation.benchmark` replaces one-off replay scripts for
 ongoing regression measurement. It runs the actual current routing and editorial

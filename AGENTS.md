@@ -1,5 +1,14 @@
 # Hướng dẫn cho agent làm việc trong repository
 
+## Báo điểm dễ hiểu từ phiên sau — quyết định 2026-11-28
+
+Dẫn đầu báo cáo benchmark bằng điểm hiệu quả 0–100 của anchor đã khóa trong current
+suite; công thức và giới hạn ở [quality-benchmark](docs/quality-benchmark.md).
+Giữ riêng độ phủ tin cấp công ty, độ đúng narrative và ưu tiên; báo FP/FN/unresolved,
+hỗ trợ mẫu theo nhóm/công ty và thay đổi so cùng suite. Thiếu nhãn/hỗ trợ thì báo chưa
+đủ dữ liệu, không tự tạo điểm. Không lấy điểm này làm xác suất tác động, % hoàn thành
+sản phẩm hay lý do bỏ tiêu chí nghiệm thu. Không đổi anchor/trọng số để làm đẹp điểm.
+
 ## Benchmark bắt buộc sau thay đổi — 2026-11-28
 
 Đọc [benchmark chất lượng](docs/quality-benchmark.md). Sau mỗi thay đổi engine, cấu hình,
