@@ -2,12 +2,18 @@
 
 import re
 
+from engine.source_sentences import sentences
+
 
 def assess(item, links, policy):
     windows: list[dict] = []
+    audit = {"matched_links": len(links), "context_only_links": 0,
+             "scoped_assertion_links": 0, "eligible_windows": 0}
     for link in links:
         matches = link.get("matches", [])
+        audit["scoped_assertion_links"] += int(any(m.get("assertion_scope") for m in matches))
         if matches and all(m.get("context_only") for m in matches):
+            audit["context_only_links"] += 1
             continue
         for field in ("title", "summary"):
             spans = [m for m in matches if m["field"] == field]
@@ -15,7 +21,7 @@ def assess(item, links, policy):
                 continue
             text = item["headline"] if field == "title" else item["excerpt"]
             start, end = min(m["start"] for m in spans), max(m["end"] for m in spans)
-            for sentence in re.finditer(r"[^.!?;\n]+", text):
+            for sentence in sentences(text):
                 if sentence.start() <= start and end <= sentence.end():
                     windows.append(
                         {
@@ -27,6 +33,7 @@ def assess(item, links, policy):
                                if spans[0].get("activity_assertion") else {}),
                         }
                     )
+    audit["eligible_windows"] = len(windows)
     signals = []
     for window in windows:
         text = window["text"].lower()
@@ -93,6 +100,8 @@ def assess(item, links, policy):
         "editorial_score": score,
         "score_basis": "UNCALIBRATED_RELEVANCE_NOT_FINANCIAL_IMPACT",
         "signals": signals,
+        "priority_audit": {**audit, "concrete_signals": len(signals),
+                           "weights_changed": False, "delivery": "disabled"},
         "sponsored": sponsored,
         "direction": "UNKNOWN",
         "horizon": "UNKNOWN",

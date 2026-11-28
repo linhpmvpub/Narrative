@@ -24,6 +24,7 @@ from engine.news_applicability import assess as assess_applicability
 from engine.news_capture import read_capture
 from engine.news_framework import eligible_route, signal_matches
 from engine.routing_guards import assess as assess_guards
+from engine.source_sentences import declared_reference, sentences
 from engine.supply_roles import extract_supply_roles, supplier_span, valid_cik
 
 
@@ -44,14 +45,31 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
             for window in windows(text):
                 if len(window.group()) > 1200:
                     continue
-                trace = assertion_applicability(binding.assertion_scope, window.group())
+                scope = binding.assertion_scope
+                context, offset = text, 0
+                if field == "summary" and isinstance(payload.get("source_offset"), int):
+                    candidate, position = payload.get("source_context", ""), payload["source_offset"]
+                    if position >= 0 and candidate[position:position + len(text)] == text:
+                        context, offset = candidate, position
+                reference = declared_reference(scope, context, offset + window.start())
+                if reference:
+                    scope = scope.model_copy(update={"subject_terms": [*scope.subject_terms, reference["alias"]]})
+                trace = assertion_applicability(scope, window.group())
+                if reference and trace.get("subject_span") and trace["subject_span"]["text"].casefold() == reference["alias"].casefold():
+                    if offset + window.start() + trace["subject_span"]["start"] != reference["reference_span"]["start"]:
+                        continue
+                    trace["subject_reference"] = reference
                 if not trace["allowed"]:
                     continue
                 scoped_rule = rule
+                if trace.get("subject_reference"):
+                    declared_names = {t.casefold() for t in binding.assertion_scope.subject_terms}
+                    scoped_rule = scoped_rule.model_copy(update={"topic_terms": [
+                        reference["alias"] if t.casefold() in declared_names else t for t in rule.topic_terms]})
                 if rule.kind == "SCOPED_ACTIVITY" and trace.get("predicate_span"):
                     # The typed predicate already passed the source-actor contract;
                     # a second legacy verb vocabulary must not veto that same event.
-                    scoped_rule = rule.model_copy(update={"change_terms": [trace["predicate_span"]["text"]]})
+                    scoped_rule = scoped_rule.model_copy(update={"change_terms": [trace["predicate_span"]["text"]]})
                 hits = matches(scoped_rule, {field: window.group(), "context_title": payload.get("context_title", fields["title"])},
                                issuer_cik=issuer_cik, profile_cik=profile_cik, legal_name=legal_name)
                 if hits:
@@ -65,7 +83,7 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
         rule = binding.model_copy(update={"market_scope": None, "routing_guards": []})
         title = payload.get("context_title") or fields["title"]
         for field, text in fields.items():
-            for window in re.finditer(r"[^.!?;\n]+", text):
+            for window in sentences(text):
                 if len(window.group()) > 1600:
                     continue
                 applicability = assess_applicability(binding.market_scope, title, window.group()) if binding.market_scope else None
@@ -93,7 +111,7 @@ def matches(binding, payload, *, issuer_cik=None, profile_cik=None, legal_name="
         # an issuer's share-price headline with an unrelated customer's project.
         rule = binding.model_copy(update={"kind": "ECONOMIC_CHANGE", "relevance_scope": None})
         for field, text in fields.items():
-            for window in re.finditer(r"[^.!?;\n]+", text):
+            for window in sentences(text):
                 if len(window.group()) > 1200:
                     continue
                 hits = matches(rule, {field: window.group()})

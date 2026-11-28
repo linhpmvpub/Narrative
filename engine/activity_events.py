@@ -6,6 +6,8 @@ bindings; no issuer ticker, article title or inferred customer is a routing rule
 
 import re
 
+from engine.source_sentences import sentences
+
 VERSION = "activity-assertions-v1"
 MARKETS = {
     "DATA_CENTER": r"\b(?:data[ -]?cent(?:er|re)s?|datacent(?:er|re)s?)\b",
@@ -39,7 +41,7 @@ def activity_matches(binding, fields):
     if rule is None:
         return []
     for field, text in fields.items():
-        for window in re.finditer(r"[^.!?;\n]+", text):
+        for window in sentences(text):
             value = window.group()
             if len(value) > 1200 or DENIAL.search(value):
                 continue

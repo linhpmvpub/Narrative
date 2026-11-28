@@ -13,6 +13,7 @@ from engine.ingestion.contracts import digest
 from engine.news_articles import VisibleText, root_dir
 from engine.news_capture import read_capture
 from engine.profile_routing import binding_decisions
+from engine.source_sentences import source_units
 
 BLOCK_TAGS = {"p", "div", "section", "article", "h1", "h2", "h3", "h4", "li",
               "ul", "ol", "table", "tr", "td", "th", "br", "blockquote", "footer", "nav"}
@@ -90,15 +91,13 @@ def decisions(bundle, narrative, title, blocks, at):
     for field, block in [("title", {"text": title, "source_spans": []}),
                          *[("body", b) for b in blocks]]:
         # Apply same-sentence scope to all legacy bindings as well as scoped rules.
-        for sentence in re.finditer(r"[^.!?;\n]+", block["text"]):
-            if len(sentence.group()) > 1600:
-                continue
-            for result in binding_decisions(bundle, narrative, {"summary": sentence.group(), "context_title": title}, at):
+        for unit in source_units(block["text"]):
+            for result in binding_decisions(bundle, narrative, {**unit, "context_title": title}, at):
                 yield {"binding_id": result["binding"].id, "scope": result["binding"].scope,
-                    "excerpt": sentence.group().strip(), "field": field,
+                    "excerpt": unit["summary"].strip(), "field": field,
                     "source_spans": block["source_spans"],
-                    "matches": [{**m, "field": field, "start": m["start"] + sentence.start(),
-                                 "end": m["end"] + sentence.start()} for m in result["matches"]],
+                    "matches": [{**m, "field": field, "start": m["start"] + unit["source_offset"],
+                                 "end": m["end"] + unit["source_offset"]} for m in result["matches"]],
                     "paragraph": block["text"],
                     "path": [edge.model_dump(mode="json") for edge in result["path"]],
                     "max_news_age_days": result["binding"].max_news_age_days}

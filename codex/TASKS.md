@@ -1,5 +1,13 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — 2026-11-28
+
+- [x] Shared sentence boundaries with exact offsets; legal suffix/decimal handling; one-hop explicit source aliases; RSS/article/review parity and separate priority audit. See latest checkpoint for validation receipts.
+- [ ] Define reusable editorial priority by scoped event type, phase, narrative relationship and source freshness. Four of five exposed actor77 priority positives already route but are context-only; preserve financial UNKNOWN and do not globally remove the guard.
+- [ ] Audit operating-purpose and implicit-reference omissions with ambiguity safeguards; profiles/relations remain source-backed, no ticker/headline rules.
+- [ ] Freeze a genuinely unused multi-publisher/family cohort before independent AI labels; exposed corpora stay regression. Release acceptance and7dayoperations remain separate.
+
+
 ## Active next — source boundaries, explicit references and priority (2026-11-27)
 
 - [x] Typed OWNERSHIP/FINANCING_PURPOSE: sourced named actor, bounded product/asset object, completion/planned/passive forms, exact spans; unrelated-assets/stock-trade/other-clause/truncation counterexamples.

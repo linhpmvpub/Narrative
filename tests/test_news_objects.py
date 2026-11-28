@@ -30,6 +30,7 @@ def scope(name="Orion", component="MEMORY", event="OWNERSHIP"):
     ("The memory facility was acquired by Orion.", "ACQUIRER", "SOURCE_REPORTED"),
     ("The memory division will be divested by Orion.", "DISPOSER", "FORWARD_LOOKING"),
     ("Orion divested its memory division.", "DISPOSER", "SOURCE_REPORTED"),
+    ("Orion acquired a 1.5 million-unit memory facility.", "ACQUIRER", "SOURCE_REPORTED"),
 ])
 def test_explicit_transaction_arguments_and_exact_spans(text, role, phase):
     result = applicability(scope(), text)
@@ -64,6 +65,7 @@ def test_ownership_not_recipient_stock_trade_unrelated_asset_or_other_clause(tex
     "Orion funds development of memory products.",
     "Orion raised capital to develop memory products.",
     "Orion issued bonds for construction of a memory plant.",
+    "Orion raised $1.5 billion in bonds to develop memory products.",
     "Memory product development was funded by Orion.",
 ])
 def test_explicit_financing_purpose_never_implies_operational_result(text):

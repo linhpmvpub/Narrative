@@ -11,6 +11,7 @@ from pathlib import Path
 
 from engine.news_framework import first
 from engine.news_framework import policy as component_policy
+from engine.source_sentences import sentences
 
 
 @lru_cache(maxsize=1)
@@ -44,11 +45,14 @@ def predicates():
 
 def object_end(text, start):
     end = min(len(text), start + policy()["object_bound_chars"])
+    sentence = next(sentences(text[start:end]), None)
+    if sentence and sentence.end() < end - start:
+        end = start + sentence.end()
     # Purpose/recipient/reporting adjuncts cannot donate an unrelated product.
-    stop = re.search(r"[,;.!?\n]|\b(?:for|to|from|with|by|which|that|but|whereas|while|and)\b", text[start:end], re.I)
+    stop = re.search(r"[,;!?\n]|\b(?:for|to|from|with|by|which|that|but|whereas|while|and)\b", text[start:end], re.I)
     if stop:
         return start + stop.start()
-    return end if end == len(text) else None  # Do not accept a silently truncated object.
+    return end if end == len(text) or end < start + policy()["object_bound_chars"] else None
 
 
 def object_events(scope, text):
@@ -82,7 +86,7 @@ def object_events(scope, text):
                         connector = re.search(r"\b(?:to|for)\s+(?:" + alternatives(p["purpose_actions"]) + r")\b", tail, re.I)
                         if not connector or not first(p["funding_terms"], tail[:connector.start()]):
                             continue
-                        if re.search(r"[,;.!?\n]|\b(?:and|but|while|whereas|for|to|from|with|by|said|says|plans|expects)\b",
+                        if re.search(r"[,;!?\n]|(?<!\d)\.|\.(?!\d)|\b(?:and|but|while|whereas|for|to|from|with|by|said|says|plans|expects)\b",
                                      tail[:connector.start()], re.I):
                             continue
                         purpose = span(text, start + connector.start(), start + connector.end())

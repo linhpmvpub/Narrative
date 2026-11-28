@@ -17,6 +17,7 @@ from pydantic import AwareDatetime, BaseModel, ConfigDict, Field
 from engine.article_cards import substantive_blocks
 from engine.company_profiles import available_bundles, paths
 from engine.ingestion.contracts import digest
+from engine.source_sentences import sentences
 
 # Typed action phrases, independent of issuers, URLs and individual news examples.
 ACTIONS = {
@@ -78,7 +79,7 @@ def extract(text):
         r"(?:\s+in\s+(?P<location>[\w '-]{2,80}))?",
         re.I,
     )
-    for span in re.finditer(r"[^.!?;\n]+", text):
+    for span in sentences(text):
         raw = span.group()
         clause = raw.strip()
         offset = span.start() + len(raw) - len(raw.lstrip())

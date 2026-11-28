@@ -6,6 +6,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from engine.news_framework import classify, first, literal
+from engine.source_sentences import LEGAL_SUFFIX, sentences
 
 
 @lru_cache(maxsize=1)
@@ -16,7 +17,7 @@ def policy():
 
 def windows(text):
     # Contrast clauses cannot donate a subject or market to each other.
-    for sentence in re.finditer(r"[^.!?;\n]+", text):
+    for sentence in sentences(text):
         cursor = sentence.start()
         for boundary in re.finditer(r"\b(but|whereas|while)\b", sentence.group(), re.I):
             end = sentence.start() + boundary.start()
@@ -64,6 +65,8 @@ def operator_predicate(scope, text, candidates):
                     gap = text[hit.end():event["start"]]
                     if len(gap) > 160:
                         continue
+                    gap = re.sub(r"^\s*,?\s*" + LEGAL_SUFFIX, "", gap, flags=re.I)
+                    gap = re.sub(r'''^\s*\(\s*(?:the\s+)?["“'](?:the\s+)?(?:Company|Group)["”']\s*\)''', "", gap, flags=re.I)
                     gap = re.sub(r"^(?:\s*(?:,|and|&)\s*(?:" + names + r")(?!\w))+", "", gap, flags=re.I)
                     if re.fullmatch(r"[\s,]*" + auxiliary, gap, re.I):
                         if event["text"].lower().endswith("ed") and re.search(r"\b(is|are|was|were|been|be)\s*$", gap, re.I):

@@ -1,5 +1,12 @@
 # Nguyên tắc và bài học phát triển
 
+## L023 — Preserve source boundaries and diagnose priority independently
+
+- Evidence2026-11-28: seven archived articles had302regex segments versus257shared-source segments; all2760exposed pair decisions stayed unchanged. A parser correction is not measured recall improvement. Keep exact spans and original quotes across RSS, article cards and review.
+- Resolve actor references only from explicit source evidence, at most one hop within a bounded source block; trace antecedent, declaration and use. Never borrow a headline actor, infer an ambiguous pronoun or replace financial UNKNOWN with a naming heuristic. Test renamed actors, unrelated markets, absent declarations and withdrawn/expired routes.
+- A concrete, relevant source claim may still be context-only. In actor77,4of5resolved priority-positive pairs match but are blocked by this policy. Audit every matched unit even if another unit wins a score tie; separate routing failure from editorial withholding before changing weights. Future promotion needs a reusable event/phase contract and held-out evidence, not per-ticker exceptions or removal of all context guards.
+
+
 ## L022 — Shared taxonomy needs scoped graph applicability, not ticker exceptions
 
 - User direction2026-11-27: prioritize a reusable crawl→deduplicate→classify→bind→graph→rank→explain→deliver workflow. Company-specific content belongs in sourced profiles/relations, not headline-specific code branches. The shared signal API has no ticker input; renamed-company tests preserve decisions.

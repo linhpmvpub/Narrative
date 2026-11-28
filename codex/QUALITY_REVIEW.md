@@ -1,5 +1,14 @@
 # Quality review after each iteration
 
+## 2026-11-28 — Shared boundaries and priority withholding
+
+- Value: RSS/full body/review now share literal sentence offsets; decimal/abbreviation fragmentation is reduced. Explicit source-declared aliases can route through existing sourced relations without inferred identity. Renamed actors, wrong markets, recipient/negation, ambiguous/two-hop references, expired edges and priority score ties covered.
+- Evidence:180initial+120final focused tests pass;Ruff/mypy159pass. Seven real archived articles142blocks have302→257segments,17changed blocks. All2760exposed pair decisions unchanged over8separate cohorts; no measured recall or priority gain, no new blind/human reference. Actor77=6/0/6 (TP/FP/FN),4unresolved; priority0/0/5,7unresolved. Desktop/mobile smoke passed without page errors; CI pending final receipt.
+- Diagnosis:4of5resolved priority positives already match but context-only suppresses every activity window;1is still unlinked. This is a distinct ranking-policy limitation, not evidence for changing graph identities or numerical weights. Review audit formerly lost body evidence when a title tied on score; aggregated audit fixes observation without changing rank.
+- Limits: quoted Company/Group aliases only, no implicit pronouns; complex parentheticals/coordinated objects/irregular passives remain bounded. English suffix heuristics can abstain at ambiguous boundaries. Unchanged labels and current-profile historical sources cannot establish historical-as-of or market generalization. Offline stale-source projection correctly returned0; one fresh poll restored26main41background, not seven-day reliability.
+- Next: event-type/phase editorial priority contract, context-negative counterexamples and source freshness; then unused family-diverse independent evaluation. Keep prior policy available, make no release promotion, preserve conditional/UNKNOWN financial language. L023recorded; product direction and acceptance unchanged.
+
+
 ## Typed asset/purpose scope — 2026-11-27
 
 - Product value: a reusable actor→action→object contract now distinguishes acquired operating assets and explicit use of capital from mere company/product mentions. Profile evidence declares component classes; source spans and existing graph routes explain relevance. All6eligible competitor bindings migrate by relation type,not ticker. Sourced company differences remain data. Financial and operational results stayUNKNOWN.

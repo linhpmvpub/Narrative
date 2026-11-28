@@ -115,3 +115,32 @@ only; priority weights and push are unchanged. Evidence on an exposed corpus is
 regression evidence, not a new blind result. See the latest checkpoint and aggregate
 `reports/asset-purpose-review.json`; opt-in local manifest is
 `source-cache/asset-purpose-workspace-2026-11-27.json`.
+
+## Shared boundaries and explicit source references (2026-11-28)
+
+`source_sentences` is shared by profile/typed/structured matching, article cards,
+priority review and priority windows. It preserves original string offsets while
+keeping decimal numbers, legal suffix continuations, internal URL/email dots and
+bounded initialisms together. Semicolon/newline/terminal punctuation still split;
+contrast clauses additionally split actor scope. This supersedes the decimal and
+legal-suffix limitation above; arbitrary parentheticals remain unsupported.
+
+`source_units` carries the unchanged paragraph and literal sentence offset. Actor
+scope may use a quoted source declaration such as `Orion (the “Company”)`, in the
+same or immediately preceding sentence only. The declared alias is never a new
+profile name: traces retain exact antecedent/declaration/reference spans relative
+to source context, and the predicate subject remains the literal alias. Topic-name
+substitution happens only after this actor contract passes. Multiple declarations,
+paragraph/contrast boundaries, inferred pronouns, recipient roles and wrong markets
+cannot establish scope. No headline actor donation or canonical identity update.
+
+`priority_audit` exposes context-only/scoped links and eligible/concrete windows.
+`review_audit` aggregates all source units even if a title wins a score tie, without
+changing the winning assessment. Policy11 keeps numerical weights and context-only
+withholding unchanged. Four of five resolved priority positives in the exposed77
+reference already match but are context-only; one remains unmatched. This motivates
+a separate editorial event-priority contract, not a financial-impact inference.
+
+See `reports/source-boundary-review.json`. Local opt-in manifest:
+`source-cache/source-boundaries-workspace-2026-11-28.json`. Data stays local and
+notifications disabled; no new blind evaluation or quality promotion is claimed.

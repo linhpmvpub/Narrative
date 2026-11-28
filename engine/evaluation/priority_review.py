@@ -4,7 +4,6 @@ This local review never authorizes notifications or estimates financial effects.
 """
 
 import json
-import re
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -17,6 +16,7 @@ from engine.evaluation.profile_relevance import consensus, write_new
 from engine.ingestion.contracts import digest
 from engine.profile_news import entity_context
 from engine.profile_routing import binding_decisions
+from engine.source_sentences import source_units
 
 GROUPS = {"supply_disruption", "input_price", "capacity", "demand", "technology",
           "financing", "policy", "other", "UNKNOWN"}
@@ -49,9 +49,8 @@ def decisions(row, bundle, narrative, at, policy):
 
         blocks, _ = substantive_blocks(row["source_observation"], at)
         units = [{"title": article["title"], "summary": ""}] + [
-            {"title": "", "summary": sentence.group(), "context_title": article["title"]}
-            for block in blocks for sentence in re.finditer(r"[^.!?;\n]+", block["text"])
-            if len(sentence.group()) <= 1600]
+            {"title": "", **unit, "context_title": article["title"]}
+            for block in blocks for unit in source_units(block["text"])]
     assessments, matched = [], False
     for unit in units:
         links = []
@@ -65,7 +64,11 @@ def decisions(row, bundle, narrative, at, policy):
         assessments.append(assess({"headline": article.get("title", ""),
                                    "excerpt": unit.get("summary", "")}, links, policy))
     activity = max(assessments, key=lambda a: a["editorial_score"])
-    return matched, activity
+    # Keep the winning assessment/rank unchanged, but do not lose withholding
+    # evidence from equal-scoring body units behind the first title assessment.
+    audit = {key: sum(a["priority_audit"][key] for a in assessments) for key in
+             ("matched_links", "context_only_links", "scoped_assertion_links", "eligible_windows", "concrete_signals")}
+    return matched, {**activity, "review_audit": {**audit, "source_units": len(units)}}
 
 
 def freeze(directory, profile_root, review_directory):

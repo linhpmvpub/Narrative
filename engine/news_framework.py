@@ -9,6 +9,8 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
+from engine.source_sentences import sentences
+
 POLICY = Path(__file__).resolve().parent.parent / "config/news-routing-v1.json"
 
 
@@ -45,7 +47,7 @@ def classify(window):
 
 def signal_matches(rule, fields):
     for field, text in fields.items():
-        for sentence in re.finditer(r"[^.!?;\n]+", text):
+        for sentence in sentences(text):
             if len(sentence.group()) > 1200:
                 continue
             signal = classify(sentence.group())
