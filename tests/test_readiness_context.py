@@ -92,6 +92,37 @@ def test_no_cross_field_or_cross_narrative_donation(dossier):
     assert not list(binding_decisions(b,b.narratives[0],{'title':text},datetime.now(UTC)))
 
 
+@pytest.mark.parametrize('name',['Orion','Cobalt'])
+@pytest.mark.parametrize('text,expected',[
+    ('Cooling constraints delay data center deployment.',True),
+    ('Data center cooling capacity is constrained.',True),
+    ('Cooling shortages delay food processing.',False),
+    ('Data center memory capacity rises with new cooling technology.',False),
+    ('Data centers expand software capacity and household cooling shortages worsen.',False),
+    ('Data center operators denied cooling constraints.',False),
+])
+def test_cooling_requires_explicit_sourced_scope(dossier,name,text,expected):
+    root,data,b=configured(dossier,name=name)
+    assert not list(binding_decisions(b,b.narratives[0],{'title':text},datetime.now(UTC)))
+    quote='Data center deployment depends on cooling availability.'
+    raw=(root/'source.html').read_bytes()+('<p>'+quote+'</p>').encode()
+    (root/'source.html').write_bytes(raw)
+    data['sources'][0]['sha256']=hashlib.sha256(raw).hexdigest()
+    binding=data['factor_bindings'][0]
+    binding['readiness_context']['resources']=['COOLING']
+    evidence=[{'source_id':'s','quote':quote}]
+    binding['evidence']=evidence
+    data['relationships'][-1]['evidence']=evidence
+    seal(root,data)
+    b=load_bundle(root)
+    links=list(binding_decisions(b,b.narratives[0],{'title':text},datetime.now(UTC)))
+    assert bool(links)==expected
+    if expected:
+        result=assess({'headline':text,'excerpt':''},[{'matches':links[0]['matches']}],json.loads(POLICY.read_text()))
+        assert result['tier']=='BACKGROUND_THEME' and not result['signals']
+        assert all(m['context_only'] for m in links[0]['matches'])
+
+
 @pytest.mark.parametrize('fault',['revoked','expired','future','disabled'])
 def test_source_route_and_binding_lifecycle(dossier,fault):
     _,data,_=configured(dossier)

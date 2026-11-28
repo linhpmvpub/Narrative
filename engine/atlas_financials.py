@@ -155,6 +155,8 @@ def apply_financials(data, selections, profile_root, bundles, at):
         if (b is None or source is None or s.id in used or s.reviewed_at > at or source.retrieved_at > s.reviewed_at or b.available_at > s.reviewed_at
                 or int(b.identifiers.get('CIK','-1')) != int(s.cik)):
             raise ValueError('Financial source/profile/reviewer binding invalid')
+        if source.published_at is None:
+            raise ValueError('Financial extraction requires a dated disclosure source')
         used.add(s.id)
         directory = dirs[b.id].resolve()
         path = (directory/source.file).resolve()

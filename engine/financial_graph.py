@@ -70,7 +70,7 @@ def project_financial_graph(data, bindings, profile_root, bundles, at):
         sources = {bundle.id+'/'+s.id:s for s in bundle.sources}
         for e in binding.evidence:
             source = sources.get(e.source_id)
-            if source is None or source.retrieved_at > binding.reviewed_at:
+            if source is None or source.published_at is None or source.retrieved_at > binding.reviewed_at:
                 raise ValueError('Invalid binding evidence source/time')
             directory = dirs[bundle.id].resolve()
             path = (directory/source.file).resolve()

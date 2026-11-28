@@ -9,6 +9,7 @@ VERSION = "readiness-context-v1"
 RESOURCES = {
     "POWER": r"\b(?:power|electricity|electrical|grid)\b",
     "WATER": r"\bwater\b",
+    "COOLING": r"\bcooling\b",
     "CONSTRUCTION": r"\bconstruction\b",
 }
 MARKETS = {

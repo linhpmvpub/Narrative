@@ -77,18 +77,37 @@ class Strict(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
 
+class UnknownPublication(Strict):
+    source_kind: Literal["OFFICIAL_PRODUCT_PAGE", "OFFICIAL_TECHNICAL_PAGE"]
+    basis: Literal["NO_PUBLICATION_DATE", "DISPLAYED_UPDATE_NOT_ORIGINAL"]
+    displayed_date: date | None = None
+    review_note: TEXT
+
+    @model_validator(mode="after")
+    def explicit_basis(self):
+        if (self.basis == "DISPLAYED_UPDATE_NOT_ORIGINAL") != (self.displayed_date is not None):
+            raise ValueError("Displayed update date must match publication uncertainty basis")
+        return self
+
+
 class Source(Strict):
     id: ID
     url: HttpUrl
     file: str
     sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
-    published_at: AwareDatetime
+    published_at: AwareDatetime | None
     retrieved_at: AwareDatetime
+    unknown_publication: UnknownPublication | None = Field(default=None, exclude_if=lambda value: value is None)
 
     @model_validator(mode="after")
     def chronology(self):
-        if self.url.scheme != "https" or self.published_at > self.retrieved_at:
+        if self.url.scheme != "https" or (self.published_at is not None and self.published_at > self.retrieved_at):
             raise ValueError("HTTPS source and truthful acquisition clock required")
+        if (self.published_at is None) != (self.unknown_publication is not None):
+            raise ValueError("Unknown publication requires explicit official-page metadata, never a fabricated date")
+        if (self.unknown_publication and self.unknown_publication.displayed_date
+                and self.unknown_publication.displayed_date > self.retrieved_at.date()):
+            raise ValueError("Displayed source date cannot follow acquisition")
         return self
 
 
@@ -340,7 +359,7 @@ class AccessConstraintRule(Strict):
 
 class ReadinessContextRule(Strict):
     scope: Literal["CUSTOMER_DEPLOYMENT", "MANUFACTURING"]
-    resources: list[Literal["POWER", "WATER", "CONSTRUCTION"]] = Field(min_length=1, max_length=3)
+    resources: list[Literal["POWER", "WATER", "COOLING", "CONSTRUCTION"]] = Field(min_length=1, max_length=4)
     relationship_id: ID
 
 
@@ -559,7 +578,7 @@ class ProfileBundle(Strict):
         if self.snapshot_at > self.available_at:
             raise ValueError("Snapshot cannot be later than availability")
         for s in self.sources:
-            if s.retrieved_at > self.available_at or s.published_at > self.snapshot_at:
+            if s.retrieved_at > self.available_at or (s.published_at is not None and s.published_at > self.snapshot_at):
                 raise ValueError("Future source or fabricated availability")
         for r in self.relationships:
             if r.from_id not in nodes or r.to_id not in nodes:
@@ -592,6 +611,16 @@ class ProfileBundle(Strict):
             if any(e.source_id not in source_ids for e in item.evidence):
                 raise ValueError("Missing evidence source")
         sources = {s.id: s for s in self.sources}
+        for undated_relation in self.relationships:
+            for evidence in undated_relation.evidence:
+                source = sources[evidence.source_id]
+                if source.published_at is None and (
+                        undated_relation.valid_from < source.retrieved_at or undated_relation.known_at < source.retrieved_at):
+                    raise ValueError("Undated source cannot backdate relationship validity or knowledge")
+        dated_facts: list[Event | MetricObservation] = [*self.events, *self.observations]
+        for dated_fact in dated_facts:
+            if any(sources[e.source_id].published_at is None for e in dated_fact.evidence):
+                raise ValueError("Dated events and metric observations require dated source evidence")
         references = {r.id: r for r in self.entity_references}
         relationships = {r.id: r for r in self.relationships}
         for ref in self.entity_references:
@@ -891,7 +920,9 @@ def project(bundle):
                           "evidence": [v.model_dump() for v in r.evidence]} for r in route],
                 "unknowns": list(dict.fromkeys([*n.unknowns, *(u for r in route for u in r.unknowns)])),
                 "sources": [{"id": s.id, "url": str(s.url), "sha256": s.sha256,
-                             "published_at": s.published_at.isoformat()} for s in bundle.sources
+                             "published_at": s.published_at.isoformat() if s.published_at else None,
+                             **({"unknown_publication": s.unknown_publication.model_dump(mode="json")}
+                                if s.unknown_publication else {})} for s in bundle.sources
                             if s.id in cited],
                 "event_evidence": [v.model_dump() for v in e.evidence],
                 "alternative_paths": len(routes) - 1, "paths_truncated": truncated,
@@ -915,7 +946,9 @@ def project(bundle):
             "factor_bindings": [b.model_dump(mode="json") for b in bundle.factor_bindings],
             "entity_references": [r.model_dump(mode="json") for r in bundle.entity_references],
             "sources": [{"id": s.id, "url": str(s.url), "sha256": s.sha256,
-                         "published_at": s.published_at.isoformat(),
+                         "published_at": s.published_at.isoformat() if s.published_at else None,
+                         **({"unknown_publication": s.unknown_publication.model_dump(mode="json")}
+                            if s.unknown_publication else {}),
                          "retrieved_at": s.retrieved_at.isoformat()} for s in bundle.sources],
             "cards": cards, "coverage": dict((s, sum(c["status"] == s for c in components))
                 for s in {c["status"] for c in components}),
