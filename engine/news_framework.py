@@ -79,6 +79,16 @@ def signal_matches(rule, fields):
 
 
 def route_contract(bundle, narrative, route, spans):
+    if finance := next((s.get("project_finance") for s in spans if s.get("project_finance")), None):
+        declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
+        allowed = bool(declared and set(declared.intents) & {"DEMAND", "DEPLOYMENT"}
+            and any(r.id == finance['relationship_id'] and r.type == "AFFECTS_DEMAND" for r in route)
+            and all(r.type != "COMPETES_WITH" for r in route))
+        return {"version":finance['version'],"allowed":allowed,"role":"PROJECT_FINANCE_CONTEXT",
+            "reason":"EXACT_SOURCED_CAPITAL_DEPLOYMENT_MECHANISM",
+            "explanation":"Nguồn gắn tài trợ với tài sản triển khai và đường nhu cầu trong hồ sơ. Chưa xác minh nhà cung cấp, giải ngân, công suất vận hành hay tác động tài chính.",
+            "relationship_id":finance['relationship_id'],"relation_types":[r.type for r in route],
+            "financial_impact":"UNKNOWN"}
     if readiness := next((s.get("readiness_context") for s in spans if s.get("readiness_context")), None):
         declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
         deployment = readiness["scope"] == "CUSTOMER_DEPLOYMENT"
@@ -88,21 +98,32 @@ def route_contract(bundle, narrative, route, spans):
                        and any(r.id == readiness["relationship_id"] and r.type == mechanism for r in route)
                        and all(r.type != "COMPETES_WITH" for r in route))
         source_role = readiness.get("source_role", {})
+        reference = readiness.get("source_reference")
         description = source_role.get("role") == "FOCUSED_DESCRIPTION"
         return {"version": readiness["version"], "allowed": allowed, "role": "OPERATING_READINESS_CONTEXT",
                 "reason": "CONDITIONAL_RESOURCE_EXPOSURE_NOT_COMPANY_INCIDENT",
                 "explanation": "Bối cảnh nguồn lực và điều kiện vận hành có đường liên hệ trong hồ sơ. Chưa xác minh sự cố tại công ty, đơn hàng hoặc tác động tài chính."
-                    + (" Đây là mô tả năng lực hoặc trạng thái có sẵn, chưa phải thay đổi mới." if description else ""),
+                    + (" Đây là mô tả năng lực hoặc trạng thái có sẵn, chưa phải thay đổi mới." if description else "")
+                    + (" Tài sản được tham chiếu từ câu liền trước trong cùng đoạn nguồn; không suy ra danh tính khách hàng." if reference else ""),
+                **({"source_reference": reference} if reference else {}),
                 **({"source_role": source_role} if source_role else {}),
                 "financial_impact": "UNKNOWN", "relation_types": [r.type for r in route]}
     if any(s.get("relevance_role") == "ACCESS_CONSTRAINT_CONTEXT" for s in spans):
+        mechanism_id = next((s.get("activity_assertion", {}).get("relationship_id") for s in spans
+                             if s.get("activity_assertion", {}).get("relationship_id")), None)
+        reference = next((s.get("activity_assertion", {}).get("source_reference") for s in spans
+                          if s.get("activity_assertion", {}).get("source_reference")), None)
         declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
         allowed = bool(declared and set(declared.intents) & {"DEMAND", "DEPLOYMENT"}
                        and any(r.type in {"AFFECTS_DEMAND", "AFFECTS_ACCESS"} for r in route)
+                       and (not mechanism_id or any(r.id == mechanism_id for r in route))
                        and all(r.type != "COMPETES_WITH" for r in route))
         return {"version": policy()["version"], "allowed": allowed, "role": "ACCESS_CONSTRAINT_CONTEXT",
                 "reason": "SOURCE_REPORTED_ACCESS_ON_SOURCED_DEMAND_ROUTE",
-                "explanation": "Nguồn nêu hạn chế tiếp cận năng lực tính toán; có thể ảnh hưởng khả năng triển khai hoặc nhu cầu. Chưa xác minh hiệu lực pháp lý, giao dịch hay tác động tài chính.",
+                "explanation": "Nguồn nêu hạn chế tiếp cận năng lực tính toán; có thể ảnh hưởng khả năng triển khai hoặc nhu cầu. Chưa xác minh hiệu lực pháp lý, giao dịch hay tác động tài chính."
+                    + (" Vai trò bên mua/bán được tham chiếu từ câu liền trước; chỉ giữ làm bối cảnh." if reference else ""),
+                **({"source_reference": reference} if reference else {}),
+                **({"relationship_id": mechanism_id} if mechanism_id else {}),
                 "financial_impact": "UNKNOWN", "relation_types": [r.type for r in route]}
     """One contract for RSS and full-body paths; no ticker/headline condition."""
     declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)

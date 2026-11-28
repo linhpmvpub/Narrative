@@ -42,11 +42,21 @@ def supported(rule, evidence):
                for resource in rule.resources)
 
 
-def matches(binding, fields, *, context_title=""):
+def matches(binding, fields, *, context_title="", payload=None):
     rule = binding.readiness_context
     for field, text in fields.items():
         for sentence in sentences(text):
             value = sentence.group()
+            reference = None
+            markets = list(re.finditer(MARKETS[rule.scope], value, re.I))
+            if not markets and rule.scope == "CUSTOMER_DEPLOYMENT":
+                from engine.source_references import data_center
+
+                reference = data_center(payload or fields, field, text, sentence.start())
+                if reference:
+                    # Use the literal referring noun here; its antecedent stays
+                    # in separate provenance, never a rewritten source sentence.
+                    markets = list(re.finditer(r"^\s*(?:This|That|The)\s+(?:facility|site)\b", value, re.I))
             if len(value) > 1200 or any(re.search(r"(?<!\w)" + re.escape(t) + r"(?!\w)", value, re.I)
                                        for t in binding.exclude_terms):
                 continue
@@ -54,7 +64,7 @@ def matches(binding, fields, *, context_title=""):
             # an unrelated sector must not imply semiconductor supply exposure.
             for resource in rule.resources:
                 for res in re.finditer(RESOURCES[resource], value, re.I):
-                    for market in re.finditer(MARKETS[rule.scope], value, re.I):
+                    for market in markets:
                         if rule.scope == "MANUFACTURING" and not (
                             re.search(r"\b(?:semiconductor|chip|memory)\s+(?:device\s+)?$", value[:market.start()], re.I)
                             or re.search(r"\b(?:how|why)\b[^;.!?]*\bindustrial\s+(?:power|water|electricity)\b", value, re.I)
@@ -81,6 +91,8 @@ def matches(binding, fields, *, context_title=""):
                                      "relationship_id": rule.relationship_id, "text": value,
                                      "source_role": role,
                                      "company_incident_verified": False, "financial_impact": "UNKNOWN"}
+                            if reference:
+                                trace['source_reference'] = reference
                             return [{"field": field, "start": h.start()+sentence.start(),
                                      "end": h.end()+sentence.start(), "text": h.group(), "group": group,
                                      "readiness_context": trace, "context_only": True,

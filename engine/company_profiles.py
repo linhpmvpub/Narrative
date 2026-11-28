@@ -355,6 +355,11 @@ class NarrativeRoutingPolicy(Strict):
 
 class AccessConstraintRule(Strict):
     company_terms: list[TEXT] = Field(min_length=1, max_length=10)
+    relationship_id: ID | None = Field(default=None, exclude_if=lambda value: value is None)
+
+
+class ProjectFinanceRule(Strict):
+    relationship_id: ID
 
 
 class ReadinessContextRule(Strict):
@@ -378,6 +383,7 @@ class FactorBinding(Strict):
     infrastructure_scope: InfrastructureScope | None = Field(default=None, exclude_if=lambda value: value is None)
     access_constraint: AccessConstraintRule | None = Field(default=None, exclude_if=lambda value: value is None)
     readiness_context: ReadinessContextRule | None = Field(default=None, exclude_if=lambda value: value is None)
+    project_finance: ProjectFinanceRule | None = Field(default=None, exclude_if=lambda value: value is None)
     relevance_scope: RelevanceScope | None = Field(default=None, exclude_if=lambda value: value is None)
     market_scope: Literal["COMPONENT_MARKET", "APPLICATION_SOFTWARE", "INFRASTRUCTURE_DEMAND"] | None = Field(default=None, exclude_if=lambda value: value is None)
     routing_guards: list[Literal["INFRASTRUCTURE_FINANCING", "SERVER_COMPONENT_MARKET", "SECTOR_CONSTRAINT"]] = Field(default_factory=list, max_length=3, exclude_if=lambda value: not value)
@@ -396,6 +402,16 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
+        if self.project_finance:
+            from engine.project_finance import supported as finance_supported
+
+            if (self.kind != "SCOPED_ACTIVITY" or not self.narrative_ids
+                    or any((self.assertion_scope, self.activity_rule, self.signal_rule,
+                            self.infrastructure_scope, self.relevance_scope, self.market_scope,
+                            self.routing_guards, self.access_constraint, self.readiness_context,
+                            self.term_aliases, self.issuer_supply_scope, self.entity_reference_id))
+                    or not finance_supported(self.evidence)):
+                raise ValueError("Project finance requires sourced capital/market scope and dedicated narratives")
         if self.readiness_context:
             from engine.readiness_context import supported
 
@@ -638,6 +654,21 @@ class ProfileBundle(Strict):
                     sources[e.source_id].retrieved_at > ref.reviewed_at for e in ref.evidence):
                 raise ValueError("Entity reference review must follow acquisition")
         for binding in self.factor_bindings:
+            mechanism_id = (binding.project_finance.relationship_id if binding.project_finance else
+                            binding.access_constraint.relationship_id if binding.access_constraint else None)
+            if mechanism_id:
+                relation = relationships.get(mechanism_id)
+                expected_types = {"AFFECTS_DEMAND"} if binding.project_finance else {"AFFECTS_ACCESS", "AFFECTS_DEMAND"}
+                if (relation is None or relation.from_id != binding.factor_id or relation.type not in expected_types
+                        or not set(binding.narrative_ids) <= {p.narrative_id for p in self.routing_policies}):
+                    raise ValueError("Typed mechanism requires an incident access/financing route and declared narrative")
+                if binding.project_finance:
+                    from engine.project_finance import supported as finance_supported
+
+                    if not finance_supported(relation.evidence):
+                        raise ValueError("Project finance mechanism needs its own capital/market evidence")
+                elif not any(re.search(r"\b(?:compute|computing|GPUs?)\b", e.quote, re.I) for e in relation.evidence):
+                    raise ValueError("Access mechanism needs its own compute evidence")
             if binding.readiness_context:
                 from engine.readiness_context import supported
 

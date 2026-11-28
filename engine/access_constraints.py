@@ -49,7 +49,7 @@ def classify(text):
     return None
 
 
-def matches(binding, fields):
+def matches(binding, fields, *, payload=None):
     rule = binding.access_constraint
     for field, text in fields.items():
         for sentence in sentences(text):
@@ -66,11 +66,27 @@ def matches(binding, fields):
                 r"(?:['’]s)?\s+(?:chip|GPU|compute|AI|buyers?|sellers?|customers?)\b", value[m.end():], re.I)
                 and not re.search(BOUNDARY, value[min(m.start(), event['action_span']['start']):
                                                 max(m.end(), event['object_span']['end'])], re.I)), None)
+            reference = None
             if company is None:
-                continue
-            event['company_span'] = span(value, company.start(), company.end())
+                from engine.source_references import compute_party
+
+                reference = compute_party(payload or fields, field, text, sentence.start(), rule.company_terms)
+                if reference is None:
+                    continue
+                ref = reference['reference_span']
+                base = reference['window_span']['start']
+                company_span = span(value, ref['start']-base, ref['end']-base)
+                if re.search(BOUNDARY, value[company_span['end']:event['object_span']['end']], re.I):
+                    continue
+                event['source_reference'] = reference
+            else:
+                company_span = span(value, company.start(), company.end())
+            event['company_span'] = company_span
+            if rule.relationship_id:
+                event['relationship_id'] = rule.relationship_id
             return [{**s, "field": field, "start": s['start']+sentence.start(), "end": s['end']+sentence.start(),
                      "group": "access_constraint", "activity_assertion": event,
-                     "relevance_role": "ACCESS_CONSTRAINT_CONTEXT", "news_party_verified": False}
+                     "relevance_role": "ACCESS_CONSTRAINT_CONTEXT", "news_party_verified": False,
+                     **({"context_only": True} if reference else {})}
                     for s in (event['company_span'], event['action_span'], event['object_span'])]
     return []
