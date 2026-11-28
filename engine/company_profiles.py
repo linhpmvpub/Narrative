@@ -338,6 +338,12 @@ class AccessConstraintRule(Strict):
     company_terms: list[TEXT] = Field(min_length=1, max_length=10)
 
 
+class ReadinessContextRule(Strict):
+    scope: Literal["CUSTOMER_DEPLOYMENT", "MANUFACTURING"]
+    resources: list[Literal["POWER", "WATER", "CONSTRUCTION"]] = Field(min_length=1, max_length=3)
+    relationship_id: ID
+
+
 class FactorBinding(Strict):
     """Curated literal topic/context/change groups, never a financial event classifier."""
     id: ID
@@ -352,6 +358,7 @@ class FactorBinding(Strict):
     activity_rule: ActivityRule | None = Field(default=None, exclude_if=lambda value: value is None)
     infrastructure_scope: InfrastructureScope | None = Field(default=None, exclude_if=lambda value: value is None)
     access_constraint: AccessConstraintRule | None = Field(default=None, exclude_if=lambda value: value is None)
+    readiness_context: ReadinessContextRule | None = Field(default=None, exclude_if=lambda value: value is None)
     relevance_scope: RelevanceScope | None = Field(default=None, exclude_if=lambda value: value is None)
     market_scope: Literal["COMPONENT_MARKET", "APPLICATION_SOFTWARE", "INFRASTRUCTURE_DEMAND"] | None = Field(default=None, exclude_if=lambda value: value is None)
     routing_guards: list[Literal["INFRASTRUCTURE_FINANCING", "SERVER_COMPONENT_MARKET", "SECTOR_CONSTRAINT"]] = Field(default_factory=list, max_length=3, exclude_if=lambda value: not value)
@@ -370,6 +377,16 @@ class FactorBinding(Strict):
 
     @model_validator(mode="after")
     def bounded_rule(self):
+        if self.readiness_context:
+            from engine.readiness_context import supported
+
+            if (self.kind != "SCOPED_ACTIVITY" or not self.narrative_ids
+                    or any((self.assertion_scope, self.activity_rule, self.signal_rule,
+                            self.infrastructure_scope, self.relevance_scope, self.market_scope,
+                            self.routing_guards, self.access_constraint, self.term_aliases, self.issuer_supply_scope))
+                    or len(set(self.readiness_context.resources)) != len(self.readiness_context.resources)
+                    or not supported(self.readiness_context, self.evidence)):
+                raise ValueError("Readiness context requires sourced resource/market scope and dedicated narratives")
         if self.access_constraint:
             names = self.access_constraint.company_terms
             if (self.kind != "SCOPED_ACTIVITY" or not self.narrative_ids
@@ -592,6 +609,16 @@ class ProfileBundle(Strict):
                     sources[e.source_id].retrieved_at > ref.reviewed_at for e in ref.evidence):
                 raise ValueError("Entity reference review must follow acquisition")
         for binding in self.factor_bindings:
+            if binding.readiness_context:
+                from engine.readiness_context import supported
+
+                rule = binding.readiness_context
+                relation = relationships.get(rule.relationship_id)
+                expected = "AFFECTS_DEMAND" if rule.scope == "CUSTOMER_DEPLOYMENT" else "AFFECTS_SUPPLY"
+                if (relation is None or relation.from_id != binding.factor_id or relation.type != expected
+                        or not supported(rule, relation.evidence)
+                        or not set(binding.narrative_ids) <= {p.narrative_id for p in self.routing_policies}):
+                    raise ValueError("Readiness context requires a sourced incident mechanism and declared narrative policy")
             if binding.infrastructure_scope:
                 infrastructure = binding.infrastructure_scope
                 if not set(infrastructure.own_names) & {self.legal_name, nodes[self.company_id].label}:

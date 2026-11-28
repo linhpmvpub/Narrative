@@ -79,6 +79,18 @@ def signal_matches(rule, fields):
 
 
 def route_contract(bundle, narrative, route, spans):
+    if readiness := next((s.get("readiness_context") for s in spans if s.get("readiness_context")), None):
+        declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
+        deployment = readiness["scope"] == "CUSTOMER_DEPLOYMENT"
+        mechanism = "AFFECTS_DEMAND" if deployment else "AFFECTS_SUPPLY"
+        intents = {"DEMAND", "DEPLOYMENT"} if deployment else {"SUPPLY"}
+        allowed = bool(declared and set(declared.intents) & intents
+                       and any(r.id == readiness["relationship_id"] and r.type == mechanism for r in route)
+                       and all(r.type != "COMPETES_WITH" for r in route))
+        return {"version": readiness["version"], "allowed": allowed, "role": "OPERATING_READINESS_CONTEXT",
+                "reason": "CONDITIONAL_RESOURCE_EXPOSURE_NOT_COMPANY_INCIDENT",
+                "explanation": "Bối cảnh nguồn lực và điều kiện vận hành có đường liên hệ trong hồ sơ. Chưa xác minh sự cố tại công ty, đơn hàng hoặc tác động tài chính.",
+                "financial_impact": "UNKNOWN", "relation_types": [r.type for r in route]}
     if any(s.get("relevance_role") == "ACCESS_CONSTRAINT_CONTEXT" for s in spans):
         declared = next((p for p in bundle.routing_policies if p.narrative_id == narrative.id), None)
         allowed = bool(declared and set(declared.intents) & {"DEMAND", "DEPLOYMENT"}
