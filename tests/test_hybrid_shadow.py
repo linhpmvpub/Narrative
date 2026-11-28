@@ -13,7 +13,7 @@ from test_company_profiles import dossier as dossier
 from engine.company_profiles import ProfileBundle, load_bundle
 from engine.evaluation import hybrid_shadow as hs
 from engine.evaluation.benchmark import pin, read, write
-from engine.local_analyst import LocalAnalyst, parse_response
+from engine.local_analyst import LocalAnalyst, parse_response, response_schema
 from engine.shadow_analyst import Proposal, catalog, model_routes, retrieve, validate
 
 
@@ -136,7 +136,7 @@ def test_remote_models_and_context_truncation_rejected(monkeypatch):
     a = LocalAnalyst("test", context=4096, output_tokens=256)
     try:
         with pytest.raises(ValueError, match="BUDGET"):
-            a.analyze({"source": "x" * 5000})
+            a.analyze({"source": "x" * 5000, "companies": [{"company_id": "co"}]})
     finally:
         a.close()
     with pytest.raises(ValueError, match="local"):
@@ -157,6 +157,29 @@ def test_bad_response_is_not_a_successful_model_prediction(fault):
         record["response"]["message"]["content"] = "{}"
     with pytest.raises(ValueError):
         parse_response(record)
+
+
+@pytest.mark.parametrize("fault", [None, "missing", "wrong_identity", "extra"])
+def test_decoding_contract_requires_every_company_even_without_routes(fault):
+    companies = [{"company_id": "co"}, {"company_id": "other"}]
+    schema = response_schema(companies)
+    assert schema["properties"]["decisions"]["required"] == ["co", "other"]
+    values = {c["company_id"]: proposal(company_id=c["company_id"]).decisions[0].model_dump()
+              for c in companies}
+    if fault == "missing":
+        del values["other"]
+    elif fault == "wrong_identity":
+        values["other"]["company_id"] = "co"
+    elif fault == "extra":
+        values["surprise"] = values["co"]
+    receipt = {"model_stable": True, "identity": {"model": "test"}, "expected_companies": ["co", "other"],
+               "response": {"done": True, "done_reason": "stop", "model": "test",
+                            "message": {"content": json.dumps({"decisions": values})}}}
+    if fault:
+        with pytest.raises(ValueError, match="target-company"):
+            parse_response(receipt)
+    else:
+        assert len(parse_response(receipt).decisions) == 2
 
 
 def setup(benchmark, tmp_path):
