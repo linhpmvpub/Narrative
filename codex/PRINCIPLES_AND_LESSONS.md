@@ -1,5 +1,14 @@
 # Nguyên tắc và bài học phát triển
 
+## L033 — Preserve relevant unassigned company context without inventing a narrative (2026-11-28)
+
+- Separate company discovery from narrative attribution in runtime as well as measurement. A bounded issuer event or sourced exposure may be useful company context with no watched endpoint. Keep that state explicit; never manufacture demand→supply links. Evidence:3company recoveries with all3240narrative/priority decisions unchanged;25.18vs21.82fixed-anchor index.
+- A factor route needs an independent company-membership proof to its product/segment/metric. Limit membership to sourced ownership/metric links; customer/competitor edges are not ownership. Require exact current mechanism IDs and review/effective time. Company-only bindings need explicit discovery scope and no narrative target; test both model loading and staging, since a stage-only validator left an orphan gap.
+- Broader company truth must not be evaluated against old narrow narrative-union negatives. Score new discovery only where direct company references were frozen; preserve old proxy and all target errors. Legacy historical/current profiles can differ for the same source-company; enforce prediction consistency only for direct reference units. This is a scope correction, not relabelling or changing score weights.
+- More background cards are not automatically useful news.22unassigned cards include19MU infrastructure contexts with no independent labels. Keep source-reported statements, conditional product exposure and unknown financial consequences separate in UI; do not promote context to alert. Directed diagrams must show actual edge direction, not reverse membership as a causal claim.
+- Validate source lifecycle, corrections, withdrawals, freshness, pins, deduplication and mobile/logout for the complete path. A headless routed snapshot validates rendering, not running-server availability or remote access. Continue fuller source/context review and new event-family evaluation; do not tune a growing list of ticker/headline exceptions against exposed labels.
+
+
 ## L032 — Company discovery needs its own truth and denominator (2026-11-28)
 
 - A narrative error and an undiscovered company event are different. Keep pair-level target errors even when another narrative finds the article. Conversely, independently label company relevance outside watched narratives; a union of narrative labels cannot reveal those misses. Evidence: new20article benchmark has24company misses,5outside all watched narratives; legacy infra160 has9target misses but only2company-proxy misses. These are different questions, not gains from relabelling.

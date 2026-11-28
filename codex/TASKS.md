@@ -1,5 +1,19 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — fuller evidence after company discovery (2026-11-28)
+
+This section supersedes the company-discovery implementation item below; the wider product roadmap remains open.
+
+- [x] Shared source-backed issuer/exposure discovery independent of narratives; explicit company-only binding contract, exact current factor/member paths and typed intents.
+- [x] Required five-company data stage: sourced identities, MU memory demand, DELL/SNDK product-metric membership;6profiles86nodes108relations69discoveryrules. Existing financial/source observations preserved.
+- [x] End-to-end RSS/current-version/private feed:22unassigned company cards, explanatory paths and sources, no duplicate narrative cards; desktop/mobile local snapshot checks and lifecycle integration tests.
+- [x] Same-suite benchmark after each logical stage and final gate:25.18/100,+3.36;3company recoveries/0regressions; narrative/priority unchanged. Reports retain group/company counts and exposed-AI limits.
+- [ ] Enrich reviewed substantive full-article evidence and bridge it to company context while preserving source-local statements/revision/withdrawal/time integrity. Existing helper is not production feed integration.
+- [ ] Strengthen shared product/market/capacity/end-market/memory-price-volume contracts; distinguish primary events from incidental infrastructure background. Review19newMUcontext cards by event family, not headline exceptions. Do not infer supplier wins, demand→supply effects or quantified financial outcomes.
+- [ ] Freeze unused varied event families and negative controls with predictions before independent AI reviewers; preserve current anchor and unknown labels. Reduce evidence ambiguity before weight tuning; no separate LLM-prior evaluation required.
+- [ ] Personal relevance/notification-budget controls, human usefulness, source coverage/latency and7dayreliability/release gates. Financial size/horizon/causal truth unmeasured; cloud/live notifications remain disabled until explicitly authorized.
+
+
 ## Current next steps — company discovery before narrative attribution (2026-11-28)
 
 This section supersedes the previous pending measurement/unused-news items below.
