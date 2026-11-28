@@ -1,5 +1,15 @@
 # Quality review after each iteration
 
+## Source statement focus review — 2026-11-28
+
+- Product value: reduce background noise from incidental company/facility descriptions, without discarding a new event elsewhere in the article. Implemented shared source-role-v1 across readiness and infrastructure matching; original spans, predicate attachment, same-clause focus and context-only capability state. Profiles/targets/labels/numeric weights unchanged.
+- Evidence: step1,step2,final all reproduce3040baseline decisions; no labelled improvement or regression. Prior4readiness gains preserved. infra16013/0/10relevance and5/0/4priority,20/21unresolved unchanged. All aggregate cohort/group/company metrics retained; exposed AI references only, no fresh blind or human gold.
+- Controlled projection uses the same isolated news snapshot with no polling:50main unchanged,45→44background. One unlabelled sponsored incidental description removed; not claimed as a verified FP correction. All94cards disabled/financialUNKNOWN. No UI change or new browser/operational acceptance.
+- Validation:174earlier focused;40final source-role tests after final explanation,ruff/mypy172,current benchmark gate. CI46123633281success on45c2a92: 1792 passed, 1 warning in 211.50s (0:03:31); 1792 passed, 1 warning in 325.97s (0:05:25),JS,migrations/seed/replay/downgrade,dependency audits and model smoke8. Initial editing/type/import failures retained. See docs/source-statement-role.md and reports/source-focus-review.md/.json.
+- Read-only Dell source discovery found official product/cooling candidates; stored raw responses locally and left them unapproved. A redirected IR listing is not an original release; display/update dates do not establish original effective dates. Candidate source review remains next data task, not an invented missing graph edge.
+- Limits: narrow English markers; unknown descriptions may still match, metaphorical titles and implicit subjects can lose context. No fresh event-family, financial-impact or personal-usefulness measurement. Existing misses/FP/unresolved labels and v1gates unchanged. Next prioritize sourced Dell profile scope and independently labelled unused event families rather than headline/ticker patches. Direction unchanged;L029added;cloud/push off.
+
+
 ## Operating readiness review — 2026-11-28
 
 - Goal: map sourced electricity/water/construction dependencies into explainable company narrative context without claiming a company incident. Result:2shared scope types,3resource classes,2new sourced mechanisms,2exposure edges,2bindings;6profiles84nodes101relations. No ticker/headline exception or numeric-weight tuning.

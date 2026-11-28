@@ -1,5 +1,16 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — source statement focus (2026-11-28)
+
+- [x] Shared persistent-state/capability role across readiness and infrastructure market matching, original spans and same-clause focus. No new-event priority from a capability description; later substantive activity survives.
+- [x] Vietnamese description-vs-change explanation; RSS correction and reviewed full-body projection tested with renamed companies/resources.
+- [x] Benchmark after both steps and final:3040decisions unchanged,zero measured gains/regressions. Controlled feed50main/44background;1unlabelled removal disclosed. Full exact-code CI passed; data local/cloud/push off.
+- [x] Discover/cache3official Dell source candidates without promoting them to graph evidence; preserve redirect and publication/effective-date caveats.
+- [ ] Review/version Dell power/cooling deployment sources with explicit unknown/updated date handling, then add scope/edges/bindings and benchmark. Keep construction-permitting gaps unknown unless sourced.
+- [ ] Evaluate unused discourse/event families with independent labels; improve actor/asset references and measure generic-description filtering costs without ticker patches.
+- [ ] Remaining infra16010relevance/4priority misses,olderFP/unresolved costs and v1release gates unchanged;causal magnitude/horizon,personal utility and7dayoperations not demonstrated.
+
+
 ## Current next steps — operating readiness (2026-11-28)
 
 - [x] Source-backed AMD customer-buildout demand and MU manufacturing-utility supply paths;2mechanisms/2exposure edges with exact filing evidence, no changed targets.

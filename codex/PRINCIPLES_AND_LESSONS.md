@@ -1,5 +1,14 @@
 # Nguyên tắc và bài học phát triển
 
+## L029 — A capability description is not a new operating event (2026-11-28)
+
+- A sourced company path plus resource words can surface an unrelated article when the matched passage merely describes a persistent state. Classify the statement role after its own literal evidence matches; a title may retain relevant descriptive context but must not supply missing actors/resources or bridge unrelated clauses.
+- A specialization/capability marker must govern the matched activity. Do not let company-description modifiers suppress a separate project action, or return the first descriptive candidate before checking later substantive ones. Retained descriptions remain context_only/BACKGROUND through priority and explanation.
+- Evidence: new shared guard preserves all3040exposed benchmark decisions and removes1unlabelled background card from the same local snapshot. This is a behavior change, not a demonstrated market-accuracy gain. Keep zero-gain results, old failures and unknown labels visible; tests establish contracts, not user usefulness.
+- Source discovery has its own boundary: an HTTP200redirect to a listing is not the requested release, and a displayed article date can coexist with older prospective wording. Preserve URL/status/hash/retrieval time and unknown effective dates; do not backdate new profile knowledge or promote a search snippet to source evidence.
+- Verify with renamed companies/resources, headline/body separation, secondary substantive statements, original offsets, RSS correction/withdrawal and unchanged full-body benchmark references. Add independently labelled unused families for generalization; no ticker/headline exclusions.
+
+
 ## L028 — Resource availability is distinct from component efficiency (2026-11-28)
 
 - Evidence: the first readiness matcher improved4exposed relevance decisions but added1false positive by mixing component power efficiency with memory capacity. Same-sentence co-occurrence was insufficient. Requiring a bounded resource-condition phrase removed the regression while preserving the4recoveries; no ticker or headline exception was added.
