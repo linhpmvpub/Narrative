@@ -1,5 +1,14 @@
 # Nguyên tắc và bài học phát triển
 
+## L032 — Company discovery needs its own truth and denominator (2026-11-28)
+
+- A narrative error and an undiscovered company event are different. Keep pair-level target errors even when another narrative finds the article. Conversely, independently label company relevance outside watched narratives; a union of narrative labels cannot reveal those misses. Evidence: new20article benchmark has24company misses,5outside all watched narratives; legacy infra160 has9target misses but only2company-proxy misses. These are different questions, not gains from relabelling.
+- Aggregate company decisions by exact article/source representation, then company; never merge unrelated versions/articles just because event clustering connects them. A negative legacy union needs complete observed target inventory. Missing/ambiguous references remain unresolved. Validate duplicate targets and direct company/narrative contradictions.
+- An understandable scalar is a reporting aid. Lock formula/sample/predictions before labels; include unresolved coverage and disclose the evidence ceiling. First21.82/100 has a68/100 ceiling from this fixed reference's uncertainty. Do not normalize it upward after seeing labels, compare different samples as algorithm gains, or hide group/ticker regressions behind a net score. Future changed labels require a new benchmark version.
+- Zero false positives over very few selections can coexist with poor usefulness. Here4company positives were found and24missed;3priority pairs found and8missed.44company units unresolved, including26reviewer disagreements, show evidence/reference limits as well. Report counts and positive support, not an unqualified100%precision claim. AI agreement is not human gold; company dossiers can constrain both reviewers' view.
+- Improve the shared discovery→classification→graph→narrative→explanation flow. A source-backed company-context candidate may remain unassigned to narrative; never manufacture a demand→supply link to force assignment. Next validate renamed-company cases, explicit issuer identity, absent/withdrawn exposures, multiple article versions and relevant company events outside current narratives. Keep fixed exposed regression plus genuinely unused-content evaluation; no ticker/headline branches.
+
+
 ## L031 — Preserve source references and distinguish target misses from discovery misses (2026-11-28)
 
 - Resolve only an explicit typed role/asset from an unambiguous adjacent source sentence, at most one hop. Preserve both spans; never rewrite source text or combine title and body to manufacture an assertion. A role reference does not verify legal identity, and a data-center reference does not make its operator a supplier/customer. Keep ambiguous, canceled and remote antecedents withheld.

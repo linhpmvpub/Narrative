@@ -17,6 +17,11 @@ must be at least one positive reference in **each** dimension, and direct compan
 references; otherwise the score is unavailable, never renormalized to look better.
 Small positive support still needs prominent disclosure; this minimum only makes
 the arithmetic defined and does not establish representative product quality.
+Also report the evidence ceiling `100 × sum(weight × resolved share)`: fixed
+unresolved labels can make 100 unattainable on that anchor. Do not renormalize the
+predeclared score or change labels to hide this limitation. The index deliberately
+combines measured matching quality and reference coverage; component F1/recall
+remain necessary to distinguish algorithm errors from uncertain references.
 
 Use one fixed, explicitly named anchor cohort (`headline_score.anchor`) and the
 exact `SCORE_POLICY` in the suite spec. Do not pool the older overlapping cohorts

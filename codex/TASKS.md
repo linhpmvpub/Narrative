@@ -1,5 +1,19 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — company discovery before narrative attribution (2026-11-28)
+
+This section supersedes the previous pending measurement/unused-news items below.
+
+- [x] Separate exact-source company discovery, narrative accuracy and priority; keep legacy company union explicitly scoped and all original target errors.
+- [x] Freeze20unusedRSS articles/100company/200narrative references and predictions; two independent AI reviewers, no post-label algorithm edits; disagreements remain unresolved.
+- [x] Establish understandable fixed-anchor score21.82/100, predeclared40/40/20F1×resolvedshare. Current evidence ceiling68/100. Update direction/workflow/AGENTS; from next session lead with score plus same-suite delta and diagnostics.
+- [x] Preserve old3040pairs unchanged; expand to3240pairs/11cohorts in a new immutable suite. Tests/CI/gate passed; data local, live notifications off; checkpoint and aggregate published without source/label detail.
+- [ ] Add a shared source-backed company candidate layer before narrative assignment, retaining relevant unassigned company context. Five observed company misses lie outside all watched narratives; do not force them into a false endpoint.
+- [ ] Enrich full article/issuer/product/market evidence and common infrastructure readiness, memory price-volume, and end-market contracts.44company units unresolved; no per-ticker or headline patches, no invented suppliers or financial effect.
+- [ ] Replay the fixed anchor after each change, preserving its newly exposed status. Collect fresh varied event families/negative controls for independently labelled evaluation; retain sparse support and reviewer disagreement disclosures.
+- [ ] Human usefulness, personalization, source coverage/latency and reliability/release gates remain open. Financial magnitude/horizon/causal truth remain unmeasured; v1notcomplete, cloud/push stay off.
+
+
 ## Current next steps — actor/asset and mechanism contracts (2026-11-28)
 
 - [x] Shared adjacent source references with original spans; no title/body, multi-hop or ambiguous actor/asset donation. Background-only new matches.
