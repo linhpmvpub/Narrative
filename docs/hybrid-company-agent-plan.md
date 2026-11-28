@@ -1,5 +1,9 @@
 # Hybrid company-news agent: assessment and experiment plan
 
+Implementation update (2026-11-28): the isolated local A/B/C harness is now implemented; see
+[experiment contract](hybrid-shadow-experiment.md) and the latest checkpoint for measured execution.
+The assessment below records the original plan; deployment and fresh blind evaluation remain pending.
+
 2026-11-28. Requested evaluation of an analyst agent using the project's relationship/impact
 database, algorithms and weights. This is a proposed experiment, not an implemented LLM pipeline,
 measured improvement, production migration or authorization to transfer private data to a provider.
