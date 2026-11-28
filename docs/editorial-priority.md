@@ -6,7 +6,7 @@ Neither answer establishes financial impact or authorizes a notification.
 
 `config/editorial-priority-v1.json` is the versioned contract. Actor names, products,
 relations and narrative intent remain source-backed profile data; there are no
-ticker, publisher or headline exceptions. Core policy12 retains numeric40/30/20/20
+ticker, publisher or headline exceptions. Core policy13 retains numeric40/30/20/20
 weights but changes eligibility and the resolved-entity feature: a named relationship
 alone no longer receives an event's priority or score bonus.
 
@@ -33,11 +33,23 @@ Accepted context-only matches retain that conditional relevance flag but can now
 produce an editorial signal. Thus relevance uncertainty is preserved without
 automatically hiding every source-backed development.
 
-Legacy non-scoped change-word and structured-activity branches still run with shared
-routine/uncertain/retrospective exclusions. They remain an observed limitation:
-four generic change-word paths and one legacy compute-deployment path account for
-the five unchanged priority false positives on the exposed framework reference.
-Do not call those branches fully standardized or add exceptions for those articles.
+Legacy paths now use `operating_developments` and
+`config/operating-developments-v1.json`: a bounded action must have an operating
+object (capacity, demand, financing, cost or supply), or a structured facility,
+compute deployment, financing or integration object. Exact action/object offsets
+are relative to the retained source window. An explicit funding purpose is a
+forward-looking allocation, not realized capacity. Plans stay plans. Product
+definitions, abstract role/influence expansion and deployment demonstrations do
+not qualify by change vocabulary alone. Ambiguous/unrecognized clauses stay in
+background; relevance and source-backed graph matching are unchanged.
+
+Facility apposition and quantity complements are bounded; passive deployments
+need a source auxiliary or explicit by-agent. These are source text signals, not
+verified actor identity or semantic completeness. The 40-point entity feature now
+requires the same qualifying link, preventing another link from donating it. This
+is still relationship context, not proof the named party performs the action.
+Legacy price wording is informational context only, never a commodity price alert;
+the separate comparable-period and >5% threshold contract is unchanged.
 
 Freshness is checked by the existing feed boundary, including current source poll,
 raw revision proof, article-age windows, profile pins, withdrawals and graph validity.
@@ -56,8 +68,11 @@ constraint versus price-only language; RSS/article parity; stale-source, expired
 and withdrawn-profile checks. See `reports/editorial-priority-review.json` and the
 latest checkpoint for exact CI results and exposed regression metrics.
 
-Opt-in local workspace: `source-cache/editorial-priority-workspace-2026-11-28.json`.
-Private sources/profiles/labels/DB remain local. No new blind evaluation or public
-release acceptance is claimed. Next: migrate legacy priority to explicit action/object
-and operating-purpose scope, then freeze unused publisher/family-diverse events
-before independent reviews; keep original labels and all observed failures.
+Opt-in local workspace: `source-cache/operating-priority-workspace-2026-11-28.json`.
+Private sources/profiles/labels/DB remain local. No public release is authorized.
+See the latest checkpoint and `reports/operating-priority-review.json` for exposed
+regressions, unused RSS review limitations, remaining losses and exact CI results.
+Keep precision and recall costs visible: stricter priority is not an accuracy gain
+when useful developments move to background. Next coverage should address common
+operating improvements, supply access and agreements through typed evidence, not
+per-company rules or weight changes that conceal missing semantics.

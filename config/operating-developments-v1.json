@@ -1,0 +1,20 @@
+{
+  "version": "operating-developments-v1",
+  "object_bound_chars": 140,
+  "objects": {
+    "CAPACITY": ["capacity", "output", "production", "manufacturing", "facility", "facilities", "fab", "fabs", "factory", "factories", "plant", "plants", "campus", "site", "production line", "compute", "computing", "AI infrastructure"],
+    "FINANCING": ["investment", "investments", "spending", "funding", "capital", "financing"],
+    "DEMAND": ["demand", "orders", "order", "shipments", "deliveries", "sales", "backlog", "procurement"],
+    "COST": ["prices", "price", "costs", "cost", "tariffs", "duties", "expenses"],
+    "SUPPLY": ["supply", "supplies", "availability", "power", "electricity", "water", "inventory", "inventories"]
+  },
+  "hardware": ["GPU", "GPUs", "accelerator", "accelerators", "server", "servers", "cluster", "clusters", "supercomputer", "supercomputers", "racks", "AI infrastructure", "AI compute", "computing capacity"],
+  "facilities": ["data center", "data centre", "datacenter", "campus", "facility", "facilities", "construction", "development", "project"],
+  "funding": ["funds", "funding", "capital", "bonds", "financing", "investment", "investment partner"],
+  "demonstration_pattern": "\\b(?:demo(?:nstration|nstrator)?s?|prototypes?|proof[ -]of[ -]concept|testbeds?|showcas\\w*)\\b",
+  "planning_pattern": "\\b(?:plans?|planned|intends?|will|expects?|expected|proposes?|proposed|decides?|decided)\\b",
+  "allocation_pattern": "\\b(?:raised?|secured?|invest(?:s|ed)?|fund(?:s|ed)?|committed)\\b",
+  "clause_boundary": "[,;!?]|\\b(?:but|whereas|while|and)\\b",
+  "object_boundary": "[,;!?]|\\b(?:for|to|from|with|by|which|that|but|whereas|while|and|across|alongside|in|of)\\b",
+  "delivery": "disabled"
+}

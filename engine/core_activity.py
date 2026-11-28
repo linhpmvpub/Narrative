@@ -3,6 +3,7 @@
 import re
 
 from engine.editorial_priority import exclusion, scoped
+from engine.operating_developments import assess as operating_development
 from engine.source_sentences import sentences
 
 
@@ -19,6 +20,7 @@ def assess(item, links, policy):
             editorial.append(decision)
             if decision["eligible"]:
                 typed_signals.append({**decision["source_window"], "driver_direction": "UNKNOWN",
+                    "entity_resolved": bool(link.get("entity_context")),
                     "phase": decision["phase"], "event_type": decision["event_type"],
                     "source_duration": None, "event_horizon": "UNKNOWN", "horizon_basis": "NOT_ESTIMATED",
                     "editorial_basis": decision["reason"]})
@@ -41,6 +43,7 @@ def assess(item, links, policy):
                             "start": sentence.start(),
                             "end": sentence.end(),
                             "text": sentence.group(),
+                            "entity_resolved": bool(link.get("entity_context")),
                             **({"activity_assertion": spans[0]["activity_assertion"]}
                                if spans[0].get("activity_assertion") else {}),
                         }
@@ -52,26 +55,13 @@ def assess(item, links, policy):
         if reason := exclusion(text):
             editorial.append({"eligible": False, "reason": reason, "source_window": window})
             continue
-        assertion = window.get("activity_assertion")
-        if assertion:
-            signals.append({**window, "driver_direction": "UNKNOWN",
-                            "phase": assertion["phase"], "source_duration": None,
-                            "event_horizon": "UNKNOWN", "horizon_basis": "NOT_ESTIMATED"})
-            continue
         if re.search(r"\b(no|not|never|without|unchanged|denied)\b", text):
+            editorial.append({"eligible": False, "reason": "NEGATED_OR_UNCHANGED_WINDOW", "source_window": window})
             continue
-        directions = [
-            direction
-            for direction, terms in policy["change_terms"].items()
-            if any(re.search(r"\b" + re.escape(term) + r"\b", text) for term in terms)
-        ]
-        if len(directions) != 1:
+        development = operating_development(window, policy)
+        editorial.append(development)
+        if not development["eligible"]:
             continue
-        phase = (
-            "FORWARD_LOOKING"
-            if any(re.search(r"\b" + word + r"\b", text) for word in policy["phase_terms"])
-            else "SOURCE_REPORTED_CHANGE"
-        )
         duration = re.search(r"\bfor (\d{1,3}) (days?|weeks?|months?|years?)\b", text)
         event_horizon = "UNKNOWN"
         if duration:
@@ -83,27 +73,31 @@ def assess(item, links, policy):
         signals.append(
             {
                 **window,
-                "driver_direction": directions[0],
-                "phase": phase,
+                "driver_direction": development["driver_direction"],
+                "phase": development["phase"],
+                "event_type": development["event_type"],
+                "editorial_basis": development["reason"],
+                "operating_development": development,
                 "source_duration": duration[0] if duration else None,
                 "event_horizon": event_horizon,
                 "horizon_basis": "SOURCE_DURATION_EDITORIAL_BIN_NOT_COMPANY_IMPACT_LAG",
             }
         )
     resolved = any(link.get("entity_context") for link in links)
+    event_resolved = any(signal.get("entity_resolved") for signal in signals)
     sponsored = bool(
         re.search(r"\b(sponsored|advertorial|partner content)\b", item["headline"], re.I)
     )
     weights = policy["priority_weights"]
     score = (
         weights["sourced_path"]
-        + weights["resolved_entity"] * (resolved and bool(signals))
+        + weights["resolved_entity"] * event_resolved
         + weights["concrete_change"] * bool(signals)
         - weights["sponsored_penalty"] * sponsored
     )
     tier = (
         "COMPANY_CONTEXT"
-        if resolved and signals
+        if event_resolved
         else "SECTOR_CHANGE_CONTEXT"
         if signals
         else "BACKGROUND_THEME"
@@ -117,16 +111,17 @@ def assess(item, links, policy):
         "signals": signals,
         "editorial_decisions": editorial,
         "resolved_entity": resolved,
+        "event_entity_resolved": event_resolved,
         "priority_audit": {**audit, "concrete_signals": len(signals),
                            "weights_changed": False, "delivery": "disabled"},
         "sponsored": sponsored,
         "direction": "UNKNOWN",
         "horizon": "UNKNOWN",
         "reason": "Resolved relationship entity"
-        if resolved and signals
+        if event_resolved
         else "Scoped source development within narrative; financial effect unknown"
         if typed_signals
-        else "Same-window economic change language"
+        else "Source action and operating object; financial effect unknown"
         if signals
         else "Related entity without a qualifying development" if resolved
         else "Topic match without a specific change assertion",
