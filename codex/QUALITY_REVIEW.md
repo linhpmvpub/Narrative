@@ -1,5 +1,14 @@
 # Quality review after each iteration
 
+## Hybrid workflow assessment, not an efficacy result — 2026-11-28
+
+- Current10.64company index and42misses motivate testing semantic interpretation beyond bounded regex; they do not prove a particular model will outperform the engine. Model smoke is spaCy; no deployed LLM comparison exists. Read code to distinguish implemented capability from labels in historical reports.
+- Proposed division: agent owns language interpretation and evidence-grounded proposals; source/version validation, entity/graph membership, arithmetic, ranking policy and delivery remain code-controlled. The graph supplies reviewed scope/mechanisms/conditions, not automatic truth about every new event. Missing data, retrieval misses and ambiguous claims stay explicit. Database advantage over generic LLM is a testable hypothesis.
+- Risks addressed in plan: old candidate filters preserving misses; whole-database prompts obscuring useful evidence; agent-created financial coefficients; unsupported inferred suppliers; prompt-injection from source content; stale caches after corrections/profile changes; one serial growing conversation; self-judging evaluation; historical/model leakage. Scope is bounded workflow first, not a multi-agent production committee.
+- Same-source/model paired A/B/C design separates engine, generic model and hybrid. Retain old exposed references; new predictions and protocol precede independent labels. Measure quality plus unsupported claims, retrieval coverage, explanation fidelity, cost/latency and repeated-run consistency. No fresh data, labels, efficacy number or release criterion change this turn.
+- Only planning/checkpoint/tasks documentation changed; link/diff/history checks replace unnecessary runtime tests. Data local,LLM_MODE=none,live notifications/cloud off. Existing principles retained; no empirical lesson invented. Next implement local provider-neutral shadow contracts and audit sourced identity/exposure data; obtain a model/data-egress decision only when execution actually requires it.
+
+
 ## Shared issuer contracts — 2026-11-28 (latest)
 
 - Investor value: direct issuer operating/financial developments can reach the company feed beyond four legacy forms. Catalog is explicit/versioned; names remain data and grammar is reusable. Exact statement/actor/object/phase traces support review, not causal or numerical impact claims. Same-source sentence attention prevents unrelated commentary veto while retaining local uncertainty.

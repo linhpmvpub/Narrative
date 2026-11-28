@@ -1,5 +1,18 @@
 # TASKS — implementation execution checklist
 
+## Hybrid analyst experiment assessment — 2026-11-28
+
+User requested evaluation; this is a proposed experiment sequence, not approval to activate runtime LLM or send private data. See [hybrid plan](../docs/hybrid-company-agent-plan.md).
+
+- [x] Audit existing extraction/assessment and evaluate the one-agent+database approach; distinguish spaCy smoke, deterministic production and a future generative analyst.
+- [ ] Prepare local shadow contracts: immutable source/graph packets, typed proposals, read-only retrieval, source/graph validators and A/B/C comparison receipts. Keep normal feed and model execution disabled while preparing.
+- [ ] Continue source-backed alias and product/market exposure inventory below; agent interpretation must not substitute for missing verified edges.
+- [ ] At actual execution: select an available local model/runtime or obtain specific provider/cost/private-data-egress authorization. Do not silently use an API or represent manual developer judgments as model predictions.
+- [ ] Compare current engine, generic LLM and hybrid on identical frozen inputs; retain current benchmarks and later add unused economic-event clusters with independently frozen labels. Measure retrieval, unsupported claims, fidelity, cost/latency and quality; no deployment by score alone.
+
+Company foundation remains primary, narratives later. No new measured score this assessment.
+
+
 ## Next after issuer-event contracts — 2026-11-28 (latest)
 
 - [x] Versioned shared issuer catalog for result/performance, shipment/capacity, financing, governance and credit; literal evidence and plan phase, no ticker branches.
