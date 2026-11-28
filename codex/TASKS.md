@@ -1,5 +1,16 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — operating semantics and routing coverage (2026-11-28)
+
+- [x] Legacy action/object/operating-purpose priority with same-link entity bonus, source phase/spans and generic counterexamples. Policy13, weights unchanged;97focused and full CI details in checkpoint.
+- [x] Eight exposed-cohort replays;2760relevance decisions unchanged. Removed5framework priority FP; retained4memory priority losses and older selection losses as open defects.
+- [x] Freeze unused12RSS/120pairs from4publishers; actual prior runtime and candidate before2independent AI reviewers. Both1TP/0FP/11FN relevance;1/0/8priority. No post-label tuning, no release promotion; this cohort is now exposed regression.
+- [ ] Align sourced infrastructure/market routes with stated narrative scope. Represent proposals, experiments and commercial deployment distinctly; do not infer specific supplier orders.
+- [ ] Extend source-local headline/body references only with explicit bounded evidence and wrong-subject/other-clause negatives; preserve source offsets and ambiguity.
+- [ ] Recover financing-to-input-access and strategic-agreement operating purposes without ticker/headline rules. Keep4memory priority losses and all old targets in regression.
+- [ ] After implementation, lock a new publisher/family sample with better issuer/mechanism coverage before independent labels. Seven-day operations and human/product validation remain separate release gates.
+
+
 ## Current next steps — editorial priority (2026-11-28)
 
 - [x] Versioned source event/phase/narrative priority contract; conditional typed developments can be highlighted, entity mention alone cannot. Exact decision traces and Vietnamese phase labels; final validation in checkpoint.

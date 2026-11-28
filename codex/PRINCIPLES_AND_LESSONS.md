@@ -8,6 +8,13 @@
 - Verify both selection and false promotions. Numeric weights may stay unchanged while feature eligibility changes; do not call this learned impact calibration. Improve remaining legacy semantics, then use untouched families/publishers for independent evaluation.
 
 
+### L024 follow-up — operating evidence and coverage costs (2026-11-28)
+
+- Explicit action/object priority removes5exposed framework false promotions while retaining9correct selections, but withholds4memory priority positives across2articles. Preserve these costs and their background cards; a stricter gate is not automatically better quality. A demonstration/definition differs from a realized deployment; a concrete planned experiment can still be useful and needs its own phase, not a blanket research-content exclusion.
+- The resolved-entity feature must come from the qualifying link, not another article link. Even that is relationship context, not verified causal actor identity. Keep source spans and financial UNKNOWN.
+- Fresh12RSS/120pairs yield the same1TP/0FP/11FN relevance for old/new runtime;8priority misses are unmatched upstream. Fix source-backed applicability and narrative scope before weights. Two AI contexts and lexical novelty are limited evidence, not human truth or proven family independence. Freeze both actual runtimes before labels and do not tune after review; the new packet becomes exposed regression.
+
+
 ## L023 — Preserve source boundaries and diagnose priority independently
 
 - Evidence2026-11-28: seven archived articles had302regex segments versus257shared-source segments; all2760exposed pair decisions stayed unchanged. A parser correction is not measured recall improvement. Keep exact spans and original quotes across RSS, article cards and review.

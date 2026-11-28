@@ -1,0 +1,1860 @@
+{
+  "schema": "OPERATING_PRIORITY_REVIEW_V1",
+  "date": "2026-11-28",
+  "baseline_code": "7148544f14e1b00e7009dda5e2b776a414e4e573",
+  "reference": "EXPOSED_AI_LABELS_NOT_NEW_BLIND_OR_HUMAN_GOLD",
+  "release_status": "NOT_ACCEPTED_FOR_PUBLIC_RELEASE",
+  "policy_version": 13,
+  "operating_policy": "operating-developments-v1",
+  "numerical_weights_changed": false,
+  "profiles_unchanged": true,
+  "delivery": "disabled",
+  "runtime_baseline": "76bad7612ffcd107a53970eb91a8454bcd97ab389382f311b1531ac3138dc101",
+  "cohorts": {
+    "actor77": {
+      "pairs": 77,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 6,
+        "fp": 0,
+        "tn": 61,
+        "fn": 6,
+        "unresolved": 4,
+        "pairs": 77,
+        "clusters": 7,
+        "positive_clusters": 6,
+        "negative_clusters": 7,
+        "selected_positive_clusters": 3,
+        "selected_unresolved": 1,
+        "precision": 1.0,
+        "recall": 0.5,
+        "unresolved_fraction": 0.05194805194805195
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 61,
+          "fn": 9,
+          "unresolved": 4,
+          "pairs": 77,
+          "clusters": 7,
+          "positive_clusters": 6,
+          "negative_clusters": 7,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.25,
+          "unresolved_fraction": 0.05194805194805195
+        },
+        "candidate_priority": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 61,
+          "fn": 9,
+          "unresolved": 4,
+          "pairs": 77,
+          "clusters": 7,
+          "positive_clusters": 6,
+          "negative_clusters": 7,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.25,
+          "unresolved_fraction": 0.05194805194805195
+        }
+      },
+      "promotions": 0,
+      "demotions": 0,
+      "main_vs_priority": {
+        "previous_priority": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 65,
+          "fn": 2,
+          "unresolved": 7,
+          "pairs": 77,
+          "clusters": 7,
+          "positive_clusters": 4,
+          "negative_clusters": 7,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.6,
+          "unresolved_fraction": 0.09090909090909091
+        },
+        "candidate_priority": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 65,
+          "fn": 2,
+          "unresolved": 7,
+          "pairs": 77,
+          "clusters": 7,
+          "positive_clusters": 4,
+          "negative_clusters": 7,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.6,
+          "unresolved_fraction": 0.09090909090909091
+        }
+      },
+      "failure_layers": {
+        "routing_misses": 1,
+        "matched_unprioritized": 1
+      }
+    },
+    "framework121": {
+      "pairs": 121,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 31,
+        "fp": 0,
+        "tn": 68,
+        "fn": 17,
+        "unresolved": 5,
+        "pairs": 121,
+        "clusters": 11,
+        "positive_clusters": 10,
+        "negative_clusters": 11,
+        "selected_positive_clusters": 9,
+        "selected_unresolved": 3,
+        "precision": 1.0,
+        "recall": 0.6458333333333334,
+        "unresolved_fraction": 0.04132231404958678
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 15,
+          "fp": 0,
+          "tn": 68,
+          "fn": 33,
+          "unresolved": 5,
+          "pairs": 121,
+          "clusters": 11,
+          "positive_clusters": 10,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 8,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.3125,
+          "unresolved_fraction": 0.04132231404958678
+        },
+        "candidate_priority": {
+          "tp": 9,
+          "fp": 0,
+          "tn": 68,
+          "fn": 39,
+          "unresolved": 5,
+          "pairs": 121,
+          "clusters": 11,
+          "positive_clusters": 10,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 8,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.1875,
+          "unresolved_fraction": 0.04132231404958678
+        }
+      },
+      "promotions": 0,
+      "demotions": 6,
+      "main_vs_priority": {
+        "previous_priority": {
+          "tp": 9,
+          "fp": 5,
+          "tn": 79,
+          "fn": 19,
+          "unresolved": 9,
+          "pairs": 121,
+          "clusters": 11,
+          "positive_clusters": 9,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 8,
+          "selected_unresolved": 1,
+          "precision": 0.6428571428571429,
+          "recall": 0.32142857142857145,
+          "unresolved_fraction": 0.0743801652892562
+        },
+        "candidate_priority": {
+          "tp": 9,
+          "fp": 0,
+          "tn": 84,
+          "fn": 19,
+          "unresolved": 9,
+          "pairs": 121,
+          "clusters": 11,
+          "positive_clusters": 9,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 8,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.32142857142857145,
+          "unresolved_fraction": 0.0743801652892562
+        }
+      },
+      "failure_layers": {
+        "routing_misses": 10,
+        "matched_unprioritized": 9
+      }
+    },
+    "memory-unseen-2026-11-27": {
+      "pairs": 150,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 25,
+        "fp": 0,
+        "tn": 107,
+        "fn": 13,
+        "unresolved": 5,
+        "pairs": 150,
+        "clusters": 15,
+        "positive_clusters": 10,
+        "negative_clusters": 15,
+        "selected_positive_clusters": 10,
+        "selected_unresolved": 1,
+        "precision": 1.0,
+        "recall": 0.6578947368421053,
+        "unresolved_fraction": 0.03333333333333333
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 9,
+          "fp": 0,
+          "tn": 107,
+          "fn": 29,
+          "unresolved": 5,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 10,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 5,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.23684210526315788,
+          "unresolved_fraction": 0.03333333333333333
+        },
+        "candidate_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 107,
+          "fn": 33,
+          "unresolved": 5,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 10,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.13157894736842105,
+          "unresolved_fraction": 0.03333333333333333
+        }
+      },
+      "promotions": 0,
+      "demotions": 4,
+      "main_vs_priority": {
+        "previous_priority": {
+          "tp": 9,
+          "fp": 0,
+          "tn": 107,
+          "fn": 23,
+          "unresolved": 11,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 10,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 5,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.28125,
+          "unresolved_fraction": 0.07333333333333333
+        },
+        "candidate_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 107,
+          "fn": 27,
+          "unresolved": 11,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 10,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.15625,
+          "unresolved_fraction": 0.07333333333333333
+        }
+      },
+      "failure_layers": {
+        "routing_misses": 10,
+        "matched_unprioritized": 17
+      }
+    },
+    "priority-blind-2026-11-26": {
+      "pairs": 216,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 5,
+        "fp": 0,
+        "tn": 153,
+        "fn": 2,
+        "unresolved": 56,
+        "pairs": 216,
+        "clusters": 24,
+        "positive_clusters": 5,
+        "negative_clusters": 22,
+        "selected_positive_clusters": 4,
+        "selected_unresolved": 0,
+        "precision": 1.0,
+        "recall": 0.7142857142857143,
+        "unresolved_fraction": 0.25925925925925924
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 153,
+          "fn": 2,
+          "unresolved": 56,
+          "pairs": 216,
+          "clusters": 24,
+          "positive_clusters": 5,
+          "negative_clusters": 22,
+          "selected_positive_clusters": 4,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.7142857142857143,
+          "unresolved_fraction": 0.25925925925925924
+        },
+        "candidate_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 153,
+          "fn": 2,
+          "unresolved": 56,
+          "pairs": 216,
+          "clusters": 24,
+          "positive_clusters": 5,
+          "negative_clusters": 22,
+          "selected_positive_clusters": 4,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.7142857142857143,
+          "unresolved_fraction": 0.25925925925925924
+        }
+      },
+      "promotions": 0,
+      "demotions": 0,
+      "main_vs_priority": {
+        "previous_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 155,
+          "fn": 0,
+          "unresolved": 56,
+          "pairs": 216,
+          "clusters": 24,
+          "positive_clusters": 4,
+          "negative_clusters": 22,
+          "selected_positive_clusters": 4,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.25925925925925924
+        },
+        "candidate_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 155,
+          "fn": 0,
+          "unresolved": 56,
+          "pairs": 216,
+          "clusters": 24,
+          "positive_clusters": 4,
+          "negative_clusters": 22,
+          "selected_positive_clusters": 4,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.25925925925925924
+        }
+      },
+      "failure_layers": {
+        "routing_misses": 0,
+        "matched_unprioritized": 0
+      }
+    },
+    "priority-issuer-archive-2026-11-26": {
+      "pairs": 30,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 2,
+        "fp": 0,
+        "tn": 25,
+        "fn": 0,
+        "unresolved": 3,
+        "pairs": 30,
+        "clusters": 3,
+        "positive_clusters": 2,
+        "negative_clusters": 3,
+        "selected_positive_clusters": 2,
+        "selected_unresolved": 1,
+        "precision": 1.0,
+        "recall": 1.0,
+        "unresolved_fraction": 0.1
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 25,
+          "fn": 0,
+          "unresolved": 3,
+          "pairs": 30,
+          "clusters": 3,
+          "positive_clusters": 2,
+          "negative_clusters": 3,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.1
+        },
+        "candidate_priority": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 25,
+          "fn": 0,
+          "unresolved": 3,
+          "pairs": 30,
+          "clusters": 3,
+          "positive_clusters": 2,
+          "negative_clusters": 3,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.1
+        }
+      },
+      "promotions": 0,
+      "demotions": 0,
+      "main_vs_priority": {
+        "previous_priority": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 25,
+          "fn": 0,
+          "unresolved": 3,
+          "pairs": 30,
+          "clusters": 3,
+          "positive_clusters": 2,
+          "negative_clusters": 3,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.1
+        },
+        "candidate_priority": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 25,
+          "fn": 0,
+          "unresolved": 3,
+          "pairs": 30,
+          "clusters": 3,
+          "positive_clusters": 2,
+          "negative_clusters": 3,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "unresolved_fraction": 0.1
+        }
+      },
+      "failure_layers": {
+        "routing_misses": 0,
+        "matched_unprioritized": 0
+      }
+    },
+    "older_rss": {
+      "pairs": 1716,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 54,
+        "fp": 3,
+        "tn": 1359,
+        "fn": 42,
+        "unresolved": 258,
+        "pairs": 1716,
+        "clusters": 308,
+        "positive_clusters": 58,
+        "negative_clusters": 302,
+        "selected_positive_clusters": 40,
+        "selected_unresolved": 12,
+        "precision": 0.9473684210526315,
+        "recall": 0.5625,
+        "unresolved_fraction": 0.15034965034965034
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 16,
+          "fp": 1,
+          "tn": 1361,
+          "fn": 80,
+          "unresolved": 258,
+          "pairs": 1716,
+          "clusters": 308,
+          "positive_clusters": 58,
+          "negative_clusters": 302,
+          "selected_positive_clusters": 12,
+          "selected_unresolved": 5,
+          "precision": 0.9411764705882353,
+          "recall": 0.16666666666666666,
+          "unresolved_fraction": 0.15034965034965034
+        },
+        "candidate_priority": {
+          "tp": 5,
+          "fp": 0,
+          "tn": 1362,
+          "fn": 91,
+          "unresolved": 258,
+          "pairs": 1716,
+          "clusters": 308,
+          "positive_clusters": 58,
+          "negative_clusters": 302,
+          "selected_positive_clusters": 5,
+          "selected_unresolved": 2,
+          "precision": 1.0,
+          "recall": 0.052083333333333336,
+          "unresolved_fraction": 0.15034965034965034
+        }
+      },
+      "promotions": 0,
+      "demotions": 15
+    },
+    "older_archive": {
+      "pairs": 300,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 5,
+        "fp": 0,
+        "tn": 275,
+        "fn": 7,
+        "unresolved": 13,
+        "pairs": 300,
+        "clusters": 75,
+        "positive_clusters": 8,
+        "negative_clusters": 74,
+        "selected_positive_clusters": 3,
+        "selected_unresolved": 0,
+        "precision": 1.0,
+        "recall": 0.4166666666666667,
+        "unresolved_fraction": 0.043333333333333335
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 275,
+          "fn": 12,
+          "unresolved": 13,
+          "pairs": 300,
+          "clusters": 75,
+          "positive_clusters": 8,
+          "negative_clusters": 74,
+          "selected_positive_clusters": 0,
+          "selected_unresolved": 0,
+          "precision": null,
+          "recall": 0.0,
+          "unresolved_fraction": 0.043333333333333335
+        },
+        "candidate_priority": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 275,
+          "fn": 12,
+          "unresolved": 13,
+          "pairs": 300,
+          "clusters": 75,
+          "positive_clusters": 8,
+          "negative_clusters": 74,
+          "selected_positive_clusters": 0,
+          "selected_unresolved": 0,
+          "precision": null,
+          "recall": 0.0,
+          "unresolved_fraction": 0.043333333333333335
+        }
+      },
+      "promotions": 0,
+      "demotions": 0
+    },
+    "older_full_article": {
+      "pairs": 150,
+      "relevance_unchanged": true,
+      "relevance": {
+        "tp": 24,
+        "fp": 1,
+        "tn": 108,
+        "fn": 4,
+        "unresolved": 13,
+        "pairs": 150,
+        "clusters": 15,
+        "positive_clusters": 12,
+        "negative_clusters": 15,
+        "selected_positive_clusters": 12,
+        "selected_unresolved": 1,
+        "precision": 0.96,
+        "recall": 0.8571428571428571,
+        "unresolved_fraction": 0.08666666666666667
+      },
+      "main_vs_relevance": {
+        "previous_priority": {
+          "tp": 13,
+          "fp": 0,
+          "tn": 109,
+          "fn": 15,
+          "unresolved": 13,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 12,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 7,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.4642857142857143,
+          "unresolved_fraction": 0.08666666666666667
+        },
+        "candidate_priority": {
+          "tp": 10,
+          "fp": 0,
+          "tn": 109,
+          "fn": 18,
+          "unresolved": 13,
+          "pairs": 150,
+          "clusters": 15,
+          "positive_clusters": 12,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 6,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.35714285714285715,
+          "unresolved_fraction": 0.08666666666666667
+        }
+      },
+      "promotions": 0,
+      "demotions": 3
+    }
+  },
+  "validation": {
+    "focused_tests": 97,
+    "focused_seconds": 52.63,
+    "ruff": "passed",
+    "mypy_modules": 161,
+    "browser": "desktop_mobile_auth_filter_logout_error_late_response_passed",
+    "ci": {
+      "conclusion": "success",
+      "run_id": 46101923055,
+      "code_commit": "868c88c871eca4312933e5e68eaf1476df0f5d91",
+      "tests": [
+        "SQLite 1523 passed, 1 warning in 146.01s (0:02:26)",
+        "PostgreSQL 1523 passed, 1 warning in 257.90s (0:04:17)"
+      ],
+      "jobs": [
+        {
+          "id": 140846072321,
+          "name": "verify",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Initialize containers",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Run python -m pip install pip==26.3",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run pip install -c requirements-validated.txt -e '.[dev]'",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run ruff check engine alembic tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run node --check engine/web/core.js",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run mypy engine",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Run pytest -q",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run pytest -q",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Run alembic upgrade head",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Stop containers",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 140846072494,
+          "name": "extraction-model-smoke",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run python -m pip install pip==26.3",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Run python -m pip install -r requirements-extraction.txt",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run python -m tests.model_extraction_smoke",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 140846072500,
+          "name": "dependency-audit",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run python -m pip install pip==26.3 pip-audit==2.10.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Run pip-audit -r requirements-validated.txt --no-deps --disable-pip",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run pip-audit -r requirements-container.txt --no-deps --disable-pip",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "fresh_review": {
+    "reference_kind": "TWO_INDEPENDENT_AI_CONTEXTS_NOT_HUMAN_GOLD",
+    "pairs": 120,
+    "articles": 12,
+    "publishers": 4,
+    "source_feeds": {
+      "dcd": 4,
+      "dck": 1,
+      "cnbc_technology": 3,
+      "cnbc_world": 1,
+      "cnbc_markets": 2,
+      "marketwatch": 1
+    },
+    "sampling_strata": {
+      "other": 6,
+      "capacity": 3,
+      "finance": 2,
+      "policy": 1
+    },
+    "source_quota_shortfalls": {
+      "dcd": 0,
+      "dck": 2,
+      "cnbc_technology": 0,
+      "sandisk_ir": 1,
+      "amd_ir": 1
+    },
+    "prior_packets_verified": 37,
+    "unique_prior_articles": 606,
+    "excluded_prior_exposure": 297,
+    "packet_sha256": "03af776dd1c2564e6ad8d4ea107279c7d5fa8203cde7bc3562c0c4601906eecd",
+    "baseline_code": "7148544f14e1b00e7009dda5e2b776a414e4e573",
+    "relevance_disagreements": 3,
+    "priority_disagreements": 3,
+    "group_unresolved_clusters": 1,
+    "metrics": {
+      "relevance": {
+        "previous": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 100,
+          "fn": 11,
+          "unresolved": 8,
+          "pairs": 120,
+          "clusters": 12,
+          "positive_clusters": 4,
+          "negative_clusters": 12,
+          "selected_positive_clusters": 1,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.08333333333333333,
+          "unresolved_fraction": 0.06666666666666667
+        },
+        "candidate": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 100,
+          "fn": 11,
+          "unresolved": 8,
+          "pairs": 120,
+          "clusters": 12,
+          "positive_clusters": 4,
+          "negative_clusters": 12,
+          "selected_positive_clusters": 1,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.08333333333333333,
+          "unresolved_fraction": 0.06666666666666667
+        }
+      },
+      "priority": {
+        "previous_priority": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 103,
+          "fn": 8,
+          "unresolved": 8,
+          "pairs": 120,
+          "clusters": 12,
+          "positive_clusters": 3,
+          "negative_clusters": 12,
+          "selected_positive_clusters": 1,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.1111111111111111,
+          "unresolved_fraction": 0.06666666666666667
+        },
+        "candidate_priority": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 103,
+          "fn": 8,
+          "unresolved": 8,
+          "pairs": 120,
+          "clusters": 12,
+          "positive_clusters": 3,
+          "negative_clusters": 12,
+          "selected_positive_clusters": 1,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.1111111111111111,
+          "unresolved_fraction": 0.06666666666666667
+        }
+      }
+    },
+    "by_ticker": {
+      "AMD": {
+        "relevance": {
+          "previous": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 20,
+            "fn": 0,
+            "unresolved": 4,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.16666666666666666
+          },
+          "candidate": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 20,
+            "fn": 0,
+            "unresolved": 4,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.16666666666666666
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 20,
+            "fn": 0,
+            "unresolved": 4,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.16666666666666666
+          },
+          "candidate_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 20,
+            "fn": 0,
+            "unresolved": 4,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.16666666666666666
+          }
+        }
+      },
+      "DELL": {
+        "relevance": {
+          "previous": {
+            "tp": 1,
+            "fp": 0,
+            "tn": 20,
+            "fn": 3,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 4,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 1,
+            "selected_unresolved": 0,
+            "precision": 1.0,
+            "recall": 0.25,
+            "unresolved_fraction": 0.0
+          },
+          "candidate": {
+            "tp": 1,
+            "fp": 0,
+            "tn": 20,
+            "fn": 3,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 4,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 1,
+            "selected_unresolved": 0,
+            "precision": 1.0,
+            "recall": 0.25,
+            "unresolved_fraction": 0.0
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 1,
+            "fp": 0,
+            "tn": 21,
+            "fn": 2,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 3,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 1,
+            "selected_unresolved": 0,
+            "precision": 1.0,
+            "recall": 0.3333333333333333,
+            "unresolved_fraction": 0.0
+          },
+          "candidate_priority": {
+            "tp": 1,
+            "fp": 0,
+            "tn": 21,
+            "fn": 2,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 3,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 1,
+            "selected_unresolved": 0,
+            "precision": 1.0,
+            "recall": 0.3333333333333333,
+            "unresolved_fraction": 0.0
+          }
+        }
+      },
+      "MU": {
+        "relevance": {
+          "previous": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 24,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          },
+          "candidate": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 24,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 24,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          },
+          "candidate_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 24,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          }
+        }
+      },
+      "NVDA": {
+        "relevance": {
+          "previous": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 16,
+            "fn": 8,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 4,
+            "negative_clusters": 8,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": 0.0,
+            "unresolved_fraction": 0.0
+          },
+          "candidate": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 16,
+            "fn": 8,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 4,
+            "negative_clusters": 8,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": 0.0,
+            "unresolved_fraction": 0.0
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 18,
+            "fn": 6,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 3,
+            "negative_clusters": 9,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": 0.0,
+            "unresolved_fraction": 0.0
+          },
+          "candidate_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 18,
+            "fn": 6,
+            "unresolved": 0,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 3,
+            "negative_clusters": 9,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": 0.0,
+            "unresolved_fraction": 0.0
+          }
+        }
+      },
+      "SNDK": {
+        "relevance": {
+          "previous": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 20,
+            "fn": 0,
+            "unresolved": 4,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.16666666666666666
+          },
+          "candidate": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 20,
+            "fn": 0,
+            "unresolved": 4,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.16666666666666666
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 20,
+            "fn": 0,
+            "unresolved": 4,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.16666666666666666
+          },
+          "candidate_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 20,
+            "fn": 0,
+            "unresolved": 4,
+            "pairs": 24,
+            "clusters": 12,
+            "positive_clusters": 0,
+            "negative_clusters": 12,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.16666666666666666
+          }
+        }
+      }
+    },
+    "by_group": {
+      "UNKNOWN": {
+        "relevance": {
+          "previous": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          },
+          "candidate": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          },
+          "candidate_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          }
+        }
+      },
+      "capacity": {
+        "relevance": {
+          "previous": {
+            "tp": 1,
+            "fp": 0,
+            "tn": 25,
+            "fn": 8,
+            "unresolved": 6,
+            "pairs": 40,
+            "clusters": 4,
+            "positive_clusters": 3,
+            "negative_clusters": 4,
+            "selected_positive_clusters": 1,
+            "selected_unresolved": 0,
+            "precision": 1.0,
+            "recall": 0.1111111111111111,
+            "unresolved_fraction": 0.15
+          },
+          "candidate": {
+            "tp": 1,
+            "fp": 0,
+            "tn": 25,
+            "fn": 8,
+            "unresolved": 6,
+            "pairs": 40,
+            "clusters": 4,
+            "positive_clusters": 3,
+            "negative_clusters": 4,
+            "selected_positive_clusters": 1,
+            "selected_unresolved": 0,
+            "precision": 1.0,
+            "recall": 0.1111111111111111,
+            "unresolved_fraction": 0.15
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 1,
+            "fp": 0,
+            "tn": 25,
+            "fn": 8,
+            "unresolved": 6,
+            "pairs": 40,
+            "clusters": 4,
+            "positive_clusters": 3,
+            "negative_clusters": 4,
+            "selected_positive_clusters": 1,
+            "selected_unresolved": 0,
+            "precision": 1.0,
+            "recall": 0.1111111111111111,
+            "unresolved_fraction": 0.15
+          },
+          "candidate_priority": {
+            "tp": 1,
+            "fp": 0,
+            "tn": 25,
+            "fn": 8,
+            "unresolved": 6,
+            "pairs": 40,
+            "clusters": 4,
+            "positive_clusters": 3,
+            "negative_clusters": 4,
+            "selected_positive_clusters": 1,
+            "selected_unresolved": 0,
+            "precision": 1.0,
+            "recall": 0.1111111111111111,
+            "unresolved_fraction": 0.15
+          }
+        }
+      },
+      "financing": {
+        "relevance": {
+          "previous": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          },
+          "candidate": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          },
+          "candidate_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          }
+        }
+      },
+      "input_price": {
+        "relevance": {
+          "previous": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          },
+          "candidate": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          },
+          "candidate_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          }
+        }
+      },
+      "other": {
+        "relevance": {
+          "previous": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 45,
+            "fn": 3,
+            "unresolved": 2,
+            "pairs": 50,
+            "clusters": 5,
+            "positive_clusters": 1,
+            "negative_clusters": 5,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": 0.0,
+            "unresolved_fraction": 0.04
+          },
+          "candidate": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 45,
+            "fn": 3,
+            "unresolved": 2,
+            "pairs": 50,
+            "clusters": 5,
+            "positive_clusters": 1,
+            "negative_clusters": 5,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": 0.0,
+            "unresolved_fraction": 0.04
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 48,
+            "fn": 0,
+            "unresolved": 2,
+            "pairs": 50,
+            "clusters": 5,
+            "positive_clusters": 0,
+            "negative_clusters": 5,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.04
+          },
+          "candidate_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 48,
+            "fn": 0,
+            "unresolved": 2,
+            "pairs": 50,
+            "clusters": 5,
+            "positive_clusters": 0,
+            "negative_clusters": 5,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.04
+          }
+        }
+      },
+      "policy": {
+        "relevance": {
+          "previous": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          },
+          "candidate": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          },
+          "candidate_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 0,
+            "unresolved": 0,
+            "pairs": 10,
+            "clusters": 1,
+            "positive_clusters": 0,
+            "negative_clusters": 1,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": null,
+            "unresolved_fraction": 0.0
+          }
+        }
+      },
+      "technology": {
+        "relevance": {
+          "previous": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 6,
+            "unresolved": 4,
+            "pairs": 20,
+            "clusters": 2,
+            "positive_clusters": 2,
+            "negative_clusters": 2,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": 0.0,
+            "unresolved_fraction": 0.2
+          },
+          "candidate": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 6,
+            "unresolved": 4,
+            "pairs": 20,
+            "clusters": 2,
+            "positive_clusters": 2,
+            "negative_clusters": 2,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": 0.0,
+            "unresolved_fraction": 0.2
+          }
+        },
+        "priority": {
+          "previous_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 6,
+            "unresolved": 4,
+            "pairs": 20,
+            "clusters": 2,
+            "positive_clusters": 2,
+            "negative_clusters": 2,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": 0.0,
+            "unresolved_fraction": 0.2
+          },
+          "candidate_priority": {
+            "tp": 0,
+            "fp": 0,
+            "tn": 10,
+            "fn": 6,
+            "unresolved": 4,
+            "pairs": 20,
+            "clusters": 2,
+            "positive_clusters": 2,
+            "negative_clusters": 2,
+            "selected_positive_clusters": 0,
+            "selected_unresolved": 0,
+            "precision": null,
+            "recall": 0.0,
+            "unresolved_fraction": 0.2
+          }
+        }
+      }
+    },
+    "all_relevance_decisions_unchanged": true,
+    "post_label_tuning": false,
+    "promotion": "NOT_PROMOTED",
+    "limitations": [
+      "Only 12 RSS excerpts/120 correlated narrative pairs, not full-body or market-wide acceptance.",
+      "Source quotas short: DCK2, AMD1, SNDK1; no fresh issuer article in the 30-day unused pool.",
+      "URL/text novelty and independent reviewer family flags do not prove economic-family independence.",
+      "Separate AI contexts with declared no prediction/peer access, not filesystem isolation or human truth.",
+      "Current profiles/current content diagnostic, no historical as-of or price-impact accuracy."
+    ],
+    "delivery": "disabled",
+    "failure_layers": {
+      "relevant_unmatched": 11,
+      "priority_unmatched": 8,
+      "priority_matched_not_selected": 0
+    },
+    "diagnosis": "Both runtimes select1 of12 agreed relevance positives and1 of9priority positives. Failures precede ranking: proposals/experimental deployment and infrastructure availability/buildout scope. Three additional background positives also fail routing. No weight adjustment or post-label code changes.",
+    "reviewer_family_flags": 0
+  },
+  "pipeline": {
+    "context_cards": 17,
+    "background_cards": 50,
+    "cards_by_ticker": {
+      "DELL": 15,
+      "NVDA": 2
+    },
+    "price_alerts": 0,
+    "scan_truncated": false,
+    "poll_attempts": 10,
+    "poll_ok": 7,
+    "poll_not_modified": 3,
+    "created": 0,
+    "updated": 0,
+    "prior_main": 25,
+    "prior_background": 42
+  },
+  "limitations": [
+    "Framework priority FP5->0 with TP9 retained is exposed regression, not independent acceptance.",
+    "Memory150 loses4 priority positives across2 articles: supply-financing purpose/access and strategic customer agreements; relevance unchanged and items remain background.",
+    "Older RSS main-vs-relevance loses11TP and removes1FP; older full loses3TP. These cohorts lack separate priority labels, so demotions are not proven correct.",
+    "Generic action/object grammar is conservative and incomplete for operating improvements, appositives, nominal/passive forms and agreements; event entity bonus only establishes same-link relationship context.",
+    "Numerical weights unchanged; no profit/price magnitude or company horizon inferred.",
+    "Fresh RSS quota shortfalls and sparse positive clusters limit coverage; public v1 gates remain unmet."
+  ],
+  "next_steps": [
+    "Unify source-backed market/infrastructure applicability with the stated narrative scope; keep explicit conditional context and no inferred hardware orders.",
+    "Represent proposals, pilots/tests and commercial operation as distinct source phases; validate source-local cross-field references rather than borrowing an unrelated headline actor.",
+    "Recover common financing-to-input-access and strategic-agreement semantics using action/object/purpose contracts; preserve the4lost memory priority references.",
+    "Freeze new publisher/family-diverse examples after the next implementation; keep these120pairs exposed and report routing and priority separately."
+  ]
+}
