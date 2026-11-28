@@ -1,5 +1,21 @@
 # TASKS — implementation execution checklist
 
+## Next after local A/B/C experiment — 2026-11-28 (latest)
+
+- [x] Isolated company analyst contracts, immutable all-source packets, read-only sourced route catalog/retrieval, validators, raw/gated A/B/C metrics, failure and cost/latency receipts.
+- [x] Select/install portable local runtime and model; execute24 article / 120 unit development comparison with48 actual calls. Fix omitted targets through generic required-company schema; keep failed runs. No API/private-data egress.
+- [x] Both fixed benchmarks after each runtime stage; tests/exact-codeCI; aggregate report/self-review/checkpoint and private handoff. Production assessment/feed remains unchanged.
+- [ ] NEXT: source-only extraction into validated fact IDs; graph analysis chooses fact/route IDs and code rebuilds citations. Deduplicate repeated graph evidence and allocate bounded context across companies. Improve generic semantic/alias retrieval; diagnose14 no-lexical-route positives versus10 budget-omitted positives before changing DB facts. No per-ticker or per-headline patches.
+- [ ] Continue sourced aliases/product-market exposure where evidence shows a true DB gap. Source-first identity and scope must remain explicit.
+- [x] Inventory next-cohort candidates without mutating sources:266 RSS articles after limited fixed-reference exclusions; not yet an independent economic-event sample.
+- [ ] Lock the next version; collect 100 unused economic clusters with fuller sources from the candidate pool plus missing source/family strata, lock predictions then request two independent AI reviews. Record nonhuman status, disagreements and event independence limits; no recycled exposed reference called blind.
+- [ ] Explanation fidelity, multiple events, source revision/withdrawal cancellation, queue/cache limits, repeated-run consistency and operating latency. Do not connect shadow proposals directly to feed/canonical/push.
+- [ ] Company-only numerical acceptance mapping, watchlists/history/attention controls, human/operational validation; production integration only after evidence. Optional narrative/history/outcomes remain downstream.
+
+See latest checkpoint/report for measured scores and limitations. Earlier proposed-experiment checklist below is historical; local shadow execution is now authorized and implemented, main LLM_MODE=none and cloud / real push off.
+
+
+
 ## Hybrid analyst experiment assessment — 2026-11-28
 
 User requested evaluation; this is a proposed experiment sequence, not approval to activate runtime LLM or send private data. See [hybrid plan](../docs/hybrid-company-agent-plan.md).

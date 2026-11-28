@@ -28,10 +28,15 @@ No event-independent generalization, financial forecasting or human-utility clai
   company, within a 16,000 UTF-8-byte context budget. Complete routes are dropped when over budget;
   evidence is not silently shortened. This simple retriever can miss paraphrases and may distribute
   context unevenly. Selected route IDs, hashes and retrieval overlaps remain auditable.
+  This is the approved `company_discovery` route slice, not the entire impact atlas, price-series
+  registry or numerical prior inventory. Its results cannot establish the value of the whole database.
 - `engine/local_analyst.py`: loopback-only Ollama adapter. No DNS host, redirect, environment proxy,
   cloud model or model substitution; model/server identity checked before and after calls. No tools
   or autonomous actions. Strict JSON, complete-response and conservative context-size checks;
   bounded timeout/output. Failed calls are recorded, not replaced with engine predictions.
+  Decoder schema requires a named object entry for every target company (including those without
+  retrieved routes), then normalizes to the internal proposal array. A loose array allowed a real
+  model to omit four companies; that failed pilot is retained, not scored as four negative judgments.
 - `engine/evaluation/hybrid_shadow.py`: immutable source/profile/runtime export, grouped calls,
   predictions saved before reference scoring, per-arm reports, raw-call/token/latency receipts and
   final output hashes. Altered sources, profiles, runtime or experiment pins invalidate reuse.

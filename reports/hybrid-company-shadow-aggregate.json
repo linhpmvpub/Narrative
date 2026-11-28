@@ -1,0 +1,462 @@
+{
+  "schema": "LOCAL_HYBRID_EXPERIMENT_AGGREGATE_V1",
+  "articles": 24,
+  "company_units": 120,
+  "reference": "EXPOSED_AI_NOT_FRESH_BLIND_OR_HUMAN_GOLD",
+  "reference_ceiling": 77.0,
+  "model": {
+    "model": "qwen3:4b",
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "4.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 262144,
+      "embedding_length": 2560,
+      "runner": "ggml"
+    },
+    "server": {
+      "version": "0.40.19"
+    },
+    "context": 32768,
+    "output_tokens": 3072,
+    "temperature": 0,
+    "seed": 42,
+    "thinking": false
+  },
+  "hardware": {
+    "ram_gib": 31.73,
+    "gpu": "NVIDIA RTX A2000 Laptop GPU 4GiB",
+    "kv_cache": "q4_0",
+    "flash_attention": true,
+    "fit_target_mib": 256
+  },
+  "repeat_probe": {
+    "identical_request": true,
+    "identical_identity": true,
+    "articles": 1,
+    "company_units": 5,
+    "arm": "C_graph",
+    "decision_fields_equal": false,
+    "full_proposals_equal": false,
+    "meaning": "one exposed control repeat, not whole-cohort stability",
+    "delivery": "disabled",
+    "raw_field_difference_counts": {
+      "relevance": 0,
+      "attention": 0,
+      "group": 0,
+      "phase": 0,
+      "negated": 0,
+      "quote": 1,
+      "actor": 0,
+      "route_id": 0
+    },
+    "final_decision_difference_counts": {
+      "selected": 0,
+      "priority": 0
+    }
+  },
+  "next_cohort_inventory": {
+    "status": "CANDIDATE_INVENTORY_NOT_FROZEN_OR_LABELLED",
+    "input_rows": 830,
+    "excluded_reference_urls": 456,
+    "counts": {
+      "source_integrity_or_eligibility_failed": 98,
+      "fixed_reference_url_or_near_text": 369,
+      "outside_30_day_window": 14,
+      "duplicate_current_url": 83,
+      "candidate_articles": 266
+    },
+    "by_source": {
+      "dcd": 76,
+      "cnbc_world": 33,
+      "cnbc_markets": 56,
+      "cnbc_technology": 16,
+      "marketwatch": 52,
+      "ecb": 20,
+      "fed": 12,
+      "sandisk_ir": 1
+    },
+    "limits": [
+      "No economic-event independence certification",
+      "Only fixed-reference URL/near-text exclusion; wider development history still needs audit",
+      "RSS excerpts, not reviewed full bodies",
+      "No predictions or labels assigned"
+    ]
+  },
+  "arms": {
+    "A_engine": {
+      "status": "COMPLETED",
+      "withheld_units": 0,
+      "abstained_units": 0,
+      "latency_seconds_p50": null,
+      "latency_seconds_p95": null,
+      "prompt_tokens": 0,
+      "output_tokens": 0,
+      "api_charge": null,
+      "hardware_energy_cost": "UNMEASURED",
+      "score": 10.64,
+      "raw_model_score": null,
+      "dimensions": {
+        "relevance": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 51,
+          "fn": 42,
+          "unresolved": 24,
+          "pairs": 120,
+          "clusters": 24,
+          "positive_clusters": 11,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 3,
+          "selected_unresolved": 1,
+          "precision": 1.0,
+          "recall": 0.06666666666666667,
+          "unresolved_fraction": 0.2,
+          "f1": 0.125,
+          "resolved_fraction": 0.8
+        },
+        "priority": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 64,
+          "fn": 21,
+          "unresolved": 33,
+          "pairs": 120,
+          "clusters": 24,
+          "positive_clusters": 7,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 0,
+          "precision": 1.0,
+          "recall": 0.08695652173913043,
+          "unresolved_fraction": 0.275,
+          "f1": 0.16,
+          "resolved_fraction": 0.725
+        }
+      },
+      "diagnostics": {
+        "validation_faults": {},
+        "resolved_positive_misses": {
+          "not_selected": 42
+        }
+      }
+    },
+    "B_generic": {
+      "status": "COMPLETED",
+      "withheld_units": 53,
+      "abstained_units": 0,
+      "latency_seconds_p50": 35.508794999914244,
+      "latency_seconds_p95": 46.34227609995287,
+      "prompt_tokens": 15806,
+      "output_tokens": 17389,
+      "api_charge": 0,
+      "hardware_energy_cost": "UNMEASURED",
+      "score": 0.0,
+      "raw_model_score": 28.41,
+      "dimensions": {
+        "relevance": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 51,
+          "fn": 45,
+          "unresolved": 24,
+          "pairs": 120,
+          "clusters": 24,
+          "positive_clusters": 11,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 0,
+          "selected_unresolved": 0,
+          "precision": null,
+          "recall": 0.0,
+          "unresolved_fraction": 0.2,
+          "f1": 0.0,
+          "resolved_fraction": 0.8
+        },
+        "priority": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 64,
+          "fn": 23,
+          "unresolved": 33,
+          "pairs": 120,
+          "clusters": 24,
+          "positive_clusters": 7,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 0,
+          "selected_unresolved": 0,
+          "precision": null,
+          "recall": 0.0,
+          "unresolved_fraction": 0.275,
+          "f1": 0.0,
+          "resolved_fraction": 0.725
+        }
+      },
+      "diagnostics": {
+        "validation_faults": {
+          "INCONSISTENT_ATTENTION": 49,
+          "UNSUPPORTED_ACTOR_SPAN": 28,
+          "GENERIC_ARM_CANNOT_CITE_PRIVATE_GRAPH": 12,
+          "MISSING_OR_AMBIGUOUS_SOURCE_QUOTE": 2
+        },
+        "resolved_positive_misses": {
+          "withheld_source_or_route": 19,
+          "not_selected": 26
+        }
+      },
+      "raw_dimensions": {
+        "relevance": {
+          "tp": 19,
+          "fp": 20,
+          "tn": 31,
+          "fn": 26,
+          "unresolved": 24,
+          "pairs": 120,
+          "clusters": 24,
+          "positive_clusters": 11,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 8,
+          "selected_unresolved": 14,
+          "precision": 0.48717948717948717,
+          "recall": 0.4222222222222222,
+          "unresolved_fraction": 0.2,
+          "f1": 0.4523809523809524,
+          "resolved_fraction": 0.8
+        },
+        "priority": {
+          "tp": 3,
+          "fp": 0,
+          "tn": 64,
+          "fn": 20,
+          "unresolved": 33,
+          "pairs": 120,
+          "clusters": 24,
+          "positive_clusters": 7,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 1,
+          "precision": 1.0,
+          "recall": 0.13043478260869565,
+          "unresolved_fraction": 0.275,
+          "f1": 0.23076923076923078,
+          "resolved_fraction": 0.725
+        }
+      }
+    },
+    "C_graph": {
+      "status": "COMPLETED",
+      "withheld_units": 60,
+      "abstained_units": 0,
+      "latency_seconds_p50": 53.14112579997163,
+      "latency_seconds_p95": 69.09662129997741,
+      "prompt_tokens": 72116,
+      "output_tokens": 20019,
+      "api_charge": 0,
+      "hardware_energy_cost": "UNMEASURED",
+      "score": 0.0,
+      "raw_model_score": 33.57,
+      "dimensions": {
+        "relevance": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 51,
+          "fn": 45,
+          "unresolved": 24,
+          "pairs": 120,
+          "clusters": 24,
+          "positive_clusters": 11,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 0,
+          "selected_unresolved": 0,
+          "precision": null,
+          "recall": 0.0,
+          "unresolved_fraction": 0.2,
+          "f1": 0.0,
+          "resolved_fraction": 0.8
+        },
+        "priority": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 64,
+          "fn": 23,
+          "unresolved": 33,
+          "pairs": 120,
+          "clusters": 24,
+          "positive_clusters": 7,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 0,
+          "selected_unresolved": 0,
+          "precision": null,
+          "recall": 0.0,
+          "unresolved_fraction": 0.275,
+          "f1": 0.0,
+          "resolved_fraction": 0.725
+        }
+      },
+      "diagnostics": {
+        "validation_faults": {
+          "INCONSISTENT_ATTENTION": 40,
+          "MISSING_OR_AMBIGUOUS_SOURCE_QUOTE": 49,
+          "UNSUPPORTED_ACTOR_SPAN": 36,
+          "MISSING_OR_WRONG_COMPANY_ROUTE": 20
+        },
+        "resolved_positive_misses": {
+          "withheld_source_or_route": 21,
+          "no_retrieved_company_route": 24
+        }
+      },
+      "raw_dimensions": {
+        "relevance": {
+          "tp": 25,
+          "fp": 22,
+          "tn": 29,
+          "fn": 20,
+          "unresolved": 24,
+          "pairs": 120,
+          "clusters": 24,
+          "positive_clusters": 11,
+          "negative_clusters": 11,
+          "selected_positive_clusters": 11,
+          "selected_unresolved": 13,
+          "precision": 0.5319148936170213,
+          "recall": 0.5555555555555556,
+          "unresolved_fraction": 0.2,
+          "f1": 0.5434782608695652,
+          "resolved_fraction": 0.8
+        },
+        "priority": {
+          "tp": 4,
+          "fp": 4,
+          "tn": 60,
+          "fn": 19,
+          "unresolved": 33,
+          "pairs": 120,
+          "clusters": 24,
+          "positive_clusters": 7,
+          "negative_clusters": 15,
+          "selected_positive_clusters": 2,
+          "selected_unresolved": 0,
+          "precision": 0.5,
+          "recall": 0.17391304347826086,
+          "unresolved_fraction": 0.275,
+          "f1": 0.25806451612903225,
+          "resolved_fraction": 0.725
+        }
+      }
+    }
+  },
+  "retrieval": {
+    "counts": [
+      {
+        "reference": "INSUFFICIENT_CONTEXT",
+        "retrieval": "no_route",
+        "units": 18
+      },
+      {
+        "reference": "INSUFFICIENT_CONTEXT",
+        "retrieval": "offered",
+        "units": 6
+      },
+      {
+        "reference": "NOT_RELEVANT",
+        "retrieval": "no_route",
+        "units": 38
+      },
+      {
+        "reference": "NOT_RELEVANT",
+        "retrieval": "offered",
+        "units": 13
+      },
+      {
+        "reference": "RELEVANT",
+        "retrieval": "no_route",
+        "units": 24
+      },
+      {
+        "reference": "RELEVANT",
+        "retrieval": "offered",
+        "units": 21
+      }
+    ],
+    "meaning": "Presence of at least one route for a company, not correctness or coverage of its causal mechanism",
+    "reference": "EXPOSED_AI_NOT_HUMAN_GOLD",
+    "delivery": "disabled",
+    "positive_reference_diagnosis": {
+      "offered": 21,
+      "budget_or_per_company_limit": 10,
+      "no_lexical_route": 14
+    }
+  },
+  "routes_in_catalog": 69,
+  "production_regression": {
+    "company_score": 10.64,
+    "legacy_score": 25.18,
+    "changed_decisions": 0
+  },
+  "limitations": [
+    "lexical retrieval may miss paraphrases",
+    "semantic truth not proven by validators",
+    "single primary event per company/article",
+    "no explanation-fidelity or human utility labels",
+    "no causal or financial impact calibration",
+    "no production promotion",
+    "24 exposed articles below 100-cluster acceptance",
+    "company_discovery route slice, not entire atlas/price series/numerical priors",
+    "small quantized local model; not a claim for all LLMs",
+    "cache quantization may affect quality; same configuration for B/C",
+    "single full run; cohort-wide repeat consistency pending"
+  ],
+  "delivery": "disabled",
+  "private_data": "local",
+  "production_promoted": false,
+  "conclusion": "CURRENT_MODEL_AND_INTERFACE_FAIL_ACCEPTED_OUTPUT_CONTRACT; NO_PRODUCTION_PROMOTION",
+  "ci": {
+    "code_sha": "ffcde6ad22a580b5845fa70b90d0d159cb774373",
+    "run": 46156324690,
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "job": 141013667492,
+        "name": "dependency-audit",
+        "conclusion": "success",
+        "tests": null,
+        "types": null,
+        "audits": 2,
+        "model": null
+      },
+      {
+        "job": 141013667683,
+        "name": "verify",
+        "conclusion": "success",
+        "tests": [
+          "2053 passed, 1 warning in 120.28s (0:02:00)",
+          "2053 passed, 1 warning in 230.51s (0:03:50)"
+        ],
+        "types": [
+          "Success: no issues found in 184 source files"
+        ],
+        "audits": 0,
+        "model": null
+      },
+      {
+        "job": 141013667694,
+        "name": "extraction-model-smoke",
+        "conclusion": "success",
+        "tests": null,
+        "types": null,
+        "audits": 0,
+        "model": [
+          "synthetic_model_cases_passed\": 8, \"human_gold\": false}"
+        ]
+      }
+    ],
+    "url": "https://github.com/linhpmvpub/Narrative/actions/runs/46156324690",
+    "delivery": "disabled"
+  }
+}

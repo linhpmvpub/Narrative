@@ -1,5 +1,17 @@
 # Quality review after each iteration
 
+## Local hybrid experiment: measured, not promoted — 2026-11-28
+
+- Product fit: tests a shared semantic reader using the private company graph without narrative dependency or ticker-specific patches. Preserves existing source lifecycle, deterministic attention and delivery boundary. Runtime company score 10.64 and legacy 25.18 unchanged.
+- Evidence: completed 24 article / 120 unit A/B/C. Gated A 10.64/B generic 0.00/C graph 0.00; raw B 28.41/C33.57; details/FP/FN/unknowns and latency in [report](../reports/hybrid-company-shadow-2026-11-28.md). Current references exposed AI, no human/fresh accuracy claim. No weights/labels/data facts altered.
+- Readout: B/C gated scores are 0 because all 53 / 60 relevant proposals violate evidence/consistency contracts. Raw relevance precision 48.7% / 53.2% is also below the unchanged target. Treat this as a failed model/interface pilot, not a measured production gain. Fix the common workflow before scaling the blind study.
+- Failures preserved: output omitted targets, corrected at schema boundary; model confused profile quote with article quote, withheld; f16 cache caused slow CPU offload, separateq4hardwareconfiguration recorded. Tests initially used invalid future profiles/wrong list element, corrected fixtures without weakening validators. Strong contracts are necessary but do not verify semantic applicability.
+- Database/retrieval limitation: only 21/45 positive units receive any route;10 budget-limited and 14 without lexical hit. Fix the generic retrieval/source-reading workflow before scaling labels or expanding an unbounded database. Complete-route 16 KB budget can favor earlier/higher-overlap companies. Do not hide this as a model-only recall problem.
+- Validation:86 focused tests; exact-codeCI 461563246902053 SQLite / 2053 PostgreSQL passed, existing warning only,lint/types/JS,migrations,2 audits, 8 spaCy smoke. Three fixed benchmark replays current/nochanges. Actual Qwen calls are separate from spaCysmoke. Data local and all notifications off.
+- Next: source-first extraction, bounded semantic/alias retrieval and context allocation; 100 unused economic clusters/predictionfreeze/twoindependent AIreviews; explanation fidelity/multievent/revisions/latency/repeat checks. L037 added; product direction and acceptance unchanged. First executable experiment completed; full blind study and production agent integration remain open.
+
+
+
 ## Hybrid workflow assessment, not an efficacy result — 2026-11-28
 
 - Current10.64company index and42misses motivate testing semantic interpretation beyond bounded regex; they do not prove a particular model will outperform the engine. Model smoke is spaCy; no deployed LLM comparison exists. Read code to distinguish implemented capability from labels in historical reports.

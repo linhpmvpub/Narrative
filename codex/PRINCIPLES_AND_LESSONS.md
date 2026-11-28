@@ -1,5 +1,15 @@
 # Nguyên tắc và bài học phát triển
 
+## L037 — Real model experiments need complete targets and separated evidence roles (2026-11-28)
+
+- A valid model JSON response can omit most requested companies. In the local pilot, an array contained only one of five targets. Require named target keys in decoder schema and validate the complete unique identity set afterwards. Never fill omissions with negative judgments or silently substitute regex predictions.
+- Model context may confuse a profile quotation with the current article. Preserve distinct news spans and graph evidence; validate against the exact source representation. The observed copied-dossier quote was withheld. Exact quotes and paths still do not establish semantic/causal truth; retain unverified drafts separately from presentation.
+- Measure the generic and graph-assisted arms on identical source/company inputs, both raw and gated. Keep failed/aborted runs and missing-arm status. Do not change labels, reporting weights or targets after observing a model failure, and do not present exposed regression as blind evaluation.
+- Retrieval limits are algorithmic quality limits: here21/45 positive units got any route,10 had lexical candidates omitted by context budget,14 had no lexical hit. Diagnose retrieval versus missing database scope before adding relations or tuning ticker-specific rules. Keep complete evidence rather than cutting quotes to fit the prompt.
+- Record model digest, prompt/schema, context/output budgets and hardware cache configuration. f16 KV offload slowed the first request to 131.8 seconds; changing cache settings is a new execution configuration, not a quality improvement. One repeated request varied a quote while labels/final decisions stayed stable; this is not whole-cohort reproducibility or a general LLM-quality claim.
+
+
+
 ## L036 — Event contracts need both source grammar and a sourced identity inventory (2026-11-28)
 
 - Use explicit reusable actor/action/object/phase contracts; company names and aliases belong to sourced profile data. Shipment/capacity/metric activity differs from share-price movement and capability prose. A versioned catalog gives inspectable rules and business-variable labels; it does not establish a realized economic effect or calibrated weight.
