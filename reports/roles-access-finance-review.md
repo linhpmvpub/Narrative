@@ -44,7 +44,7 @@ quy hoàn toàn cho thuật toán vì đợt poll có dữ liệu mới; benchma
 mới là phép so sánh chất lượng cùng tập.
 
 Tests bước1:31đạt; bước2 cuối:37đạt; cuối lượt:141đạt. Ruff và mypy170files đạt.
-CI đầy đủ trên SQLite/PostgreSQL được cập nhật khi hoàn tất. Không có thay đổi UI;
+CI [46118830543](https://github.com/linhpmvpub/Narrative/actions/runs/46118830543) đạt trên commit `633ad89`: 1694 passed, 1 warning in 162.80s (0:02:42); 1694 passed, 1 warning in 249.20s (0:04:09); migration, JS, audit và model smoke8 đạt. Không có thay đổi UI;
 không tuyên bố đã kiểm tra giao diện desktop/mobile mới.
 
 ## Hạn chế và bước tiếp theo

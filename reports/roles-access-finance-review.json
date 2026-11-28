@@ -5206,7 +5206,35 @@
     "focused_final": 141,
     "ruff": "PASS",
     "mypy_files": 170,
-    "ci": "PENDING"
+    "ci": {
+      "run_id": 46118830543,
+      "head_sha": "633ad89bcdd1232cc5fcbf2cc8d5f9ca1de85f6a",
+      "conclusion": "success",
+      "test_results": [
+        "1694 passed, 1 warning in 162.80s (0:02:42)",
+        "1694 passed, 1 warning in 249.20s (0:04:09)"
+      ],
+      "jobs": [
+        {
+          "id": 140898577557,
+          "name": "extraction-model-smoke",
+          "conclusion": "success"
+        },
+        {
+          "id": 140898577714,
+          "name": "dependency-audit",
+          "conclusion": "success"
+        },
+        {
+          "id": 140898577784,
+          "name": "verify",
+          "conclusion": "success"
+        }
+      ],
+      "model_smoke_cases": 8,
+      "dependency_audits": "No known vulnerabilities found in both pinned requirement sets",
+      "url": "https://github.com/linhpmvpub/Narrative/actions/runs/46118830543"
+    }
   },
   "limitations": [
     "All references exposed AI; no fresh holdout or human gold.",
@@ -5217,5 +5245,9 @@
     "Priority labels absent in three older cohorts; two prior unlabelled downgrades remain unadjudicated."
   ],
   "delivery": "disabled",
-  "promotion": "NOT_AUTHORIZED"
+  "promotion": "NOT_AUTHORIZED",
+  "remaining_priority_failure_layers": {
+    "infra160_unmatched": 4,
+    "infra160_matched_but_background": 0
+  }
 }

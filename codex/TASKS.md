@@ -1,5 +1,17 @@
 # TASKS — implementation execution checklist
 
+## Current next steps — roles/access/finance (2026-11-28)
+
+- [x] Non-exclusive directional graph roles with current sourced edges; project operator is not automatically a technology vendor. Preserve explicit other-vendor and scoped collaboration exclusions.
+- [x] Source-event access restriction matching with opt-in sourced company/compute binding, demand/deployment graph contract and legal/financial UNKNOWN. NVIDIA23uses existing factor/path; no new edge or narrative target.
+- [x] Capital backing of an operating counterparty/purpose changes editorial priority only; no disbursement, ownership, order, amount or realized capacity inference.
+- [x] Full3040pair benchmark after each of3steps and final hardening. Cumulative1relevance+3priority improvements,0measured regressions, othercohorts unchanged; exposed AI reference only.
+- [ ] Address sourced infrastructure-readiness/energy/construction applicability and implicit actor references: infra160still14relevance misses and4priority misses,all4unmatched upstream.
+- [ ] Expand access/finance applicability to additional company profiles only with source-backed scope/path; avoid engine ticker lists and demand-to-supply shortcuts.
+- [ ] Review named-collaboration conservative costs and unused event-family coverage with independent labels; keep prior2priority downgrades without labels unresolved.
+- [ ] Unchanged v1release gates: fresh evaluation,7dayoperations,laterhumanvalidation; causal truth/financial magnitude/horizon remain unmeasured. Live push/cloud disabled.
+
+
 ## Current next steps — quality benchmark v1 (2026-11-28)
 
 - [x] Reusable local create/run/check benchmark;10cohorts3040pairs, pinned provenance and full-body sources, separate relevance/priority, group/company metrics and decision changes.

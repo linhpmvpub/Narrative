@@ -1,5 +1,15 @@
 # Quy trình phát triển, tự đánh giá và cải thiện
 
+## Nhiều bước trong một task — bổ sung 2026-11-28
+
+Theo yêu cầu người dùng, sau mỗi bước thay đổi chức năng/database phải chạy benchmark,
+đọc kết quả rồi mới chuyển sang bước tiếp theo. Giữ run riêng cho từng bước, cả phiên bản
+thất bại/superseded; so sánh với bước ngay trước và tổng thể với baseline đầu task.
+Không thay baseline để che regression tích lũy. Đổi profile có available_at mới thì ghi
+mốc replay mới rõ ràng; các bước chỉ đổi code sau đó dùng cùng mốc để so sánh. Sau hardening
+cuối vẫn chạy lại và quality_gate --all trước commit. Chi tiết nguồn/nhãn/predictions cục bộ.
+
+
 ## Benchmark sau mỗi update — quyết định 2026-11-28
 
 Áp dụng [quality-benchmark](../docs/quality-benchmark.md): chốt suite/target/labels,

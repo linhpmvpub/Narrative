@@ -1,5 +1,15 @@
 # Nguyên tắc và bài học phát triển
 
+## L027 — Graph roles, source event roles and economic outcomes are distinct (2026-11-28)
+
+- One node can be a sourced competitor, buyer and supplier through different directed, scoped edges. Product competition does not establish a company-wide identity or the technology vendor of every facility it operates. Preserve all current roles and their source IDs; do not infer customer/supplier edges from a name in news.
+- Operator-only infrastructure context can remain conditional. Explicit other-vendor technology and a third-party collaboration still need their own applicability checks; a conservative exclusion is not proof of exclusive supply. Step1changed no3040benchmark decisions, so its generalization benefit is not independently demonstrated.
+- An access restriction must bind access to the actual resource in the same clause, not a building entrance or unrelated analyst/company mention. Current implementation routes sourced demand/deployment paths only; do not fabricate supply effects from a demand-side event. Optional typed matchers must reject overlapping guards and foreign company aliases rather than silently bypass them.
+- Capital backing plus operating purpose is distinct from disbursed funds, new capacity, ownership and customer orders. Keep source spans/planned phase, reject litigation/conferences/software/other clauses and do not borrow amounts across fields. Existing graph relevance is still required before editorial priority.
+- Evidence: step2recovers1exposed relevance+2priority decisions,step3adds1priority decision; other3040pair decisions unchanged. These are exposed AI references, not independent holdout/human gold. After each step retain benchmark, tests, losses and cumulative comparison to task-start baseline; final hardening must also be rerun.
+- Remaining4infra160priority misses are all unmatched upstream. Next work should address sourced profile/graph applicability and implicit subjects, not simply lower ranking thresholds. A successful software test or clearer trace is not proof of financial magnitude or causal impact.
+
+
 ## L026 — Benchmark freshness and dimensions must be explicit (2026-11-28)
 
 - Evidence: importing10previous cohorts and rerunning3040pairs reproduced every stored relevance/priority decision. Relevance labels cannot substitute for priority labels; three older cohorts intentionally report priority unmeasured. Exposed AI references are regression, not fresh holdout/human truth.

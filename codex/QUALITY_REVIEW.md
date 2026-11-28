@@ -1,5 +1,15 @@
 # Quality review after each iteration
 
+## Review: roles, access and finance — 2026-11-28 (latest)
+
+- Product outcome: typed source events now reach the private feed through existing sourced graph paths. Competition is no longer treated as an exclusive company role. Project operators, technology vendors, source assertions and economic outcomes remain distinct; no customer/supplier transaction is invented.
+- Per-step evidence: step1 changed no3040pair decisions; step2 gained1relevance+2priority decisions; step3 gained1priority decision; final hardening was unchanged. Cumulative infra160 is9TP/0FP/14FN relevance and5TP/0FP/4FN priority, versus8/0/15 and2/0/7. The20/21 unresolved references remain. All other cohorts are unchanged. These exposed AI labels and correlated pairs do not establish fresh/human/generalization accuracy. Two older priority downgrades remain unlabelled.
+- Verification:141final focused tests, Ruff, mypy170; CI46118830543 on633ad89bcdd1232cc5fcbf2cc8d5f9ca1de85f6a: 1694 passed, 1 warning in 162.80s (0:02:42); 1694 passed, 1 warning in 249.20s (0:04:09). All jobs passed, including migrations, audits and model smoke8. Six profiles remain source-validated; one version23binding was added without new graph edges. New immutable atlas/registry and the source-to-card pipeline were checked:50main/42background, three new typed-event cards with financial UNKNOWN, delivery disabled. Four newly collected RSS items mean feed counts are not a controlled algorithm comparison. No new browser/UX acceptance is claimed.
+- Limitations: the operator-scope fix has no measured benchmark gain here; third-party collaborations remain conservatively bounded. Access grammar is limited and only one company currently has a reviewed opt-in binding. Capital backing changes priority, not relevance or verified funder/recipient identity, disbursement, amounts, ownership or orders. Whole-window negation and limited syntax may withhold valid complex sentences.
+- Main bottleneck: all4remaining infra160priority misses are unmatched upstream; there are14total relevance misses. Prioritize sourced profile/graph readiness, power/construction and actor scope before changing ranking weights. Extend company coverage through the shared data contract, without inferring supply causality from general AI demand or competition.
+- Next evaluation: retain3040exposed pairs and rerun after each step, then use unused event families/publishers for independent review. Causality, financial magnitude/horizon, personalized utility, live coverage and7day operations require separate evidence. No automatic release, cloud or live push. L027/workflow updated; direction and acceptance remain unchanged. No user-decision blocker.
+
+
 ## Quality benchmark and next framework step — 2026-11-28 (latest)
 
 - Product benefit: comparable evidence after every runtime/database update, and an already relevant concrete interruption now reaches the main feed. Shared engine/data contracts remain central; no ticker or headline branch.

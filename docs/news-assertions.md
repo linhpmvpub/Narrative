@@ -1,5 +1,18 @@
 # Source assertions and graph applicability
 
+## Non-exclusive roles, access restrictions and backing — 2026-11-28
+
+See [roles/access/finance contract](roles-access-finance.md). Infrastructure scopev2
+separates project operator from technology vendor and carries source-backed directional
+graph roles. Optional access_constraint matches same-clause named-company compute
+restrictions and requires demand/deployment mechanisms; its source-reported priority
+is not verified legal effect. CAPITAL_BACKING consumes already-matched source windows
+and requires an operating counterparty/purpose, without disbursement/order inference.
+Policy19, numerical weights unchanged. Benchmark after every step and final hardening;
+raw inputs, labels and DB local, delivery disabled. Measured limitations and next steps
+are in [the aggregate report](../reports/roles-access-finance-review.md).
+
+
 ## Operating interruption priority — 2026-11-28
 
 Policy16 adds a common source-local OPERATING_INTERRUPTION event for an already
